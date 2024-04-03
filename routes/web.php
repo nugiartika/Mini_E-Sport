@@ -21,7 +21,9 @@ Route::get('/', function () {
 });
 
 
-
 Auth::routes();
 
+Route::get('/tes', function (){
+    return view('tes');
+});
 
