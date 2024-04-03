@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +21,9 @@ Route::get('/', function () {
 
 Route::resource('tes', TesController::class);
 
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
