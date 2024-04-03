@@ -20,8 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('tes', TesController::class);
-
 
 
 Auth::routes();
