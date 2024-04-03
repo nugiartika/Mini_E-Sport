@@ -8,28 +8,28 @@
     <meta name="description" content="eSports and Gaming NFT Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/x-icon" href="./assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/img/favicon.png') }}">
 
     <!-- google fonts here -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="{{ asset('https://fonts.googleapis.com') }}">
+    <link rel="preconnect" href="{{ asset('https://fonts.gstatic.com') }}" crossorigin>
+    <link href="{{ asset('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet') }}">
     <!-- CSS here -->
-    <link rel="stylesheet" href="{{ asset('./assets/css/animate.min.css')  }}">
-    <link rel="stylesheet" href="{{ asset('./assets/css/magnific-popup.css') }}">
-    <link rel="stylesheet" href="{{ asset('') }}./assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="{{ asset('') }}./assets/css/swiper-bundle.css">
-    <link rel="stylesheet" href="{{ asset('') }}./assets/css/tg-cursor.css">
-    <link rel="stylesheet" href="{{ asset('') }}./assets/css/jquery-ui.css">
-    <link rel="stylesheet" href="{{ asset('') }}./assets/css/odometer.css">
-    <link rel="stylesheet" href="{{ asset('') }}./assets/css/slick.css">
-    <link rel="stylesheet" href="{{ asset('') }}./assets/css/jquery-ui.css">
-    <link rel="stylesheet" href="{{ asset('') }}./assets/css/flaticon.css">
-    <link rel="stylesheet" href="{{ asset('') }}./assets/css/flowbite.min.css">
-	<link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" href="{{ asset('asset/css/animate.min.css')  }}">
+    <link rel="stylesheet" href="{{ asset('asset/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/css/swiper-bundle.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/tg-cursor.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/odometer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/flowbite.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('./style.css') }}">
 
     <!-- Page-Revealer -->
-    <script src="./assets/js/tg-page-head.js"></script>
+    <script src="/js/tg-page-head.js"></script>
 </head>
 
 <body>
@@ -161,7 +161,7 @@
         </div>
 
         <!-- header-search -->
-        <div class="search__popup-wrap fixed h-screen w-full z-[99] mt-[-370px] -translate-y-full transition-all duration-[1500ms] ease-[cubic-bezier(0.86,0,0.07,1)] left-0 top-0 after:content-[''] after:absolute after:w-full after:h-[370px] after:bg-[url(./assets/img/bg/search\_wave.png)] after:bg-no-repeat after:bg-center after:bg-cover after:mt-0 after:left-0 after:top-full">
+        <div class="search__popup-wrap fixed h-screen w-full z-[99] mt-[-370px] -translate-y-full transition-all duration-[1500ms] ease-[cubic-bezier(0.86,0,0.07,1)] left-0 top-0 after:content-[''] after:absolute after:w-full after:h-[370px] after:bg-[url(/img/bg/search\_wave.png)] after:bg-no-repeat after:bg-center after:bg-cover after:mt-0 after:left-0 after:top-full">
             <div class="search__layer content-[''] absolute h-screen w-full bg-[rgba(15,22,27,0.9)] transition-all duration-[1500ms] ease-[cubic-bezier(0.86,0,0.07,1)] z-[-1] left-0 top-0"></div>
             <div class="search__close absolute text-3xl text-[#45f882] cursor-pointer right-[5%] top-[5%]">
                 <span><i class="flaticon-swords-in-cross-arrangement"></i></span>
@@ -385,7 +385,7 @@ xsm:max-w-[690px] xsm:text-[21vw] xsm:tracking-[10px] xsm:top-auto xsm:bottom-[3
             <div class="container">
                 <div class="services-row flex flex-wrap mx-[-15px] items-end align-items-xl-start">
                     <div class="w-6/12 basis-6/12 xl:w-6/12 xl:basis-6/12 lg:w-6/12 lg:basis-6/12 md:w-full md:basis-full sm:w-full sm:basis-full xsm:w-full xsm:basis-full relative px-[15px]">
-                        <div class="section__title text-left mb-[65px]  relative after:content-[''] after:block after:bg-[url(./assets/img/bg/title\_shape.svg)] after:w-[65px] after:h-[5px] after:mt-5 after:mb-0 after:mx-0
+                        <div class="section__title text-left mb-[65px]  relative after:content-[''] after:block after:bg-[url(/img/bg/title\_shape.svg)] after:w-[65px] after:h-[5px] after:mt-5 after:mb-0 after:mx-0
                         lg:w-[calc(100%_+_200px)]
                         sm:w-full sm:text-center sm:after:m-[19px_auto_0]
                         xsm:w-full xsm:text-center xsm:after:m-[19px_auto_0]
@@ -480,7 +480,7 @@ xsm:max-w-[690px] xsm:text-[21vw] xsm:tracking-[10px] xsm:top-auto xsm:bottom-[3
             <div class="container">
                 <div class="flex flex-wrap mx-[-15px]  justify-center ">
                     <div class="w-6/12 basis-6/12 xl:w-6/12 xl:basis-6/12 lg:w-7/12 lg:basis-7/12 md:w-10/12 md:basis-10/12 sm:w-full sm:basis-full xsm:w-full xsm:basis-full relative px-[15px]">
-                        <div class="section__title text-center mb-[60px] relative after:content-[''] after:block after:bg-[url(./assets/img/bg/title\_shape.svg)] after:w-[65px] after:h-[5px] after:mt-5 after:mb-0 after:mx-auto">
+                        <div class="section__title text-center mb-[60px] relative after:content-[''] after:block after:bg-[url(/img/bg/title\_shape.svg)] after:w-[65px] after:h-[5px] after:mt-5 after:mb-0 after:mx-auto">
                             <span class="sub-title tg__animate-text block uppercase text-[14px] tracking-[2px] font-semibold text-[#45f882] leading-none mt-0 mb-[7px] mx-0 sm:m-[0_0_10px] xsm:m-[0_0_10px]">our team member</span>
                             <h3 class="title text-[45px] font-extrabold tracking-[1px] m-0 sm:text-[35px] xsm:text-[35px]">ACTIVE TEAM MEMBERS</h3>
                         </div>
@@ -553,10 +553,10 @@ xsm:max-w-[690px] xsm:text-[21vw] xsm:tracking-[10px] xsm:top-auto xsm:bottom-[3
                                 <p class="desc text-[15px] mt-0 mb-[25px] mx-0">Lorem ipsum dolor sitamet consectur adipiscing Duis esollici tudin augue euismod. Nulla ullam dolor sitamet consectetur</p>
                                 <p class="social-title text-[16px] font-semibold uppercase text-[#ecebeb] leading-none mt-0 mb-[25px] mx-0">Active <span class=" text-[#45f882]">With Us <i class="fas fa-angle-double-right"></i></span></p>
                                 <div class="footer-social flex flex-wrap gap-[10px_20px]">
-<a class="block" href="#"><img class=" max-w-[30px]" src="assets/img/icons/social_icon01.png" alt="iocn"></a>
-<a class="block" href="#"><img class=" max-w-[30px]" src="assets/img/icons/social_icon02.png" alt="iocn"></a>
-<a class="block" href="#"><img class=" max-w-[30px]" src="assets/img/icons/social_icon03.png" alt="iocn"></a>
-<a class="block" href="#"><img class=" max-w-[30px]" src="assets/img/icons/social_icon04.png" alt="iocn"></a>
+<a class="block" href="#"><img class=" max-w-[30px]" src="{{ asset('img/icons/social_icon01.png') }}" alt="iocn"></a>
+<a class="block" href="#"><img class=" max-w-[30px]" src="{{ asset('img/icons/social_icon02.png') }}" alt="iocn"></a>
+<a class="block" href="#"><img class=" max-w-[30px]" src="{{ asset('img/icons/social_icon03.png') }}" alt="iocn"></a>
+<a class="block" href="#"><img class=" max-w-[30px]" src="{{ asset('img/icons/social_icon04.png') }}" alt="iocn"></a>
                                 </div>
                             </div>
                         </div>
@@ -622,35 +622,26 @@ xsm:max-w-[690px] xsm:text-[21vw] xsm:tracking-[10px] xsm:top-auto xsm:bottom-[3
     <!-- footer-start-end -->
 
     <!-- JS here -->
-    <script src="./assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="./assets/js/jquery.countdown.min.js"></script>
-    <script src="./assets/js/jquery.waypoints.min.js"></script>
-    <script src="./assets/js/jquery.odometer.min.js"></script>
-    <script src="./assets/js/simpleParallax.min.js"></script>
-    <script src="./assets/js/jquery-ui.min.js"></script>
-    <script src="./assets/js/gsap.min.js"></script>
-    <script src="./assets/js/scrollTrigger.min.js"></script>
-    <script src="./assets/js/splitText.min.js"></script>
-    <script src="./assets/js/jquery.appear.js"></script>
-    <script src="./assets/js/tg-cursor.min.js"></script>
-    <script src="./assets/js/swiper-bundle.js"></script>
-    <script src="./assets/js/jarallax.min.js"></script>
-    <script src="./assets/js/parallax.min.js"></script>
-    <script src="./assets/js/slick.min.js"></script>
-    <script src="./assets/js/ajax-form.js"></script>
-    <script src="./assets/js/vivus.min.js"></script>
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/flowbite.min.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="{{ asset('asset/js/vendor/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('asset/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('asset/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('asset/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('asset/js/jquery.odometer.min.js') }}"></script>
+    <script src="{{ asset('asset/js/simpleParallax.min.js') }}"></script>
+    <script src="{{ asset('asset/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('asset/js/gsap.min.js') }}"></script>
+    <script src="{{ asset('asset/js/scrollTrigger.min.js') }}"></script>
+    <script src="{{ asset('/js/splitText.min.js') }}"></script>
+    <script src="{{ asset('asset/js/jquery.appear.js') }}"></script>
+    <script src="{{ asset('asset/js/tg-cursor.min.js') }}"></script>
+    <script src="{{ asset('asset/js/swiper-bundle.js') }}"></script>
+    <script src="{{ asset('asset/js/jarallax.min.js') }}"></script>
+    <script src="{{ asset('asset/js/parallax.min.js') }}"></script>
+    <script src="{{ asset('asset/js/slick.min.js') }}"></script>
+    <script src="{{ asset('asset/js/ajax-form.js') }}"></script>
+    <script src="{{ asset('asset/js/vivus.min.js') }}"></script>
+    <script src="{{ asset('asset/js/wow.min.js') }}"></script>
+    <script src="{{ asset('asset/js/flowbite.min.js') }}"></script>
+    <script src="{{ asset('asset/js/main.js') }}"></script>
 </body>
 
-</html>    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>
-        hello
-    </h1>
-</body>
-</html>
