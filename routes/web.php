@@ -3,6 +3,7 @@
 use App\Http\Controllers\TesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,14 @@ Auth::routes();
 Route::get('/tes', function (){
     return view('tes');
 });
+
+Route::middleware('admin')->group(function(){
+
+    Route::get('/admin',  function(){
+        return view('admin');
+    });
+
+});
+
+
 
