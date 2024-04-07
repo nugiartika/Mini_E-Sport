@@ -28,6 +28,30 @@ Route::get('/tes', function (){
     return view('tes');
 });
 
+Route::get('/index', function (){
+    return view('user.index');
+});
+
+Route::get('/tournament', function (){
+    return view('user.tournament');
+});
+
+Route::get('/detail', function (){
+    return view('user.detailtournament');
+});
+
+Route::get('/game', function (){
+    return view('user.game');
+});
+
+Route::get('/team', function (){
+    return view('team');
+});
+
+Route::get('/detailteam', function (){
+    return view('detailteam');
+});
+
 Route::middleware('admin')->group(function(){
 
     Route::get('/admin',  function(){
