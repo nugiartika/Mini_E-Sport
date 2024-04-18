@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
-    <title>Tournament - GamePlex</title>
+    <title>Tournament - HummaEsport</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
@@ -14,32 +14,22 @@
 
 <body>
 
-    <!-- Preloader -->
-    {{-- <div class="preloader">
-        <div class="loader">
-            <span></span>
-        </div>
-    </div> --}}
-
     <!-- cursor effect-->
     <div class="cursor"></div>
     <!-- Header area  -->
-
-
-
 
     <div class="modal" tabindex="-1" id="tambahModal" style="color: #000;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Konten</h5>
+                    <h5 class="modal-title">Add Tournament</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">name tournament</label>
+                            <label for="name" class="form-label">NAME TOURNAMENT</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -48,7 +38,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="pendaftaran" class="form-label">pendaftaran</label>
+                            <label for="pendaftaran" class="form-label">TIME REGISTER</label>
                             <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror" id="pendaftaran" name="pendaftaran" value="{{ old('pendaftaran') }}">
                             @error('pendaftaran')
                                 <span class="invalid-feedback" role="alert">
@@ -57,7 +47,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="permainan" class="form-label">permainan</label>
+                            <label for="permainan" class="form-label">TIME GAME</label>
                             <input type="date" class="form-control @error('permainan') is-invalid @enderror" id="permainan" name="permainan" value="{{ old('permainan') }}">
                             @error('permainan')
                                 <span class="invalid-feedback" role="alert">
@@ -66,7 +56,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="penyelenggara" class="form-label">penyelenggara</label>
+                            <label for="penyelenggara" class="form-label">ORGANIZER</label>
                             <input type="text" class="form-control @error('penyelenggara') is-invalid @enderror" id="penyelenggara" name="penyelenggara" value="{{ old('penyelenggara') }}">
                             @error('penyelenggara')
                                 <span class="invalid-feedback" role="alert">
@@ -76,7 +66,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="category" class="form-label">Game</label><br>
+                            <label for="category" class="form-label">GAME</label><br>
                             <select class="form-control @error('categories_id') is-invalid @enderror" id="category" name="categories_id" aria-label="Default select example">
                                 <option value="" selected>Select Game</option>
                                 @foreach ($category as $kat)
@@ -93,7 +83,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="images" class="form-label">Image</label>
+                            <label for="images" class="form-label">IMAGE</label>
                             <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" name="images" onchange="previewImage(event)">
                             @if(old('images'))
                                 <img id="preview" src="{{ asset('storage/' . old('images')) }}" alt="Old images" style="max-width: 100px; max-height: 100px;">
@@ -105,7 +95,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Fill Description</label><br>
+                            <label for="description" class="form-label">FILL DESCRIPTION</label><br>
 
                                 @error('description')
                                 <p class="text-danger">{{ $message }}</p>
@@ -114,7 +104,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="rule" class="form-label">
-                                Fill rule</label><br>
+                                FILL RULE</label><br>
                                 @error('rule')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -156,13 +146,13 @@
                                 <a href="index.html">Home</a>
                             </li>
                             <li class="menu-item">
-                                <button>Tournament</button>
+                                <button>TOURNAMENT</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="tournaments.html">Tournaments</a>
+                                        <a href="tournaments.html">TOURNAMENT</a>
                                     </li>
                                     <li class="menu-link">
-                                        <a href="tournaments-details.html">Tournaments Details</a>
+                                        <a href="tournaments-details.html">TOURNAMENT DETAILS</a>
                                     </li>
                                 </ul>
                             </li>
@@ -349,7 +339,7 @@
     <!-- connect your Wallet section end -->
 
     <!-- user account details popup start  -->
-    <div class="user-account-popup p-4">
+    {{-- <div class="user-account-popup p-4">
         <div class="account-items d-grid gap-1" data-tilt>
 
             <div class="user-level-area p-3">
@@ -373,7 +363,7 @@
             <a href="chat.html" class="account-item">Message</a>
             <button class="bttn account-item">Logout</button>
         </div>
-    </div>
+    </div> --}}
     <!-- user account details popup end  -->
 
     <!-- tournament section start -->
@@ -406,7 +396,7 @@
 
                         <div class="px-6">
                             <a type="button"
-                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal">buat baru</a>
+                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal">Make New</a>
                         </div>
                     </div>
                     <div class="tabcontents">
@@ -1588,7 +1578,7 @@
     <!-- tournament section end -->
 
     <!-- call to action section start -->
-    <div class="call-to-action pt-120 pb-120 bgn-4 overflow-x-hidden" id="cta">
+    {{-- <div class="call-to-action pt-120 pb-120 bgn-4 overflow-x-hidden" id="cta">
         <div class="container">
             <div class="row justify-content-between g-6">
                 <div class="col-lg-6">
@@ -1624,7 +1614,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- call to action section end -->
 
     <!-- footer section start  -->

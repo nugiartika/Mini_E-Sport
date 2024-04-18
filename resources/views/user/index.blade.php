@@ -51,7 +51,7 @@
                                 <button>Tournament</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="tournaments.html">Tournaments</a>
+                                        <a href="tournaments">Tournaments</a>
                                     </li>
                                     <li class="menu-link">
                                         <a href="tournaments-details.html">Tournaments Details</a>

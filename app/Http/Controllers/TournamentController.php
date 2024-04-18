@@ -40,7 +40,6 @@ class TournamentController extends Controller
             $path_gambar = Storage::disk('public')->put('tournament', $gambar);
         }
 
-        // $category = Category::all();
         $category_id = $request->input('categories_id');
 
         Tournament::create([

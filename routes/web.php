@@ -26,9 +26,6 @@ Route::get('signin', function () {
     return view('login');
 });
 
-
-Route::resource('category', CategoryController::class);
-
 Auth::routes();
 
 Route::get('/tes', function (){
@@ -65,7 +62,6 @@ Route::middleware('admin')->group(function(){
     Route::get('/admin', function(){
         return view('admin');
     });
-    Route::resource('category', CategoryController::class);
-
+    Route::resource('   ', CategoryController::class);
 });
 
