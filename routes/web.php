@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TesController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\Group;
@@ -53,12 +54,7 @@ Route::get('/detailteam', function (){
 });
 
 Route::middleware('admin')->group(function(){
-
-    Route::get('/admin',  function(){
+    Route::get('/admin', function(){
         return view('admin');
     });
-
 });
-
-
-
