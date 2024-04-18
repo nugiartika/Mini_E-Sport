@@ -27,34 +27,36 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
+        $data = [];
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $path = $photo->store('images', 'public');
+            $data['photo'] = $path;
+        } else {
+            $defaultImagePath = 'images/default-photo.jpg';
+            $data['photo'] = $defaultImagePath;
+        }
+
         Category::create([
-            'name'=>$request->input('name'),
+            'name' => $request->input('name'),
+            'photo' => $data['photo'],
         ]);
-        return redirect()->route('category.index')->with('success','CATEGORY SUCCESSFULLY ADDED');
-    }
 
-    public function show(Category $category)
-    {
-
-    }
-
-    public function edit(Category $category)
-    {
-        $category=Category::all();
-        return view ('category',compact('category'));
+        return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY ADDED');
     }
 
     public function update(CategoryRequest $request, Category $category)
     {
-        $category::create([
-            'name'=>$request->input('name'),
+        $category->update([
+            'name' => $request->input('name'),
         ]);
-        return redirect()->route('category.index')->with('success','CATEGORY SUCCESSFULLY UPDATED');
+        return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY UPDATED');
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('category.index')->with('success','CATEGORY SUCCESSFULLY REMOVED');
+        return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY REMOVED');
     }
 }

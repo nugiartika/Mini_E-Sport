@@ -27,6 +27,8 @@ Route::get('signin', function () {
 });
 
 
+Route::resource('category', CategoryController::class);
+
 Auth::routes();
 
 Route::get('/tes', function (){

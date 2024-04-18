@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
-    <title>Home - GamePlex</title>
+    <title>Home - HummaEsport</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -312,7 +312,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-5 col-md-6 order-md-1 order-lg-last">
                     <div class="hero-content">
-                        <div class="card-area py-lg-8 py-6 px-lg-6 px-3 rounded-5 tilt mb-10" data-tilt>
+                        {{-- <div class="card-area py-lg-8 py-6 px-lg-6 px-3 rounded-5 tilt mb-10" data-tilt>
                             <h3 class="tcn-1 dot-icon cursor-scale growDown mb-6 title-anim">
                                 Last Winners
                             </h3>
@@ -354,8 +354,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="active-player-list d-grid justify-content-end gap-2">
+                        </div> --}}
+                        {{-- <div class="active-player-list d-grid justify-content-end gap-2">
                             <ul class="player-lists d-flex align-items-center">
                                 <li class="rounded-circle overflow-hidden me-n6">
                                     <img src="assets/img/player1.png" alt="player">
@@ -375,7 +375,7 @@
                             </ul>
                             <span class="d-block tcn-1 dot-icon cursor-scale growDown2 fs-xl text-end">Active
                                 Players</span>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -835,332 +835,7 @@
     </section>
     <!-- 3D swiper section end-->
 
-    <!-- top player section start  -->
-    <section class="top-player-section pt-120 pb-120" id="top-player">
-        <!-- sword animation -->
-        <div class="sword-area">
-            <img class="w-100" src="assets/img/sword.png" alt="sword">
-        </div>
-        <div class="red-ball end-0"></div>
-        <div class="container">
-            <div class="row justify-content-between mb-15">
-                <div class="col-sm-6">
-                    <h2 class="display-four tcn-1 cursor-scale growUp title-anim">Top Player</h2>
-                </div>
-                <div class="col-sm-6 d-none d-sm-block">
-                    <div class="d-flex justify-content-end align-items-center gap-6">
-                        <div class="swiper-btn top-player-prev box-style">
-                            <i class="ti ti-chevron-left fs-xl"></i>
-                        </div>
-                        <div class="swiper-btn top-player-next box-style">
-                            <i class="ti ti-chevron-right fs-xl"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="swiper swiper-top-player">
-                        <div class="swiper-wrapper my-1">
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle" src="assets/img/top-player1.png"
-                                                    alt="player">
-                                                <span
-                                                    class="player-status position-absolute end-0 bottom-0 tcn-1 fs-xs d-center">1</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">Jane Cooper</h5>
-                                                <span class="tcn-6 fs-sm">Duelist</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">Score</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-half-filled"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">Rank</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> Diamond</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">Region</h6>
-                                            <span class="tcn-1 fs-sm text-uppercase"> EUW</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">Team</h6>
-                                            <span class="tcs-1 fs-sm text-uppercase"> fire</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle" src="assets/img/top-player2.png"
-                                                    alt="player">
-                                                <span
-                                                    class="player-status position-absolute end-0 bottom-0 tcn-1 fs-xs d-center">2</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">
-                                                    Savannah Nguyen
-                                                </h5>
-                                                <span class="tcn-6 fs-sm">Duelist</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">Score</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-half-filled"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">Rank</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> Diamond</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">Region</h6>
-                                            <span class="tcn-1 fs-sm text-uppercase"> EUW</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">Team</h6>
-                                            <span class="tcs-1 fs-sm text-uppercase"> lft</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle" src="assets/img/top-player3.png"
-                                                    alt="player">
-                                                <span
-                                                    class="player-status position-absolute end-0 bottom-0 tcn-1 fs-xs d-center">3</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">Guy Hawkins</h5>
-                                                <span class="tcn-6 fs-sm">Duelist</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">Score</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-half-filled"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">Rank</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> Diamond</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">Region</h6>
-                                            <span class="tcn-1 fs-sm text-uppercase"> EUW</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">Team</h6>
-                                            <span class="tcs-1 fs-sm text-uppercase">liqud</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle" src="assets/img/top-player1.png"
-                                                    alt="player">
-                                                <span
-                                                    class="player-status position-absolute end-0 bottom-0 tcn-1 fs-xs d-center">1</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">Jane Cooper</h5>
-                                                <span class="tcn-6 fs-sm">Duelist</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">Score</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-half-filled"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">Rank</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> Diamond</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">Region</h6>
-                                            <span class="tcn-1 fs-sm text-uppercase"> EUW</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">Team</h6>
-                                            <span class="tcs-1 fs-sm text-uppercase"> fire</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle" src="assets/img/top-player2.png"
-                                                    alt="player">
-                                                <span
-                                                    class="player-status position-absolute end-0 bottom-0 tcn-1 fs-xs d-center">2</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">
-                                                    Savannah Nguyen
-                                                </h5>
-                                                <span class="tcn-6 fs-sm">Duelist</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">Score</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-half-filled"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">Rank</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> Diamond</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">Region</h6>
-                                            <span class="tcn-1 fs-sm text-uppercase"> EUW</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">Team</h6>
-                                            <span class="tcs-1 fs-sm text-uppercase"> lft</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle" src="assets/img/top-player3.png"
-                                                    alt="player">
-                                                <span
-                                                    class="player-status position-absolute end-0 bottom-0 tcn-1 fs-xs d-center">3</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">Guy Hawkins</h5>
-                                                <span class="tcn-6 fs-sm">Duelist</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">Score</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-half-filled"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">Rank</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> Diamond</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">Region</h6>
-                                            <span class="tcn-1 fs-sm text-uppercase"> EUW</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">Team</h6>
-                                            <span class="tcs-1 fs-sm text-uppercase">liqud</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- top player section end -->
+
 
     <!-- tournament section start -->
     <section class="tournament-section pb-120" id="tournament-hero">
@@ -1173,12 +848,13 @@
             <img class="w-100" src="assets/img/game-console2.png" alt="game-console">
         </div>
         <div class="red-ball top-50"></div>
+
         <div class="tournament-wrapper">
             <div class="tournament-wrapper-border">
                 <div class="container pt-120 pb-120">
                     <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15">
                         <div class="col-md-6 col-sm-8">
-                            <h2 class="display-four tcn-1 cursor-scale growUp title-anim">Tournaments</h2>
+                            <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENTS</h2>
                         </div>
                         <div class="col-md-6 col-sm-4 text-sm-end">
                             <a href="tournaments.html"
@@ -1371,211 +1047,10 @@
                 </div>
             </div>
         </div>
+
     </section>
     <!-- tournament section end -->
 
-    <!-- game section start  -->
-    <section class="game-section">
-        <div class="red-ball bottom-0 end-0"></div>
-        <div class="container">
-            <div class="row justify-content-between align-items-center mb-15">
-                <div class="col-6">
-                    <h2 class="display-four tcn-1 cursor-scale growUp title-anim">Games</h2>
-                </div>
-                <div class="col-6 text-end">
-                    <a href="game.html"
-                        class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill">View
-                        More</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="swiper game-swiper">
-                        <div class="swiper-wrapper mb-lg-15 mb-10">
-                            <div class="swiper-slide">
-                                <div class="game-card-wrapper mx-auto">
-                                    <div class="game-card mb-5 p-2">
-                                        <div class="game-card-border"></div>
-                                        <div class="game-card-border-overlay"></div>
-                                        <div class="game-img alt">
-                                            <img class="w-100 h-100" src="assets/img/game-x4.png" alt="game">
-                                        </div>
-                                        <div class="game-link d-center">
-                                            <a href="game.html" class="btn2">
-                                                <i class="ti ti-arrow-right fs-2xl"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <a href="game.html">
-                                        <h3 class="game-title mb-0 tcn-1 cursor-scale growDown2">AAG Axie Cup</h3>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="game-card-wrapper mx-auto">
-                                    <div class="game-card mb-5 p-2">
-                                        <div class="game-card-border"></div>
-                                        <div class="game-card-border-overlay"></div>
-                                        <div class="game-img alt">
-                                            <img class="w-100 h-100" src="assets/img/game3.png" alt="game">
-                                        </div>
-                                        <div class="game-link d-center">
-                                            <a href="game.html" class="btn2">
-                                                <i class="ti ti-arrow-right fs-2xl"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <a href="game.html">
-                                        <h3 class="game-title mb-0 tcn-1 cursor-scale growDown2">Axie Origin</h3>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="game-card-wrapper mx-auto">
-                                    <div class="game-card mb-5 p-2">
-                                        <div class="game-card-border"></div>
-                                        <div class="game-card-border-overlay"></div>
-                                        <div class="game-img alt">
-                                            <img class="w-100 h-100" src="assets/img/game4.png" alt="game">
-                                        </div>
-                                        <div class="game-link d-center">
-                                            <a href="game.html" class="btn2">
-                                                <i class="ti ti-arrow-right fs-2xl"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <a href="game.html">
-                                        <h3 class="game-title mb-0 tcn-1 cursor-scale growDown2">Free Fire</h3>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="game-card-wrapper mx-auto">
-                                    <div class="game-card mb-5 p-2">
-                                        <div class="game-card-border"></div>
-                                        <div class="game-card-border-overlay"></div>
-                                        <div class="game-img alt">
-                                            <img class="w-100 h-100" src="assets/img/game2.png" alt="game">
-                                        </div>
-                                        <div class="game-link d-center">
-                                            <a href="game.html" class="btn2">
-                                                <i class="ti ti-arrow-right fs-2xl"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <a href="game.html">
-                                        <h3 class="game-title mb-0 tcn-1 cursor-scale growDown2">Fortnite</h3>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center d-center">
-                            <div class="game-swiper-pagination"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- game section end  -->
-
-    <!-- next level gaming section start -->
-    <section class="next-level-gaming-section pt-120 pb-120" id="next-level-gaming">
-        <div class="red-ball bottom-50"></div>
-        <div class="container">
-            <div class="row justify-content-between mb-15">
-                <div class="col-lg-6 col-sm-10">
-                    <h2 class="display-four tcn-1 cursor-scale growUp title-anim"><span class="d-block">Gaming To
-                        </span> The Next Level</h2>
-                </div>
-            </div>
-            <div class="row g-6">
-                <div class="col-lg-4 col-md-6">
-                    <div class="next-level-game-card d-grid gap-5 py-lg-10 py-sm-6 py-4 px-xl-9 px-sm-5 px-3">
-                        <div class="card-icon">
-                            <i class="ti ti-12-hours fs-2xl tcn-1"></i>
-                        </div>
-                        <h4 class="card-title tcn-1 cursor-scale growDown2 title-anim">Industry Best Support</h4>
-                        <p class="card-text tcs-6">Get a reply in under 90 seconds from our friendly, in-house staff.
-                            24/7.</p>
-                        <div class="pt-3">
-                            <a href="game.html" class="card-link d-inline-flex align-items-center w-auto">Play Now<i
-                                    class="ti ti-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="next-level-game-card d-grid gap-5 py-lg-10 py-sm-6 py-4 px-xl-9 px-sm-5 px-3">
-                        <div class="card-icon">
-                            <i class="ti ti-tools fs-2xl tcn-1"></i>
-                        </div>
-                        <h4 class="card-title tcn-1 cursor-scale growDown2 title-anim">Play To Earn</h4>
-                        <p class="card-text tcs-6">Earn our TXT tokens with every bet you make. TXT tokens can be
-                            profits.</p>
-                        <div class="pt-3">
-                            <a href="game.html" class="card-link d-inline-flex align-items-center w-auto">Play Now<i
-                                    class="ti ti-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="next-level-game-card d-grid gap-5 py-lg-10 py-sm-6 py-4 px-xl-9 px-sm-5 px-3">
-                        <div class="card-icon">
-                            <i class="ti ti-coins fs-2xl tcn-1"></i>
-                        </div>
-                        <h4 class="card-title tcn-1 cursor-scale growDown2 title-anim">Instant Payouts</h4>
-                        <p class="card-text tcs-6">Withdraw easily with instant payouts on over 99.4% withdrawals.</p>
-                        <div class="pt-3">
-                            <a href="game.html" class="card-link d-inline-flex align-items-center w-auto">Play Now<i
-                                    class="ti ti-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="next-level-game-card d-grid gap-5 py-lg-10 py-sm-6 py-4 px-xl-9 px-sm-5 px-3">
-                        <div class="card-icon">
-                            <i class="ti ti-free-rights fs-2xl tcn-1"></i>
-                        </div>
-                        <h4 class="card-title tcn-1 cursor-scale growDown2 title-anim">Free Withdrawals</h4>
-                        <p class="card-text tcs-6">Withdraw easily with instant payouts on over 99.4% withdrawals.</p>
-                        <div class="pt-3">
-                            <a href="game.html" class="card-link d-inline-flex align-items-center w-auto">Play Now<i
-                                    class="ti ti-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="next-level-game-card d-grid gap-5 py-lg-10 py-sm-6 py-4 px-xl-9 px-sm-5 px-3">
-                        <div class="card-icon">
-                            <i class="ti ti-scale fs-2xl tcn-1"></i>
-                        </div>
-                        <h4 class="card-title tcn-1 cursor-scale growDown2 title-anim">Prove-able Fairness</h4>
-                        <p class="card-text tcs-6">Get a reply in under 90 seconds from our friendly, in-house staff.
-                            24/7.</p>
-                        <div class="pt-3">
-                            <a href="game.html" class="card-link d-inline-flex align-items-center w-auto">Play Now<i
-                                    class="ti ti-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="next-level-game-card d-grid gap-5 py-lg-10 py-sm-6 py-4 px-xl-9 px-sm-5 px-3">
-                        <div class="card-icon">
-                            <i class="ti ti-license fs-2xl tcn-1"></i>
-                        </div>
-                        <h4 class="card-title tcn-1 cursor-scale growDown2 title-anim">Fully Licensed</h4>
-                        <p class="card-text tcs-6">Get a reply in under 90 seconds from our friendly, in-house staff.
-                            24/7.</p>
-                        <div class="pt-3">
-                            <a href="game.html" class="card-link d-inline-flex align-items-center w-auto">Play Now<i
-                                    class="ti ti-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- next level gaming section end -->
 
     <!-- call to action section start -->
     <div class="call-to-action pt-120 pb-120 bgn-4 overflow-x-hidden" id="cta">

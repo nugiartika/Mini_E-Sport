@@ -38,19 +38,19 @@
                         <div class="navbar-brand-box">
                             <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="assetsadmin/images/logo.svg" alt="" height="22">
+                                    <img src="{{ asset('images/logo.svg') }}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assetsadmin/images/logo-dark.png" alt="" height="17">
+                                    <img src="{{ asset('images/logo-dark.png') }}" alt="" height="17">
                                 </span>
                             </a>
 
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assetsadmin/images/logo-light.svg" alt="" height="22">
+                                    <img src="{{ asset('images/logo-light.svg') }}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assetsadmin/images/logo-light.png" alt="" height="19">
+                                    <img src="{{ asset('images/logo-light.png') }}" alt="" height="19">
                                 </span>
                             </a>
                         </div>
@@ -188,7 +188,7 @@
 
                                             <div class="col-sm-5">
                                                 <div>
-                                                    <img src="assetsadmin/images/megamenu-img.png" alt="" class="img-fluid mx-auto d-block">
+                                                    <img src="{{ asset('images/megamenu-img.png') }}" alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                             </div>
                                         </div>
@@ -225,32 +225,32 @@
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item waves-effect"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img id="header-lang-img" src="assetsadmin/images/flags/us.jpg" alt="Header Language" height="16">
+                                <img id="header-lang-img" src="{{ asset('images/flags/us.jpg') }}" alt="Header Language" height="16">
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="en">
-                                    <img src="assetsadmin/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
+                                    <img src="{{ asset('images/flags/us.jpg') }}" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
                                 </a>
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
-                                    <img src="assetsadmin/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
+                                    <img src="{{ asset('images/flags/spain.jpg') }}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="gr">
-                                    <img src="assetsadmin/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
+                                    <img src="{{ asset('images/flags/germany.jpg') }}" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="it">
-                                    <img src="assetsadmin/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
+                                    <img src="{{ asset('images/images/flags/italy.jpg') }}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru">
-                                    <img src="assetsadmin/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
+                                    <img src="{{ asset('images/flags/russia.jpg') }}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
                                 </a>
                             </div>
                         </div>
@@ -265,19 +265,19 @@
                                     <div class="row g-0">
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="assetsadmin/images/brands/github.png" alt="Github">
+                                                <img src="{{ asset('images/brands/github.png') }}" alt="Github">
                                                 <span>GitHub</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="assetsadmin/images/brands/bitbucket.png" alt="bitbucket">
+                                                <img src="{{ asset('images/brands/bitbucket.png') }}" alt="bitbucket">
                                                 <span>Bitbucket</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="assetsadmin/images/brands/dribbble.png" alt="dribbble">
+                                                <img src="{{ asset('images/brands/dribbble.png') }}" alt="dribbble">
                                                 <span>Dribbble</span>
                                             </a>
                                         </div>
@@ -286,19 +286,19 @@
                                     <div class="row g-0">
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="assetsadmin/images/brands/dropbox.png" alt="dropbox">
+                                                <img src="{{ asset('images/brands/dropbox.png') }}" alt="dropbox">
                                                 <span>Dropbox</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="assetsadmin/images/brands/mail_chimp.png" alt="mail_chimp">
+                                                <img src="{{ asset('images/brands/mail_chimp.png') }}" alt="mail_chimp">
                                                 <span>Mail Chimp</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="assetsadmin/images/brands/slack.png" alt="slack">
+                                                <img src="{{ asset('images/brands/slack.png') }}" alt="slack">
                                                 <span>Slack</span>
                                             </a>
                                         </div>
@@ -350,7 +350,7 @@
                                     </a>
                                     <a href="javascript: void(0);" class="text-reset notification-item">
                                         <div class="d-flex">
-                                            <img src="assetsadmin/images/users/avatar-3.jpg"
+                                            <img src="{{ asset('images/users/avatar-3.jpg') }}"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-grow-1">
                                                 <h6 class="mb-1">James Lemire</h6>
@@ -380,7 +380,7 @@
 
                                     <a href="javascript: void(0);" class="text-reset notification-item">
                                         <div class="d-flex">
-                                            <img src="assetsadmin/images/users/avatar-4.jpg"
+                                            <img src="{{ asset('images/users/avatar-4.jpg') }}"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-grow-1">
                                                 <h6 class="mb-1">Salena Layfield</h6>
@@ -403,7 +403,7 @@
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="assetsadmin/images/users/avatar-1.jpg"
+                                <img class="rounded-circle header-profile-user" src="{{ asset('images/users/avatar-1.jpg') }}"
                                     alt="Header Avatar">
                                 <span class="d-none d-xl-inline-block ms-1" key="t-henry">Henry</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
@@ -867,7 +867,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-5 align-self-end">
-                                                <img src="assetsadmin/images/profile-img.png" alt="" class="img-fluid">
+                                                <img src="{{ asset('images/profile-img.png') }}" alt="" class="img-fluid">
                                             </div>
                                         </div>
                                     </div>
@@ -875,7 +875,7 @@
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="avatar-md profile-user-wid mb-4">
-                                                    <img src="assetsadmin/images/users/avatar-1.jpg" alt="" class="img-thumbnail rounded-circle">
+                                                    <img src="{{ asset('images/users/avatar-1.jpg') }}" alt="" class="img-thumbnail rounded-circle">
                                                 </div>
                                                 <h5 class="font-size-15 text-truncate">Henry Price</h5>
                                                 <p class="text-muted mb-0 text-truncate">UI/UX Designer</p>
@@ -1439,7 +1439,7 @@
                                             <tr>
                                                 <th scope="row">
                                                     <div>
-                                                        <img src="assetsadmin/images/product/img-7.png" alt="" class="avatar-sm">
+                                                        <img src="{{ asset('images/product/img-7.png') }}" alt="" class="avatar-sm">
                                                     </div>
                                                 </th>
                                                 <td>
@@ -1453,7 +1453,7 @@
                                             <tr>
                                                 <th scope="row">
                                                     <div>
-                                                        <img src="assetsadmin/images/product/img-4.png" alt="" class="avatar-sm">
+                                                        <img src="{{ asset('images/product/img-4.png') }}" alt="" class="avatar-sm">
                                                     </div>
                                                 </th>
                                                 <td>
@@ -1576,7 +1576,7 @@
 
                 <div class="p-4">
                     <div class="mb-2">
-                        <img src="assetsadmin/images/layouts/layout-1.jpg" class="img-thumbnail" alt="layout images">
+                        <img src="{{ asset('images/layouts/layout-1.jpg') }}" class="img-thumbnail" alt="layout images">
                     </div>
 
                     <div class="form-check form-switch mb-3">
@@ -1585,7 +1585,7 @@
                     </div>
 
                     <div class="mb-2">
-                        <img src="assetsadmin/images/layouts/layout-2.jpg" class="img-thumbnail" alt="layout images">
+                        <img src="{{ asset('images/layouts/layout-2.jpg') }}" class="img-thumbnail" alt="layout images">
                     </div>
                     <div class="form-check form-switch mb-3">
                         <input class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch">
@@ -1593,7 +1593,7 @@
                     </div>
 
                     <div class="mb-2">
-                        <img src="assetsadmin/images/layouts/layout-3.jpg" class="img-thumbnail" alt="layout images">
+                        <img src="{{ asset('images/layouts/layout-3.jpg') }}" class="img-thumbnail" alt="layout images">
                     </div>
                     <div class="form-check form-switch mb-3">
                         <input class="form-check-input theme-choice" type="checkbox" id="rtl-mode-switch">
@@ -1601,7 +1601,7 @@
                     </div>
 
                     <div class="mb-2">
-                        <img src="assetsadmin/images/layouts/layout-4.jpg" class="img-thumbnail" alt="layout images">
+                        <img src="{{ asset('images/layouts/layout-4.jpg') }}" class="img-thumbnail" alt="layout images">
                     </div>
                     <div class="form-check form-switch mb-5">
                         <input class="form-check-input theme-choice" type="checkbox" id="dark-rtl-mode-switch">
