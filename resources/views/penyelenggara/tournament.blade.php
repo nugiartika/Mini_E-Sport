@@ -390,6 +390,8 @@
                         <ul class="tablinks d-flex flex-wrap align-items-center gap-3">
                             <li class="nav-links active">
                                 <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Filter</button>
+
+
                             </li>
                             {{-- <li class="nav-links">
                                 <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Active</button>
@@ -430,7 +432,7 @@
                                                         {{ $tournament->name }}
                                                     </h4>
                                                 </a>
-                                                <span class="tcn-6 fs-sm">Torneo Individual</span>
+                                                <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
                                             </div>
                                             <div class="hr-line line3"></div>
                                             <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
@@ -454,7 +456,7 @@
                                                 <div
                                                     class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                     <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                    <span class="tcn-1 fs-sm">OCT 07, 5:10 AM</span>
+                                                    <span class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
                                                 </div>
                                             </div>
                                             <div class="hr-line line3"></div>
