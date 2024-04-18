@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TournamentRequest;
+use App\Models\Category;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,9 +15,9 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        $tournament = Tournament::all();
-
-        return view('penyelenggara.tournament', compact('tournament'));
+        $tournaments = Tournament::all();
+        $category = Category::all();
+        return view('penyelenggara.tournament', compact('tournaments','category'));
     }
 
     /**
@@ -25,7 +26,8 @@ class TournamentController extends Controller
     public function create()
     {
         $tournament = Tournament::all();
-        return view('penyelenggara.tournament', compact('tournament'));
+        $category = Category::all();
+        return view('penyelenggara.tournament', compact('tournament','category'));
     }
 
     /**
@@ -38,17 +40,21 @@ class TournamentController extends Controller
             $path_gambar = Storage::disk('public')->put('tournament', $gambar);
         }
 
+        // $category = Category::all();
+        $category_id = $request->input('categories_id');
+
         Tournament::create([
             'name' => $request->name,
             'pendaftaran' => $request->pendaftaran,
             'permainan' => $request->permainan,
             'penyelenggara' => $request->penyelenggara,
+            'categories_id' => $category_id,
             'images' => $path_gambar,
             'description' => $request->description,
             'rule' => $request->rule
         ]);
 
-        return redirect()->route('tournament.index')->with('success', 'Tournament added successfully');
+        return redirect()->back()->with('success', 'Tournament added successfully');
     }
 
     /**
