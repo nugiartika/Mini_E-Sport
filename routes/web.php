@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TesController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TournamentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\Group;
@@ -21,6 +22,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('signin', function () {
+    return view('login');
+});
 
 
 Auth::routes();
@@ -36,6 +40,9 @@ Route::get('/index', function (){
 Route::get('/tournament', function (){
     return view('user.tournament');
 });
+
+Route::resource('ptournament', TournamentController::class);
+
 
 Route::get('/detail', function (){
     return view('user.detailtournament');
