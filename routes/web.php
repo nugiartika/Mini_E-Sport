@@ -45,7 +45,6 @@ Route::get('/tournament', function (){
 
 Route::resource('ptournament', TournamentController::class);
 
-
 Route::get('/detail', function (){
     return view('user.detailtournament');
 });
@@ -66,4 +65,7 @@ Route::middleware('admin')->group(function(){
     Route::get('/admin', function(){
         return view('admin');
     });
+    Route::resource('category', CategoryController::class);
+
 });
+

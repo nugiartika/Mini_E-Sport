@@ -36,10 +36,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">name</label>
+                            <label for="name" class="form-label">name tournament</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -47,18 +47,18 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6">
                             <label for="pendaftaran" class="form-label">pendaftaran</label>
-                            <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror" id="pendaftaran" pendaftaran="pendaftaran" value="{{ old('pendaftaran') }}">
+                            <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror" id="pendaftaran" name="pendaftaran" value="{{ old('pendaftaran') }}">
                             @error('pendaftaran')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6">
                             <label for="permainan" class="form-label">permainan</label>
-                            <input type="date" class="form-control @error('permainan') is-invalid @enderror" id="permainan" permainan="permainan" value="{{ old('permainan') }}">
+                            <input type="date" class="form-control @error('permainan') is-invalid @enderror" id="permainan" name="permainan" value="{{ old('permainan') }}">
                             @error('permainan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -67,13 +67,31 @@
                         </div>
                         <div class="mb-3">
                             <label for="penyelenggara" class="form-label">penyelenggara</label>
-                            <input type="text" class="form-control @error('penyelenggara') is-invalid @enderror" id="penyelenggara" penyelenggara="penyelenggara" value="{{ old('penyelenggara') }}">
+                            <input type="text" class="form-control @error('penyelenggara') is-invalid @enderror" id="penyelenggara" name="penyelenggara" value="{{ old('penyelenggara') }}">
                             @error('penyelenggara')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Game</label><br>
+                            <select class="form-control @error('categories_id') is-invalid @enderror" id="category" name="categories_id" aria-label="Default select example">
+                                <option value="" selected>Select Game</option>
+                                @foreach ($category as $kat)
+                                    <option value="{{ $kat->id }}" {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
+                                        {{ $kat->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('categories_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                         <div class="mb-3">
                             <label for="images" class="form-label">Image</label>
                             <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" name="images" onchange="previewImage(event)">
@@ -87,8 +105,8 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">
-                                Fill Description</label>
+                            <label for="description" class="form-label">Fill Description</label><br>
+
                                 @error('description')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -96,7 +114,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="rule" class="form-label">
-                                Fill rule</label>
+                                Fill rule</label><br>
                                 @error('rule')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -113,22 +131,6 @@
         </div>
     </div>
 
-    {{-- <div class="mb-3">
-        <label for="kategoris" class="form-label">Category</label><br>
-        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
-            <option value="" selected>Select Category</option>
-            @foreach ($kategori as $kat)
-                <option value="{{ $kat->id }}" {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
-                    {{ $kat->kategori }}
-                </option>
-            @endforeach
-        </select>
-        @error('kategori_id')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div> --}}
 
     <!-- header-section start -->
     <header class="header-section w-100 bgn-4">
@@ -408,11 +410,14 @@
                     <div class="tabcontents">
                         <div class="tabitem active">
                             <div class="row justify-content-md-start justify-content-center g-6">
+                                @foreach ($tournaments as $tournament)
+
+
                                 <div class="col-xl-4 col-md-6 col-sm-10">
                                     <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                         <div class="tournament-img mb-8 position-relative">
                                             <div class="img-area overflow-hidden">
-                                                <img class="w-100" src="assets/img/slide-3d-1.png" alt="tournament">
+                                                <img class="w-100" src="{{ asset('storage/'.  $tournament->images ) }}" alt="tournament">
                                             </div>
                                             <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
                                                 <span class="dot-icon alt-icon ps-3">Playing</span>
@@ -421,9 +426,8 @@
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
                                                 <a href="tournaments-details.html" class="d-block">
-                                                    <h4
-                                                        class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                        Azariaria's Battlegrounds
+                                                    <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                        {{ $tournament->name }}
                                                     </h4>
                                                 </a>
                                                 <span class="tcn-6 fs-sm">Torneo Individual</span>
@@ -471,8 +475,8 @@
                                             </div>
                                         </div>
                                     </div>
-
-                            </div>
+                                </div>
+                                @endforeach
                         </div>
                         <div class="tabitem">
                             <div class="row justify-content-md-start justify-content-center  g-6">

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('pendaftaran');
             $table->date('permainan');
             $table->string('penyelenggara');
+            $table->foreignId('categories_id')->constrained();
             $table->string('images');
             $table->text('description');
             $table->text('rule');
