@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TesController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RegisterOrganizerController;
 use App\Http\Controllers\TournamentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,11 +18,14 @@ use PHPUnit\Framework\Attributes\Group;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Auth::routes();
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('signin', function () {
     return view('login');
 });
@@ -34,11 +38,11 @@ Route::get('/tes', function (){
 
 Route::get('/index', function (){
     return view('user.index');
-});
+})->name('index');
 
 Route::get('/tournament', function (){
     return view('user.tournament');
-});
+})->name('user.tournament');
 
 Route::resource('ptournament', TournamentController::class);
 Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');
@@ -48,7 +52,7 @@ Route::get('/pdetail', function (){
 
 Route::get('/detail', function (){
     return view('user.detailtournament');
-});
+})->name('detailTournament');
 
 Route::get('/game', function (){
     return view('user.game');
@@ -68,4 +72,10 @@ Route::middleware('admin')->group(function(){
     });
     Route::resource('   ', CategoryController::class);
 });
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 

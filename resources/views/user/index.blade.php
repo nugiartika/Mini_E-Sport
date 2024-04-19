@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
-    <title>Home - HummaEsport</title>
+    <title>HOME - HUMMAESPORT</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -45,50 +45,30 @@
                     <div class="navbar-toggle-item w-100 position-lg-relative">
                         <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
-                                <a href="index.html">Home</a>
+                                <a href="{{ route('index') }}">Home</a>
                             </li>
                             <li class="menu-item">
-                                <button>Tournament</button>
+                                <button>TOURNAMENTS</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="tournaments">Tournaments</a>
+                                        <a href="{{ route('user.tournament') }}">Tournaments</a>
                                     </li>
                                     <li class="menu-link">
-                                        <a href="tournaments-details.html">Tournaments Details</a>
+                                        <a href="detailtournament">TOURNAMENTS DETAILS</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="menu-link">
-                                <a href="game.html">Game</a>
+                                <a href="game">GAME</a>
                             </li>
                             <li class="menu-item">
-                                <button>Teams</button>
+                                <button>TEAMS</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="teams.html">Teams</a>
+                                        <a href="team">TEAMS</a>
                                     </li>
                                     <li class="menu-link">
-                                        <a href="teams-details.html">Teams Details</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item">
-                                <button>pages</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="signup.html">Sign Up</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="signin.html">Sign In</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="error.html">Error</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="faq.html">Faq</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="terms-condition.html">Terms Conditions</a>
+                                        <a href="detailteam">TEAMS DETAILS</a>
                                     </li>
                                 </ul>
                             </li>
@@ -101,12 +81,12 @@
                         <span class="btn-circle fs-2xl">
                             <i class="ti ti-wallet"></i>
                         </span>
-                        <span class="text-nowrap d-none d-xl-block">Connect Wallet</span>
+                        <span class="text-nowrap d-none d-xl-block">CONNECT WALLET</span>
                     </button>
                     <button class="ntf-btn box-style fs-2xl">
                         <i class="ti ti-bell-filled"></i>
                     </button>
-                    <div class="header-profile pointer">
+                    {{-- <div class="header-profile pointer">
                         <div class="profile-wrapper d-flex align-items-center gap-3">
                             <div class="img-area overflow-hidden">
                                 <img class="w-100" src="assets/img/profile.png" alt="profile">
@@ -114,7 +94,7 @@
                             <span class="user-name d-none d-xxl-block text-nowrap">David Malan</span>
                             <i class="ti ti-chevron-down d-none d-xxl-block"></i>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -292,7 +272,7 @@
                         </ul>
                         <h1 class="hero-title display-one tcn-1 cursor-scale growUp mb-10">
                             ULTIMATE
-                            <span class="d-block tcp-1">GAMER’S</span>
+                            <span class="d-block tcp-1">GAMERS</span>
                             HAVEN
                         </h1>
                         <a href="https://www.youtube.com/watch?v=G5kzUpWAusI"
@@ -429,377 +409,6 @@
                                 <span
                                     class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
                                     <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-1.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">Apex Legends</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-2.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">
-                                Super Mario Odyssey
-                            </h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-3.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">
-                                Ghost of Tsushima
-                            </h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-4.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">
-                                Copa Punto Gamer - A
-                            </h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-5.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">
-                                Ghost of Tsushima
-                            </h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-6.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">
-                                Super Mario Odyssey
-                            </h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-7.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">Apex Legends</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-1.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">Apex Legends</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-2.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">
-                                Super Mario Odyssey
-                            </h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-3.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">
-                                Ghost of Tsushima
-                            </h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-4.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">
-                                Copa Punto Gamer - A
-                            </h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-5.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">
-                                Ghost of Tsushima
-                            </h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-6.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">
-                                Super Mario Odyssey
-                            </h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
                                 <img class="w-100" src="assets/img/slide-3d-7.png" alt="game">
                                 <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
                                     <span class="dot-icon alt-icon ps-3">Playing</span>
@@ -858,131 +467,11 @@
                         </div>
                         <div class="col-md-6 col-sm-4 text-sm-end">
                             <a href="tournaments.html"
-                                class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill">View
-                                More</a>
+                                class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill">VIEW
+                                MORE</a>
                         </div>
                     </div>
                     <div class="row justify-content-between align-items-center g-6">
-                        <div class="col-xl-4 col-md-6">
-                            <div class="tournament-card p-xl-4 p-3 bgn-4">
-                                <div class="tournament-img mb-8 position-relative">
-                                    <div class="img-area overflow-hidden">
-                                        <img class="w-100" src="assets/img/tournament1.png" alt="tournament">
-                                    </div>
-                                    <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                        <span class="dot-icon alt-icon ps-3">Playing</span>
-                                    </span>
-                                </div>
-                                <div class="tournament-content px-xl-4 px-sm-2">
-                                    <div class="tournament-info mb-5">
-                                        <a href="tournaments-details.html" class="d-block">
-                                            <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                Azariaria's Battlegrounds
-                                            </h4>
-                                        </a>
-                                        <span class="tcn-6 fs-sm">Torneo Individual</span>
-                                    </div>
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
-                                        <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                                <span class="tcn-1 fs-sm">75</span>
-                                            </div>
-                                            <div class="v-line"></div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                                <span class="tcn-1 fs-sm">$49.97</span>
-                                            </div>
-                                        </div>
-                                        <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-ticket fs-base tcp-2"></i>
-                                            <span class="tcn-1 fs-sm">Free Entry</span>
-                                        </div>
-                                        <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-calendar fs-base tcn-1"></i>
-                                            <span class="tcn-1 fs-sm">OCT 07, 5:10 AM</span>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-more-info d-between mt-6">
-                                        <div class="teams-info d-between gap-xl-5 gap-3">
-                                            <div class="teams d-flex align-items-center gap-1">
-                                                <i class="ti ti-users fs-base"></i>
-                                                <span class="tcn-6 fs-sm">12/12 Teams</span>
-                                            </div>
-                                            <div class="player d-flex align-items-center gap-1">
-                                                <i class="ti ti-user fs-base"></i>
-                                                <span class="tcn-6 fs-sm">128 Players</span>
-                                            </div>
-                                        </div>
-                                        <a href="tournaments-details.html" class="btn2">
-                                            <i class="ti ti-arrow-right fs-2xl"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-6">
-                            <div class="tournament-card p-xl-4 p-3 bgn-4">
-                                <div class="tournament-img mb-8 position-relative">
-                                    <div class="img-area overflow-hidden">
-                                        <img class="w-100" src="assets/img/tournament2.png" alt="tournament">
-                                    </div>
-                                    <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                        <span class="dot-icon alt-icon ps-3">Playing</span>
-                                    </span>
-                                </div>
-                                <div class="tournament-content px-xl-4 px-sm-2">
-                                    <div class="tournament-info mb-5">
-                                        <a href="tournaments-details.html" class="d-block">
-                                            <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                Superliga Weekly
-                                            </h4>
-                                        </a>
-                                        <span class="tcn-6 fs-sm">Torneo Individual</span>
-                                    </div>
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
-                                        <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                                <span class="tcn-1 fs-sm">75</span>
-                                            </div>
-                                            <div class="v-line"></div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                                <span class="tcn-1 fs-sm">$49.97</span>
-                                            </div>
-                                        </div>
-                                        <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-ticket fs-base tcp-2"></i>
-                                            <span class="tcn-1 fs-sm">Free Entry</span>
-                                        </div>
-                                        <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-calendar fs-base tcn-1"></i>
-                                            <span class="tcn-1 fs-sm">OCT 07, 5:10 AM</span>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-more-info d-between mt-6">
-                                        <div class="teams-info d-between gap-xl-5 gap-3">
-                                            <div class="teams d-flex align-items-center gap-1">
-                                                <i class="ti ti-users fs-base"></i>
-                                                <span class="tcn-6 fs-sm">12/12 Teams</span>
-                                            </div>
-                                            <div class="player d-flex align-items-center gap-1">
-                                                <i class="ti ti-user fs-base"></i>
-                                                <span class="tcn-6 fs-sm">128 Players</span>
-                                            </div>
-                                        </div>
-                                        <a href="tournaments-details.html" class="btn2">
-                                            <i class="ti ti-arrow-right fs-2xl"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-xl-4 col-md-6">
                             <div class="tournament-card p-xl-4 p-3 bgn-4">
                                 <div class="tournament-img mb-8 position-relative">
@@ -1047,7 +536,6 @@
                 </div>
             </div>
         </div>
-
     </section>
     <!-- tournament section end -->
 
@@ -1057,33 +545,25 @@
         <div class="container">
             <div class="row justify-content-between g-6">
                 <div class="col-lg-6">
-                    <span class="display-three tcn-1 cursor-scale growUp mb-8 d-block title-anim">Stay up to
-                        date</span>
+                    <span class="display-three tcn-1 cursor-scale growUp mb-8 d-block title-anim">Humma Esport</span>
                     <span class="fs-lg tcn-6">
-                        Have questions or feedback? We'd love to hear from you. Reach out to our team or use our
-                        contact
-                        form.
+                       Ingin memmbuat even tourname sendiri? Daftarkan diri anda sebagai penylenggara
                     </span>
                 </div>
                 <div class="col-xl-5 col-lg-6">
                     <form action="#">
-                        <div class="single-input mb-6">
-                            <input type="email" placeholder="Enter your email">
-                        </div>
+
                         <div
                             class="d-flex align-items-md-center align-items-start justify-content-between gap-lg-8 gap-6 flex-md-row flex-column">
                             <div class="d-flex align-items-center gap-lg-4 gap-2">
                                 <label class="custom-checkbox">
                                     <input type="checkbox">
-                                    <span class="checkmark"></span>
                                 </label>
-                                <span class="fs-base tcn-6">I agree with <a href="#" class="tcp-1">Privacy
-                                        Policy</a>
-                                    and <a href="terms-condition.html" class="tcp-1">Terms & Conditions</a>
+                                <span class="fs-base tcn-6"><a href="" class="tcp-1"></a>
                                 </span>
                             </div>
                             <button type="submit"
-                                class="bttn py-sm-4 py-3 px-lg-10 px-sm-8 px-6 bgp-1 tcn-1 rounded-4">Submit</button>
+                                class="bttn py-sm-4 py-3 px-lg-10 px-sm-8 px-6 bgp-1 tcn-1 rounded-4">Daftar</button>
                         </div>
                     </form>
                 </div>
@@ -1131,58 +611,50 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 br br-res py-lg-20 pt-sm-15 pt-10 footer-card-area">
                     <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">Quick Links</h4>
+                        <h4 class="footer-title mb-8 title-anim">QUICK LINKS</h4>
                         <ul class="footer-list d-grid gap-4">
-                            <li><a href="tournaments.html" class="footer-link d-flex align-items-center tcn-6">
-                                    <i class="ti ti-chevron-right"></i> Tournaments</a></li>
-                            <li><a href="game.html" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> Games </a></li>
-                            <li><a href="teams.html" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> Teams</a></li>
-                            <li><a href="faq.html" class="footer-link d-flex align-items-center tcn-6"> <i
+                            <li><a href="tournament" class="footer-link d-flex align-items-center tcn-6">
+                                    <i class="ti ti-chevron-right"></i> TOURNAMENTS</a></li>
+                            <li><a href="game" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> GAMES </a></li>
+                            <li><a href="team" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> TEAMS</a></li>
+                            <li><a href="faq" class="footer-link d-flex align-items-center tcn-6"> <i
                                         class="ti ti-chevron-right"></i> FAQ</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
                     <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">Explore</h4>
+                        <h4 class="footer-title mb-8 title-anim">EXPLORE</h4>
                         <ul class="footer-list d-grid gap-4">
                             <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> Top Players</a></li>
-                            <li><a href="chat.html" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> messages</a></li>
-                            <li><a href="profile.html" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> Profile</a></li>
+                                        class="ti ti-chevron-right"></i> TOP PLAYERS</a></li>
+                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> MESSAGES</a></li>
+                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> PROFILE</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 py-lg-20 pt-sm-15 pt-10 footer-card-area">
                     <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">Follow Us</h4>
+                        <h4 class="footer-title mb-8 title-anim">FOLLOW US</h4>
                         <ul class="footer-list d-grid gap-4">
                             <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> Facebook</a></li>
+                                        class="ti ti-chevron-right"></i> FACEBOOK</a></li>
                             <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> Instagram</a></li>
+                                        class="ti ti-chevron-right"></i> INSTAGRAM</a></li>
                             <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> Twitter</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> Linkedln</a></li>
+                                        class="ti ti-chevron-right"></i> TWITER</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
                 <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
-                    <span>Copyright © <span class="currentYear"></span> GamePlex | Designed by <a
-                            href="https://themeforest.net/user/pixelaxis" class="tcp-1">Pixelaxis </a></span>
-                </div>
-                <div class="col-xxl-3 col-lg-5">
-                    <ul class="d-flex align-items-center gap-lg-10 gap-sm-6 gap-4">
-                        <li><a href="terms-condition.html">Terms & Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
+                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY  <a
+                            href="https://themeforest.net/user/pixelaxis" class="tcp-1">MAGANG HUMMA </a></span>
                 </div>
             </div>
         </div>
