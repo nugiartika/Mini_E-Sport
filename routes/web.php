@@ -64,7 +64,7 @@ Route::get('/detailteam', function (){
 
 Route::middleware('admin')->group(function(){
     Route::get('/admin', function(){
-        return view('admin');
+        return view('adminDashboard');
     });
     Route::resource('   ', CategoryController::class);
 });
