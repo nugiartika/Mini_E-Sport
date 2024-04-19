@@ -3997,10 +3997,11 @@
                     </li>
                     <!--end::Item-->
 
-                            <!--begin::Item-->
-                                    <li class="breadcrumb-item text-muted">
-                                                    Dashboards                                            </li>
-                                <!--end::Item-->
+                    <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">
+                            Dashboards
+                        </li>
+                    <!--end::Item-->
 
                     </ul>
         <!--end::Breadcrumb-->
