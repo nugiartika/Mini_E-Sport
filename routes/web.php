@@ -22,6 +22,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('signin', function () {
     return view('login');
 });
@@ -32,31 +33,28 @@ Route::get('/tes', function (){
     return view('tes');
 });
 
-Route::get('/index', function (){
-    return view('user.index');
-});
-
-Route::get('/tournament', function (){
-    return view('user.tournament');
-});
-
 Route::resource('ptournament', TournamentController::class);
 
-Route::get('/detail', function (){
-    return view('user.detailtournament');
-});
-
-Route::get('/game', function (){
-    return view('user.game');
-});
-
-Route::get('/team', function (){
-    return view('team');
-});
-
-Route::get('/detailteam', function (){
-    return view('detailteam');
-});
+// Route::middleware('user')->group(function(){
+    Route::get('/index', function (){
+        return view('user.index');
+    });
+    Route::get('/tournament', function (){
+        return view('user.tournament');
+    });
+    Route::get('/detailtournament', function (){
+        return view('user.detailtournament');
+    });
+    Route::get('/game', function (){
+        return view('user.game');
+    });
+    Route::get('/team', function (){
+        return view('team');
+    });
+    Route::get('/detailteam', function (){
+        return view('detailteam');
+    });
+// });
 
 Route::middleware('admin')->group(function(){
     Route::get('/admin', function(){
