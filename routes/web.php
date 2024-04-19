@@ -41,6 +41,10 @@ Route::get('/tournament', function (){
 });
 
 Route::resource('ptournament', TournamentController::class);
+Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');
+Route::get('/pdetail', function (){
+    return view('penyelenggara.detailtournament');
+})->name('ptournament.detail');
 
 Route::get('/detail', function (){
     return view('user.detailtournament');

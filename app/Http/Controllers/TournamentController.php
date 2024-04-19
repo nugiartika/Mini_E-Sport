@@ -6,6 +6,7 @@ use App\Http\Requests\TournamentRequest;
 use App\Models\Category;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class TournamentController extends Controller
@@ -55,6 +56,27 @@ class TournamentController extends Controller
 
         return redirect()->back()->with('success', 'Tournament added successfully');
     }
+
+
+
+    public function filter(Request $request)
+    {
+        $oldSearch = $request->input('search');
+        $user = Auth::user();
+        $category = Category::all();
+        $selectedCategories = $request->input('categories_id', []);
+
+        $query = Tournament::query();
+
+        if (!empty($selectedCategories)) {
+            $query->whereIn('categories_id', $selectedCategories);
+        }
+
+        $tournaments = $query->get();
+
+        return view('penyelenggara.tournament', compact('tournaments', 'category', 'selectedCategories', 'oldSearch','user'));
+    }
+
 
     /**
      * Display the specified resource.

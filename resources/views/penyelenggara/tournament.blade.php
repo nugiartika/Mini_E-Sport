@@ -152,7 +152,7 @@
                                         <a href="tournaments.html">TOURNAMENT</a>
                                     </li>
                                     <li class="menu-link">
-                                        <a href="tournaments-details.html">TOURNAMENT DETAILS</a>
+                                        <a href="{{ route('ptournament.detail') }}">TOURNAMENT DETAILS</a>
                                     </li>
                                 </ul>
                             </li>
@@ -379,8 +379,37 @@
                     <div class="d-between gap-6 flex-wrap mb-lg-15 mb-sm-10 mb-6">
                         <ul class="tablinks d-flex flex-wrap align-items-center gap-3">
                             <li class="nav-links active">
-                                <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Filter</button>
+                                <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#filter">Filter</button>
 
+                                <div class="modal" tabindex="-1" id="filter" style="color: #000;">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-split">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Filter</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="{{ route('tournament.filter') }}" method="GET">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h4 class="widget-title"><b>Category</b></h4>
+                                                        <button type="submit" class="btn btn-primary" style="background-color:rgb(40, 144, 204); border:none;">Filter</button>
+                                                    </div>
+                                                    @php
+                                                        $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
+                                                    @endphp
+                                                    @foreach ($category as $categories)
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="category{{ $categories->id }}" name="categories_id[]" value="{{ $categories->id }}" @if(in_array($categories->id, (array)$selectedCategories)) checked @endif>
+                                                            <label class="form-check-label" for="category{{ $categories->id }}">
+                                                                {{ $categories->name }}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </li>
                             {{-- <li class="nav-links">
@@ -396,7 +425,7 @@
 
                         <div class="px-6">
                             <a type="button"
-                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal">Make New</a>
+                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal">add tournament</a>
                         </div>
                     </div>
                     <div class="tabcontents">
@@ -417,7 +446,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         {{ $tournament->name }}
                                                     </h4>
@@ -461,7 +490,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -484,7 +513,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         Azariaria's Battlegrounds
@@ -529,7 +558,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -548,7 +577,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         EGamesSV Individual #1
@@ -593,7 +622,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -612,7 +641,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         AAG Axie Cup
@@ -657,7 +686,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -676,7 +705,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         Copa Punto Gamers - B
@@ -721,7 +750,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -744,7 +773,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         Azariaria's Battlegrounds
@@ -789,7 +818,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -808,7 +837,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         EGamesSV Individual #1
@@ -853,7 +882,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -872,7 +901,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         Copa Punto Gamers - B
@@ -917,7 +946,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -936,7 +965,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         Superliga Weekly
@@ -981,7 +1010,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -1000,7 +1029,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         Azariaria's Battlegrounds
@@ -1045,7 +1074,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -1064,7 +1093,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         TDL SEA Pro Series 11
@@ -1109,7 +1138,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -1128,7 +1157,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         Liga Triunfo
@@ -1173,7 +1202,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -1196,7 +1225,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         Azariaria's Battlegrounds
@@ -1241,7 +1270,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -1260,7 +1289,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         EGamesSV Individual #1
@@ -1305,7 +1334,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -1324,7 +1353,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         AAG Axie Cup
@@ -1369,7 +1398,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -1388,7 +1417,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         Copa Punto Gamers - B
@@ -1433,7 +1462,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -1452,7 +1481,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         AAG Axie Cup
@@ -1497,7 +1526,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
@@ -1516,7 +1545,7 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         Copa Punto Gamers - B
@@ -1561,7 +1590,7 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
