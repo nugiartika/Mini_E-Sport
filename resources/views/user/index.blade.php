@@ -72,17 +72,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="menu-item">
-                                <button>PAGES</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="signup">SIGN UP</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="signin">SIGN IN</a>
-                                    </li>
-                                </ul>
-                            </li>
                         </ul>
                     </div>
                 </nav>
