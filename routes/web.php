@@ -30,12 +30,6 @@ Route::get('signin', function () {
     return view('login');
 });
 
-Auth::routes();
-
-Route::get('/tes', function (){
-    return view('tes');
-});
-
 Route::get('/index', function (){
     return view('user.index');
 })->name('index');
@@ -68,7 +62,7 @@ Route::get('/detailteam', function (){
 
 Route::middleware('admin')->group(function(){
     Route::get('/admin', function(){
-        return view('adminDashboard');
+        return view('admin.index');
     });
     Route::resource('   ', CategoryController::class);
 });
