@@ -25,12 +25,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('signin', function () {
     return view('login');
 });
-
-
-Route::resource('category', CategoryController::class);
 
 Auth::routes();
 
@@ -68,8 +66,7 @@ Route::middleware('admin')->group(function(){
     Route::get('/admin', function(){
         return view('admin');
     });
-    Route::resource('category', CategoryController::class);
-
+    Route::resource('   ', CategoryController::class);
 });
 
 
