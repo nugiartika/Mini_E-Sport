@@ -38,21 +38,21 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="w-100 logo1" src="assets/img/favicon.png" alt="favicon">
-                            <img class="w-100 logo2" src="assets/img/logo.png" alt="logo">
+                            <img class="w-100 logo1" src="assets/img/LOGO WEB.png" alt="favicon">
+                            {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
                         <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
-                                <a href="{{ route('index') }}">Home</a>
+                                <a href="index">HOME</a>
                             </li>
                             <li class="menu-item">
                                 <button>TOURNAMENTS</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="{{ route('user.tournament') }}">Tournaments</a>
-                                     </li>
+                                        <a href="tournament">TOURNAMENTS</a>
+                                    </li>
                                     <li class="menu-link">
                                         <a href="detailtournament">TOURNAMENTS DETAILS</a>
                                     </li>
@@ -69,6 +69,17 @@
                                     </li>
                                     <li class="menu-link">
                                         <a href="detailteam">TEAMS DETAILS</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <button>PAGES</button>
+                                <ul class="sub-menu">
+                                    <li class="menu-link">
+                                        <a href="signup.html">SIGN UP</a>
+                                    </li>
+                                    <li class="menu-link">
+                                        <a href="signin">SIGN IN</a>
                                     </li>
                                 </ul>
                             </li>
