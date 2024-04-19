@@ -9,6 +9,8 @@
     <title>TEAMS - HUMMAESPORT</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -249,13 +251,124 @@
     </section>
     <!-- teams banner section end  -->
 
+
+
+    <div class="modal" tabindex="-1" id="tambahTeam" style="color: #000;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-split">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Team</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">NAME TEAM</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="profile" class="form-label">PROFILE</label>
+                            <input type="file" class="form-control @error('profile') is-invalid @enderror" id="profile" name="profile" onchange="previewImage(event)">
+                            @if(old('profile'))
+                                <img id="preview" src="{{ asset('storage/' . old('profile')) }}" alt="Old profile" style="max-width: 100px; max-height: 100px;">
+                            @endif
+                            @error('profile')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">GAME</label><br>
+                            <select class="form-control @error('categories_id') is-invalid @enderror" id="category" name="categories_id" aria-label="Default select example">
+                                <option value="" selected>Select Game</option>
+                                @foreach ($category_id as $kat)
+                                    <option value="{{ $kat->id }}" {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
+                                        {{ $kat->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('categories_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        {{-- <div class="mb-3">
+                            <label for="kapten" class="form-label">Captain Team</label>
+                            <input type="text" class="form-control @error('kapten') is-invalid @enderror" id="kapten" name="kapten" value="{{ old('kapten') }}">
+                            @error('kapten')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div> --}}
+                        {{-- <div class="mb-3">
+                            <label for="anggota1" class="form-label">Member Team</label>
+                            <input type="text" class="form-control @error('anggota1') is-invalid @enderror" id="anggota1" name="anggota1" value="{{ old('anggota1') }}">
+                            @error('anggota1')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="anggota2" class="form-label">Member Team</label>
+                            <input type="text" class="form-control @error('anggota2') is-invalid @enderror" id="anggota2" name="anggota2" value="{{ old('anggota2') }}">
+                            @error('anggota2')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="anggota3" class="form-label">Member Team</label>
+                            <input type="text" class="form-control @error('anggota3') is-invalid @enderror" id="anggota3" name="anggota3" value="{{ old('anggota3') }}">
+                            @error('anggota3')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="anggota4" class="form-label">Member Team</label>
+                            <input type="text" class="form-control @error('anggota4') is-invalid @enderror" id="anggota4" name="anggota4" value="{{ old('anggota4') }}">
+                            @error('anggota4')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div> --}}
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                            <button type="submit" class="btn btn-primary">SAVE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- teams card section start   -->
     <section class="teams-card-section pb-120">
         <div class="container">
             <div class="row">
-                <div class="col-12 mb-lg-15 mb-10">
+                <div class="col-12 mb-lg-15 mb-10 d-flex justify-content-between align-items-center">
                     <h2 class="display-four tcn-1 cursor-scale growUp title-anim">FIND TEAMS</h2>
+                    <div class="text-end">
+                        <a type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahTeam">Add Team</a>
+                    </div>
                 </div>
+
+
             </div>
             <!-- teams card  -->
             <div class="row g-6 justify-content-md-start justify-content-center mb-lg-15 mb-10">
