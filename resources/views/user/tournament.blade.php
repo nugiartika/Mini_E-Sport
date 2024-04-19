@@ -45,13 +45,13 @@
                     <div class="navbar-toggle-item w-100 position-lg-relative">
                         <ul class="custom-nav gap-3 gap-lg-7 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
-                                <a href="index.html">Home</a>
+                                <a href="{{ route('index') }}">Home</a>
                             </li>
                             <li class="menu-item">
                                 <button>Tournament</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="tournaments.html">Tournaments</a>
+                                        <a href="{{ route('user.tournament') }}">Tournaments</a>
                                     </li>
                                     <li class="menu-link">
                                         <a href="tournaments-details.html">Tournaments Details</a>

@@ -45,13 +45,13 @@
                     <div class="navbar-toggle-item w-100 position-lg-relative">
                         <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
-                                <a href="index.html">Home</a>
+                                <a href="{{ route('index') }}">Home</a>
                             </li>
                             <li class="menu-item">
                                 <button>Tournament</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="tournaments.html">Tournaments</a>
+                                        <a href="{{ route('user.tournament') }}">Tournaments</a>
                                     </li>
                                     <li class="menu-link">
                                         <a href="tournaments-details.html">Tournaments Details</a>
@@ -1057,33 +1057,25 @@
         <div class="container">
             <div class="row justify-content-between g-6">
                 <div class="col-lg-6">
-                    <span class="display-three tcn-1 cursor-scale growUp mb-8 d-block title-anim">Stay up to
-                        date</span>
+                    <span class="display-three tcn-1 cursor-scale growUp mb-8 d-block title-anim">Humma Esport</span>
                     <span class="fs-lg tcn-6">
-                        Have questions or feedback? We'd love to hear from you. Reach out to our team or use our
-                        contact
-                        form.
+                       Ingin memmbuat even tourname sendiri? Daftarkan diri anda sebagai penylenggara
                     </span>
                 </div>
                 <div class="col-xl-5 col-lg-6">
                     <form action="#">
-                        <div class="single-input mb-6">
-                            <input type="email" placeholder="Enter your email">
-                        </div>
+
                         <div
                             class="d-flex align-items-md-center align-items-start justify-content-between gap-lg-8 gap-6 flex-md-row flex-column">
                             <div class="d-flex align-items-center gap-lg-4 gap-2">
                                 <label class="custom-checkbox">
                                     <input type="checkbox">
-                                    <span class="checkmark"></span>
                                 </label>
-                                <span class="fs-base tcn-6">I agree with <a href="#" class="tcp-1">Privacy
-                                        Policy</a>
-                                    and <a href="terms-condition.html" class="tcp-1">Terms & Conditions</a>
+                                <span class="fs-base tcn-6"><a href="" class="tcp-1"></a>
                                 </span>
                             </div>
                             <button type="submit"
-                                class="bttn py-sm-4 py-3 px-lg-10 px-sm-8 px-6 bgp-1 tcn-1 rounded-4">Submit</button>
+                                class="bttn py-sm-4 py-3 px-lg-10 px-sm-8 px-6 bgp-1 tcn-1 rounded-4">Daftar</button>
                         </div>
                     </form>
                 </div>
