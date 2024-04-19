@@ -85,10 +85,6 @@
     <link rel="stylesheet" href="../../demo/assets/vendor/libs/apex-charts/apex-charts.css" />
 
 
-    <!-- Page Styles -->
-
-    <!-- Include Scripts for customizer, helper, analytics, config -->
-    <!-- $isFront is used to append the front layout scriptsIncludes only on the front layout otherwise the variable will be blank -->
     <!-- laravel style -->
     <script src="../../demo/assets/vendor/js/helpers.js"></script>
     <!-- beautify ignore:start -->
@@ -225,10 +221,6 @@
 <!-- BEGIN: Theme JS-->
 <script src="../../demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a"></script>
 
-<!-- END: Theme JS-->
-<!-- Pricing Modal JS-->
-<!-- END: Pricing Modal JS-->
-<!-- BEGIN: Page JS-->
 <script src="../../demo/assets/js/dashboards-crm.js"></script>
 <!-- END: Page JS-->
 
