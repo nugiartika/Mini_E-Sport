@@ -4,6 +4,7 @@ use App\Http\Controllers\TesController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterOrganizerController;
 use App\Http\Controllers\TournamentController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\Group;
@@ -30,6 +31,7 @@ Route::get('signin', function () {
     return view('login');
 });
 
+
 Auth::routes();
 
 Route::get('/tes', function (){
@@ -43,9 +45,9 @@ Route::get('/index', function (){
 Route::get('/tournament', function (){
     return view('user.tournament');
 })->name('user.tournament');
-
 Route::resource('ptournament', TournamentController::class);
 Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');
+
 Route::get('/pdetail', function (){
     return view('penyelenggara.detailtournament');
 })->name('ptournament.detail');
@@ -66,11 +68,11 @@ Route::get('/detailteam', function (){
     return view('detailteam');
 });
 
-Route::middleware('admin')->group(function(){
-    Route::get('/admin', function(){
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', function () {
         return view('adminDashboard');
     });
-    Route::resource('   ', CategoryController::class);
+    Route::resource('category', CategoryController::class);
 });
 
 

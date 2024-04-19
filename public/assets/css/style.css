@@ -859,8 +859,9 @@ ul li {
   max-width: 260px;
   width: 100%;
 }
-.header-section .navbar-brand .logo1 {
-  max-width: 48px;
+.header-section .navbar-brand .logo1{
+    max-width: 100px;
+    margin-top: -28px;
 }
 .header-section .navbar-brand .logo2 {
   max-width: 180px;
@@ -1160,8 +1161,8 @@ ul li {
 }
 
 .tcp-1 {
-  color: rgb(var(--p1)) !important;
-}
+    color: #1791C8 !important;
+  }
 
 .tcp-2 {
   color: rgb(var(--p2));
@@ -1188,7 +1189,7 @@ ul li {
 }
 
 .bgp-1 {
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 
 .bgp-2 {
@@ -1245,7 +1246,7 @@ ul li {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgb(var(--p1));
+  background: #1791C8;
   margin-right: 10px;
   vertical-align: middle;
 }
