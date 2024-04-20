@@ -6,9 +6,6 @@
     data-base-url="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo-1" data-framework="laravel"
     data-template="vertical-menu-theme-default-light">
 
-
-<!-- Mirrored from demos.pixinvent.com/vuexy-html-laravel-admin-template/demo-1/dashboard/crm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Oct 2023 03:44:33 GMT -->
-<!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -16,9 +13,9 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Crm |
-        Vuexy -
-        Bootstrap Admin Template
+    <title>Dashboard |
+        Admin
+        Humma Esport
     </title>
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 5" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -168,13 +165,9 @@
         © <script>
             document.write(new Date().getFullYear())
         </script>
-      , made with ❤️ by <a href="https://pixinvent.com/" target="_blank" class="footer-link fw-medium">Pixinvent</a>
+      , Humma <span>Esport</span>
       </div>
       <div class="d-none d-lg-inline-block">
-        <a href="https://themeforest.net/licenses/standard" class="footer-link me-4" target="_blank">License</a>
-        <a href="https://1.envato.market/pixinvent_portfolio" target="_blank" class="footer-link me-4">More Themes</a>
-        <a href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/laravel-introduction.html" target="_blank" class="footer-link me-4">Documentation</a>
-        <a href="https://pixinvent.ticksy.com/" target="_blank" class="footer-link d-none d-sm-inline-block">Support</a>
       </div>
     </div>
   </div>
@@ -195,11 +188,6 @@
   </div>
   <!-- / Layout wrapper -->
     <!--/ Layout Content -->
-
-
-  <div class="buy-now">
-    <a href="https://1.envato.market/vuexy_admin" target="_blank" class="btn btn-danger btn-buy-now">Buy Now</a>
-  </div>
 
 
   <!-- Include Scripts -->
