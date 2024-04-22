@@ -16,7 +16,7 @@ class CategoryController extends Controller
         } else {
             $category = Category::paginate(5);
         }
-        return view('category', compact('category'));
+        return view('admin.category', compact('category'));
     }
 
     public function create()

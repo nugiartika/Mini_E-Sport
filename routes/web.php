@@ -69,8 +69,11 @@ Route::get('/detailteam', function (){
 Route::middleware('admin')->group(function(){
     Route::get('/admin', function(){
         return view('admin.index');
-    });
-    Route::resource('   ', CategoryController::class);
+    })->name('admin.index');
+    Route::get('/listUser', function(){
+        return view('admin.listUser');
+    })->name('listUser');
+    Route::resource('category', CategoryController::class);
 });
 
 
