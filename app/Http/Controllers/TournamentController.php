@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TournamentRequest;
 use App\Models\Category;
 use App\Models\Tournament;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -17,8 +18,17 @@ class TournamentController extends Controller
     public function index()
     {
         $tournaments = Tournament::all();
+        $user = User::all();
         $category = Category::all();
-        return view('penyelenggara.tournament', compact('tournaments','category'));
+        return view('penyelenggara.tournament', compact('tournaments','category','user'));
+    }
+
+    public function indexadmin()
+    {
+        $tournaments = Tournament::all();
+        $user = User::all();
+        $category = Category::all();
+        return view('admin.konfirmtournament', compact('tournaments','category','user'));
     }
 
     /**
@@ -27,35 +37,40 @@ class TournamentController extends Controller
     public function create()
     {
         $tournament = Tournament::all();
+        $user = User::all();
         $category = Category::all();
-        return view('penyelenggara.tournament', compact('tournament','category'));
+        return view('penyelenggara.tournament', compact('tournament','category','user'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(TournamentRequest $request)
-    {
-        $gambar = $request->file('images');
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('tournament', $gambar);
-        }
+{
+    $user = Auth::user();
 
-        $category_id = $request->input('categories_id');
-
-        Tournament::create([
-            'name' => $request->name,
-            'pendaftaran' => $request->pendaftaran,
-            'permainan' => $request->permainan,
-            'penyelenggara' => $request->penyelenggara,
-            'categories_id' => $category_id,
-            'images' => $path_gambar,
-            'description' => $request->description,
-            'rule' => $request->rule
-        ]);
-
-        return redirect()->back()->with('success', 'Tournament added successfully');
+    $gambar = $request->file('images');
+    if ($gambar) {
+        $path_gambar = Storage::disk('public')->put('tournament', $gambar);
     }
+
+    $category_id = $request->input('categories_id');
+
+    Tournament::create([
+        'name' => $request->name,
+        'pendaftaran' => $request->pendaftaran,
+        'permainan' => $request->permainan,
+        'categories_id' => $category_id,
+        'users_id' => $user->id,
+        'images' => $path_gambar,
+        'description' => $request->description,
+        'rule' => $request->rule,
+        'status' => 'pending',
+    ]);
+
+    return redirect()->back()->with('success', 'Tournament added successfully');
+}
+
 
 
 

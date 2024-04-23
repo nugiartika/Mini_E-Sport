@@ -9,19 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->date('pendaftaran');
             $table->date('permainan');
-            $table->string('penyelenggara');
             $table->foreignId('categories_id')->constrained();
+            $table->unsignedBigInteger('users_id')->nullable(); // Nullable agar bisa kosong
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('images');
             $table->text('description');
             $table->text('rule');
+            $table->enum('status',['pending','rejected','accepted'])->default('pending');
+            // $table->unsignedBigInteger('penyelenggara')->nullable();
+            // $table->foreign('penyelenggara')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+
         });
     }
 

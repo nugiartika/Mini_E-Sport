@@ -55,7 +55,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="penyelenggara" class="form-label">ORGANIZER</label>
                             <input type="text" class="form-control @error('penyelenggara') is-invalid @enderror" id="penyelenggara" name="penyelenggara" value="{{ old('penyelenggara') }}">
                             @error('penyelenggara')
@@ -63,7 +63,17 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
+                        </div> --}}
+
+                        {{-- datepicker --}}
+                        {{-- <input type="text" name="daterange"  />
+
+                        <script type="text/javascript">
+                        $(function() {
+                            $('input[name="daterange"]').daterangepicker();
+                        });
+                        </script> --}}
+                        {{-- end --}}
 
                         <div class="mb-3">
                             <label for="category" class="form-label">GAME</label><br>
@@ -1746,6 +1756,7 @@
         </div>
     </footer>
     <!-- footer section end  -->
+
 
     <!-- ==== js dependencies start ==== -->
     <!-- jquery  -->

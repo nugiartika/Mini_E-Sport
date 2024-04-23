@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function create()
     {
         $category=Category::all();
-        return view ('category',compact('category'));
+        return view ('admin.category',compact('category'));
     }
 
     public function store(CategoryRequest $request)

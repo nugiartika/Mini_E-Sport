@@ -5,20 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
     <title>TEAMS DETAILS - HUMMAESPORT</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 
 <body>
 
     <!-- Preloader -->
-    <div class="preloader">
+    {{-- <div class="preloader">
         <div class="loader">
             <span></span>
         </div>
-    </div>
+    </div> --}}
 
     <!-- cursor effect-->
     <div class="cursor"></div>
@@ -38,8 +38,8 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="w-100 logo1" src="assets/img/favicon.png" alt="favicon">
-                            <img class="w-100 logo2" src="assets/img/logo.png" alt="logo">
+                            <img class="w-100 logo1" src="{{ asset('assets/img/favicon.png')}}" alt="favicon">
+                            <img class="w-100 logo2" src="{{ asset('assets/img/logo.png')}}" alt="logo">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -144,7 +144,7 @@
                             <a href="#" class="d-between">
                                 <span>Connect with Metamask</span>
                                 <div class="wallet-item-thumb">
-                                    <img class="w-100" src="assets/img/metamask.png" alt="metamask">
+                                    <img class="w-100" src="{{ asset('assets/img/metamask.png') }}" alt="metamask">
                                 </div>
                             </a>
                         </li>
@@ -152,7 +152,7 @@
                             <a href="#" class="d-between">
                                 <span>Connect with Wallet Connect </span>
                                 <div class="wallet-item-thumb">
-                                    <img class="w-100" src="assets/img/walletconnect.png" alt="wallet connect">
+                                    <img class="w-100" src="{{ asset('assets/img/walletconnect.png') }}" alt="wallet connect">
                                 </div>
                             </a>
                         </li>
@@ -204,16 +204,16 @@
                 <div class="col-12 mb-lg-20 mb-15 pb-lg-10 pb-6">
                     <div class="parallax-banner-area parallax-container">
                         <div class="parallax-img team-banner position-relative">
-                            <img class="w-100 h-100 tbi rounded-5" src="assets/img/team-x.png" alt="tournament banner">
+                            <img class="w-100 h-100 tbi rounded-5" src="{{ asset('assets/img/team-x.png') }}" alt="tournament banner">
                             <div
                                 class="team-profile d-between position-absolute z-1 w-100 px-lg-15 px-md-10 px-sm-6 px-4">
                                 <div class="d-flex align-items-center gap-sm-6 gap-3">
                                     <div class="team-thumb">
-                                        <img class="w-100 h-100 alt rounded-circle" src="assets/img/team-thumb1.png"
+                                        <img class="w-100 h-100 alt rounded-circle" src="{{ asset('storage/'. $teams->profile ) }}"
                                             alt="team logo">
                                     </div>
                                     <div class="team-details mb-3">
-                                        <h3 class="team-name">TEAM XR</h3>
+                                        <h3 class="team-name">{{ $teams->name }}</h3>
                                         <div class="d-flex gap-sm-6 gap-2 align-items-center flex-wrap">
                                             <div class="d-flex gap-sm-3 gap-1 align-items-center">
                                                 <i class="ti ti-users fs-2xl"></i>
@@ -228,16 +228,16 @@
                                 </div>
                                 <ul class="player-lists d-md-flex align-items-center d-none">
                                     <li class="rounded-circle overflow-hidden me-n4">
-                                        <img src="assets/img/player1.png" alt="player">
+                                        <img src="{{ asset('assets/img/player1.png') }}" alt="player">
                                     </li>
                                     <li class="rounded-circle overflow-hidden me-n4">
-                                        <img src="assets/img/player2.png" alt="player">
+                                        <img src="{{ asset('assets/img/player2.png') }}" alt="player">
                                     </li>
                                     <li class="rounded-circle overflow-hidden me-n4">
-                                        <img src="assets/img/player3.png" alt="player">
+                                        <img src="{{ asset('assets/img/player3.png') }}" alt="player">
                                     </li>
                                     <li class="rounded-circle overflow-hidden me-n4">
-                                        <img src="assets/img/player4.png" alt="player">
+                                        <img src="{{ asset('assets/img/player4.png') }}" alt="player">
                                     </li>
                                     <li class="rounded-circle overflow-hidden heading-font fs-base">
                                         99+
@@ -252,7 +252,7 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="team-info p-xl-8 p-md-6 p-2 bgn-4 d-flex align-items-center gap-lg-6 gap-4 rounded">
                         <div class="team-info-icon">
-                            <img class="w-100" src="assets/img/wallet2.png" alt="img">
+                            <img class="w-100" src="{{ asset('assets/img/wallet2.png') }}" alt="img">
                         </div>
                         <div class="team-info-details">
                             <h3 class="team-info-text tcn-1">$5960</h3>
@@ -263,7 +263,7 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="team-info p-xl-8 p-md-6 p-2 bgn-4 d-flex align-items-center gap-lg-6 gap-4 rounded">
                         <div class="team-info-icon">
-                            <img class="w-100" src="assets/img/star.png" alt="img">
+                            <img class="w-100" src="{{ asset('assets/img/star.png') }}" alt="img">
                         </div>
                         <div class="team-info-details">
                             <h3 class="team-info-text tcn-1">20</h3>
@@ -274,7 +274,7 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="team-info p-xl-8 p-md-6 p-2 bgn-4 d-flex align-items-center gap-lg-6 gap-4 rounded">
                         <div class="team-info-icon">
-                            <img class="w-100" src="assets/img/tropy2.png" alt="img">
+                            <img class="w-100" src="{{ asset('assets/img/tropy2.png') }}" alt="img">
                         </div>
                         <div class="team-info-details">
                             <h3 class="team-info-text tcn-1">15</h3>
@@ -309,12 +309,12 @@
                                     <li class="d-between bgn-4 py-sm-4 py-3 px-sm-8 px-3 rounded">
                                         <div class="d-flex gap-3 align-items-center">
                                             <div class="player-img">
-                                                <img class="w-100 rounded-circle" src="assets/img/player1.png"
+                                                <img class="w-100 rounded-circle" src="{{ asset('assets/img/player1.png') }}"
                                                     alt="player">
                                             </div>
-                                            <h5 class="player-name tcn-1">Ashadul Islam</h5>
+                                            {{-- <h5 class="player-name tcn-1">{{ $teams->user_id->name }}</h5> --}}
                                             <div class="player-badge">
-                                                <img src="assets/img/chess-queen.png" alt="badge">
+                                                <img src="{{ asset('assets/img/chess-queen.png') }}" alt="badge">
                                             </div>
                                         </div>
                                         <span class="player-type">captain</span>
@@ -322,7 +322,7 @@
                                     <li class="d-between bgn-4 py-sm-4 py-3 px-sm-8 px-3 rounded">
                                         <div class="d-flex gap-3 align-items-center">
                                             <div class="player-img">
-                                                <img class="w-100 rounded-circle" src="assets/img/player2.png"
+                                                <img class="w-100 rounded-circle" src="{{ asset('assets/img/player2.png') }}"
                                                     alt="player">
                                             </div>
                                             <h5 class="player-name tcn-1">Cucahook</h5>
@@ -475,10 +475,10 @@
                         <div class="footer-logo mb-8">
                             <a href="#" class="d-grid gap-6">
                                 <div class="flogo-1">
-                                    <img class="w-100" src="assets/img/logo2.png" alt="favicon">
+                                    <img class="w-100" src="{{ asset('assets/img/logo2.png') }}" alt="favicon">
                                 </div>
                                 <div class="flogo-2">
-                                    <img class="w-100" src="assets/img/logo.png" alt="logo">
+                                    <img class="w-100" src="{{ asset('assets/img/logo.png') }}" alt="logo">
                                 </div>
                             </a>
                         </div>
@@ -554,38 +554,38 @@
         </div>
         <!-- footer banner img  -->
         <div class="footer-banner-img" id="faa">
-            <img class="w-100" src="assets/img/fbanner.png" alt="banner">
+            <img class="w-100" src="{{ asset('assets/img/fbanner.png') }}" alt="banner">
         </div>
     </footer>
     <!-- footer section end  -->
 
     <!-- ==== js dependencies start ==== -->
     <!-- jquery  -->
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- gsap  -->
-    <script src="assets/js/gsap.min.js"></script>
+    <script src="{{ asset('assets/js/gsap.min.js') }}"></script>
     <!-- gsap scroll trigger -->
-    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="{{ asset('assets/js/ScrollTrigger.min.js') }}"></script>
     <!-- lenis  -->
-    <script src="assets/js/lenis.min.js"></script>
+    <script src="{{ asset('assets/js/lenis.min.js') }}"></script>
     <!-- gsap split text -->
-    <script src="assets/js/SplitText.min.js"></script>
+    <script src="{{ asset('assets/js/SplitText.min.js') }}"></script>
     <!-- tilt js -->
-    <script src="assets/js/vanilla-tilt.js"></script>
+    <script src="{{ asset('assets/js/vanilla-tilt.js') }}"></script>
     <!-- scroll magic -->
-    <script src="assets/js/ScrollMagic.min.js"></script>
+    <script src="{{ asset('assets/js/ScrollMagic.min.js') }}"></script>
     <!-- animation.gsap -->
-    <script src="assets/js/animation.gsap.min.js"></script>
+    <script src="{{ asset('assets/js/animation.gsap.min.js') }}"></script>
     <!-- gsap customization  -->
-    <script src="assets/js/gsap-customization.js"></script>
+    <script src="{{ asset('assets/js/gsap-customization.js') }}"></script>
     <!-- swiper js -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
     <!-- magnific popup  -->
-    <script src="assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js"></script>
+    <script src="{{ asset('assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js') }}"></script>
     <!-- bootstrap js -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <!-- main js  -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 
 </html>

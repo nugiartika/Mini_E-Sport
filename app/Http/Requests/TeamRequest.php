@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TournamentRequest extends FormRequest
+class TeamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,16 @@ class TournamentRequest extends FormRequest
     {
         return [
             'name'=>'required|max:30',
-            'pendaftaran'=>'required',
-            'permainan'=>'required',
+            'profile'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'categories_id'=>'required|exists:categories,id',
-            'users_id' => 'nullable|exists:users,id', 
-            'images'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description'=>'required|max:2048',
-            'rule'=>'required|max:2048',
+            // 'user_id'=>'nullable',
+            'member1'=>'nullable|max:30',
+            'member2'=>'required|max:30',
+            'member3'=>'required|max:30',
+            'member4'=>'required|max:30',
+            'member5'=>'required|max:30',
+            'cadangan1'=>'required|max:30',
+            'cadangan2'=>'required|max:30',
 
         ];
     }
@@ -39,18 +42,15 @@ class TournamentRequest extends FormRequest
         return [
             'name.required'=>'name must be filled in.',
             'name.max' => 'name must not exceed 2048 characters.',
-            'pendaftaran.required'=>'pendaftaran must be filled in.',
-            'permainan.required'=>'permainan must be filled in.',
             'categories_id.required' => 'Category must be filled in.',
             'categories_id.exists' => 'The Category you entered is invalid.',
-            'images.required'=>'images must be filled in.',
-            'description.required'=>'description must be filled in.',
-            'description.max' => 'description must not exceed 2048 characters.',
-            'rule.required'=>'rule must be filled in.',
-            'rule.max' => 'rule must not exceed 2048 characters.',
+            'member2.required'=>'member 2 must be filled in.',
+            'member3.required'=>'member 3 must be filled in.',
+            'member4.required'=>'member 4 must be filled in.',
+            'member5.required'=>'member 5 must be filled in.',
+            'cadangan1.required'=>'reserve 1 must be filled in.',
+            'cadangan2.required'=>'reserve 2 must be filled in.',
+            'profile.required'=>'profile must be filled in.',
         ];
     }
 }
-
-
-

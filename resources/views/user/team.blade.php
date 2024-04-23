@@ -1,119 +1,63 @@
+@extends('layouts.user')
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@section('style')
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
     <title>TEAMS - HUMMAESPORT</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <link rel="canonical" href="https://1.envato.market/vuexy_admin">
 
-</head>
 
-<body>
+    <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5J3LMKC');</script>
+    <!-- End Google Tag Manager -->
 
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <span></span>
-        </div>
-    </div>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
 
-    <!-- cursor effect-->
-    <div class="cursor"></div>
-    <!-- Header area  -->
+    <!-- Fonts -->
+    {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap" rel="stylesheet"> --}}
 
-    <!-- header-section start -->
-    <header class="header-section w-100">
-        <div class="py-sm-6 py-3 mx-xxl-20 mx-md-15 mx-3">
-            <div class="d-flex align-items-center justify-content-between gap-xxl-10 gap-lg-8 w-100">
-                <nav
-                    class="navbar-custom d-flex gap-lg-6 align-items-center flex-column flex-lg-row justify-content-start justify-content-lg-between w-100">
-                    <div class="top-bar w-100 d-flex align-items-center gap-lg-0 gap-6">
-                        <button class="navbar-toggle-btn d-block d-lg-none" type="button">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                        <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="w-100 logo1" src="assets/img/favicon.png" alt="favicon">
-                            <img class="w-100 logo2" src="assets/img/logo.png" alt="logo">
-                        </a>
-                    </div>
-                    <div class="navbar-toggle-item w-100 position-lg-relative">
-                        <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
-                            <li class="menu-link">
-                                <a href="index">HOME</a>
-                            </li>
-                            <li class="menu-item">
-                                <button>TOURNAMENTS</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="tournament">TOURNAMENTS</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="detailtournament">TOURNAMENTS DETAILS</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-link">
-                                <a href="game">GAME</a>
-                            </li>
-                            <li class="menu-item">
-                                <button>TEAMS</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="team">TEAMS</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="detailteam">TEAMS DETAILS</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item">
-                                <button>PAGES</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="signup.html">SIGN UP</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="signin">SIGN IN</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-                <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    <button
-                        class="btn-rounded-cus wallet-btn border-0 d-flex align-items-center gap-3 p-xl-2 p-0 pe-xl-6 rounded-5 position-relative">
-                        <span class="btn-circle fs-2xl">
-                            <i class="ti ti-wallet"></i>
-                        </span>
-                        <span class="text-nowrap d-none d-xl-block">CONNECT WALLET</span>
-                    </button>
-                    <button class="ntf-btn box-style fs-2xl">
-                        <i class="ti ti-bell-filled"></i>
-                    </button>
-                    {{-- <div class="header-profile pointer">
-                        <div class="profile-wrapper d-flex align-items-center gap-3">
-                            <div class="img-area overflow-hidden">
-                                <img class="w-100" src="assets/img/profile.png" alt="profile">
-                            </div>
-                            <span class="user-name d-none d-xxl-block text-nowrap">David Malan</span>
-                            <i class="ti ti-chevron-down d-none d-xxl-block"></i>
-                        </div>
-                    </div> --}}
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- header-section end -->
+    <!-- Icons -->
+    {{-- <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css"/>
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" /> --}}
 
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/@form-validation/form-validation.css" />
+
+    <!-- Page CSS -->
+
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+@endsection
+    @section('content')
     <!-- notification area start -->
     <div class="notification-area p-4" data-lenis-prevent>
         <div class="notification-card d-grid gap-lg-4 gap-2" data-tilt>
@@ -261,100 +205,232 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
-                        @csrf
+                    {{-- <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
+                        @csrf --}}
 
-                        <div class="mb-3">
-                            <label for="name" class="form-label">NAME TEAM</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                        {{-- <div class="slide active" id="slide1">
+                            <div class="row g-3">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">NAME TEAM</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="profile" class="form-label">PROFILE</label>
+                                    <input type="file" class="form-control @error('profile') is-invalid @enderror" id="profile" name="profile" onchange="previewImage(event)">
+                                    @if(old('profile'))
+                                        <img id="preview" src="{{ asset('storage/' . old('profile')) }}" alt="Old profile" style="max-width: 100px; max-height: 100px;">
+                                    @endif
+                                    @error('profile')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col"></div>
+                                <div class="col">
+                                    <button type="button" class="btn btn-primary next-slide">Next</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="profile" class="form-label">PROFILE</label>
-                            <input type="file" class="form-control @error('profile') is-invalid @enderror" id="profile" name="profile" onchange="previewImage(event)">
-                            @if(old('profile'))
-                                <img id="preview" src="{{ asset('storage/' . old('profile')) }}" alt="Old profile" style="max-width: 100px; max-height: 100px;">
-                            @endif
-                            @error('profile')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="category" class="form-label">GAME</label><br>
-                            <select class="form-control @error('categories_id') is-invalid @enderror" id="category" name="categories_id" aria-label="Default select example">
-                                <option value="" selected>Select Game</option>
-                                @foreach ($category_id as $kat)
-                                    <option value="{{ $kat->id }}" {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
-                                        {{ $kat->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('categories_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        {{-- <div class="mb-3">
-                            <label for="kapten" class="form-label">Captain Team</label>
-                            <input type="text" class="form-control @error('kapten') is-invalid @enderror" id="kapten" name="kapten" value="{{ old('kapten') }}">
-                            @error('kapten')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+
+                        <div class="slide" id="slide2">
+                            <div class="mb-3">
+                                <label for="category" class="form-label">GAME</label><br>
+                                <select class="form-control @error('categories_id') is-invalid @enderror" id="category" name="categories_id" aria-label="Default select example">
+                                    <option value="" selected>Select Game</option>
+                                    @foreach ($category as $kat)
+                                        <option value="{{ $kat->id }}" {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
+                                            {{ $kat->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('categories_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col">
+                                    <button type="button" class="btn btn-primary prev-slide">Previous</button>
+                                </div>
+                                <div class="col">
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                                        <button type="submit" class="btn btn-primary">SAVE</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div> --}}
-                        {{-- <div class="mb-3">
-                            <label for="anggota1" class="form-label">Member Team</label>
-                            <input type="text" class="form-control @error('anggota1') is-invalid @enderror" id="anggota1" name="anggota1" value="{{ old('anggota1') }}">
-                            @error('anggota1')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="anggota2" class="form-label">Member Team</label>
-                            <input type="text" class="form-control @error('anggota2') is-invalid @enderror" id="anggota2" name="anggota2" value="{{ old('anggota2') }}">
-                            @error('anggota2')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="anggota3" class="form-label">Member Team</label>
-                            <input type="text" class="form-control @error('anggota3') is-invalid @enderror" id="anggota3" name="anggota3" value="{{ old('anggota3') }}">
-                            @error('anggota3')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="anggota4" class="form-label">Member Team</label>
-                            <input type="text" class="form-control @error('anggota4') is-invalid @enderror" id="anggota4" name="anggota4" value="{{ old('anggota4') }}">
-                            @error('anggota4')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div> --}}
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-                            <button type="submit" class="btn btn-primary">SAVE</button>
-                        </div>
-                    </form>
+                        <!-- Default Wizard -->
+<div class="col-12 mb-4">
+    {{-- <small class="text-light fw-medium">Basic</small> --}}
+    <div class="bs-stepper wizard-numbered mt-2">
+      <div class="bs-stepper-header">
+        <div class="step" data-target="#account-details">
+          <button type="button" class="step-trigger">
+            <span class="bs-stepper-circle">1</span>
+            <span class="bs-stepper-label">
+            </span>
+          </button>
+        </div>
+        <div class="line">
+          <i class="ti ti-chevron-right"></i>
+        </div>
+        <div class="step" data-target="#personal-info">
+          <button type="button" class="step-trigger">
+            <span class="bs-stepper-circle">2</span>
+            <span class="bs-stepper-label">
+
+            </span>
+
+          </button>
+        </div>
+        <div class="line">
+          <i class="ti ti-chevron-right"></i>
+        </div>
+        <div class="step" data-target="#social-links">
+          <button type="button" class="step-trigger">
+            <span class="bs-stepper-circle">3</span>
+            <span class="bs-stepper-label">
+
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="bs-stepper-content">
+        <form onSubmit="return false">
+          <!-- Account Details -->
+          <div id="account-details" class="content">
+            <div class="content-header mb-3">
+              <h6 class="mb-0">Account Details</h6>
+              <small>Enter Your Account Details.</small>
+            </div>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label" for="username">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="johndoe" />
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="john.doe@email.com" aria-label="john.doe" />
+              </div>
+              <div class="col-sm-6 form-password-toggle">
+                <label class="form-label" for="password">Password</label>
+                <div class="input-group input-group-merge">
+                  <input type="password" id="password" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password2" />
+                  <span class="input-group-text cursor-pointer" id="password2"><i class="ti ti-eye-off"></i></span>
+                </div>
+              </div>
+              <div class="col-sm-6 form-password-toggle">
+                <label class="form-label" for="confirm-password">Confirm Password</label>
+                <div class="input-group input-group-merge">
+                  <input type="password" id="confirm-password" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="confirm-password2" />
+                  <span class="input-group-text cursor-pointer" id="confirm-password2"><i class="ti ti-eye-off"></i></span>
+                </div>
+              </div>
+              <div class="col-12 d-flex justify-content-between">
+                <button class="btn btn-label-secondary btn-prev" disabled> <i class="ti ti-arrow-left me-sm-1 me-0"></i>
+                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                </button>
+                <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- Personal Info -->
+          <div id="personal-info" class="content">
+            <div class="content-header mb-3">
+              <h6 class="mb-0">Personal Info</h6>
+              <small>Enter Your Personal Info.</small>
+            </div>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label" for="first-name">First Name</label>
+                <input type="text" id="first-name" class="form-control" placeholder="John" />
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="last-name">Last Name</label>
+                <input type="text" id="last-name" class="form-control" placeholder="Doe" />
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="country">Country</label>
+                <select class="select2" id="country">
+                  <option label=" "></option>
+                  <option>UK</option>
+                  <option>USA</option>
+                  <option>Spain</option>
+                  <option>France</option>
+                  <option>Italy</option>
+                  <option>Australia</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="language">Language</label>
+                <select class="selectpicker w-auto" id="language" data-style="btn-transparent" data-icon-base="ti" data-tick-icon="ti-check text-white" multiple>
+                  <option>English</option>
+                  <option>French</option>
+                  <option>Spanish</option>
+                </select>
+              </div>
+              <div class="col-12 d-flex justify-content-between">
+                <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left me-sm-1 me-0"></i>
+                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                </button>
+                <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- Social Links -->
+          <div id="social-links" class="content">
+            <div class="content-header mb-3">
+              <h6 class="mb-0">Social Links</h6>
+              <small>Enter Your Social Links.</small>
+            </div>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label" for="twitter">Twitter</label>
+                <input type="text" id="twitter" class="form-control" placeholder="https://twitter.com/abc" />
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="facebook">Facebook</label>
+                <input type="text" id="facebook" class="form-control" placeholder="https://facebook.com/abc" />
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="google">Google+</label>
+                <input type="text" id="google" class="form-control" placeholder="https://plus.google.com/abc" />
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="linkedin">LinkedIn</label>
+                <input type="text" id="linkedin" class="form-control" placeholder="https://linkedin.com/abc" />
+              </div>
+              <div class="col-12 d-flex justify-content-between">
+                <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left me-sm-1 me-0"></i>
+                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                </button>
+                <button class="btn btn-success btn-submit">Submit</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- /Default Wizard -->
+                    {{-- </form> --}}
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <!-- teams card section start   -->
@@ -372,15 +448,17 @@
             </div>
             <!-- teams card  -->
             <div class="row g-6 justify-content-md-start justify-content-center mb-lg-15 mb-10">
+                @foreach ($teams as $team)
                 <div class="col-xl-4 col-md-6">
                     <div class="team-card gap-6 p-xxl-8 p-4 bgn-4 box-style alt-box" data-tilt>
-                        <div class="team-thumb">
-                            <img class="w-100 rounded-circle" src="assets/img/team-logo9.png" alt="team">
+                        <div class="team-thumb"
+                        style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden;">
+                            <img class="w-100 rounded-circle" src="{{ asset('storage/'. $team->profile) }}" alt="team" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div class="team-info w-100">
                             <div class="title-area d-flex gap-5 align-items-end mb-5">
                                 <a href="teams-details.html">
-                                    <h4 class="tcn-1 cursor-scale growDown title-anim">EQUIPO DE JUAN</h4>
+                                    <h4 class="tcn-1 cursor-scale growDown title-anim">{{ $team->name }}</h4>
                                 </a>
                                 <span class="tcn-6">04/12</span>
                             </div>
@@ -413,13 +491,14 @@
                                         99+
                                     </li>
                                 </ul>
-                                <a href="teams-details.html"
+                                <a href="{{ route('team.detail', ['team' => $team->id]) }}"
                                     class="btn-half-border position-relative d-inline-block py-2 px-6 rounded-pill z-2">Request
                                     to join</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
             <div class="d-center">
                 <button
@@ -430,124 +509,29 @@
     </section>
     <!-- teams card section end   -->
 
-    <!-- footer section start  -->
-    <footer class="footer bgn-4 bt">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <div class="footer-logo mb-8">
-                            <a href="#" class="d-grid gap-6">
-                                <div class="flogo-1">
-                                    <img class="w-100" src="assets/img/logo2.png" alt="favicon">
-                                </div>
-                                <div class="flogo-2">
-                                    <img class="w-100" src="assets/img/logo.png" alt="logo">
-                                </div>
-                            </a>
-                        </div>
-                        <div class="social-links">
-                            <ul class="d-flex align-items-center gap-3 flex-wrap">
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-facebook fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-twitter fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-youtube fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-linkedin fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-instagram fs-2xl"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 br br-res py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">QUICK LINKS</h4>
-                        <ul class="footer-list d-grid gap-4">
-                            <li><a href="tournament" class="footer-link d-flex align-items-center tcn-6">
-                                    <i class="ti ti-chevron-right"></i> TOURNAMENTS</a></li>
-                            <li><a href="game" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> GAMES </a></li>
-                            <li><a href="team" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> TEAMS</a></li>
-                            <li><a href="faq" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">EXPLORE</h4>
-                        <ul class="footer-list d-grid gap-4">
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> TOP PLAYERS</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> MESSAGES</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> PROFILE</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">FOLLOW US</h4>
-                        <ul class="footer-list d-grid gap-4">
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> FACEBOOK</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> INSTAGRAM</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> TWITER</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
-                <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
-                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY  <a
-                            href="https://themeforest.net/user/pixelaxis" class="tcp-1">MAGANG HUMMA </a></span>
-                </div>
-            </div>
-        </div>
-        <!-- footer banner img  -->
-        <div class="footer-banner-img" id="faa">
-            <img class="w-100" src="assets/img/fbanner.png" alt="banner">
-        </div>
-    </footer>
-    <!-- footer section end  -->
 
-    <!-- ==== js dependencies start ==== -->
-    <!-- jquery  -->
-    <script src="assets/js/jquery.min.js"></script>
-    <!-- gsap  -->
-    <script src="assets/js/gsap.min.js"></script>
-    <!-- gsap scroll trigger -->
-    <script src="assets/js/ScrollTrigger.min.js"></script>
-    <!-- lenis  -->
-    <script src="assets/js/lenis.min.js"></script>
-    <!-- gsap split text -->
-    <script src="assets/js/SplitText.min.js"></script>
-    <!-- tilt js -->
-    <script src="assets/js/vanilla-tilt.js"></script>
-    <!-- scroll magic -->
-    <script src="assets/js/ScrollMagic.min.js"></script>
-    <!-- animation.gsap -->
-    <script src="assets/js/animation.gsap.min.js"></script>
-    <!-- gsap customization  -->
-    <script src="assets/js/gsap-customization.js"></script>
-    <!-- swiper js -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <!-- magnific popup  -->
-    <script src="assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js"></script>
-    <!-- main js  -->
-    <script src="assets/js/main.js"></script>
-</body>
+@endsection
 
-</html>
+
+
+
+@section('script')
+<script src="../../demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a"></script>
+<script src="../../demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c"></script>
+<script src="../../demo/assets/vendor/js/bootstraped84.js?id=9a6c701557297a042348b5aea69e9b76"></script>
+<script src="../../demo/assets/vendor/libs/node-waves/node-waves259f.js?id=4fae469a3ded69fb59fce3dcc14cd638"></script>
+<script
+    src="../../demo/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar6188.js?id=44b8e955848dc0c56597c09f6aebf89a">
+</script>
+<script src="../../demo/assets/vendor/libs/hammer/hammer2de0.js?id=0a520e103384b609e3c9eb3b732d1be8"></script>
+<script src="../../demo/assets/vendor/libs/typeahead-js/typeahead60e7.js?id=f6bda588c16867a6cc4158cb4ed37ec6"></script>
+<script src="../../demo/assets/vendor/js/menu2dc9.js?id=c6ce30ded4234d0c4ca0fb5f2a2990d8"></script>
+<script src="../../demo/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<!-- END: Page Vendor JS-->
+<!-- BEGIN: Theme JS-->
+<script src="../../demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a"></script>
+
+<script src="../../demo/assets/js/dashboards-crm.js"></script>
+<!-- END: Page JS-->
+@endsection
+
