@@ -96,60 +96,6 @@
                             <div>List user</div>
                         </a>
                     </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <div>View</div>
-                        </a>
-
-
-                        <ul class="menu-sub">
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/user/view/account.html" class="menu-link">
-                                    <div>Account</div>
-                                </a>
-
-
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/user/view/security.html" class="menu-link">
-                                    <div>Security</div>
-                                </a>
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/user/view/billing.html" class="menu-link">
-                                    <div>Billing &amp; Plans</div>
-                                </a>
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/user/view/notifications.html" class="menu-link">
-                                    <div>Notifications</div>
-                                </a>
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/user/view/connections.html" class="menu-link">
-                                    <div>Connections</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
             </li>
 
@@ -267,8 +213,6 @@
                                 <a href="../app/ecommerce/customer/all.html" class="menu-link">
                                     <div>All Customers</div>
                                 </a>
-
-
                             </li>
 
 
@@ -407,173 +351,32 @@
 
 
 
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/settings/notifications.html" class="menu-link">
-                                    <div>Notifications</div>
-                                </a>
 
-
-                            </li>
                         </ul>
                     </li>
                 </ul>
             </li>
 
-
-
-
-
-
-
-
-            <li class="menu-item ">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons ti ti-book"></i>
-                    <div>Academy</div>
+            <li class="menu-item">
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="menu-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#888888" d="M6 2h9a2 2 0 0 1 2 2v2h-2V4H6v16h9v-2h2v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"/><path fill="#888888" d="M16.09 15.59L17.5 17l5-5l-5-5l-1.41 1.41L18.67 11H9v2h9.67z"/></svg>
+                    <div>Log Out</div>
                 </a>
-
-
-                <ul class="menu-sub">
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/academy/dashboard.html" class="menu-link">
-                            <div>Dashboard</div>
-                        </a>
-
-
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/academy/course.html" class="menu-link">
-                            <div>My Course</div>
-                        </a>
-
-
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/academy/course-details.html" class="menu-link">
-                            <div>Course Details</div>
-                        </a>
-
-
-                    </li>
-                </ul>
             </li>
 
-
-
-
-
-
-
-
-            <li class="menu-item ">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons ti ti-truck"></i>
-                    <div>Logistics</div>
-                </a>
-
-
-                <ul class="menu-sub">
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/logistics/dashboard.html" class="menu-link">
-                            <div>Dashboard</div>
-                        </a>
-
-
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/logistics/fleet.html" class="menu-link">
-                            <div>Fleet</div>
-                        </a>
-
-
-                    </li>
-                </ul>
-            </li>
-
-
-
-
-
-
-
-
-            <li class="menu-item ">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons ti ti-file-dollar"></i>
-                    <div>Invoice</div>
-                    <div class="badge bg-danger rounded-pill ms-auto">4</div>
-
-                </a>
-
-
-                <ul class="menu-sub">
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/invoice/list.html" class="menu-link">
-                            <div>List</div>
-                        </a>
-
-
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/invoice/preview.html" class="menu-link">
-                            <div>Preview</div>
-                        </a>
-
-
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/invoice/edit.html" class="menu-link">
-                            <div>Edit</div>
-                        </a>
-
-
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/invoice/add.html" class="menu-link">
-                            <div>Add</div>
-                        </a>
-
-
-                    </li>
-                </ul>
-            </li>
-
-
-
-
-
-
-
-
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
 
 
         </ul>
 
+
     </aside>
+    <script>
+        function logout() {
+            event.preventDefault();
+            document.getElementById('logout-form').submit();
+        }
+    </script>
+
