@@ -73,13 +73,13 @@
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <button>PAGES</button>
+                                <button>Login</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="signup.html">SIGN UP</a>
+                                        <a href="{{ route('login') }}">Login</a>
                                     </li>
                                     <li class="menu-link">
-                                        <a href="signin">SIGN IN</a>
+                                        <a href="{{ route('register') }}">Register</a>
                                     </li>
                                 </ul>
                             </li>
