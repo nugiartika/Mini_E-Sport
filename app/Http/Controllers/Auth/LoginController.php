@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -21,11 +21,37 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     */
+    public function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+        $this->clearLoginAttempts($request);
+
+        if ($response = $this->authenticated($request, $this->guard()->user())) {
+            return $response;
+        }
+
+        // Redirect users based on their role
+        if (auth()->user()->role === "admin") {
+            return redirect()->back();
+        } elseif (auth()->user()->role === "organizer") {
+            return redirect()->route('dashboardPenyelenggara');
+        }
+
+        // Default redirect if role is not defined
+        return redirect()->route('dashboardPenyelenggara');
+    }
+
+    /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin.index';
 
     /**
      * Create a new controller instance.

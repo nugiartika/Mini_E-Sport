@@ -36,6 +36,9 @@ Route::middleware(['auth'])->group(function () {
     });
 });
     //Route Organizer
+        Route::get('/organizer', function (){
+            return view('penyelenggara.Dashboard');
+        })->name('dashboardPenyelenggara');
         Route::resource('ptournament', TournamentController::class);
         Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');
         Route::get('/pdetail', function () {
