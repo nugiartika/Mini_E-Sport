@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\TesController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\RegisterOrganizerController;
 use App\Http\Controllers\SainsRoleController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TournamentController;
+use App\Models\DashboardAdmin;
 use App\Models\SainsRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +29,10 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     // Route Admin
     Route::middleware('admin')->group(function () {
-        Route::get('/admin', function () {
-            return view('admin.index');
-        })->name('admin.index');
+        // Route::get('/admin', function () {
+        //     return view('admin.index');
+        // })->name('admin.index');
+        Route::get('/admin', [DashboardAdminController::class, 'index'])->name('admin.index');
         Route::get('/listUser', [SainsRoleController::class, 'index'])->name('listUser');
         Route::resource('category', CategoryController::class);
         Route::get('konfirmtournament',[TournamentController::class, 'indexadmin'])->name('konfirmtournament');

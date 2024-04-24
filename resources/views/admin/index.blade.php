@@ -6,54 +6,20 @@
 
         <div class="row">
 
-            <!-- Sales last year -->
-            <div class="col-xl-2 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5 class="card-title mb-0">Sales</h5>
-                        <small class="text-muted">Last Year</small>
-                    </div>
-                    <div id="salesLastYear"></div>
-                    <div class="card-body pt-0">
-                        <div class="d-flex justify-content-between align-items-center mt-3 gap-3">
-                            <h4 class="mb-0">175k</h4>
-                            <small class="text-danger">-16.2%</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sessions Last month -->
-            <div class="col-xl-2 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5 class="card-title mb-0">Sessions</h5>
-                        <small class="text-muted">Last Month</small>
-                    </div>
-                    <div class="card-body">
-                        <div id="sessionsLastMonth"></div>
-                        <div class="d-flex justify-content-between align-items-center mt-3 gap-3">
-                            <h4 class="mb-0">45.1k</h4>
-                            <small class="text-success">+12.6%</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Total Profit -->
-            <div class="col-xl-2 col-md-4 col-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="badge p-2 bg-label-danger mb-2 rounded"><i class="ti ti-currency-dollar ti-md"></i>
-                        </div>
-                        <h5 class="card-title mb-1 pt-2">Total Profit</h5>
-                        <small class="text-muted">Last week</small>
-                        <p class="mb-2 mt-1">1.28k</p>
-                        <div class="pt-1">
-                            <span class="badge bg-label-secondary">-12.2%</span>
+                <div class="col-xl-2 col-md-4 col-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="badge p-2 bg-label-danger mb-2 rounded"><i class="ti ti-user text-heading text-denger"></i>
+                            </div>
+                            <h5 class="card-title mb-1 pt-2">Total</h5>
+                            <small class="text-muted">Penyelenggara</small>
+                            <p class="mb-2 mt-1">{{ $organizer }}</p>
+                            <div class="pt-1">
+                                {{-- <span class="badge bg-label-secondary">-12.2%</span> --}}
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
 
             <!-- Total Sales -->
@@ -61,11 +27,54 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="badge p-2 bg-label-info mb-2 rounded"><i class="ti ti-chart-bar ti-md"></i></div>
-                        <h5 class="card-title mb-1 pt-2">Total Sales</h5>
-                        <small class="text-muted">Last week</small>
-                        <p class="mb-2 mt-1">$4,673</p>
+                        <h5 class="card-title mb-1 pt-2">Total</h5>
+                        <small class="text-muted">User</small>
+                        <p class="mb-2 mt-1">{{ $user }}</p>
                         <div class="pt-1">
-                            <span class="badge bg-label-secondary">+25.2%</span>
+                            {{-- <span class="badge bg-label-secondary">+25.2%</span> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Total Sales -->
+             <div class="col-xl-2 col-md-4 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="badge p-2 bg-label-info mb-2 rounded"><i class="ti ti-chart-bar ti-md"></i></div>
+                        <h5 class="card-title mb-1 pt-2">Total</h5>
+                        <small class="text-muted">Category Game</small>
+                        <p class="mb-2 mt-1">{{ $category }}</p>
+                        <div class="pt-1">
+                                    {{-- <span class="badge bg-label-secondary">+25.2%</span> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-2 col-md-4 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="badge p-2 bg-label-info mb-2 rounded"><i class="ti ti-chart-bar ti-md"></i></div>
+                        <h5 class="card-title mb-1 pt-2">Total</h5>
+                        <small class="text-muted">Tournament</small>
+                        <p class="mb-2 mt-1">{{ $tournament }}</p>
+                        <div class="pt-1">
+                                    {{-- <span class="badge bg-label-secondary">+25.2%</span> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-2 col-md-4 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="badge p-2 bg-label-info mb-2 rounded"><i class="ti ti-chart-bar ti-md"></i></div>
+                        <h5 class="card-title mb-1 pt-2">Total</h5>
+                        <small class="text-muted">Team</small>
+                        <p class="mb-2 mt-1">{{ $team }}</p>
+                        <div class="pt-1">
+                                    {{-- <span class="badge bg-label-secondary">+25.2%</span> --}}
                         </div>
                     </div>
                 </div>

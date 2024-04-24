@@ -33,7 +33,7 @@
                             fill="#7367F0" />
                     </svg>
                 </span>
-                <span class="app-brand-text demo menu-text fw-bold">Vuexy</span>
+                <span class="app-brand-text demo menu-text fw-bold">Huma Esport</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -106,254 +106,19 @@
 
             <li class="menu-item ">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons ti ti-building-factory-2"></i>
-                    <div>eCommerce</div>
+                    <i class="ti-md ti ti-device-laptop text-body"></i>
+                    <div>Tournament</div>
                 </a>
 
 
                 <ul class="menu-sub">
 
-
-
                     <li class="menu-item ">
-                        <a href="../app/ecommerce/dashboard.html" class="menu-link">
-                            <div>Dashboard</div>
+                        <a href="{{ route('konfirmtournament') }}" class="menu-link">
+                            <div>List Tournament</div>
                         </a>
-
-
                     </li>
 
-
-
-                    <li class="menu-item ">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <div>Products</div>
-                        </a>
-
-
-                        <ul class="menu-sub">
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/product/list.html" class="menu-link">
-                                    <div>Product List</div>
-                                </a>
-
-
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/product/add.html" class="menu-link">
-                                    <div>Add Product</div>
-                                </a>
-
-
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/product/category.html" class="menu-link">
-                                    <div>Category List</div>
-                                </a>
-
-
-                            </li>
-                        </ul>
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <div>Order</div>
-                        </a>
-
-
-                        <ul class="menu-sub">
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/order/list.html" class="menu-link">
-                                    <div>Order List</div>
-                                </a>
-
-
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/order/details.html" class="menu-link">
-                                    <div> Order Details</div>
-                                </a>
-
-
-                            </li>
-                        </ul>
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <div>Customer</div>
-                        </a>
-
-
-                        <ul class="menu-sub">
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/customer/all.html" class="menu-link">
-                                    <div>All Customers</div>
-                                </a>
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                    <div>Customer Details</div>
-                                </a>
-
-
-                                <ul class="menu-sub">
-
-
-
-                                    <li class="menu-item ">
-                                        <a href="../app/ecommerce/customer/details/overview.html" class="menu-link">
-                                            <div>Overview</div>
-                                        </a>
-
-
-                                    </li>
-
-
-
-                                    <li class="menu-item ">
-                                        <a href="../app/ecommerce/customer/details/security.html" class="menu-link">
-                                            <div>Security</div>
-                                        </a>
-
-
-                                    </li>
-
-
-
-                                    <li class="menu-item ">
-                                        <a href="../app/ecommerce/customer/details/billing.html" class="menu-link">
-                                            <div>Address &amp; Billing</div>
-                                        </a>
-
-
-                                    </li>
-
-
-
-                                    <li class="menu-item ">
-                                        <a href="../app/ecommerce/customer/details/notifications.html" class="menu-link">
-                                            <div>Notifications</div>
-                                        </a>
-
-
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/ecommerce/manage/reviews.html" class="menu-link">
-                            <div>Manage Reviews</div>
-                        </a>
-
-
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="../app/ecommerce/referrals.html" class="menu-link">
-                            <div>Referrals</div>
-                        </a>
-
-
-                    </li>
-
-
-
-                    <li class="menu-item ">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <div>Settings</div>
-                        </a>
-
-
-                        <ul class="menu-sub">
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/settings/details.html" class="menu-link">
-                                    <div>Store details</div>
-                                </a>
-
-
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/settings/payments.html" class="menu-link">
-                                    <div>Payments</div>
-                                </a>
-
-
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/settings/checkout.html" class="menu-link">
-                                    <div>Checkout</div>
-                                </a>
-
-
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/settings/shipping.html" class="menu-link">
-                                    <div>Shipping &amp; Delivery</div>
-                                </a>
-
-
-                            </li>
-
-
-
-                            <li class="menu-item ">
-                                <a href="../app/ecommerce/settings/locations.html" class="menu-link">
-                                    <div>Locations</div>
-                                </a>
-
-
-                            </li>
-
-
-
-
-                        </ul>
-                    </li>
                 </ul>
             </li>
 

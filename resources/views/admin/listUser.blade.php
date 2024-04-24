@@ -59,7 +59,7 @@
                                             @method('PUT')
                                             <input type="hidden" name=" action" value="approve">
                                             <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i
-                                                    class="ti ti-pencil me-1"></i></button>
+                                                    class="ti ti-check text-heading" style="margin-right: 5px;"></i></button>
                                         </form>
 
                                         <form action="{{ route('rejectUser', $index->id) }}" method="POST" class="d-inline-block">
