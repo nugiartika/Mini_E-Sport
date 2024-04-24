@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+    namespace App\Http\Controllers;
 
-use App\Models\SainsRole;
-use App\Http\Requests\StoreSainsRoleRequest;
-use App\Http\Requests\UpdateSainsRoleRequest;
-use App\Models\User;
-use Illuminate\Http\Request;
+    use App\Models\SainsRole;
+    use App\Http\Requests\StoreSainsRoleRequest;
+    use App\Http\Requests\UpdateSainsRoleRequest;
+    use App\Models\User;
+    use Illuminate\Http\Request;
 
 class SainsRoleController extends Controller
 {

@@ -46,7 +46,7 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <i class="ti ti-brand-angular ti-lg text-danger me-3"></i>
+                                            <i class="ti ti-user text-primary display-6"></i>
                                             <span class="fw-medium">{{ $index->name }}</span>
                                         </div>
                                     </td>
