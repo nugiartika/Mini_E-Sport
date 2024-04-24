@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
     <title>HOME - HUMMAESPORT</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <style>
         .main-content {
     padding: 20px; /* Padding agar konten tidak terlalu dekat dengan tepi layar */
@@ -17,11 +17,11 @@
 </head>
 <body>
  <!-- Preloader -->
- <div class="preloader">
+ {{-- <div class="preloader">
     <div class="loader">
         <span></span>
     </div>
-</div>
+</div> --}}
 
 <!-- cursor effect-->
 <div class="cursor"></div>
@@ -41,7 +41,7 @@
                         <span></span>
                     </button>
                     <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                        <img class="w-100 logo1" src="assets/img/LOGO WEB.png" alt="favicon">
+                        <img class="" src="{{ asset('assets/img/LOGO WEB.png') }}" height="75px" width="75px" alt="favicon">
                         {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
                     </a>
                 </div>
@@ -119,7 +119,6 @@
 
     @yield('content')
 
-
 </div>
 
  <!-- footer section start  -->
@@ -131,10 +130,10 @@
                     <div class="footer-logo mb-8">
                         <a href="#" class="d-grid gap-6">
                             <div class="flogo-1">
-                                <img class="w-100" src="assets/img/logo2.png" alt="favicon">
+                                <img class="w-100" src="{{ asset('assets/img/logo2.png') }}" alt="favicon">
                             </div>
                             <div class="flogo-2">
-                                <img class="w-100" src="assets/img/logo.png" alt="logo">
+                                <img class="w-100" src="{{ asset('assets/img/logo.png') }}" alt="logo">
                             </div>
                         </a>
                     </div>
@@ -210,7 +209,7 @@
     </div>
     <!-- footer banner img  -->
     <div class="footer-banner-img" id="faa">
-        <img class="w-100" src="assets/img/fbanner.png" alt="banner">
+        <img class="w-100" src="{{ asset('assets/img/fbanner.png') }}" alt="banner">
     </div>
 </footer>
 <!-- footer section end  -->
@@ -219,33 +218,33 @@
 
 <!-- ==== js dependencies start ==== -->
 <!-- jquery  -->
-<script src="assets/js/jquery.min.js"></script>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <!-- gsap  -->
-<script src="assets/js/gsap.min.js"></script>
+<script src="{{ asset('assets/js/gsap.min.js') }}"></script>
 <!-- gsap scroll trigger -->
-<script src="assets/js/ScrollTrigger.min.js"></script>
+<script src="{{ asset('assets/js/ScrollTrigger.min.js') }}"></script>
 <!-- lenis  -->
-<script src="assets/js/lenis.min.js"></script>
+<script src="{{ asset('assets/js/lenis.min.js') }}"></script>
 <!-- gsap split text -->
-<script src="assets/js/SplitText.min.js"></script>
+<script src="{{ asset('assets/js/SplitText.min.js') }}"></script>
 <!-- tilt js -->
-<script src="assets/js/vanilla-tilt.js"></script>
+<script src="{{ asset('assets/js/vanilla-tilt.js') }}"></script>
 <!-- scroll magic -->
-<script src="assets/js/ScrollMagic.min.js"></script>
+<script src="{{ asset('assets/js/ScrollMagic.min.js') }}"></script>
 <!-- animation.gsap -->
-<script src="assets/js/animation.gsap.min.js"></script>
+<script src="{{ asset('assets/js/animation.gsap.min.js') }}"></script>
 <!-- gsap customization  -->
-<script src="assets/js/gsap-customization.js"></script>
+<script src="{{ asset('assets/js/gsap-customization.js') }}"></script>
 <!-- apex chart  -->
-<script src="assets/js/apexcharts.js"></script>
+<script src="{{ asset('assets/js/apexcharts.js') }}"></script>
 <!-- swiper js -->
-<script src="assets/js/swiper-bundle.min.js"></script>
+<script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
 <!-- magnific popup  -->
-<script src="assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js"></script>
+<script src="{{ asset('assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js') }}"></script>
 <!-- bootstrap js -->
-<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 <!-- main js  -->
-<script src="assets/js/main.js"></script>
+<script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 
 </html>

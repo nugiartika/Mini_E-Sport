@@ -26,11 +26,11 @@ class TournamentRequest extends FormRequest
             'pendaftaran'=>'required',
             'permainan'=>'required',
             'categories_id'=>'required|exists:categories,id',
-            'users_id' => 'nullable|exists:users,id', 
+            'users_id' => 'nullable|exists:users,id',
             'images'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description'=>'required|max:2048',
             'rule'=>'required|max:2048',
-
+            
         ];
     }
 

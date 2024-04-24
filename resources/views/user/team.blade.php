@@ -272,9 +272,9 @@
                             </div>
                         </div> --}}
                         <!-- Default Wizard -->
-<div class="col-12 mb-4">
+{{-- <div class="col-12 mb-4"> --}}
     {{-- <small class="text-light fw-medium">Basic</small> --}}
-    <div class="bs-stepper wizard-numbered mt-2">
+    {{-- <div class="bs-stepper wizard-numbered mt-2">
       <div class="bs-stepper-header">
         <div class="step" data-target="#account-details">
           <button type="button" class="step-trigger">
@@ -423,8 +423,103 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> --}}
   <!-- /Default Wizard -->
+
+
+
+  <div class="slide active" id="slide1">
+    <div class="row g-3">
+        <div class="col">
+        <label for="" class="form-label"></label>
+        <input class="input form-control @error('') is-invalid @enderror" id="" type="text"
+            name="" value="{{ old('nama') }}" required autocomplete="" autofocus>
+
+    </div>
+
+    <div class="col">
+        <label for="nisn" class="form-label"></label>
+        <input class="input form-control @error('nisn') is-invalid @enderror" id="nisn" type="text"
+            name="" value="{{ old('nisn') }}" required autocomplete="nisn" autofocus>
+
+    </div>
+</div>
+<div class="row g-3">
+    <div class="col">
+        <label for="telepon" class="form-label"></label>
+        <input class="input form-control @error('telepon') is-invalid @enderror" id="telepon" type="text"
+            name="" value="{{ old('telepon') }}" required autocomplete="telepon" autofocus>
+
+    </div>
+    <div class="col">
+        <label for="alamat" class="form-label">{{ __('Alamat') }}</label>
+        <textarea class="input form-control @error('alamat') is-invalid @enderror" id="alamat" type="text"
+            name="" required autocomplete="alamat" autofocus>{{ old('alamat') }}</textarea>
+
+    </div>
+</div>
+    <div class="row g-3">
+        <div class="col">
+            <label for="tempat_lahir" class="form-label">{{ __('Tempat Lahir') }}</label>
+            <input class="input form-control @error('tempat_lahir') is-invalid @enderror" id="tempat_lahir" type="text"
+                name="" value="{{ old('tempat_lahir') }}" required autocomplete="tempat_lahir" autofocus>
+
+        </div>
+
+        <div class="col">
+            <label for="tanggal_lahir" class="form-label">TANGGAL LAHIR</label>
+            <input type="" class="input form-control @error('tanggal_lahir') is-invalid @enderror" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" max="{{ now()->toDateString() }}" required>
+
+        </div>
+    </div>
+
+        <div class="col">
+            <label class="form-label">{{ __('Jenis kelamin') }}</label>
+
+
+        </div>
+    <div class="row g-3">
+        <div class="col"></div>
+        <div class="col">
+    <button type="button" class="btn btn-primary next-slide">Next</button>
+        </div></div>
+</div>
+
+<div class="slide" id="slide2">
+    <div class="mb-3">
+        <label for="" class="form-label">{{ __('email') }}</label>
+        <input class="input form-control @error('') is-invalid @enderror" id="" type=""
+            name="" value="{{ old('email') }}" required autocomplete="">
+
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">{{ __('Password') }}</label>
+        <input class="input form-control @error('password') is-invalid @enderror" id="password" type="password"
+            name="" required autocomplete="new-password">
+
+    </div>
+
+    <div class="mb-3">
+        <label for="password-confirm" class="form-label">{{ __('Password Confirm') }}</label>
+        <input class="input form-control" id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
+    </div>
+
+    <input type="hidden" name="status" value="menunggu konfirmasi">
+    <div class="row g-3">
+        <div class="col">
+    <button type="button" class="btn btn-primary prev-slide">Previous</button></div>
+    <div class="col">
+    <div class="input-box button">
+        <button type="button" class="btn btn-primary">
+            {{ __('Register') }}
+        </button></div>
+    </div>
+</div>
+</div>
+<div class="text">
+    <p>Sudah Punya Akun?<a href="{{ route('login') }}"> Login</a></p>
+    </div>
                     {{-- </form> --}}
                 </div>
             </div>
@@ -440,7 +535,8 @@
                 <div class="col-12 mb-lg-15 mb-10 d-flex justify-content-between align-items-center">
                     <h2 class="display-four tcn-1 cursor-scale growUp title-anim">FIND TEAMS</h2>
                     <div class="text-end">
-                        <a type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahTeam">Add Team</a>
+                        {{-- <a type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahTeam">Add Team</a> --}}
+                        <a href="{{ route('team.create') }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" >Add Team</a>
                     </div>
                 </div>
 
@@ -516,6 +612,34 @@
 
 
 @section('script')
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                if (index === slideIndex) {
+                    slide.style.display = 'block';
+                } else {
+                    slide.style.display = 'none';
+                }
+            });
+        }
+
+        document.querySelector('.next-slide').addEventListener('click', function() {
+            currentSlide++;
+            showSlide(currentSlide);
+        });
+
+        document.querySelector('.prev-slide').addEventListener('click', function() {
+            currentSlide--;
+            showSlide(currentSlide);
+        });
+    });
+</script>
+
 <script src="../../demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a"></script>
 <script src="../../demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c"></script>
 <script src="../../demo/assets/vendor/js/bootstraped84.js?id=9a6c701557297a042348b5aea69e9b76"></script>

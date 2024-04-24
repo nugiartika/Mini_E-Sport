@@ -292,11 +292,14 @@
                     <div class="tabcontents">
                         <div class="tabitem active">
                             <div class="row justify-content-md-start justify-content-center g-6">
+                                @foreach ($tournaments as $index => $tournament)
+
+
                                 <div class="col-xl-4 col-md-6 col-sm-10">
                                     <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                         <div class="tournament-img mb-8 position-relative">
                                             <div class="img-area overflow-hidden">
-                                                <img class="w-100" src="assets/img/game-xx1.png" alt="tournament">
+                                                <img class="w-100" src="{{ asset('storage/'.  $tournament->images ) }}" alt="tournament">
                                             </div>
                                             <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
                                                 <span class="dot-icon alt-icon ps-3">Playing</span>
@@ -304,13 +307,12 @@
                                         </div>
                                         <div class="tournament-content px-xxl-4">
                                             <div class="tournament-info mb-5">
-                                                <a href="tournaments-details.html" class="d-block">
-                                                    <h4
-                                                        class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                        Liga Triunfo
+                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
+                                                    <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                        {{ $tournament->name }}
                                                     </h4>
                                                 </a>
-                                                <span class="tcn-6 fs-sm">QUALIFIER 3</span>
+                                                <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
                                             </div>
                                             <div class="hr-line line3"></div>
                                             <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
@@ -334,7 +336,7 @@
                                                 <div
                                                     class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                     <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                    <span class="tcn-1 fs-sm">OCT 07, 5:10 AM</span>
+                                                    <span class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
                                                 </div>
                                             </div>
                                             <div class="hr-line line3"></div>
@@ -349,14 +351,15 @@
                                                         <span class="tcn-6 fs-sm">128 Players</span>
                                                     </div>
                                                 </div>
-                                                <a href="tournaments-details.html" class="btn2">
+                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                @endforeach
+                        </div>
                         </div>
                     </div>
                 </div>

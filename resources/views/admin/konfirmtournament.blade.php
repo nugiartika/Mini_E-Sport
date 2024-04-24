@@ -38,12 +38,28 @@
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
+                                            data-bs-toggle="dropdown">Edit</button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
+                                            <form id="updateForm{{ $tournament->id }}" action="{{ route('konfirm.update', $tournament->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="dropdown-item">
+                                                    <label for="rejected{{ $tournament->id }}">Rejected</label>
+                                                    <input type="radio" id="rejected{{ $tournament->id }}" name="status" value="rejected" {{ $tournament->status == 'rejected' ? 'checked' : '' }}>
+                                                </div>
+                                                <div class="dropdown-item">
+                                                    <label for="accepted{{ $tournament->id }}">Accepted</label>
+                                                    <input type="radio" id="accepted{{ $tournament->id }}" name="status" value="accepted" {{ $tournament->status == 'accepted' ? 'checked' : '' }}>
+                                                </div>
+                                            </form>
+
+
+
+
+                                            {{-- <a class="dropdown-item" href="javascript:void(0);"><i
                                                     class="ti ti-pencil me-1"></i> Edit</a>
                                             <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="ti ti-trash me-1"></i> Delete</a>
+                                                    class="ti ti-trash me-1"></i> Delete</a> --}}
                                         </div>
                                     </div>
                                 </td>
@@ -63,6 +79,24 @@
         {{-- </div> --}}
         <!-- / Layout page -->
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            @foreach ($tournaments as $tournament)
+                var form{{ $tournament->id }} = document.getElementById('updateForm{{ $tournament->id }}');
+                var rejectedRadio{{ $tournament->id }} = document.getElementById('rejected{{ $tournament->id }}');
+                var acceptedRadio{{ $tournament->id }} = document.getElementById('accepted{{ $tournament->id }}');
+
+                rejectedRadio{{ $tournament->id }}.addEventListener('change', function () {
+                    form{{ $tournament->id }}.submit();
+                });
+
+                acceptedRadio{{ $tournament->id }}.addEventListener('change', function () {
+                    form{{ $tournament->id }}.submit();
+                });
+            @endforeach
+        });
+    </script>
 
 </body>
 

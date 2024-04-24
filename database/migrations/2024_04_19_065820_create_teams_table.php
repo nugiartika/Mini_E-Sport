@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('member3');
             $table->string('member4');
             $table->string('member5');
-            $table->string('cadangan1');
-            $table->string('cadangan2');
+            $table->string('cadangan1')->nullable();
+            $table->string('cadangan2')->nullable();
             $table->timestamps();
         });
     }

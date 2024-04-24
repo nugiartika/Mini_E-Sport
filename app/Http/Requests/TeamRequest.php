@@ -27,12 +27,12 @@ class TeamRequest extends FormRequest
             'categories_id'=>'required|exists:categories,id',
             // 'user_id'=>'nullable',
             'member1'=>'nullable|max:30',
-            'member2'=>'required|max:30',
-            'member3'=>'required|max:30',
-            'member4'=>'required|max:30',
-            'member5'=>'required|max:30',
-            'cadangan1'=>'required|max:30',
-            'cadangan2'=>'required|max:30',
+            'member2'=>'nullable|max:30',
+            'member3'=>'nullable|max:30',
+            'member4'=>'nullable|max:30',
+            'member5'=>'nullable|max:30',
+            'cadangan1'=>'nullable|max:30',
+            'cadangan2'=>'nullable|max:30',
 
         ];
     }
@@ -42,14 +42,8 @@ class TeamRequest extends FormRequest
         return [
             'name.required'=>'name must be filled in.',
             'name.max' => 'name must not exceed 2048 characters.',
-            'categories_id.required' => 'Category must be filled in.',
-            'categories_id.exists' => 'The Category you entered is invalid.',
-            'member2.required'=>'member 2 must be filled in.',
-            'member3.required'=>'member 3 must be filled in.',
-            'member4.required'=>'member 4 must be filled in.',
-            'member5.required'=>'member 5 must be filled in.',
-            'cadangan1.required'=>'reserve 1 must be filled in.',
-            'cadangan2.required'=>'reserve 2 must be filled in.',
+            // 'categories_id.required' => 'Category must be filled in.',
+            // 'categories_id.exists' => 'The Category you entered is invalid.',
             'profile.required'=>'profile must be filled in.',
         ];
     }

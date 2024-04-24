@@ -29,7 +29,7 @@ class TeamController extends Controller
     {
         $teams = Team::all();
         $category = Category::all();
-        return view('user.team', compact('teams','category'));
+        return view('user.createteam', compact('teams','category'));
     }
 
     /**
@@ -43,22 +43,21 @@ class TeamController extends Controller
         }
 
         $category = $request->input('categories_id');
-        $user_id =  auth()->id();
 
-        Team::create([
-            'name' => $request->name,
-            'profile' => $path_gambar,
-            'categories_id' => $category,
-            'member1' => $user_id,
-            'member2' => $request->member2,
-            'member3' => $request->member3,
-            'member4' => $request->member4,
-            'member5' => $request->member5,
-            'cadangan1' => $request->cadangan1,
-            'cadangan2' => $request->cadangan2,
-        ]);
+    Team::create([
+        'name' => $request->name,
+        'profile' => $path_gambar,
+        'categories_id' => $category,
+        'member1' => $request->member1,
+        'member2' => $request->member2,
+        'member3' => $request->member3,
+        'member4' => $request->member4,
+        'member5' => $request->member5,
+        'cadangan1' => $request->cadangan1,
+        'cadangan2' => $request->cadangan2,
+    ]);
 
-        return redirect()->back()->with('success', 'Team added successfully');
+    return redirect()->route('team.index')->with('success', 'Team added successfully');
     }
 
 

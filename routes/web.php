@@ -33,6 +33,9 @@ Route::middleware(['auth'])->group(function () {
         })->name('listUser');
         Route::resource('category', CategoryController::class);
         Route::get('konfirmtournament',[TournamentController::class, 'indexadmin'])->name('konfirmtournament');
+        Route::get('konfirmtournament/{konfirmtournament}/edit', [TournamentController::class, 'edit'])->name('konfirm.edit');
+        Route::put('konfirmtournament/{id}',[TournamentController::class, 'update'])->name('konfirm.update');
+
     });
 });
     //Route Organizer
@@ -48,9 +51,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     //route User
-        Route::get('/tournament', function () {
-            return view('user.tournament');
-        })->name('user.tournament');
+    Route::get('tournament',[TournamentController::class, 'indexuser'])->name('user.tournament');
+    Route::resource('team', TeamController::class);
 
 
         Route::get('/detail', function () {
@@ -69,11 +71,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/detailteam', function () {
             return view('detailteam');
-        });
+        })->name('team.detail');
 
-        Route::get('/team', function () {
-            return view('team');
-        });
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
