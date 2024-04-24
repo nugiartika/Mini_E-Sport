@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TournamentRequest;
 use App\Models\Category;
+use App\Models\Team;
 use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,11 +18,13 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        $tournaments = Tournament::all();
-        $user = User::all();
+        $user = Auth::user();
+        $tournaments = Tournament::where('users_id', $user->id)->get();
         $category = Category::all();
-        return view('penyelenggara.tournament', compact('tournaments','category','user'));
+
+        return view('penyelenggara.tournament', compact('tournaments', 'category', 'user'));
     }
+
     public function indexuser()
     {
         $tournaments = Tournament::where('status', 'accepted')->get();
@@ -106,6 +109,14 @@ class TournamentController extends Controller
     public function show(Tournament $tournament)
     {
         //
+    }
+    public function detail($id)
+    {
+        $tournaments = Tournament::findOrFail($id);
+        $user = User::all();
+        $team = Team::count();
+        $category = Category::all();
+        return view('user.detailtournament', compact('tournaments','category','user','team'));
     }
 
     /**

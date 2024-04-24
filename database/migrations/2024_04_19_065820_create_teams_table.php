@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('profile');
-            $table->foreignId('categories_id')->constrained();
+            $table->foreignId('tournament_id')->constrained();
             // $table->foreignId('user_id')->constrained();
             $table->string('member1');
             $table->string('member2');

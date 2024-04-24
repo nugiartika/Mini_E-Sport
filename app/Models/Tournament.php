@@ -23,4 +23,8 @@ class Tournament extends Model
     {
         return $this->belongsTo(Category::class, 'categories_id');
     }
+    public function team()
+    {
+        return $this->hasOne(Team::class);
+    }
 }

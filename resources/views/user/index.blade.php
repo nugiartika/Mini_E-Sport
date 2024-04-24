@@ -38,7 +38,7 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="w-100 logo1" src="assets/img/LOGO WEB.png" alt="favicon">
+                            <img class="" src="assets/img/LOGO WEB.png" width="60px" height="60px" alt="favicon">
                             {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
                         </a>
                     </div>

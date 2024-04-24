@@ -54,11 +54,8 @@ Route::middleware(['auth'])->group(function () {
     //route User
     Route::get('tournament',[TournamentController::class, 'indexuser'])->name('user.tournament');
     Route::resource('team', TeamController::class);
+    Route::get('tournament/{tournament}', [TournamentController::class, 'detail'])->name('detailTournament');
 
-
-        Route::get('/detail', function () {
-            return view('user.detailtournament');
-        })->name('detailTournament');
 
 
 

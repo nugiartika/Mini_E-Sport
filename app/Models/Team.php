@@ -15,5 +15,9 @@ class Team extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function tournament()
+    {
+        return $this->belongsTo(Tournament::class);
+    }
 
 }

@@ -163,6 +163,8 @@
                     </span>
                 @enderror
             </div>
+            <input type="hidden" name="tournament_id" value="{{ $selectedTournamentId }}">
+
             <!-- Charge tax check box -->
             {{-- <div class="mb-3">
                 <label for="category" class="form-label">GAME</label><br>
@@ -179,7 +181,7 @@
                 @enderror
             </div> --}}
 
-            <div class="row">
+            {{-- <div class="row">
                 <label for="category" class="form-label">GAME</label><br>
 
                 @foreach ($category as $kat)
@@ -194,7 +196,7 @@
                     </div>
                 </div>
                 @endforeach
-            </div>
+            </div> --}}
             <!-- Instock switch -->
             {{-- <div class="d-flex justify-content-between align-items-center border-top pt-3">
               <div class="w-25 d-flex justify-content-end">
@@ -224,7 +226,7 @@
                     <div class="col-md-4">
                         <label for="member1" class="form-label">Captain Team</label>
                         <input type="text" class="form-control" id="member1" name="member1" value="{{ auth()->user()->name }}" readonly>
-                    </div>
+                      </div>
 
                     <div class="col-md-4">
                         <label for="member2" class="form-label">Member Team</label>

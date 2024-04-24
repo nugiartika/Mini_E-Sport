@@ -534,10 +534,9 @@
             <div class="row">
                 <div class="col-12 mb-lg-15 mb-10 d-flex justify-content-between align-items-center">
                     <h2 class="display-four tcn-1 cursor-scale growUp title-anim">FIND TEAMS</h2>
-                    <div class="text-end">
-                        {{-- <a type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahTeam">Add Team</a> --}}
+                    {{-- <div class="text-end">
                         <a href="{{ route('team.create') }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" >Add Team</a>
-                    </div>
+                    </div> --}}
                 </div>
 
 

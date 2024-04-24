@@ -24,7 +24,7 @@ class TeamRequest extends FormRequest
         return [
             'name'=>'required|max:30',
             'profile'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'categories_id'=>'required|exists:categories,id',
+            'tournament_id' => 'nullable|exists:tournaments,id',
             // 'user_id'=>'nullable',
             'member1'=>'nullable|max:30',
             'member2'=>'nullable|max:30',

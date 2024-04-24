@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class TeamController extends Controller
@@ -25,30 +26,34 @@ class TeamController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $teams = Team::all();
-        $category = Category::all();
-        return view('user.createteam', compact('teams','category'));
+        $loggedInUserId = Auth::user(); 
+        $selectedTournamentId = $request->input('tournament_id');
+        return view('user.createteam', compact('teams','loggedInUserId','selectedTournamentId'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(TeamRequest $request)
-    {
-        $gambar = $request->file('profile');
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('team', $gambar);
-        }
+{
+    $tournament_id = $request->tournament_id;
 
-        $category = $request->input('categories_id');
+    $loggedInUser = Auth::user();
+    $loggedInUserName = $loggedInUser->name;
+
+    $gambar = $request->file('profile');
+    if ($gambar) {
+        $path_gambar = Storage::disk('public')->put('team', $gambar);
+    }
 
     Team::create([
         'name' => $request->name,
         'profile' => $path_gambar,
-        'categories_id' => $category,
-        'member1' => $request->member1,
+        'tournament_id' => $tournament_id,
+        'member1' => $loggedInUserName,
         'member2' => $request->member2,
         'member3' => $request->member3,
         'member4' => $request->member4,
@@ -58,7 +63,8 @@ class TeamController extends Controller
     ]);
 
     return redirect()->route('team.index')->with('success', 'Team added successfully');
-    }
+}
+
 
 
     public function indexdetail($id)

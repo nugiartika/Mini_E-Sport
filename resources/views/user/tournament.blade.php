@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -198,7 +197,8 @@
     <div class="connect-wallet-section position-fixed top-0 start-0 w-100 vh-100">
         <div class="connect-wallet-overlay position-absolute top-0 start-0 w-100 h-100"></div>
         <div class="vh-100 wallet-wrapper d-center">
-            <div class="wallet-area pt-lg-8 pt-sm-6 pt-4 pb-lg-20 pb-sm-10 pb-6 px-lg-15 px-sm-8 px-3 bgn-4 rounded-5 ">
+            <div
+                class="wallet-area pt-lg-8 pt-sm-6 pt-4 pb-lg-20 pb-sm-10 pb-6 px-lg-15 px-sm-8 px-3 bgn-4 rounded-5 ">
                 <div class="mb-lg-7 mb-sm-5 mb-3 d-flex justify-content-end">
                     <i class="ti ti-circle-x display-four fw-normal pointer wallet-close-btn"></i>
                 </div>
@@ -293,82 +293,92 @@
                         <div class="tabitem active">
                             <div class="row justify-content-md-start justify-content-center g-6">
                                 @foreach ($tournaments as $index => $tournament)
-
-
-                                <div class="col-xl-4 col-md-6 col-sm-10">
-                                    <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
-                                        <div class="tournament-img mb-8 position-relative">
-                                            <div class="img-area overflow-hidden">
-                                                <img class="w-100" src="{{ asset('storage/'.  $tournament->images ) }}" alt="tournament">
+                                    <div class="col-xl-4 col-md-6 col-sm-10">
+                                        <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
+                                            <div class="tournament-img mb-8 position-relative">
+                                                <div class="img-area overflow-hidden">
+                                                    <img class="w-100"
+                                                        src="{{ asset('storage/' . $tournament->images) }}"
+                                                        alt="tournament">
+                                                </div>
+                                                <span
+                                                    class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
+                                                    <span class="dot-icon alt-icon ps-3">Playing</span>
+                                                </span>
                                             </div>
-                                            <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                                <span class="dot-icon alt-icon ps-3">Playing</span>
-                                            </span>
-                                        </div>
-                                        <div class="tournament-content px-xxl-4">
-                                            <div class="tournament-info mb-5">
-                                                <a href="{{ route('ptournament.detail') }}" class="d-block">
-                                                    <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                        {{ $tournament->name }}
-                                                    </h4>
-                                                </a>
-                                                <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
-                                            </div>
-                                            <div class="hr-line line3"></div>
-                                            <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
-                                                <div
-                                                    class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                                        <span class="tcn-1 fs-sm">75</span>
-                                                    </div>
-                                                    <div class="v-line"></div>
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                                        <span class="tcn-1 fs-sm">$49.97</span>
-                                                    </div>
+                                            <div class="tournament-content px-xxl-4">
+                                                <div class="tournament-info mb-5">
+                                                    <a href="{{ route('ptournament.detail') }}" class="d-block">
+                                                        <h4
+                                                            class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                            {{ $tournament->name }}
+                                                        </h4>
+                                                    </a>
+                                                    <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
                                                 </div>
-                                                <div
-                                                    class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                                    <i class="ti ti-ticket fs-base tcp-2"></i>
-                                                    <span class="tcn-1 fs-sm">Free Entry</span>
-                                                </div>
-                                                <div
-                                                    class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                                    <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                    <span class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="hr-line line3"></div>
-                                            <div class="card-more-info d-between mt-6">
-                                                <div class="teams-info d-between gap-xl-5 gap-3">
-                                                    <div class="teams d-flex align-items-center gap-1">
-                                                        <i class="ti ti-users fs-base"></i>
-                                                        <span class="tcn-6 fs-sm">12/12 Teams</span>
+                                                <div class="hr-line line3"></div>
+                                                <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
+                                                    <div
+                                                        class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
+                                                        <div class="d-flex align-items-center gap-2">
+                                                            <img class="w-100" src="assets/img/bitcoin.png"
+                                                                alt="bitcoin">
+                                                            <span class="tcn-1 fs-sm">75</span>
+                                                        </div>
+                                                        <div class="v-line"></div>
+                                                        <div class="d-flex align-items-center gap-2">
+                                                            <img class="w-100" src="assets/img/tether.png"
+                                                                alt="tether">
+                                                            <span class="tcn-1 fs-sm">$49.97</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="player d-flex align-items-center gap-1">
-                                                        <i class="ti ti-user fs-base"></i>
-                                                        <span class="tcn-6 fs-sm">128 Players</span>
+                                                    <div
+                                                        class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                                        <i class="ti ti-ticket fs-base tcp-2"></i>
+                                                        <span class="tcn-1 fs-sm">Free Entry</span>
+                                                    </div>
+                                                    <div
+                                                        class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                                        <i class="ti ti-calendar fs-base tcn-1"></i>
+                                                        <span
+                                                            class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
                                                     </div>
                                                 </div>
-                                                <a href="{{ route('ptournament.detail') }}" class="btn2">
-                                                    <i class="ti ti-arrow-right fs-2xl"></i>
-                                                </a>
+                                                <div class="hr-line line3"></div>
+                                                <div class="card-more-info d-between mt-6">
+                                                    <div class="teams-info d-between gap-xl-5 gap-3">
+                                                        <div class="teams d-flex align-items-center gap-1">
+                                                            <i class="ti ti-users fs-base"></i>
+                                                            <span class="tcn-6 fs-sm">12/12 Teams</span>
+                                                        </div>
+                                                        {{-- <div class="player d-flex align-items-center gap-1">
+                                                            <i class="ti ti-user fs-base"></i>
+                                                            <span class="tcn-6 fs-sm">128 Players</span>
+                                                        </div> --}}
+                                                    </div>
+                                                    <div class="text-end ms-4">
+                                                        <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add Team</a>
+                                                        {{-- <a href="{{ route('team.create') }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" >Add Team</a> --}}
+                                                    </div>
+                                                    <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}"
+                                                        class="btn2">
+                                                        <i class="ti ti-arrow-right fs-2xl"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
-                        </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-         </div>
-    </div>
-</div>
-</section>
-<!-- tournament section end -->
+        </div>
+        </div>
+        </div>
+    </section>
+    <!-- tournament section end -->
 
     <!-- footer section start  -->
     <footer class="footer bgn-4 bt">
@@ -451,7 +461,7 @@
             </div>
             <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
                 <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
-                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY  <a
+                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY <a
                             href="https://themeforest.net/user/pixelaxis" class="tcp-1">MAGANG HUMMA </a></span>
                 </div>
             </div>
