@@ -1,5 +1,22 @@
 @extends('admin.layouts.app')
 
+<style>
+    .dropdown-menu {
+        min-width: auto;
+        padding: 0;
+    }
+
+    .dropdown-menu .dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+    }
+
+    .dropdown-menu .dropdown-item i {
+        margin-right: 0.5rem;
+    }
+</style>
+
 <body>
     <!-- Layout page -->
     <div class="layout-page">
@@ -20,29 +37,43 @@
                             <tr>
                                 <th>Nama</th>
                                 <th>Email</th>
-                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
+
                         <tbody class="table-border-bottom-0">
-                            <tr>
-                                <td><i class="ti ti-brand-angular ti-lg text-danger me-3"></i> <span
-                                        class="fw-medium">Jono</span></td>
-                                <td>Jono@gmail.com</td>
-                                <td><span class="badge bg-label-primary me-1">Active</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="ti ti-pencil me-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="ti ti-trash me-1"></i> Delete</a>
+                            @foreach ($users as $index)
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="ti ti-brand-angular ti-lg text-danger me-3"></i>
+                                            <span class="fw-medium">{{ $index->name }}</span>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>{{ $index->email }}</td>
+                                    <!-- dalam tag <td> -->
+                                    <td>
+                                        <form action="{{ route('konfirmUser', $index->id) }}" method="POST"
+                                            class="d-inline-block">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="action" value="approve">
+                                            <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i
+                                                    class="ti ti-pencil me-1"></i></button>
+                                        </form>
+
+                                        <form action="{{ route('rejectUser', $index->id) }}" method="POST"
+                                            class="d-inline-block">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="action" value="reject">
+                                            <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i
+                                                    class="ti ti-trash me-1"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
@@ -61,3 +92,14 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+<div class="dropdown-menu">
+    <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-pencil me-1"></i> Approve</a>
+    <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-trash me-1"></i> Reject</a>
+</div>

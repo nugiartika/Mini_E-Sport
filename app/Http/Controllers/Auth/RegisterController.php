@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\SainsRole;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+
 
     /**
      * Create a new controller instance.
@@ -38,6 +40,25 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'email' => 'required|string|email|max:50|unique:users',
+            'password' => 'required|string|min:6|confirmed'
+
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = 'user';
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan masuk ke akun anda.');
     }
 
     /**
@@ -52,7 +73,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            
+
         ]);
     }
 
@@ -70,5 +91,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role' => 'user',
         ]);
+
+        
     }
 }

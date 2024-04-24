@@ -43,7 +43,7 @@
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
-                        <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
+                        <ul  class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
                                 <a href="index">HOME</a>
                             </li>
@@ -282,9 +282,9 @@
                             <li>Enjoy</li>
                         </ul>
                         <h1 class="hero-title display-one tcn-1 cursor-scale growUp mb-10">
-                            ULTIMATE
-                            <span class="d-block tcp-1">GAMERS</span>
-                            HAVEN
+                            Humma
+                            <span class="d-block tcp-1">Esport</span>
+                            GAMERS
                         </h1>
                         <a href="https://www.youtube.com/watch?v=G5kzUpWAusI"
                             class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill popupvideo mfp-iframe">Play

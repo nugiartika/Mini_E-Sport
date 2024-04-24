@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -21,37 +22,10 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Handle a login request to the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
-     */
-    public function sendLoginResponse(Request $request)
-    {
-        $request->session()->regenerate();
-        $this->clearLoginAttempts($request);
-
-        if ($response = $this->authenticated($request, $this->guard()->user())) {
-            return $response;
-        }
-
-        // Redirect users based on their role
-        if (auth()->user()->role === "admin") {
-            return redirect()->back();
-        } elseif (auth()->user()->role === "organizer") {
-            return redirect()->route('dashboardPenyelenggara');
-        }
-
-        // Default redirect if role is not defined
-        return redirect()->route('dashboardPenyelenggara');
-    }
-
-    /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/admin.index';
 
     /**
      * Create a new controller instance.
@@ -62,4 +36,18 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-}
+
+    public function login(Request $request)
+    {
+        if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (auth()->user()->role === 'organizer') {
+                return redirect()->route('dashboardPenyelenggara');
+            } else {
+                return redirect()->route('admin.index');
+            }
+        } else {
+            // Tambahkan pesan kesalahan atau tindakan lain jika login gagal
+            return redirect()->back()->withInput()->withErrors(['email' => 'Kombinasi email dan password tidak valid.']);
+        }
+    }
+    }

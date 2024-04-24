@@ -3,8 +3,10 @@
 use App\Http\Controllers\TesController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterOrganizerController;
+use App\Http\Controllers\SainsRoleController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TournamentController;
+use App\Models\SainsRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\Group;
@@ -28,14 +30,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin', function () {
             return view('admin.index');
         })->name('admin.index');
-        Route::get('/listUser', function () {
-            return view('admin.listUser');
-        })->name('listUser');
+        Route::get('/listUser', [SainsRoleController::class, 'index'])->name('listUser');
         Route::resource('category', CategoryController::class);
         Route::get('konfirmtournament',[TournamentController::class, 'indexadmin'])->name('konfirmtournament');
         Route::get('konfirmtournament/{konfirmtournament}/edit', [TournamentController::class, 'edit'])->name('konfirm.edit');
         Route::put('konfirmtournament/{id}',[TournamentController::class, 'update'])->name('konfirm.update');
-
+        Route::put('konfirmUser/{idUser}', [SainsRoleController::class, 'update'])->name('konfirmUser');
+        Route::put('rejectUser', [SainsRoleController::class, 'destroy'])->name('rejectUser');
     });
 });
     //Route Organizer

@@ -8,7 +8,7 @@ class ValidateSignature extends Middleware
 {
     /**
      * The names of the query string parameters that should be ignored.
-     *
+     *artisan 
      * @var array<int, string>
      */
     protected $except = [
