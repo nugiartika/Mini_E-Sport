@@ -67,17 +67,16 @@ class SainsRoleController extends Controller
         $sainsRole = SainsRole::find($id);
 
         if ($sainsRole) {
-            // Update peran (role) pada SainsRole menjadi 'organizer'
             $sainsRole->role = 'organizer';
             $sainsRole->save();
 
-            // Anda mungkin ingin mencari entri User yang berhubungan dengan SainsRole yang diubah
             $user = $sainsRole->user;
             if ($user) {
-                // Update peran (role) pada User menjadi 'organizer' jika perlu
                 $user->role = 'organizer';
                 $user->save();
             }
+
+            $sainsRole->delete();
         }
 
 
@@ -86,10 +85,22 @@ class SainsRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SainsRole $sainsRole)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($idUser)
     {
-        $sainsRole->delete();
+        $sainsRole = SainsRole::find($idUser);
 
-        return redirect()->back()->with('success', 'User ditolak menjadi penyelenggara');
+        if ($sainsRole) {
+            // Hapus SainsRole
+            $sainsRole->delete();
+
+            // Mengembalikan pengguna ke halaman sebelumnya dengan pesan sukses
+            return redirect()->back()->with('success', 'User ditolak menjadi penyelenggara');
+        } else {
+            // Jika SainsRole tidak ditemukan
+            return redirect()->back()->with('error', 'Data SainsRole tidak ditemukan');
+        }
     }
 }

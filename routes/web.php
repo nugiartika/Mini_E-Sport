@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('konfirmtournament/{konfirmtournament}/edit', [TournamentController::class, 'edit'])->name('konfirm.edit');
         Route::put('konfirmtournament/{id}',[TournamentController::class, 'update'])->name('konfirm.update');
         Route::put('konfirmUser/{idUser}', [SainsRoleController::class, 'update'])->name('konfirmUser');
-        Route::put('rejectUser', [SainsRoleController::class, 'destroy'])->name('rejectUser');
+        Route::delete('rejectUser/{idUser}', [SainsRoleController::class, 'destroy'])->name('rejectUser');
     });
 });
     //Route Organizer

@@ -62,14 +62,13 @@
                                                     class="ti ti-pencil me-1"></i></button>
                                         </form>
 
-                                        <form action="{{ route('rejectUser', $index->id) }}" method="POST"
-                                            class="d-inline-block">
+                                        <form action="{{ route('rejectUser', $index->id) }}" method="POST" class="d-inline-block">
                                             @csrf
-                                            @method('PUT')
+                                            @method('DELETE')
                                             <input type="hidden" name="action" value="reject">
-                                            <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i
-                                                    class="ti ti-trash me-1"></i></button>
+                                            <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i class="ti ti-trash me-1"></i></button>
                                         </form>
+
                                     </td>
                                 </tr>
                             @endforeach
