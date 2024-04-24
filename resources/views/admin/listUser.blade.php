@@ -42,15 +42,15 @@
                         </thead>
 
                         <tbody class="table-border-bottom-0">
-                            @foreach ($users as $index)
+                            @foreach ($sainsRole as $index)
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <i class="ti ti-brand-angular ti-lg text-danger me-3"></i>
-                                            <span class="fw-medium">{{ $index->name }}</span>
+                                            <span class="fw-medium">{{ $index->user->name }}</span>
                                         </div>
                                     </td>
-                                    <td>{{ $index->email }}</td>
+                                    <td>{{ $index->user->email }}</td>
                                     <!-- dalam tag <td> -->
                                     <td>
                                         <form action="{{ route('konfirmUser', $index->id) }}" method="POST"

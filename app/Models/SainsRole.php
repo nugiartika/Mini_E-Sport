@@ -11,6 +11,9 @@ class SainsRole extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id','role'];
+
+
     /**
      * Get the SainsRole associated with the SainsRole
      *

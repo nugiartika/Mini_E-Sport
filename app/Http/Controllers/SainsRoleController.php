@@ -15,10 +15,10 @@ class SainsRoleController extends Controller
      */
     public function index()
     {
-        $users = User::where('role', 'user')->get();
-
+        // $users = User::where('role', 'user')->get();
+        $sainsRole = SainsRole::all();
         // Mengirimkan data pengguna ke view
-        return view('admin.listUser', compact('users'));
+        return view('admin.listUser', compact('sainsRole'));
     }
 
     /**

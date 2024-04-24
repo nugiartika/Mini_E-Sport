@@ -48,15 +48,27 @@ class RegisterController extends Controller
             'name' => 'required|string|max:50',
             'email' => 'required|string|email|max:50|unique:users',
             'password' => 'required|string|min:6|confirmed'
-
         ]);
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role = 'user';
-        $user->save();
+        // $user = new User();
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+        // $user->password = Hash::make($request->password);
+        // $user->role = 'user';
+        // $user->save();
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'user'
+        ]);
+
+        // Set role for the new user
+        SainsRole::create([
+            'user_id' => $user->id,
+            'role' => 'user',
+        ]);
 
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan masuk ke akun anda.');
     }
@@ -73,7 +85,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-
         ]);
     }
 
@@ -92,6 +103,6 @@ class RegisterController extends Controller
             'role' => 'user',
         ]);
 
-        
+
     }
 }
