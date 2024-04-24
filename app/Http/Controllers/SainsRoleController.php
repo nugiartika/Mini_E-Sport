@@ -1,12 +1,12 @@
 <?php
 
-    namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
-    use App\Models\SainsRole;
-    use App\Http\Requests\StoreSainsRoleRequest;
-    use App\Http\Requests\UpdateSainsRoleRequest;
-    use App\Models\User;
-    use Illuminate\Http\Request;
+use App\Models\SainsRole;
+use App\Http\Requests\StoreSainsRoleRequest;
+use App\Http\Requests\UpdateSainsRoleRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class SainsRoleController extends Controller
 {
@@ -61,16 +61,29 @@ class SainsRoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $idUser)
+    public function update(Request $request, $id)
     {
-        $user = User::findOrFail($idUser);
-        $user->role = 'organizer';
 
-        $user->save();
+        $sainsRole = SainsRole::find($id);
+
+        if ($sainsRole) {
+            // Update peran (role) pada SainsRole menjadi 'organizer'
+            $sainsRole->role = 'organizer';
+            $sainsRole->save();
+
+            // Anda mungkin ingin mencari entri User yang berhubungan dengan SainsRole yang diubah
+            $user = $sainsRole->user;
+            if ($user) {
+                // Update peran (role) pada User menjadi 'organizer' jika perlu
+                $user->role = 'organizer';
+                $user->save();
+            }
+        }
+
 
         return redirect()->back()->with('success', 'Berhasil Konfirmasi');
     }
-      /**
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(SainsRole $sainsRole)

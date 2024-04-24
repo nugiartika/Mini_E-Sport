@@ -57,7 +57,7 @@
                                             class="d-inline-block">
                                             @csrf
                                             @method('PUT')
-                                            <input type="hidden" name="action" value="approve">
+                                            <input type="hidden" name=" action" value="approve">
                                             <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i
                                                     class="ti ti-pencil me-1"></i></button>
                                         </form>
