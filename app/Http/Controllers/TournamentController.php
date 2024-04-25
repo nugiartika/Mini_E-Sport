@@ -39,6 +39,17 @@ class TournamentController extends Controller
         $category = Category::all();
         return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts'));
     }
+    public function dashboard()
+    {
+        $tournaments = Tournament::where('status', 'accepted')->get();
+        $user = User::all();
+        // $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+        //     ->groupBy('tournament_id')
+        //     ->get();
+        $category = Category::all();
+        return view('penyelenggara.Dashboard', compact('tournaments', 'category', 'user'));
+    }
+
 
     public function indexadmin()
     {

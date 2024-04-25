@@ -601,7 +601,7 @@
                                                         <div class="teams d-flex align-items-center gap-1">
                                                             <i class="ti ti-users fs-base"></i>
                                                             <span class="tcn-6 fs-sm">
-                                                              
+
                                                             </span>
                                                         </div>
                                                         {{-- <div class="player d-flex align-items-center gap-1">
@@ -706,6 +706,7 @@
                                                     </a>
                                                     <span class="tcn-6 fs-sm">Solos Edition</span>
                                                 </div>
+                                                
                                                 <div class="hr-line line3"></div>
                                                 <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
                                                     <div
