@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
@@ -17,16 +17,14 @@ return new class extends Migration
             $table->date('pendaftaran');
             $table->date('permainan');
             $table->foreignId('categories_id')->constrained();
-            $table->unsignedBigInteger('users_id')->nullable(); // Nullable agar bisa kosong
+            $table->unsignedBigInteger('users_id')->nullable();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('images');
+            $table->integer('slotTeam');
             $table->text('description');
             $table->text('rule');
             $table->enum('status',['pending','rejected','accepted'])->default('pending');
-            // $table->unsignedBigInteger('penyelenggara')->nullable();
-            // $table->foreign('penyelenggara')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
-
         });
     }
 

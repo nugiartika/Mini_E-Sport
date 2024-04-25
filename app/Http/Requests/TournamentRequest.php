@@ -21,16 +21,29 @@ class TournamentRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'name'=>'required|max:30',
             'pendaftaran'=>'required',
             'permainan'=>'required',
             'categories_id'=>'required|exists:categories,id',
             'users_id' => 'nullable|exists:users,id',
+            'slotTeam' => [
+                        'required',
+                        'integer',
+                        'min:2',
+                        'max:12', // Maksimal 12 slot
+                        function ($attribute, $value, $fail) {
+                            // Memeriksa apakah nilai genap
+                            if ($value % 2 !== 0) {
+                                $fail('The '.$attribute.' must be an even number.');
+                            }
+                        },
+                    ],
             'images'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description'=>'required|max:2048',
             'rule'=>'required|max:2048',
-            
+
         ];
     }
 

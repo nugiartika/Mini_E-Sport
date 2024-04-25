@@ -74,7 +74,15 @@
                         });
                         </script> --}}
                         {{-- end --}}
-
+                        <div class="mb-3">
+                            <label for="slotTeam" class="form-label">SLOT TEAM</label>
+                            <input type="number" class="form-control @error('slotTeam') is-invalid @enderror" id="slotTeam" name="slotTeam" value="{{ old('slotTeam') }}">
+                            @error('slotTeam')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <div class="mb-3">
                             <label for="category" class="form-label">GAME</label><br>
                             <select class="form-control @error('categories_id') is-invalid @enderror" id="category" name="categories_id" aria-label="Default select example">
@@ -442,7 +450,6 @@
                         <div class="tabitem active">
                             <div class="row justify-content-md-start justify-content-center g-6">
                                 @foreach ($tournaments as $tournament)
-
 
                                 <div class="col-xl-4 col-md-6 col-sm-10">
                                     <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TesController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardAdminController;
@@ -24,13 +25,14 @@ use PHPUnit\Framework\Attributes\Group;
 |
 */
 
+
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     // Route Admin
     Route::middleware('admin')->group(function () {
         // Route::get('/admin', function () {
-        //     return view('admin.index');
+            //     return view('admin.index');
         // })->name('admin.index');
         Route::get('/admin', [DashboardAdminController::class, 'index'])->name('admin.index');
         Route::get('/listUser', [SainsRoleController::class, 'index'])->name('listUser');
@@ -42,7 +44,9 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('rejectUser/{idUser}', [SainsRoleController::class, 'destroy'])->name('rejectUser');
         Route::get('chart', [DashboardAdminController::class, 'response'])->name('chart');
     });
-});
+
+
+    Route::middleware('organizer')->group(function () {
     //Route Organizer
         Route::get('/organizer', function (){
             return view('penyelenggara.Dashboard');
@@ -52,16 +56,20 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pdetail', function () {
             return view('penyelenggara.detailtournament');
         })->name('ptournament.detail');
+    });
 
 
+    Route::middleware('user')->group(function () {
 
-    //route User
-    Route::get('tournament',[TournamentController::class, 'indexuser'])->name('user.tournament');
-    Route::resource('team', TeamController::class);
-    Route::get('tournament/{tournament}', [TournamentController::class, 'detail'])->name('detailTournament');
+        //route User
+        Route::get('tournament',[TournamentController::class, 'indexuser'])->name('user.tournament');
+        Route::resource('team', TeamController::class);
+        Route::get('tournament/{tournament}', [TournamentController::class, 'detail'])->name('detailTournament');
 
 
-
+        // Rute untuk menambahkan peran pengguna setelah registrasi berhasil
+        Route::get('/admin/listUser', [SainsRoleController::class, 'create'])->name('admin.listUser');
+        Route::post('/store-sains-role', [SainsRoleController::class, 'store'])->name('storeSainsRole');
 
         Route::get('/index', function () {
             return view('user.index');
@@ -74,8 +82,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/detailteam', function () {
             return view('detailteam');
         })->name('team.detail');
+    });
 
-
+});
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

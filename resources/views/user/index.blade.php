@@ -562,7 +562,6 @@
                     </span>
                 </div>
                 <div class="col-xl-5 col-lg-6">
-                    <form action="#">
 
                         <div
                             class="d-flex align-items-md-center align-items-start justify-content-between gap-lg-8 gap-6 flex-md-row flex-column">
@@ -573,10 +572,13 @@
                                 <span class="fs-base tcn-6"><a href="" class="tcp-1"></a>
                                 </span>
                             </div>
-                            <button type="submit"
-                                class="bttn py-sm-4 py-3 px-lg-10 px-sm-8 px-6 bgp-1 tcn-1 rounded-4">Daftar</button>
+                            <form method="POST" action="{{ route('storeSainsRole') }}">
+                                @csrf
+                                <!-- Mengubah type dari button menjadi submit -->
+                                <button type="submit" id="registerBtn" class="bttn py-sm-4 py-3 px-lg-10 px-sm-8 px-6 bgp-1 tcn-1 rounded-4">Daftar</button>
+                            </form>
+
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -675,6 +677,52 @@
         </div>
     </footer>
     <!-- footer section end  -->
+
+
+    {{-- <script>
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            var form = document.querySelector('form');
+            var formData = new FormData(form);
+
+            fetch('{{ route('addUserRole') }}', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    addUserRole(data.user_id, 'user');
+                } else {
+                    alert('Registrasi gagal!');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        function addUserRole(user_id, role) {
+            fetch('{{ route('addUserRole') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+                body: JSON.stringify({
+                    user_id: user_id,
+                    role: role,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '{{ route('login') }}';
+                } else {
+                    alert('Gagal menambahkan role!');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script> --}}
+
 
     <!-- ==== js dependencies start ==== -->
     <!-- jquery  -->

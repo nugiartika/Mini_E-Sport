@@ -26,22 +26,23 @@ class SainsRoleController extends Controller
      */
     public function create()
     {
-        //
+        $sainsRole = SainsRole::all();
+        $user = User::all();
+        return view('admin.listUser', compact('user','sainsRole'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSainsRoleRequest $request)
+    public function store(Request $request)
     {
-        $user = new User();
-        $user->user_id = auth()->id();
-        $user->save();
+        $sainsRole = new SainsRole();
+        $sainsRole->user_id = auth()->id(); // Pastikan user_id sesuai dengan pengguna yang masuk
+        $sainsRole->role = 'user'; // Atur peran pengguna di sini
+        $sainsRole->save();
 
-        $users = User::all();
-        return view('admin.listUser', compact('users'));
+        return redirect()->back()->with('success', 'Berhasil daftar');
     }
-
     /**
      * Display the specified resource.
      */

@@ -344,22 +344,68 @@
                                                             class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
                                                     </div>
                                                 </div>
+
+                                                @php
+                                                    $teamCount = $teamCounts->firstWhere(
+                                                        'tournament_id',
+                                                        $tournament->id,
+                                                    );
+                                                @endphp
+
                                                 <div class="hr-line line3"></div>
                                                 <div class="card-more-info d-between mt-6">
                                                     <div class="teams-info d-between gap-xl-5 gap-3">
                                                         <div class="teams d-flex align-items-center gap-1">
                                                             <i class="ti ti-users fs-base"></i>
-                                                            <span class="tcn-6 fs-sm">12/12 Teams</span>
+                                                            {{-- <span class="tcn-6 fs-sm">{{ $teamCounts  }}/12 Teams</span> --}}
+
+                                                            <span class="tcn-6 fs-sm">
+                                                                @if ($teamCount)
+                                                                    {{ $teamCount->count }}/{{ $tournament->slotTeam }}
+                                                                    Teams
+                                                                @else
+                                                                    0/{{ $tournament->slotTeam }} Teams
+                                                                @endif
+                                                            </span>
+
                                                         </div>
                                                         {{-- <div class="player d-flex align-items-center gap-1">
                                                             <i class="ti ti-user fs-base"></i>
                                                             <span class="tcn-6 fs-sm">128 Players</span>
                                                         </div> --}}
                                                     </div>
+                                                    @if ($teamCount && $teamCount->where('user_id', Auth::id())->count() == 0 && $teamCount->count() < $tournament->slotTeam)
+                                                    <div class="text-end ms-4">
+                                                            <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add Team</a>
+                                                        </div>
+
+                                                    {{-- @elseif (!$teamCount)
+                                                        <div class="text-end ms-4">
+                                                            <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add Team</a>
+                                                        </div> --}}
+                                                    {{-- @elseif ($teamCount) --}}
+                                                        {{-- user sudah terdaftar --}}
+                                                    {{-- @elseif ($teamCount && $teamCount->count == $tournament->slotTeam) --}}
+                                                        {{-- Jika jumlah tim sama dengan slot tim, tidak ada tindakan yang diambil --}}
+                                                    {{-- @endif --}}
+
+
+                                                    {{-- @if ($teamCount && $teamCount->count < $tournament->slotTeam)
                                                     <div class="text-end ms-4">
                                                         <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add Team</a>
-                                                        {{-- <a href="{{ route('team.create') }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" >Add Team</a> --}}
                                                     </div>
+                                                @elseif (!$teamCount)
+                                                    <div class="text-end ms-4">
+                                                        <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add Team</a>
+                                                    </div> --}}
+                                                @elseif ($teamCount)
+                                                    {{-- user sudah terdaftar --}}
+                                                @elseif ($teamCount && $teamCount->count == $tournament->slotTeam)
+                                                    {{-- Jika jumlah tim sama dengan slot tim, tidak ada tindakan yang diambil --}}
+                                                @endif
+
+
+
                                                     <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}"
                                                         class="btn2">
                                                         <i class="ti ti-arrow-right fs-2xl"></i>
@@ -369,6 +415,9 @@
                                         </div>
                                     </div>
                                 @endforeach
+
+
+
                             </div>
                         </div>
                     </div>

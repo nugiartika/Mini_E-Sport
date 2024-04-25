@@ -224,10 +224,9 @@
                 <h5 class="card-title mb-0">core players</h5><br>
                 <div class="row g-3">
                     <div class="col-md-4">
-                        <label for="member1" class="form-label">Captain Team</label>
-                        <input type="text" class="form-control" id="member1" name="member1" value="{{ auth()->user()->name }}" readonly>
-                      </div>
-
+                        <label for="user_id" class="form-label">Captain Team</label>
+                        <input type="text" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->name }}" readonly>
+                    </div>
                     <div class="col-md-4">
                         <label for="member2" class="form-label">Member Team</label>
                         <input type="text" class="form-control @error('member2') is-invalid @enderror" id="member2" name="member2" value="{{ old('member2') }}">

@@ -9,6 +9,7 @@ use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class TournamentController extends Controller
@@ -29,8 +30,11 @@ class TournamentController extends Controller
     {
         $tournaments = Tournament::where('status', 'accepted')->get();
         $user = User::all();
+        $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('tournament_id')
+            ->get();
         $category = Category::all();
-        return view('user.tournament', compact('tournaments','category','user'));
+        return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts'));
     }
 
     public function indexadmin()
@@ -38,7 +42,7 @@ class TournamentController extends Controller
         $tournaments = Tournament::all();
         $user = User::all();
         $category = Category::all();
-        return view('admin.konfirmtournament', compact('tournaments','category','user'));
+        return view('admin.konfirmtournament', compact('tournaments', 'category', 'user'));
     }
 
     /**
@@ -49,37 +53,38 @@ class TournamentController extends Controller
         $tournament = Tournament::all();
         $user = User::all();
         $category = Category::all();
-        return view('penyelenggara.tournament', compact('tournament','category','user'));
+        return view('penyelenggara.tournament', compact('tournament', 'category', 'user'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(TournamentRequest $request)
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    $gambar = $request->file('images');
-    if ($gambar) {
-        $path_gambar = Storage::disk('public')->put('tournament', $gambar);
+        $gambar = $request->file('images');
+        if ($gambar) {
+            $path_gambar = Storage::disk('public')->put('tournament', $gambar);
+        }
+
+        $category_id = $request->input('categories_id');
+
+        Tournament::create([
+            'name' => $request->name,
+            'pendaftaran' => $request->pendaftaran,
+            'permainan' => $request->permainan,
+            'categories_id' => $category_id,
+            'users_id' => $user->id,
+            'slotTeam' => $request->slotTeam,
+            'images' => $path_gambar,
+            'description' => $request->description,
+            'rule' => $request->rule,
+            'status' => 'pending',
+        ]);
+
+        return redirect()->back()->with('success', 'Tournament added successfully');
     }
-
-    $category_id = $request->input('categories_id');
-
-    Tournament::create([
-        'name' => $request->name,
-        'pendaftaran' => $request->pendaftaran,
-        'permainan' => $request->permainan,
-        'categories_id' => $category_id,
-        'users_id' => $user->id,
-        'images' => $path_gambar,
-        'description' => $request->description,
-        'rule' => $request->rule,
-        'status' => 'pending',
-    ]);
-
-    return redirect()->back()->with('success', 'Tournament added successfully');
-}
 
 
 
@@ -99,7 +104,7 @@ class TournamentController extends Controller
 
         $tournaments = $query->get();
 
-        return view('penyelenggara.tournament', compact('tournaments', 'category', 'selectedCategories', 'oldSearch','user'));
+        return view('penyelenggara.tournament', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user'));
     }
 
 
@@ -116,7 +121,7 @@ class TournamentController extends Controller
         $user = User::all();
         $team = Team::count();
         $category = Category::all();
-        return view('user.detailtournament', compact('tournaments','category','user','team'));
+        return view('user.detailtournament', compact('tournaments', 'category', 'user', 'team'));
     }
 
     /**
@@ -127,43 +132,39 @@ class TournamentController extends Controller
         $tournaments = Tournament::find($id);
         $category = Category::all();
         $user = User::all();
-        return view('admin.konfirmtournament', compact('tournaments','category','user'));
+        return view('admin.konfirmtournament', compact('tournaments', 'category', 'user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-{
-    $tournament = Tournament::findOrFail($id);
+    {
+        $tournament = Tournament::findOrFail($id);
 
-    $request->validate([
-        'status' => 'required|in:accepted,rejected',
-    ], [
-        'status.required' => 'Kolom STATUS wajib diisi.',
-        'status.in' => 'Status harus berupa "accepted" atau "rejected".',
-    ]);
+        $request->validate([
+            'status' => 'required|in:accepted,rejected',
+        ], [
+            'status.required' => 'Kolom STATUS wajib diisi.',
+            'status.in' => 'Status harus berupa "accepted" atau "rejected".',
+        ]);
 
-    $status = $request->input('status');
+        $status = $request->input('status');
 
-    $data = [
-        'status' => $status,
-    ];
+        $data = [
+            'status' => $status,
+        ];
 
-    $tournament->update($data);
+        $tournament->update($data);
 
-    if ($status === 'rejected') {
-        $tournament->delete();
-        return redirect()->route('konfirmtournament')->with('success', 'Turnamen berhasil dihapus.');
+        if ($status === 'rejected') {
+            // Hapus turnamen yang sesuai dengan ID yang sedang diubah
+            $tournament->delete();
+            return redirect()->route('konfirmtournament')->with('success', 'Turnamen berhasil dihapus.');
+        }
+
+        return redirect()->back()->with('error', 'Gagal memperbarui status turnamen.');
     }
-
-
-    return redirect()->back()->with('error', 'Gagal memperbarui status turnamen.');
-}
-
-
-
-
 
 
     /**

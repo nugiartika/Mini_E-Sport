@@ -50,22 +50,30 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed'
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'email_verified_at' => now(),
-            'role' => 'user'
-        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = 'user';
+        $user->save();
+
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        //     'email_verified_at' => now(),
+        //     'role' => 'user'
+        // ]);
 
         // Set role for the new user
-        SainsRole::create([
-            'user_id' => $user->id,
-            'role' => 'user',
-        ]);
+        // SainsRole::create([
+        //     'user_id' => $user->id,
+        //     'role' => 'user',
+        // ]);
 
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan masuk ke akun anda.');
     }
+
 
     /**
      * Get a validator for an incoming registration request.

@@ -29,41 +29,41 @@ class TeamController extends Controller
     public function create(Request $request)
     {
         $teams = Team::all();
-        $loggedInUserId = Auth::user(); 
+        $user = User::all();
         $selectedTournamentId = $request->input('tournament_id');
-        return view('user.createteam', compact('teams','loggedInUserId','selectedTournamentId'));
+        return view('user.createteam', compact('teams','user','selectedTournamentId'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(TeamRequest $request)
-{
-    $tournament_id = $request->tournament_id;
+    {
+        $tournament_id = $request->tournament_id;
 
-    $loggedInUser = Auth::user();
-    $loggedInUserName = $loggedInUser->name;
+        $user = Auth::user();
+        // $loggedInUserName = $loggedInUser->name;
 
-    $gambar = $request->file('profile');
-    if ($gambar) {
-        $path_gambar = Storage::disk('public')->put('team', $gambar);
+        $gambar = $request->file('profile');
+        if ($gambar) {
+            $path_gambar = Storage::disk('public')->put('team', $gambar);
+        }
+
+        Team::create([
+            'name' => $request->name,
+            'profile' => $path_gambar,
+            'tournament_id' => $tournament_id,
+            'user_id' => $user->id,
+            'member2' => $request->member2,
+            'member3' => $request->member3,
+            'member4' => $request->member4,
+            'member5' => $request->member5,
+            'cadangan1' => $request->cadangan1,
+            'cadangan2' => $request->cadangan2,
+        ]);
+
+        return redirect()->route('team.index')->with('success', 'Team added successfully');
     }
-
-    Team::create([
-        'name' => $request->name,
-        'profile' => $path_gambar,
-        'tournament_id' => $tournament_id,
-        'member1' => $loggedInUserName,
-        'member2' => $request->member2,
-        'member3' => $request->member3,
-        'member4' => $request->member4,
-        'member5' => $request->member5,
-        'cadangan1' => $request->cadangan1,
-        'cadangan2' => $request->cadangan2,
-    ]);
-
-    return redirect()->route('team.index')->with('success', 'Team added successfully');
-}
 
 
 

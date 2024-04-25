@@ -72,23 +72,23 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(var(--p2));
+  background: #fff;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-button,
 ::-webkit-scrollbar-thumb {
-  background: rgb(var(--p1));
+  background: #1791C8;
   border-radius: 5px;
 }
 
 ::-moz-selection {
-  color: rgb(var(--p1));
+  color: #1791C8;
   background: rgb(var(--n0));
 }
 
 ::selection {
-  color: rgb(var(--p1));
+  color: #1791C8;
   background: rgb(var(--n1));
 }
 
@@ -600,7 +600,7 @@ ul li {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(var(--p1));
+  background: #1791C8;
   font-weight: normal;
 }
 @media (max-width: 575px) {
@@ -630,7 +630,7 @@ ul li {
   overflow: hidden;
   z-index: 1;
   transition: all 0.5s ease;
-  border: 1px solid rgb(var(--p1));
+  border: 1px solid #1791C8;
 }
 .box-style::before {
   content: "";
@@ -639,7 +639,7 @@ ul li {
   left: var(--y);
   transform: translate(-50%, -50%);
   transition: all 0.7s ease;
-  background: rgb(var(--p1));
+  background: #1791C8;
   border-radius: inherit;
   width: 0;
   height: 0;
@@ -671,7 +671,7 @@ ul li {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgb(var(--p1));
+  background: #1791C8;
   border-radius: inherit;
   width: 0;
   height: 100%;
@@ -699,10 +699,10 @@ ul li {
   z-index: -1;
   transition: border 0.3s ease-in-out;
   border: 2px solid transparent;
-  border-color: transparent rgb(var(--p1));
+  border-color: transparent #1791C8;
 }
 .btn-half-border:hover::before {
-  border-color: rgb(var(--p1));
+  border-color: #1791C8;
 }
 
 .btn2 {
@@ -738,7 +738,7 @@ ul li {
   width: 100%;
   height: 100%;
   border-radius: inherit;
-  border: 1px dashed rgb(var(--p1));
+  border: 1px dashed #1791C8;
   z-index: -1;
 }
 .swiper-btn.box-style {
@@ -764,7 +764,7 @@ ul li {
   transition: all 0.5s ease;
 }
 .claim-btn:hover {
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 
 .bttn {
@@ -1268,7 +1268,7 @@ ul li {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 .dot-icon.alt-icon::before {
   background: rgb(var(--n1));
@@ -1322,7 +1322,7 @@ ul li {
   transition: all 0.3s;
 }
 .single-input:focus-within {
-  outline: 1px solid rgb(var(--p1));
+  outline: 1px solid #1791C8;
 }
 .single-input input {
   width: 100%;
@@ -1349,7 +1349,7 @@ ul li {
   transition: all 0.3s;
 }
 .input-area:focus-within {
-  outline: 1px solid rgb(var(--p1));
+  outline: 1px solid #1791C8;
 }
 .input-area input {
   width: 100%;
@@ -1380,7 +1380,7 @@ ul li {
   transform: translate(-50%, -50%);
   width: 32px;
   height: 32px;
-  background-color: rgb(var(--p1));
+  background-color: #1791C8;
   border-radius: 50%;
 }
 .custom-checkbox .checkmark:after {
@@ -1400,7 +1400,7 @@ ul li {
   background-color: rgb(var(--p1), 0.8);
 }
 .custom-checkbox input:checked ~ .checkmark {
-  background-color: rgb(var(--p1));
+  background-color: #1791C8;
 }
 .custom-checkbox input:checked ~ .checkmark:after {
   display: block;
@@ -1507,7 +1507,7 @@ ul li {
 .notification-area::-webkit-scrollbar-button, .notification-area::-webkit-scrollbar-thumb,
 .user-account-popup::-webkit-scrollbar-button,
 .user-account-popup::-webkit-scrollbar-thumb {
-  background: rgb(var(--p1));
+  background: #1791C8;
   border-radius: 5px;
 }
 .notification-area .card-img-area,
@@ -1530,7 +1530,7 @@ ul li {
 }
 .notification-area .card-item:hover,
 .user-account-popup .card-item:hover {
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 
 .user-account-popup {
@@ -1542,7 +1542,7 @@ ul li {
   transition: all 0.3s ease;
 }
 .user-account-popup .account-item:hover {
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 .user-account-popup .user-level-area {
   background: rgba(var(--p1), 0.1);
@@ -1558,7 +1558,7 @@ ul li {
   left: 0;
   top: 0;
   height: 100%;
-  background: rgb(var(--p1));
+  background: #1791C8;
   width: initial;
   transition: all 0.5s ease;
   border-radius: 6px;
@@ -1571,7 +1571,7 @@ ul li {
   width: 100%;
   height: 100%;
   border-radius: 40%;
-  background: rgb(var(--p1));
+  background: #1791C8;
   animation: spin 5s ease-in-out infinite;
   filter: blur(140px);
   z-index: -1;
@@ -1601,7 +1601,7 @@ ul li {
   margin: auto;
 }
 .connect-wallet-section .wallet-area {
-  border: 1px solid rgb(var(--p1));
+  border: 1px solid #1791C8;
   max-width: 600px;
   max-height: 700px;
   width: 100%;
@@ -1738,7 +1738,7 @@ ul li {
   border: 3px solid rgb(var(--n3));
 }
 .active-player-list .player-lists li:last-child {
-  background: rgb(var(--p1));
+  background: #1791C8;
   border-color: rgb(var(--n1));
 }
 
@@ -1869,7 +1869,7 @@ ul li {
   background: rgba(var(--n3), 0.4);
 }
 .swiper-3d-section .swiper-3d-container .swiper-slide-active .card-3d {
-  border: 1px solid rgb(var(--p1));
+  border: 1px solid #1791C8;
 }
 .swiper-3d-section .swiper-btn-area .swiper-3d-button-prev,
 .swiper-3d-section .swiper-btn-area .swiper-3d-button-next {
@@ -1926,7 +1926,7 @@ ul li {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(var(--p1));
+  background: #1791C8;
   border: 2px solid rgb(var(--n0));
 }
 .top-player-section .swiper-top-player .swiper-slide .player-card .follow-btn {
@@ -1944,17 +1944,17 @@ ul li {
   color: rgb(var(--n6));
 }
 .top-player-section .swiper-top-player .swiper-slide .player-card .follow-btn:hover {
-  border-color: rgb(var(--p1));
+  border-color: #1791C8;
   color: rgb(var(--n1));
 }
 .top-player-section .swiper-top-player .swiper-slide-active .player-card {
-  border: 1px solid rgb(var(--p1));
+  border: 1px solid #1791C8;
 }
 .top-player-section .swiper-top-player .swiper-slide-active .player-card .player-name {
-  color: rgb(var(--p1));
+  color: #1791C8;
 }
 .top-player-section .swiper-top-player .swiper-slide-active .player-card .follow-btn {
-  background: rgb(var(--p1));
+  background: #1791C8;
   border: 0;
   color: rgb(var(--n1));
 }
@@ -1983,7 +1983,7 @@ ul li {
   position: absolute;
   left: -50%;
   top: 50%;
-  background: rgb(var(--p1));
+  background: #1791C8;
   width: 200%;
   height: 100px;
   z-index: -1;
@@ -2027,22 +2027,22 @@ ul li {
   transition: all 0.5s ease;
 }
 .tournament-section .tournament-wrapper .tournament-card:hover {
-  border: 1px solid rgb(var(--p1));
+  border: 1px solid #1791C8;
 }
 .tournament-section .tournament-wrapper .tournament-card:hover .tournament-title,
 .tournament-section .tournament-wrapper .tournament-card:hover .teams,
 .tournament-section .tournament-wrapper .tournament-card:hover .player {
-  color: rgb(var(--p1));
+  color: #1791C8;
 }
 .tournament-section .tournament-wrapper .tournament-card:hover .card-status {
-  background: rgb(var(--p1));
-  border: 1px solid rgb(var(--p1));
+  background: #1791C8;
+  border: 1px solid #1791C8;
 }
 .tournament-section .tournament-wrapper .tournament-card:hover .tournament-img img {
   transform: scale(1.1);
 }
 .tournament-section .tournament-wrapper .tournament-card .btn2:hover {
-  background: rgb(var(--p1));
+  background: #1791C8;
   transform: rotate(-45deg);
 }
 @media (max-width: 480px) {
@@ -2152,18 +2152,18 @@ ul li {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(var(--p1));
+  background: #1791C8;
   transition: all 0.5s ease;
   z-index: 10;
 }
 .game-section .game-card-wrapper:hover .game-card-border {
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 .game-section .game-card-wrapper:hover .game-img img {
   transform: scale(1.1);
 }
 .game-section .game-card-wrapper:hover .game-title {
-  color: rgb(var(--p1));
+  color: #1791C8;
 }
 .game-section .game-card-wrapper:hover .game-link {
   opacity: 1;
@@ -2182,7 +2182,7 @@ ul li {
   width: 15px;
   height: 8px;
   border-radius: 8px;
-  background: rgb(var(--p1));
+  background: #1791C8;
   opacity: 0.7;
 }
 .game-section .game-swiper .game-swiper-pagination .swiper-pagination-bullet-active,
@@ -2232,20 +2232,20 @@ ul li {
   transition: all 0.3s ease;
 }
 .next-level-gaming-section .next-level-game-card .card-link:hover {
-  color: rgb(var(--p1));
-  border-color: rgb(var(--p1));
+  color: #1791C8;
+  border-color: #1791C8;
 }
 .next-level-gaming-section .next-level-game-card .card-link:hover i {
   transform: translateX(5px);
 }
 .next-level-gaming-section .next-level-game-card:hover {
-  border: 1px solid rgb(var(--p1));
+  border: 1px solid #1791C8;
 }
 .next-level-gaming-section .next-level-game-card:hover .card-icon {
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 .next-level-gaming-section .next-level-game-card:hover .card-title {
-  color: rgb(var(--p1));
+  color: #1791C8;
 }
 
 @media (min-width: 992px) {
@@ -2319,7 +2319,7 @@ ul li {
   opacity: 0;
 }
 .footer .footer-list li .footer-link:hover {
-  color: rgb(var(--p1));
+  color: #1791C8;
   transform: translateX(0px);
 }
 .footer .footer-list li .footer-link:hover i {
@@ -2341,7 +2341,7 @@ ul li {
   transition: all 0.5s ease;
 }
 .social-links li:hover {
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 
 .banner-section .banner-bg-img,
@@ -2385,7 +2385,7 @@ ul li {
   border-radius: 10px;
 }
 .banner-section .banner-swiper-pagination .swiper-pagination-bullet-active {
-  background: rgb(var(--p1));
+  background: #1791C8;
   height: 40px;
   opacity: 1;
 }
@@ -2429,7 +2429,7 @@ ul li {
   border: 0;
 }
 .tournaments-tab .nav-links.active .tablink {
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 
 .parallax-banner-area {
@@ -2477,10 +2477,10 @@ ul li {
   border-color: transparent rgb(var(--n3));
 }
 .teams-card-section .team-card .btn-half-border:hover {
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 .teams-card-section .team-card .btn-half-border:hover::before {
-  border-color: rgb(var(--p1));
+  border-color: #1791C8;
 }
 
 .player-lists li {
@@ -2758,7 +2758,7 @@ ul li {
   color: rgb(var(--n1));
 }
 .player-details-section .nav-pills .active {
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 .player-details-section .nested-tabs .nav-link {
   background: unset;
@@ -2767,7 +2767,7 @@ ul li {
   opacity: 0.8;
 }
 .player-details-section .nested-tabs .active {
-  border-bottom: 2px solid rgb(var(--p1));
+  border-bottom: 2px solid #1791C8;
   opacity: 1;
 }
 
@@ -2791,7 +2791,7 @@ ul li {
   transition: all 0.3s ease-in-out;
 }
 .faq-accordion .accordion-single.active {
-  border: 1px solid rgb(var(--p1));
+  border: 1px solid #1791C8;
 }
 
 .tournament-details .parallax-banner-area {
@@ -2820,7 +2820,7 @@ ul li {
   border-radius: 20%;
   -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
           clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  background: rgb(var(--p1));
+  background: #1791C8;
 }
 @media (max-width: 575px) {
   .tournament-details .running-tournament .date-box {
@@ -3003,10 +3003,10 @@ ul li {
           clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
 .gaming-account-card:hover {
-  border-color: rgb(var(--p1));
+  border-color: #1791C8;
 }
 .gaming-account-card:hover .title {
-  color: rgb(var(--p1));
+  color: #1791C8;
 }
 
 .connected-thumb {
@@ -3342,7 +3342,7 @@ ul li {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgb(var(--p1));
+  background: #1791C8;
   transform-origin: top left;
   transform: rotate(-55deg);
   filter: blur(30px) drop-shadow(20px 20px 20px rgb(var(--s1)));

@@ -42,7 +42,11 @@ class DatabaseSeeder extends Seeder
 
         Category::create([
             'name' => 'Mobile Legend',
-            'photo' => 'game.png',
+            'photo' => 'assets/img/profil.png',
+        ]);
+        Category::create([
+            'name' => 'ML',
+            'photo' => 'assets/img/profil.png',
         ]);
     }
 }
