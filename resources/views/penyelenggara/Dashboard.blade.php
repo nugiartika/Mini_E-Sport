@@ -24,13 +24,13 @@
     <div class="cursor"></div>
     <!-- Header area  -->
 
-    <!-- header-section start -->
-    <header class="header-section w-100">
+     <!-- header-section start -->
+     <header class="header-section w-100 bgn-4">
         <div class="py-sm-6 py-3 mx-xxl-20 mx-md-15 mx-3">
             <div class="d-flex align-items-center justify-content-between gap-xxl-10 gap-lg-8 w-100">
                 <nav
                     class="navbar-custom d-flex gap-lg-6 align-items-center flex-column flex-lg-row justify-content-start justify-content-lg-between w-100">
-                    <div class="top-bar w-100 d-flex align-items-center gap-lg-0 gap-6">
+                    <div class="top-bar w-100 d-flex align-items-center gap-6">
                         <button class="navbar-toggle-btn d-block d-lg-none" type="button">
                             <span></span>
                             <span></span>
@@ -38,65 +38,67 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="" src="assets/img/LOGO WEB.png" width="60px" height="60px" alt="favicon">
+                            <img class="" src="{{ asset('assets/img/LOGO WEB.png') }}" height="75px" width="75px" alt="favicon">
                             {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
-                        <ul  class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
+                        <ul class="custom-nav gap-3 gap-lg-7 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
-                                <a href="index">HOME</a>
+                                <a href="{{ route('dashboardPenyelenggara') }}">Home</a>
                             </li>
-                            <li class="menu-item">
-                                <button>TOURNAMENTS</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="tournament">TOURNAMENTS</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="detailtournament">TOURNAMENTS DETAILS</a>
-                                    </li>
-                                </ul>
+
+                            <li class="menu-link">
+                                <a href="{{ route('ptournament.index') }}">Tournament</a>
                             </li>
                             <li class="menu-link">
-                                <a href="game">GAME</a>
+                                <a href="{{ route('games') }}">Game</a>
                             </li>
-                            <li class="menu-item">
-                                <button>TEAMS</button>
+                            {{-- <li class="menu-item">
+                                <button>Teams</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="team">TEAMS</a>
+                                        <a href="teams.html">Teams</a>
                                     </li>
                                     <li class="menu-link">
-                                        <a href="detailteam">TEAMS DETAILS</a>
+                                        <a href="teams-details.html">Teams Details</a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="menu-item">
-                                <button>Login</button>
+                            </li> --}}
+                            {{-- <li class="menu-item">
+                                <button>pages</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="{{ route('login') }}">Login</a>
+                                        <a href="signup.html">Sign Up</a>
                                     </li>
                                     <li class="menu-link">
-                                        <a href="{{ route('register') }}">Register</a>
+                                        <a href="signin.html">Sign In</a>
+                                    </li>
+                                    <li class="menu-link">
+                                        <a href="error.html">Error</a>
+                                    </li>
+                                    <li class="menu-link">
+                                        <a href="faq.html">Faq</a>
+                                    </li>
+                                    <li class="menu-link">
+                                        <a href="terms-condition.html">Terms Conditions</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    <button
+                    {{-- <button
                         class="btn-rounded-cus wallet-btn border-0 d-flex align-items-center gap-3 p-xl-2 p-0 pe-xl-6 rounded-5 position-relative">
                         <span class="btn-circle fs-2xl">
                             <i class="ti ti-wallet"></i>
                         </span>
-                        <span class="text-nowrap d-none d-xl-block">CONNECT WALLET</span>
-                    </button>
-                    <button class="ntf-btn box-style fs-2xl">
+                        <span class="text-nowrap d-none d-xl-block">Connect Wallet</span>
+                    </button> --}}
+                    {{-- <button class="ntf-btn box-style fs-2xl">
                         <i class="ti ti-bell-filled"></i>
-                    </button>
+                    </button> --}}
                     {{-- <div class="header-profile pointer">
                         <div class="profile-wrapper d-flex align-items-center gap-3">
                             <div class="img-area overflow-hidden">
@@ -455,7 +457,9 @@
     </section>
     <!-- 3D swiper section end-->
 
+<!-- game section start  -->
 
+<!-- game section end  -->
 
     <!-- tournament section start -->
     <section class="tournament-section pb-120" id="tournament-hero">
@@ -469,20 +473,20 @@
         </div>
         <div class="red-ball top-50"></div>
 
-        <div class="tournament-wrapper">
+        {{-- <div class="tournament-wrapper">
             <div class="tournament-wrapper-border">
                 <div class="container pt-120 pb-120">
-                    <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15">
-                        <div class="col-md-6 col-sm-8">
+                    <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15"> --}}
+                        {{-- <div class="col-md-6 col-sm-8">
                             <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENTS</h2>
-                        </div>
-                        <div class="col-md-6 col-sm-4 text-sm-end">
+                        </div> --}}
+                        {{-- <div class="col-md-6 col-sm-4 text-sm-end">
                             <a href="tournaments.html"
                                 class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill">VIEW
                                 MORE</a>
-                        </div>
-                    </div>
-                    <div class="row justify-content-between align-items-center g-6">
+                        </div> --}}
+                    {{-- </div> --}}
+                    {{-- <div class="row justify-content-between align-items-center g-6">
                         <div class="col-xl-4 col-md-6">
                             <div class="tournament-card p-xl-4 p-3 bgn-4">
                                 <div class="tournament-img mb-8 position-relative">
@@ -543,16 +547,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </div> --}}
+                {{-- </div>
+            </div> --}}
         </div>
     </section>
     <!-- tournament section end -->
 
 
     <!-- call to action section start -->
-    <div class="call-to-action pt-120 pb-120 bgn-4 overflow-x-hidden" id="cta">
+    {{-- <div class="call-to-action pt-120 pb-120 bgn-4 overflow-x-hidden" id="cta">
         <div class="container">
             <div class="row justify-content-between g-6">
                 <div class="col-lg-6">
@@ -579,101 +583,102 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- call to action section end -->
 
     <!-- footer section start  -->
-    <footer class="footer bgn-4 bt">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <div class="footer-logo mb-8">
-                            <a href="#" class="d-grid gap-6">
-                                <div class="flogo-1">
-                                    <img class="w-100" src="assets/img/logo2.png" alt="favicon">
-                                </div>
-                                <div class="flogo-2">
-                                    <img class="w-100" src="assets/img/logo.png" alt="logo">
-                                </div>
-                            </a>
-                        </div>
-                        <div class="social-links">
-                            <ul class="d-flex align-items-center gap-3 flex-wrap">
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-facebook fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-twitter fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-youtube fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-linkedin fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-instagram fs-2xl"></i></a>
-                                </li>
-                            </ul>
-                        </div>
+ <footer class="footer bgn-4 bt">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
+                <div class="py-lg-10">
+                    <div class="footer-logo mb-8">
+                        <a href="#" class="d-grid gap-6">
+                            <div class="flogo-1">
+                                <img class="w-100" src="assets/img/LOGO WEB.png" alt="favicon">
+                            </div>
+                            <div class="flogo-2">
+                                {{-- <img class="w-100" src="{{ asset('assets/img/logo.png') }}" alt="logo"> --}}
+                                <h3>HUMMAESPORT</h3>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 br br-res py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">QUICK LINKS</h4>
-                        <ul class="footer-list d-grid gap-4">
-                            <li><a href="tournament" class="footer-link d-flex align-items-center tcn-6">
-                                    <i class="ti ti-chevron-right"></i> TOURNAMENTS</a></li>
-                            <li><a href="game" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> GAMES </a></li>
-                            <li><a href="team" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> TEAMS</a></li>
-                            <li><a href="faq" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">EXPLORE</h4>
-                        <ul class="footer-list d-grid gap-4">
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> TOP PLAYERS</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> MESSAGES</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> PROFILE</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">FOLLOW US</h4>
-                        <ul class="footer-list d-grid gap-4">
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> FACEBOOK</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> INSTAGRAM</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> TWITER</a></li>
+                    <div class="social-links">
+                        <ul class="d-flex align-items-center gap-3 flex-wrap">
+                            <li>
+                                <a href="#"><i class="ti ti-brand-facebook fs-2xl"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="ti ti-brand-twitter fs-2xl"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="ti ti-brand-youtube fs-2xl"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="ti ti-brand-linkedin fs-2xl"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="ti ti-brand-instagram fs-2xl"></i></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
-                <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
-                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY  <a
-                            href="https://themeforest.net/user/pixelaxis" class="tcp-1">MAGANG HUMMA </a></span>
+            <div class="col-lg-3 col-sm-6 br br-res py-lg-20 pt-sm-15 pt-10 footer-card-area">
+                <div class="py-lg-10">
+                    <h4 class="footer-title mb-8 title-anim">QUICK LINKS</h4>
+                    <ul class="footer-list d-grid gap-4">
+                        <li><a href="tournament" class="footer-link d-flex align-items-center tcn-6">
+                                <i class="ti ti-chevron-right"></i> TOURNAMENTS</a></li>
+                        <li><a href="game" class="footer-link d-flex align-items-center tcn-6"> <i
+                                    class="ti ti-chevron-right"></i> GAMES </a></li>
+                        <li><a href="team" class="footer-link d-flex align-items-center tcn-6"> <i
+                                    class="ti ti-chevron-right"></i> TEAMS</a></li>
+                        <li><a href="faq" class="footer-link d-flex align-items-center tcn-6"> <i
+                                    class="ti ti-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
+                <div class="py-lg-10">
+                    <h4 class="footer-title mb-8 title-anim">EXPLORE</h4>
+                    <ul class="footer-list d-grid gap-4">
+                        <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                    class="ti ti-chevron-right"></i> TOP PLAYERS</a></li>
+                        <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                    class="ti ti-chevron-right"></i> MESSAGES</a></li>
+                        <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                    class="ti ti-chevron-right"></i> PROFILE</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 py-lg-20 pt-sm-15 pt-10 footer-card-area">
+                <div class="py-lg-10">
+                    <h4 class="footer-title mb-8 title-anim">FOLLOW US</h4>
+                    <ul class="footer-list d-grid gap-4">
+                        <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                    class="ti ti-chevron-right"></i> FACEBOOK</a></li>
+                        <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                    class="ti ti-chevron-right"></i> INSTAGRAM</a></li>
+                        <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                    class="ti ti-chevron-right"></i> TWITER</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <!-- footer banner img  -->
-        <div class="footer-banner-img" id="faa">
-            <img class="w-100" src="assets/img/fbanner.png" alt="banner">
+        <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
+            <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
+                <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY  <a
+                        href="https://themeforest.net/user/pixelaxis" class="tcp-1">MAGANG HUMMA </a></span>
+            </div>
         </div>
-    </footer>
-    <!-- footer section end  -->
+    </div>
+    <!-- footer banner img  -->
+    <div class="footer-banner-img" id="faa">
+        <img class="w-100" src="{{ asset('assets/img/fbanner.png') }}" alt="banner">
+    </div>
+</footer>
+<!-- footer section end  -->
 
 
 

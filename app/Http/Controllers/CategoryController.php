@@ -18,6 +18,11 @@ class CategoryController extends Controller
         }
         return view('admin.category', compact('category'));
     }
+    public function indexuser(Request $request)
+    {
+      $category = Category::all();
+        return view('penyelenggara.game', compact('category'));
+    }
 
     public function create()
     {

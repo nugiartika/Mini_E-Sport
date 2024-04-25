@@ -56,6 +56,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pdetail', function () {
             return view('penyelenggara.detailtournament');
         })->name('ptournament.detail');
+        // Route::get('/games', function () {
+        //     return view('penyelenggara.game');
+        // })->name('games');
+        Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
+
     });
 
 
