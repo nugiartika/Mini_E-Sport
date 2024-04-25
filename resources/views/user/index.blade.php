@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,12 +37,13 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="" src="assets/img/LOGO WEB.png" width="60px" height="60px" alt="favicon">
+                            <img class="" src="assets/img/LOGO WEB.png" width="60px" height="60px"
+                                alt="favicon">
                             {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
-                        <ul  class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
+                        <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
                                 <a href="index">HOME</a>
                             </li>
@@ -68,7 +68,7 @@
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <button>Login</button>
+                                <button>Pages</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
                                         <a href="{{ route('login') }}">Login</a>
@@ -194,7 +194,8 @@
     <div class="connect-wallet-section position-fixed top-0 start-0 w-100 vh-100">
         <div class="connect-wallet-overlay position-absolute top-0 start-0 w-100 h-100"></div>
         <div class="vh-100 wallet-wrapper d-center">
-            <div class="wallet-area pt-lg-8 pt-sm-6 pt-4 pb-lg-20 pb-sm-10 pb-6 px-lg-15 px-sm-8 px-3 bgn-4 rounded-5 ">
+            <div
+                class="wallet-area pt-lg-8 pt-sm-6 pt-4 pb-lg-20 pb-sm-10 pb-6 px-lg-15 px-sm-8 px-3 bgn-4 rounded-5 ">
                 <div class="mb-lg-7 mb-sm-5 mb-3 d-flex justify-content-end">
                     <i class="ti ti-circle-x display-four fw-normal pointer wallet-close-btn"></i>
                 </div>
@@ -272,9 +273,7 @@
                 <div class="col-lg-5 col-md-6 col-sm-8">
                     <div class="hero-content">
                         <ul class="d-flex gap-3 fs-2xl fw-semibold heading-font mb-5 list-icon title-anim">
-                            <li>Play</li>
-                            <li>Earn</li>
-                            <li>Enjoy</li>
+                            
                         </ul>
                         <h1 class="hero-title display-one tcn-1 cursor-scale growUp mb-10">
                             Humma
@@ -553,27 +552,28 @@
                 <div class="col-lg-6">
                     <span class="display-three tcn-1 cursor-scale growUp mb-8 d-block title-anim">Humma Esport</span>
                     <span class="fs-lg tcn-6">
-                       Ingin memmbuat even tourname sendiri? Daftarkan diri anda sebagai penylenggara
+                        Ingin memmbuat even tourname sendiri? Daftarkan diri anda sebagai penylenggara
                     </span>
                 </div>
                 <div class="col-xl-5 col-lg-6">
 
-                        <div
-                            class="d-flex align-items-md-center align-items-start justify-content-between gap-lg-8 gap-6 flex-md-row flex-column">
-                            <div class="d-flex align-items-center gap-lg-4 gap-2">
-                                <label class="custom-checkbox">
-                                    <input type="checkbox">
-                                </label>
-                                <span class="fs-base tcn-6"><a href="" class="tcp-1"></a>
-                                </span>
-                            </div>
-                            <form method="POST" action="{{ route('storeSainsRole') }}">
-                                @csrf
-                                <!-- Mengubah type dari button menjadi submit -->
-                                <button type="submit" id="registerBtn" class="bttn py-sm-4 py-3 px-lg-10 px-sm-8 px-6 bgp-1 tcn-1 rounded-4">Daftar</button>
-                            </form>
-
+                    <div
+                        class="d-flex align-items-md-center align-items-start justify-content-between gap-lg-8 gap-6 flex-md-row flex-column">
+                        <div class="d-flex align-items-center gap-lg-4 gap-2">
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                            </label>
+                            <span class="fs-base tcn-6"><a href="" class="tcp-1"></a>
+                            </span>
                         </div>
+                        <form method="POST" action="{{ route('storeSainsRole') }}">
+                            @csrf
+                            <!-- Mengubah type dari button menjadi submit -->
+                            <button type="submit" id="registerBtn"
+                                class="bttn py-sm-4 py-3 px-lg-10 px-sm-8 px-6 bgp-1 tcn-1 rounded-4">Daftar</button>
+                        </form>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -586,15 +586,11 @@
             <div class="row justify-content-between">
                 <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
                     <div class="py-lg-10">
-                        <div class="footer-logo mb-8">
-                            <a href="#" class="d-grid gap-6">
-                                <div class="flogo-1">
-                                    <img class="w-100" src="assets/img/logo2.png" alt="favicon">
-                                </div>
-                                <div class="flogo-2">
-                                    <img class="w-100" src="assets/img/logo.png" alt="logo">
-                                </div>
-                            </a>
+                        <div class="flogo-1">
+                            <img class="w-100 " src="{{ asset('assets/img/LOGO WEB.png') }}" alt="favicon">
+                        </div>
+                        <div class="flogo-2">
+                            <span class="text-nowrap d-none d-xl-block mb-8 title-anim">Humma Esport</span>
                         </div>
                         <div class="social-links">
                             <ul class="d-flex align-items-center gap-3 flex-wrap">
@@ -661,7 +657,7 @@
             </div>
             <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
                 <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
-                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY  <a
+                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY <a
                             href="https://themeforest.net/user/pixelaxis" class="tcp-1">MAGANG HUMMA </a></span>
                 </div>
             </div>

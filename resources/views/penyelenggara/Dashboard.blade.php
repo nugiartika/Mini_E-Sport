@@ -52,7 +52,7 @@
                                 <a href="{{ route('ptournament.index') }}">Tournament</a>
                             </li>
                             <li class="menu-link">
-                                <a href="{{ route('games') }}">Game</a>
+                                <a href="{{ route('game') }}">Game</a>
                             </li>
                             {{-- <li class="menu-item">
                                 <button>Teams</button>

@@ -76,7 +76,7 @@
                                 <li class="menu-link">
                                     <a href="{{ route('login') }}">Login</a>
                                 </li>
-                               
+
                             </ul>
                         </li>
                     </ul>
@@ -123,10 +123,10 @@
                     <div class="footer-logo mb-8">
                         <a href="#" class="d-grid gap-6">
                             <div class="flogo-1">
-                                <img class="w-100" src="{{ asset('assets/img/logo2.png') }}" alt="favicon">
+                                <img class="w-100 " src="{{ asset('assets/img/LOGO WEB.png') }}" alt="favicon">
                             </div>
                             <div class="flogo-2">
-                                <img class="w-100" src="{{ asset('assets/img/logo.png') }}" alt="logo">
+                                <span class="text-nowrap d-none d-xl-block mb-8 title-anim">Humma Esport</span>
                             </div>
                         </a>
                     </div>
@@ -194,9 +194,9 @@
             </div>
         </div>
         <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
-            <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
+            <div class="col-xxl-4 col-lg-6 order-last order-lg-first mb-8 title-anim">
                 <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY  <a
-                        href="https://themeforest.net/user/pixelaxis" class="tcp-1">MAGANG HUMMA </a></span>
+                        href="" class="tcp-1">MAGANG HUMMA </a></span>
             </div>
         </div>
     </div>

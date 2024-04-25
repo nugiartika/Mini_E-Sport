@@ -38,8 +38,9 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="w-100 logo1" src="assets/img/favicon.png" alt="favicon">
-                            <img class="w-100 logo2" src="assets/img/logo.png" alt="logo">
+                            <img class="" src="assets/img/LOGO WEB.png" width="60px" height="60px"
+                            alt="favicon">
+
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -53,9 +54,6 @@
                                     <li class="menu-link">
                                         <a href="{{ route('user.tournament') }}">TOURNAMENTS</a>
                                     </li>
-                                    <li class="menu-link">
-                                        <a href="{{ route('team.detail') }}">TOURNAMENTS DETAILS</a>
-                                    </li>
                                 </ul>
                             </li>
                             <li class="menu-link">
@@ -65,10 +63,7 @@
                                 <button>TEAMS</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="team">TEAMS</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="detailteam">TEAMS DETAILS</a>
+                                        <a href="{{ route('team.index') }}">TEAMS</a>
                                     </li>
                                 </ul>
                             </li>
@@ -268,15 +263,11 @@
             <div class="row justify-content-between">
                 <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
                     <div class="py-lg-10">
-                        <div class="footer-logo mb-8">
-                            <a href="#" class="d-grid gap-6">
-                                <div class="flogo-1">
-                                    <img class="w-100" src="assets/img/logo2.png" alt="favicon">
-                                </div>
-                                <div class="flogo-2">
-                                    <img class="w-100" src="assets/img/logo.png" alt="logo">
-                                </div>
-                            </a>
+                        <div class="flogo-1">
+                            <img class="w-100 " src="{{ asset('assets/img/LOGO WEB.png') }}" alt="favicon">
+                        </div>
+                        <div class="flogo-2">
+                            <span class="text-nowrap d-none d-xl-block mb-8 title-anim">Humma Esport</span>
                         </div>
                         <div class="social-links">
                             <ul class="d-flex align-items-center gap-3 flex-wrap">
@@ -343,7 +334,7 @@
             </div>
             <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
                 <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
-                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY  <a
+                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY <a
                             href="https://themeforest.net/user/pixelaxis" class="tcp-1">MAGANG HUMMA </a></span>
                 </div>
             </div>

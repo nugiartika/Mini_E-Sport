@@ -77,7 +77,7 @@
                                     <li class="menu-link">
                                         <a href="{{ route('login') }}">Login</a>
                                     </li>
-                                   
+
                                 </ul>
                             </li>
                         </ul>
@@ -407,10 +407,10 @@
                         <div class="footer-logo mb-8">
                             <a href="#" class="d-grid gap-6">
                                 <div class="flogo-1">
-                                    <img class="w-100" src="assets/img/logo2.png" alt="favicon">
+                                    <img class="w-100 " src="{{ asset('assets/img/LOGO WEB.png') }}" alt="favicon">
                                 </div>
                                 <div class="flogo-2">
-                                    <img class="w-100" src="assets/img/logo.png" alt="logo">
+                                    <span class="text-nowrap d-none d-xl-block mb-8 title-anim">Humma Esport</span>
                                 </div>
                             </a>
                         </div>

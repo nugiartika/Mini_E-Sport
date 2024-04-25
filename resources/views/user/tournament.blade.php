@@ -36,8 +36,8 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="w-100 logo1" src="assets/img/favicon.png" alt="favicon">
-                            <img class="w-100 logo2" src="assets/img/logo.png" alt="logo">
+                            <img class="" src="assets/img/LOGO WEB.png" width="60px" height="60px"
+                                alt="favicon">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -50,9 +50,6 @@
                                 <ul class="sub-menu">
                                     <li class="menu-link">
                                         <a href="{{ route('user.tournament') }}">Tournaments</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="detailtournament">TOURNAMENTS DETAILS</a>
                                     </li>
                                 </ul>
                             </li>
@@ -268,15 +265,6 @@
                             <li class="nav-links active">
                                 <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">All</button>
                             </li>
-                            <li class="nav-links">
-                                <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Active</button>
-                            </li>
-                            <li class="nav-links">
-                                <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Upcoming</button>
-                            </li>
-                            <li class="nav-links">
-                                <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Finished</button>
-                            </li>
                         </ul>
                         <div class="px-6">
                             <a href="#"
@@ -433,10 +421,10 @@
                         <div class="footer-logo mb-8">
                             <a href="#" class="d-grid gap-6">
                                 <div class="flogo-1">
-                                    <img class="w-100" src="assets/img/logo2.png" alt="favicon">
+                                    <img class="w-100 " src="{{ asset('assets/img/LOGO WEB.png') }}" alt="favicon">
                                 </div>
                                 <div class="flogo-2">
-                                    <img class="w-100" src="assets/img/logo.png" alt="logo">
+                                    <span class="text-nowrap d-none d-xl-block mb-8 title-anim">Humma Esport</span>
                                 </div>
                             </a>
                         </div>
