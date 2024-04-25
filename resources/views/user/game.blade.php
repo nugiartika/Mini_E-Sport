@@ -51,15 +51,15 @@
                                 <button>TOURNAMENTS</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="tournament">TOURNAMENTS</a>
+                                        <a href="{{ route('user.tournament') }}">TOURNAMENTS</a>
                                     </li>
                                     <li class="menu-link">
-                                        <a href="detailtournament">TOURNAMENTS DETAILS</a>
+                                        <a href="{{ route('team.detail') }}">TOURNAMENTS DETAILS</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="menu-link">
-                                <a href="game">GAME</a>
+                                <a href="{{ route('game') }}">GAME</a>
                             </li>
                             <li class="menu-item">
                                 <button>TEAMS</button>
@@ -76,11 +76,9 @@
                                 <button>PAGES</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="signup.html">SIGN UP</a>
+                                        <a href="{{ route('login') }}">login</a>
                                     </li>
-                                    <li class="menu-link">
-                                        <a href="signin">SIGN IN</a>
-                                    </li>
+
                                 </ul>
                             </li>
                         </ul>

@@ -77,7 +77,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/game', function () {
             return view('user.game');
-        });
+        })->name('game');
 
         Route::get('/detailteam', function () {
             return view('detailteam');

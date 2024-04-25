@@ -57,7 +57,7 @@
                                 </ul>
                             </li>
                             <li class="menu-link">
-                                <a href="game">GAME</a>
+                                <a href="{{ route('game') }}">GAME</a>
                             </li>
                             <li class="menu-item">
                                 <button>TEAMS</button>
@@ -65,20 +65,15 @@
                                     <li class="menu-link">
                                         <a href="team">TEAMS</a>
                                     </li>
-                                    <li class="menu-link">
-                                        <a href="detailteam">TEAMS DETAILS</a>
-                                    </li>
                                 </ul>
                             </li>
                             <li class="menu-item">
                                 <button>PAGES</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="signup.html">SIGN UP</a>
+                                        <a href="{{ route('login') }}">login</a>
                                     </li>
-                                    <li class="menu-link">
-                                        <a href="signin">SIGN IN</a>
-                                    </li>
+
                                 </ul>
                             </li>
                         </ul>
