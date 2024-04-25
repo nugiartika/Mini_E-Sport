@@ -81,9 +81,8 @@ Route::middleware(['auth'])->group(function () {
             return view('user.index');
         })->name('index');
 
-        Route::get('/game', function () {
-            return view('user.game');
-        })->name('game');
+        Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
+
 
         Route::get('/detailteam', function () {
             return view('detailteam');
