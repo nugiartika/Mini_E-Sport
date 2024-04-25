@@ -1,12 +1,15 @@
 @extends('admin.layouts.app')
+
 @section('style')
+    <!-- Add Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 @endsection
+
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-
         <div class="row">
 
-            <!-- Total Profit -->
             <div class="col-xl-2 col-md-4 col-6 mb-4">
                 <div class="card">
                     <div class="card-body">
@@ -119,8 +122,81 @@
                 </div>
             </div>
 
+            <!-- Line Chart -->
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title mb-0">Grafik User</h5>
+                            <small class="text-muted">Grafik pertumbuhan user Tiap bulan</small>
+                        </div>
+                        <div class="d-sm-flex d-none align-items-center">
+                           
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="lineChart"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Line Chart -->
+
         </div>
     </div>
 @endsection
+
 @section('script')
+    <script src="{{ asset('demo/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a') }}"></script>
+    <script>
+        $.ajax({
+            url: '{{ route('chart') }}',
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                chart(response.user_count)
+            },
+            error: function(xhr, status, error) {
+                // Tangani kesalahan jika ada
+            }
+        });
+
+function chart(data) {
+        var options = {
+            series: [{
+                name: "User",
+                data: data
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            title: {
+                text: 'Daftar User Tiap Bulan',
+                align: 'left'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+            xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#lineChart"), options);
+        chart.render();
+}
+    </script>
 @endsection

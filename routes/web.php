@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('konfirmtournament/{id}',[TournamentController::class, 'update'])->name('konfirm.update');
         Route::put('konfirmUser/{idUser}', [SainsRoleController::class, 'update'])->name('konfirmUser');
         Route::delete('rejectUser/{idUser}', [SainsRoleController::class, 'destroy'])->name('rejectUser');
+        Route::get('chart', [DashboardAdminController::class, 'response'])->name('chart');
     });
 });
     //Route Organizer

@@ -50,13 +50,6 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed'
         ]);
 
-        // $user = new User();
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = Hash::make($request->password);
-        // $user->role = 'user';
-        // $user->save();
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Team;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Tournament;
 use App\Models\DashboardAdmin;
 use App\Http\Requests\StoreDashboardAdminRequest;
 use App\Http\Requests\UpdateDashboardAdminRequest;
-use App\Models\Category;
-use App\Models\Team;
-use App\Models\Tournament;
-use App\Models\User;
 
 class DashboardAdminController extends Controller
 {
@@ -26,6 +27,22 @@ class DashboardAdminController extends Controller
         return view('admin.index', compact('user', 'organizer', 'category', 'tournament', 'team'));
 
     }
+    public function response()
+    {
+        $userGrowth = [];
+        $currentMonth = Carbon::now()->startOfYear()->subMonths(1); // Mulai dari bulan Desember tahun lalu
+
+        for ($i = 0; $i < 12; $i++) {
+            $currentMonth->addMonth();
+            $userCount = User::whereYear('created_at', $currentMonth->year)
+                            ->whereMonth('created_at', $currentMonth->month)
+                            ->count();
+            $userGrowth[] = $userCount;
+        }
+
+        return response()->json(['user_count' => $userGrowth]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
