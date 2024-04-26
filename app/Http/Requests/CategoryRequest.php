@@ -23,6 +23,8 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name'=>'required|unique:categories,name',
+            'photo'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'membersPerTeam' => 'required|integer'
         ];
     }
 
@@ -31,6 +33,8 @@ class CategoryRequest extends FormRequest
         return [
             'name.required' => 'The name field is required.',
             'name.unique' => 'The name has already been taken.',
+            'photo.required' => 'The photooo field is required.',
+            'membersPerTeam.required' => 'Member per team must be filled in.',
         ];
     }
 }

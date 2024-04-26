@@ -40,10 +40,10 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now()
         ]);
 
-        Category::create([
-            'name' => 'Mobile Legend',
-            'photo' => 'assets/img/profil.png',
-        ]);
-       
+        // Category::create([
+        //     'name' => 'Mobile Legend',
+        //     'photo' => 'assets/img/profil.png',
+        // ]);
+
     }
 }

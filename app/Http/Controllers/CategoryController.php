@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -29,6 +30,20 @@ class CategoryController extends Controller
         return view('user.game', compact('category'));
     }
 
+
+    public function getMembersPerTeam($categoryId)
+    {
+        $category = Category::find($categoryId);
+
+        if ($category) {
+            return response()->json(['membersPerTeam' => $category->members_per_team]);
+        } else {
+            return response()->json(['error' => 'Category not found'], 404);
+        }
+    }
+
+
+
     public function create()
     {
         $category=Category::all();
@@ -37,20 +52,15 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        $data = [];
-
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $path = $photo->store('images', 'public');
-            $data['photo'] = $path;
-        } else {
-            $defaultImagePath = 'images/default-photo.jpg';
-            $data['photo'] = $defaultImagePath;
+        $gambar = $request->file('photo');
+        if ($gambar) {
+            $path_gambar = Storage::disk('public')->put('game', $gambar);
         }
 
         Category::create([
-            'name' => $request->input('name'),
-            'photo' => $data['photo'],
+            'name' => $request->name,
+            'photo' => $path_gambar,
+            'membersPerTeam' => $request->membersPerTeam,
         ]);
 
         return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY ADDED');

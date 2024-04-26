@@ -10,6 +10,7 @@ use App\Models\Tournament;
 use App\Models\DashboardAdmin;
 use App\Http\Requests\StoreDashboardAdminRequest;
 use App\Http\Requests\UpdateDashboardAdminRequest;
+use App\Models\SainsRole;
 
 class DashboardAdminController extends Controller
 {
@@ -23,10 +24,11 @@ class DashboardAdminController extends Controller
         $category = Category::all()->count();
         $tournament = Tournament::all()->count();
         $team = Team::all()->count();
+        $sainsRole = SainsRole::all()->count();
 
-        return view('admin.index', compact('user', 'organizer', 'category', 'tournament', 'team'));
-
+        return view('admin.index', compact('user', 'organizer', 'category', 'tournament', 'team','sainsRole'));
     }
+
     public function response()
     {
         $userGrowth = [];

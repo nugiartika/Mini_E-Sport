@@ -273,7 +273,7 @@
                 <div class="col-lg-5 col-md-6 col-sm-8">
                     <div class="hero-content">
                         <ul class="d-flex gap-3 fs-2xl fw-semibold heading-font mb-5 list-icon title-anim">
-                            
+
                         </ul>
                         <h1 class="hero-title display-one tcn-1 cursor-scale growUp mb-10">
                             Humma

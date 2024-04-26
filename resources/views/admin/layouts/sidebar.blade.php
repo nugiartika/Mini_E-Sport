@@ -91,36 +91,39 @@
 
 
                 <ul class="menu-sub">
+                    <li class="menu-item {{ request()->routeIs('listUserPenyelenggara') ? 'active':'' }} ">
+                        <a href="{{ route('listUserPenyelenggara') }}" class="menu-link">
+                            <div>List User Penyelenggara</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="menu-sub">
                     <li class="menu-item {{ request()->routeIs('listUser') ? 'active':'' }} ">
                         <a href="{{ route('listUser') }}" class="menu-link">
-                            <div>List user</div>
+                            <div>List User</div>
                         </a>
                     </li>
                 </ul>
-            </li>
-
-
-
-
-
-
-            <li class="menu-item ">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="ti-md ti ti-device-laptop text-body"></i>
-                    <div> Tournament</div>
-                </a>
-
-
                 <ul class="menu-sub">
-
-                    <li class="menu-item ">
-                        <a href="{{ route('konfirmtournament') }}" class="menu-link">
-                            <div>List Tournament</div>
+                    <li class="menu-item {{ request()->routeIs('listPenyelenggara') ? 'active':'' }} ">
+                        <a href="{{ route('listPenyelenggara') }}" class="menu-link">
+                            <div>List Penyelenggara</div>
                         </a>
                     </li>
-
                 </ul>
             </li>
+
+
+
+
+
+            <li class="menu-item {{ request()->routeIs('konfirmtournament') ? 'active':'' }} ">
+                <a href="{{ route('konfirmtournament') }}" class="menu-link">
+                    <i class="ti-md ti ti-device-laptop text-body"></i>
+                    <div>List Tournament</div>
+                </a>
+            </li>
+
 
             <li class="menu-item">
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="menu-link">

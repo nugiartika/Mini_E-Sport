@@ -165,8 +165,9 @@
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h3 class="mb-1">Selamat Datang </h3>
-                    <p class="mb-4">Silahkan register akun anda sekarang!</p>
+                    <h3 class="mb-1">Welcome </h3>
+                    <p class="mb-4">Please register your account now!
+                    </p>
 
                     <form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
                         @csrf
@@ -174,7 +175,7 @@
                         <div class="mb-3">
                             <label for="username" class="form-label">Name</label>
                             <input type="text" class="form-control" id="username" name="name"
-                                placeholder="Masukkan Nama Anda" autofocus>
+                                placeholder="Enter your Name" autofocus>
                             @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -183,7 +184,7 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Masukkan Email Anda">
+                                placeholder="Enter your Email">
                             @error('email')
                                 <p class="text-danger">
                                     {{ $message }}
@@ -195,7 +196,7 @@
                             <label class="form-label" for="password">Password</label>
                             <div class="input-group input-group-merge">
                                 <input type="password" id="password" class="form-control" name="password"
-                                    placeholder="Masukkan Password Anda" aria-describedby="password" />
+                                    placeholder="Enter your Password" aria-describedby="password" />
                                 <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                                 @error('password')
                                     <p class="text-danger">
@@ -206,10 +207,10 @@
                         </div>
 
                         <div class="mb-3 form-password-toggle">
-                            <label class="form-label" for="confirm-password">Konfirmasi Password</label>
+                            <label class="form-label" for="confirm-password">Confirmation Password</label>
                             <div class="input-group input-group-merge">
                                 <input type="password" id="confirm-password" class="form-control"
-                                    name="password_confirmation" placeholder="Konfirmasi Password Anda"
+                                    name="password_confirmation" placeholder="Enter your Confirmation Password"
                                     aria-describedby="confirm-password" />
                                 <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
@@ -224,7 +225,8 @@
                     </form>
 
                     <p class="text-center">
-                        <span>Sudah Memiliki Akun</span>
+                        <span>Already Have an Account
+                        </span>
                         <a href="{{ route('login') }}">
                             <span>Login</span>
                         </a>
