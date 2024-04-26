@@ -46,7 +46,7 @@
                     <div class="navbar-toggle-item w-100 position-lg-relative">
                         <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
-                                <a href="index">HOME</a>
+                                <a href="{{ route('index') }}">HOME</a>
                             </li>
                             <li class="menu-item">
                                 <button>TOURNAMENTS</button>
@@ -80,113 +80,18 @@
                     </div>
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    <button
-                        class="btn-rounded-cus wallet-btn border-0 d-flex align-items-center gap-3 p-xl-2 p-0 pe-xl-6 rounded-5 position-relative">
-                        <span class="btn-circle fs-2xl">
-                            <i class="ti ti-wallet"></i>
-                        </span>
-                        <span class="text-nowrap d-none d-xl-block">CONNECT WALLET</span>
-                    </button>
+
                     <button class="ntf-btn box-style fs-2xl">
-                        <i class="ti ti-bell-filled"></i>
-                    </button>
-                    {{-- <div class="header-profile pointer">
-                        <div class="profile-wrapper d-flex align-items-center gap-3">
-                            <div class="img-area overflow-hidden">
-                                <img class="w-100" src="assets/img/profile.png" alt="profile">
-                            </div>
-                            <span class="user-name d-none d-xxl-block text-nowrap">David Malan</span>
-                            <i class="ti ti-chevron-down d-none d-xxl-block"></i>
-                        </div>
-                    </div> --}}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 22 22">
+                            <path fill="currentColor"
+                                d="M13 21H9v-1H8v-6H2v-1H1V9h1V8h6V2h1V1h4v1h1v6h6v1h1v4h-1v1h-6v6h-1M12 5V3h-2v2m-5 7v-2H3v2Z" />
+                        </svg>                    </button>
+
                 </div>
             </div>
         </div>
     </header>
     <!-- header-section end -->
-
-    <!-- notification area start -->
-    <div class="notification-area p-4" data-lenis-prevent>
-        <div class="notification-card d-grid gap-lg-4 gap-2" data-tilt>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Cristofer Dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">Winners The Last Game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Piter Maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Copa Punto Gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Daily Bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Cristofer Dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">Winners The Last Game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Piter Maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Copa Punto Gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Daily Bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <!-- notification area end -->
 
     <!-- connect your Wallet section start -->
     <div class="connect-wallet-section position-fixed top-0 start-0 w-100 vh-100">

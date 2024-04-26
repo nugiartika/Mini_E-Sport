@@ -90,25 +90,7 @@
                                 </span>
                             @enderror
                         </div>
-                        {{-- <div class="mb-3">
-                            <label for="penyelenggara" class="form-label">ORGANIZER</label>
-                            <input type="text" class="form-control @error('penyelenggara') is-invalid @enderror" id="penyelenggara" name="penyelenggara" value="{{ old('penyelenggara') }}">
-                            @error('penyelenggara')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div> --}}
-
-                        {{-- datepicker --}}
-                        {{-- <input type="text" name="daterange"  />
-
-                        <script type="text/javascript">
-                        $(function() {
-                            $('input[name="daterange"]').daterangepicker();
-                        });
-                        </script> --}}
-                        {{-- end --}}
+                      
                         <div class="mb-3">
                             <label for="slotTeam" class="form-label">SLOT TEAM</label>
                             <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
@@ -706,7 +688,7 @@
                                                     </a>
                                                     <span class="tcn-6 fs-sm">Solos Edition</span>
                                                 </div>
-                                                
+
                                                 <div class="hr-line line3"></div>
                                                 <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
                                                     <div

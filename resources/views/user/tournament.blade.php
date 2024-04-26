@@ -43,7 +43,7 @@
                     <div class="navbar-toggle-item w-100 position-lg-relative">
                         <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
-                                <a href="{{ route('index') }}">Home</a>
+                                <a href="{{ route('index') }}">HOME</a>
                             </li>
                             <li class="menu-item">
                                 <button>TOURNAMENTS</button>
@@ -65,6 +65,14 @@
                                 </ul>
                             </li>
                             <li class="menu-item">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit">Log Out</button>
+                                </form>
+
+                            </li>
+
+                            <li class="menu-item">
                                 <button>PAGES</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
@@ -77,120 +85,24 @@
                     </div>
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    <button
-                        class="btn-rounded-cus wallet-btn border-0 d-flex align-items-center gap-3 p-xl-2 p-0 pe-xl-6 rounded-5 position-relative">
-                        <span class="btn-circle fs-2xl">
-                            <i class="ti ti-wallet"></i>
-                        </span>
-                        <span class="text-nowrap d-none d-xl-block">CONNECT WALLET</span>
-                    </button>
                     <button class="ntf-btn box-style fs-2xl">
-                        <i class="ti ti-bell-filled"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 22 22">
+                            <path fill="currentColor"
+                                d="M13 21H9v-1H8v-6H2v-1H1V9h1V8h6V2h1V1h4v1h1v6h6v1h1v4h-1v1h-6v6h-1M12 5V3h-2v2m-5 7v-2H3v2Z" />
+                        </svg>
                     </button>
-                    {{-- <div class="header-profile pointer">
-                        <div class="profile-wrapper d-flex align-items-center gap-3">
-                            <div class="img-area overflow-hidden">
-                                <img class="w-100" src="assets/img/profile.png" alt="profile">
-                            </div>
-                            <span class="user-name d-none d-xxl-block text-nowrap">David Malan</span>
-                            <i class="ti ti-chevron-down d-none d-xxl-block"></i>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
     </header>
     <!-- header-section end -->
 
-    <!-- notification area start -->
-    <div class="notification-area p-4" data-lenis-prevent>
-        <div class="notification-card d-grid gap-4" data-tilt>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Cristofer Dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">Winners The Last Game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Piter Maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Copa Punto Gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Daily Bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Cristofer Dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">Winners The Last Game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Piter Maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Copa Punto Gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Daily Bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <!-- notification area end -->
 
     <!-- connect your Wallet section start -->
     <div class="connect-wallet-section position-fixed top-0 start-0 w-100 vh-100">
         <div class="connect-wallet-overlay position-absolute top-0 start-0 w-100 h-100"></div>
         <div class="vh-100 wallet-wrapper d-center">
-            <div
-                class="wallet-area pt-lg-8 pt-sm-6 pt-4 pb-lg-20 pb-sm-10 pb-6 px-lg-15 px-sm-8 px-3 bgn-4 rounded-5 ">
+            <div class="wallet-area pt-lg-8 pt-sm-6 pt-4 pb-lg-20 pb-sm-10 pb-6 px-lg-15 px-sm-8 px-3 bgn-4 rounded-5 ">
                 <div class="mb-lg-7 mb-sm-5 mb-3 d-flex justify-content-end">
                     <i class="ti ti-circle-x display-four fw-normal pointer wallet-close-btn"></i>
                 </div>
@@ -222,33 +134,6 @@
     </div>
     <!-- connect your Wallet section end -->
 
-    <!-- user account details popup start  -->
-    <div class="user-account-popup p-4">
-        <div class="account-items d-grid gap-1" data-tilt>
-
-            <div class="user-level-area p-3">
-                <div class="user-info d-between">
-                    <span class="user-name fs-five">David Malan</span>
-                    <div class="badge d-flex align-items-center">
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                    </div>
-                </div>
-                <div class="user-level">
-                    <span class="level-title tcn-6">Level</span>
-                    <div class="level-bar my-1">
-                        <div class="level-progress" style="width: 30%;"></div>
-                    </div>
-                </div>
-            </div>
-            <a href="profile.html" class="account-item">View Profile</a>
-
-            <a href="chat.html" class="account-item">Message</a>
-            <button class="bttn account-item">Logout</button>
-        </div>
-    </div>
-    <!-- user account details popup end  -->
 
     <!-- tournament section start -->
     <section class="tournament-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
@@ -352,40 +237,26 @@
                                                             </span>
 
                                                         </div>
-                                                        {{-- <div class="player d-flex align-items-center gap-1">
-                                                            <i class="ti ti-user fs-base"></i>
-                                                            <span class="tcn-6 fs-sm">128 Players</span>
-                                                        </div> --}}
-                                                    </div>
-                                                    @if ($teamCount && $teamCount->where('user_id', Auth::id())->count() == 0 && $teamCount->count() < $tournament->slotTeam)
-                                                    <div class="text-end ms-4">
-                                                            <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add Team</a>
-                                                        </div>
 
-                                                    {{-- @elseif (!$teamCount)
+                                                    </div>
+
+                                                    @if ($teamCount && $teamCount->count < $tournament->slotTeam)
                                                         <div class="text-end ms-4">
-                                                            <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add Team</a>
-                                                        </div> --}}
-                                                    {{-- @elseif ($teamCount) --}}
+                                                            <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
+                                                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
+                                                                Team</a>
+                                                        </div>
+                                                    @elseif (!$teamCount)
+                                                        <div class="text-end ms-4">
+                                                            <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
+                                                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
+                                                                Team</a>
+                                                        </div>
+                                                    @elseif ($teamCount)
                                                         {{-- user sudah terdaftar --}}
-                                                    {{-- @elseif ($teamCount && $teamCount->count == $tournament->slotTeam) --}}
+                                                    @elseif ($teamCount && $teamCount->count == $tournament->slotTeam)
                                                         {{-- Jika jumlah tim sama dengan slot tim, tidak ada tindakan yang diambil --}}
-                                                    {{-- @endif --}}
-
-
-                                                    {{-- @if ($teamCount && $teamCount->count < $tournament->slotTeam)
-                                                    <div class="text-end ms-4">
-                                                        <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add Team</a>
-                                                    </div>
-                                                @elseif (!$teamCount)
-                                                    <div class="text-end ms-4">
-                                                        <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add Team</a>
-                                                    </div> --}}
-                                                @elseif ($teamCount)
-                                                    {{-- user sudah terdaftar --}}
-                                                @elseif ($teamCount && $teamCount->count == $tournament->slotTeam)
-                                                    {{-- Jika jumlah tim sama dengan slot tim, tidak ada tindakan yang diambil --}}
-                                                @endif
+                                                    @endif
 
 
 

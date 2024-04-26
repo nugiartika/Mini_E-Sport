@@ -13,17 +13,6 @@
 
 <body>
 
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <span></span>
-        </div>
-    </div>
-
-    <!-- cursor effect-->
-    <div class="cursor"></div>
-    <!-- Header area  -->
-
     <!-- header-section start -->
   <header class="header-section w-100 bgn-4">
     <div class="py-sm-6 py-3 mx-xxl-20 mx-md-15 mx-3">
@@ -39,7 +28,6 @@
                     </button>
                     <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
                         <img class="" src="{{ asset('assets/img/LOGO WEB.png') }}" height="75px" width="75px" alt="favicon">
-                        {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
                     </a>
                 </div>
                 <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -54,183 +42,15 @@
                         <li class="menu-link">
                             <a href="{{ route('games') }}">Game</a>
                         </li>
-                        {{-- <li class="menu-item">
-                            <button>Teams</button>
-                            <ul class="sub-menu">
-                                <li class="menu-link">
-                                    <a href="teams.html">Teams</a>
-                                </li>
-                                <li class="menu-link">
-                                    <a href="teams-details.html">Teams Details</a>
-                                </li>
-                            </ul>
-                        </li> --}}
-                        {{-- <li class="menu-item">
-                            <button>pages</button>
-                            <ul class="sub-menu">
-                                <li class="menu-link">
-                                    <a href="signup.html">Sign Up</a>
-                                </li>
-                                <li class="menu-link">
-                                    <a href="signin.html">Sign In</a>
-                                </li>
-                                <li class="menu-link">
-                                    <a href="error.html">Error</a>
-                                </li>
-                                <li class="menu-link">
-                                    <a href="faq.html">Faq</a>
-                                </li>
-                                <li class="menu-link">
-                                    <a href="terms-condition.html">Terms Conditions</a>
-                                </li>
-                            </ul>
-                        </li> --}}
                     </ul>
                 </div>
             </nav>
             <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                {{-- <button
-                    class="btn-rounded-cus wallet-btn border-0 d-flex align-items-center gap-3 p-xl-2 p-0 pe-xl-6 rounded-5 position-relative">
-                    <span class="btn-circle fs-2xl">
-                        <i class="ti ti-wallet"></i>
-                    </span>
-                    <span class="text-nowrap d-none d-xl-block">Connect Wallet</span>
-                </button> --}}
-                {{-- <button class="ntf-btn box-style fs-2xl">
-                    <i class="ti ti-bell-filled"></i>
-                </button> --}}
-                {{-- <div class="header-profile pointer">
-                    <div class="profile-wrapper d-flex align-items-center gap-3">
-                        <div class="img-area overflow-hidden">
-                            <img class="w-100" src="assets/img/profile.png" alt="profile">
-                        </div>
-                        <span class="user-name d-none d-xxl-block text-nowrap">David Malan</span>
-                        <i class="ti ti-chevron-down d-none d-xxl-block"></i>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>
 </header>
 <!-- header-section end -->
-    <!-- notification area start -->
-    <div class="notification-area p-4" data-lenis-prevent>
-        <div class="notification-card d-grid gap-lg-4 gap-2" data-tilt>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Cristofer Dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">Winners The Last Game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Piter Maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Copa Punto Gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Daily Bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Cristofer Dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">Winners The Last Game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Piter Maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Copa Punto Gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Daily Bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <!-- notification area end -->
-
-    <!-- connect your Wallet section start -->
-    <div class="connect-wallet-section position-fixed top-0 start-0 w-100 vh-100">
-        <div class="connect-wallet-overlay position-absolute top-0 start-0 w-100 h-100"></div>
-        <div class="vh-100 wallet-wrapper d-center">
-            <div class="wallet-area pt-lg-8 pt-sm-6 pt-4 pb-lg-20 pb-sm-10 pb-6 px-lg-15 px-sm-8 px-3 bgn-4 rounded-5 ">
-                <div class="mb-lg-7 mb-sm-5 mb-3 d-flex justify-content-end">
-                    <i class="ti ti-circle-x display-four fw-normal pointer wallet-close-btn"></i>
-                </div>
-                <h3 class="tcn-1 cursor-scale growDown title-anim mb-lg-20 mb-sm-10 mb-6">
-                    Connect Your Wallet
-                </h3>
-                <div class="wallet-option pb-20">
-                    <ul class="d-grid gap-sm-8 gap-4">
-                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4">
-                            <a href="#" class="d-between">
-                                <span>Connect with Metamask</span>
-                                <div class="wallet-item-thumb">
-                                    <img class="w-100" src="assets/img/metamask.png" alt="metamask">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4">
-                            <a href="#" class="d-between">
-                                <span>Connect with Wallet Connect </span>
-                                <div class="wallet-item-thumb">
-                                    <img class="w-100" src="assets/img/walletconnect.png" alt="wallet connect">
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- connect your Wallet section end -->
 
     <!-- game section start  -->
     <section class="game-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
@@ -281,7 +101,6 @@
                                 <img class="w-100" src="assets/img/LOGO WEB.png" alt="favicon">
                             </div>
                             <div class="flogo-2">
-                                {{-- <img class="w-100" src="{{ asset('assets/img/logo.png') }}" alt="logo"> --}}
                                 <h3>HUMMAESPORT</h3>
                             </div>
                         </a>

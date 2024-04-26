@@ -19,6 +19,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
+        
         $user = Auth::user();
         $tournaments = Tournament::where('users_id', $user->id)->get();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))

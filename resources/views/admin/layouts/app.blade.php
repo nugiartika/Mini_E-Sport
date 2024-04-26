@@ -28,30 +28,6 @@
         href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
 
 
-    <!-- Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                '../../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-5J3LMKC');
-    </script>
-    <!-- End Google Tag Manager -->
-
-
-    <!-- Include Styles -->
-    <!-- $isFront is used to append the front layout styles only on the front layout otherwise the variable will be blank -->
-    <!-- BEGIN: Theme CSS-->
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link
@@ -84,12 +60,8 @@
 
     <!-- laravel style -->
     <script src="../../demo/assets/vendor/js/helpers.js"></script>
-    <!-- beautify ignore:start -->
-  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-  <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
   <script src="../../demo/assets/vendor/js/template-customizer.js"></script>
 
-  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../../demo/assets/js/config.js"></script>
 
   <script>
@@ -126,9 +98,6 @@
 
 <body>
 
-    <!-- Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
 
   <!-- Layout Content -->
@@ -190,9 +159,6 @@
     <!--/ Layout Content -->
 
 
-  <!-- Include Scripts -->
-  <!-- $isFront is used to append the front layout scripts only on the front layout otherwise the variable will be blank -->
-  <!-- BEGIN: Vendor JS-->
   @yield('script')
 <script src="{{ asset('demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a') }}"></script>
 <script src="../../demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c"></script>
@@ -213,6 +179,4 @@
 
 </body>
 
-
-<!-- Mirrored from demos.pixinvent.com/vuexy-html-laravel-admin-template/demo-1/dashboard/crm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Oct 2023 03:44:44 GMT -->
 </html>

@@ -6,18 +6,14 @@
     data-template="blank-menu-theme-default-light">
 
 
-<!-- Mirrored from demos.pixinvent.com/vuexy-html-laravel-admin-template/demo-1/auth/login-cover by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Oct 2023 03:49:34 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Cover - Pages |
-        Vuexy -
-        Bootstrap Admin Template
+    <title>Login Humma Esport
     </title>
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 5" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -30,30 +26,6 @@
         href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
 
 
-    <!-- Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                '../../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-5J3LMKC');
-    </script>
-    <!-- End Google Tag Manager -->
-
-
-    <!-- Include Styles -->
-    <!-- $isFront is used to append the front layout styles only on the front layout otherwise the variable will be blank -->
-    <!-- BEGIN: Theme CSS-->
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link
@@ -89,16 +61,9 @@
     <!-- Page -->
     <link rel="stylesheet" href="../../demo/assets/vendor/css/pages/page-auth.css">
 
-    <!-- Include Scripts for customizer, helper, analytics, config -->
-    <!-- $isFront is used to append the front layout scriptsIncludes only on the front layout otherwise the variable will be blank -->
-    <!-- laravel style -->
     <script src="../../demo/assets/vendor/js/helpers.js"></script>
-    <!-- beautify ignore:start -->
-  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-  <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
   <script src="../../demo/assets/vendor/js/template-customizer.js"></script>
 
-  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../../demo/assets/js/config.js"></script>
 
   <script>
@@ -134,11 +99,6 @@
 
 <body>
 
-    <!-- Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
-
   <!-- Layout Content -->
 
 <!-- Content -->
@@ -169,7 +129,6 @@
 </span>
           </a>
         </div>
-        <!-- /Logo -->
         <h3 class=" mb-1">Welcome to Humma Esport 👋</h3>
         <p class="mb-4">Silahkan masuk dengan akun anda</p>
 

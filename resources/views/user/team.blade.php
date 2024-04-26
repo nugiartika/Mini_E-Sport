@@ -11,13 +11,6 @@
     <link rel="canonical" href="https://1.envato.market/vuexy_admin">
 
 
-    <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-5J3LMKC');</script>
-    <!-- End Google Tag Manager -->
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
@@ -27,10 +20,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap" rel="stylesheet"> --}}
 
-    <!-- Icons -->
-    {{-- <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
-    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css"/>
-    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" /> --}}
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
@@ -51,131 +40,10 @@
 
     <!-- Helpers -->
     <script src="../../assets/vendor/js/helpers.js"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <script src="../../assets/vendor/js/template-customizer.js"></script>
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../../assets/js/config.js"></script>
 @endsection
     @section('content')
-    <!-- notification area start -->
-    <div class="notification-area p-4" data-lenis-prevent>
-        <div class="notification-card d-grid gap-lg-4 gap-2" data-tilt>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Cristofer Dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">Winners The Last Game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Piter Maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Copa Punto Gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Daily Bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Cristofer Dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">Winners The Last Game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Piter Maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Copa Punto Gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Daily Bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <!-- notification area end -->
-
-    <!-- connect your Wallet section start -->
-    <div class="connect-wallet-section position-fixed top-0 start-0 w-100 vh-100">
-        <div class="connect-wallet-overlay position-absolute top-0 start-0 w-100 h-100"></div>
-        <div class="vh-100 wallet-wrapper d-center">
-            <div class="wallet-area pt-lg-8 pt-sm-6 pt-4 pb-lg-20 pb-sm-10 pb-6 px-lg-15 px-sm-8 px-3 bgn-4 rounded-5 ">
-                <div class="mb-lg-7 mb-sm-5 mb-3 d-flex justify-content-end">
-                    <i class="ti ti-circle-x display-four fw-normal pointer wallet-close-btn"></i>
-                </div>
-                <h3 class="tcn-1 cursor-scale growDown title-anim mb-lg-20 mb-sm-10 mb-6">
-                    Connect Your Wallet
-                </h3>
-                <div class="wallet-option pb-20">
-                    <ul class="d-grid gap-sm-8 gap-4">
-                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4">
-                            <a href="#" class="d-between">
-                                <span>Connect with Metamask</span>
-                                <div class="wallet-item-thumb">
-                                    <img class="w-100" src="assets/img/metamask.png" alt="metamask">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4">
-                            <a href="#" class="d-between">
-                                <span>Connect with Wallet Connect </span>
-                                <div class="wallet-item-thumb">
-                                    <img class="w-100" src="assets/img/walletconnect.png" alt="wallet connect">
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- connect your Wallet section end -->
 
     <!-- teams banner section start  -->
     <section class="teams-section pb-sm-10 pb-6 pt-120 mt-lg-0 mt-sm-15 mt-10">
@@ -426,7 +294,7 @@
   </div> --}}
   <!-- /Default Wizard -->
 
-
+  <h1>tes</h1>
 
   <div class="slide active" id="slide1">
     <div class="row g-3">

@@ -51,200 +51,32 @@
                             <li class="menu-link">
                                 <a href="{{ route('ptournament.index') }}">Tournament</a>
                             </li>
+
+                            <li class="menu-link">
+                                <a href="{{ route('ptournament.index') }}">Tournament</a>
+                            </li>
+
                             <li class="menu-link">
                                 <a href="{{ route('game') }}">Game</a>
                             </li>
-                            {{-- <li class="menu-item">
-                                <button>Teams</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="teams.html">Teams</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="teams-details.html">Teams Details</a>
-                                    </li>
-                                </ul>
-                            </li> --}}
-                            {{-- <li class="menu-item">
-                                <button>pages</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="signup.html">Sign Up</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="signin.html">Sign In</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="error.html">Error</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="faq.html">Faq</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="terms-condition.html">Terms Conditions</a>
-                                    </li>
-                                </ul>
-                            </li> --}}
+
                         </ul>
                     </div>
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    {{-- <button
-                        class="btn-rounded-cus wallet-btn border-0 d-flex align-items-center gap-3 p-xl-2 p-0 pe-xl-6 rounded-5 position-relative">
-                        <span class="btn-circle fs-2xl">
-                            <i class="ti ti-wallet"></i>
-                        </span>
-                        <span class="text-nowrap d-none d-xl-block">Connect Wallet</span>
-                    </button> --}}
-                    {{-- <button class="ntf-btn box-style fs-2xl">
-                        <i class="ti ti-bell-filled"></i>
-                    </button> --}}
-                    {{-- <div class="header-profile pointer">
-                        <div class="profile-wrapper d-flex align-items-center gap-3">
-                            <div class="img-area overflow-hidden">
-                                <img class="w-100" src="assets/img/profile.png" alt="profile">
-                            </div>
-                            <span class="user-name d-none d-xxl-block text-nowrap">David Malan</span>
-                            <i class="ti ti-chevron-down d-none d-xxl-block"></i>
-                        </div>
-                    </div> --}}
+
                 </div>
             </div>
         </div>
     </header>
     <!-- header-section end -->
 
-    <!-- notification area start -->
-    <div class="notification-area p-4" data-lenis-prevent>
-        <div class="notification-card d-grid gap-4" data-tilt>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Cristofer Dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">Winners The Last Game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Piter Maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Copa Punto Gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Daily Bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Cristofer Dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">Winners The Last Game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Piter Maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Copa Punto Gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> Daily Bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">Tournament start</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <!-- notification area end -->
-
-    <!-- connect your Wallet section start -->
-    <div class="connect-wallet-section position-fixed top-0 start-0 w-100 vh-100">
-        <div class="connect-wallet-overlay position-absolute top-0 start-0 w-100 h-100"></div>
-        <div class="vh-100 wallet-wrapper d-center">
-            <div class="wallet-area pt-lg-8 pt-sm-6 pt-4 pb-lg-20 pb-sm-10 pb-6 px-lg-15 px-sm-8 px-3 bgn-4 rounded-5 ">
-                <div class="mb-lg-7 mb-sm-5 mb-3 d-flex justify-content-end">
-                    <i class="ti ti-circle-x display-four fw-normal pointer wallet-close-btn"></i>
-                </div>
-                <h3 class="tcn-1 cursor-scale growDown title-anim mb-lg-20 mb-sm-10 mb-6">
-                    Connect Your Wallet
-                </h3>
-                <div class="wallet-option pb-20">
-                    <ul class="d-grid gap-sm-8 gap-4">
-                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4">
-                            <a href="#" class="d-between">
-                                <span>Connect with Metamask</span>
-                                <div class="wallet-item-thumb">
-                                    <img class="w-100" src="assets/img/metamask.png" alt="metamask">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4">
-                            <a href="#" class="d-between">
-                                <span>Connect with Wallet Connect </span>
-                                <div class="wallet-item-thumb">
-                                    <img class="w-100" src="assets/img/walletconnect.png" alt="wallet connect">
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- connect your Wallet section end -->
 
     <!-- user account details popup start  -->
     <div class="user-account-popup p-4">
         <div class="account-items d-grid gap-1" data-tilt>
             <div class="user-level-area p-3">
-                {{-- <div class="user-info d-between">
-                    <span class="user-name fs-five">David Malan</span>
-                    <div class="badge d-flex align-items-center">
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                    </div>
-                </div> --}}
+
                 <div class="user-level">
                     <span class="level-title tcn-6">Level</span>
                     <div class="level-bar my-1">
@@ -289,8 +121,7 @@
                             GAMERS
                         </h1>
                         <a href="https://www.youtube.com/watch?v=G5kzUpWAusI"
-                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill popupvideo mfp-iframe">Play
-                            Now</a>
+                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Join</a>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-2 col-4 order-md-last order-lg-1">
@@ -305,70 +136,6 @@
                 </div>
                 <div class="col-xl-4 col-lg-5 col-md-6 order-md-1 order-lg-last">
                     <div class="hero-content">
-                        {{-- <div class="card-area py-lg-8 py-6 px-lg-6 px-3 rounded-5 tilt mb-10" data-tilt>
-                            <h3 class="tcn-1 dot-icon cursor-scale growDown mb-6 title-anim">
-                                Last Winners
-                            </h3>
-                            <div class="hr-line mb-6"></div>
-                            <div class="card-items d-grid gap-5">
-                                <div class="card-item d-flex align-items-center gap-4">
-                                    <div class="card-img-area rounded-circle overflow-hidden">
-                                        <img class="w-100" src="assets/img/avatar1.png" alt="profile">
-                                    </div>
-                                    <div class="card-info">
-                                        <h4 class="card-title fw-semibold tcn-1 mb-1 cursor-scale growDown2 title-anim">
-                                            Cristofer Dorwart
-                                        </h4>
-                                        <p class="card-text tcs-1 fw-medium">+$220</p>
-                                    </div>
-                                </div>
-                                <div class="hr-line"></div>
-                                <div class="card-item d-flex align-items-center gap-4">
-                                    <div class="card-img-area rounded-circle overflow-hidden">
-                                        <img class="w-100" src="assets/img/avatar2.png" alt="profile">
-                                    </div>
-                                    <div class="card-info">
-                                        <h4 class="card-title fw-semibold tcn-1 mb-1 cursor-scale growDown2 title-anim">
-                                            Cristofer Dorwart
-                                        </h4>
-                                        <p class="card-text tcs-1 fw-medium">+$220</p>
-                                    </div>
-                                </div>
-                                <div class="hr-line"></div>
-                                <div class="card-item d-flex align-items-center gap-4">
-                                    <div class="card-img-area rounded-circle overflow-hidden">
-                                        <img class="w-100" src="assets/img/avatar3.png" alt="profile">
-                                    </div>
-                                    <div class="card-info">
-                                        <h4 class="card-title fw-semibold tcn-1 mb-1 cursor-scale growDown2 title-anim">
-                                            Cristofer Dorwart
-                                        </h4>
-                                        <p class="card-text tcs-1 fw-medium">+$220</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="active-player-list d-grid justify-content-end gap-2">
-                            <ul class="player-lists d-flex align-items-center">
-                                <li class="rounded-circle overflow-hidden me-n6">
-                                    <img src="assets/img/player1.png" alt="player">
-                                </li>
-                                <li class="rounded-circle overflow-hidden me-n6">
-                                    <img src="assets/img/player2.png" alt="player">
-                                </li>
-                                <li class="rounded-circle overflow-hidden me-n6">
-                                    <img src="assets/img/player3.png" alt="player">
-                                </li>
-                                <li class="rounded-circle overflow-hidden me-n6">
-                                    <img src="assets/img/player4.png" alt="player">
-                                </li>
-                                <li class="rounded-circle overflow-hidden me-n6 heading-font fs-xl">
-                                    99+
-                                </li>
-                            </ul>
-                            <span class="d-block tcn-1 dot-icon cursor-scale growDown2 fs-xl text-end">Active
-                                Players</span>
-                        </div> --}}
                     </div>
                 </div>
             </div>
