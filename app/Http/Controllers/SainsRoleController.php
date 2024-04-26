@@ -7,6 +7,7 @@ use App\Http\Requests\StoreSainsRoleRequest;
 use App\Http\Requests\UpdateSainsRoleRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SainsRoleController extends Controller
 {
@@ -18,7 +19,7 @@ class SainsRoleController extends Controller
         // $users = User::where('role', 'user')->get();
         $sainsRole = SainsRole::all();
         // Mengirimkan data pengguna ke view
-        return view('admin.listUser', compact('sainsRole'));
+        return view('admin.listUserPenyelenggara', compact('sainsRole'));
     }
 
     /**
@@ -28,7 +29,7 @@ class SainsRoleController extends Controller
     {
         $sainsRole = SainsRole::all();
         $user = User::all();
-        return view('admin.listUser', compact('user','sainsRole'));
+        return view('admin.listUserPenyelenggara', compact('user','sainsRole'));
     }
 
     /**
@@ -43,6 +44,7 @@ class SainsRoleController extends Controller
 
         return redirect()->back()->with('success', 'Berhasil daftar');
     }
+
     /**
      * Display the specified resource.
      */

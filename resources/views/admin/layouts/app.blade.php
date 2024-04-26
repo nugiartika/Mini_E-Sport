@@ -41,8 +41,8 @@
     <link rel="stylesheet"
         href="../../demo/assets/vendor/fonts/flag-icons80a8.css?id=121bcc3078c6c2f608037fb9ca8bce8d" />
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../../demo/assets/vendor/css/rtl/core6cc1.css?id=9dd8321ea008145745a7d78e072a6e36"
-        class="template-customizer-core-css" />
+    {{-- <link rel="stylesheet" href="../../demo/assets/vendor/css/rtl/core6cc1.css?id=9dd8321ea008145745a7d78e072a6e36"
+        class="template-customizer-core-css" /> --}}
     <link rel="stylesheet"
         href="../../demo/assets/vendor/css/rtl/theme-defaultfc79.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9"
         class="template-customizer-theme-css" />

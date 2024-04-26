@@ -1,5 +1,21 @@
 @extends('admin.layouts.app')
 
+<style>
+    .dropdown-menu {
+        min-width: auto;
+        padding: 0;
+    }
+
+    .dropdown-menu .dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+    }
+
+    .dropdown-menu .dropdown-item i {
+        margin-right: 0.5rem;
+    }
+</style>
 
 <body>
     <!-- Layout page -->
@@ -14,47 +30,46 @@
 
             <!-- Bootstrap Table with Header - Light -->
             <div class="card">
-                <h5 class="card-header">List Users</h5>
+                <h5 class="card-header">Organizer list user</h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table">
                         <thead class="table-light">
                             <tr>
                                 <th>Nama</th>
                                 <th>Email</th>
-                                <th>Date</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
 
                         <tbody class="table-border-bottom-0">
-                            @foreach ($users as $index)
+                            @foreach ($sainsRole as $index)
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <i class="ti ti-user text-primary display-6"></i>
-                                            <span class="fw-medium">{{ $index->name }}</span>
+                                            <span class="fw-medium">{{ $index->user->name }}</span>
                                         </div>
                                     </td>
-                                    <td>{{ $index->email }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($index->created_at)->isoFormat('D MMMM YYYY') }}</td>
+                                    <td>{{ $index->user->email }}</td>
                                     <!-- dalam tag <td> -->
-                                    {{-- <td> --}}
-                                        {{-- <form action="{{ route('konfirmUser', $index->id) }}" method="POST"
+                                    <td>
+                                        <form action="{{ route('konfirmUser', $index->id) }}" method="POST"
                                             class="d-inline-block">
                                             @csrf
                                             @method('PUT')
                                             <input type="hidden" name=" action" value="approve">
                                             <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i
                                                     class="ti ti-check text-heading" style="margin-right: 5px;"></i></button>
-                                        </form> --}}
+                                        </form>
 
-                                        {{-- <form action="{{ route('rejectUser', $index->id) }}" method="POST" class="d-inline-block">
+                                        <form action="{{ route('rejectUser', $index->id) }}" method="POST" class="d-inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <input type="hidden" name="action" value="reject">
-                                            <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i class="ti ti-trash me-1"></i></button>
-                                        </form> --}}
+                                            <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i class="fas fa-times me-1"></i></button>
+                                        </form>
 
-                                    {{-- </td> --}}
+                                    </td>
                                 </tr>
                             @endforeach
 

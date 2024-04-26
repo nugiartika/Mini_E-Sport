@@ -269,7 +269,7 @@
                     <div class="d-flex align-items-center gap-4 mb-4">
                         <a href="javascript:void(0)" onclick="window.history.back()" class="back-btn"><i
                                 class="ti ti-arrow-narrow-left fs-2xl"></i></a>
-                        <h3 class="tcn-1 cursor-scale growDown title-anim">TDL SEA Pro Series 11</h3>
+                        <h3 class="tcn-1 cursor-scale growDown title-anim"></h3>
                     </div>
                 </div>
             </div>

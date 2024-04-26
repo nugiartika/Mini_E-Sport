@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterOrganizerController;
 use App\Http\Controllers\SainsRoleController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TournamentController;
+use App\Http\Controllers\UserController;
 use App\Models\DashboardAdmin;
 use App\Models\SainsRole;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,9 @@ Route::middleware(['auth'])->group(function () {
         //     return view('admin.index');
         // })->name('admin.index');
         Route::get('/admin', [DashboardAdminController::class, 'index'])->name('admin.index');
-        Route::get('/listUser', [SainsRoleController::class, 'index'])->name('listUser');
+        Route::get('/listUserPenyelenggara', [SainsRoleController::class, 'index'])->name('listUserPenyelenggara');
+        Route::get('/listUser', [UserController::class, 'index'])->name('listUser');
+        Route::get('/listPenyelenggara', [UserController::class, 'indexpenyelenggara'])->name('listPenyelenggara');
         Route::resource('category', CategoryController::class);
         Route::get('konfirmtournament', [TournamentController::class, 'indexadmin'])->name('konfirmtournament');
         Route::get('konfirmtournament/{konfirmtournament}/edit', [TournamentController::class, 'edit'])->name('konfirm.edit');
@@ -61,6 +64,21 @@ Route::middleware(['auth'])->group(function () {
 
         //route User
 
+
+        // Rute untuk menambahkan peran pengguna setelah registrasi berhasil
+        Route::get('/admin/listUser', [SainsRoleController::class, 'create'])->name('admin.listUser');
+        Route::post('/store-sains-role', [SainsRoleController::class, 'store'])->name('storeSainsRole');
+
+        Route::get('/index', function () {
+            return view('user.index');
+        })->name('index');
+
+        Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
+
+
+        Route::get('/detailteam', function () {
+            return view('detailteam');
+        })->name('team.detail');
     });
 });
 Route::get('tournament', [TournamentController::class, 'indexuser'])->name('user.tournament');
