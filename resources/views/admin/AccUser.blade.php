@@ -18,19 +18,12 @@
 </style>
 
 <body>
-    <!-- Layout page -->
     <div class="layout-page">
 
-        <!-- Content wrapper -->
-        {{-- <div class="content-wrapper"> --}}
-
-        <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
 
-
-            <!-- Bootstrap Table with Header - Light -->
             <div class="card">
-                <h5 class="card-header">Organizer list user</h5>
+                <h5 class="card-header">Acc User</h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table">
                         <thead class="table-light">
@@ -51,7 +44,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $index->user->email }}</td>
-                                    <!-- dalam tag <td> -->
+
                                     <td>
                                         <form action="{{ route('konfirmUser', $index->id) }}" method="POST"
                                             class="d-inline-block">
@@ -77,26 +70,13 @@
                     </table>
                 </div>
             </div>
-            <!-- Bootstrap Table with Header - Light -->
-
 
         </div>
-        <!-- / Content -->
-
-        <!--/ Content wrapper -->
-        {{-- </div> --}}
-        <!-- / Layout page -->
     </div>
 
 </body>
 
 </html>
-
-
-
-
-
-
 
 <div class="dropdown-menu">
     <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-pencil me-1"></i> Approve</a>

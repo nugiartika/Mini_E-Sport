@@ -19,7 +19,7 @@ class SainsRoleController extends Controller
         // $users = User::where('role', 'user')->get();
         $sainsRole = SainsRole::all();
         // Mengirimkan data pengguna ke view
-        return view('admin.listUserPenyelenggara', compact('sainsRole'));
+        return view('admin.AccUser', compact('sainsRole'));
     }
 
     /**
@@ -29,7 +29,7 @@ class SainsRoleController extends Controller
     {
         $sainsRole = SainsRole::all();
         $user = User::all();
-        return view('admin.listUserPenyelenggara', compact('user','sainsRole'));
+        return view('admin.AccUser', compact('user','sainsRole'));
     }
 
     /**

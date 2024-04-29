@@ -13,7 +13,6 @@
 
 <body>
 
-    <!-- header-section start -->
   <header class="header-section w-100 bgn-4">
     <div class="py-sm-6 py-3 mx-xxl-20 mx-md-15 mx-3">
         <div class="d-flex align-items-center justify-content-between gap-xxl-10 gap-lg-8 w-100">
@@ -33,14 +32,20 @@
                 <div class="navbar-toggle-item w-100 position-lg-relative">
                     <ul class="custom-nav gap-3 gap-lg-7 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                         <li class="menu-link">
-                            <a href="{{ route('dashboardPenyelenggara') }}">Home</a>
+                            <a href="{{ route('dashboardPenyelenggara') }}">HOME</a>
                         </li>
 
                         <li class="menu-link">
-                            <a href="{{ route('ptournament.index') }}">Tournament</a>
+                            <a href="{{ route('ptournament.index') }}">TOURNAMENT</a>
                         </li>
                         <li class="menu-link">
-                            <a href="{{ route('games') }}">Game</a>
+                            <a href="{{ route('games') }}">GAME</a>
+                        </li>
+                        <li class="menu-link">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOG OUT</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </div>

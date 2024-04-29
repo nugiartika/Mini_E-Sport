@@ -32,28 +32,26 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     // Route Admin
     Route::middleware('admin')->group(function () {
-        // Route::get('/admin', function () {
-        //     return view('admin.index');
-        // })->name('admin.index');
-        Route::get('/admin', [DashboardAdminController::class, 'index'])->name('admin.index');
-        Route::get('/listUserPenyelenggara', [SainsRoleController::class, 'index'])->name('listUserPenyelenggara');
+        Route::get('/DashboardAdmin', [DashboardAdminController::class, 'index'])->name('admin.index');
+        Route::get('/AccUser', [SainsRoleController::class, 'index'])->name('listUserPenyelenggara');
         Route::get('/listUser', [UserController::class, 'index'])->name('listUser');
-        Route::get('/listPenyelenggara', [UserController::class, 'indexpenyelenggara'])->name('listPenyelenggara');
+        Route::get('/listOrganizer', [UserController::class, 'indexpenyelenggara'])->name('listPenyelenggara');
         Route::resource('category', CategoryController::class);
-        Route::get('konfirmtournament', [TournamentController::class, 'indexadmin'])->name('konfirmtournament');
+        Route::get('confirmtournament', [TournamentController::class, 'indexadmin'])->name('konfirmtournament');
         Route::get('konfirmtournament/{konfirmtournament}/edit', [TournamentController::class, 'edit'])->name('konfirm.edit');
         Route::put('konfirmtournament/{id}', [TournamentController::class, 'update'])->name('konfirm.update');
         Route::put('konfirmUser/{idUser}', [SainsRoleController::class, 'update'])->name('konfirmUser');
         Route::delete('rejectUser/{idUser}', [SainsRoleController::class, 'destroy'])->name('rejectUser');
+        Route::delete('deleteUser/{idUser}',[UserController::class, 'destroy'])->name('deleteUser');
         Route::get('chart', [DashboardAdminController::class, 'response'])->name('chart');
     });
 
 
     Route::middleware('organizer')->group(function () {
-        Route::get('/DashboardPenyelenggara', [TournamentController::class, 'dashboard'])->name('dashboardPenyelenggara');
+        Route::get('/DashboardOrganizer', [TournamentController::class, 'dashboard'])->name('dashboardPenyelenggara');
         Route::resource('ptournament', TournamentController::class);
         Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');
-        Route::get('/pdetail', function () {
+        Route::get('/DetailTournament', function () {
             return view('penyelenggara.detailtournament');
         })->name('ptournament.detail');
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
@@ -62,20 +60,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('user')->group(function () {
 
-        //route User
-
-
-        // Rute untuk menambahkan peran pengguna setelah registrasi berhasil
         Route::get('/admin/listUser', [SainsRoleController::class, 'create'])->name('admin.listUser');
         Route::post('/store-sains-role', [SainsRoleController::class, 'store'])->name('storeSainsRole');
-
-        Route::get('/index', function () {
-            return view('user.index');
-        })->name('index');
-
         Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
-
-
         Route::get('/detailteam', function () {
             return view('detailteam');
         })->name('team.detail');
@@ -93,7 +80,6 @@ Route::get('/game', function () {
 Route::get('/detailteam', function () {
     return view('detailteam');
 })->name('team.detail');
-
 Route::get('/', function () {
     return view('user.index');
 })->name('index');

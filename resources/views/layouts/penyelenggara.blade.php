@@ -16,19 +16,10 @@
       @yield('style')
 </head>
 <body>
- <!-- Preloader -->
- {{-- <div class="preloader">
-    <div class="loader">
-        <span></span>
-    </div>
-</div> --}}
 
-<!-- cursor effect-->
-<div class="cursor"></div>
-<!-- Header area  -->
+    <div class="cursor"></div>
 
-<!-- header-section start -->
-<header class="header-section w-100">
+    <header class="header-section w-100">
     <div class="py-sm-6 py-3 mx-xxl-20 mx-md-15 mx-3">
         <div class="d-flex align-items-center justify-content-between gap-xxl-10 gap-lg-8 w-100">
             <nav
@@ -42,7 +33,6 @@
                     </button>
                     <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
                         <img class="" src="{{ asset('assets/img/LOGO WEB.png') }}" height="75px" width="75px" alt="favicon">
-                        {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
                     </a>
                 </div>
                 <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -100,16 +90,7 @@
                 <button class="ntf-btn box-style fs-2xl">
                     <i class="ti ti-bell-filled"></i>
                 </button>
-                {{-- <div class="header-profile pointer">
-                    <div class="profile-wrapper d-flex align-items-center gap-3">
-                        <div class="img-area overflow-hidden">
-                            <img class="w-100" src="assets/img/profile.png" alt="profile">
-                        </div>
-                        <span class="user-name d-none d-xxl-block text-nowrap">David Malan</span>
-                        <i class="ti ti-chevron-down d-none d-xxl-block"></i>
-                    </div>
-                </div> --}}
-            </div>
+                </div>
         </div>
     </div>
 </header>

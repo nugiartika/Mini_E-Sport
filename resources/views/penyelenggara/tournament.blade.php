@@ -90,7 +90,7 @@
                                 </span>
                             @enderror
                         </div>
-                      
+
                         <div class="mb-3">
                             <label for="slotTeam" class="form-label">SLOT TEAM</label>
                             <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
@@ -176,75 +176,32 @@
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
                             <img class="" src="{{ asset('assets/img/LOGO WEB.png') }}" height="75px"
                                 width="75px" alt="favicon">
-                            {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
                         <ul class="custom-nav gap-3 gap-lg-7 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
-                                <a href="{{ route('dashboardPenyelenggara') }}">Home</a>
+                                <a href="{{ route('dashboardPenyelenggara') }}">HOME </a>
                             </li>
 
                             <li class="menu-link">
-                                <a href="{{ route('ptournament.index') }}">Tournament</a>
+                                <a href="{{ route('ptournament.index') }}">TOURNAMENT</a>
                             </li>
                             <li class="menu-link">
-                                <a href="{{ route('games') }}">Game</a>
+                                <a href="{{ route('games') }}">GAME</a>
                             </li>
-                            {{-- <li class="menu-item">
-                                <button>Teams</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="teams.html">Teams</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="teams-details.html">Teams Details</a>
-                                    </li>
-                                </ul>
-                            </li> --}}
-                            {{-- <li class="menu-item">
-                                <button>pages</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="signup.html">Sign Up</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="signin.html">Sign In</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="error.html">Error</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="faq.html">Faq</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="terms-condition.html">Terms Conditions</a>
-                                    </li>
-                                </ul>
-                            </li> --}}
+
+                            <li class="menu-link">
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOG OUT</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                            
                         </ul>
                     </div>
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    {{-- <button
-                        class="btn-rounded-cus wallet-btn border-0 d-flex align-items-center gap-3 p-xl-2 p-0 pe-xl-6 rounded-5 position-relative">
-                        <span class="btn-circle fs-2xl">
-                            <i class="ti ti-wallet"></i>
-                        </span>
-                        <span class="text-nowrap d-none d-xl-block">Connect Wallet</span>
-                    </button> --}}
-                    {{-- <button class="ntf-btn box-style fs-2xl">
-                        <i class="ti ti-bell-filled"></i>
-                    </button> --}}
-                    {{-- <div class="header-profile pointer">
-                        <div class="profile-wrapper d-flex align-items-center gap-3">
-                            <div class="img-area overflow-hidden">
-                                <img class="w-100" src="assets/img/profile.png" alt="profile">
-                            </div>
-                            <span class="user-name d-none d-xxl-block text-nowrap">David Malan</span>
-                            <i class="ti ti-chevron-down d-none d-xxl-block"></i>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -334,71 +291,6 @@
     </div>
     <!-- notification area end -->
 
-    <!-- connect your Wallet section start -->
-    <div class="connect-wallet-section position-fixed top-0 start-0 w-100 vh-100">
-        <div class="connect-wallet-overlay position-absolute top-0 start-0 w-100 h-100"></div>
-        <div class="vh-100 wallet-wrapper d-center">
-            <div
-                class="wallet-area pt-lg-8 pt-sm-6 pt-4 pb-lg-20 pb-sm-10 pb-6 px-lg-15 px-sm-8 px-3 bgn-4 rounded-5 ">
-                <div class="mb-lg-7 mb-sm-5 mb-3 d-flex justify-content-end">
-                    <i class="ti ti-circle-x display-four fw-normal pointer wallet-close-btn"></i>
-                </div>
-                <h3 class="tcn-1 cursor-scale growDown title-anim mb-lg-20 mb-sm-10 mb-6">
-                    Connect Your Wallet
-                </h3>
-                <div class="wallet-option pb-20">
-                    <ul class="d-grid gap-sm-8 gap-4">
-                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4">
-                            <a href="#" class="d-between">
-                                <span>Connect with Metamask</span>
-                                <div class="wallet-item-thumb">
-                                    <img class="w-100" src="assets/img/metamask.png" alt="metamask">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4">
-                            <a href="#" class="d-between">
-                                <span>Connect with Wallet Connect </span>
-                                <div class="wallet-item-thumb">
-                                    <img class="w-100" src="assets/img/walletconnect.png" alt="wallet connect">
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- connect your Wallet section end -->
-
-    <!-- user account details popup start  -->
-    {{-- <div class="user-account-popup p-4">
-        <div class="account-items d-grid gap-1" data-tilt>
-
-            <div class="user-level-area p-3">
-                <div class="user-info d-between">
-                    <span class="user-name fs-five">David Malan</span>
-                    <div class="badge d-flex align-items-center">
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                    </div>
-                </div>
-                <div class="user-level">
-                    <span class="level-title tcn-6">Level</span>
-                    <div class="level-bar my-1">
-                        <div class="level-progress" style="width: 30%;"></div>
-                    </div>
-                </div>
-            </div>
-            <a href="profile.html" class="account-item">View Profile</a>
-
-            <a href="chat.html" class="account-item">Message</a>
-            <button class="bttn account-item">Logout</button>
-        </div>
-    </div> --}}
-    <!-- user account details popup end  -->
-
     <!-- tournament section start -->
     <section class="tournament-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
         <div class="tournament-wrapper alt">
@@ -419,15 +311,6 @@
 
 
                             </li>
-                            {{-- <li class="nav-links">
-                                <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Active</button>
-                            </li>
-                            <li class="nav-links">
-                                <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Upcoming</button>
-                            </li>
-                            <li class="nav-links">
-                                <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Finished</button>
-                            </li> --}}
                         </ul>
 
                         <div class="px-6">
@@ -1836,10 +1719,7 @@
             <img class="w-100" src="{{ asset('assets/img/fbanner.png') }}" alt="banner">
         </div>
     </footer>
-    <!-- footer section end  -->
 
-    <!-- ==== js dependencies start ==== -->
-    <!-- jquery  -->
     <script src="assets/js/jquery.min.js"></script>
     <!-- gsap  -->
     <script src="assets/js/gsap.min.js"></script>
