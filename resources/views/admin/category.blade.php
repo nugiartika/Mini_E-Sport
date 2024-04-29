@@ -32,14 +32,27 @@
         </div>
     @endif
 
-    <div class="layout-page">
+    .radio-button input[type="radio"] {
+        display: none;
+    }
+</style>
 
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="card">
-                <h5 class="card-header">List Users</h5>
-                <div class="table-responsive text-nowrap">
-                    <table class="table">
-                        <thead class="table-light">
+<div class="layout-page">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <h5 class="card-header">Tournament Confirmation</h5>
+            <div class="table-responsive text-nowrap">
+                <table class="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Category</th>
+                            <th>Photo</th>
+                            <th>Members Per Team</th>
+                            <th>Del/Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @foreach ($category as $index => $categories)
                             <tr>
                                 <th>No.</th>
                                 <th>Category</th>
@@ -62,7 +75,7 @@
                                     <td>{{ \Carbon\Carbon::parse($index->created_at)->isoFormat('D MMMM YYYY') }}</td>
 
                                 </tr>
-                            @endforeach
+                            @endforeach1
 
                         </tbody>
                     </table>
@@ -121,39 +134,6 @@
             </div>
         </div>
     </div>
+</div>
 
-    @foreach ($category as $a)
-        <div class="modal" tabindex="-1" id="editModal{{ $a->id }}">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Category</h6>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('category.update', $a->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-
-                            <div class="mb-3">
-                                <label for="Category" class="form-label">Category</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name"
-                                    value="{{ old('name', $a->name) }}">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-                        <button type="submit" class="btn btn-primary">SAVE</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endforeach
 @endsection
