@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('style')
-    <!-- Add Owl Carousel CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 @endsection
@@ -23,7 +22,6 @@
                         <small class="text-muted">Penyelenggara</small>
                         <p class="mb-2 mt-1">{{ $organizer }}</p>
                         <div class="pt-1">
-                            {{-- <span class="badge bg-label-secondary">-12.2%</span> --}}
                         </div>
                     </div>
                 </div>
@@ -43,7 +41,6 @@
                         <small class="text-muted">User</small>
                         <p class="mb-2 mt-1">{{ $user }}</p>
                         <div class="pt-1">
-                            {{-- <span class="badge bg-label-secondary">+25.2%</span> --}}
                         </div>
                     </div>
                 </div>
@@ -62,7 +59,6 @@
                         <small class="text-muted">Category Game</small>
                         <p class="mb-2 mt-1">{{ $category }}</p>
                         <div class="pt-1">
-                            {{-- <span class="badge bg-label-secondary">+25.2%</span> --}}
                         </div>
                     </div>
                 </div>
@@ -80,7 +76,6 @@
                         <small class="text-muted">Tournament</small>
                         <p class="mb-2 mt-1">{{ $tournament }}</p>
                         <div class="pt-1">
-                            {{-- <span class="badge bg-label-secondary">+25.2%</span> --}}
                         </div>
                     </div>
                 </div>
@@ -98,7 +93,6 @@
                         <small class="text-muted">Team</small>
                         <p class="mb-2 mt-1">{{ $team }}</p>
                         <div class="pt-1">
-                            {{-- <span class="badge bg-label-secondary">+25.2%</span> --}}
                         </div>
                     </div>
                 </div>
@@ -116,7 +110,6 @@
                         <small class="text-muted">Submission</small>
                         <p class="mb-2 mt-1">{{ $sainsRole }}</p>
                         <div class="pt-1">
-                            {{-- <span class="badge bg-label-secondary">+25.2%</span> --}}
                         </div>
                     </div>
                 </div>
@@ -127,8 +120,8 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div>
-                            <h5 class="card-title mb-0">Grafik User</h5>
-                            <small class="text-muted">Grafik pertumbuhan user Tiap bulan</small>
+                            <h5 class="card-title mb-0">GRAPHICS USER</h5>
+                            <small class="text-muted">Graph of User Growth Each Month</small>
                         </div>
                         <div class="d-sm-flex d-none align-items-center">
 
@@ -157,7 +150,6 @@
                 chart(response.user_count)
             },
             error: function(xhr, status, error) {
-                // Tangani kesalahan jika ada
             }
         });
 
@@ -181,18 +173,18 @@ function chart(data) {
                 curve: 'straight'
             },
             title: {
-                text: 'Daftar User Tiap Bulan',
+                text: 'List Of Users Every Month',
                 align: 'left'
             },
             grid: {
                 row: {
-                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    colors: ['#f3f3f3', 'transparent'],
                     opacity: 0.5
                 },
             },
             xaxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-            }
+            }   1
         };
 
         var chart = new ApexCharts(document.querySelector("#lineChart"), options);

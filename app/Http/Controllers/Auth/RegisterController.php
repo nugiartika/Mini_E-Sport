@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -41,6 +42,7 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+
 
     public function register(Request $request)
     {
@@ -79,6 +81,29 @@ class RegisterController extends Controller
             //     'role' => 'organizer',
             // ]);
         }
+
+
+
+    //     'name' => 'required|string|max:50|',
+    //     'email' => 'required|string|email|max:50|unique:users,email,except,id',
+    //     'password' => 'required|min:6',
+    //     'password_confirmation' => 'required|min:6'
+    // ],[
+    //     'name.required' => 'Nama Harus wajib di isi',
+    //     'name.max' => 'Nama tidak boleh melebihi 50 karakter',
+    //     'email.required' => 'email wajib di isi',
+    //     'email.max:50' => 'email tidak boleh melebihi 50 karakter',
+    //     'password.required' => 'password wajib di isi',
+    //     'password.min' => 'password minimal 6 karakter',
+    //     'password_confirmation.required' => 'password wajib di isi',
+    //     'password_confirmation.min' => 'minimal password 6 karater'
+    // ]);
+    $user = new User();
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->password = Hash::make($request->password);
+    $user->role = 'user';
+    $user->save();
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan masuk ke akun anda.');
     }
 
