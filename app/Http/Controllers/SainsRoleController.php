@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateSainsRoleRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SainsRoleController extends Controller
 {
@@ -27,9 +28,9 @@ class SainsRoleController extends Controller
      */
     public function create()
     {
-        $sainsRole = SainsRole::all();
-        $user = User::all();
-        return view('admin.listUserPenyelenggara', compact('user','sainsRole'));
+        // $sainsRole = SainsRole::all();
+        // $user = User::all();
+        // return view('admin.listUserPenyelenggara', compact('user','sainsRole'));
     }
 
     /**
@@ -37,12 +38,12 @@ class SainsRoleController extends Controller
      */
     public function store(Request $request)
     {
-        $sainsRole = new SainsRole();
-        $sainsRole->user_id = auth()->id(); // Pastikan user_id sesuai dengan pengguna yang masuk
-        $sainsRole->role = 'user'; // Atur peran pengguna di sini
-        $sainsRole->save();
+        // $sainsRole = new SainsRole();
+        // $sainsRole->user_id = auth()->id(); // Pastikan user_id sesuai dengan pengguna yang masuk
+        // $sainsRole->role = 'user'; // Atur peran pengguna di sini
+        // $sainsRole->save();
 
-        return redirect()->back()->with('success', 'Berhasil daftar');
+        // return redirect()->back()->with('success', 'Berhasil daftar');
     }
 
     /**
@@ -64,27 +65,43 @@ class SainsRoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SainsRole $sainsRole)
     {
 
-        $sainsRole = SainsRole::find($id);
+        if ($sainsRole->role === 'organizer') {
 
-        if ($sainsRole) {
-            $sainsRole->role = 'organizer';
-            $sainsRole->save();
+        User::create([
+            'name' => $sainsRole->name,
+            'email' => $sainsRole->email,
+            'password' => Hash::make($sainsRole->password),
+            'email_verified_at' => now(),
+            'role' => 'organizer',
+        ]);
 
-            $user = $sainsRole->user;
-            if ($user) {
-                $user->role = 'organizer';
-                $user->save();
-            }
-
-            $sainsRole->delete();
-        }
-
+        $sainsRole->delete();
+    }
 
         return redirect()->back()->with('success', 'Berhasil Konfirmasi');
     }
+
+
+    // $sainsRole = SainsRole::find($id);
+
+        // if ($sainsRole) {
+        //     $sainsRole->role = 'organizer';
+        //     $sainsRole->save();
+
+        //     $user = $sainsRole->user;
+        //     if ($user) {
+        //         $user->role = 'organizer';
+        //         $user->save();
+        //     }
+
+        //     $sainsRole->delete();
+        // }
+
+
+
     /**
      * Remove the specified resource from storage.
      */

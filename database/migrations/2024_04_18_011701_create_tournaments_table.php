@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('images');
             $table->integer('slotTeam');
+            $table->integer('contact');
             $table->text('description');
             $table->text('rule');
             $table->enum('status',['pending','rejected','accepted'])->default('pending');

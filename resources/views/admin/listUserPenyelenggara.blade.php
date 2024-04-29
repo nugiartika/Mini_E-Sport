@@ -47,16 +47,16 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <i class="ti ti-user text-primary display-6"></i>
-                                            <span class="fw-medium">{{ $index->user->name }}</span>
+                                            <span class="fw-medium">{{ $index->name }}</span>
                                         </div>
                                     </td>
-                                    <td>{{ $index->user->email }}</td>
+                                    <td>{{ $index->email }}</td>
                                     <!-- dalam tag <td> -->
                                     <td>
                                         <form action="{{ route('konfirmUser', $index->id) }}" method="POST"
                                             class="d-inline-block">
                                             @csrf
-                                            @method('PUT')
+                                            @method('POST')
                                             <input type="hidden" name=" action" value="approve">
                                             <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i
                                                     class="ti ti-check text-heading" style="margin-right: 5px;"></i></button>

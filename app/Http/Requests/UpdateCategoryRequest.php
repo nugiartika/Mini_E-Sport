@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class CategoryRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,9 +22,15 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+
+        $categoryId = $this->route('category'); // Assuming your route parameter is named 'category'
+
         return [
-            'name'=>'required|unique:categories,name',
-            'photo'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'name' => [
+                'required',
+                Rule::unique('categories', 'name')->ignore($categoryId),
+            ],
+                        'photo'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'membersPerTeam' => 'required|integer'
         ];
     }
@@ -33,7 +40,6 @@ class CategoryRequest extends FormRequest
         return [
             'name.required' => 'The name field is required.',
             'name.unique' => 'The name has already been taken.',
-            'photo.required' => 'The photo field is required.',
             'membersPerTeam.required' => 'Member per team must be filled in.',
         ];
     }

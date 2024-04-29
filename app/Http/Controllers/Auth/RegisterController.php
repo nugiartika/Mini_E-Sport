@@ -47,30 +47,38 @@ class RegisterController extends Controller
         $request->validate([
             'name' => 'required|string|max:50',
             'email' => 'required|string|email|max:50|unique:users',
-            'password' => 'required|string|min:6|confirmed'
+            'password' => 'required|string|min:6|confirmed',
+            'role' => 'required',
         ]);
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role = 'user';
-        $user->save();
+        // $user = new User();
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+        // $user->password = Hash::make($request->password);
+        // $user->role = $request->role;
+        // $user->save();
 
-        // $user = User::create([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        //     'email_verified_at' => now(),
-        //     'role' => 'user'
-        // ]);
-
-        // Set role for the new user
-        // SainsRole::create([
-        //     'user_id' => $user->id,
-        //     'role' => 'user',
-        // ]);
-
+        if ($request->role == 'user') {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->role = $request->role;
+            $user->save();
+        } elseif ($request->role == 'organizer') {
+            $sainsRole = new SainsRole();
+            $sainsRole->name = $request->name;
+            $sainsRole->email = $request->email;
+            $sainsRole->password = Hash::make($request->password);
+            $sainsRole->role = $request->role;
+            $sainsRole->save();
+            // SainsRole::create([
+            //     'name' => $user->name,
+            //     'email' => $user->email,
+            //     'password' => Hash::make($user->password),
+            //     'role' => 'organizer',
+            // ]);
+        }
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan masuk ke akun anda.');
     }
 
@@ -102,9 +110,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'user',
+            'role' => $data['role'],
         ]);
-
-
     }
 }

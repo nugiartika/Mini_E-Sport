@@ -180,6 +180,7 @@
                             @enderror
                         </div>
 
+
                         <div class="mb-3 form-password-toggle">
                             <label class="form-label" for="password">Password</label>
                             <div class="input-group input-group-merge">
@@ -209,6 +210,19 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="role" class="form-label">role</label>
+                        <select id="role" class="form-control @error('role') is-invalid @enderror" name="role">
+                            <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                            <option value="organizer" {{ old('role') == 'organizer' ? 'selected' : '' }}>Organizer</option>
+                        </select>
+
+                            @error('role')
+                                <p class="text-danger">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
                         <button type="submit" id="register" class="btn btn-primary d-grid w-100">Register</button>
                     </form>
 
@@ -226,7 +240,7 @@
             <!-- /Register -->
         </div>
     </div>
-    <button id="coba">coba</button>
+    {{-- <button id="coba">coba</button> --}}
     <!--/ Content -->
 
     <!--/ Layout Content -->

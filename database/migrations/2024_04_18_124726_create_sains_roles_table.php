@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('sains_roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->enum('role', ['admin','organizer','user']);
+            // $table->foreignId('user_id')->constrained();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->enum('role', ['admin','organizer','user'])->default('user');
             $table->timestamps();
         });
     }

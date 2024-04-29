@@ -40,6 +40,7 @@ class TournamentRequest extends FormRequest
                             }
                         },
                     ],
+            'contact' => 'required|integer',
             'images'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description'=>'required|max:2048',
             'rule'=>'required|max:2048',
@@ -57,6 +58,7 @@ class TournamentRequest extends FormRequest
             'categories_id.required' => 'Category must be filled in.',
             'categories_id.exists' => 'The Category you entered is invalid.',
             'images.required'=>'images must be filled in.',
+            'contact.required'=>'contact must be filled in.',
             'description.required'=>'description must be filled in.',
             'description.max' => 'description must not exceed 2048 characters.',
             'rule.required'=>'rule must be filled in.',

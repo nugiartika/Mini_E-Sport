@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -66,17 +69,48 @@ class CategoryController extends Controller
         return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY ADDED');
     }
 
-    public function update(CategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, $id)
     {
-        $category->update([
+        $category = Category::findOrFail($id);
+        $oldPhotoPath = $category->photo;
+
+        $dataToUpdate = [
             'name' => $request->input('name'),
-        ]);
+            'membersPerTeam' => $request->input('membersPerTeam'),
+        ];
+
+        if ($request->hasFile('photo')) {
+            $foto = $request->file('photo');
+            $path = $foto->store('game', 'public');
+            $dataToUpdate['photo'] = $path;
+        }
+
+        $category->update($dataToUpdate);
+
+        if ($category->wasChanged('photo') && $oldPhotoPath) {
+            Storage::disk('public')->delete($oldPhotoPath);
+            $localFilePath = public_path('storage/' . $oldPhotoPath);
+            if (File::exists($localFilePath)) {
+                File::delete($localFilePath);
+            }
+        }
+
         return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY UPDATED');
     }
 
     public function destroy(Category $category)
     {
-        $category->delete();
-        return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY REMOVED');
+        try {
+
+            if (Storage::disk('public')->exists($category->photo)) {
+               Storage::disk('public')->delete($category->photo);
+            }
+
+            $category->delete();
+
+            return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY REMOVED');
+        } catch (Exception $th) {
+            return redirect()->route('category.index')->with('error', 'GAGAL MENGHAPUS CATEGORY. ');
+        }
     }
 }

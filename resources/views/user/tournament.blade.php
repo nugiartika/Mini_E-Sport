@@ -241,16 +241,18 @@
                                                     </div>
 
                                                     @if ($teamCount && $teamCount->count < $tournament->slotTeam)
-                                                        <div class="text-end ms-4">
-                                                            <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
+                                                        <div class="text-end ms-8">
+                                                            {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
-                                                                Team</a>
+                                                                Team</a> --}}
+                                                                <a href="" type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a>
                                                         </div>
                                                     @elseif (!$teamCount)
-                                                        <div class="text-end ms-4">
-                                                            <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
+                                                        <div class="text-end ms-8">
+                                                            {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
-                                                                Team</a>
+                                                                Team</a> --}}
+                                                                <a href="" type="button"class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a>
                                                         </div>
                                                     @elseif ($teamCount)
                                                         {{-- user sudah terdaftar --}}

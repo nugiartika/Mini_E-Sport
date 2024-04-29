@@ -19,7 +19,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        
+
         $user = Auth::user();
         $tournaments = Tournament::where('users_id', $user->id)->get();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
@@ -50,7 +50,6 @@ class TournamentController extends Controller
         $category = Category::all();
         return view('penyelenggara.Dashboard', compact('tournaments', 'category', 'user'));
     }
-
 
     public function indexadmin()
     {
@@ -92,6 +91,7 @@ class TournamentController extends Controller
             'categories_id' => $category_id,
             'users_id' => $user->id,
             'slotTeam' => $request->slotTeam,
+            'contact' => $request->contact,
             'images' => $path_gambar,
             'description' => $request->description,
             'rule' => $request->rule,

@@ -90,12 +90,22 @@
                                 </span>
                             @enderror
                         </div>
-                      
+
                         <div class="mb-3">
                             <label for="slotTeam" class="form-label">SLOT TEAM</label>
                             <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
                                 id="slotTeam" name="slotTeam" value="{{ old('slotTeam') }}">
                             @error('slotTeam')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact" class="form-label">CONTACT</label>
+                            <input type="number" class="form-control @error('contact') is-invalid @enderror"
+                                id="contact" name="contact" value="{{ old('contact') }}">
+                            @error('contact')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -119,7 +129,6 @@
                                 </span>
                             @enderror
                         </div>
-
                         <div class="mb-3">
                             <label for="images" class="form-label">IMAGE</label>
                             <input type="file" class="form-control @error('images') is-invalid @enderror"
