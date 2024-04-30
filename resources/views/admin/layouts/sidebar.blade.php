@@ -81,11 +81,28 @@
             </ul>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('konfirmtournament') ? 'active' : '' }} ">
-            <a href="{{ route('konfirmtournament') }}" class="menu-link">
+
+
+        {{-- strat --}}
+        <li class="menu-item active open">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="ti-md ti ti-device-laptop text-body"></i>
-                <div>List Tournament</div>
+                <div>Tournament</div>
             </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->routeIs('detailTur') ? 'active' : '' }} ">
+                    <a href="{{ route('detailTur') }}" class="menu-link">
+                        <div>List Tournament</div>
+                    </a>
+                </li>
+
+                <li class="menu-item {{ request()->routeIs('konfirmtournament') ? 'active' : '' }}">
+                    <a href="{{ route('konfirmtournament') }}" class="menu-link">
+                        <div>Acc Toutnament</div>
+                    </a>
+                </li>
+            </ul>
         </li>
 
     </ul>

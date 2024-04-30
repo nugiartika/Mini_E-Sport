@@ -2,8 +2,8 @@
 <style>
 
 .radio-button {
-    display: block; /* Mengubah elemen menjadi blok agar dapat diatur posisinya */
-    margin-top: 10px; /* Atur jarak dari atas */
+    display: block;
+    margin-top: 10px;
 }
 
 .radio-button input[type="radio"] {
@@ -26,8 +26,6 @@
                         <thead class="table-light">
                             <tr>
                                 <th>Name</th>
-                                <th>Game</th>
-                                <th>Organizer</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -38,9 +36,7 @@
                             <tr>
                                 <td> <span
                                         class="fw-medium">{{ $tournament->name }}</span></td>
-                                        <td>{{$tournament->category->name }}</td>
 
-                                        <td>{{ $tournament->user->name }}</td>
                                         <td><span class="badge bg-label-primary me-1">{{ $tournament->status }}</span></td>
                                 <td>
                                             <form id="updateForm{{ $tournament->id }}" action="{{ route('konfirm.update', $tournament->id) }}" method="POST">

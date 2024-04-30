@@ -22,10 +22,8 @@
     <!-- laravel CRUD token -->
     <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
     <!-- Canonical SEO -->
-    <link rel="canonical" href="https://1.envato.market/vuexy_admin">
+    <link rel="shortcut icon" href="assets/img/humma-01.png" type="image/x-icon">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon"
-        href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -40,9 +38,7 @@
         href="../../demo/assets/vendor/fonts/fontawesome8a69.css?id=a2997cb6a1c98cc3c85f4c99cdea95b5" />
     <link rel="stylesheet"
         href="../../demo/assets/vendor/fonts/flag-icons80a8.css?id=121bcc3078c6c2f608037fb9ca8bce8d" />
-    <!-- Core CSS -->
-    {{-- <link rel="stylesheet" href="../../demo/assets/vendor/css/rtl/core6cc1.css?id=9dd8321ea008145745a7d78e072a6e36"
-        class="template-customizer-core-css" /> --}}
+     <!-- Core CSS -->
     <link rel="stylesheet"
         href="../../demo/assets/vendor/css/rtl/theme-defaultfc79.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9"
         class="template-customizer-theme-css" />
@@ -108,9 +104,6 @@
 
             <!-- Layout page -->
             <div class="layout-page">
-
-
-
 
                 <!-- BEGIN: Navbar-->
                 @include('admin.layouts.navbar')

@@ -56,7 +56,7 @@ class TournamentController extends Controller
         $tournaments = Tournament::all();
         $user = User::all();
         $category = Category::all();
-        return view('admin.konfirmtournament', compact('tournaments', 'category', 'user'));
+        return view('admin.AccTournament', compact('tournaments', 'category', 'user'));
     }
 
     /**

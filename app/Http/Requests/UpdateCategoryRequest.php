@@ -23,24 +23,26 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
 
-        $categoryId = $this->route('category'); // Assuming your route parameter is named 'category'
-
+        $categoryId = $this->route('category');
         return [
             'name' => [
                 'required',
                 Rule::unique('categories', 'name')->ignore($categoryId),
+                'max:50'
             ],
-                        'photo'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'membersPerTeam' => 'required|integer'
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'membersPerTeam' => 'required|integer|min:1|max:7'
         ];
     }
-
     public function messages(): array
     {
         return [
             'name.required' => 'The name field is required.',
             'name.unique' => 'The name has already been taken.',
+            'name.max' => 'maximum 50 character',
             'membersPerTeam.required' => 'Member per team must be filled in.',
+            'membersPerTeam.min' => 'Minimum 1 member',
+            'membersPerTeam.max' => 'Maximum 7 members'
         ];
     }
 }
