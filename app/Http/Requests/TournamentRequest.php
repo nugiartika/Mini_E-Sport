@@ -26,6 +26,8 @@ class TournamentRequest extends FormRequest
             'name'=>'required|max:30',
             'pendaftaran'=>'required',
             'permainan'=>'required',
+            'end_pendaftaran'=>'required|date|after:pendaftaran',
+            'end_permainan'=>'require|date|after:pendaftaran',
             'categories_id'=>'required|exists:categories,id',
             'users_id' => 'nullable|exists:users,id',
             'slotTeam' => [
@@ -55,6 +57,8 @@ class TournamentRequest extends FormRequest
             'name.max' => 'name must not exceed 2048 characters.',
             'pendaftaran.required'=>'pendaftaran must be filled in.',
             'permainan.required'=>'permainan must be filled in.',
+            'end_pendaftaran.required'=>'the end of pendaftaran must be filled in after the pendaftaran date.',
+            'end_permainan.required'=>'the end of permainan must be filled in after the permainan date.',
             'categories_id.required' => 'Category must be filled in.',
             'categories_id.exists' => 'The Category you entered is invalid.',
             'images.required'=>'images must be filled in.',

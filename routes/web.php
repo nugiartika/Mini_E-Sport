@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Organizer Routes
     Route::middleware('organizer')->group(function () {
+        Route::get('/tambah', [TournamentController::class, 'create'])->name('tambahtournament');
         Route::get('/DashboardOrganizer', [TournamentController::class, 'dashboard'])->name('dashboardPenyelenggara');
         Route::resource('ptournament', TournamentController::class);
         Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');
