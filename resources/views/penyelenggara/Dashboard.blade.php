@@ -46,12 +46,6 @@
                                 <a href="{{ route('game') }}">GAME</a>
                             </li>
 
-                            <li class="menu-link">
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOG OUT</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
                         </ul>
                     </div>
                 </nav>
