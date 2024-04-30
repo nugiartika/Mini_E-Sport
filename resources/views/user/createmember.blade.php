@@ -14,6 +14,16 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
 
+    <!-- Fonts -->
+    {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap" rel="stylesheet"> --}}
+
+    <!-- Icons -->
+    {{-- <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css"/>
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" /> --}}
+
     <!-- Core CSS -->
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
@@ -26,11 +36,17 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet"
-        href="../../assets/vendor/libs/@form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/@form-validation/form-validation.css" />
 
+    <!-- Page CSS -->
+
+
+    <!-- Helpers -->
     <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../../assets/js/config.js"></script>
 
 
@@ -50,23 +66,47 @@
         }
 
 
+   /* Style untuk tombol radio kustom */
+   /* .custom-radio {
+        display: inline-block;
+        position: relative;
+        padding-left: 30px;
+        margin-right: 15px;
+        cursor: pointer;
+    } */
+
     /* Gambar yang digunakan untuk tombol radio */
     .custom-radio input[type="radio"] {
         display: none;
     }
 
+    /* Style untuk tanda centang */
+    /* .custom-radio .radio-dot {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        background-color: #ccc;
+        transition: background-color 0.3s ease;
+    } */
 
     /* Style ketika tombol radio dipilih */
     .custom-radio input[type="radio"]:checked + .radio-dot {
         background-color: #2196F3; /* Warna tanda centang saat dipilih */
     }
 
-
+    /* .custom-radio img {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    } */
 </style>
 @endsection
 @section('content')
 <div class="container" style="margin-top: 10%; color: #939393">
-    <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
+    <form action="{{ route('member.store') }}" method="POST" class="row g-3">
         @csrf
          <!-- Second column -->
     <div class="col-12 col-lg-4">
@@ -91,7 +131,7 @@
             {{-- </div> --}}
             </div><br>
             <!-- Base Price -->
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="profile" class="form-label">PROFILE</label>
                 <input type="file" class="form-control @error('profile') is-invalid @enderror" id="profile" name="profile" onchange="previewImage(event)">
                 @if (old('profile'))
@@ -102,20 +142,75 @@
                     </span>
                 @enderror
 
-            </div>
+            </div> --}}
             <!-- Discounted Price -->
-            <div class="mb-3">
-    <label for="name" class="form-label">NAME TEAM</label>
-    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-        value="{{ old('name') }}">
-    @error('name')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-    </div>
-    <input type="hidden" name="tournament_id" value="{{ $selectedTournamentId }}">
-    <button type="submit" class="btn btn-primary ms-2">SAVE</button>
+
+                {{-- @php
+                    $team = App\Models\Team::find($selectedTeamId);
+                    $jumlahmember = $team->tournament->category->members_per_team;
+                @endphp --}}
+            @php
+                $members = App\Models\Member::all();
+
+                $membersPerTeamArray = [];
+
+                foreach ($members as $member) {
+                    $teamId = $member->team_id;
+
+                    // Ambil tournament_id dari team
+                    $team = App\Models\Team::find($teamId);
+                    if ($team) {
+                        $tournamentId = $team->tournament_id;
+
+                        // Ambil categories_id dari tournament
+                        $tournament = App\Models\Tournament::find($tournamentId);
+                        if ($tournament && $tournament->category) {
+                            $categoryId = $tournament->category->id;
+
+                            // Ambil membersPerTeam dari category
+                            $membersPerTeam = $tournament->category->membersPerTeam;
+
+                            // Simpan data dalam array
+                            $membersPerTeamArray[$member->id] = $membersPerTeam;
+                        }
+                    }
+                }
+            @endphp
+
+            @foreach ($membersPerTeamArray as $memberId => $membersPerTeam)
+                <div class="mb-3">
+                    <label for="member{{ $memberId }}" class="form-label">Member TEAM {{ $memberId }}</label>
+                    <input type="text" class="form-control @error('member' . $memberId) is-invalid @enderror" id="member{{ $memberId }}"
+                        name="member{{ $memberId }}" value="{{ old('member' . $memberId) }}">
+                    @error('member' . $memberId)
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            @endforeach
+
+                {{-- @php
+                $categoryName = null;
+
+                if ($team && $team->tournament && $team->tournament->category) {
+                    $categoryName = $team->tournament->category->id;
+                }                @endphp
+
+                @for ($i = 1; $i <= $categoryId; $i++)
+                    <div class="mb-3">
+                        <label for="member{{$i}}" class="form-label">Member TEAM {{$i}}</label>
+                        <input type="text" class="form-control @error('member'.$i) is-invalid @enderror" id="member{{$i}}"
+                            name="member{{$i}}" value="{{ old('member'.$i) }}">
+                        @error('member'.$i)
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                @endfor --}}
+
+            <button type="submit" class="btn btn-primary ms-2">SAVE</button>
 
     <!-- Charge tax check box -->
     {{-- <div class="mb-3">
@@ -190,28 +285,25 @@
                     </div> --}}
     {{-- <div class="col-md-4">
                         <label for="member3" class="form-label">Member Team</label>
-                        <input type="text" class="form-control @error('member3') is-invalid @enderror" id="member3"
-                            name="member3" value="{{ old('member3') }}">
+                        <input type="text" class="form-control @error('member3') is-invalid @enderror" id="member3" name="member3" value="{{ old('member3') }}">
                         @error('member3')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div> --}}
     {{-- <div class="col-md-4">
                         <label for="member4" class="form-label">Member Team</label>
-                        <input type="text" class="form-control @error('member4') is-invalid @enderror" id="member4"
-                            name="member4" value="{{ old('member4') }}">
+                        <input type="text" class="form-control @error('member4') is-invalid @enderror" id="member4" name="member4" value="{{ old('member4') }}">
                         @error('member4')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="col-md-4">
                         <label for="member5" class="form-label">Member Team</label>
-                        <input type="text" class="form-control @error('member5') is-invalid @enderror" id="member5"
-                            name="member5" value="{{ old('member5') }}">
+                        <input type="text" class="form-control @error('member5') is-invalid @enderror" id="member5" name="member5" value="{{ old('member5') }}">
                         @error('member5')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -226,8 +318,7 @@
                 <div class="row g-3">
                     <div class="col-md-4">
                         <label for="cadangan1" class="form-label">substitute player</label>
-                        <input type="text" class="form-control @error('cadangan1') is-invalid @enderror"
-                            id="cadangan1" name="cadangan1" placeholder="Optional" value="{{ old('cadangan1') }}">
+                        <input type="text" class="form-control @error('cadangan1') is-invalid @enderror" id="cadangan1" name="cadangan1" placeholder="Optional" value="{{ old('cadangan1') }}">
                         @error('cadangan1')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -236,8 +327,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="cadangan2" class="form-label">substitute player</label>
-                        <input type="text" class="form-control @error('cadangan2') is-invalid @enderror"
-                            id="cadangan2" name="cadangan2" placeholder="Optional" value="{{ old('cadangan2') }}">
+                        <input type="text" class="form-control @error('cadangan2') is-invalid @enderror" id="cadangan2" name="cadangan2" placeholder="Optional"  value="{{ old('cadangan2') }}">
                         @error('cadangan2')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -543,6 +633,48 @@
             </div>
         </div>
 
+            <div class="col">
+                <label class="form-label">{{ __('Jenis kelamin') }}</label>
+
+
+            </div>
+        <div class="row g-3">
+            <div class="col"></div>
+            <div class="col">
+        <button type="button" class="btn btn-primary next-slide">Next</button>
+            </div></div>
+    </div>
+
+    <div class="slide" id="slide2">
+        <div class="mb-3">
+            <label for="" class="form-label">{{ __('email') }}</label>
+            <input class="input form-control @error('') is-invalid @enderror" id="" type=""
+                name="" value="{{ old('email') }}" required autocomplete="">
+
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">{{ __('Password') }}</label>
+            <input class="input form-control @error('password') is-invalid @enderror" id="password" type="password"
+                name="" required autocomplete="new-password">
+
+        </div>
+
+        <div class="mb-3">
+            <label for="password-confirm" class="form-label">{{ __('Password Confirm') }}</label>
+            <input class="input form-control" id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
+        </div>
+
+        <input type="hidden" name="status" value="menunggu konfirmasi">
+        <div class="row g-3">
+            <div class="col">
+        <button type="button" class="btn btn-primary prev-slide">Previous</button></div>
+        <div class="col">
+        <div class="input-box button">
+            <button type="button" class="btn btn-primary">
+                {{ __('Register') }}
+            </button></div>
+        </div>
     </div>
     </div>
     <div class="text">

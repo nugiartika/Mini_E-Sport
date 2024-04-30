@@ -59,7 +59,9 @@ class SainsRoleController extends Controller
      */
     public function edit(SainsRole $sainsRole)
     {
-        //
+        $sainsRole = SainsRole::all();
+        $user = User::all();
+        return view('admin.AccUser', compact('sainsRole','user'));
     }
 
     /**
@@ -67,19 +69,25 @@ class SainsRoleController extends Controller
      */
     public function update(Request $request, SainsRole $sainsRole)
     {
-
-        if ($sainsRole->role === 'organizer') {
-
-        User::create([
-            'name' => $sainsRole->name,
-            'email' => $sainsRole->email,
-            'password' => Hash::make($sainsRole->password),
-            'email_verified_at' => now(),
-            'role' => 'organizer',
+        $request->validate([
+            'status' => 'required',
         ]);
 
-        $sainsRole->delete();
-    }
+        $status = $request->input('status');
+
+        if($status === 'accepted'){
+            $user = new User();
+            $user->name = $sainsRole->name;
+            $user->email = $sainsRole->email;
+            $user->password = Hash::make($sainsRole->password);
+            $user->role = $sainsRole->role;
+            $user->save();
+            
+            $sainsRole->delete();
+
+        }elseif($status === 'rejected'){
+            $sainsRole->delete();
+        }
 
         return redirect()->back()->with('success', 'Berhasil Konfirmasi');
     }

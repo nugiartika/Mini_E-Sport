@@ -22,7 +22,6 @@ class TeamController extends Controller
         return view('user.team', compact('teams','category'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      */
@@ -53,16 +52,12 @@ class TeamController extends Controller
             'name' => $request->name,
             'profile' => $path_gambar,
             'tournament_id' => $tournament_id,
-            'user_id' => $user->id,
-            'member2' => $request->member2,
-            'member3' => $request->member3,
-            'member4' => $request->member4,
-            'member5' => $request->member5,
-            'cadangan1' => $request->cadangan1,
-            'cadangan2' => $request->cadangan2,
+            // 'member_id' => $request->member_id,
+            // 'cadangan1' => $request->cadangan1,
+            // 'cadangan2' => $request->cadangan2,
         ]);
 
-        return redirect()->route('team.index')->with('success', 'Team added successfully');
+        return redirect()->route('member.create')->with('success', 'Team added successfully');
     }
 
 

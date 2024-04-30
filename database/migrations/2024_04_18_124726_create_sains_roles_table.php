@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('role', ['admin','organizer','user'])->default('user');
+            $table->enum('status', ['accepted','rejected','pending'])->default('pending');
             $table->timestamps();
         });
     }

@@ -1,6 +1,16 @@
 @extends('admin.layouts.app')
 
 <style>
+
+.radio-button {
+    display: block;
+    margin-top: 10px;
+}
+
+.radio-button input[type="radio"] {
+    display: none;
+}
+
     .dropdown-menu {
         min-width: auto;
         padding: 0;
@@ -46,13 +56,29 @@
                                     <td>{{ $index->email }}</td>
                                     <!-- dalam tag <td> -->
                                     <td>
-                                        <form action="{{ route('konfirmUser', $index->id) }}" method="POST"
-                                            class="d-inline-block">
+
+                                        <form id="updateForm{{ $index->id }}" action="{{ route('konfirmUser', $index->id) }}" method="POST" class="d-inline-block">
                                             @csrf
-                                            @method('POST')
-                                            <input type="hidden" name=" action" value="approve">
-                                            <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i
-                                                    class="ti ti-check text-heading" style="margin-right: 5px;"></i></button>
+                                            @method('put')
+                                          
+                                            <div class="radio-button">
+                                                <span class="badge bg-label-danger me-1">
+                                                <label for="rejected{{ $index->id }}">Rejected</label>
+                                                <input type="radio" id="rejected{{ $index->id }}" name="status" value="rejected" {{ $index->status == 'rejected' ? 'checked' : '' }}>
+                                                </span>
+
+                                                <span class="badge bg-label-success me-1">
+                                                <label for="accepted{{ $index->id }}">Accepted</label>
+                                                <input type="radio" id="accepted{{ $index->id }}" name="status" value="accepted" {{ $index->status == 'accepted' ? 'checked' : '' }}>
+                                                </span>
+                                            </div>
+                                        </form>
+                                        {{-- <form action="{{ route('konfirmUser', $index->id) }}" method="POST" class="d-inline-block">
+                                            @csrf
+                                            @method('put')
+                                            <input type="hidden" name="action" value="approve">
+                                            <button  type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i
+                                                 class="ti ti-check text-heading" style="margin-right: 5px;"></i></button>
                                         </form>
 
                                         <form action="{{ route('rejectUser', $index->id) }}" method="POST" class="d-inline-block">
@@ -60,7 +86,7 @@
                                             @method('DELETE')
                                             <input type="hidden" name="action" value="reject">
                                             <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i class="fas fa-times me-1"></i></button>
-                                        </form>
+                                        </form> --}}
 
                                     </td>
                                 </tr>
@@ -82,3 +108,21 @@
     <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-pencil me-1"></i> Approve</a>
     <a class="dropdown-item" href="javascript:void(0);"><i class="ti ti-trash me-1"></i> Reject</a>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        @foreach ($sainsRole as $index)
+            var form{{ $index->id }} = document.getElementById('updateForm{{ $index->id }}');
+            var rejectedRadio{{ $index->id }} = document.getElementById('rejected{{ $index->id }}');
+            var acceptedRadio{{ $index->id }} = document.getElementById('accepted{{ $index->id }}');
+
+            rejectedRadio{{ $index->id }}.addEventListener('change', function () {
+                form{{ $index->id }}.submit();
+            });
+
+            acceptedRadio{{ $index->id }}.addEventListener('change', function () {
+                form{{ $index->id }}.submit();
+            });
+        @endforeach
+    });
+</script>

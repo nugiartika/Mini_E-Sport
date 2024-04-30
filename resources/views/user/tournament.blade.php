@@ -227,14 +227,14 @@
                                                             {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
                                                                 Team</a> --}}
-                                                                <a href="" type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a>
+                                                                <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a>
                                                         </div>
                                                     @elseif (!$teamCount)
                                                         <div class="text-end ms-8">
                                                             {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
                                                                 Team</a> --}}
-                                                                <a href="" type="button"class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a>
+                                                                <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button"class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a>
                                                         </div>
                                                     @elseif ($teamCount)
                                                         {{-- user sudah terdaftar --}}

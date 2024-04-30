@@ -26,13 +26,13 @@ class TeamRequest extends FormRequest
             'profile'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'tournament_id' => 'nullable|exists:tournaments,id',
             // 'user_id'=>'nullable',
-            'member1'=>'nullable|max:30',
-            'member2'=>'nullable|max:30',
-            'member3'=>'nullable|max:30',
-            'member4'=>'nullable|max:30',
-            'member5'=>'nullable|max:30',
-            'cadangan1'=>'nullable|max:30',
-            'cadangan2'=>'nullable|max:30',
+            // 'member1'=>'nullable|max:30',
+            // 'member2'=>'nullable|max:30',
+            // 'member3'=>'nullable|max:30',
+            // 'member4'=>'nullable|max:30',
+            // 'member5'=>'nullable|max:30',
+            // 'cadangan1'=>'nullable|max:30',
+            // 'cadangan2'=>'nullable|max:30',
 
         ];
     }
