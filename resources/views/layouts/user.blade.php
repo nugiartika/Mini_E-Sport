@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/img/humma-01.png') }}" type="image/x-icon">
     <title>HOME - HUMMAESPORT</title>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -36,7 +36,7 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="" src="{{ asset('assets/img/LOGO WEB.png') }}" height="75px"
+                            <img class="" src="{{ asset('assets/img/humma-01.png') }}" height="75px"
                                 width="75px" alt="favicon">
                         </a>
                     </div>
@@ -46,24 +46,17 @@
                                 <a href="{{ route('index') }}">HOME</a>
                             </li>
                             <li class="menu-item">
-                                <button>TOURNAMENTS</button>
-                                <ul class="sub-menu">
                                     <li class="menu-link">
                                         <a href="{{ route('user.tournament') }}">TOURNAMENTS</a>
                                     </li>
-
-                                </ul>
                             </li>
                             <li class="menu-link">
                                 <a href="game">GAME</a>
                             </li>
                             <li class="menu-item">
-                                <button>TEAMS</button>
-                                <ul class="sub-menu">
                                     <li class="menu-link">
                                         <a href="{{ route('team.index') }}">TEAMS</a>
                                     </li>
-                                </ul>
                             </li>
                             <li class="menu-item">
                                 <button>PAGES</button>
@@ -77,17 +70,40 @@
                         </ul>
                     </div>
                 </nav>
+
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    <button class="ntf-btn box-style fs-2xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 22 22">
-                        <path fill="currentColor"
-                            d="M13 21H9v-1H8v-6H2v-1H1V9h1V8h6V2h1V1h4v1h1v6h6v1h1v4h-1v1h-6v6h-1M12 5V3h-2v2m-5 7v-2H3v2Z" />
-                    </svg>                    </button>
+                    @if (auth()->check())
+                        <div class="header-profile pointer">
+                            <div class="profile-wrapper d-flex align-items-center gap-3">
+                                <div class="img-area overflow-hidden">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 36 36"><path fill="currentColor" d="M30.61 24.52a17.16 17.16 0 0 0-25.22 0a1.51 1.51 0 0 0-.39 1v6A1.5 1.5 0 0 0 6.5 33h23a1.5 1.5 0 0 0 1.5-1.5v-6a1.51 1.51 0 0 0-.39-.98" class="clr-i-solid clr-i-solid-path-1"/><circle cx="18" cy="10" r="7" fill="currentColor" class="clr-i-solid clr-i-solid-path-2"/><path fill="none" d="M0 0h36v36H0z"/></svg>                                    </div>
+                                <span
+                                    class="user-name d-none d-xxl-block text-nowrap">{{ auth()->user()->name }}</span>
+                                <i class="ti ti-chevron-down d-none d-xxl-block"></i>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </header>
     <!-- header-section end -->
+
+    @if (auth()->check())
+        <div class="user-account-popup p-4">
+            <div class="account-items d-grid gap-1" data-tilt>
+                <div class="user-level-area p-3">
+                    <div class="user-info d-between">
+                        <span class="user-name fs-five">Nama : {{ auth()->user()->name }}</span>
+                    </div>
+                </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="bttn account-item" type="submit">Log Out</button>
+                </form>
+            </div>
+        </div>
+    @endif
 
     <div class="main-content">
 
@@ -104,7 +120,7 @@
                         <div class="footer-logo mb-8">
                             <a href="#" class="d-grid gap-6">
                                 <div class="flogo-1">
-                                    <img class="w-100 " src="{{ asset('assets/img/LOGO WEB.png') }}" alt="favicon">
+                                    <img class="w-100 " src="{{ asset('assets/img/humma-01.png') }}" alt="favicon">
                                 </div>
                                 <div class="flogo-2">
                                     <span class="text-nowrap d-none d-xl-block mb-8 title-anim">Humma Esport</span>
@@ -202,23 +218,14 @@
     <script src="{{ asset('assets/js/lenis.min.js') }}"></script>
     <!-- gsap split text -->
     <script src="{{ asset('assets/js/SplitText.min.js') }}"></script>
-    <!-- tilt js -->
     <script src="{{ asset('assets/js/vanilla-tilt.js') }}"></script>
-    <!-- scroll magic -->
     <script src="{{ asset('assets/js/ScrollMagic.min.js') }}"></script>
-    <!-- animation.gsap -->
     <script src="{{ asset('assets/js/animation.gsap.min.js') }}"></script>
-    <!-- gsap customization  -->
     <script src="{{ asset('assets/js/gsap-customization.js') }}"></script>
-    <!-- apex chart  -->
     <script src="{{ asset('assets/js/apexcharts.js') }}"></script>
-    <!-- swiper js -->
     <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
-    <!-- magnific popup  -->
     <script src="{{ asset('assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js') }}"></script>
-    <!-- bootstrap js -->
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- main js  -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 

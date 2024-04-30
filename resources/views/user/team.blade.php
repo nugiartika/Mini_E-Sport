@@ -2,24 +2,17 @@
 
 
 @section('style')
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/humma-01.png" type="image/x-icon">
     <title>TEAMS - HUMMAESPORT</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <link rel="canonical" href="https://1.envato.market/vuexy_admin">
 
 
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
-
-    <!-- Fonts -->
-    {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap" rel="stylesheet"> --}}
-
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
@@ -293,8 +286,6 @@
     </div>
   </div> --}}
   <!-- /Default Wizard -->
-
-  <h1>tes</h1>
 
   <div class="slide active" id="slide1">
     <div class="row g-3">

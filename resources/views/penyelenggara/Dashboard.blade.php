@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/humma-01.png" type="image/x-icon">
     <title>HOME - HUMMAESPORT</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -29,8 +29,7 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="" src="{{ asset('assets/img/LOGO WEB.png') }}" height="75px" width="75px" alt="favicon">
-                            {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
+                            <img class="" src="{{ asset('assets/img/humma-01.png') }}" height="75px" width="75px" alt="favicon">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -56,6 +55,21 @@
                         </ul>
                     </div>
                 </nav>
+
+                <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
+                    @if (auth()->check())
+                        <div class="header-profile pointer">
+                            <div class="profile-wrapper d-flex align-items-center gap-3">
+                                <div class="img-area overflow-hidden">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 36 36"><path fill="currentColor" d="M30.61 24.52a17.16 17.16 0 0 0-25.22 0a1.51 1.51 0 0 0-.39 1v6A1.5 1.5 0 0 0 6.5 33h23a1.5 1.5 0 0 0 1.5-1.5v-6a1.51 1.51 0 0 0-.39-.98" class="clr-i-solid clr-i-solid-path-1"/><circle cx="18" cy="10" r="7" fill="currentColor" class="clr-i-solid clr-i-solid-path-2"/><path fill="none" d="M0 0h36v36H0z"/></svg>                                    </div>
+                                <span
+                                    class="user-name d-none d-xxl-block text-nowrap">{{ auth()->user()->name }}</span>
+                                <i class="ti ti-chevron-down d-none d-xxl-block"></i>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
 
                 </div>
@@ -64,25 +78,17 @@
     </header>
     <!-- header-section end -->
 
-
-    <!-- user account details popup start  -->
-    <div class="user-account-popup p-4">
-        <div class="account-items d-grid gap-1" data-tilt>
-            <div class="user-level-area p-3">
-
-                <div class="user-level">
-                    <span class="level-title tcn-6">Level</span>
-                    <div class="level-bar my-1">
-                        <div class="level-progress" style="width: 30%;"></div>
-                    </div>
-                </div>
+    @if (auth()->check())
+        <div class="user-account-popup p-4">
+            <div class="account-items d-grid gap-1" data-tilt>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="bttn account-item" type="submit">Log Out</button>
+                </form>
             </div>
-            <a href="profile.html" class="account-item">View Profile</a>
-            <a href="chat.html" class="account-item">Message</a>
-            <button class="bttn account-item">Logout</button>
         </div>
-    </div>
-    <!-- user account details popup end  -->
+    @endif
+
 
     <!-- Hero Section start  -->
     <section class="hero-section pt-20 pb-120 position-relative">
@@ -104,9 +110,7 @@
                 <div class="col-lg-5 col-md-6 col-sm-8">
                     <div class="hero-content">
                         <ul class="d-flex gap-3 fs-2xl fw-semibold heading-font mb-5 list-icon title-anim">
-                            <li>Play</li>
-                            <li>Earn</li>
-                            <li>Enjoy</li>
+
                         </ul>
                         <h1 class="hero-title display-one tcn-1 cursor-scale growUp mb-10">
                             Humma
@@ -217,42 +221,6 @@
     </section>
     <!-- 3D swiper section end-->
 
-<!-- game section start  -->
-{{-- <section class="game-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
-    <div class="container">
-        <div class="row align-items-center justify-content-between mb-lg-15 mb-md-8 mb-sm-6 mb-4">
-            <div class="col-6">
-                <h2 class="display-four tcn-1 cursor-scale growUp title-anim">GAMES</h2>
-            </div>
-        </div>
-        @foreach ($category as $index)
-
-        <div class="row gy-lg-10 gy-6">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="game-card-wrapper mx-auto">
-                    <div class="game-card mb-5 p-2">
-                        <div class="game-card-border"></div>
-                        <div class="game-card-border-overlay"></div>
-                        <div class="game-img">
-                            <img class="w-100 h-100" src="assets/img/game-x10.png" alt="game">
-                        </div>
-                        <div class="game-link d-center">
-                            <a href="tournaments-details.html" class="btn2">
-                                <i class="ti ti-arrow-right fs-2xl"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <a href="tournaments-details.html">
-                        <h4 class="game-title mb-0 tcn-1 cursor-scale growDown2 title-anim">{{ $index->name }}</h4>
-                    </a>
-                </div>
-            </div>
-        </div>
-        @endforeach
-
-    </div>
-</section> --}}
-<!-- game section end  -->
 
     <!-- tournament section start -->
     <section class="tournament-section pb-120" id="tournament-hero">
@@ -266,7 +234,6 @@
         </div>
         <div class="red-ball top-50"></div>
 
-        {{-- <div class="tournament-wrapper">
             <div class="tournament-wrapper-border">
                 <div class="container pt-120 pb-120">
                     <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15"> --}}
@@ -338,8 +305,6 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
                     </div> --}}
                 {{-- </div>
             </div> --}}
@@ -347,37 +312,6 @@
     </section>
     <!-- tournament section end -->
 
-
-    <!-- call to action section start -->
-    {{-- <div class="call-to-action pt-120 pb-120 bgn-4 overflow-x-hidden" id="cta">
-        <div class="container">
-            <div class="row justify-content-between g-6">
-                <div class="col-lg-6">
-                    <span class="display-three tcn-1 cursor-scale growUp mb-8 d-block title-anim">Humma Esport</span>
-                    <span class="fs-lg tcn-6">
-                       Ingin memmbuat even tourname sendiri? Daftarkan diri anda sebagai penylenggara
-                    </span>
-                </div>
-                <div class="col-xl-5 col-lg-6">
-                    <form action="#">
-
-                        <div
-                            class="d-flex align-items-md-center align-items-start justify-content-between gap-lg-8 gap-6 flex-md-row flex-column">
-                            <div class="d-flex align-items-center gap-lg-4 gap-2">
-                                <label class="custom-checkbox">
-                                    <input type="checkbox">
-                                </label>
-                                <span class="fs-base tcn-6"><a href="" class="tcp-1"></a>
-                                </span>
-                            </div>
-                            <button type="submit" id="registerBtn" class="bttn py-sm-4 py-3 px-lg-10 px-sm-8 px-6 bgp-1 tcn-1 rounded-4">Daftar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- call to action section end -->
 
     <!-- footer section start  -->
  <footer class="footer bgn-4 bt">
@@ -388,7 +322,7 @@
                     <div class="footer-logo mb-8">
                         <a href="#" class="d-grid gap-6">
                             <div class="flogo-1">
-                                <img class="w-100" src="assets/img/LOGO WEB.png" alt="favicon">
+                                <img class="w-100" src="assets/img/humma-01.png" alt="favicon">
                             </div>
                             <div class="flogo-2">
                                 {{-- <img class="w-100" src="{{ asset('assets/img/logo.png') }}" alt="logo"> --}}
@@ -462,7 +396,7 @@
         <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
             <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
                 <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY  <a
-                        href="https://themeforest.net/user/pixelaxis" class="tcp-1">MAGANG HUMMA </a></span>
+                        href="" class="tcp-1">MAGANG HUMMA </a></span>
             </div>
         </div>
     </div>

@@ -2,12 +2,11 @@
 <html lang="en">
 
 
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/humma-01.png" type="image/x-icon">
     <title>Login Humma Esport</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -39,9 +38,9 @@
                             <span></span>
                             <span></span>
                         </button>
-                        <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="w-100 logo1" src="assets/img/favicon.png" alt="favicon">
-                            <img class="w-100 logo2" src="assets/img/logo.png" alt="logo">
+                        <a class="navbar-brand d-flex align-items-center gap-4" href="">
+                            <img class="w-100 logo1" src="assets/img/humma-01.png" alt="favicon">
+                            <img class="w-100 logo2" src="assets/img/Huuma-04.png" alt="logo">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -50,29 +49,16 @@
                                 <a href="{{ route('index') }}">HOME</a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ route('ptournament.index') }}">TOURNAMEN</a>
+                                <a href="{{ route('user.tournament') }}">TOURNAMEN</a>
                             </li>
                             <li class="menu-link">
                                 <a href="{{ route('game') }}">GAME</a>
                             </li>
                             <li class="menu-item">
-                                <button>TEAMS</button>
-                                <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="{{ route('team.index') }}">Teams</a>
+                                        <a href="{{ route('team.index') }}">TEAM</a>
                                     </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item">
-                                <button>PAGES</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="{{ route('login') }}">LOGIN</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="{{ route('register') }}">REGISTER</a>
-                                    </li>
-                                </ul>
+
                             </li>
                         </ul>
                     </div>
@@ -83,35 +69,6 @@
     <!-- header-section end -->
 
 
-    <!-- user account details popup start  -->
-    <div class="user-account-popup p-4">
-        <div class="account-items d-grid gap-1" data-tilt>
-
-            <div class="user-level-area p-3">
-                <div class="user-info d-between">
-                    <span class="user-name fs-five">David Malan</span>
-                    <div class="badge d-flex align-items-center">
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                    </div>
-                </div>
-                <div class="user-level">
-                    <span class="level-title tcn-6">Level</span>
-                    <div class="level-bar my-1">
-                        <div class="level-progress" style="width: 30%;"></div>
-                    </div>
-                </div>
-            </div>
-            <a href="profile.html" class="account-item">View Profile</a>
-
-            <a href="chat.html" class="account-item">Message</a>
-            <button class="bttn account-item">Logout</button>
-        </div>
-    </div>
-    <!-- user account details popup end  -->
-
-    <!-- sign in section start  -->
     <section class="sign-in-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
         <div class="container pt-120">
             <div class="row justify-content-center">

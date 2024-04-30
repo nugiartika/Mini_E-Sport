@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'name.max' => 'Nama tidak boleh melebihi 50 karakter',
             'email.required' => 'email wajib di isi',
             'email.max:50' => 'email tidak boleh melebihi 50 karakter',
+            'email.unique' => 'email sudah digunakan, Gunakan email lain',
             'password.required' => 'password wajib di isi',
             'password.min' => 'password minimal 6 karakter',
             'password_confirmation.required' => 'password wajib di isi',

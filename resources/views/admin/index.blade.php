@@ -1,11 +1,8 @@
 @extends('admin.layouts.app')
 
-@section('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-@endsection
 
 @section('content')
+
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
 
@@ -139,6 +136,7 @@
 @endsection
 
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ asset('demo/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a') }}"></script>
     <script>
@@ -184,7 +182,7 @@ function chart(data) {
             },
             xaxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-            }   1
+            }
         };
 
         var chart = new ApexCharts(document.querySelector("#lineChart"), options);

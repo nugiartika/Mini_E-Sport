@@ -13,12 +13,7 @@
 
 <body>
 
-    <!-- Preloader -->
-    {{-- <div class="preloader">
-        <div class="loader">
-            <span></span>
-        </div>
-    </div> --}}
+  
 
     <!-- cursor effect-->
     <div class="cursor"></div>
