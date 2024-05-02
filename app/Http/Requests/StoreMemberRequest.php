@@ -22,8 +22,9 @@ class StoreMemberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'team_id' => 'required',
+            'members' => 'required|array',
+            'member.*' => 'required|string|max:255',
+            'team_id' => 'required|integer|exists:teams,id',
         ];
     }
 }

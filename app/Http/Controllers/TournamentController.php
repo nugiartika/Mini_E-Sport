@@ -38,7 +38,8 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get();
         $category = Category::all();
-        return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts'));
+        $teams = Team::all();
+        return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts','teams'));
     }
     public function dashboard()
     {
@@ -67,7 +68,7 @@ class TournamentController extends Controller
         $tournament = Tournament::all();
         $user = User::all();
         $category = Category::all();
-        return view('penyelenggara.tambah', compact('tournament', 'category', 'user'));
+        return view('penyelenggara.tournament', compact('tournament', 'category', 'user'));
     }
 
     /**
@@ -88,8 +89,8 @@ class TournamentController extends Controller
             'name' => $request->name,
             'pendaftaran' => $request->pendaftaran,
             'permainan' => $request->permainan,
-            'end_pendaftaran' => $request->end_pendaftaran,
-            'end_permainan' => $request->end_permainan,
+            // 'end_pendaftaran' => $request->end_pendaftaran,
+            // 'end_permainan' => $request->end_permainan,
             'categories_id' => $category_id,
             'users_id' => $user->id,
             'slotTeam' => $request->slotTeam,

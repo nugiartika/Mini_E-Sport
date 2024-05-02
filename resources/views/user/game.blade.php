@@ -137,7 +137,7 @@
                 <h2 class="display-four tcn-1 cursor-scale growUp title-anim">GAMES</h2>
             </div>
         </div>
-        @foreach ($category as $index)
+        @foreach ($category as $key => $a)
 
         <div class="row gy-lg-10 gy-6">
             <div class="col-lg-3 col-md-4 col-sm-6">
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                     <a href="tournaments-details.html">
-                        <h4 class="game-title mb-0 tcn-1 cursor-scale growDown2 title-anim">{{ $index->name }}</h4>
+                        <h4 class="game-title mb-0 tcn-1 cursor-scale growDown2 title-anim">{{ $a->name }}</h4>
                     </a>
                 </div>
             </div>

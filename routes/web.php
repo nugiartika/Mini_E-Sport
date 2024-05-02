@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('konfirmtournament/{id}', [TournamentController::class, 'update'])->name('konfirm.update');
         Route::put('listUserPenyelenggara/{sainsRole}', [SainsRoleController::class, 'update'])->name('konfirmUser');
         Route::delete('rejectUser/{idUser}', [SainsRoleController::class, 'destroy'])->name('rejectUser');
-        Route::delete('deleteUser/{idUser}',[UserController::class, 'destroy'])->name('deleteUser');
+        Route::delete('deleteUser/{idUser}', [UserController::class, 'destroy'])->name('deleteUser');
         Route::get('chart', [DashboardAdminController::class, 'response'])->name('chart');
     });
 
@@ -70,18 +70,17 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-// Public Routes
-Route::get('tournament', [TournamentController::class, 'indexuser'])->name('user.tournament');
-Route::resource('team', TeamController::class);
-Route::resource('member', MemberController::class);
-Route::get('tournament/{tournament}', [TournamentController::class, 'detail'])->name('detailTournament');
-Route::get('/game', function () {
-    return view('user.game');
-})->name('game');
-Route::get('/detailteam', function () {
-    return view('detailteam');
-})->name('team.detail');
-Route::get('/', function () {
-    return view('user.index');
-})->name('home');
-
+    // Public Routes
+    Route::get('tournament', [TournamentController::class, 'indexuser'])->name('user.tournament');
+    Route::resource('team', TeamController::class);
+    Route::resource('member', MemberController::class);
+    Route::get('tournament/{tournament}', [TournamentController::class, 'detail'])->name('detailTournament');
+    Route::get('/game', function () {
+        return view('user.game');
+    })->name('game');
+    Route::get('/detailteam', function () {
+        return view('detailteam');
+    })->name('team.detail');
+    Route::get('/', function () {
+        return view('user.index');
+    })->name('home');

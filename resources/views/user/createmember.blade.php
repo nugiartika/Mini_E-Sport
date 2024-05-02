@@ -36,7 +36,8 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/@form-validation/form-validation.css" />
+    <link rel="stylesheet"
+        href="../../assets/vendor/libs/@form-validation/form-validation.css" />
 
     <!-- Page CSS -->
 
@@ -105,112 +106,95 @@
 </style>
 @endsection
 @section('content')
-<div class="container" style="margin-top: 10%; color: #939393">
-    <form action="{{ route('member.store') }}" method="POST" class="row g-3">
-        @csrf
+<div class="container d-flex justify-content-center align-items-center" style="margin-top: 10%; color: #939393">
+
          <!-- Second column -->
     <div class="col-12 col-lg-4">
         <!-- Pricing Card -->
         <div class="card mb-4">
-          <div class="card-header">
+          {{-- <div class="card-header">
+
             <h5 class="card-title mb-0">new team</h5>
-          </div>
+          </div> --}}
+
           <div class="card-body">
+             <form action="{{ route('member.store') }}" method="POST">
+        @csrf
             <div class="customer-avatar-section">
-                {{-- <div class="d-flex justify-content-center">
-                    <img class="rounded my-3" style="border: 2px solid #000000; object-fit: cover;" width="110px" height="110px" src="{{ asset('assets/img/game-x10.png') }}" alt="User avatar" /> --}}
-                    {{-- <span class="btn-text" style=" bottom: 5px; right: 5px;"><i class="fas fa-camera"></i></span> --}}
-                    {{-- <input type="file" class="upload" name="profile" id="profile-input"> --}}
-                {{-- </div> --}}
-                {{-- <div class="fileupload d-flex justify-content-center">
-                    <span class="btn-text" style="display: block; width: 32px; height: 32px; background-color: rgba(0, 0, 0, 0.5); border-radius: 50%; text-align: center; line-height: 32px; cursor: pointer;"><i class="fas fa-camera"></i>
-                    <input type="file" class="upload" name="profile" id="profile-input" ></span>
-                </div> --}}
-            {{-- <div class="fileupload"> --}}
-                {{-- <span class="btn-text"><i class="fas fa-camera"></i></span> --}}
-            {{-- </div> --}}
-            </div><br>
-            <!-- Base Price -->
-            {{-- <div class="mb-3">
-                <label for="profile" class="form-label">PROFILE</label>
-                <input type="file" class="form-control @error('profile') is-invalid @enderror" id="profile" name="profile" onchange="previewImage(event)">
-                @if (old('profile'))
-                    <img id="preview" src="{{ asset('storage/' . old('profile')) }}" alt="Old profile" style="max-width: 100px; max-height: 100px;"> @endif
-                @error('profile')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
 
-            </div> --}}
-            <!-- Discounted Price -->
-
-                {{-- @php
-                    $team = App\Models\Team::find($selectedTeamId);
-                    $jumlahmember = $team->tournament->category->members_per_team;
-                @endphp --}}
+            {{-- @php
+                use App\Models\Team;
+                $teamIds = [ $selectedTeamId ];
+                        @endphp --}}
             @php
-                $members = App\Models\Member::all();
-
-                $membersPerTeamArray = [];
-
-                foreach ($members as $member) {
-                    $teamId = $member->team_id;
-
-                    // Ambil tournament_id dari team
-                    $team = App\Models\Team::find($teamId);
-                    if ($team) {
-                        $tournamentId = $team->tournament_id;
-
-                        // Ambil categories_id dari tournament
-                        $tournament = App\Models\Tournament::find($tournamentId);
-                        if ($tournament && $tournament->category) {
-                            $categoryId = $tournament->category->id;
-
-                            // Ambil membersPerTeam dari category
-                            $membersPerTeam = $tournament->category->membersPerTeam;
-
-                            // Simpan data dalam array
-                            $membersPerTeamArray[$member->id] = $membersPerTeam;
-                        }
-                    }
-                }
+            $loggedInUserId = auth()->user()->email; // Mengambil ID pengguna yang sedang login
+            $loggedInUserName = auth()->user()->name; // Mengambil ID pengguna yang sedang login
             @endphp
 
-            @foreach ($membersPerTeamArray as $memberId => $membersPerTeam)
-                <div class="mb-3">
-                    <label for="member{{ $memberId }}" class="form-label">Member TEAM {{ $memberId }}</label>
-                    <input type="text" class="form-control @error('member' . $memberId) is-invalid @enderror" id="member{{ $memberId }}"
-                        name="member{{ $memberId }}" value="{{ old('member' . $memberId) }}">
-                    @error('member' . $memberId)
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+            @foreach ($teams as $team)
+                    @php
+                        $membersPerTeam = $team->tournament->category->membersPerTeam;
+                    @endphp @endforeach
+
+            <h5>core players</h5><br>
+
+            @for ($i = 1; $i <= $membersPerTeam; $i++)
+<div  class="row g-3">
+    <div class="col-md-6">
+        <label for="member{{ $i }}" class="form-label">Member {{ $i }}</label>
+        @if ($i === 1)
+            <input type="email" class="form-control @error('member.' . ($i - 1)) is-invalid @enderror"
+                id="member{{ $i }}" name="member[]" value="{{ old('member.' . ($i - 1), $loggedInUserId) }}"
+                readonly>
+        @else
+            <input type="email" class="form-control @error('member.' . ($i - 1)) is-invalid @enderror"
+                id="member{{ $i }}" name="member[]" value="{{ old('member.' . ($i - 1)) }}"
+                placeholder="Entry your email">
+        @endif
+        @error('member.' . ($i - 1))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="col-md-6">
+        <label for="nickname{{ $i }}" class="form-label">Nickname {{ $i }}</label>
+        @if ($i === 1)
+            <input type="text" class="form-control @error('nickname.' . ($i - 1)) is-invalid @enderror"
+                id="nickname{{ $i }}" name="nickname[]"
+                value="{{ old('nickname.' . ($i - 1), $loggedInUserName) }}" placeholder="Entry nickname game">
+        @else
+            <input type="text" class="form-control @error('nickname.' . ($i - 1)) is-invalid @enderror"
+                id="nickname{{ $i }}" name="nickname[]" value="{{ old('nickname.' . ($i - 1)) }}"
+                placeholder="Entry nickname game">
+        @endif
+        @error('nickname.' . ($i - 1))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+
+    <input type="hidden" name="team_id" value="{{ $teamId }}">
+    @endfor
+    <br>
+    {{-- <h5>substitute player</h5><br> --}}
+
+    {{-- <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="substituteMember" class="form-label">Substitute Member</label>
+                    <input type="email" class="form-control" id="substituteMember" name="substitute_member"
+                        placeholder="Enter substitute member's email">
                 </div>
-            @endforeach
+                <div class="col-md-6">
+                    <label for="substituteNickname" class="form-label">Substitute Nickname</label>
+                    <input type="text" class="form-control" id="substituteNickname" name="substitute_nickname"
+                        placeholder="Enter substitute nickname">
+                </div>
+            </div> --}}
 
-                {{-- @php
-                $categoryName = null;
-
-                if ($team && $team->tournament && $team->tournament->category) {
-                    $categoryName = $team->tournament->category->id;
-                }                @endphp
-
-                @for ($i = 1; $i <= $categoryId; $i++)
-                    <div class="mb-3">
-                        <label for="member{{$i}}" class="form-label">Member TEAM {{$i}}</label>
-                        <input type="text" class="form-control @error('member'.$i) is-invalid @enderror" id="member{{$i}}"
-                            name="member{{$i}}" value="{{ old('member'.$i) }}">
-                        @error('member'.$i)
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                @endfor --}}
-
-            <button type="submit" class="btn btn-primary ms-2">SAVE</button>
+    <button type="submit" class="btn btn-primary ms-2">SAVE</button>
+    </div>
 
     <!-- Charge tax check box -->
     {{-- <div class="mb-3">
@@ -258,6 +242,8 @@
               </div>
             </div> --}}
     </div>
+    </form>
+
     </div>
     <!-- /Pricing Card -->
 
@@ -681,7 +667,6 @@
         <p>Sudah Punya Akun?<a href="{{ route('login') }}"> Login</a></p>
         </div>
 </form> --}}
-    </form>
     </div>
 @endsection
 

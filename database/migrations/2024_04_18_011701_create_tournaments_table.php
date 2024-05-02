@@ -16,15 +16,15 @@ return new class extends Migration
             $table->string('name');
             $table->date('pendaftaran');
             $table->date('permainan');
-            $table->date('end_pendaftaran');
-            $table->date('end_permainan');
+            // $table->date('end_pendaftaran');
+            // $table->date('end_permainan');
             $table->foreignId('categories_id')->constrained();
             $table->unsignedBigInteger('users_id')->nullable();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('images');
             $table->integer('slotTeam');
             $table->integer('contact');
-            $table->text('description');
+            $table->text('description'); 
             $table->text('rule');
             $table->enum('paidment',['paid','unpaid']);
             $table->integer('nominal')->nullable();

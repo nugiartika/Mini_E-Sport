@@ -65,9 +65,9 @@
 </style>
 @endsection
 @section('content')
-<div class="container" style="margin-top: 10%; color: #939393">
-    <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
-        @csrf
+<div class="container d-flex justify-content-center align-items-center" style="margin-top: 10%; color: #939393">
+
+
          <!-- Second column -->
     <div class="col-12 col-lg-4">
         <!-- Pricing Card -->
@@ -76,12 +76,21 @@
             <h5 class="card-title mb-0">new team</h5>
           </div>
           <div class="card-body">
+        <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
+            @csrf
             <div class="customer-avatar-section">
-                {{-- <div class="d-flex justify-content-center">
-                    <img class="rounded my-3" style="border: 2px solid #000000; object-fit: cover;" width="110px" height="110px" src="{{ asset('assets/img/game-x10.png') }}" alt="User avatar" /> --}}
-                    {{-- <span class="btn-text" style=" bottom: 5px; right: 5px;"><i class="fas fa-camera"></i></span> --}}
-                    {{-- <input type="file" class="upload" name="profile" id="profile-input"> --}}
-                {{-- </div> --}}
+                <div class="d-flex justify-content-center">
+                    {{-- @if ($teams->profile)
+                    <img id="preview-image" src="{{ asset('storage/' . $teams->profile) }}" style="width: 100%; height: 100%; object-fit: cover;" alt="">
+                @else
+                    <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" style="width: 100%; height: 100%; object-fit: cover;" alt>
+                @endif --}}
+                    {{-- <img class="rounded my-3" id="preview-images" style="border: 2px solid #000000; object-fit: cover;" width="110px" height="110px" src="{{ asset('assets/img/game-x10.png') }}" alt="User avatar" /> --}}
+
+
+                    {{-- <span class="btn-text" style=" bottom: 5px; right: 5px;"><i class="fas fa-camera"></i></span>
+                    <input type="file" class="upload" name="profile" id="profile-input"> --}}
+                </div>
                 {{-- <div class="fileupload d-flex justify-content-center">
                     <span class="btn-text" style="display: block; width: 32px; height: 32px; background-color: rgba(0, 0, 0, 0.5); border-radius: 50%; text-align: center; line-height: 32px; cursor: pointer;"><i class="fas fa-camera"></i>
                     <input type="file" class="upload" name="profile" id="profile-input" ></span>
@@ -89,13 +98,13 @@
             {{-- <div class="fileupload"> --}}
                 {{-- <span class="btn-text"><i class="fas fa-camera"></i></span> --}}
             {{-- </div> --}}
-            </div><br>
+            {{-- </div><br> --}}
             <!-- Base Price -->
             <div class="mb-3">
                 <label for="profile" class="form-label">PROFILE</label>
                 <input type="file" class="form-control @error('profile') is-invalid @enderror" id="profile" name="profile" onchange="previewImage(event)">
-                @if (old('profile'))
-                    <img id="preview" src="{{ asset('storage/' . old('profile')) }}" alt="Old profile" style="max-width: 100px; max-height: 100px;"> @endif
+                {{-- @if (old('profile'))
+                    <img id="preview" src="{{ asset('storage/' . old('profile')) }}" alt="Old profile" style="max-width: 100px; max-height: 100px;"> @endif --}}
                 @error('profile')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -105,17 +114,19 @@
             </div>
             <!-- Discounted Price -->
             <div class="mb-3">
-    <label for="name" class="form-label">NAME TEAM</label>
-    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-        value="{{ old('name') }}">
-    @error('name')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-    </div>
-    <input type="hidden" name="tournament_id" value="{{ $selectedTournamentId }}">
-    <button type="submit" class="btn btn-primary ms-2">SAVE</button>
+                <label for="name" class="form-label">NAME TEAM</label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                    value="{{ old('name') }}">
+                @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+                <input type="hidden" name="tournament_id" value="{{ $selectedTournamentId }}">
+                <button type="submit" class="btn btn-primary ms-2">SAVE</button>
+
+        </form>
 
     <!-- Charge tax check box -->
     {{-- <div class="mb-3">
@@ -549,7 +560,6 @@
         <p>Sudah Punya Akun?<a href="{{ route('login') }}"> Login</a></p>
         </div>
 </form> --}}
-    </form>
     </div>
 @endsection
 
@@ -580,6 +590,28 @@
             });
         });
     </script>
+
+{{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script> --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    profileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            previewImage.setAttribute('src', e.target.result);
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            previewImage.setAttribute('src', '{{ asset('images/LOGO/profil.jpeg') }}');
+        }
+    });
+});
+</script>
 
     <script src="../../demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a"></script>
     <script src="../../demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c"></script>
