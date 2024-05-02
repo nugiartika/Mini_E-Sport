@@ -31,7 +31,7 @@
                         <span></span>
                     </button>
                     <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                        <img class="" src="{{ asset('assets/img/LOGO WEB.png') }}" height="75px" width="75px" alt="favicon">
+                        <img class="" src="{{ asset('assets/img/LOGO WEB.png') }}" height="60px" width="75px" alt="favicon">
                         {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
                     </a>
                 </div>

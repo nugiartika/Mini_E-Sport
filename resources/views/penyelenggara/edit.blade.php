@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
     <title>Tournament - HummaEsport</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
@@ -149,7 +149,7 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-5">
             <div class="card">
                 <div class="card-body">
-                    <h1>Tambah Turnamen</h1>
+                    <h1>Edit Turnamen</h1>
                     <form  action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data"
                         class="row g-3" id="regForm">
                         @csrf
@@ -158,7 +158,7 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">NAME TOURNAMENT</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        id="name" name="name" value="{{ old('name') }}">
+                                        id="name" name="name" value="{{ $tournament->name }}">
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -169,7 +169,7 @@
                                     <div class="col-md-6">
                                         <label for="pendaftaran" class="form-label">TIME REGISTER</label>
                                         <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror" id="pendaftaran"
-                                            name="pendaftaran" value="{{ old('pendaftaran') }}">
+                                            name="pendaftaran" value="{{ $tournament->pendaftaran }}">
                                         @error('pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -180,7 +180,7 @@
                                     <div class="col-md-6">
                                         <label for="permainan" class="form-label">TIME GAME</label>
                                         <input type="date" class="form-control @error('permainan') is-invalid @enderror" id="permainan"
-                                            name="permainan" value="{{ old('permainan') }}">
+                                            name="permainan" value="{{ $tournament->permainan }}">
                                         @error('permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -193,7 +193,7 @@
                                     <div class="col-md-6">
                                         <label for="end_pendaftaran" class="form-label">END REGISTER</label>
                                         <input type="date" class="form-control @error('end_pendaftaran') is-invalid @enderror" id="end_pendaftaran"
-                                            name="end_pendaftaran" value="{{ old('end_pendaftaran') }}">
+                                            name="end_pendaftaran" value="{{ $tournament->end_pendaftaran }}">
                                         @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -204,7 +204,7 @@
                                     <div class="col-md-6">
                                         <label for="end_permainan" class="form-label">END GAME</label>
                                         <input type="date" class="form-control @error('end_permainan') is-invalid @enderror" id="end_permainan"
-                                            name="end_permainan" value="{{ old('end_permainan') }}">
+                                            name="end_permainan" value="{{ $tournament->end_permainan }}">
                                         @error('end_permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -220,7 +220,7 @@
                             <div class="mb-3">
                                 <label for="slotTeam" class="form-label">SLOT TEAM</label>
                                 <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
-                                    id="slotTeam" name="slotTeam" value="{{ old('slotTeam') }}">
+                                    id="slotTeam" name="slotTeam" value="{{ $tournament->slotTeam }}">
                                 @error('slotTeam')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -232,7 +232,7 @@
                             <div class="mb-3">
                                 <label for="contact" class="form-label">CONTACT</label>
                                 <input type="number" class="form-control @error('contact') is-invalid @enderror"
-                                    id="contact" name="contact" value="{{ old('contact') }}">
+                                    id="contact" name="contact" value="{{ $tournament->contact }}">
                                 @error('contact')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -260,31 +260,31 @@
                                 @enderror
                             </div>
                             </p>
-                            <p>
-                                <div class="mb-3">
-                                    <label for="images" class="form-label">IMAGE</label>
-                                    <input type="file" class="form-control @error('images') is-invalid @enderror"
-                                        id="images" name="images" onchange="previewImage(event)">
-                                    @if (old('images'))
-                                        <img id="preview" src="{{ asset('storage/' . old('images')) }}"
-                                            alt="Old images" style="max-width: 100px; max-height: 100px;">
-                                    @endif
-                                    @error('images')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </p>
                         </div>
                         <div class="tab">
+                            <p>
+                            <div class="mb-3">
+                                <label for="images" class="form-label">IMAGE</label>
+                                <input type="file" class="form-control @error('images') is-invalid @enderror"
+                                    id="images" name="images" onchange="previewImage(event)">
+                                @if (old('images'))
+                                    <img id="preview" src="{{ asset('storage/' . old('images')) }}"
+                                        alt="Old images" style="max-width: 100px; max-height: 100px;">
+                                @endif
+                                @error('images')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            </p>
                             <p>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Fill Description</label>
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <textarea name="description" id="summernoteModalDescription" class="form-control" aria-label="With textarea">{{ old('description') }}</textarea>
+                                <textarea name="description" id="summernoteModalDescription" class="form-control" aria-label="With textarea" value="{{ $tournament->description }}">{{ old('description') }}</textarea>
                             </div>
                             </p>
                             <p>
@@ -293,30 +293,23 @@
                                 @error('rule')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <textarea name="rule" id="summernoteModalRule" class="form-control" aria-label="With textarea">{{ old('rule') }}</textarea>
+                                <textarea name="rule" id="summernoteModalRule" class="form-control" aria-label="With textarea" value="{{ $tournament->rule }}">{{ old('rule') }}</textarea>
                             </div>
                             </p>
                             <p>
-                                <div class="mb-3">
-                                    <label for="paidment" class="form-label">Paid & Unpaid</label>
-                                    @error('paidment')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv()">
-                                        <option value="" selected disabled>Pilih</option>
-                                        <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar</option>
-                                        <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak Berbayar</option>
-                                    </select>
-                                </div>
-                            </p>
-                            <p>
-                                <div class="mb-3" id="nominal" style="display: none;"> 
-                                    <label for="nominal_input" class="form-label">Masukkan Nominal</label>
-                                    @error('nominal')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <input type="number" name="nominal" id="nominal_input" class="form-control">
-                                </div>
+                            <div class="mb-3">
+                                <label for="paidment" class="form-label">Paid & Unpaid</label>
+                                @error('paidment')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <select name="paidment" id="paidment" class="form-control">
+                                    <option value="" selected disabled>Pilih</option>
+                                    <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
+                                    </option>
+                                    <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak
+                                        Berbayar</option>
+                                </select>
+                            </div>
                             </p>
                         </div>
                         <div style="overflow:auto;">
@@ -431,46 +424,34 @@
         </div>
     </footer>
 
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <!-- gsap  -->
-    <script src="assets/js/gsap.min.js"></script>
+    <script src="{{asset('assets/js/gsap.min.js')}}"></script>
     <!-- gsap scroll trigger -->
-    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="{{asset('assets/js/ScrollTrigger.min.js')}}"></script>
     <!-- lenis  -->
-    <script src="assets/js/lenis.min.js"></script>
+    <script src="{{asset('assets/js/lenis.min.js')}}"></script>
     <!-- gsap split text -->
-    <script src="assets/js/SplitText.min.js"></script>
+    <script src="{{asset('assets/js/SplitText.min.js')}}"></script>
     <!-- tilt js -->
-    <script src="assets/js/vanilla-tilt.js"></script>
+    <script src="{{asset('assets/js/vanilla-tilt.js')}}"></script>
     <!-- scroll magic -->
-    <script src="assets/js/ScrollMagic.min.js"></script>
+    <script src="{{asset('assets/js/ScrollMagic.min.js')}}"></script>
     <!-- animation.gsap -->
-    <script src="assets/js/animation.gsap.min.js"></script>
+    <script src="{{asset('assets/js/animation.gsap.min.js')}}"></script>
     <!-- gsap customization  -->
-    <script src="assets/js/gsap-customization.js"></script>
+    <script src="{{asset('assets/js/gsap-customization.js')}}"></script>
     <!-- apex chart  -->
-    <script src="assets/js/apexcharts.js"></script>
+    <script src="{{asset('assets/js/apexcharts.js')}}"></script>
     <!-- swiper js -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="{{asset('assets/js/swiper-bundle.min.js')}}"></script>
     <!-- magnific popup  -->
-    <script src="assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js"></script>
+    <script src="{{asset('assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js')}}"></script>
     <!-- bootstrap js -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
     <!-- main js  -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
 
-    <script>
-        function toggleDiv() {
-            let value = document.getElementById("paidment").value;
-            let div =  document.getElementById("nominal");
-
-            if (value === "paid") {
-                div.style.display = "block";
-            } else {
-                div.style.display = "none";
-            }
-        }
-    </script>
     <script>
         var currentTab = 0; // Current tab is set to be the first tab (0)
         showTab(currentTab); // Display the current tab

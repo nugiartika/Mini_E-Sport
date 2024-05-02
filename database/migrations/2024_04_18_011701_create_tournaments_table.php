@@ -26,6 +26,8 @@ return new class extends Migration
             $table->integer('contact');
             $table->text('description');
             $table->text('rule');
+            $table->enum('paidment',['paid','unpaid']);
+            $table->integer('nominal')->nullable();
             $table->enum('status',['pending','rejected','accepted'])->default('pending');
             $table->timestamps();
         });

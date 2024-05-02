@@ -25,9 +25,9 @@ class TournamentRequest extends FormRequest
         return [
             'name'=>'required|max:30',
             'pendaftaran'=>'required',
-            'permainan'=>'required',
+            'permainan'=>'required|date|after:end_pendaftaran',
             'end_pendaftaran'=>'required|date|after:pendaftaran',
-            'end_permainan'=>'require|date|after:pendaftaran',
+            'end_permainan'=>'required|date|after:permainan',
             'categories_id'=>'required|exists:categories,id',
             'users_id' => 'nullable|exists:users,id',
             'slotTeam' => [
@@ -46,7 +46,8 @@ class TournamentRequest extends FormRequest
             'images'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description'=>'required|max:2048',
             'rule'=>'required|max:2048',
-
+            'nominal' => 'nullable',
+            'paidment'=>'required',
         ];
     }
 
@@ -67,6 +68,7 @@ class TournamentRequest extends FormRequest
             'description.max' => 'description must not exceed 2048 characters.',
             'rule.required'=>'rule must be filled in.',
             'rule.max' => 'rule must not exceed 2048 characters.',
+            'paidment.required' => 'paidment must be filled in.',
         ];
     }
 }

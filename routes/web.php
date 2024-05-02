@@ -46,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
     // Organizer Routes
     Route::middleware('organizer')->group(function () {
         Route::get('/tambah', [TournamentController::class, 'create'])->name('tambahtournament');
+        Route::get('/tournament/{id}/edit', [TournamentController::class, 'edittour'])->name('ptournament.edittour');
+        Route::post('/tournament/{id}/proses', [TournamentController::class, 'updatetour'])->name('ptournament.updatetour');
         Route::get('/DashboardOrganizer', [TournamentController::class, 'dashboard'])->name('dashboardPenyelenggara');
         Route::resource('ptournament', TournamentController::class);
         Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');

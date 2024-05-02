@@ -83,7 +83,7 @@ class TournamentController extends Controller
         }
 
         $category_id = $request->input('categories_id');
-
+        $nominal = $request->input('nominal', null);
         Tournament::create([
             'name' => $request->name,
             'pendaftaran' => $request->pendaftaran,
@@ -97,10 +97,12 @@ class TournamentController extends Controller
             'images' => $path_gambar,
             'description' => $request->description,
             'rule' => $request->rule,
+            'paidment' => $request->paidment,
+            'nominal' => $nominal,
             'status' => 'pending',
         ]);
 
-        return redirect()->back()->with('success', 'Tournament added successfully');
+        return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
     }
 
 
@@ -184,11 +186,64 @@ class TournamentController extends Controller
     }
 
 
+    public function edittour($id)
+    {
+        $tournament = Tournament::findOrFail($id);
+        $user = User::all();
+        $category = Category::all();
+        return view('penyelenggara.edit', compact('tournament', 'category', 'user'));
+
+    }
+
+    public function updatetour(Request $request, $id)
+    {
+        $user = Auth::user();
+
+        $tournament = Tournament::findOrFail($id);
+
+        $gambar = $request->file('images');
+        if ($gambar) {
+            if ($tournament->images) {
+                Storage::disk('public')->delete($tournament->images);
+            }
+            $path_gambar = Storage::disk('public')->put('tournament', $gambar);
+            $tournament->images = $path_gambar;
+        }
+
+        $tournament->update([
+            'name' => $request->name,
+            'pendaftaran' => $request->pendaftaran,
+            'permainan' => $request->permainan,
+            'end_pendaftaran' => $request->end_pendaftaran,
+            'end_permainan' => $request->end_permainan,
+            'categories_id' => $request->categories_id,
+            'users_id' => $user->id,
+            'slotTeam' => $request->slotTeam,
+            'contact' => $request->contact,
+            'description' => $request->description,
+            'rule' => $request->rule,
+            'paidment' => $request->paidment,
+            'nominal' => $request->nominal,
+            'status' => 'pending',
+        ]);
+
+        return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil di edit');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tournament $tournament)
+    public function destroy(string $id)
     {
-        //
+        try {
+            $tournament = Tournament::findOrFail($id);
+            if ($tournament->images) {
+                Storage::disk('public')->delete($tournament->images);
+            }
+            $tournament->delete();
+            return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->route('ptournament.index')->with('error', 'Gagal menghapus turnamen. Silakan coba lagi.');
+        }
     }
 }
