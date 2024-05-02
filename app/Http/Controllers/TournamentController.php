@@ -85,6 +85,8 @@ class TournamentController extends Controller
 
         $category_id = $request->input('categories_id');
         $nominal = $request->input('nominal', null);
+        $uang = $request->input('uang', null);
+
         Tournament::create([
             'name' => $request->name,
             'pendaftaran' => $request->pendaftaran,
@@ -100,6 +102,8 @@ class TournamentController extends Controller
             'rule' => $request->rule,
             'paidment' => $request->paidment,
             'nominal' => $nominal,
+            'prizepol' => $request->prizepol,
+            'uang' => $uang,
             'status' => 'pending',
         ]);
 
@@ -234,7 +238,7 @@ class TournamentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         try {
             $tournament = Tournament::findOrFail($id);

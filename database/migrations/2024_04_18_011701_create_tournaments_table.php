@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('images');
             $table->integer('slotTeam');
+            $table->enum('prizepol',['Uang','Trophy','Sertifikat','Mendali']);
             $table->integer('contact');
             $table->text('description'); 
             $table->text('rule');

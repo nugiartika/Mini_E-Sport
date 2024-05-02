@@ -8,7 +8,6 @@
     <title>Tournament - HummaEsport</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="sweetalert2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
@@ -99,8 +98,7 @@
                                         <path fill="none" d="M0 0h36v36H0z" />
                                     </svg>
                                 </div>
-                                <span
-                                    class="user-name d-none d-xxl-block text-nowrap">{{ auth()->user()->name }}</span>
+                                <span class="user-name d-none d-xxl-block text-nowrap">{{ auth()->user()->name }}</span>
                                 <i class="ti ti-chevron-down d-none d-xxl-block"></i>
                             </div>
                         </div>
@@ -271,7 +269,7 @@
                         <div class="px-6">
                             <a type="button"
                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
-                               href="/tambah">add tournament</a>
+                                href="/tambah">add tournament</a>
                         </div>
                     </div>
                     <div class="tabcontents">
@@ -281,15 +279,23 @@
                                     <div class="col-xl-4 col-md-6 col-sm-10">
                                         <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                             <div class="dropdown" style="margin-bottom: 15px; margin-left:350px;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical dropdown-toggle" viewBox="0 0 16 16" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                    fill="currentColor"
+                                                    class="bi bi-three-dots-vertical dropdown-toggle"
+                                                    viewBox="0 0 16 16" id="dropdownMenuButton"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <path
+                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                                                 </svg>
-                                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                                    <li><a href="{{ route('ptournament.edittour', $tournament->id) }}" class="dropdown-item"><i class="ti ti-edit fs-2xl"></i> Edit Tournament</a></li>
+                                                <ul class="dropdown-menu dropdown-menu-end"
+                                                    aria-labelledby="dropdownMenuButton">
+                                                    <li><a href="{{ route('ptournament.edittour', $tournament->id) }}"
+                                                            class="dropdown-item"><i class="ti ti-edit fs-2xl"></i>
+                                                            Edit Tournament</a></li>
                                                     <li>
                                                         <form id="deleteForm{{ $tournament->id }}" action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST">
                                                             @csrf
-                                                            @method('DELETE')
+                                                             @method('DELETE')
                                                             <button type="submit" class="dropdown-item delete" data-id="{{ $tournament->id }}">
                                                                 <i class="ti ti-trash fs-2xl"></i> Delete Tournament
                                                             </button>
@@ -327,18 +333,20 @@
                                                         <div class="d-flex align-items-center gap-2">
                                                             <img class="w-100" src="assets/img/tether.png"
                                                                 alt="tether">
-                                                            <span class="tcn-1 fs-sm">Rp.{{ number_format(floatval($tournament->nominal), 0,',','.')}}</span>
+                                                            <span
+                                                                class="tcn-1 fs-sm">Rp.{{ number_format(floatval($tournament->nominal), 0, ',', '.') }}</span>
                                                         </div>
                                                     </div>
                                                     <div
                                                         class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                         <i class="ti ti-ticket fs-base tcp-2"></i>
-                                                        <span class="tcn-1 fs-sm">{{$tournament->paidment}}</span>
+                                                        <span class="tcn-1 fs-sm">{{ $tournament->paidment }}</span>
                                                     </div>
                                                     <div
                                                         class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                         <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                        <span class="tcn-1 fs-sm">{{ $tournament->permainan ? \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') : '-' }}</span>
+                                                        <span
+                                                            class="tcn-1 fs-sm">{{ $tournament->permainan ? \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') : '-' }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="hr-line line3"></div>
@@ -498,9 +506,36 @@
     <!-- main js  -->
     <script src="assets/js/main.js"></script>
     <!-- jQuery (diperlukan untuk Bootstrap JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- File JavaScript Bootstrap -->
-  
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(document).on('click', '.delete', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            swal({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    // Menggunakan ID formulir yang dibangun secara dinamis
+                    $('#deleteForm' + id).submit();
+                } else {
+                    swal("Cancelled", "Your data is safe :)", "error");
+                }
+            });
+        });
+    </script>
+
+
+
 </body>
 
 </html>

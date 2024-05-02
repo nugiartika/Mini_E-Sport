@@ -16,6 +16,7 @@
         text-align: center;
 
     }
+
     /* Gaya untuk form */
     #regForm {
         background-color: #ffffff;
@@ -70,8 +71,6 @@
         border-radius: 15px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     }
-
-
 </style>
 
 
@@ -150,72 +149,73 @@
             <div class="card">
                 <div class="card-body">
                     <h1>Tambah Turnamen</h1>
-                    <form  action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data"
+                    <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data"
                         class="row g-3" id="regForm">
                         @csrf
                         <div class="tab">
                             <p>
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">NAME TOURNAMENT</label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        id="name" name="name" value="{{ old('name') }}">
-                                    @error('name')
+                            <div class="mb-3">
+                                <label for="name" class="form-label">NAME TOURNAMENT</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    id="name" name="name" value="{{ old('name') }}">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="pendaftaran" class="form-label">TIME REGISTER</label>
+                                    <input type="date"
+                                        class="form-control @error('pendaftaran') is-invalid @enderror" id="pendaftaran"
+                                        name="pendaftaran" value="{{ old('pendaftaran') }}">
+                                    @error('pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="pendaftaran" class="form-label">TIME REGISTER</label>
-                                        <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror" id="pendaftaran"
-                                            name="pendaftaran" value="{{ old('pendaftaran') }}">
-                                        @error('pendaftaran')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
 
-                                    <div class="col-md-6">
-                                        <label for="permainan" class="form-label">TIME GAME</label>
-                                        <input type="date" class="form-control @error('permainan') is-invalid @enderror" id="permainan"
-                                            name="permainan" value="{{ old('permainan') }}">
-                                        @error('permainan')
+                                <div class="col-md-6">
+                                    <label for="permainan" class="form-label">TIME GAME</label>
+                                    <input type="date" class="form-control @error('permainan') is-invalid @enderror"
+                                        id="permainan" name="permainan" value="{{ old('permainan') }}">
+                                    @error('permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                        @enderror
-                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="end_pendaftaran" class="form-label">END REGISTER</label>
+                                    <input type="date"
+                                        class="form-control @error('end_pendaftaran') is-invalid @enderror"
+                                        id="end_pendaftaran" name="end_pendaftaran"
+                                        value="{{ old('end_pendaftaran') }}">
+                                    @error('end_pendaftaran')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="end_pendaftaran" class="form-label">END REGISTER</label>
-                                        <input type="date" class="form-control @error('end_pendaftaran') is-invalid @enderror" id="end_pendaftaran"
-                                            name="end_pendaftaran" value="{{ old('end_pendaftaran') }}">
-                                        @error('end_pendaftaran')
+                                <div class="col-md-6">
+                                    <label for="end_permainan" class="form-label">END GAME</label>
+                                    <input type="date"
+                                        class="form-control @error('end_permainan') is-invalid @enderror"
+                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}">
+                                    @error('end_permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="end_permainan" class="form-label">END GAME</label>
-                                        <input type="date" class="form-control @error('end_permainan') is-invalid @enderror" id="end_permainan"
-                                            name="end_permainan" value="{{ old('end_permainan') }}">
-                                        @error('end_permainan')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
+                                    @enderror
                                 </div>
-
+                            </div>
                             </p>
-                        </div>
-                        <div class="tab">
                             <P>
                             <div class="mb-3">
                                 <label for="slotTeam" class="form-label">SLOT TEAM</label>
@@ -228,6 +228,54 @@
                                 @enderror
                             </div>
                             </P>
+                        </div>
+                        <div class="tab">
+                            <p>
+                            <div class="mb-3">
+                                <label for="prizepol" class="form-label">Prizepol</label>
+                                @error('prizepol')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <div class="dropdown">
+                                    <div id="options" class="dropdown-content">
+                                        <a href="#">
+                                            <input type="checkbox" id="option1" name="prizepol[]" value="Uang"
+                                                {{ in_array('Uang', old('prizepol', [])) ? 'checked' : '' }}
+                                                onchange="toggleDiv()">
+                                            <label for="option1">UangTunai</label>
+                                        </a>
+                                        <a href="#">
+                                            <input type="checkbox" id="option2" name="prizepol[]" value="Trophy"
+                                                {{ in_array('Trophy', old('prizepol', [])) ? 'checked' : '' }}
+                                                onchange="toggleDiv()">
+                                            <label for="option2">Trophy</label>
+                                        </a>
+                                        <a href="#">
+                                            <input type="checkbox" id="option3" name="prizepol[]"
+                                                value="Sertifikat"
+                                                {{ in_array('Sertifikat', old('prizepol', [])) ? 'checked' : '' }}
+                                                onchange="toggleDiv()">
+                                            <label for="option3">Sertifikat</label>
+                                        </a>
+                                        <a href="#">
+                                            <input type="checkbox" id="option4" name="prizepol[]" value="Mendali"
+                                                {{ in_array('Mendali', old('prizepol', [])) ? 'checked' : '' }}
+                                                onchange="toggleDiv()">
+                                            <label for="option4">Mendali</label>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            </p>
+                            <p>
+                            <div class="mb-3" id="uang" style="display: none;">
+                                <label for="uang_input" class="form-label">Masukkan Nominal</label>
+                                @error('uang')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <input type="number" name="uang" id="uang_input" class="form-control">
+                            </div>
+                            </p>
                             <p>
                             <div class="mb-3">
                                 <label for="contact" class="form-label">CONTACT</label>
@@ -261,20 +309,20 @@
                             </div>
                             </p>
                             <p>
-                                <div class="mb-3">
-                                    <label for="images" class="form-label">IMAGE</label>
-                                    <input type="file" class="form-control @error('images') is-invalid @enderror"
-                                        id="images" name="images" onchange="previewImage(event)">
-                                    @if (old('images'))
-                                        <img id="preview" src="{{ asset('storage/' . old('images')) }}"
-                                            alt="Old images" style="max-width: 100px; max-height: 100px;">
-                                    @endif
-                                    @error('images')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                            <div class="mb-3">
+                                <label for="images" class="form-label">IMAGE</label>
+                                <input type="file" class="form-control @error('images') is-invalid @enderror"
+                                    id="images" name="images" onchange="previewImage(event)">
+                                @if (old('images'))
+                                    <img id="preview" src="{{ asset('storage/' . old('images')) }}"
+                                        alt="Old images" style="max-width: 100px; max-height: 100px;">
+                                @endif
+                                @error('images')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                             </p>
                         </div>
                         <div class="tab">
@@ -297,31 +345,34 @@
                             </div>
                             </p>
                             <p>
-                                <div class="mb-3">
-                                    <label for="paidment" class="form-label">Paid & Unpaid</label>
-                                    @error('paidment')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv()">
-                                        <option value="" selected disabled>Pilih</option>
-                                        <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar</option>
-                                        <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak Berbayar</option>
-                                    </select>
-                                </div>
+                            <div class="mb-3">
+                                <label for="paidment" class="form-label">Paid & Unpaid</label>
+                                @error('paidment')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv()">
+                                    <option value="" selected disabled>Pilih</option>
+                                    <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
+                                    </option>
+                                    <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak
+                                        Berbayar</option>
+                                </select>
+                            </div>
                             </p>
                             <p>
-                                <div class="mb-3" id="nominal" style="display: none;"> 
-                                    <label for="nominal_input" class="form-label">Masukkan Nominal</label>
-                                    @error('nominal')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <input type="number" name="nominal" id="nominal_input" class="form-control">
-                                </div>
+                            <div class="mb-3" id="nominal" style="display: none;">
+                                <label for="nominal_input" class="form-label">Masukkan Nominal</label>
+                                @error('nominal')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <input type="number" name="nominal" id="nominal_input" class="form-control">
+                            </div>
                             </p>
                         </div>
                         <div style="overflow:auto;">
                             <div style="float:right;">
-                                <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-danger">Previous</button>
+                                <button type="button" id="prevBtn" onclick="nextPrev(-1)"
+                                    class="btn btn-danger">Previous</button>
                                 <button type="button" id="nextBtn" onclick="nextPrev(1)"
                                     class="btn btn-success">Next</button>
                             </div>
@@ -459,10 +510,12 @@
     <!-- main js  -->
     <script src="assets/js/main.js"></script>
 
+
+    {{-- script untuk memunculkan form nominal apabila memilih paid --}}
     <script>
         function toggleDiv() {
             let value = document.getElementById("paidment").value;
-            let div =  document.getElementById("nominal");
+            let div = document.getElementById("nominal");
 
             if (value === "paid") {
                 div.style.display = "block";
@@ -471,6 +524,8 @@
             }
         }
     </script>
+
+    {{-- script untuk form wizard --}}
     <script>
         var currentTab = 0; // Current tab is set to be the first tab (0)
         showTab(currentTab); // Display the current tab
@@ -496,17 +551,30 @@
 
         function nextPrev(n) {
             var x = document.getElementsByClassName("tab");
-            if (n == 1 && !validateForm()) return false;
+            // Melakukan validasi hanya jika n == 1 (maju ke depan)
+            if (n == 1) {
+                if (currentTab == 0 && !validateForm()) return false; // Validasi hanya pada langkah pertama
+                if (currentTab == 0 && document.getElementById("option1").checked) { // Jika opsi "Uang" dipilih
+                    var uangForm = document.getElementById("uang_input");
+                    if (uangForm.value.trim() === "") { // Jika input "Uang" kosong
+                        // Lewati validasi jika input "Uang" kosong
+                        currentTab += n;
+                        showTab(currentTab);
+                        return false;
+                    }
+                }
+            }
+            // Semua validasi lulus, lanjutkan seperti biasa
             x[currentTab].style.display = "none";
             currentTab = currentTab + n;
             if (currentTab >= x.length) {
                 document.getElementById("regForm").submit();
                 // Tambahkan pengalihan halaman setelah formulir disubmit
-
                 return false;
             }
             showTab(currentTab);
         }
+
 
         function validateForm() {
             // This function deals with validation of the form fields
@@ -515,8 +583,8 @@
             y = x[currentTab].getElementsByTagName("input");
             // A loop that checks every input field in the current tab:
             for (i = 0; i < y.length; i++) {
-                // If a field is empty...
-                if (y[i].value == "") {
+                // If a field is empty and it's required...
+                if (y[i].hasAttribute("required") && y[i].value.trim() === "") {
                     // add an "invalid" class to the field:
                     y[i].className += " invalid";
                     // and set the current valid status to false:
@@ -530,6 +598,7 @@
             return valid; // return the valid status
         }
 
+
         function fixStepIndicator(n) {
             // This function removes the "active" class of all steps...
             var i, x = document.getElementsByClassName("step");
@@ -540,6 +609,44 @@
             x[n].className += " active";
         }
     </script>
+
+    {{-- script untuk select option prizepoll --}}
+    <script>
+        function toggleDropdown() {
+            var dropdownContent = document.getElementById("options");
+            dropdownContent.classList.toggle("show");
+
+            // Memanggil fungsi toggleDiv() saat dropdown diubah
+            toggleDiv();
+        }
+
+        // Memastikan dropdown tertutup ketika mengklik di luar dropdown
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+        // Fungsi untuk menampilkan atau menyembunyikan form nominal
+        function toggleDiv() {
+            var uangCheckbox = document.getElementById("option1");
+            var uangForm = document.getElementById("uang");
+
+            if (uangCheckbox.checked) {
+                uangForm.style.display = "block";
+            } else {
+                uangForm.style.display = "none";
+            }
+        }
+    </script>
+
+
 </body>
 
 </html>
