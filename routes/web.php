@@ -66,13 +66,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/listUser', [SainsRoleController::class, 'create'])->name('admin.listUser');
         Route::get('/teams/create', [TeamController::class, 'createId'])->name('team.createId');
         Route::post('/teams', [TeamController::class, 'storeId'])->name('team.storeId');
-        Route::get('/index', function () {
-            return view('user.index');
-        })->name('index');
-        Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
-        Route::get('/detailteam', function () {
-            return view('detailteam');
-        })->name('team.detail');
+
     });
 });
 
@@ -81,14 +75,12 @@ Route::get('tournament', [TournamentController::class, 'indexuser'])->name('user
 Route::resource('team', TeamController::class);
 Route::resource('member', MemberController::class);
 Route::get('tournament/{tournament}', [TournamentController::class, 'detail'])->name('detailTournament');
-Route::get('/game', function () {
-    return view('user.game');
-})->name('game');
+Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
 Route::get('/detailteam', function () {
     return view('detailteam');
 })->name('team.detail');
 Route::get('/', function () {
     return view('user.index');
-})->name('home');
+})->name('index');
 
 

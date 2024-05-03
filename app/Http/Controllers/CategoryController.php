@@ -27,6 +27,7 @@ class CategoryController extends Controller
       $category = Category::all();
         return view('penyelenggara.game', compact('category'));
     }
+
     public function indexusers()
     {
         $categories = Category::all();
