@@ -232,7 +232,7 @@
                         <div class="tabitem active">
                             <div class="row justify-content-md-start justify-content-center g-6">
                                 @foreach ($tournaments as $tournament)
-                                    <div class="col-xl-4 col-md-6 col-sm-10">
+                                <div class="col-xl-4 col-md-6 col-sm-10">
                                         <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                             <div class="dropdown" style="margin-bottom: 15px; margin-left:350px;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"

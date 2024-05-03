@@ -157,7 +157,7 @@
                     <div class="tabcontents">
                         <div class="tabitem active">
                             <div class="row justify-content-md-start justify-content-center g-6">
-                                @foreach ($tournaments as $index => $tournament)
+                                @foreach ($tournaments->where('status', 'accepted') as $index => $tournament)
                                     <div class="col-xl-4 col-md-6 col-sm-10">
                                         <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                             <div class="tournament-img mb-8 position-relative">
@@ -215,6 +215,9 @@
                                                         'tournament_id',
                                                         $tournament->id,
                                                     );
+
+                
+
                                                 @endphp
 
                                                 <div class="hr-line line3"></div>
@@ -257,6 +260,16 @@
                                                         {{-- user sudah terdaftar --}}
                                                     @elseif ($teamCount && $teamCount->count == $tournament->slotTeam)
                                                         {{-- Jika jumlah tim sama dengan slot tim, tidak ada tindakan yang diambil --}}
+                                                    @elseif ($teams->tournament_id === $tournament->id)
+                                                        @if ($teams->user_id === auth()->user()->id)
+                                                        <div class="text-end ms-8">
+                                                            {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
+                                                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
+                                                                Team</a> --}}
+                                                                {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button"class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a> --}}
+                                                                <a type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="modal" data-target="#exampleModalCenter">Join</a>
+                                                        </div>
+                                                        @endif
                                                     @endif
 
 
@@ -327,7 +340,7 @@
         </div>
         <div class="card-body">
 
-            <form action="{{ route('team.storeId') }}" method="POST" >
+            {{-- <form action="{{ route('team.storeId') }}" method="POST" >
                 @csrf
                 <div class="form-group">
                     <label for="team_id">Select Team:</label>
@@ -345,7 +358,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </form> --}}
 
     </div>
 

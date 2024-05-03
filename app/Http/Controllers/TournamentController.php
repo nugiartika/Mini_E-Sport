@@ -21,8 +21,8 @@ class TournamentController extends Controller
     {
 
         $user = Auth::user();
-        // $tournaments = Tournament::where('users_id', $user->id)->get();
-        $tournaments = Tournament::all();
+        $tournaments = Tournament::where('users_id', $user->id)->get();
+        // $tournaments = Tournament::all();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
