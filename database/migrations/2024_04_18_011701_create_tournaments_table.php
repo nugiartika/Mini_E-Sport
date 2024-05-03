@@ -23,10 +23,14 @@ return new class extends Migration
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('images');
             $table->integer('slotTeam');
+            $table->enum('prizepol',['Uang','Trophy','Sertifikat','Mendali']);
             $table->integer('contact');
             $table->text('description');
             $table->text('rule');
+            $table->enum('paidment',['paid','unpaid']);
+            $table->string('nominal')->nullable();
             $table->enum('status',['pending','rejected','accepted'])->default('pending');
+            $table->string('uang')->nullable();
             $table->timestamps();
         });
     }

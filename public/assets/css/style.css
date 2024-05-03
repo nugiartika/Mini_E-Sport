@@ -821,7 +821,7 @@ ul li {
   transform: translateX(-50%);
   z-index: 100;
   transition: all 0.3s ease-in-out;
-  max-height: 100px;
+  max-height: 87px;
 }
 @media (max-width: 1600px) {
   .header-section {

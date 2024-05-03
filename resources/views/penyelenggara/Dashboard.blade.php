@@ -29,7 +29,7 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="" src="{{ asset('assets/img/humma-01.png') }}" height="75px" width="75px" alt="favicon">
+                            <img class="" src="{{ asset('assets/img/humma-01.png') }}" height="60px" width="75px" alt="favicon">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -43,7 +43,7 @@
                             </li>
 
                             <li class="menu-link">
-                                <a href="{{ route('game') }}">GAME</a>
+                                <a href="{{ route('games') }}">GAME</a>
                             </li>
 
                         </ul>
@@ -230,7 +230,7 @@
 
             <div class="tournament-wrapper-border">
                 <div class="container pt-120 pb-120">
-                    <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15"> --}}
+                    <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15">
                         {{-- <div class="col-md-6 col-sm-8">
                             <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENTS</h2>
                         </div> --}}

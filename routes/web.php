@@ -43,13 +43,15 @@ Route::middleware(['auth'])->group(function () {
 
         Route::put('listUserPenyelenggara/{sainsRole}', [SainsRoleController::class, 'update'])->name('konfirmUser');
         Route::delete('rejectUser/{idUser}', [SainsRoleController::class, 'destroy'])->name('rejectUser');
-        Route::delete('deleteUser/{idUser}',[UserController::class, 'destroy'])->name('deleteUser');
+        Route::delete('deleteUser/{idUser}', [UserController::class, 'destroy'])->name('deleteUser');
         Route::get('chart', [DashboardAdminController::class, 'response'])->name('chart');
     });
 
     // Organizer Routes
     Route::middleware('organizer')->group(function () {
         Route::get('/tambah', [TournamentController::class, 'create'])->name('tambahtournament');
+        Route::get('/tournament/{id}/edit', [TournamentController::class, 'edittour'])->name('ptournament.edittour');
+        Route::post('/tournament/{id}/proses', [TournamentController::class, 'updatetour'])->name('ptournament.updatetour');
         Route::get('/DashboardOrganizer', [TournamentController::class, 'dashboard'])->name('dashboardPenyelenggara');
         Route::resource('ptournament', TournamentController::class);
         Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');
@@ -87,4 +89,4 @@ Route::get('/', function () {
     return view('user.index');
 })->name('home');
 
-require_once __DIR__ . '/fajar.php';
+

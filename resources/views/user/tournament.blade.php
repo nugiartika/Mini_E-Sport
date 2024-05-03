@@ -8,6 +8,21 @@
     <title>TOURNAMENT - HUMMAESPORT</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .profile-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .name-text {
+            color: black;
+            margin-bottom: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -227,14 +242,16 @@
                                                             {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
                                                                 Team</a> --}}
-                                                                <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a>
+                                                                {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a> --}}
+                                                                <a type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="modal" data-target="#exampleModalCenter">Join</a>
                                                         </div>
                                                     @elseif (!$teamCount)
                                                         <div class="text-end ms-8">
                                                             {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
                                                                 Team</a> --}}
-                                                                <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button"class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a>
+                                                                {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button"class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a> --}}
+                                                                <a type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="modal" data-target="#exampleModalCenter">Join</a>
                                                         </div>
                                                     @elseif ($teamCount)
                                                         {{-- user sudah terdaftar --}}
@@ -266,6 +283,93 @@
         </div>
     </section>
     <!-- tournament section end -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        {{-- <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> --}}
+        <div class="modal-body d-flex flex-column align-items-center">
+            <div class="d-flex justify-content-center align-items-center mb-4" style="height: 100px;">
+                <center><h6 style="color: black;">Create a New Team for the Tournament or Choose an Existing Team</h6></center>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a type="button" class="btn btn-secondary me-2" data-toggle="modal" data-target="#existing"  data-dismiss="modal">Existing Team</a>
+                <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button" class="btn btn-primary">New Team</a>
+            </div>
+        </div>
+
+
+        {{-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> --}}
+      </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existingLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="height: 100vh;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-black" id="exampleModalLabel">Exixting Team</h5>
+          {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> --}}
+        </div>
+
+
+        {{-- <form action="{{ route('team.store') }}" method="POST">
+            @csrf
+            <div class="modal-body">
+                <div class="row">
+                    @foreach ($teams as $index)
+                        @if ($index->user_id === auth()->user()->id)
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body d-flex align-items-center">
+                                        <input type="hidden" id="team_id" name="team_id">
+                                        <img src="{{ asset('storage/' . $index->profile) }}" alt="" width="25" height="25" class="profile-image me-4">
+                                        <h4 class="name-text">{{ $index->name }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form> --}}
+
+        <form action="{{ route('team.addToTournament') }}" method="POST">
+            @csrf
+            <input type="hidden" name="id_turnamen" value="{{ $id_turnamen }}">
+
+            <label for="team_select">Pilih Tim:</label>
+            <select name="id_team" id="team_select">
+                @foreach ($teams as $team)
+                    <option value="{{ $team->id }}">{{ $team->name }}</option>
+                @endforeach
+            </select>
+             <button type="submit">Tambahkan ke Turnamen</button>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+
 
     <!-- footer section start  -->
     <footer class="footer bgn-4 bt">
@@ -360,6 +464,9 @@
     </footer>
     <!-- footer section end  -->
 
+
+
+
     <!-- ==== js dependencies start ==== -->
     <!-- jquery  -->
     <script src="assets/js/jquery.min.js"></script>
@@ -389,6 +496,10 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <!-- main js  -->
     <script src="assets/js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>

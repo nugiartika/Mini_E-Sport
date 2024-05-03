@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMemberRequest;
 use App\Models\member;
 use App\Models\Team;
 use App\Models\Tournament;
@@ -15,20 +16,11 @@ class MemberController extends Controller
     public function index()
     {
         $members = member::all();
-        return view('user.team', compact('members'));
+        $teams = Team::all();
+        return view('user.team', compact('members', 'teams'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(Request $request)
-{
-    $members = Member::all();
-    $teams = Team::all();
-    $selectedTeamId = $request->input('team_id');
 
-    return view('user.createmember', compact('members', 'teams', 'selectedTeamId'));
-}
 
 // public function store(Request $request)
 // {
@@ -57,15 +49,33 @@ class MemberController extends Controller
 //     return redirect()->route('member.create')->with('success', 'Members added successfully.');
 // }
 
+    public function create(Request $request)
+    {
+        $members = Member::all();
+        $teams = Team::all();
+        $selectedTeamId = $request->input('team_id');
+
+        return view('user.createmember', compact('members', 'teams', 'selectedTeamId'));
+    }
+
     public function store(Request $request)
     {
-        $team_id = $request->team_id;
+        $teams_id = $request->team_id;
+        $nicknames = $request->nickname;
 
-        member::create([
-            'member' => $request->member,
-            'team_id' => $team_id,
-        ]);
+        foreach ($request->member as $index => $memberName) {
+            Member::create([
+                'member' => $memberName,
+                'nickname' => $request->nickname[$index],
+                'team_id' => $teams_id,
+            ]);
+        }
+
+        // dd($member);
+
+        return redirect()->route('team.index')->with('success', 'Members added successfully');
     }
+
 
     /**
      * Display the specified resource.

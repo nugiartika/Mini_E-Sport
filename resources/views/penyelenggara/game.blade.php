@@ -25,7 +25,7 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="" src="{{ asset('assets/img/humma-01.png') }}" height="75px"
+                            <img class="" src="{{ asset('assets/img/humma-01.png') }}" height="60px"
                                 width="75px" alt="favicon">
                         </a>
                     </div>

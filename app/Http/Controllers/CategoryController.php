@@ -22,16 +22,17 @@ class CategoryController extends Controller
         }
         return view('admin.category', compact('category'));
     }
-    public function indexuser(Request $request)
+    public function indexuser()
     {
       $category = Category::all();
         return view('penyelenggara.game', compact('category'));
     }
-    public function indexusers(Request $request)
+    public function indexusers()
     {
-      $category = Category::all();
-        return view('user.game', compact('category'));
+        $categories = Category::all();
+        return view('user.game', compact('categories'));
     }
+
 
 
     public function getMembersPerTeam($categoryId)

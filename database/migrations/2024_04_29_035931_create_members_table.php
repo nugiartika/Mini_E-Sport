@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('team_id')->constrained();
             $table->string('member');
-            // $table->string('cadangan1')->nullable();
+            $table->string('nickname');
             // $table->string('cadangan2')->nullable();
             $table->timestamps();
         });
