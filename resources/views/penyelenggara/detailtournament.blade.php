@@ -31,21 +31,21 @@
                         <span></span>
                     </button>
                     <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                        <img class="" src="{{ asset('assets/img/LOGO WEB.png') }}" height="60px" width="75px" alt="favicon">
+                        <img class="" src="{{ asset('assets/img/humma-01.png') }}" height="60px" width="75px" alt="favicon">
                         {{-- <img class="w-100 logo2" src="assets/img/logo.png" alt="logo"> --}}
                     </a>
                 </div>
                 <div class="navbar-toggle-item w-100 position-lg-relative">
                     <ul class="custom-nav gap-3 gap-lg-7 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                         <li class="menu-link">
-                            <a href="{{ route('dashboardPenyelenggara') }}">Home</a>
+                            <a href="{{ route('dashboardPenyelenggara') }}">HOME</a>
                         </li>
 
                         <li class="menu-link">
-                            <a href="{{ route('ptournament.index') }}">Tournament</a>
+                            <a href="{{ route('ptournament.index') }}">TOURNAMENT</a>
                         </li>
                         <li class="menu-link">
-                            <a href="{{ route('games') }}">Game</a>
+                            <a href="{{ route('games') }}">GAME</a>
                         </li>
                         <li class="menu-link">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOG OUT</a>
@@ -159,27 +159,7 @@
                     <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Entry Fee</h4>
                     <p class="tcn-1 title-anim">$50.00</p>
                 </div>
-                <div class="tour-prize-card">
-                    <div class="icon-area mb-6">
-                        <i class="ti ti-users-group display-five fw-normal tcp-2"></i>
-                    </div>
-                    <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Mode</h4>
-                    <p class="tcn-1 title-anim">solo</p>
-                </div>
-                <div class="tour-prize-card">
-                    <div class="icon-area mb-6">
-                        <i class="ti ti-sitemap display-five fw-normal tcp-2"></i>
-                    </div>
-                    <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Format</h4>
-                    <p class="tcn-1 title-anim">Single Elimination</p>
-                </div>
-                <div class="tour-prize-card">
-                    <div class="icon-area mb-6">
-                        <i class="ti ti-trophy display-five fw-normal tcp-2"></i>
-                    </div>
-                    <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Type</h4>
-                    <p class="tcn-1 title-anim"> -- </p>
-                </div>
+              
             </div>
         </div>
     </section>
@@ -209,7 +189,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
                                     <div class="bracket-card-header d-flex align-items-center gap-2 mb-2">
-                                        <h4 class="tcn-1">Round 01</h4>
+                                        <h4 class="tcn-1">Penyisihan</h4>
                                         <span class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">BO3</span>
                                     </div>
                                     <span class="tcn-1 d-block mb-3">Agu 17, 5.30 AM</span>
@@ -219,7 +199,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
                                     <div class="bracket-card-header d-flex align-items-center gap-2 mb-2">
-                                        <h4 class="tcn-1">Round 02</h4>
+                                        <h4 class="tcn-1">Semi Final</h4>
                                         <span class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">BO3</span>
                                     </div>
                                     <span class="tcn-1 d-block mb-3">Agu 17, 5.30 AM</span>
@@ -229,21 +209,11 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
                                     <div class="bracket-card-header d-flex align-items-center gap-2 mb-2">
-                                        <h4 class="tcn-1">Round 03</h4>
+                                        <h4 class="tcn-1">Final</h4>
                                         <span class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">BO3</span>
                                     </div>
                                     <span class="tcn-1 d-block mb-3">Agu 17, 5.30 AM</span>
                                     <span class="tcn-6">32 Players</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
-                                    <div class="bracket-card-header d-flex align-items-center gap-2 mb-2">
-                                        <h4 class="tcn-1">Round 04</h4>
-                                        <span class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">BO3</span>
-                                    </div>
-                                    <span class="tcn-1 d-block mb-3">Agu 17, 5.30 AM</span>
-                                    <span class="tcn-6">16 Players</span>
                                 </div>
                             </div>
                         </div>
