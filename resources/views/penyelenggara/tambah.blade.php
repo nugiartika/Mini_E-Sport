@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/img/favicon.png')}}" type="image/x-icon">
     <title>Tournament - HummaEsport</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
@@ -231,50 +231,29 @@
                         </div>
                         <div class="tab">
                             <p>
-                            <div class="mb-3">
-                                <label for="prizepol" class="form-label">Prizepol</label>
-                                @error('prizepol')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <div class="dropdown">
-                                    <div id="options" class="dropdown-content">
-                                        <a href="#">
-                                            <input type="checkbox" id="option1" name="prizepol[]" value="Uang"
-                                                {{ in_array('Uang', old('prizepol', [])) ? 'checked' : '' }}
-                                                onchange="toggleDiv()">
-                                            <label for="option1">UangTunai</label>
-                                        </a>
-                                        <a href="#">
-                                            <input type="checkbox" id="option2" name="prizepol[]" value="Trophy"
-                                                {{ in_array('Trophy', old('prizepol', [])) ? 'checked' : '' }}
-                                                onchange="toggleDiv()">
-                                            <label for="option2">Trophy</label>
-                                        </a>
-                                        <a href="#">
-                                            <input type="checkbox" id="option3" name="prizepol[]"
-                                                value="Sertifikat"
-                                                {{ in_array('Sertifikat', old('prizepol', [])) ? 'checked' : '' }}
-                                                onchange="toggleDiv()">
-                                            <label for="option3">Sertifikat</label>
-                                        </a>
-                                        <a href="#">
-                                            <input type="checkbox" id="option4" name="prizepol[]" value="Mendali"
-                                                {{ in_array('Mendali', old('prizepol', [])) ? 'checked' : '' }}
-                                                onchange="toggleDiv()">
-                                            <label for="option4">Mendali</label>
-                                        </a>
-                                    </div>
+                                <div class="mb-3">
+                                    <label for="prizepol" class="form-label">Prizepol</label>
+                                    @error('prizepol')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <select name="prizepol" id="prizepol" class="form-control" onchange="toggleDiv()">
+                                        <option value="" selected disabled>Pilih</option>
+                                        <option value="Uang" {{ old('prizepol') == 'Uang' ? 'selected' : '' }}>Uang Tunai</option>
+                                        <option value="Trophy" {{ old('prizepol') == 'Trophy' ? 'selected' : '' }}>Trophy</option>
+                                        <option value="Sertifikat" {{ old('prizepol') == 'Sertifikat' ? 'selected' : '' }}>Sertifikat</option>
+                                        <option value="Mendali" {{ old('prizepol') == 'Mendali' ? 'selected' : '' }}>Mendali</option>
+                                    </select>
                                 </div>
-                            </div>
                             </p>
                             <p>
-                            <div class="mb-3" id="uang" style="display: none;">
-                                <label for="uang_input" class="form-label">Masukkan Nominal</label>
-                                @error('uang')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <input type="number" name="uang" id="uang_input" class="form-control">
-                            </div>
+                                <div class="mb-3" id="uang" style="display: none;">
+                                    <label for="uang_input" class="form-label">Masukkan Nominal</label>
+                                    @error('uang')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input type="number" name="uang" id="uang_input" class="form-control">
+                                </div>
+
                             </p>
                             <p>
                             <div class="mb-3">
@@ -345,28 +324,26 @@
                             </div>
                             </p>
                             <p>
-                            <div class="mb-3">
-                                <label for="paidment" class="form-label">Paid & Unpaid</label>
-                                @error('paidment')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv()">
-                                    <option value="" selected disabled>Pilih</option>
-                                    <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
-                                    </option>
-                                    <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak
-                                        Berbayar</option>
-                                </select>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="paidment" class="form-label">Paid & Unpaid</label>
+                                    @error('paidment')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
+                                        <option value="" selected disabled>Pilih</option>
+                                        <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar</option>
+                                        <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak Berbayar</option>
+                                    </select>
+                                </div>
                             </p>
                             <p>
-                            <div class="mb-3" id="nominal" style="display: none;">
-                                <label for="nominal_input" class="form-label">Masukkan Nominal</label>
-                                @error('nominal')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <input type="number" name="nominal" id="nominal_input" class="form-control">
-                            </div>
+                                <div class="mb-3" id="nominal" style="display: none;">
+                                    <label for="nominal_input" class="form-label">Masukkan Nominal</label>
+                                    @error('nominal')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input type="number" name="nominal" id="nominal_input" class="form-control">
+                                </div>
                             </p>
                         </div>
                         <div style="overflow:auto;">
@@ -482,42 +459,131 @@
         </div>
     </footer>
 
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <!-- gsap  -->
-    <script src="assets/js/gsap.min.js"></script>
+    <script src="{{asset('assets/js/gsap.min.js')}}"></script>
     <!-- gsap scroll trigger -->
-    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="{{asset('assets/js/ScrollTrigger.min.js')}}"></script>
     <!-- lenis  -->
-    <script src="assets/js/lenis.min.js"></script>
+    <script src="{{asset('assets/js/lenis.min.js')}}"></script>
     <!-- gsap split text -->
-    <script src="assets/js/SplitText.min.js"></script>
+    <script src="{{asset('assets/js/SplitText.min.js')}}"></script>
     <!-- tilt js -->
-    <script src="assets/js/vanilla-tilt.js"></script>
+    <script src="{{asset('assets/js/vanilla-tilt.js')}}"></script>
     <!-- scroll magic -->
-    <script src="assets/js/ScrollMagic.min.js"></script>
+    <script src="{{asset('assets/js/ScrollMagic.min.js')}}"></script>
     <!-- animation.gsap -->
-    <script src="assets/js/animation.gsap.min.js"></script>
+    <script src="{{asset('assets/js/animation.gsap.min.js')}}"></script>
     <!-- gsap customization  -->
-    <script src="assets/js/gsap-customization.js"></script>
+    <script src="{{asset('assets/js/gsap-customization.js')}}"></script>
     <!-- apex chart  -->
-    <script src="assets/js/apexcharts.js"></script>
+    <script src="{{asset('assets/js/apexcharts.js')}}"></script>
     <!-- swiper js -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="{{asset('assets/js/swiper-bundle.min.js')}}"></script>
     <!-- magnific popup  -->
-    <script src="assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js"></script>
+    <script src="{{asset('assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js')}}"></script>
     <!-- bootstrap js -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
     <!-- main js  -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
 
 
     {{-- script untuk memunculkan form nominal apabila memilih paid --}}
     <script>
-        function toggleDiv() {
+        function toggleDiv1() {
             let value = document.getElementById("paidment").value;
+            console.log("Nilai yang dipilih:", value); // Tambahkan pesan log untuk memeriksa nilai yang dipilih
             let div = document.getElementById("nominal");
 
             if (value === "paid") {
+                console.log("Menampilkan form nominal"); // Tambahkan pesan log untuk memeriksa logika ini
+                div.style.display = "block";
+            } else {
+                console.log("Menyembunyikan form nominal"); // Tambahkan pesan log untuk memeriksa logika ini
+                div.style.display = "none";
+            }
+        }
+    </script>
+
+
+    {{-- script untuk form wizard --}}
+    <script>
+        var currentTab = 0; // Langkah saat ini diatur menjadi langkah pertama (0)
+        showTab(currentTab); // Tampilkan langkah saat ini
+
+        function showTab(n) {
+            var x = document.getElementsByClassName("tab");
+            x[n].style.display = "block";
+
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+
+            fixStepIndicator(n);
+        }
+
+        function nextPrev(n) {
+            var x = document.getElementsByClassName("tab");
+
+            if (n == 1 && !validateForm()) return false;
+
+            x[currentTab].style.display = "none";
+            currentTab = currentTab + n;
+
+            if (currentTab >= x.length) {
+                document.getElementById("regForm").submit();
+                return false;
+            }
+
+            showTab(currentTab);
+        }
+
+        function validateForm() {
+            var x, y, i, valid = true;
+            x = document.getElementsByClassName("tab");
+            y = x[currentTab].getElementsByTagName("select");
+
+            for (i = 0; i < y.length; i++) {
+                if (y[i].hasAttribute("required") && y[i].value.trim() === "") {
+                    y[i].className += " invalid";
+                    valid = false;
+                }
+            }
+
+            if (valid) {
+                document.getElementsByClassName("step")[currentTab].className += " finish";
+            }
+
+            return valid;
+        }
+
+        function fixStepIndicator(n) {
+            var i, x = document.getElementsByClassName("step");
+
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+
+            x[n].className += " active";
+        }
+    </script>
+
+
+    {{-- script untuk memunculkan form uang apabila memilih Uang --}}
+    <script>
+        function toggleDiv() {
+            let value = document.getElementById("prizepol").value;
+            let div = document.getElementById("uang");
+
+            if (value === "Uang") {
                 div.style.display = "block";
             } else {
                 div.style.display = "none";
@@ -525,126 +591,8 @@
         }
     </script>
 
-    {{-- script untuk form wizard --}}
-    <script>
-        var currentTab = 0; // Current tab is set to be the first tab (0)
-        showTab(currentTab); // Display the current tab
-
-        function showTab(n) {
-            // This function will display the specified tab of the form ...
-            var x = document.getElementsByClassName("tab");
-            x[n].style.display = "block";
-            // ... and fix the Previous/Next buttons:
-            if (n == 0) {
-                document.getElementById("prevBtn").style.display = "none";
-            } else {
-                document.getElementById("prevBtn").style.display = "inline";
-            }
-            if (n == (x.length - 1)) {
-                document.getElementById("nextBtn").innerHTML = "Submit";
-            } else {
-                document.getElementById("nextBtn").innerHTML = "Next";
-            }
-            // ... and run a function that displays the correct step indicator:
-            fixStepIndicator(n)
-        }
-
-        function nextPrev(n) {
-            var x = document.getElementsByClassName("tab");
-            // Melakukan validasi hanya jika n == 1 (maju ke depan)
-            if (n == 1) {
-                if (currentTab == 0 && !validateForm()) return false; // Validasi hanya pada langkah pertama
-                if (currentTab == 0 && document.getElementById("option1").checked) { // Jika opsi "Uang" dipilih
-                    var uangForm = document.getElementById("uang_input");
-                    if (uangForm.value.trim() === "") { // Jika input "Uang" kosong
-                        // Lewati validasi jika input "Uang" kosong
-                        currentTab += n;
-                        showTab(currentTab);
-                        return false;
-                    }
-                }
-            }
-            // Semua validasi lulus, lanjutkan seperti biasa
-            x[currentTab].style.display = "none";
-            currentTab = currentTab + n;
-            if (currentTab >= x.length) {
-                document.getElementById("regForm").submit();
-                // Tambahkan pengalihan halaman setelah formulir disubmit
-                return false;
-            }
-            showTab(currentTab);
-        }
 
 
-        function validateForm() {
-            // This function deals with validation of the form fields
-            var x, y, i, valid = true;
-            x = document.getElementsByClassName("tab");
-            y = x[currentTab].getElementsByTagName("input");
-            // A loop that checks every input field in the current tab:
-            for (i = 0; i < y.length; i++) {
-                // If a field is empty and it's required...
-                if (y[i].hasAttribute("required") && y[i].value.trim() === "") {
-                    // add an "invalid" class to the field:
-                    y[i].className += " invalid";
-                    // and set the current valid status to false:
-                    valid = false;
-                }
-            }
-            // If the valid status is true, mark the step as finished and valid:
-            if (valid) {
-                document.getElementsByClassName("step")[currentTab].className += " finish";
-            }
-            return valid; // return the valid status
-        }
-
-
-        function fixStepIndicator(n) {
-            // This function removes the "active" class of all steps...
-            var i, x = document.getElementsByClassName("step");
-            for (i = 0; i < x.length; i++) {
-                x[i].className = x[i].className.replace(" active", "");
-            }
-            //... and adds the "active" class to the current step:
-            x[n].className += " active";
-        }
-    </script>
-
-    {{-- script untuk select option prizepoll --}}
-    <script>
-        function toggleDropdown() {
-            var dropdownContent = document.getElementById("options");
-            dropdownContent.classList.toggle("show");
-
-            // Memanggil fungsi toggleDiv() saat dropdown diubah
-            toggleDiv();
-        }
-
-        // Memastikan dropdown tertutup ketika mengklik di luar dropdown
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-        // Fungsi untuk menampilkan atau menyembunyikan form nominal
-        function toggleDiv() {
-            var uangCheckbox = document.getElementById("option1");
-            var uangForm = document.getElementById("uang");
-
-            if (uangCheckbox.checked) {
-                uangForm.style.display = "block";
-            } else {
-                uangForm.style.display = "none";
-            }
-        }
-    </script>
 
 
 </body>

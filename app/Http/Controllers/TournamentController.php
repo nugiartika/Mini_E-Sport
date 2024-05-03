@@ -38,8 +38,7 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get();
         $category = Category::all();
-        $teams = Team::all();
-        return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts','teams'));
+        return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts'));
     }
     public function dashboard()
     {
@@ -68,47 +67,48 @@ class TournamentController extends Controller
         $tournament = Tournament::all();
         $user = User::all();
         $category = Category::all();
-        return view('penyelenggara.tournament', compact('tournament', 'category', 'user'));
+        return view('penyelenggara.tambah', compact('tournament', 'category', 'user'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(TournamentRequest $request)
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
 
-        $gambar = $request->file('images');
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('tournament', $gambar);
-        }
+    $gambar = $request->file('images');
+    $path_gambar = null;
 
-        $category_id = $request->input('categories_id');
-        $nominal = $request->input('nominal', null);
-        $uang = $request->input('uang', null);
-
-        Tournament::create([
-            'name' => $request->name,
-            'pendaftaran' => $request->pendaftaran,
-            'permainan' => $request->permainan,
-            // 'end_pendaftaran' => $request->end_pendaftaran,
-            // 'end_permainan' => $request->end_permainan,
-            'categories_id' => $category_id,
-            'users_id' => $user->id,
-            'slotTeam' => $request->slotTeam,
-            'contact' => $request->contact,
-            'images' => $path_gambar,
-            'description' => $request->description,
-            'rule' => $request->rule,
-            'paidment' => $request->paidment,
-            'nominal' => $nominal,
-            'prizepol' => $request->prizepol,
-            'uang' => $uang,
-            'status' => 'pending',
-        ]);
-
-        return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
+    if ($gambar) {
+        $path_gambar = Storage::disk('public')->put('tournament', $gambar);
     }
+
+
+    Tournament::create([
+        'name' => $request->name,
+        'pendaftaran' => $request->pendaftaran,
+        'permainan' => $request->permainan,
+        'end_pendaftaran' => $request->end_pendaftaran,
+        'end_permainan' => $request->end_permainan,
+        'categories_id' => $request->categories_id,
+        'users_id' => $user->id,
+        'slotTeam' => $request->slotTeam,
+        'contact' => $request->contact,
+        'images' => $path_gambar,
+        'description' => $request->description,
+        'rule' => $request->rule,
+        'paidment' => $request->paidment,
+        'nominal' => $request->nominal,
+        'prizepol' => $request->prizepol,
+        'uang' => $request->uang,
+        'status' => 'pending',
+    ]);
+
+
+    return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
+}
+
 
 
 

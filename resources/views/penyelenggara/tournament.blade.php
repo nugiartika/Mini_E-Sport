@@ -260,16 +260,13 @@
                                 <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1"
                                     data-toggle="tooltip" data-bs-toggle="modal"
                                     data-bs-target="#filter">Filter</button>
-
-
-
                             </li>
                         </ul>
 
                         <div class="px-6">
                             <a type="button"
                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
-                                href="/tambah">add tournament</a>
+                                href="{{ route('ptournament.create') }}">add tournament</a>
                         </div>
                     </div>
                     <div class="tabcontents">
@@ -293,10 +290,13 @@
                                                             class="dropdown-item"><i class="ti ti-edit fs-2xl"></i>
                                                             Edit Tournament</a></li>
                                                     <li>
-                                                        <form id="deleteForm{{ $tournament->id }}" action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST">
+                                                        <form id="deleteForm{{ $tournament->id }}"
+                                                            action="{{ route('ptournament.destroy', $tournament->id) }}"
+                                                            method="POST">
                                                             @csrf
-                                                             @method('DELETE')
-                                                            <button type="submit" class="dropdown-item delete" data-id="{{ $tournament->id }}">
+                                                            @method('DELETE')
+                                                            <button type="submit" class="dropdown-item delete"
+                                                                data-id="{{ $tournament->id }}">
                                                                 <i class="ti ti-trash fs-2xl"></i> Delete Tournament
                                                             </button>
                                                         </form>
@@ -506,31 +506,32 @@
     <!-- main js  -->
     <script src="assets/js/main.js"></script>
     <!-- jQuery (diperlukan untuk Bootstrap JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
+        integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        $(document).on('click', '.delete', function (e) {
+        $(document).on('click', '.delete', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
             swal({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel!",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    // Menggunakan ID formulir yang dibangun secara dinamis
-                    $('#deleteForm' + id).submit();
-                } else {
-                    swal("Cancelled", "Your data is safe :)", "error");
-                }
-            });
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        // Menggunakan ID formulir yang dibangun secara dinamis
+                        $('#deleteForm' + id).submit();
+                    } else {
+                        swal("Cancelled", "Your data is safe :)", "error");
+                    }
+                });
         });
     </script>
 

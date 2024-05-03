@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->date('pendaftaran');
             $table->date('permainan');
-            // $table->date('end_pendaftaran');
-            // $table->date('end_permainan');
+            $table->date('end_pendaftaran');
+            $table->date('end_permainan');
             $table->foreignId('categories_id')->constrained();
             $table->unsignedBigInteger('users_id')->nullable();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
@@ -25,11 +25,12 @@ return new class extends Migration
             $table->integer('slotTeam');
             $table->enum('prizepol',['Uang','Trophy','Sertifikat','Mendali']);
             $table->integer('contact');
-            $table->text('description'); 
+            $table->text('description');
             $table->text('rule');
             $table->enum('paidment',['paid','unpaid']);
-            $table->integer('nominal')->nullable();
+            $table->string('nominal')->nullable();
             $table->enum('status',['pending','rejected','accepted'])->default('pending');
+            $table->string('uang')->nullable();
             $table->timestamps();
         });
     }
