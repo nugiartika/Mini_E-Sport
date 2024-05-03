@@ -14,10 +14,18 @@ class DetailTournamentController extends Controller
         $tournaments =Tournament::where('status', 'accepted')->get();
         $user = User::all();
         $category = Category::all();
-        return view('admin.DetailTournament', compact('tournaments', 'user', 'category'));
+        return view('admin.ListTournament', compact('tournaments', 'user', 'category'));
 
     }
 
-    
+    public function detail()
+    {
+        $turnamets = Tournament::all();
+        $user  = User::all();
+        $category = Category::all();
+
+        return view('admin.detailTournament', compact('turnamets', 'user', ));
+    }
+
 
 }

@@ -19,9 +19,7 @@
         </div>
     </div>
 
-    <!-- cursor effect-->
     <div class="cursor"></div>
-    <!-- Header area  -->
 
     <!-- header-section start -->
     <header class="header-section w-100">
