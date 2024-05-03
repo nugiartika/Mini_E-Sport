@@ -40,7 +40,6 @@
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="">
                             <img class="w-100 logo1" src="{{ asset('assets/img/humma-01.png') }}" alt="favicon">
-                            <img class="w-100 logo2" src="{{ asset('asset/img/Huuma-04.png') }}" alt="logo">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -78,13 +77,13 @@
                         <form action="{{ route('login') }}" class="sign-in-form" method="POST">
                             @csrf
                             <div class="single-input mb-6">
-                                <input type="email" name="email" placeholder="Massukan Email Anda">
+                                <input type="email" name="email" placeholder="Enter your email">
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="single-input mb-6">
-                                <input type="password" name="password" placeholder="Masukkan Password Anda">
+                                <input type="password" name="password" placeholder="Enter your password">
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

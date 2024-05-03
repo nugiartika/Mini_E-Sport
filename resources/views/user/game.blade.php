@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +38,7 @@
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
                             <img class="" src="assets/img/LOGO WEB.png" width="60px" height="60px"
-                            alt="favicon">
+                                alt="favicon">
 
                         </a>
                     </div>
@@ -49,32 +48,22 @@
                                 <a href="{{ route('index') }}">HOME</a>
                             </li>
                             <li class="menu-item">
-                                <button>TOURNAMENTS</button>
-                                <ul class="sub-menu">
                                     <li class="menu-link">
                                         <a href="{{ route('user.tournament') }}">TOURNAMENTS</a>
                                     </li>
-                                </ul>
                             </li>
                             <li class="menu-link">
                                 <a href="{{ route('game') }}">GAME</a>
                             </li>
                             <li class="menu-item">
-                                <button>TEAMS</button>
-                                <ul class="sub-menu">
                                     <li class="menu-link">
                                         <a href="{{ route('team.index') }}">TEAMS</a>
                                     </li>
-                                </ul>
                             </li>
                             <li class="menu-item">
-                                <button>PAGES</button>
-                                <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="{{ route('login') }}">login</a>
+                                        <a href="{{ route('login') }}">LOGIN</a>
                                     </li>
-
-                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -85,7 +74,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 22 22">
                             <path fill="currentColor"
                                 d="M13 21H9v-1H8v-6H2v-1H1V9h1V8h6V2h1V1h4v1h1v6h6v1h1v4h-1v1h-6v6h-1M12 5V3h-2v2m-5 7v-2H3v2Z" />
-                        </svg>                    </button>
+                        </svg> </button>
 
                 </div>
             </div>
@@ -129,43 +118,42 @@
     </div>
     <!-- connect your Wallet section end -->
 
-   <!-- game section start  -->
-   <section class="game-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
-    <div class="container">
-        <div class="row align-items-center justify-content-between mb-lg-15 mb-md-8 mb-sm-6 mb-4">
-            <div class="col-6">
-                <h2 class="display-four tcn-1 cursor-scale growUp title-anim">GAMES</h2>
+    <!-- game section start  -->
+    <section class="game-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
+        <div class="container">
+            <div class="row align-items-center justify-content-between mb-lg-15 mb-md-8 mb-sm-6 mb-4">
+                <div class="col-6">
+                    <h2 class="display-four tcn-1 cursor-scale growUp title-anim">GAMES</h2>
+                </div>
             </div>
-        </div>
-        @foreach ($categories as $index => $category)
-
-
-        <div class="row gy-lg-10 gy-6">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="game-card-wrapper mx-auto">
-                    <div class="game-card mb-5 p-2">
-                        <div class="game-card-border"></div>
-                        <div class="game-card-border-overlay"></div>
-                        <div class="game-img">
-                            <img class="w-100 h-100" src="assets/img/game-x10.png" alt="game">
-                        </div>
-                        <div class="game-link d-center">
-                            <a href="tournaments-details.html" class="btn2">
-                                <i class="ti ti-arrow-right fs-2xl"></i>
+            @foreach ($categories as $index => $category)
+                <div class="row gy-lg-10 gy-6">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="game-card-wrapper mx-auto">
+                            <div class="game-card mb-5 p-2">
+                                <div class="game-card-border"></div>
+                                <div class="game-card-border-overlay"></div>
+                                <div class="game-img">
+                                    <img class="w-100 h-100" src="assets/img/game-x10.png" alt="game">
+                                </div>
+                                <div class="game-link d-center">
+                                    <a href="tournaments-details.html" class="btn2">
+                                        <i class="ti ti-arrow-right fs-2xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <a href="tournaments-details.html">
+                                <h4 class="game-title mb-0 tcn-1 cursor-scale growDown2 title-anim">
+                                    {{ $category->name }}</h4>
                             </a>
                         </div>
                     </div>
-                    <a href="tournaments-details.html">
-                        <h4 class="game-title mb-0 tcn-1 cursor-scale growDown2 title-anim">{{ $category->name }}</h4>
-                    </a>
                 </div>
-            </div>
-        </div>
-        @endforeach
+            @endforeach
 
-    </div>
-</section>
-<!-- game section end  -->
+        </div>
+    </section>
+    <!-- game section end  -->
 
     <!-- footer section start  -->
     <footer class="footer bgn-4 bt">

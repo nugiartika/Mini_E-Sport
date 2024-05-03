@@ -42,7 +42,7 @@
 
                 <li class="menu-item {{ request()->routeIs('category.index') ? 'active' : '' }}">
                     <a href="{{ route('category.index') }}" class="menu-link">
-                        <div>Category Game</div>
+                        <div>Game</div>
                     </a>
                 </li>
             </ul>

@@ -197,7 +197,6 @@
 
 @yield('script')
 
-<!-- ==== js dependencies start ==== -->
 <!-- jquery  -->
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <!-- gsap  -->
@@ -229,4 +228,3 @@
 </body>
 
 </html>
-{{--  --}}

@@ -62,17 +62,17 @@
                                 <a href="{{ route('index') }}">HOME</a>
                             </li>
                             <li class="menu-item">
-                                    <li class="menu-link">
-                                        <a href="{{ route('user.tournament') }}">TOURNAMENT</a>
-                                    </li>
+                            <li class="menu-link">
+                                <a href="{{ route('user.tournament') }}">TOURNAMENT</a>
+                            </li>
                             </li>
                             <li class="menu-link">
                                 <a href="{{ route('game') }}">GAME</a>
                             </li>
                             <li class="menu-item">
-                                    <li class="menu-link">
-                                        <a href="{{ route('team.index') }}">TEAMS</a>
-                                    </li>
+                            <li class="menu-link">
+                                <a href="{{ route('team.index') }}">TEAMS</a>
+                            </li>
                             </li>
 
                             <li class="menu-item">
@@ -86,7 +86,7 @@
                         </ul>
                     </div>
                 </nav>
-                
+
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
                     <button class="ntf-btn box-style fs-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 22 22">
@@ -101,9 +101,17 @@
                         <div class="header-profile pointer">
                             <div class="profile-wrapper d-flex align-items-center gap-3">
                                 <div class="img-area overflow-hidden">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 36 36"><path fill="currentColor" d="M30.61 24.52a17.16 17.16 0 0 0-25.22 0a1.51 1.51 0 0 0-.39 1v6A1.5 1.5 0 0 0 6.5 33h23a1.5 1.5 0 0 0 1.5-1.5v-6a1.51 1.51 0 0 0-.39-.98" class="clr-i-solid clr-i-solid-path-1"/><circle cx="18" cy="10" r="7" fill="currentColor" class="clr-i-solid clr-i-solid-path-2"/><path fill="none" d="M0 0h36v36H0z"/></svg>                                    </div>
-                                <span
-                                    class="user-name d-none d-xxl-block text-nowrap">{{ auth()->user()->name }}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                        viewBox="0 0 36 36">
+                                        <path fill="currentColor"
+                                            d="M30.61 24.52a17.16 17.16 0 0 0-25.22 0a1.51 1.51 0 0 0-.39 1v6A1.5 1.5 0 0 0 6.5 33h23a1.5 1.5 0 0 0 1.5-1.5v-6a1.51 1.51 0 0 0-.39-.98"
+                                            class="clr-i-solid clr-i-solid-path-1" />
+                                        <circle cx="18" cy="10" r="7" fill="currentColor"
+                                            class="clr-i-solid clr-i-solid-path-2" />
+                                        <path fill="none" d="M0 0h36v36H0z" />
+                                    </svg>
+                                </div>
+                                <span class="user-name d-none d-xxl-block text-nowrap">{{ auth()->user()->name }}</span>
                                 <i class="ti ti-chevron-down d-none d-xxl-block"></i>
                             </div>
                         </div>
@@ -216,8 +224,6 @@
                                                         $tournament->id,
                                                     );
 
-                
-
                                                 @endphp
 
                                                 <div class="hr-line line3"></div>
@@ -245,31 +251,27 @@
                                                             {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
                                                                 Team</a> --}}
-                                                                {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a> --}}
-                                                                <a type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="modal" data-target="#exampleModalCenter">Join</a>
+                                                            {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a> --}}
+                                                            <a type="button"
+                                                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
+                                                                data-toggle="modal"
+                                                                data-target="#exampleModalCenter">Join</a>
                                                         </div>
                                                     @elseif (!$teamCount)
                                                         <div class="text-end ms-8">
                                                             {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
                                                                 Team</a> --}}
-                                                                {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button"class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a> --}}
-                                                                <a type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="modal" data-target="#exampleModalCenter">Join</a>
+                                                            {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button"class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a> --}}
+                                                            <a type="button"
+                                                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
+                                                                data-toggle="modal"
+                                                                data-target="#exampleModalCenter">Join</a>
                                                         </div>
                                                     @elseif ($teamCount)
                                                         {{-- user sudah terdaftar --}}
                                                     @elseif ($teamCount && $teamCount->count == $tournament->slotTeam)
                                                         {{-- Jika jumlah tim sama dengan slot tim, tidak ada tindakan yang diambil --}}
-                                                    @elseif ($teams->tournament_id === $tournament->id)
-                                                        @if ($teams->user_id === auth()->user()->id)
-                                                        <div class="text-end ms-8">
-                                                            {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
-                                                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Add
-                                                                Team</a> --}}
-                                                                {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button"class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a> --}}
-                                                                <a type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill" data-toggle="modal" data-target="#exampleModalCenter">Join</a>
-                                                        </div>
-                                                        @endif
                                                     @endif
 
 
@@ -297,89 +299,51 @@
     </section>
     <!-- tournament section end -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        {{-- <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div> --}}
-        <div class="modal-body d-flex flex-column align-items-center">
-            <div class="d-flex justify-content-center align-items-center mb-4" style="height: 100px;">
-                <center><h6 style="color: black;">Create a New Team for the Tournament or Choose an Existing Team</h6></center>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a type="button" class="btn btn-secondary me-2" data-toggle="modal" data-target="#existing"  data-dismiss="modal">Existing Team</a>
-                <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button" class="btn btn-primary">New Team</a>
-            </div>
-        </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
 
-
-        {{-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div> --}}
-      </div>
-    </div>
-</div>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existingLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="height: 100vh;">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-black" id="exampleModalLabel">Exixting Team</h5>
-          {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button> --}}
-        </div>
-        <div class="card-body">
-
-            {{-- <form action="{{ route('team.storeId') }}" method="POST" >
-                @csrf
-                <div class="form-group">
-                    <label for="team_id">Select Team:</label>
-                    <div class="row">
-                        @foreach ($teams as $team)
-                            <div class="col-12 mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="team_id{{ $team->id }}" name="team_id" value="{{ $team->id }}">
-                                    <label class="form-check-label" for="team_id{{ $team->id }}">
-                                        {{ $team->name }}
-                                    </label>
-                                </div>
-                            </div>
-                        @endforeach
+                <div class="modal-body d-flex flex-column align-items-center">
+                    <div class="d-flex justify-content-center align-items-center mb-4" style="height: 100px;">
+                        <center>
+                            <h6 style="color: black;">Create a New Team for the Tournament or Choose an Existing Team
+                            </h6>
+                        </center>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a type="button" class="btn btn-secondary me-2" data-toggle="modal" data-target="#existing"
+                            data-dismiss="modal">Existing Team</a>
+                            @foreach ($tournaments as $tournaments)
+                            <a href="{{ route('team.create', ['tournament' => $tournaments->id]) }}" type="button"
+                                class="btn btn-primary">New Team</a>
+                            @endforeach
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form> --}}
 
+            </div>
+        </div>
     </div>
 
-{{--
-        <form action="{{ route('team.addToTournament') }}" method="POST">
-            @csrf
-            <input type="hidden" name="id_turnamen" value="{{ $id_turnamen }}">
-
-            <label for="team_select">Pilih Tim:</label>
-            <select name="id_team" id="team_select">
-                @foreach ($teams as $team)
-                    <option value="{{ $team->id }}">{{ $team->name }}</option>
-                @endforeach
-            </select>
-             <button type="submit">Tambahkan ke Turnamen</button>
-        </form> --}}
 
 
-      </div>
+    <!-- Modal -->
+    <div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existingLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document" style="height: 100vh;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-black" id="exampleModalLabel">Exixting Team</h5>
+                </div>
+                <div class="card-body">
+
+
+                </div>
+
+            </div>
+        </div>
     </div>
-  </div>
 
 
     <!-- footer section start  -->
@@ -519,9 +483,15 @@
     <!-- main js  -->
     <script src="assets/js/main.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

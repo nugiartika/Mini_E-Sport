@@ -59,8 +59,6 @@
                             <button type="submit" class="btn btn-secondary">Cari</button>
                         </div>
                     </form>
-                    {{-- </div>
-                        </div> --}}
                 </div>
 
 
@@ -262,7 +260,7 @@
                         <table class="table"></table>
                         <img src="{{ asset('assets/img/No-data.png') }}" alt=""
                             style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                        <h1 class="table-light" style="text-align: center;">Data Kosong</h1>
+                        <h1 class="table-light" style="text-align: center;">Empty Data</h1>
                     </div>
                 </div>
             </div>

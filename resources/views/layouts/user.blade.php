@@ -59,13 +59,9 @@
                                     </li>
                             </li>
                             <li class="menu-item">
-                                <button>PAGES</button>
-                                <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="{{ route('login') }}">Login</a>
+                                        <a href="{{ route('login') }}">LOGIN</a>
                                     </li>
-
-                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -94,7 +90,7 @@
             <div class="account-items d-grid gap-1" data-tilt>
                 <div class="user-level-area p-3">
                     <div class="user-info d-between">
-                        <span class="user-name fs-five">Nama : {{ auth()->user()->name }}</span>
+                        <span class="user-name fs-five">Name : {{ auth()->user()->name }}</span>
                     </div>
                 </div>
                 <form method="POST" action="{{ route('logout') }}">

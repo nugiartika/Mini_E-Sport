@@ -126,9 +126,7 @@
             </div>
         </div>
     </section>
-    <!-- sign in section end  -->
 
-    <!-- ==== js dependencies start ==== -->
     <!-- jquery  -->
     <script src="assets/js/jquery.min.js"></script>
     <!-- gsap  -->
