@@ -198,16 +198,14 @@
         </div>
     </section>
 
-
-    <section class="swiper-3d-section position-relative z-1" id="swiper-3d">
-        <div class="container">
+    <div class="container">
             <h1>WINNERS</h1>
             <!-- Slider main container -->
-            <div class="swiper swiper-3d-container">
+            <div class="card"></div
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                     <!-- Slides -->
-                    <div class="swiper-slide">
+                    <div class="swiper-slide" style="border: 5px solid rgb(0, 0, 0);"> <!-- Menambahkan border solid hitam dengan lebar 12px -->
                         <div class="card-3d d-grid justify-content-center p-3">
                             <h3 class="card-title text-center tcn-1 mb-4 title-anim">Tournament</h3>
                             <h4 class="card-title text-center tcn-1 mb-4 title-anim">Game</h4>
@@ -218,16 +216,8 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-btn-area d-center gap-6">
-                <div class="swiper-btn swiper-3d-button-prev box-style">
-                    <i class="ti ti-chevron-left fs-xl"></i>
-                </div>
-                <div class="swiper-btn swiper-3d-button-next box-style">
-                    <i class="ti ti-chevron-right fs-xl"></i>
-                </div>
-            </div>
-        </div>
-    </section>
+            
+    </div>
     <!-- 3D swiper section end-->
 
 
