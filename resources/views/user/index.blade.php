@@ -19,9 +19,7 @@
         </div>
     </div>
 
-    <!-- cursor effect-->
     <div class="cursor"></div>
-    <!-- Header area  -->
 
     <!-- header-section start -->
     <header class="header-section w-100">
@@ -365,13 +363,6 @@
                             <span class="fs-base tcn-6"><a href="" class="tcp-1"></a>
                             </span>
                         </div>
-                        <form method="POST" action="{{ route('storeSainsRole') }}">
-                            @csrf
-                            <!-- Mengubah type dari button menjadi submit -->
-                            <button type="submit" id="registerBtn"
-                                class="bttn py-sm-4 py-3 px-lg-10 px-sm-8 px-6 bgp-1 tcn-1 rounded-4">Daftar</button>
-                        </form>
-
                     </div>
                 </div>
             </div>

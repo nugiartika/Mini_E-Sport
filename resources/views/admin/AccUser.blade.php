@@ -38,6 +38,7 @@
                     <table class="table">
                         <thead class="table-light">
                             <tr>
+                                <th>No</th>
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Actions</th>
@@ -45,8 +46,9 @@
                         </thead>
 
                         <tbody class="table-border-bottom-0">
-                            @foreach ($sainsRole as $index)
+                            @forelse ($sainsRole as $index)
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <i class="ti ti-user text-primary display-6"></i>
@@ -54,13 +56,11 @@
                                         </div>
                                     </td>
                                     <td>{{ $index->email }}</td>
-                                    <!-- dalam tag <td> -->
-                                    <td>
 
                                         <form id="updateForm{{ $index->id }}" action="{{ route('konfirmUser', $index->id) }}" method="POST" class="d-inline-block">
                                             @csrf
                                             @method('put')
-                                          
+
                                             <div class="radio-button">
                                                 <span class="badge bg-label-danger me-1">
                                                 <label for="rejected{{ $index->id }}">Rejected</label>
@@ -73,24 +73,25 @@
                                                 </span>
                                             </div>
                                         </form>
-                                        {{-- <form action="{{ route('konfirmUser', $index->id) }}" method="POST" class="d-inline-block">
-                                            @csrf
-                                            @method('put')
-                                            <input type="hidden" name="action" value="approve">
-                                            <button  type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i
-                                                 class="ti ti-check text-heading" style="margin-right: 5px;"></i></button>
-                                        </form>
-
-                                        <form action="{{ route('rejectUser', $index->id) }}" method="POST" class="d-inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="action" value="reject">
-                                            <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><i class="fas fa-times me-1"></i></button>
-                                        </form> --}}
 
                                     </td>
                                 </tr>
-                            @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card">
+                                                <div class="table-responsive text-nowrap">
+                                                    <table class="table"></table>x
+                                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                                    style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+                                                    <h1 class="table-light" style="text-align: center;">Data Kosong</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforelse
 
                         </tbody>
                     </table>

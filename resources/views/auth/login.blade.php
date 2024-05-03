@@ -39,8 +39,8 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="">
-                            <img class="w-100 logo1" src="assets/img/humma-01.png" alt="favicon">
-                            <img class="w-100 logo2" src="assets/img/Huuma-04.png" alt="logo">
+                            <img class="w-100 logo1" src="{{ asset('assets/img/humma-01.png') }}" alt="favicon">
+                            <img class="w-100 logo2" src="{{ asset('asset/img/Huuma-04.png') }}" alt="logo">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -93,7 +93,7 @@
                                 <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Login</button>
                             </div>
                         </form>
-                        <p class="tcn-4 text-center mt-lg-10 mt-6">Belum Mempunyai Akun? <a
+                        <p class="tcn-4 text-center mt-lg-10 mt-6">Don't have an account yet? <a
                                 href="{{ route('register') }}" class="text-decoration-underline tcp-1">Sign Up</a></p>
                     </div>
                 </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/img/humma-01.png') }}" type="image/x-icon">
     <title>Register Humma Esport</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -37,8 +37,8 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="w-100 logo1" src="assets/img/favicon.png" alt="favicon">
-                            <img class="w-100 logo2" src="assets/img/logo.png" alt="logo">
+                            <img class="w-100 logo1" src="{{ asset('assets/img/humma-01.png') }}" alt="favicon">
+                            {{-- <img class="w-100 logo2" src="{{ asset('asset/img/Huuma-04.png') }}" alt="logo"> --}}
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -53,23 +53,9 @@
                                 <a href="{{ route('game') }}">GAME</a>
                             </li>
                             <li class="menu-item">
-                                <button>TEAMS</button>
-                                <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="{{ route('team.index') }}">Teams</a>
+                                        <a href="{{ route('team.index') }}">TEAMS</a>
                                     </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item">
-                                <button>PAGES</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="{{ route('login') }}">LOGIN</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="{{ route('register') }}">REGISTER</a>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -79,34 +65,6 @@
     </header>
     <!-- header-section end -->
 
-
-    <!-- user account details popup start  -->
-    <div class="user-account-popup p-4">
-        <div class="account-items d-grid gap-1" data-tilt>
-
-            <div class="user-level-area p-3">
-                <div class="user-info d-between">
-                    <span class="user-name fs-five">David Malan</span>
-                    <div class="badge d-flex align-items-center">
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
-                    </div>
-                </div>
-                <div class="user-level">
-                    <span class="level-title tcn-6">Level</span>
-                    <div class="level-bar my-1">
-                        <div class="level-progress" style="width: 30%;"></div>
-                    </div>
-                </div>
-            </div>
-            <a href="profile.html" class="account-item">View Profile</a>
-
-            <a href="chat.html" class="account-item">Message</a>
-            <button class="bttn account-item">Logout</button>
-        </div>
-    </div>
-    <!-- user account details popup end  -->
 
     <!-- sign in section start  -->
     <section class="sign-in-section pb-120 pt-120 mt-sm-15 mt-10">
@@ -118,32 +76,31 @@
                         <form action="{{ route('register') }}" class="sign-in-form" method="POST">
                             @csrf
                             <div class="single-input mb-6">
-                                <input type="text" name="name" placeholder="Masukkan Nama Anda">
+                                <input type="text" name="name" placeholder="Enter your name">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="single-input mb-6">
-                                <input type="email" name="email" placeholder="Masukkan email Anda">
+                                <input type="email" name="email" placeholder="Enter your email">
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="single-input mb-6">
-                                <input type="password" name="password" placeholder="Masukan password Anda">
+                                <input type="password" name="password" placeholder="Enter your password">
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="single-input mb-6">
-                                <input type="password" name="password_confirmation" placeholder="Konfirmasi password Anda">
+                                <input type="password" name="password_confirmation" placeholder="Confirm your password">
                                 @error('password_confirmation')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="single-input mb-6">
-                                    {{-- <label for="role">role</label> --}}
                                 <select id="role" class="form-control @error('role') is-invalid @enderror" name="role">
                                     <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                                     <option value="organizer" {{ old('role') == 'organizer' ? 'selected' : '' }}>Organizer</option>
@@ -162,7 +119,7 @@
                             </div>
                         </form>
 
-                        <p class="tcn-4 text-center mt-lg-10 mt-6">Sudah Mempuyai Akun? <a
+                        <p class="tcn-4 text-center mt-lg-10 mt-6">Already have an account? <a
                                 href="{{ route('login') }}" class="text-decoration-underline tcp-1">Login</a></p>
                     </div>
                 </div>
@@ -201,8 +158,4 @@
     <!-- main js  -->
     <script src="assets/js/main.js"></script>
 </body>
-
-
-<!-- Mirrored from gameplex-final.vercel.app/gameplex-v1-smooth-scroll/signup.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 07:42:04 GMT -->
-
 </html>

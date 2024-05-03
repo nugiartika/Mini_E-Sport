@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DetailTournamentController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RegisterOrganizerController;
 use App\Http\Controllers\SainsRoleController;
@@ -37,6 +38,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('confirmtournament', [TournamentController::class, 'indexadmin'])->name('konfirmtournament');
         Route::get('konfirmtournament/{konfirmtournament}/edit', [TournamentController::class, 'edit'])->name('konfirm.edit');
         Route::put('konfirmtournament/{id}', [TournamentController::class, 'update'])->name('konfirm.update');
+        Route::get('AdminDetailTournament', [DetailTournamentController::class, 'index'])->name('DetailTournament');
+
+
         Route::put('listUserPenyelenggara/{sainsRole}', [SainsRoleController::class, 'update'])->name('konfirmUser');
         Route::delete('rejectUser/{idUser}', [SainsRoleController::class, 'destroy'])->name('rejectUser');
         Route::delete('deleteUser/{idUser}',[UserController::class, 'destroy'])->name('deleteUser');
@@ -83,3 +87,4 @@ Route::get('/', function () {
     return view('user.index');
 })->name('home');
 
+require_once __DIR__ . '/fajar.php';

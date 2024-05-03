@@ -91,8 +91,8 @@
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('detailTur') ? 'active' : '' }} ">
-                    <a href="{{ route('detailTur') }}" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('DetailTournament') ? 'active' : '' }} ">
+                    <a href="{{ route('DetailTournament') }}" class="menu-link">
                         <div>List Tournament</div>
                     </a>
                 </li>

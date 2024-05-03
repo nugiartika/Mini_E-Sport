@@ -47,7 +47,6 @@ class LoginController extends Controller
                 return redirect()->route('admin.index');
             }
         } else {
-            // Tambahkan pesan kesalahan atau tindakan lain jika login gagal
             return redirect()->back()->withInput()->withErrors(['email' => 'Kombinasi email dan password tidak valid.']);
         }
     }

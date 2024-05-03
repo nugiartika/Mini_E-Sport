@@ -51,24 +51,17 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:50|unique:users,email,except,id',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|min:6'
-        ],[
-            'name.required' => 'Nama Harus wajib di isi',
-            'name.max' => 'Nama tidak boleh melebihi 50 karakter',
-            'email.required' => 'email wajib di isi',
-            'email.max:50' => 'email tidak boleh melebihi 50 karakter',
-            'email.unique' => 'email sudah digunakan, Gunakan email lain',
-            'password.required' => 'password wajib di isi',
-            'password.min' => 'password minimal 6 karakter',
-            'password_confirmation.required' => 'password wajib di isi',
-            'password_confirmation.min' => 'minimal password 6 karater'
+        ], [
+            'name.required' => 'Name must be filled in',
+            'name.max' => 'Names cannot exceed 50 characters',
+            'email.required' => 'Email must be filled in',
+            'email.max:50' => 'Emails should not exceed 50 characters',
+            'email.unique' => 'email is already in use, Use another email',
+            'password.required' => 'Password must be filled in',
+            'password.min' => 'Password must be at least 6 characters',
+            'password_confirmation.required' => 'Password confirmation is mandatory',
+            'password_confirmation.min' => 'Minimum password must be 6 characters'
         ]);
-
-        // $user = new User();
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = Hash::make($request->password);
-        // $user->role = 'user';
-        // $user->save();
 
         if ($request->role == 'user') {
             $user = new User();
@@ -84,36 +77,10 @@ class RegisterController extends Controller
             $sainsRole->password = Hash::make($request->password);
             $sainsRole->role = $request->role;
             $sainsRole->save();
-            // SainsRole::create([
-            //     'name' => $user->name,
-            //     'email' => $user->email,
-            //     'password' => Hash::make($user->password),
-            //     'role' => 'organizer',
-            // ]);
         }
 
 
 
-    //     'name' => 'required|string|max:50|',
-    //     'email' => 'required|string|email|max:50|unique:users,email,except,id',
-    //     'password' => 'required|min:6',
-    //     'password_confirmation' => 'required|min:6'
-    // ],[
-    //     'name.required' => 'Nama Harus wajib di isi',
-    //     'name.max' => 'Nama tidak boleh melebihi 50 karakter',
-    //     'email.required' => 'email wajib di isi',
-    //     'email.max:50' => 'email tidak boleh melebihi 50 karakter',
-    //     'password.required' => 'password wajib di isi',
-    //     'password.min' => 'password minimal 6 karakter',
-    //     'password_confirmation.required' => 'password wajib di isi',
-    //     'password_confirmation.min' => 'minimal password 6 karater'
-    // ]);
-    // $user = new User();
-    // $user->name = $request->name;
-    // $user->email = $request->email;
-    // $user->password = Hash::make($request->password);
-    // $user->role = 'user';
-    // $user->save();
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan masuk ke akun anda.');
     }
 
@@ -147,7 +114,5 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role' => 'user',
         ]);
-
-
     }
 }
