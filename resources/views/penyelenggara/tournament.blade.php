@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/img/humma-01.png" type="image/x-icon">
     <title>Tournament - HummaEsport</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
@@ -478,33 +478,33 @@
         </div>
     </footer>
 
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- gsap  -->
-    <script src="assets/js/gsap.min.js"></script>
+    <script src="{{ asset('assets/js/gsap.min.js') }}"></script>
     <!-- gsap scroll trigger -->
-    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="{{ asset('assets/js/ScrollTrigger.min.js') }}"></script>
     <!-- lenis  -->
-    <script src="assets/js/lenis.min.js"></script>
+    <script src="{{ asset('assets/js/lenis.min.js') }}"></script>
     <!-- gsap split text -->
-    <script src="assets/js/SplitText.min.js"></script>
+    <script src="{{ asset('assets/js/SplitText.min.js') }}"></script>
     <!-- tilt js -->
-    <script src="assets/js/vanilla-tilt.js"></script>
+    <script src="{{ asset('assets/js/vanilla-tilt.js') }}"></script>
     <!-- scroll magic -->
-    <script src="assets/js/ScrollMagic.min.js"></script>
+    <script src="{{ asset('assets/js/ScrollMagic.min.js') }}"></script>
     <!-- animation.gsap -->
-    <script src="assets/js/animation.gsap.min.js"></script>
+    <script src="{{ asset('assets/js/animation.gsap.min.js') }}"></script>
     <!-- gsap customization  -->
-    <script src="assets/js/gsap-customization.js"></script>
+    <script src="{{ asset('assets/js/gsap-customization.js') }}"></script>
     <!-- apex chart  -->
-    <script src="assets/js/apexcharts.js"></script>
+    <script src="{{ asset('assets/js/apexcharts.js') }}"></script>
     <!-- swiper js -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
     <!-- magnific popup  -->
-    <script src="assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js"></script>
+    <script src="{{ asset('assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js') }}"></script>
     <!-- bootstrap js -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <!-- main js  -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     <!-- jQuery (diperlukan untuk Bootstrap JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
         integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>

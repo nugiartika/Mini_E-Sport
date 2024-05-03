@@ -325,33 +325,31 @@
             <span aria-hidden="true">&times;</span>
           </button> --}}
         </div>
+        <div class="card-body">
 
-
-        {{-- <form action="{{ route('team.store') }}" method="POST">
-            @csrf
-            <div class="modal-body">
-                <div class="row">
-                    @foreach ($teams as $index)
-                        @if ($index->user_id === auth()->user()->id)
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body d-flex align-items-center">
-                                        <input type="hidden" id="team_id" name="team_id">
-                                        <img src="{{ asset('storage/' . $index->profile) }}" alt="" width="25" height="25" class="profile-image me-4">
-                                        <h4 class="name-text">{{ $index->name }}</h4>
-                                    </div>
+            <form action="{{ route('team.storeId') }}" method="POST" >
+                @csrf
+                <div class="form-group">
+                    <label for="team_id">Select Team:</label>
+                    <div class="row">
+                        @foreach ($teams as $team)
+                            <div class="col-12 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="team_id{{ $team->id }}" name="team_id" value="{{ $team->id }}">
+                                    <label class="form-check-label" for="team_id{{ $team->id }}">
+                                        {{ $team->name }}
+                                    </label>
                                 </div>
                             </div>
-                        @endif
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-        </form> --}}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
 
+    </div>
+
+{{--
         <form action="{{ route('team.addToTournament') }}" method="POST">
             @csrf
             <input type="hidden" name="id_turnamen" value="{{ $id_turnamen }}">
@@ -363,7 +361,7 @@
                 @endforeach
             </select>
              <button type="submit">Tambahkan ke Turnamen</button>
-        </form>
+        </form> --}}
 
 
       </div>
@@ -466,7 +464,18 @@
 
 
 
-
+    <script>
+        document.getElementById('team_id').addEventListener('change', function() {
+            var teamId = this.value;
+            if (teamId) {
+                document.getElementById('name-group').classList.remove('hidden');
+                document.getElementById('profile-group').classList.remove('hidden');
+            } else {
+                document.getElementById('name-group').classList.add('hidden');
+                document.getElementById('profile-group').classList.add('hidden');
+            }
+        });
+    </script>
     <!-- ==== js dependencies start ==== -->
     <!-- jquery  -->
     <script src="assets/js/jquery.min.js"></script>

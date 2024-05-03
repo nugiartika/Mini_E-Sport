@@ -60,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
     // User Routes
     Route::middleware('user')->group(function () {
         Route::get('/admin/listUser', [SainsRoleController::class, 'create'])->name('admin.listUser');
+        Route::get('/teams/create', [TeamController::class, 'createId'])->name('team.createId');
+        Route::post('/teams', [TeamController::class, 'storeId'])->name('team.storeId');
         Route::get('/index', function () {
             return view('user.index');
         })->name('index');

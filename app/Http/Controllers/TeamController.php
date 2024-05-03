@@ -6,6 +6,7 @@ use App\Http\Requests\TeamRequest;
 use App\Models\Category;
 use App\Models\member;
 use App\Models\Team;
+use App\Models\TeamTournament;
 use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,42 +28,6 @@ class TeamController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function createId(Request $request)
-    {
-        $tournaments = Tournament::all();
-        $teams = Team::all();
-        $user = User::all();
-        $selectedTournamentId = $request->input('tournament_id');
-        return view('user.tourament', compact('teams','user','selectedTournamentId','tournaments'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function storeId(TeamRequest $request)
-    {
-        $tournament_id = $request->tournament_id;
-
-        $user = Auth::user();
-        // $loggedInUserName = $loggedInUser->name;
-
-        $gambar = $request->file('profile');
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('team', $gambar);
-        }
-
-        $team = Team::create([
-            'name' => $request->name,
-            'profile' => $path_gambar,
-            'tournament_id' => $tournament_id,
-            'user_id' => $user->id,
-            // 'member_id' => $request->member_id,
-            // 'cadangan1' => $request->cadangan1,
-            // 'cadangan2' => $request->cadangan2,
-        ]);
-
-        return redirect()->back()->with('success', 'Team added successfully');
-    }
 
 
     public function create(Request $request)

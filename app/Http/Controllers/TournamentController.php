@@ -21,7 +21,8 @@ class TournamentController extends Controller
     {
 
         $user = Auth::user();
-        $tournaments = Tournament::where('users_id', $user->id)->get();
+        // $tournaments = Tournament::where('users_id', $user->id)->get();
+        $tournaments = Tournament::all();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
@@ -32,7 +33,8 @@ class TournamentController extends Controller
 
     public function indexuser()
     {
-        $tournaments = Tournament::where('status', 'accepted')->get();
+        // $tournaments = Tournament::where('status', 'accepted')->get();
+        $tournaments = Tournament::all();
         $user = User::all();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
