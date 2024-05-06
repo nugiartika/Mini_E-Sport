@@ -14,6 +14,19 @@
 @endsection
 
 @section('content')
+    @if ($errors->all())
+        <div class="alert bg-danger">
+            <h5>Ada kesalahan!</h5>
+            <p>Mohon periksa pesan ini dan segera diperbaiki.</p>
+
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="card">
         <h5 class="card-header">Tournament Confirmation</h5>
         <div class="table-responsive text-nowrap">

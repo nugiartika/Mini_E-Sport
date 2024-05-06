@@ -340,8 +340,12 @@
                                                 <select class="form-control prize-dropdown @error('prize') is-invalid @enderror"
                                                     name="prize[]" value="{{ old('prize') }}">
                                                     <option value="">Pilih Salah Satu</option>
-                                        <div class="container row">
-                                            
+                                                    <option value="uang">Uang</option>
+                                                    <option value="mendali">Medali</option>
+                                                    <option value="trophy">Trophy</option>
+                                                    <option value="sertifikat">Sertifikat</option>
+                                                </select>
+
                                                 <button type="button" class="addRow rounded-end btn btn-info"><i
                                                         class="ti ti-plus fs-2xl"></i></button>
 
@@ -352,6 +356,13 @@
                                                 <!-- Ubah id menjadi class untuk "moneyForm" -->
                                                 <input class="form-control" type="number"
                                                     placeholder="inputkan jumlah uang" name="jumlah[]" />
+
+
+
+
+
+
+
                                             </div>
                                         </div>
                                     </div>
