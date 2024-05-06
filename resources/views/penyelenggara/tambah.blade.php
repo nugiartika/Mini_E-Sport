@@ -190,7 +190,7 @@
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
                             <img class="" src="{{ asset('assets/img/humma-01.png') }}" height="60px"
-                                width="75px" alt="favicon">
+                                width="75px"  alt="favicon">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -340,12 +340,8 @@
                                                 <select class="form-control prize-dropdown @error('prize') is-invalid @enderror"
                                                     name="prize[]" value="{{ old('prize') }}">
                                                     <option value="">Pilih Salah Satu</option>
-                                                    <option value="uang">Uang</option>
-                                                    <option value="mendali">Medali</option>
-                                                    <option value="trophy">Trophy</option>
-                                                    <option value="sertifikat">Sertifikat</option>
-                                                </select>
-
+                                        <div class="container row">
+                                            
                                                 <button type="button" class="addRow rounded-end btn btn-info"><i
                                                         class="ti ti-plus fs-2xl"></i></button>
 
@@ -606,8 +602,6 @@
             }
         }
     </script>
-
-
     {{-- script untuk form wizard --}}
     <script>
         var currentTab = 0; // Langkah saat ini diatur menjadi langkah pertama (0)

@@ -88,42 +88,52 @@ class TournamentController extends Controller
         try {
             $user = Auth::user();
 
-        $gambar = $request->file('images');
-        $path_gambar = null;
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('tournament', $gambar);
-        }
+            // Proses gambar
+            $gambar = $request->file('images');
+            $path_gambar = null;
+            if ($gambar) {
+                $path_gambar = Storage::disk('public')->put('tournament', $gambar);
+            }
 
-        $prize = $request->input('prize');
-        $jumlah = $request->input('jumlah');
+            // Ambil data dari form repeat
+            $prizes = $request->input('prize');
+            $jumlahs = $request->input('jumlah');
 
-        Tournament::create([
-            'name' => $request->input('name'),
-            'pendaftaran' => $request->input('pendaftaran'),
-            'permainan' => $request->input('permainan'),
-            'end_pendaftaran' => $request->input('end_pendaftaran'),
-            'end_permainan' => $request->input('end_permainan'),
-            'categories_id' => $request->input('categories_id'),
-            'users_id' => $user->id,
-            'prize' => $prize,
-            'jumlah' => $jumlah,
-            'slotTeam' => $request->input('slotTeam'),
-            'contact' => $request->input('contact'),
-            'images' => $path_gambar,
-            'description' => $request->input('description'),
-            'rule' => $request->input('rule'),
-            'paidment' => $request->input('paidment'),
-            'nominal' => $request->input('nominal'),
-            'status' => 'pending',
-        ]);
+            // Simpan data turnamen
+            $tournament = new Tournament();
+            $tournament->name = $request->input('name');
+            $tournament->pendaftaran = $request->input('pendaftaran');
+            $tournament->permainan = $request->input('permainan');
+            $tournament->end_pendaftaran = $request->input('end_pendaftaran');
+            $tournament->end_permainan = $request->input('end_permainan');
+            $tournament->categories_id = $request->input('categories_id');
+            $tournament->users_id = $user->id;
+            $tournament->slotTeam = $request->input('slotTeam');
+            $tournament->contact = $request->input('contact');
+            $tournament->images = $path_gambar;
+            $tournament->description = $request->input('description');
+            $tournament->rule = $request->input('rule');
+            $tournament->paidment = $request->input('paidment');
+            $tournament->nominal = $request->input('nominal');
+            $tournament->status = 'pending';
 
-        return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
+            // Simpan data prize dan jumlah
+            $tournament->save();
+
+            foreach ($prizes as $key => $prize) {
+                $tournamentPrize = new Tournament();
+                $tournamentPrize->prize = $prize;
+                $tournamentPrize->jumlah = $jumlahs[$key];
+                $tournamentPrize->save();
+            }
+
+            return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
 
         } catch (\Exception $e) {
             // Tangani kesalahan
-            dd($e->getMessage()); // Cetak pesan kesalahan untuk keperluan debugging
-        }
+            dd($e->getMessage());        }
     }
+
 
 
 

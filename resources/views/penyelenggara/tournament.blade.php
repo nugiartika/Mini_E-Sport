@@ -260,9 +260,7 @@
                                                             </button>
                                                         </form>
                                                     </li>
-                                                    <li><a href=""
-                                                        class="dropdown-item"><i class="ti ti-plus fs-2xl"></i>
-                                                        Tambah Pemenang</a></li>
+                                                    <li><a href="" class="dropdown-item"><i class="ti ti-calendar fs-2xl"></i>Tambah Jadwal</a></li>
                                                 </ul>
                                             </div>
 
@@ -293,10 +291,9 @@
                                                     <div
                                                         class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                                         <div class="d-flex align-items-center gap-2">
-                                                            <img class="w-100" src="assets/img/tether.png"
+                                                            <img class="w-100" src="{{asset('assets/img/tether.png')}}"
                                                                 alt="tether">
-                                                            <span
-                                                                class="tcn-1 fs-sm">Rp.{{ number_format(floatval($tournament->nominal), 0, ',', '.') }}</span>
+                                                            <span class="tcn-1 fs-sm">Rp.{{ number_format(floatval($tournament->nominal), 0, ',', '.') }}</span>
                                                         </div>
                                                     </div>
                                                     <div
