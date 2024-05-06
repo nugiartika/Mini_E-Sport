@@ -77,7 +77,7 @@
             <div class="account-items d-grid gap-1" data-tilt>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="bttn account-item" type="submit">Log Out</button>
+                    <button class="bttn account-item" type="submit">Kembali</button>
                 </form>
             </div>
         </div>

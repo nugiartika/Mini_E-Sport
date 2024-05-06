@@ -17,7 +17,7 @@
                         fill="#7367F0" />
                 </svg>
             </span>
-            <span class="app-brand-text demo menu-text fw-bold">Vuexy</span>
+            <span class="app-brand-text demo menu-text fw-bold">Huma Esport</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -33,176 +33,26 @@
 
 
         <li class="menu-item active open">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>Dashboards</div>
-                <div class="badge bg-primary rounded-pill ms-auto">5</div>
-
             </a>
 
-
-            <ul class="menu-sub">
-
-
-
-                <li class="menu-item ">
-                    <a href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo-1" class="menu-link">
-                        <div>Analytics</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item active">
-                    <a href="crm.html" class="menu-link">
-                        <div>CRM</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../app/ecommerce/dashboard.html" class="menu-link">
-                        <div>eCommerce</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../app/logistics/dashboard.html" class="menu-link">
-                        <div>Logistics</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../app/academy/dashboard.html" class="menu-link">
-                        <div>Academy</div>
-                    </a>
-
-
-                </li>
-            </ul>
         </li>
-
-
-
-
-
-
-
 
         <li class="menu-item ">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                <div>Layouts</div>
+                <div>Game</div>
             </a>
-
-
-            <ul class="menu-sub">
-
-
-
-                <li class="menu-item ">
-                    <a href="../layouts/collapsed-menu.html" class="menu-link">
-                        <div>Collapsed menu</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../layouts/content-navbar.html" class="menu-link">
-                        <div>Content navbar</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../layouts/content-nav-sidebar.html" class="menu-link">
-                        <div>Content nav + Sidebar</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../layouts/horizontal.html" class="menu-link" target="_blank">
-                        <div>Horizontal</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../layouts/without-menu.html" class="menu-link">
-                        <div>Without menu</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../layouts/without-navbar.html" class="menu-link">
-                        <div>Without navbar</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../layouts/fluid.html" class="menu-link">
-                        <div>Fluid</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../layouts/container.html" class="menu-link">
-                        <div>Container</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item ">
-                    <a href="../layouts/blank.html" class="menu-link" target="_blank">
-                        <div>Blank</div>
-                    </a>
-
-
-                </li>
-            </ul>
         </li>
 
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div>History</div>
+            </a>
+        </li>
     </ul>
 
 </aside>

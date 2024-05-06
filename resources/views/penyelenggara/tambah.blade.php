@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/img/humma-01.png') }}" type="image/x-icon">
     <title>Tournament - HummaEsport</title>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -240,7 +240,7 @@
             <div class="account-items d-grid gap-1" data-tilt>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="bttn account-item" type="submit">Log Out</button>
+                    <button class="bttn account-item" type="submit">Kembali</button>
                 </form>
             </div>
         </div>
@@ -376,9 +376,9 @@
 
                             <div class="mb-3">
                                 <label for="category" class="form-label">GAME</label>
-                                <select class="form-control @error('categories_id') is-invalid @enderror"
+                                <select class="form-select @error('categories_id') is-invalid @enderror"
                                     id="category" name="categories_id" aria-label="Default select example">
-                                    <option value="" selected>Select Game</option>
+                                    <option value="" selected>Pilih Game</option>
                                     @foreach ($category as $kat)
                                         <option value="{{ $kat->id }}"
                                             {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
@@ -432,8 +432,8 @@
                                 @error('paidment')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
-                                    <option value="" selected disabled>Pilih</option>
+                                <select name="paidment" id="paidment" class="form-select" onchange="toggleDiv1()">
+                                    <option value="" selected disabled>Pilih </option>
                                     <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
                                     </option>
                                     <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak

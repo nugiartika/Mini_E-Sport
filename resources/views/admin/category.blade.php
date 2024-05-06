@@ -10,7 +10,7 @@
                 Tambahkan Kategori
             </a>
 
-            
+
             <form action="{{ route('category.index') }}" method="get">
                 @csrf
                 <div class="input-group mb-3">
@@ -24,7 +24,7 @@
             <table class="table">
                 <thead class="table-light">
                     <tr>
-                        <th>#</th>
+                        <th>No</th>
                         <th>Kategori</th>
                         <th>Foto Cover</th>
                         <th>Anggota Per Tim</th>
@@ -197,8 +197,8 @@
     @endforeach
 @endsection
 
-{{-- @section('content') --}}
-{{-- @if (session('success'))
+ @section('content')
+ @if (session('success'))
     <!-- Modal Success -->
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -327,12 +327,8 @@
                 </div>
             </div>
 
-
         </div>
-
     </div>
-
-
 
 </body>
 
@@ -463,5 +459,5 @@
             </div>
         </td>
     </tr>
-@endforelse --}}
-{{-- @endsection --}}
+@endforelse
+@endsection

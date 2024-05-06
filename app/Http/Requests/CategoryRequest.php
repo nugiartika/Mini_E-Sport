@@ -31,15 +31,15 @@ class CategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'The name field is required.',
-            'name.unique' => 'The name has already been taken.',
-            'name.max' => 'The name must not be greater than 50 characters.',
-            'photo.required' => 'The photo field is required.',
-            'photo.image' => 'input must be a photo',
-            'photo.mimes' => 'The photo must be a file jpeg,png,jpg',
-            'photo.max' => 'The photo must be less than 2MB',
-            'membersPerTeam.required' => 'Member per team must be filled in.',
-            'membersPerTeam.min' => 'Minimum 1 member'
+            'name.required' => 'Nama Game Wajib Diisi',
+            'name.unique' => 'Nama Game Tidak Boleh sama',
+            'name.max' => 'Nama Tidak Boleh .',
+            'photo.required' => 'Foto Wajib diisi.',
+            'photo.image' => 'Masukan harus berupa foto',
+            'photo.mimes' => 'Foto harus berupa file jpeg,png,jpg',
+            'photo.max' => 'Ukuran foto harus kurang 2MB',
+            'membersPerTeam.required' => 'Anggota pertim wajib diisi',
+            'membersPerTeam.min' => 'Minimal 1 anggota'
         ];
     }
 }

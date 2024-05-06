@@ -67,7 +67,7 @@
         class="template-customizer-core-css" />
     <link rel="stylesheet"
         href="{{ asset('demo/assets/vendor/css/rtl/theme-defaultfc79.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9"
-                class="template-customizer-theme-css') }}" />
+                        class="template-customizer-theme-css') }}" />
     <link rel="stylesheet" href="{{ asset('demo/assets/css/demof1ed.css?id=ddd2feb83a604f9e432cdcb29815ed44') }}" />
     <link rel="stylesheet"
         href="{{ asset('demo/assets/vendor/libs/node-waves/node-wavesd178.css?id=aa72fb97dfa8e932ba88c8a3c04641bc') }}" />
@@ -172,7 +172,6 @@
 
         <!-- Overlay -->
         <div class="layout-overlay layout-menu-toggle"></div>
-        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
         <div class="drag-target"></div>
     </div>
 
