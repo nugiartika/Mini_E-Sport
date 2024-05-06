@@ -10,6 +10,7 @@
                 Tambahkan Kategori
             </a>
 
+            
             <form action="{{ route('category.index') }}" method="get">
                 @csrf
                 <div class="input-group mb-3">

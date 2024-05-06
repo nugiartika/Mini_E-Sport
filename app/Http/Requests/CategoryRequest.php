@@ -25,7 +25,6 @@ class CategoryRequest extends FormRequest
             'name'=>'required|unique:categories,name,max:50',
             'photo'=>'required|image|mimes:jpeg,png,jpg|max:2048',
             'membersPerTeam' => 'required|integer|min:1|max:7'
-
         ];
     }
 
