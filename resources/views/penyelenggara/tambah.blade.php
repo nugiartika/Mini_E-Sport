@@ -190,7 +190,7 @@
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
                             <img class="" src="{{ asset('assets/img/humma-01.png') }}" height="60px"
-                                width="75px"  alt="favicon">
+                                width="75px" alt="favicon">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -337,7 +337,8 @@
                                     <div id="inputs">
                                         <div class="form-prize">
                                             <div class="input-group">
-                                                <select class="form-control prize-dropdown @error('prize') is-invalid @enderror"
+                                                <select
+                                                    class="form-control prize-dropdown @error('prize') is-invalid @enderror"
                                                     name="prize[]" value="{{ old('prize') }}">
                                                     <option value="">Pilih Salah Satu</option>
                                                     <option value="uang">Uang</option>
@@ -356,13 +357,6 @@
                                                 <!-- Ubah id menjadi class untuk "moneyForm" -->
                                                 <input class="form-control" type="number"
                                                     placeholder="inputkan jumlah uang" name="jumlah[]" />
-
-
-
-
-
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -417,7 +411,8 @@
                         <div class="tab">
                             <div class="mb-3">
                                 <label for="description" class="form-label">Deskripsi</label>
-                                <textarea name="description" placeholder="Jelaskan deskripsi turnamennya" id="summernoteModalDescription" class="form-control" aria-label="With textarea">{{ old('description') }}</textarea>
+                                <textarea name="description" placeholder="Jelaskan deskripsi turnamennya" id="summernoteModalDescription"
+                                    class="form-control" aria-label="With textarea">{{ old('description') }}</textarea>
 
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
@@ -425,7 +420,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="rule" class="form-label">Aturan Main</label>
-                                <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen" class="form-control" aria-label="With textarea">{{ old('rule') }}</textarea>
+                                <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen"
+                                    class="form-control" aria-label="With textarea">{{ old('rule') }}</textarea>
 
                                 @error('rule')
                                     <p class="text-danger">{{ $message }}</p>
@@ -722,7 +718,8 @@
                     templateRow.find('.count').text(1);
                 }
 
-                $('#inputs').append('<div class="form-prize border-top pt-3 mt-3">' + templateRow.html() + '</div>');
+                $('#inputs').append('<div class="form-prize border-top pt-3 mt-3">' + templateRow.html() +
+                    '</div>');
 
                 return false;
             });
