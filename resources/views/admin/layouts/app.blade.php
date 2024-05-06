@@ -9,7 +9,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
@@ -92,9 +92,6 @@
 </head>
 
 <body>
-
-
-
     <!-- Layout Content -->
     <div class="layout-wrapper layout-content-navbar ">
         <div class="layout-container">
@@ -107,7 +104,6 @@
                 <!-- BEGIN: Navbar-->
                 @include('admin.layouts.navbar')
 
-
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
@@ -115,7 +111,6 @@
                         @yield('content')
                         <!-- / Content -->
                     </div>
-
                 </div>
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl">

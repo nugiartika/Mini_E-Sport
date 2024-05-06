@@ -1,7 +1,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
     <div class="app-brand demo">
-        <a href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo-1" class="app-brand-link">
+        <a href="{{ route('admin.index') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
                 <svg width="32" height="20" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -27,16 +27,16 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item active open">
+        <li class="menu-item {{ request()->routeIs(['admin.index', 'category.index']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div>Dashboards</div>
+                <div>Dasbor</div>
             </a>
 
             <ul class="menu-sub">
                 <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.index') }}" class="menu-link">
-                        <div>Dashboard</div>
+                        <div>Dasbor</div>
                     </a>
                 </li>
 
@@ -49,11 +49,10 @@
         </li>
         {{-- end dashboard admin --}}
 
-
         {{-- User Diterima --}}
-        <li class="menu-item active open">
+        <li class="menu-item {{ request()->routeIs(['listUserPenyelenggara', 'listPenyelenggara', 'listUser']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon tf-icons ti ti-users text-body"></i>
                 <div>Users</div>
             </a>
 
@@ -61,33 +60,31 @@
             <ul class="menu-sub">
                 <li class="menu-item {{ request()->routeIs('listUserPenyelenggara') ? 'active' : '' }} ">
                     <a href="{{ route('listUserPenyelenggara') }}" class="menu-link">
-                        <div>Acc User</div>
+                        <div>Penerimaan</div>
                     </a>
                 </li>
             </ul>
             <ul class="menu-sub">
                 <li class="menu-item {{ request()->routeIs('listUser') ? 'active' : '' }} ">
                     <a href="{{ route('listUser') }}" class="menu-link">
-                        <div>List User</div>
+                        <div>Daftar Pengguna</div>
                     </a>
                 </li>
             </ul>
             <ul class="menu-sub">
                 <li class="menu-item {{ request()->routeIs('listPenyelenggara') ? 'active' : '' }} ">
                     <a href="{{ route('listPenyelenggara') }}" class="menu-link">
-                        <div>List of Organizers</div>
+                        <div>Daftar Penyelenggara</div>
                     </a>
                 </li>
             </ul>
         </li>
 
-
-
-        {{-- strat --}}
-        <li class="menu-item active open">
+        {{-- Turnamen --}}
+        <li class="menu-item {{ request()->routeIs(['konfirmtournament']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="ti-md ti ti-device-laptop text-body"></i>
-                <div>Tournament</div>
+                <i class="menu-icon ti-md ti ti-trophy text-body"></i>
+                <div>Turnamen</div>
             </a>
 
             <ul class="menu-sub">
@@ -99,7 +96,7 @@
 
                 <li class="menu-item {{ request()->routeIs('konfirmtournament') ? 'active' : '' }}">
                     <a href="{{ route('konfirmtournament') }}" class="menu-link">
-                        <div>Acc Toutnament</div>
+                        <div>Data Turnamen</div>
                     </a>
                 </li>
             </ul>
