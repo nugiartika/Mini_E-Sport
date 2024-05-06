@@ -40,49 +40,39 @@
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
-                        <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
-                            <li class="menu-link">
-                                <a href="#">HOME</a>
-                            </li>
-                            <li class="menu-item">
 
-                            <li class="menu-link">
-                                <a href="{{ route('user.tournament') }}">TOURNAMENTS</a>
-                            </li>
-                            </li>
-                            <li class="menu-link">
-                                <a href="{{ route('game') }}">GAME</a>
-                            </li>
-                            <li class="menu-item">
-                            <li class="menu-link">
-                                <a href="{{ route('team.index') }}">TEAMS</a>
-                            </li>
-                            </li>
-                            <li class="menu-item">
-                                <button>PAGES</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="{{ route('login') }}">Login</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    <button class="ntf-btn box-style fs-2xl">
+                    {{-- <button class="ntf-btn box-style fs-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 22 22">
                             <path fill="currentColor"
                                 d="M13 21H9v-1H8v-6H2v-1H1V9h1V8h6V2h1V1h4v1h1v6h6v1h1v4h-1v1h-6v6h-1M12 5V3h-2v2m-5 7v-2H3v2Z" />
                         </svg>
-                    </button>
+                    </button> --}}
+
+                    <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
+                        <li class="menu-link">
+                            <a href="{{ route('login') }}"
+                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Login</a>                        </li>
+                        </li>
+                    </ul>
 
                     <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
                         @if (auth()->check())
                             <div class="header-profile pointer">
                                 <div class="profile-wrapper d-flex align-items-center gap-3">
                                     <div class="img-area overflow-hidden">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 36 36"><path fill="currentColor" d="M30.61 24.52a17.16 17.16 0 0 0-25.22 0a1.51 1.51 0 0 0-.39 1v6A1.5 1.5 0 0 0 6.5 33h23a1.5 1.5 0 0 0 1.5-1.5v-6a1.51 1.51 0 0 0-.39-.98" class="clr-i-solid clr-i-solid-path-1"/><circle cx="18" cy="10" r="7" fill="currentColor" class="clr-i-solid clr-i-solid-path-2"/><path fill="none" d="M0 0h36v36H0z"/></svg>                                    </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                            viewBox="0 0 36 36">
+                                            <path fill="currentColor"
+                                                d="M30.61 24.52a17.16 17.16 0 0 0-25.22 0a1.51 1.51 0 0 0-.39 1v6A1.5 1.5 0 0 0 6.5 33h23a1.5 1.5 0 0 0 1.5-1.5v-6a1.51 1.51 0 0 0-.39-.98"
+                                                class="clr-i-solid clr-i-solid-path-1" />
+                                            <circle cx="18" cy="10" r="7" fill="currentColor"
+                                                class="clr-i-solid clr-i-solid-path-2" />
+                                            <path fill="none" d="M0 0h36v36H0z" />
+                                        </svg>
+                                    </div>
                                     <span
                                         class="user-name d-none d-xxl-block text-nowrap">{{ auth()->user()->name }}</span>
                                     <i class="ti ti-chevron-down d-none d-xxl-block"></i>
@@ -142,8 +132,7 @@
                             <span class="d-block tcp-1">Esport</span>
                             GAMERS
                         </h1>
-                        <a href="{{ route('login') }}"
-                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Join</a>
+
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-2 col-4 order-md-last order-lg-1">
@@ -348,12 +337,8 @@
             <div class="row justify-content-between g-6">
                 <div class="col-lg-6">
                     <span class="display-three tcn-1 cursor-scale growUp mb-8 d-block title-anim">Humma Esport</span>
-                    <span class="fs-lg tcn-6">
-                        Ingin memmbuat even tourname sendiri? Daftarkan diri anda sebagai penylenggara
-                    </span>
                 </div>
                 <div class="col-xl-5 col-lg-6">
-
                     <div
                         class="d-flex align-items-md-center align-items-start justify-content-between gap-lg-8 gap-6 flex-md-row flex-column">
                         <div class="d-flex align-items-center gap-lg-4 gap-2">
@@ -448,8 +433,8 @@
             </div>
             <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
                 <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
-                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY <a
-                            href="https://themeforest.net/user/pixelaxis" class="tcp-1">MAGANG HUMMA </a></span>
+                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY <a href=""
+                            class="tcp-1">MAGANG HUMMA </a></span>
                 </div>
             </div>
         </div>

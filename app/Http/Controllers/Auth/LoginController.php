@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -40,14 +42,42 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
-            if (auth()->user()->role === 'organizer') {
+        $messages = [
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'password.required' => 'Password wajib diisi.',
+            'email_password_mismatch' => 'Email :email tidak ditemukan.',
+            'password_wrong' => 'Password salah.',
+        ];
+
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ], $messages);
+
+        $credentials = $request->only('email', 'password');
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return redirect()->back()->withInput()->withErrors(['email_password_mismatch' => 'Email ' . $request->email . ' tidak ditemukan atau password salah.']);
+        }
+
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->withInput()->withErrors(['password_wrong']);
+        }
+
+        if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+            if ($user->role === 'organizer') {
                 return redirect()->route('dashboardPenyelenggara');
-            } else {
+            } elseif ($user->role === 'admin') {
                 return redirect()->route('admin.index');
+            } elseif ($user->role === 'user') {
+                return redirect()->route('dashboardUser');
             }
         } else {
-            return redirect()->back()->withInput()->withErrors(['email' => 'Kombinasi email dan password tidak valid.']);
+            return redirect()->back()->withInput()->withErrors(['email_password_mismatch' => 'Email ' . $request->email . ' tidak ditemukan atau password salah.']);
         }
     }
-    }
+}

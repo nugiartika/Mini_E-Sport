@@ -76,43 +76,42 @@
                         <form action="{{ route('register') }}" class="sign-in-form" method="POST">
                             @csrf
                             <div class="single-input mb-6">
-                                <input type="text" name="name" placeholder="Enter your name">
+                                <input type="text" name="name" placeholder="Masukkan nama">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="single-input mb-6">
-                                <input type="email" name="email" placeholder="Enter your email">
+                                <input type="email" name="email" placeholder="Masukkan email">
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="single-input mb-6">
-                                <input type="password" name="password" placeholder="Enter your password">
+                                <input type="password" name="password" placeholder="Masukkan password">
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="single-input mb-6">
-                                <input type="password" name="password_confirmation" placeholder="Confirm your password">
+                                <input type="password" name="password_confirmation" placeholder="Konfirmasi password">
                                 @error('password_confirmation')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
-                            <div class="single-input mb-6">
-                                <select id="role" class="form-control @error('role') is-invalid @enderror" name="role">
+                            <div class="form-group single-input mb-6">
+                                <select id="role" class="form-control select2-selection__arrow @error('role') is-invalid @enderror" name="role">
                                     <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                                     <option value="organizer" {{ old('role') == 'organizer' ? 'selected' : '' }}>Organizer</option>
                                 </select>
 
                                 @error('role')
-                                    <p class="text-danger">
+                                    <div class="invalid-feedback">
                                         {{ $message }}
-                                    </p>
+                                    </div>
                                 @enderror
                             </div>
-
 
                             <div class="text-center">
                                 <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Register</button>

@@ -52,15 +52,15 @@ class RegisterController extends Controller
             'password' => 'required|min:6',
             'password_confirmation' => 'required|min:6'
         ], [
-            'name.required' => 'Name must be filled in',
-            'name.max' => 'Names cannot exceed 50 characters',
-            'email.required' => 'Email must be filled in',
-            'email.max:50' => 'Emails should not exceed 50 characters',
-            'email.unique' => 'email is already in use, Use another email',
-            'password.required' => 'Password must be filled in',
-            'password.min' => 'Password must be at least 6 characters',
-            'password_confirmation.required' => 'Password confirmation is mandatory',
-            'password_confirmation.min' => 'Minimum password must be 6 characters'
+            'name.required' => 'Nama wajib di isi',
+            'name.max' => 'Nama maksimal 50 karakter',
+            'email.required' => 'Email wajib di isi',
+            'email.max:50' => 'Email maksimal 50 karakter',
+            'email.unique' => 'Email sudah digunakan, Gunakan email yang belum terdaftar',
+            'password.required' => 'Password wajib di isi',
+            'password.min' => 'Password minimal 6 karakter',
+            'password_confirmation.required' => 'Password konfirmasi wajib di isi',
+            'password_confirmation.min' => 'Minimum password 6 karakter'
         ]);
 
         if ($request->role == 'user') {

@@ -1,7 +1,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
     <div class="app-brand demo">
-        <a href="{{ route('admin.index') }}" class="app-brand-link">
+        <a href="" class="app-brand-link">
             <span class="app-brand-logo demo">
                 <svg width="32" height="20" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -81,22 +81,23 @@
         </li>
 
         {{-- Turnamen --}}
-        <li class="menu-item {{ request()->routeIs(['konfirmtournament']) ? 'active open' : '' }}">
+        <li class="menu-item {{ request()->routeIs(['konfirmtournament','DetailTournament']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti-md ti ti-trophy text-body"></i>
                 <div>Turnamen</div>
             </a>
 
             <ul class="menu-sub">
-                {{-- <li class="menu-item {{ request()->routeIs('DetailTournament') ? 'active' : '' }} ">
-                    <a href="{{ route('DetailTournament') }}" class="menu-link">
-                        <div>List Tournament</div>
-                    </a>
-                </li> --}}
-
                 <li class="menu-item {{ request()->routeIs('konfirmtournament') ? 'active' : '' }}">
                     <a href="{{ route('konfirmtournament') }}" class="menu-link">
                         <div>Terima Turnamen</div>
+                    </a>
+                </li>
+            </ul>
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->routeIs('DetailTournament') ? 'active' : '' }} ">
+                    <a href="{{ route('DetailTournament') }}" class="menu-link">
+                        <div>Daftar Turnamen</div>
                     </a>
                 </li>
             </ul>

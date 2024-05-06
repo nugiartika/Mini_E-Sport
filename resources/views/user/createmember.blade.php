@@ -14,16 +14,6 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
 
-    <!-- Fonts -->
-    {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap" rel="stylesheet"> --}}
-
-    <!-- Icons -->
-    {{-- <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
-    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css"/>
-    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" /> --}}
-
     <!-- Core CSS -->
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
@@ -44,10 +34,7 @@
 
     <!-- Helpers -->
     <script src="../../assets/vendor/js/helpers.js"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <script src="../../assets/vendor/js/template-customizer.js"></script>
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../../assets/js/config.js"></script>
 
 
@@ -67,42 +54,19 @@
         }
 
 
-   /* Style untuk tombol radio kustom */
-   /* .custom-radio {
-        display: inline-block;
-        position: relative;
-        padding-left: 30px;
-        margin-right: 15px;
-        cursor: pointer;
-    } */
 
     /* Gambar yang digunakan untuk tombol radio */
     .custom-radio input[type="radio"] {
         display: none;
     }
 
-    /* Style untuk tanda centang */
-    /* .custom-radio .radio-dot {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        width: 20px;
-        height: 20px;
-        background-color: #ccc;
-        transition: background-color 0.3s ease;
-    } */
 
     /* Style ketika tombol radio dipilih */
     .custom-radio input[type="radio"]:checked + .radio-dot {
         background-color: #2196F3; /* Warna tanda centang saat dipilih */
     }
 
-    /* .custom-radio img {
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-    } */
+
 </style>
 @endsection
 @section('content')
@@ -112,20 +76,14 @@
     <div class="col-12 col-lg-4">
         <!-- Pricing Card -->
         <div class="card mb-4">
-          {{-- <div class="card-header">
 
-            <h5 class="card-title mb-0">new team</h5>
-          </div> --}}
 
           <div class="card-body">
              <form action="{{ route('member.store') }}" method="POST">
         @csrf
             <div class="customer-avatar-section">
 
-            {{-- @php
-                use App\Models\Team;
-                $teamIds = [ $selectedTeamId ];
-                        @endphp --}}
+
             @php
             $loggedInUserId = auth()->user()->email; // Mengambil ID pengguna yang sedang login
             $loggedInUserName = auth()->user()->name; // Mengambil ID pengguna yang sedang login
@@ -255,20 +213,7 @@
 
 
     <br>
-    {{-- <h5>substitute player</h5><br> --}}
-
-    {{-- <div class="row g-3">
-                <div class="col-md-6">
-                    <label for="substituteMember" class="form-label">Substitute Member</label>
-                    <input type="email" class="form-control" id="substituteMember" name="substitute_member"
-                        placeholder="Enter substitute member's email">
-                </div>
-                <div class="col-md-6">
-                    <label for="substituteNickname" class="form-label">Substitute Nickname</label>
-                    <input type="text" class="form-control" id="substituteNickname" name="substitute_nickname"
-                        placeholder="Enter substitute nickname">
-                </div>
-            </div> --}}
+   
 
     <button type="submit" class="btn btn-primary ms-2">SAVE</button>
     </div>

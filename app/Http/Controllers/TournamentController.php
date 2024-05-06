@@ -63,7 +63,7 @@ class TournamentController extends Controller
 
     public function indexadmin()
     {
-        $tournaments = Tournament::all();
+        $tournaments = Tournament::where('status', 'pending')->get();
         $user = User::all();
         $category = Category::all();
         return view('admin.AccTournament', compact('tournaments', 'category', 'user'));
@@ -155,13 +155,10 @@ class TournamentController extends Controller
     /**
      * Display the specified resource.
      */
-    // public function show(Tournament $tournament)
-    // {
-    //     $members = member::all();
-    //     $teams = Team::all();
-    //     $tournamentId = $tournament->id;
-    //     return view('user.createteam', compact('tournamentId','members','teams'));
-    // }
+    public function show(Tournament $tournament)
+    {
+        //
+    }
 
     public function detail($id)
     {
@@ -182,7 +179,6 @@ class TournamentController extends Controller
             ->get();
         $category = Category::all();
 
-        // Ambil turnamen berdasarkan ID yang diberikan
         $selectedTournament = Tournament::findOrFail($id);
 
         return view('penyelenggara.detailtournament', compact('tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
@@ -197,21 +193,55 @@ class TournamentController extends Controller
         $tournaments = Tournament::find($id);
         $category = Category::all();
         $user = User::all();
-        return view('admin.konfirmtournament', compact('tournaments', 'category', 'user'));
+        return view('admin.AccTournament', compact('tournaments', 'category', 'user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
+    // public function update(Request $request, $id)
+    // {
+    //     $tournament = Tournament::findOrFail($id);
+
+    //     $request->validate([
+    //         'status' => 'required|in:accepted,rejected',
+    //     ], [
+    //         'status.required' => 'Kolom STATUS wajib diisi.',
+    //         'status.in' => 'Status harus berupa "accepted" atau "rejected".',
+    //     ]);
+
+    //     $status = $request->input('status');
+
+    //     $data = [
+    //         'status' => $status,
+    //     ];
+
+    //     $tournament->update($data);
+
+    //     if ($status === 'rejected') {
+    //         // $tournament->delete();
+    //         return redirect()->route('konfirmtournament')->with('success', 'Turnamen berhasil dihapus.');
+    //     } elseif ($status === 'accepted'){
+    //         // $tournament->delete();
+    //         return redirect()->route('konfirmtournament')->with('success', 'Turnamen berhasil dihapus.');
+    //     }
+
+    //     return redirect()->back()->with('error', 'Gagal memperbarui status turnamen.');
+    // }
+
     public function update(Request $request, $id)
     {
         $tournament = Tournament::findOrFail($id);
 
         $request->validate([
             'status' => 'required|in:accepted,rejected',
+            'reason' => $request->input('status') === 'rejected' ? 'required|string|max:255' : 'nullable|string|max:255',
         ], [
             'status.required' => 'Kolom STATUS wajib diisi.',
             'status.in' => 'Status harus berupa "accepted" atau "rejected".',
+            'reason.required' => 'Alasan penolakan wajib diisi.',
+            'reason.string' => 'Alasan penolakan harus berupa teks.',
+            'reason.max' => 'Alasan penolakan tidak boleh melebihi 255 karakter.',
         ]);
 
         $status = $request->input('status');
@@ -220,16 +250,25 @@ class TournamentController extends Controller
             'status' => $status,
         ];
 
+        // Tambahkan alasan penolakan jika status "rejected"
+        if ($status === 'rejected') {
+            $data['reason'] = $request->input('reason');
+        }
+
         $tournament->update($data);
 
         if ($status === 'rejected') {
-            // Hapus turnamen yang sesuai dengan ID yang sedang diubah
-            $tournament->delete();
+            // $tournament->delete();
+            dd($tournament);
+            return redirect()->route('konfirmtournament')->with('success', 'Turnamen berhasil dihapus.');
+        } elseif ($status === 'accepted') {
+            // $tournament->delete();
             return redirect()->route('konfirmtournament')->with('success', 'Turnamen berhasil dihapus.');
         }
 
         return redirect()->back()->with('error', 'Gagal memperbarui status turnamen.');
     }
+
 
 
     public function edittour($id)
