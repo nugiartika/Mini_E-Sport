@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TeamRequest;
 use App\Models\Category;
-use App\Models\member;
+use App\Models\Member;
 use App\Models\Team;
 use App\Models\TeamTournament;
 use App\Models\Tournament;
@@ -33,6 +33,7 @@ class TeamController extends Controller
         $teams = Team::all();
         $user = User::all();
         $selectedTournamentId = $request->input('tournament_id');
+
         return view('user.createteam', compact('teams','user','selectedTournamentId'));
     }
 
@@ -64,8 +65,6 @@ class TeamController extends Controller
         return redirect()->route('team.show', $team->id)->with('success', 'Team added successfully');
     }
 
-
-
     public function indexdetail($id)
     {
         $teams = Team::findOrFail($id);
@@ -78,7 +77,7 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        $members = member::all();
+        $members = Member::all();
         $teams = Team::all();
         $teamId = $team->id;
 
