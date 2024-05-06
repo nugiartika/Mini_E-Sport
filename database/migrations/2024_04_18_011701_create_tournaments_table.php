@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('contact');
             $table->text('description');
             $table->text('rule');
-            $table->json('prize')->nullable();
+            $table->enum('prize',['uang','mendali','sertifikat','trophy'])->nullable();
             $table->json('jumlah')->nullable();
             $table->enum('status',['pending','rejected','accepted'])->default('pending');
             $table->enum('paidment',['paid','unpaid']);
