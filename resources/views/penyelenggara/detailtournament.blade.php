@@ -5,12 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/img/favicon.png')}}" type="image/x-icon">
     <title>Tournament Details - GamePlex</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 </head>
+<style>
+    .darkened {
+    filter: brightness(50%); /* Ubah nilai brightness sesuai kebutuhan (antara 0% - 100%) */
+}
 
+</style>
 <body>
 
 
@@ -63,77 +68,60 @@
 </header>
 <!-- header-section end -->
 
+
+@foreach ($tournaments as $tournament )
+
     <!-- tournament details banner section start -->
     <div class="tournament-details pb-10 pt-120 mt-lg-0 mt-sm-15 mt-10 overflow-hidden">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex align-items-center gap-4 mb-4">
-                        <a href="javascript:void(0)" onclick="window.history.back()" class="back-btn"><i
-                                class="ti ti-arrow-narrow-left fs-2xl"></i></a>
-                        <h3 class="tcn-1 cursor-scale growDown title-anim"></h3>
-                    </div>
-                </div>
-            </div>
+            <a href="{{ route('ptournament.index') }}">
+                <i class="ti ti-arrow-left" style="color: white;"></i>
+            </a>
             <div class="row">
                 <div class="col-12">
                     <div class="parallax-banner-area parallax-container position-relative rounded-5 overflow-hidden">
-                        <img class="w-100 h-100 parallax-img" src="assets/img/tour-details-banner.png"
-                            alt="tournament banner">
+                        <!-- Periksa apakah $selectedTournament adalah objek yang valid -->
+                        @if ($selectedTournament)
+                        <img class="w-100 h-100 parallax-img darkened" src="{{ asset('storage/' . $selectedTournament->images) }}" alt="tournament banner">
                         <!-- running tournament content here -->
                         <div
-                            class="running-tournament d-flex flex-lg-row flex-column position-absolute top-50 start-50 translate-middle w-100">
+                         class="running-tournament d-flex flex-lg-row flex-column position-absolute top-50 start-50 translate-middle w-100">
                             <div class="running-tournament-thumb w-100">
-                                <img class="w-100 h-100" src="assets/img/running-game.png" alt="tournament thumb">
+                                <img class="w-100 h-100"
+                                    src="{{ asset('storage/' . $selectedTournament->images) }}" alt="tournament thumb">
                             </div>
-                            <div class="running-tour-info py-sm-6 py-4 px-xl-15 px-lg-10 px-sm-6 px-2 w-100">
-                                <h3 class="tcn-1 mb-lg-6 mb-4">Torneo Individual</h3>
+                            <div
+                                class="running-tour-info py-sm-6 py-4 px-xl-15 px-lg-10 px-sm-6 px-2 w-100">
+                                <h3 class="tcn-1 mb-lg-6 mb-4">{{ $selectedTournament->name }}</h3>
                                 <span class="tcn-1 d-block fs-five fw-semibold mb-4">Tournament ending in</span>
-                                <div class="ending-date d-flex align-items-center gap-sm-5 gap-2 mb-lg-8 mb-6">
-                                    <div class="date-box-area">
-                                        <div class="date-box mb-4">
-                                            <h3 class="tcn-1 title-anim cursor-scale growDown" id="days">00</h3>
-                                        </div>
-                                        <span class="tcn-1 text-center d-block">Days</span>
-                                    </div>
-                                    <div class="date-box-area">
-                                        <div class="date-box mb-4">
-                                            <h3 class="tcn-1 title-anim cursor-scale growDown" id="hours">00
-                                            </h3>
-                                        </div>
-                                        <span class="tcn-1 text-center d-block">Hours</span>
-                                    </div>
-                                    <div class="date-box-area">
-                                        <div class="date-box mb-4">
-                                            <h3 class="tcn-1 title-anim cursor-scale growDown" id="minutes">00
-                                            </h3>
-                                        </div>
-                                        <span class="tcn-1 text-center d-block">Minutes</span>
-                                    </div>
-                                    <div class="date-box-area">
-                                        <div class="date-box mb-4">
-                                            <h3 class="tcn-1 title-anim cursor-scale growDown" id="seconds">00
-                                            </h3>
-                                        </div>
-                                        <span class="tcn-1 text-center d-block">Seconds</span>
-                                    </div>
+                                <div
+                                    class="ending-date d-flex align-items-center gap-sm-5 gap-2 mb-lg-8 mb-6">
+                                    <!-- Tambahkan logika waktu turnamen di sini -->
                                 </div>
-                                <div class="d-flex align-items-center gap-md-6 gap-3">
+                                <div
+                                    class="d-flex align-items-center gap-md-6 gap-3">
                                     <a href="tournaments.html"
                                         class="btn-half-border position-relative d-inline-block py-2 bgp-1 px-sm-6 px-4 rounded-pill">View
                                         More</a>
-                                    <div class="d-flex align-items-center flex-wrap gap-md-6 gap-3 w-50">
+                                    <div
+                                        class="d-flex align-items-center flex-wrap gap-md-6 gap-3 w-50">
                                         <div class="end-date">
-                                            <span class="tcn-6">OCT 07, 5:10 AM</span>
+                                            <span class="tcn-6">{{ $selectedTournament->end_permainan }}</span>
                                         </div>
                                         <div class="players">
                                             <i class="ti ti-users-group tcn-1"></i>
-                                            <span class="tcn-6">115/115 Players</span>
+                                            <span class="tcn-6">{{ $selectedTournament->slotTeam }}
+                                                Team</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @else
+                        <div class="alert alert-danger" role="alert">
+                            Tournament not found!
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -150,20 +138,19 @@
                         <i class="ti ti-coin-bitcoin display-five fw-normal tcp-2"></i>
                     </div>
                     <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Prize Pool</h4>
-                    <p class="tcn-1 title-anim">50 ~ $50.00</p>
+                    <p class="tcn-1 title-anim">{{ $tournament->prize }} {{ $tournament->jumlah }}</p>
                 </div>
                 <div class="tour-prize-card">
                     <div class="icon-area mb-6">
                         <i class="ti ti-wallet display-five fw-normal tcp-2"></i>
                     </div>
                     <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Entry Fee</h4>
-                    <p class="tcn-1 title-anim">$50.00</p>
+                    <p class="tcn-1 title-anim">{{ $tournament->paidment }} {{ $tournament->nominal }}</p>
                 </div>
-              
+
             </div>
         </div>
     </section>
-
     <!-- tournament more details section start -->
     <section class="tournament-more-details pb-120">
         <div class="container">
@@ -1024,6 +1011,7 @@
                             </div>
                         </div>
                     </div>
+            @foreach ($tournaments as $tournament )
                     <div class="tabitem">
                         <div class="row align-items-center justify-content-center pt-lg-20 pt-sm-10">
                             <div class="col-lg-4 col-sm-6">
@@ -1050,18 +1038,13 @@
                                     <h5 class="acc-header-area">
                                         <button class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
                                             type="button">
-                                            Paritdas
+                                           DESKRIPSI
                                         </button>
                                     </h5>
                                     <div class="acc-content-area">
                                         <div class="content-body mt-lg-6 mt-4">
                                             <p class="tcn-6">
-                                                Molestias excepturi sint occaecati cupiditate non provident,
-                                                similique
-                                                sunt in culpa qui officia deserunt mollitia animi, id est
-                                                laborum et
-                                                dolorum fuga. Et harum quidem
-                                                rerum facilis est et expedita distinctio.
+                                                {{ $tournament->description }}
                                             </p>
                                         </div>
                                     </div>
@@ -1070,22 +1053,14 @@
                                     <h5 class="acc-header-area">
                                         <button class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
                                             type="button">
-                                            Reglamento
+                                            RULES
                                         </button>
                                     </h5>
                                     <div class="acc-content-area">
                                         <div class="content-body mt-lg-6 mt-4">
-                                            <ol class="tcn-6 lower-alpha-right-parentheses d-grid gap-3">
-                                                <li>Treat all members and staff with courtesy and respect.
-                                                    Discriminatory or offensive behavior will not be tolerated.
-                                                </li>
-                                                <li>Communication Maintain open and constructive communication.
-                                                    Address concerns through the appropriate channels.</li>
-                                                <li>Emergency Procedures: Familiarize yourself with evacuation
-                                                    procedures and the location of emergency exits.</li>
-                                                <li>Safeguard sensitive information and respect the privacy of
-                                                    others.</li>
-                                            </ol>
+                                            <p class="tcn-6">
+                                                {{ $tournament->rule }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1093,21 +1068,14 @@
                                     <h5 class="acc-header-area">
                                         <button class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
                                             type="button">
-                                            Discord
+                                            CONTACT PERSON
                                         </button>
                                     </h5>
                                     <div class="acc-content-area">
                                         <div class="content-body mt-lg-6 mt-4">
-                                            <p>Molestias excepturi sint occaecati cupiditate non provident,
-                                                similique
-                                                sunt in culpa qui
-                                                officia
-                                                deserunt mollitia animi, id est laborum et dolorum fuga. Et
-                                                harum
-                                                quidem
-                                                rerum facilis
-                                                est et
-                                                expedita distinctio.</p>
+                                            <p class="tcn-6">
+                                                {{ $tournament->contact }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1116,6 +1084,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </section>
     <!-- tournament more details section end -->
@@ -1159,7 +1128,7 @@
         </div>
     </div>
     <!-- call to action section end -->
-
+@endforeach
     <!-- footer section start  -->
  <footer class="footer bgn-4 bt">
     <div class="container">
@@ -1256,31 +1225,31 @@
 
     <!-- ==== js dependencies start ==== -->
     <!-- jquery  -->
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <!-- gsap  -->
-    <script src="assets/js/gsap.min.js"></script>
+    <script src="{{asset('assets/js/gsap.min.js')}}"></script>
     <!-- gsap scroll trigger -->
-    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="{{asset('assets/js/ScrollTrigger.min.js')}}"></script>
     <!-- lenis  -->
-    <script src="assets/js/lenis.min.js"></script>
+    <script src="{{asset('assets/js/lenis.min.js')}}"></script>
     <!-- gsap split text -->
-    <script src="assets/js/SplitText.min.js"></script>
+    <script src="{{asset('assets/js/SplitText.min.js')}}"></script>
     <!-- tilt js -->
-    <script src="assets/js/vanilla-tilt.js"></script>
+    <script src="{{asset('assets/js/vanilla-tilt.js')}}"></script>
     <!-- scroll magic -->
-    <script src="assets/js/ScrollMagic.min.js"></script>
+    <script src="{{asset('assets/js/ScrollMagic.min.js')}}"></script>
     <!-- animation.gsap -->
-    <script src="assets/js/animation.gsap.min.js"></script>
+    <script src="{{asset('assets/js/animation.gsap.min.js')}}"></script>
     <!-- gsap customization  -->
-    <script src="assets/js/gsap-customization.js"></script>
+    <script src="{{asset('assets/js/gsap-customization.js')}}"></script>
     <!-- swiper js -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="{{asset('assets/js/swiper-bundle.min.js')}}"></script>
     <!-- magnific popup  -->
-    <script src="assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js"></script>
+    <script src="{{asset('assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js')}}"></script>
     <!-- bootstrap js -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
     <!-- main js  -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
 </body>
 
 </html>

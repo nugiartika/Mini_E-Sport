@@ -23,55 +23,72 @@ class TournamentRequest extends FormRequest
     {
 
         return [
-            'name' => 'required|max:30',
-            'pendaftaran' => 'required',
-            'permainan' => 'required|date|after:end_pendaftaran',
-            'end_pendaftaran' => 'required|date|after:pendaftaran',
-            'end_permainan' => 'required|date|after:permainan',
+            'name' => 'required|string',
+            'pendaftaran' => 'required|date_format:Y-m-d',
+            'permainan' => 'required|date_format:Y-m-d',
+            'end_pendaftaran' => 'required|date_format:Y-m-d',
+            'end_permainan' => 'required|date_format:Y-m-d',
             'categories_id' => 'required|exists:categories,id',
-            'users_id' => 'nullable|exists:users,id',
             'slotTeam' => [
                 'required',
                 'integer',
                 'min:2',
                 function ($attribute, $value, $fail) {
                     if ($value % 2 !== 0) {
-                        $fail('The ' . $attribute . ' must be an even number.');
+                        $fail('Slot tim harus merupakan bilangan genap.');
                     }
                 },
             ],
-
-            'contact' => 'required|integer',
+            'contact' => 'required|string',
             'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'required|max:2048',
-            'rule' => 'required|max:2048',
-            'nominal' => 'nullable',
-            'paidment' => 'required',
-            'prizepol' => 'required',
-            'uang' => 'nullable',
-
+            'description' => 'required|string',
+            'rule' => 'required|string',
+            'paidment' => 'required|string',
+            'nominal' => 'nullable|numeric',
+            'prize' => 'required',
+            'jumlah' => 'nullable|numeric',
         ];
+
+
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => 'name must be filled in.',
-            'name.max' => 'name must not exceed 2048 characters.',
-            'pendaftaran.required' => 'pendaftaran must be filled in.',
-            'permainan.required' => 'permainan must be filled in.',
-            'end_pendaftaran.required' => 'the end of pendaftaran must be filled in after the pendaftaran date.',
-            'end_permainan.required' => 'the end of permainan must be filled in after the permainan date.',
-            'categories_id.required' => 'Category must be filled in.',
-            'categories_id.exists' => 'The Category you entered is invalid.',
-            'images.required' => 'images must be filled in.',
-            'contact.required' => 'contact must be filled in.',
-            'description.required' => 'description must be filled in.',
-            'description.max' => 'description must not exceed 2048 characters.',
-            'rule.required' => 'rule must be filled in.',
-            'rule.max' => 'rule must not exceed 2048 characters.',
-            'paidment.required' => 'paidment must be filled in.',
-            'prizepol.required' => 'prizepol must be filled in.',
+            'name.required' => 'Nama harus diisi.',
+            'name.max' => 'Nama tidak boleh lebih dari 30 karakter.',
+            'pendaftaran.required' => 'Tanggal pendaftaran harus diisi.',
+            'permainan.required' => 'Tanggal permainan harus diisi.',
+            'permainan.date' => 'Tanggal permainan harus valid.',
+            'permainan.after' => 'Tanggal permainan harus setelah tanggal akhir pendaftaran.',
+            'end_pendaftaran.required' => 'Tanggal akhir pendaftaran harus diisi setelah tanggal pendaftaran.',
+            'end_pendaftaran.date' => 'Tanggal akhir pendaftaran harus valid.',
+            'end_pendaftaran.after' => 'Tanggal akhir pendaftaran harus setelah tanggal pendaftaran.',
+            'end_permainan.required' => 'Tanggal akhir permainan harus diisi setelah tanggal permainan.',
+            'end_permainan.date' => 'Tanggal akhir permainan harus valid.',
+            'end_permainan.after' => 'Tanggal akhir permainan harus setelah tanggal permainan.',
+            'categories_id.required' => 'Kategori harus dipilih.',
+            'categories_id.exists' => 'Kategori yang dipilih tidak valid.',
+            'images.required' => 'Gambar harus diunggah.',
+            'images.image' => 'File harus berupa gambar.',
+            'images.mimes' => 'Gambar harus dalam format: jpeg, png, jpg, gif.',
+            'images.max' => 'Gambar tidak boleh lebih dari 2048 kilobita.',
+            'contact.required' => 'Kontak harus diisi.',
+            'contact.integer' => 'Kontak harus berupa angka.',
+            'description.required' => 'Deskripsi harus diisi.',
+            'description.max' => 'Deskripsi tidak boleh lebih dari 2048 karakter.',
+            'rule.required' => 'Aturan harus diisi.',
+            'rule.max' => 'Aturan tidak boleh lebih dari 2048 karakter.',
+            'prize.required' => 'Hadiah harus diisi.',
+            'jumlah.numeric' => 'Jumlah hadiah harus berupa angka.',
+            'jumlah.min' => 'Jumlah hadiah tidak boleh kurang dari 0.',
+            'slotTeam.required' => 'Slot tim harus diisi.',
+            'slotTeam.integer' => 'Slot tim harus berupa angka.',
+            'slotTeam.min' => 'Slot tim tidak boleh kurang dari 2.',
+            'slotTeam.custom' => 'Slot tim harus berupa angka genap.',
+            'nominal.nullable' => 'Nominal harus berupa angka.',
+            'paidment.required' => 'Metode pembayaran harus dipilih.',
         ];
+
     }
 }

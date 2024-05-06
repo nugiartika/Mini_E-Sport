@@ -75,41 +75,49 @@ class TournamentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TournamentRequest $request)
-{
-    $user = Auth::user();
+    public function store(Request $request)
+    {
+        try {
+            $user = Auth::user();
 
-    $gambar = $request->file('images');
-    $path_gambar = null;
+        $gambar = $request->file('images');
+        $path_gambar = null;
+        if ($gambar) {
+            $path_gambar = Storage::disk('public')->put('tournament', $gambar);
+        }
 
-    if ($gambar) {
-        $path_gambar = Storage::disk('public')->put('tournament', $gambar);
+        $prize = $request->input('prize');
+        $jumlah = $request->input('jumlah');
+
+        Tournament::create([
+            'name' => $request->input('name'),
+            'pendaftaran' => $request->input('pendaftaran'),
+            'permainan' => $request->input('permainan'),
+            'end_pendaftaran' => $request->input('end_pendaftaran'),
+            'end_permainan' => $request->input('end_permainan'),
+            'categories_id' => $request->input('categories_id'),
+            'users_id' => $user->id,
+            'prize' => $prize,
+            'jumlah' => $jumlah,
+            'slotTeam' => $request->input('slotTeam'),
+            'contact' => $request->input('contact'),
+            'images' => $path_gambar,
+            'description' => $request->input('description'),
+            'rule' => $request->input('rule'),
+            'paidment' => $request->input('paidment'),
+            'nominal' => $request->input('nominal'),
+            'status' => 'pending',
+        ]);
+
+        return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
+
+        } catch (\Exception $e) {
+            // Tangani kesalahan
+            dd($e->getMessage()); // Cetak pesan kesalahan untuk keperluan debugging
+        }
     }
 
 
-    Tournament::create([
-        'name' => $request->name,
-        'pendaftaran' => $request->pendaftaran,
-        'permainan' => $request->permainan,
-        'end_pendaftaran' => $request->end_pendaftaran,
-        'end_permainan' => $request->end_permainan,
-        'categories_id' => $request->categories_id,
-        'users_id' => $user->id,
-        'slotTeam' => $request->slotTeam,
-        'contact' => $request->contact,
-        'images' => $path_gambar,
-        'description' => $request->description,
-        'rule' => $request->rule,
-        'paidment' => $request->paidment,
-        'nominal' => $request->nominal,
-        'prizepol' => $request->prizepol,
-        'uang' => $request->uang,
-        'status' => 'pending',
-    ]);
-
-
-    return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
-}
 
 
 
@@ -149,6 +157,23 @@ class TournamentController extends Controller
         $category = Category::all();
         return view('user.detailtournament', compact('tournaments', 'category', 'user', 'team'));
     }
+
+    public function detailTournament($id)
+    {
+        $user = Auth::user();
+        $tournaments = Tournament::where('users_id', $user->id)->get();
+        // $tournaments = Tournament::all();
+        $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('tournament_id')
+            ->get();
+        $category = Category::all();
+
+        // Ambil turnamen berdasarkan ID yang diberikan
+        $selectedTournament = Tournament::findOrFail($id);
+
+        return view('penyelenggara.detailtournament', compact('tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

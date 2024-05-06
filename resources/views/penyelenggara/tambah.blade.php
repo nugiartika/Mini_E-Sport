@@ -4,22 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{asset('assets/img/favicon.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
     <title>Tournament - HummaEsport</title>
-    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </head>
 <style>
     h1 {
         text-align: center;
+        color: white;
+    }
 
+    label {
+        color: white;
     }
 
     /* Gaya untuk form */
     #regForm {
-        background-color: #ffffff;
+        background-color: rgb(0, 0, 0);
         margin: 90px auto;
 
     }
@@ -67,9 +72,105 @@
     .card {
         margin-top: 200px;
         margin-bottom: 100px;
-        background-color: white;
+        background-color: rgb(25, 27, 31);
         border-radius: 15px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    {
+    margin-bottom: 15px;
+    background: none;
+    padding: .6em .8em .5em .8em;
+    border: 0;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    }
+
+    input,
+    i {
+        width: 150px;
+    }
+
+    .main {
+        width: 480px;
+        margin: 0 auto;
+    }
+
+
+    .input,
+    .label {
+        padding: 0 20px;
+        width: 200px;
+    }
+
+
+    .input {
+        height: 55px;
+    }
+
+    .input:nth-of-type(3) {
+        padding-right: 0;
+        width: 220px;
+    }
+
+    .input span {
+        padding-left: 5px;
+    }
+
+    .count {
+        padding: .9em 0 0;
+        width: 20px;
+    }
+
+    .submit {
+        margin: 20px auto;
+        display: block;
+        width: 100px;
+        border: 0;
+        background-color: #fff;
+        color: #222;
+        line-height: 45px;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .select-css {
+        background-image: url('https://www.adamlobo.co.uk/apps/otacon/arrow.svg');
+        background-repeat: no-repeat;
+        background-position: right .7em top 50%;
+        background-size: .65em auto;
+        width: 190px;
+        display: block;
+        max-width: 100%;
+        box-sizing: border-box;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+    }
+
+    .select-css::-ms-expand {
+        display: none;
+    }
+
+    .select-css:focus {
+        outline: none;
+    }
+
+    .select-css option {
+        color: #222;
     }
 </style>
 
@@ -144,14 +245,13 @@
             </div>
         </div>
     @endif
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-5">
-            <div class="card">
-                <div class="card-body">
-                    <h1>Tambah Turnamen</h1>
-                    <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data"
-                        class="row g-3" id="regForm">
-                        @csrf
+    <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
+        @csrf
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Tambah Turnamen</h1>
                         <div class="tab">
                             <p>
                             <div class="mb-3">
@@ -166,7 +266,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="pendaftaran" class="form-label">TIME REGISTER</label>
+                                    <label for="pendaftaran" class="form-label">START REGISTER</label>
                                     <input type="date"
                                         class="form-control @error('pendaftaran') is-invalid @enderror" id="pendaftaran"
                                         name="pendaftaran" value="{{ old('pendaftaran') }}">
@@ -176,12 +276,13 @@
                                         </span>
                                     @enderror
                                 </div>
-
                                 <div class="col-md-6">
-                                    <label for="permainan" class="form-label">TIME GAME</label>
-                                    <input type="date" class="form-control @error('permainan') is-invalid @enderror"
-                                        id="permainan" name="permainan" value="{{ old('permainan') }}">
-                                    @error('permainan')
+                                    <label for="end_pendaftaran" class="form-label">END REGISTER</label>
+                                    <input type="date"
+                                        class="form-control @error('end_pendaftaran') is-invalid @enderror"
+                                        id="end_pendaftaran" name="end_pendaftaran"
+                                        value="{{ old('end_pendaftaran') }}">
+                                    @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -191,12 +292,11 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="end_pendaftaran" class="form-label">END REGISTER</label>
+                                    <label for="permainan" class="form-label">START GAME</label>
                                     <input type="date"
-                                        class="form-control @error('end_pendaftaran') is-invalid @enderror"
-                                        id="end_pendaftaran" name="end_pendaftaran"
-                                        value="{{ old('end_pendaftaran') }}">
-                                    @error('end_pendaftaran')
+                                        class="form-control @error('permainan') is-invalid @enderror" id="permainan"
+                                        name="permainan" value="{{ old('permainan') }}">
+                                    @error('permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -231,30 +331,45 @@
                         </div>
                         <div class="tab">
                             <p>
-                                <div class="mb-3">
-                                    <label for="prizepol" class="form-label">Prizepol</label>
-                                    @error('prizepol')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <select name="prizepol" id="prizepol" class="form-control" onchange="toggleDiv()">
-                                        <option value="" selected disabled>Pilih</option>
-                                        <option value="Uang" {{ old('prizepol') == 'Uang' ? 'selected' : '' }}>Uang Tunai</option>
-                                        <option value="Trophy" {{ old('prizepol') == 'Trophy' ? 'selected' : '' }}>Trophy</option>
-                                        <option value="Sertifikat" {{ old('prizepol') == 'Sertifikat' ? 'selected' : '' }}>Sertifikat</option>
-                                        <option value="Mendali" {{ old('prizepol') == 'Mendali' ? 'selected' : '' }}>Mendali</option>
-                                    </select>
-                                </div>
-                            </p>
-                            <p>
-                                <div class="mb-3" id="uang" style="display: none;">
-                                    <label for="uang_input" class="form-label">Masukkan Nominal</label>
-                                    @error('uang')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <input type="number" name="uang" id="uang_input" class="form-control">
-                                </div>
+                            <div class="mb-3">
+                                <label for="prizepol" class="form-label">PRIZEPOOL</label>
+                                <form id="prizepol-form"> <!-- Tambahkan id "prizepol-form" pada form -->
+                                    <div id="inputs">
+                                        <div class="container row">
+                                            <div class="input">
+                                                <select class="form-control @error('prize') is-invalid @enderror"
+                                                    name="prize"value="{{ old('prize') }}">
+                                                    <option value="">Select one</option>
+                                                    <option value="uang">Uang</option>
+                                                    <option value="mendali">Mendali</option>
+                                                    <option value="trophy">Trophy</option>
+                                                    <option value="sertifikat">Sertifikat</option>
+                                                </select>
+                                                @error('prize')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="input moneyForm" style="display: none;">
+                                                <!-- Ubah id menjadi class untuk "moneyForm" -->
+                                                <input class="form-control" type="number"
+                                                    value="inputkan jumlah uang" name="jumlah">
+                                            </div>
+                                            <div class="icon-container" style="display: flex;">
+                                                <div class="input removeRow" style="cursor: pointer;"><i
+                                                        class="ti ti-trash fs-2xl" style="color: white;"></i></div>
+                                                <div class="addRow" style="cursor: pointer;"><i
+                                                        class="ti ti-plus fs-2xl" style="color: white;"></i></div>
+                                                <!-- Ubah id menjadi class untuk "addRow" -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
 
                             </p>
+
                             <p>
                             <div class="mb-3">
                                 <label for="contact" class="form-label">CONTACT</label>
@@ -289,7 +404,7 @@
                             </p>
                             <p>
                             <div class="mb-3">
-                                <label for="images" class="form-label">IMAGE</label>
+                                <label for="images" class="form-label">POSTER</label>
                                 <input type="file" class="form-control @error('images') is-invalid @enderror"
                                     id="images" name="images" onchange="previewImage(event)">
                                 @if (old('images'))
@@ -324,26 +439,28 @@
                             </div>
                             </p>
                             <p>
-                                <div class="mb-3">
-                                    <label for="paidment" class="form-label">Paid & Unpaid</label>
-                                    @error('paidment')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
-                                        <option value="" selected disabled>Pilih</option>
-                                        <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar</option>
-                                        <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak Berbayar</option>
-                                    </select>
-                                </div>
+                            <div class="mb-3">
+                                <label for="paidment" class="form-label">Paid & Unpaid</label>
+                                @error('paidment')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
+                                    <option value="" selected disabled>Pilih</option>
+                                    <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
+                                    </option>
+                                    <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak
+                                        Berbayar</option>
+                                </select>
+                            </div>
                             </p>
                             <p>
-                                <div class="mb-3" id="nominal" style="display: none;">
-                                    <label for="nominal_input" class="form-label">Masukkan Nominal</label>
-                                    @error('nominal')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <input type="number" name="nominal" id="nominal_input" class="form-control">
-                                </div>
+                            <div class="mb-3" id="nominal" style="display: none;">
+                                <label for="nominal_input" class="form-label">Masukkan Nominal</label>
+                                @error('nominal')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <input type="number" name="nominal" id="nominal_input" class="form-control">
+                            </div>
                             </p>
                         </div>
                         <div style="overflow:auto;">
@@ -354,19 +471,20 @@
                                     class="btn btn-success">Next</button>
                             </div>
                         </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary"
+                                onclick="window.location.href='/ptournament'">CANCEL</button>
+                        </div>
                         <div style="text-align:center;margin-top:40px;">
                             <span class="step"></span>
                             <span class="step"></span>
                             <span class="step"></span>
                         </div>
-                        <div>
-                            <a type="button" class="btn btn-secondary" href="/ptournament">CANCEL</a>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <footer class="footer bgn-4 bt">
         <div class="container">
             <div class="row justify-content-between">
@@ -459,33 +577,33 @@
         </div>
     </footer>
 
-    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- gsap  -->
-    <script src="{{asset('assets/js/gsap.min.js')}}"></script>
+    <script src="{{ asset('assets/js/gsap.min.js') }}"></script>
     <!-- gsap scroll trigger -->
-    <script src="{{asset('assets/js/ScrollTrigger.min.js')}}"></script>
+    <script src="{{ asset('assets/js/ScrollTrigger.min.js') }}"></script>
     <!-- lenis  -->
-    <script src="{{asset('assets/js/lenis.min.js')}}"></script>
+    <script src="{{ asset('assets/js/lenis.min.js') }}"></script>
     <!-- gsap split text -->
-    <script src="{{asset('assets/js/SplitText.min.js')}}"></script>
+    <script src="{{ asset('assets/js/SplitText.min.js') }}"></script>
     <!-- tilt js -->
-    <script src="{{asset('assets/js/vanilla-tilt.js')}}"></script>
+    <script src="{{ asset('assets/js/vanilla-tilt.js') }}"></script>
     <!-- scroll magic -->
-    <script src="{{asset('assets/js/ScrollMagic.min.js')}}"></script>
+    <script src="{{ asset('assets/js/ScrollMagic.min.js') }}"></script>
     <!-- animation.gsap -->
-    <script src="{{asset('assets/js/animation.gsap.min.js')}}"></script>
+    <script src="{{ asset('assets/js/animation.gsap.min.js') }}"></script>
     <!-- gsap customization  -->
-    <script src="{{asset('assets/js/gsap-customization.js')}}"></script>
+    <script src="{{ asset('assets/js/gsap-customization.js') }}"></script>
     <!-- apex chart  -->
-    <script src="{{asset('assets/js/apexcharts.js')}}"></script>
+    <script src="{{ asset('assets/js/apexcharts.js') }}"></script>
     <!-- swiper js -->
-    <script src="{{asset('assets/js/swiper-bundle.min.js')}}"></script>
+    <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
     <!-- magnific popup  -->
-    <script src="{{asset('assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{ asset('assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js') }}"></script>
     <!-- bootstrap js -->
-    <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <!-- main js  -->
-    <script src="{{asset('assets/js/main.js')}}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
 
     {{-- script untuk memunculkan form nominal apabila memilih paid --}}
@@ -539,7 +657,9 @@
             currentTab = currentTab + n;
 
             if (currentTab >= x.length) {
-                document.getElementById("regForm").submit();
+                // Menghubungkan formulir ke route ptournament.store saat formulir disubmit
+                document.getElementById("regForm").action = "{{ route('ptournament.store') }}";
+                document.getElementById("regForm").submit(); // Submit formulir
                 return false;
             }
 
@@ -577,19 +697,49 @@
     </script>
 
 
-    {{-- script untuk memunculkan form uang apabila memilih Uang --}}
-    <script>
-        function toggleDiv() {
-            let value = document.getElementById("prizepol").value;
-            let div = document.getElementById("uang");
 
-            if (value === "Uang") {
-                div.style.display = "block";
-            } else {
-                div.style.display = "none";
-            }
-        }
+
+    {{-- scrript untuk prizepool --}}
+    <script>
+        $(document).ready(function() {
+            // Event handler untuk tombol "Hapus Baris"
+            $(document).on('click', '.removeRow', function() {
+                // Periksa apakah ada lebih dari satu form
+                if ($('#inputs .row').length > 1) {
+                    $(this).closest('.row').remove();
+                }
+            });
+
+            // Event handler untuk semua select dengan nama "animation[]"
+            $(document).on('change', 'select[name="prize"]', function() {
+                var moneyForm = $(this).closest('.row').find('.moneyForm');
+                if ($(this).val() === "uang") {
+                    moneyForm.show();
+                } else {
+                    moneyForm.hide();
+                }
+            });
+
+            // Event handler untuk tombol "Tambah Baris"
+            $(document).on('click', '.addRow', function() {
+                let templateRow = $('#inputs .container.row:first').clone();
+                let lastRow = $('#inputs .container.row:last');
+
+                if (lastRow.length) {
+                    let nextNumber = parseInt(lastRow.find('.count').text()) + 1;
+                    templateRow.find('.count').text(nextNumber);
+                } else {
+                    // Jika tidak ada baris lagi, tambahkan baris pertama
+                    templateRow.find('.count').text(1);
+                }
+
+                $('#inputs').append('<div class="container row">' + templateRow.html() + '</div>');
+
+                return false;
+            });
+        });
     </script>
+
 
 
 

@@ -91,11 +91,11 @@
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('DetailTournament') ? 'active' : '' }} ">
+                {{-- <li class="menu-item {{ request()->routeIs('DetailTournament') ? 'active' : '' }} ">
                     <a href="{{ route('DetailTournament') }}" class="menu-link">
                         <div>List Tournament</div>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="menu-item {{ request()->routeIs('konfirmtournament') ? 'active' : '' }}">
                     <a href="{{ route('konfirmtournament') }}" class="menu-link">

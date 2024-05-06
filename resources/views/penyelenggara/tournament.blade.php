@@ -280,7 +280,7 @@
                                             </div>
                                             <div class="tournament-content px-xxl-4">
                                                 <div class="tournament-info mb-5">
-                                                    <a href="{{ route('ptournament.detail') }}" class="d-block">
+                                                    <a href="{{ route('tournament.detail', ['id' => $tournament->id]) }}" class="d-block">
                                                         <h4
                                                             class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                             {{ $tournament->name }}
@@ -312,6 +312,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="hr-line line3"></div>
+                                                <div class="prize bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100" >
+                                                        <i class="ti ti-gift fs-base tcn-1"></i>
+                                                        <span class="tcn-1 fs-sm" >{{ $tournament->prize }} {{ $tournament->jumlah }}</span>
+                                                    </div>
 
                                                 @php
                                                     $teamCount = $teamCounts->firstWhere(
@@ -334,7 +338,7 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <a href="{{ route('ptournament.detail') }}" class="btn2 ">
+                                                    <a href="{{ route('tournament.detail', ['id' => $tournament->id]) }}" class="btn2 ">
                                                         <i class="ti ti-arrow-right fs-2xl"></i>
                                                     </a>
                                                 </div>
