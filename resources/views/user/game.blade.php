@@ -134,7 +134,7 @@
                                 <div class="game-card-border"></div>
                                 <div class="game-card-border-overlay"></div>
                                 <div class="game-img">
-                                    <img class="w-100 h-100" src="assets/img/game-x10.png" alt="game">
+                                    <img class="w-100 h-100" src="{{ asset('storage/'. $category->photo) }}" alt="game">
                                 </div>
                                 <div class="game-link d-center">
                                     <a href="tournaments-details.html" class="btn2">

@@ -138,7 +138,7 @@
 
             <h5>core players</h5><br>
 
-            @for ($i = 1; $i <= $membersPerTeam; $i++)
+            {{-- @for ($i = 1; $i <= $membersPerTeam; $i++)
 <div  class="row g-3">
     <div class="col-md-6">
         <label for="member{{ $i }}" class="form-label">Member {{ $i }}</label>
@@ -146,6 +146,7 @@
             <input type="email" class="form-control @error('member.' . ($i - 1)) is-invalid @enderror"
                 id="member{{ $i }}" name="member[]" value="{{ old('member.' . ($i - 1), $loggedInUserId) }}"
                 readonly>
+
         @else
             <input type="email" class="form-control @error('member.' . ($i - 1)) is-invalid @enderror"
                 id="member{{ $i }}" name="member[]" value="{{ old('member.' . ($i - 1)) }}"
@@ -176,7 +177,83 @@
     </div>
 
     <input type="hidden" name="team_id" value="{{ $teamId }}">
-    @endfor
+
+
+    @endfor --}}
+
+
+
+    @for ($i = 1; $i <= $membersPerTeam; $i++)
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="member{{ $i }}" class="form-label">Member {{ $i }}</label>
+            @if ($i === 1)
+                <input type="email" class="form-control @error('member.' . ($i - 1)) is-invalid @enderror"
+                    id="member{{ $i }}" name="member[]" value="{{ old('member.' . ($i - 1), $loggedInUserId) }}"
+                    readonly>
+            @else
+                <input type="email" class="form-control @error('member.' . ($i - 1)) is-invalid @enderror"
+                    id="member{{ $i }}" name="member[]" value="{{ old('member.' . ($i - 1)) }}"
+                    placeholder="Enter email">
+            @endif
+            @error('member.' . ($i - 1))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+        <div class="col-md-6">
+            <label for="nickname{{ $i }}" class="form-label">Nickname {{ $i }}</label>
+            @if ($i === 1)
+                <input type="text" class="form-control @error('nickname.' . ($i - 1)) is-invalid @enderror"
+                    id="nickname{{ $i }}" name="nickname[]"
+                    value="{{ old('nickname.' . ($i - 1), $loggedInUserName) }}" placeholder="Enter nickname">
+            @else
+                <input type="text" class="form-control @error('nickname.' . ($i - 1)) is-invalid @enderror"
+                    id="nickname{{ $i }}" name="nickname[]" value="{{ old('nickname.' . ($i - 1)) }}"
+                    placeholder="Enter nickname">
+            @endif
+            @error('nickname.' . ($i - 1))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+    <input type="hidden" name="team_id" value="{{ $teamId }}">
+
+@endfor
+
+@for ($i = 0; $i < 2; $i++)
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="member_cadangan{{ $i }}" class="form-label">Cadangan Member {{ $i }}</label>
+            <input type="email" class="form-control @error('member_cadangan.' . ($i - 1)) is-invalid @enderror"
+                id="member_cadangan{{ $i }}" name="member_cadangan[]" value="{{ old('member_cadangan.' . ($i - 1)) }}"
+                placeholder="Enter email">
+            @error('member_cadangan.' . ($i - 1))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+        <div class="col-md-6">
+            <label for="nickname_cadangan{{ $i }}" class="form-label">Cadangan Nickname {{ $i }}</label>
+            <input type="text" class="form-control @error('nickname_cadangan.' . ($i - 1)) is-invalid @enderror"
+                id="nickname_cadangan{{ $i }}" name="nickname_cadangan[]"
+                value="{{ old('nickname_cadangan.' . ($i - 1)) }}" placeholder="Enter nickname">
+            @error('nickname_cadangan.' . ($i - 1))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+    <input type="hidden" name="team_id" value="{{ $teamId }}">
+@endfor
+
+
+
     <br>
     {{-- <h5>substitute player</h5><br> --}}
 
