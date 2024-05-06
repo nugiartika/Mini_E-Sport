@@ -26,7 +26,7 @@ class DashboardAdminController extends Controller
         $team = Team::all()->count();
         $sainsRole = SainsRole::all()->count();
 
-        return view('admin.index', compact('user', 'organizer', 'category', 'tournament', 'team','sainsRole'));
+        return view('admin.index', compact('user', 'organizer', 'category', 'tournament', 'team', 'sainsRole'));
     }
 
     public function response()
@@ -37,8 +37,8 @@ class DashboardAdminController extends Controller
         for ($i = 0; $i < 12; $i++) {
             $currentMonth->addMonth();
             $userCount = User::whereYear('created_at', $currentMonth->year)
-                            ->whereMonth('created_at', $currentMonth->month)
-                            ->count();
+                ->whereMonth('created_at', $currentMonth->month)
+                ->count();
             $userGrowth[] = $userCount;
         }
 

@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id')->constrained();
-            $table->string('member');
-            $table->string('nickname');
+            $table->foreignId('team_id')->constrained()->nullable();
+            $table->string('member')->nullable();
+            $table->string('nickname')->nullable();
+            $table->enum('status', ['inti','cadangan'])->nullable();
             // $table->string('cadangan2')->nullable();
             $table->timestamps();
         });

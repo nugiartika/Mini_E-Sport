@@ -127,7 +127,6 @@
     <div class="drag-target"></div>
     </div>
 
-    @yield('script')
     <script src="{{ asset('demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a') }}"></script>
     <script src="{{ asset('demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c') }}"></script>
     <script src="{{ asset('demo/assets/vendor/js/bootstraped84.js?id=9a6c701557297a042348b5aea69e9b76') }}"></script>
@@ -144,6 +143,8 @@
     <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
 
     <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script>
+
+    @yield('script')
 
 </body>
 

@@ -14,56 +14,59 @@ $(document).ready(() => {
     "use strict";
 
     // 01 -> lenis smooth scroll
-    const lenis = new Lenis()
-    lenis.on('scroll', ScrollTrigger.update)
+    const lenis = new Lenis();
+    lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => {
-        lenis.raf(time * 400)
+        lenis.raf(time * 400);
         // lenis.raf(time * 4000)
-    })
-    gsap.ticker.lagSmoothing(0)
+    });
+    gsap.ticker.lagSmoothing(0);
 
     // 02 -> cursor effect
     const cursor = document.querySelector(".cursor");
     const cursorScale = document.querySelectorAll(".cursor-scale");
     let mouseX = 0;
     let mouseY = 0;
-    gsap.to({}, 0.016, {
-        repeat: -1,
-        onRepeat: () => {
-            gsap.set(cursor, {
-                css: {
-                    left: mouseX,
-                    top: mouseY
-                }
-            });
-        }
-    })
+
+    if (cursorScale && cursor) {
+        gsap.to({}, 0.016, {
+            repeat: -1,
+            onRepeat: () => {
+                gsap?.set(cursor, {
+                    css: {
+                        left: mouseX,
+                        top: mouseY,
+                    },
+                });
+            },
+        });
+    }
 
     window.addEventListener("mousemove", (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-    })
+    });
 
-    cursorScale.forEach(el => {
-        el.addEventListener("mousemove", () => {
-            if (el.classList.contains('growUp')) {
-                cursor.classList.add("big-cursor");
-            } else if (el.classList.contains('growDown')) {
-                cursor.classList.add("small-cursor");
-            } else if (el.classList.contains('growDown2')) {
-                cursor.classList.add("small-cursor2");
+    cursorScale?.forEach((el) => {
+        el?.addEventListener("mousemove", () => {
+            if (el.classList.contains("growUp")) {
+                cursor?.classList.add("big-cursor");
+            } else if (el.classList.contains("growDown")) {
+                cursor?.classList.add("small-cursor");
+            } else if (el.classList.contains("growDown2")) {
+                cursor?.classList.add("small-cursor2");
             }
-        })
-        el.addEventListener("mouseleave", () => {
-            if (el.classList.contains('growUp')) {
-                cursor.classList.remove("big-cursor");
-            } else if (el.classList.contains('growDown')) {
-                cursor.classList.remove("small-cursor");
-            } else if (el.classList.contains('growDown2')) {
-                cursor.classList.remove("small-cursor2");
+        });
+        el?.addEventListener("mouseleave", () => {
+            if (el.classList.contains("growUp")) {
+                cursor?.classList.remove("big-cursor");
+            } else if (el.classList.contains("growDown")) {
+                cursor?.classList.remove("small-cursor");
+            } else if (el.classList.contains("growDown2")) {
+                cursor?.classList.remove("small-cursor2");
             }
-        })
-    })
+        });
+    });
 
     //03 -> title animation
     if ($(".title-anim").length > 0) {
@@ -139,42 +142,48 @@ $(document).ready(() => {
             "glare-prerender": false,
             axis: "x",
             scale: 2.1,
-            startY: 0
+            startY: 0,
         });
     }
 
     // 06 -> Images parallax
-    gsap.utils.toArray('.parallax-container').forEach(container => {
-        const img = container.querySelector('.parallax-img');
+    gsap.utils.toArray(".parallax-container").forEach((container) => {
+        const img = container.querySelector(".parallax-img");
 
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: container,
                 scrub: true,
                 pin: false,
-            }
+            },
         });
 
-        tl.fromTo(img, {
-            yPercent: -40,
-            ease: 'none'
-        }, {
-            yPercent: 40,
-            ease: 'none'
-        });
+        tl.fromTo(
+            img,
+            {
+                yPercent: -40,
+                ease: "none",
+            },
+            {
+                yPercent: 40,
+                ease: "none",
+            }
+        );
     });
     // 07 -> footer banner animation
     if ($(".footer-banner-img").length > 0) {
         let footerController = new ScrollMagic.Controller();
         let footerScene = new ScrollMagic.Scene({
             triggerElement: "#cta",
-        }).setTween(".footer-banner-img", {
-            right: "0%",
-            left: "unset",
-            bottom: "0%",
-            opacity: 1,
-            scale: 1,
-        }).addTo(footerController);
+        })
+            .setTween(".footer-banner-img", {
+                right: "0%",
+                left: "unset",
+                bottom: "0%",
+                opacity: 1,
+                scale: 1,
+            })
+            .addTo(footerController);
     }
 
     // 08 -> sword animation
@@ -183,20 +192,24 @@ $(document).ready(() => {
         let swordScene = new ScrollMagic.Scene({
             triggerElement: "#swiper-3d",
             duration: 1000,
-        }).setTween(".sword-area", {
-            right: "unset",
-            left: "0%",
-            bottom: "0%",
-            opacity: 1,
-            scale: 1,
-        }).addTo(swordController);
+        })
+            .setTween(".sword-area", {
+                right: "unset",
+                left: "0%",
+                bottom: "0%",
+                opacity: 1,
+                scale: 1,
+            })
+            .addTo(swordController);
 
         let swordScene2 = new ScrollMagic.Scene({
             triggerElement: "#top-player",
             duration: 100,
-        }).setTween(".sword-area", {
-            rotate: "180deg",
-        }).addTo(swordController);
+        })
+            .setTween(".sword-area", {
+                rotate: "180deg",
+            })
+            .addTo(swordController);
     }
     // 09 -> diamond animation
     if ($(".diamond-area").length > 0) {
@@ -204,10 +217,12 @@ $(document).ready(() => {
         let diamondScene = new ScrollMagic.Scene({
             triggerElement: "#tournament-hero",
             duration: 1000,
-        }).setTween(".diamond-area", {
-            top: "80%",
-            opacity: 1,
-        }).addTo(diamondController);
+        })
+            .setTween(".diamond-area", {
+                top: "80%",
+                opacity: 1,
+            })
+            .addTo(diamondController);
     }
 
     // 10 -> game console animation
@@ -216,12 +231,13 @@ $(document).ready(() => {
         let gameScene = new ScrollMagic.Scene({
             triggerElement: "#tournament-hero",
             duration: 1000,
-        }).setTween(".game-console-area", {
-            top: "80%",
-            left: "unset",
-            right: "0%",
-            opacity: 1,
-        }).addTo(gameController);
+        })
+            .setTween(".game-console-area", {
+                top: "80%",
+                left: "unset",
+                right: "0%",
+                opacity: 1,
+            })
+            .addTo(gameController);
     }
-
-})
+});

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMemberRequest;
-use App\Models\member;
+use App\Models\Member;
 use App\Models\Team;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
@@ -15,7 +16,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = member::all();
+        $members = Member::all();
         $teams = Team::all();
         return view('user.team', compact('members', 'teams'));
     }
@@ -58,23 +59,69 @@ class MemberController extends Controller
         return view('user.createmember', compact('members', 'teams', 'selectedTeamId'));
     }
 
+    // public function store(Request $request)
+    // {
+    //     $teams_id = $request->team_id;
+    //     $nicknames = $request->nickname;
+
+    //     foreach ($request->member as $index => $memberName) {
+    //         Member::create([
+    //             'member' => $memberName,
+    //             'nickname' => $request->nickname[$index],
+    //             'team_id' => $teams_id,
+    //         ]);
+    //     }
+
+    //     // dd($member);
+
+    //     return redirect()->route('team.index')->with('success', 'Members added successfully');
+    // }
+
     public function store(Request $request)
     {
+        // Validasi data input
+        $validator = Validator::make($request->all(), [
+            'member.*' => 'required', // Member inti wajib diisi
+            'nickname.*' => 'required', // Nickname inti wajib diisi
+            'member_cadangan.*' => 'nullable', // Member cadangan dapat kosong
+            'nickname_cadangan.*' => 'nullable', // Nickname cadangan dapat kosong
+        ]);
+
+        // Cek validasi
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $teams_id = $request->team_id;
         $nicknames = $request->nickname;
 
+        // Store "inti" members
         foreach ($request->member as $index => $memberName) {
             Member::create([
                 'member' => $memberName,
                 'nickname' => $request->nickname[$index],
                 'team_id' => $teams_id,
+                'status' => 'inti',
             ]);
         }
 
-        // dd($member);
+        // Store "cadangan" members
+        if ($request->has('member_cadangan')) {
+            foreach ($request->member_cadangan as $index => $memberName) {
+                Member::create([
+                    'member' => $memberName,
+                    'nickname' => $request->nickname_cadangan[$index],
+                    'team_id' => $teams_id,
+                    'status' => 'cadangan',
+                ]);
+            }
+        }
 
         return redirect()->route('team.index')->with('success', 'Members added successfully');
     }
+
 
 
     /**
