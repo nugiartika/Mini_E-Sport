@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TournamentRequest;
 use App\Models\Category;
+use App\Models\member;
 use App\Models\Team;
+use App\Models\TeamTournament;
 use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,16 +21,18 @@ class TournamentController extends Controller
      */
     public function index()
     {
-
         $user = Auth::user();
         $tournaments = Tournament::where('users_id', $user->id)->get();
         // $tournaments = Tournament::all();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
+        $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+        ->groupBy('tournament_id')
+        ->get();
         $category = Category::all();
 
-        return view('penyelenggara.tournament', compact('tournaments', 'category', 'user','teamCounts'));
+        return view('penyelenggara.tournament', compact('tournaments', 'category', 'user','teamCounts','teamIdCounts'));
     }
 
     public function indexuser()
@@ -39,8 +43,12 @@ class TournamentController extends Controller
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
+        $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+        ->groupBy('tournament_id')
+        ->get();
         $category = Category::all();
-        return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts'));
+        $teams = Team::all();
+        return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts','teams','teamIdCounts'));
     }
     public function dashboard()
     {
@@ -145,10 +153,14 @@ class TournamentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tournament $tournament)
-    {
-        //
-    }
+    // public function show(Tournament $tournament)
+    // {
+    //     $members = member::all();
+    //     $teams = Team::all();
+    //     $tournamentId = $tournament->id;
+    //     return view('user.createteam', compact('tournamentId','members','teams'));
+    // }
+
     public function detail($id)
     {
         $tournaments = Tournament::findOrFail($id);

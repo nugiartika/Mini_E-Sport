@@ -8,6 +8,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RegisterOrganizerController;
 use App\Http\Controllers\SainsRoleController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamTournamentController;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Organizer Routes
     Route::middleware('organizer')->group(function () {
-        Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');        Route::get('/tambah', [TournamentController::class, 'create'])->name('tambahtournament');
+        Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
+        Route::get('/tambah', [TournamentController::class, 'create'])->name('tambahtournament');
         Route::get('/tournament/{id}/edit', [TournamentController::class, 'edittour'])->name('ptournament.edittour');
         Route::post('/tournament/{id}/proses', [TournamentController::class, 'updatetour'])->name('ptournament.updatetour');
         Route::get('/DashboardOrganizer', [TournamentController::class, 'dashboard'])->name('dashboardPenyelenggara');
@@ -61,9 +63,8 @@ Route::middleware(['auth'])->group(function () {
     // User Routes
     Route::middleware('user')->group(function () {
         Route::get('/admin/listUser', [SainsRoleController::class, 'create'])->name('admin.listUser');
-        Route::get('/teams/create', [TeamController::class, 'createId'])->name('team.createId');
-        Route::post('/teams', [TeamController::class, 'storeId'])->name('team.storeId')->name('team.create');
-
+        route::resource('/teams', TeamTournamentController::class);
+        Route::get('teams/{team}', [TeamController::class, 'show'])->name('teams.show');
     });
 });
 
