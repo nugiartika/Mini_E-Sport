@@ -76,12 +76,9 @@
                             </li>
 
                             <li class="menu-item">
-                                <button>PAGES</button>
-                                <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="{{ route('login') }}">login</a>
+                                        <a href="{{ route('login') }}">LOGIN</a>
                                     </li>
-                                </ul>
                             </li>
                         </ul>
                     </div>

@@ -7,20 +7,46 @@
     data-template="vertical-menu-theme-default-light">
 
 
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard |
-        Admin
-        Humma Esport
+    <title>
+        Dashboard User
     </title>
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 5" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+    <!-- laravel CRUD token -->
     <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
-    <link rel="shortcut icon" href="assets/img/humma-01.png" type="image/x-icon">
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://1.envato.market/vuexy_admin">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon"
+        href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
+
+
+    <!-- Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
+    <script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                '{{ asset('') }}www.googletagmanager.com/gtm5445.html?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5J3LMKC');
+    </script>
+    <!-- End Google Tag Manager -->
+
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -37,8 +63,11 @@
         href="{{ asset('demo/assets/vendor/fonts/flag-icons80a8.css?id=121bcc3078c6c2f608037fb9ca8bce8d') }}" />
     <!-- Core CSS -->
     <link rel="stylesheet"
-        href="{{ asset('demo/assets/vendor/css/rtl/theme-defaultfc79.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9') }}"
-        class="template-customizer-theme-css" />
+        href="{{ asset('') }}demo/assets/vendor/css/rtl/core6cc1.css?id=9dd8321ea008145745a7d78e072a6e36"
+        class="template-customizer-core-css" />
+    <link rel="stylesheet"
+        href="{{ asset('demo/assets/vendor/css/rtl/theme-defaultfc79.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9"
+                class="template-customizer-theme-css') }}" />
     <link rel="stylesheet" href="{{ asset('demo/assets/css/demof1ed.css?id=ddd2feb83a604f9e432cdcb29815ed44') }}" />
     <link rel="stylesheet"
         href="{{ asset('demo/assets/vendor/libs/node-waves/node-wavesd178.css?id=aa72fb97dfa8e932ba88c8a3c04641bc') }}" />
@@ -50,7 +79,7 @@
     <!-- Vendor Styles -->
     <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
-    <!-- laravel style -->
+
     <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
 
@@ -69,7 +98,13 @@
                     'core.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core.css?id=9dd8321ea008145745a7d78e072a6e36',
                     'core-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core-dark.css?id=d661bae1d0ada9f7e9e3685a3e1f427e',
 
-
+                    // Themes
+                    'theme-default.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9',
+                    'theme-default-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default-dark.css?id=ce86d777a4c5030f51d0f609f202bcc5',
+                    'theme-bordered.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-bordered.css?id=786794ca0c68d96058e8ceeb20f4e7c5',
+                    'theme-bordered-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-bordered-dark.css?id=e7122ef6338b22f7cea9eaff5a96aa8b',
+                    'theme-semi-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-semi-dark.css?id=a0a317e88e943fdd62d514e00deebb22',
+                    'theme-semi-dark-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-semi-dark-dark.css?id=e9a2f7cd6ace727264936f6bf93ab1e2',
                 }
                 return resolvedPaths[path] || path;
             },
@@ -78,56 +113,70 @@
             ],
         });
     </script>
-    @yield('style')
 </head>
 
 <body>
+
+
     <!-- Layout Content -->
     <div class="layout-wrapper layout-content-navbar ">
         <div class="layout-container">
 
-            @include('admin.layouts.sidebar')
+            @include('user.layouts.sidebarUser')
 
             <!-- Layout page -->
             <div class="layout-page">
-
-                <!-- BEGIN: Navbar-->
-                @include('admin.layouts.navbar')
+                @include('user.layouts.navbarUser')
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
+                    <!-- Content wrapper -->
+
+                    <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <!-- Content -->
-                        @yield('content')
-                        <!-- / Content -->
+                        {{-- start row             --}}
+                        <div class="row">
+                            @yield('content')
+
+                        </div>
+                        {{-- end row --}}
                     </div>
-                </div>
-                <footer class="content-footer footer bg-footer-theme">
-                    <div class="container-xxl">
-                        <div
-                            class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
-                            <div>
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear())
-                                </script>
-                                , Humma <span>Esport</span>
-                            </div>
-                            <div class="d-none d-lg-inline-block">
+                    <!-- / Content -->
+
+                    <!-- Footer -->
+                    <!-- Footer-->
+                    <footer class="content-footer footer bg-footer-theme">
+                        <div class="container-xxl">
+                            <div
+                                class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+                                <div>
+                                    ©
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script>
+                                    , made with ❤️ by <a href="https://pixinvent.com/" target="_blank"
+                                        class="footer-link fw-medium">Pixinvent</a>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
-                </footer>
-                <div class="content-backdrop fade"></div>
+                    </footer>
+                    <!--/ Footer-->
+                    <!-- / Footer -->
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!--/ Content wrapper -->
             </div>
+            <!-- / Layout page -->
         </div>
+
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
     </div>
 
-    <div class="layout-overlay layout-menu-toggle"></div>
-    <div class="drag-target"></div>
-    </div>
 
-    @yield('script')
     <script src="{{ asset('demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a') }}"></script>
     <script src="{{ asset('demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c') }}"></script>
     <script src="{{ asset('demo/assets/vendor/js/bootstraped84.js?id=9a6c701557297a042348b5aea69e9b76') }}"></script>
@@ -140,11 +189,11 @@
     <script src="{{ asset('demo/assets/vendor/libs/typeahead-js/typeahead60e7.js?id=f6bda588c16867a6cc4158cb4ed37ec6') }}">
     </script>
     <script src="{{ asset('demo/assets/vendor/js/menu2dc9.js?id=c6ce30ded4234d0c4ca0fb5f2a2990d8') }}"></script>
-
+    <script src="{{ asset('demo/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
-
     <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script>
 
 </body>
+
 
 </html>

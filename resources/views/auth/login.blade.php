@@ -3,6 +3,7 @@
 
 
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,9 +55,9 @@
                                 <a href="{{ route('game') }}">GAME</a>
                             </li>
                             <li class="menu-item">
-                                    <li class="menu-link">
-                                        <a href="{{ route('team.index') }}">TEAM</a>
-                                    </li>
+                            <li class="menu-link">
+                                <a href="{{ route('team.index') }}">TEAM</a>
+                            </li>
 
                             </li>
                         </ul>
@@ -77,31 +78,32 @@
                         <form action="{{ route('login') }}" class="sign-in-form" method="POST">
                             @csrf
                             <div class="single-input mb-6">
-                                <input type="email" name="email" placeholder="Enter your email">
+                                <input type="email" name="email" placeholder="Masukkan Email Anda">
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+
                             <div class="single-input mb-6">
-                                <input type="password" name="password" placeholder="Enter your password">
+                                <input type="password" name="password" placeholder="Masukkan Password Anda">
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+
                             <div class="text-center">
                                 <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Login</button>
                             </div>
                         </form>
-                        <p class="tcn-4 text-center mt-lg-10 mt-6">Don't have an account yet? <a
-                                href="{{ route('register') }}" class="text-decoration-underline tcp-1">Sign Up</a></p>
+                        <p class="tcn-4 text-center mt-lg-10 mt-6">Belum Mempunyai Akun ? <a
+                                href="{{ route('register') }}" class="text-decoration-underline tcp-1">Register</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- sign in section end  -->
-
-    <!-- ==== js dependencies start ==== -->
     <!-- jquery  -->
     <script src="assets/js/jquery.min.js"></script>
     <!-- gsap  -->

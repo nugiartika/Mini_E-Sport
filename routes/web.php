@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DetailTournamentController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RegisterOrganizerController;
@@ -60,9 +61,9 @@ Route::middleware(['auth'])->group(function () {
 
     // User Routes
     Route::middleware('user')->group(function () {
-        Route::get('/admin/listUser', [SainsRoleController::class, 'create'])->name('admin.listUser');
         Route::get('/teams/create', [TeamController::class, 'createId'])->name('team.createId');
         Route::post('/teams', [TeamController::class, 'storeId'])->name('team.storeId')->name('team.create');
+        Route::get('DashboardUser', [DashboardUserController::class, 'index'])->name('dashboardUser');
 
     });
 });
