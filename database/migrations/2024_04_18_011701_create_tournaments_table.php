@@ -29,6 +29,7 @@ return new class extends Migration
             $table->enum('prize',['uang','mendali','sertifikat','trophy'])->nullable();
             $table->json('jumlah')->nullable();
             $table->enum('status',['pending','rejected','accepted'])->default('pending');
+            $table->text('reason')->nullable();
             $table->enum('paidment',['paid','unpaid']);
             $table->integer('nominal')->nullable();
             $table->timestamps();
