@@ -28,7 +28,9 @@ $(document).ready(() => {
 
   // 00 -> preloader
   setTimeout(() => {
-    document.querySelector(".preloader").style.display = "none";
+    if(document.querySelector(".preloader")) {
+        document.querySelector(".preloader").style.display = "none";
+    }
   }, 1000);
 
   // 01 -> Navbar toggle
@@ -48,7 +50,7 @@ $(document).ready(() => {
     $(this).siblings("ul").slideToggle(300);
   });
 
-  // Navbar Auto Active Class 
+  // Navbar Auto Active Class
   var curUrl = $(location).attr('href');
   var terSegments = curUrl.split("/");
   var desired_segment = terSegments[terSegments.length - 1];
@@ -62,7 +64,7 @@ $(document).ready(() => {
     $(".search-bar").toggleClass("open");
   });
 
-  // 04 -> Box hover effect Style 
+  // 04 -> Box hover effect Style
   const targetBtn = document.querySelectorAll('.box-style')
   if (targetBtn) {
     targetBtn.forEach((element) => {
@@ -92,12 +94,12 @@ $(document).ready(() => {
   // 06 -> chat box height adjust
   $('.chat-body').scrollTop($(document).height());
 
-  // 07 -> input file 
+  // 07 -> input file
   $(".add-file-btn").on("click", function () {
     $("#add-file-input").click()
   })
 
-  // 08 -> chat list toggle 
+  // 08 -> chat list toggle
   $(".chat-list-toggle-btn").on("click", function () {
     $(".chat-list-area").toggleClass("open");
   })
