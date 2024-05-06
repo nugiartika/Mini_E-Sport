@@ -87,7 +87,7 @@
                             <a class="dropdown-item" href="javascript:;"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="ti ti-login me-2"></i>
-                                <span class="align-middle">Log Out</span>
+                                <span class="align-middle">Keluar</span>
                             </a>
                         </li>
                     </form>

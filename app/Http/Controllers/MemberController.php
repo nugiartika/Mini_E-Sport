@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMemberRequest;
-use App\Models\member;
+use App\Models\Member;
 use App\Models\Team;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = member::all();
+        $members = Member::all();
         $teams = Team::all();
         return view('user.team', compact('members', 'teams'));
     }

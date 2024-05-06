@@ -96,7 +96,7 @@
 
                 <li class="menu-item {{ request()->routeIs('konfirmtournament') ? 'active' : '' }}">
                     <a href="{{ route('konfirmtournament') }}" class="menu-link">
-                        <div>Data Turnamen</div>
+                        <div>Terima Turnamen</div>
                     </a>
                 </li>
             </ul>
