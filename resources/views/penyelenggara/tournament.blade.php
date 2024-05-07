@@ -11,6 +11,48 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
+<style>
+    /* Gaya untuk tema gelap */
+    .modal-content {
+        background-color: #343a40; /* Warna latar belakang gelap */
+        color: #fff; /* Warna teks putih */
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #454d55; /* Garis bawah untuk header */
+    }
+
+    .modal-title {
+        color: #fff; /* Warna judul putih */
+    }
+
+    .modal-body {
+        padding: 20px; /* Padding untuk body modal */
+    }
+
+    .form-group label {
+        color: #fff; /* Warna label input putih */
+    }
+
+    .form-control {
+        background-color: #495057; /* Warna latar belakang input */
+        color: #fff; /* Warna teks input putih */
+    }
+
+    .form-control:focus {
+        background-color: #ffffff; /* Warna latar belakang input saat fokus */
+        color: #fff; /* Warna teks input saat fokus */
+    }
+
+    .close {
+        color: #fff; /* Warna ikon close putih */
+    }
+
+    .close:hover {
+        color: #fff; /* Warna ikon close putih saat dihover */
+    }
+</style>
+
 
 <body>
     <div class="modal" tabindex="-1" id="filter" style="color: #000;">
@@ -98,7 +140,8 @@
                                         <path fill="none" d="M0 0h36v36H0z" />
                                     </svg>
                                 </div>
-                                <span class="user-name d-none d-xxl-block text-nowrap">{{ auth()->user()->name }}</span>
+                                <span
+                                    class="user-name d-none d-xxl-block text-nowrap">{{ auth()->user()->name }}</span>
                                 <i class="ti ti-chevron-down d-none d-xxl-block"></i>
                             </div>
                         </div>
@@ -232,7 +275,7 @@
                         <div class="tabitem active">
                             <div class="row justify-content-md-start justify-content-center g-6">
                                 @foreach ($tournaments as $tournament)
-                                <div class="col-xl-4 col-md-6 col-sm-10">
+                                    <div class="col-xl-4 col-md-6 col-sm-10">
                                         <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                             <div class="dropdown" style="margin-bottom: 15px; margin-left:350px;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
@@ -260,11 +303,85 @@
                                                             </button>
                                                         </form>
                                                     </li>
-                                                    <li><a href="" class="dropdown-item"><i class="ti ti-calendar fs-2xl"></i>Tambah Jadwal</a></li>
+                                                    <li>
+                                                        <!-- Button trigger modal -->
+                                                        <button class="btn" data-toggle="modal"
+                                                            data-target="#exampleModal">
+                                                            <i class="ti ti-plus fs-2xl"></i> <!-- Icon tambah -->
+                                                        </button>
+                                                        Tambah Jadwal
+                                                        <!-- Modal -->
+
+                                                    </li>
+
                                                 </ul>
                                             </div>
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content bg-dark text-light">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title text-light" id="exampleModalLabel">
+                                                                Tambah Jadwal</h4>
+                                                                <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>                                                                                                                 </div>
+                                                        <form>
+                                                            <div class="modal-body">
+                                                                <form id="regForm" action="">
+                                                                    <!-- One "tab" for each step in the form: -->
+                                                                    <div class="tab">
+                                                                        <h5>Penyisihan</h5><br>
+                                                                        <p>Tanggal Mulai Game<input type="date" placeholder="Tanggal Mulai Game..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="tanggalPenyisihan"></p>
+                                                                        <p>Waktu Mulai<input type="time" placeholder="Waktu Mulai..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="waktuPenyisihan"></p>
+                                                                        <p>Best Of<input type="text" placeholder="Best Of..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="boPenyisihan"></p>
+                                                                    </div>
 
+                                                                    <div class="tab">
+                                                                        <h5>Semi Final</h5><br>
+                                                                        <p>Tanggal Mulai Game<input type="date" placeholder="Tanggal Mulai Game..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="tanggalSemi"></p>
+                                                                        <p>Waktu Mulai<input type="time" placeholder="Waktu Mulai..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="waktuSemi"></p>
+                                                                        <p>Best Of<input type="text" placeholder="Best Of..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="boSemi"></p>
+                                                                    </div>
 
+                                                                    <div class="tab">
+                                                                        <h5>Final</h5><br>
+                                                                        <p>Tanggal Mulai Game<input type="date" placeholder="Tanggal Mulai Game..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="tanggalFinal"></p>
+                                                                        <p>Waktu Mulai<input type="time" placeholder="Waktu Mulai..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="waktuFinal"></p>
+                                                                        <p>Best Of<input type="text" placeholder="Best Of..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="boFinal"></p>
+                                                                    </div>
+
+                                                                    <div style="overflow:auto;">
+                                                                        <div style="float:right;">
+                                                                            <button type="button" class="btn btn-warning" id="prevBtn"
+                                                                                onclick="nextPrev(-1)">Previous</button>
+                                                                            <button type="button" class="btn btn-success" id="nextBtn"
+                                                                                onclick="nextPrev(1)">Next</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Circles which indicates the steps of the form: -->
+                                                                    <div style="text-align:center;margin-top:40px;">
+                                                                        <span class="step"></span>
+                                                                        <span class="step"></span>
+                                                                        <span class="step"></span>
+                                                                    </div>
+
+                                                                </form>
+                                                                <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="tournament-img mb-8 position-relative">
                                                 <div class="img-area overflow-hidden">
                                                     <img class="w-100"
@@ -278,7 +395,8 @@
                                             </div>
                                             <div class="tournament-content px-xxl-4">
                                                 <div class="tournament-info mb-5">
-                                                    <a href="{{ route('tournament.detail', ['id' => $tournament->id]) }}" class="d-block">
+                                                    <a href="{{ route('tournament.detail', ['id' => $tournament->id]) }}"
+                                                        class="d-block">
                                                         <h4
                                                             class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                             {{ $tournament->name }}
@@ -291,9 +409,11 @@
                                                     <div
                                                         class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                                         <div class="d-flex align-items-center gap-2">
-                                                            <img class="w-100" src="{{asset('assets/img/tether.png')}}"
+                                                            <img class="w-100"
+                                                                src="{{ asset('assets/img/tether.png') }}"
                                                                 alt="tether">
-                                                            <span class="tcn-1 fs-sm">Rp.{{ number_format(floatval($tournament->nominal), 0, ',', '.') }}</span>
+                                                            <span
+                                                                class="tcn-1 fs-sm">Rp.{{ number_format(floatval($tournament->nominal), 0, ',', '.') }}</span>
                                                         </div>
                                                     </div>
                                                     <div
@@ -309,10 +429,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="hr-line line3"></div>
-                                                <div class="prize bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100" >
-                                                        <i class="ti ti-gift fs-base tcn-1"></i>
-                                                        <span class="tcn-1 fs-sm" >{{ $tournament->prize }} {{ $tournament->jumlah }}</span>
-                                                    </div>
+                                                <div
+                                                    class="prize bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                                    <i class="ti ti-gift fs-base tcn-1"></i>
+                                                    <span class="tcn-1 fs-sm">{{ $tournament->prizes }}
+                                                        {{ $tournament->jumlahs }}</span>
+                                                </div>
 
                                                 @php
                                                     $teamCount = $teamCounts->firstWhere(
@@ -335,7 +457,8 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <a href="{{ route('tournament.detail', ['id' => $tournament->id]) }}" class="btn2 ">
+                                                    <a href="{{ route('tournament.detail', ['id' => $tournament->id]) }}"
+                                                        class="btn2 ">
                                                         <i class="ti ti-arrow-right fs-2xl"></i>
                                                     </a>
                                                 </div>
@@ -471,31 +594,74 @@
     <!-- jQuery (diperlukan untuk Bootstrap JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
         integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
-        $(document).on('click', '.delete', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            swal({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel!",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function(isConfirm) {
-                    if (isConfirm) {
-                        // Menggunakan ID formulir yang dibangun secara dinamis
-                        $('#deleteForm' + id).submit();
-                    } else {
-                        swal("Cancelled", "Your data is safe :)", "error");
-                    }
-                });
-        });
+        var currentTab = 0; // Saat ini tab yang ditampilkan
+        showTab(currentTab); // Tampilkan tab saat ini
+
+        function showTab(n) {
+            // Ambil semua tab dan sembunyikan mereka
+            var tabs = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = "none";
+            }
+
+            // Tampilkan tab yang sesuai
+            tabs[n].style.display = "block";
+
+            // Perbarui tombol Next/Previous sesuai dengan tab yang ditampilkan
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (tabs.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+
+            // Perbarui langkah indikator
+            fixStepIndicator(n);
+        }
+
+        function nextPrev(n) {
+            // Cek validasi form sebelum pindah ke tab berikutnya
+            var tabs = document.getElementsByClassName("tab");
+            if (n == 1 && !validateForm()) return false;
+
+            // Sembunyikan tab saat ini dan tampilkan yang berikutnya
+            tabs[currentTab].style.display = "none";
+            currentTab = currentTab + n;
+
+            // Jika sudah mencapai akhir form, submit form
+            if (currentTab >= x.length) {
+                // Menghubungkan formulir ke route ptournament.store saat formulir disubmit
+                document.getElementById("regForm").action = "{{ route('ptournament.jadwal') }}";
+                document.getElementById("regForm").submit(); // Submit formulir
+                return false;
+            }
+
+            // Tampilkan tab yang sesuai
+            showTab(currentTab);
+        }
+
+        function validateForm() {
+            // Cek validasi form pada setiap tab di sini (jika diperlukan)
+            return true; // Kembalikan true jika form valid
+        }
+
+        function fixStepIndicator(n) {
+            // Ambil semua langkah indikator dan tandai langkah saat ini sebagai selesai
+            var steps = document.getElementsByClassName("step");
+            for (var i = 0; i < steps.length; i++) {
+                if (i <= n) {
+                    steps[i].className = steps[i].className.replace(" active", "");
+                }
+            }
+            steps[n].className += " active"; // Tandai langkah saat ini sebagai aktif
+        }
     </script>
 
 

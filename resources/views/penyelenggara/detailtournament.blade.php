@@ -13,7 +13,47 @@
 <style>
     .darkened {
     filter: brightness(50%); /* Ubah nilai brightness sesuai kebutuhan (antara 0% - 100%) */
-}
+    }
+
+     /* Gaya untuk tema gelap */
+     .modal-content {
+        background-color: #343a40; /* Warna latar belakang gelap */
+        color: #fff; /* Warna teks putih */
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #454d55; /* Garis bawah untuk header */
+    }
+
+    .modal-title {
+        color: #fff; /* Warna judul putih */
+    }
+
+    .modal-body {
+        padding: 20px; /* Padding untuk body modal */
+    }
+
+    .form-group label {
+        color: #fff; /* Warna label input putih */
+    }
+
+    .form-control {
+        background-color: #495057; /* Warna latar belakang input */
+        color: #fff; /* Warna teks input putih */
+    }
+
+    .form-control:focus {
+        background-color: #ffffff; /* Warna latar belakang input saat fokus */
+        color: #fff; /* Warna teks input saat fokus */
+    }
+
+    .close {
+        color: #fff; /* Warna ikon close putih */
+    }
+
+    .close:hover {
+        color: #fff; /* Warna ikon close putih saat dihover */
+    }
 
 </style>
 <body>
@@ -174,33 +214,35 @@
                     <div class="tabitem active">
                         <div class="row g-6 mb-10 ">
                             <!-- Brackets-->
+                            @foreach ($tournaments as $detail)
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
                                     <div class="bracket-card-header d-flex align-items-center gap-2 mb-2">
                                         <h4 class="tcn-1">Penyisihan</h4>
-                                        <span class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">BO3</span>
+                                        <span class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">{{$detail->boPenyishan}}</span>
                                     </div>
-                                    <span class="tcn-1 d-block mb-3">Agu 17, 5.30 AM</span>
+                                    <span class="tcn-1 d-block mb-3">{{$detail->tanggalPenyishan}},{{$detail->waktuPenyishan}}</span>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
                                     <div class="bracket-card-header d-flex align-items-center gap-2 mb-2">
                                         <h4 class="tcn-1">Semi Final</h4>
-                                        <span class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">BO3</span>
+                                        <span class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">{{$detail->boSemi}}</span>
                                     </div>
-                                    <span class="tcn-1 d-block mb-3">Agu 17, 5.30 AM</span>
+                                    <span class="tcn-1 d-block mb-3"{{$detail->tanggalSemi}}, {{$detail->waktuSemi}}</span>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
                                     <div class="bracket-card-header d-flex align-items-center gap-2 mb-2">
                                         <h4 class="tcn-1">Final</h4>
-                                        <span class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">BO3</span>
+                                        <span class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">{{$detail->boFinal}}</span>
                                     </div>
-                                    <span class="tcn-1 d-block mb-3">Agu 17, 5.30 AM</span>
+                                    <span class="tcn-1 d-block mb-3">{{$detail->tanggalFinal}}, {{$detail->waktuFinal}}</span>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
 
                     </div>
@@ -260,7 +302,7 @@
                             </div>
                         </div>
                     </div>
-        @foreach ($tournaments as $tournament )
+    @foreach ($tournaments as $tournament )
                     <div class="tabitem">
                         <div class="row align-items-center justify-content-center pt-lg-20 pt-sm-10">
                             <div class="col-lg-4 col-sm-6">
@@ -269,11 +311,66 @@
                                         <img class="w-100" src="{{asset('assets/img/winner-prize.png')}}" alt="prize">
                                     </div>
                                     <div class="content-area">
-                                        <a href="#" class="btn btn-outline-light d-flex justify-content-center align-items-center rounded-circle " style="width: 50px; height: 50px; margin-left:175px;">
-                                            <i class="ti ti-plus fs-2xl"></i>
-                                        </a>
+                                        <button  class="btn btn-outline-light d-flex justify-content-center align-items-center rounded-circle " data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        <i class="ti ti-plus fs-2xl"></i> <!-- Icon tambah -->
+                                    </button>
                                         <span class="tcn-6 text-center d-block">Silahkan tambah pemenang setelah turnamen selesai</span>
                                     </div>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content bg-dark text-light">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title text-light" id="exampleModalLabel">
+                                                                Tambah Jadwal</h4>
+                                                                <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>                                                                                                                 </div>
+                                                        <form>
+                                                            <div class="modal-body">
+                                                                <form id="regForm" action="">
+                                                                    <!-- One "tab" for each step in the form: -->
+                                                                    <div class="tab">
+                                                                        <h5>Juara 1</h5><br>
+                                                                        Nama Tim <input type="text" placeholder="Masukan Nama Tim..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="nama_juara1">
+                                                                    </div>
+
+                                                                    <div class="tab">
+                                                                        <h5>Juara 2</h5><br>
+                                                                        Nama Tim <input type="text" placeholder="Masukan Nama Tim..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="nama_juara2">
+                                                                    </div>
+
+                                                                    <div class="tab">
+                                                                        <h5>Juara 3</h5><br>
+                                                                        Nama Tim <input type="text" placeholder="Masukan Nama Tim..." class="form-control"
+                                                                                oninput="this.className = 'form-control'" name="nama_juara3">
+                                                                    </div>
+
+                                                                    <div style="overflow:auto;">
+                                                                        <div style="float:right;">
+                                                                            <button type="button" class="btn btn-warning" id="prevBtn"
+                                                                                onclick="nextPrev(-1)">Previous</button>
+                                                                            <button type="button" class="btn btn-success" id="nextBtn"
+                                                                                onclick="nextPrev(1)">Next</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Circles which indicates the steps of the form: -->
+                                                                    <div style="text-align:center;margin-top:40px;">
+                                                                        <span class="step"></span>
+                                                                        <span class="step"></span>
+                                                                        <span class="step"></span>
+                                                                    </div>
+
+                                                                </form>
+                                                                <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                 </div>
                             </div>
                         </div>
@@ -497,6 +594,74 @@
     <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
     <!-- main js  -->
     <script src="{{asset('assets/js/main.js')}}"></script>
+
+    <script>
+        var currentTab = 0; // Saat ini tab yang ditampilkan
+        showTab(currentTab); // Tampilkan tab saat ini
+
+        function showTab(n) {
+            // Ambil semua tab dan sembunyikan mereka
+            var tabs = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = "none";
+            }
+
+            // Tampilkan tab yang sesuai
+            tabs[n].style.display = "block";
+
+            // Perbarui tombol Next/Previous sesuai dengan tab yang ditampilkan
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (tabs.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+
+            // Perbarui langkah indikator
+            fixStepIndicator(n);
+        }
+
+        function nextPrev(n) {
+            // Cek validasi form sebelum pindah ke tab berikutnya
+            var tabs = document.getElementsByClassName("tab");
+            if (n == 1 && !validateForm()) return false;
+
+            // Sembunyikan tab saat ini dan tampilkan yang berikutnya
+            tabs[currentTab].style.display = "none";
+            currentTab = currentTab + n;
+
+            // Jika sudah mencapai akhir form, submit form
+            if (currentTab >= x.length) {
+                // Menghubungkan formulir ke route ptournament.store saat formulir disubmit
+                document.getElementById("regForm").action = "{{ route('ptournament.jadwal') }}";
+                document.getElementById("regForm").submit(); // Submit formulir
+                return false;
+            }
+
+            // Tampilkan tab yang sesuai
+            showTab(currentTab);
+        }
+
+        function validateForm() {
+            // Cek validasi form pada setiap tab di sini (jika diperlukan)
+            return true; // Kembalikan true jika form valid
+        }
+
+        function fixStepIndicator(n) {
+            // Ambil semua langkah indikator dan tandai langkah saat ini sebagai selesai
+            var steps = document.getElementsByClassName("step");
+            for (var i = 0; i < steps.length; i++) {
+                if (i <= n) {
+                    steps[i].className = steps[i].className.replace(" active", "");
+                }
+            }
+            steps[n].className += " active"; // Tandai langkah saat ini sebagai aktif
+        }
+    </script>
 </body>
 
 </html>

@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('ptournament', TournamentController::class);
         Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
+        Route::post('/jadwal', [TournamentController::class, 'jadwal'])->name('ptournament.jadwal');
+        Route::post('/juara', [TournamentController::class, 'juara'])->name('ptournament.juara');
     });
 
     // User Routes

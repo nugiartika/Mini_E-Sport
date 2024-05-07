@@ -27,9 +27,22 @@ return new class extends Migration
             $table->text('description');
             $table->text('rule');
             $table->json('prize')->nullable();
+            $table->integer('jumlah')->nullable();
             $table->enum('status', ['pending','rejected','accepted'])->default('pending');
             $table->enum('paidment',['paid','unpaid']);
             $table->integer('nominal')->nullable();
+            $table->date('tanggalPenyisihan');
+            $table->time('waktuPenyisihan');
+            $table->string('boPenyisihan');
+            $table->date('tanggalSemi');
+            $table->time('waktuSemi');
+            $table->string('boSemi');
+            $table->date('tanggalFinal');
+            $table->time('waktuFinal');
+            $table->string('boFinal');
+            $table->string('nama_juara1');
+            $table->string('nama_juara2');
+            $table->string('nama_juara3');
             $table->timestamps();
         });
     }

@@ -516,8 +516,6 @@
         </div>
     </footer>
     <!-- footer section end  -->
-
-
     <script>
         $(document).ready(function() {
             $('#existing').on('show.bs.modal', function(event) {
@@ -545,8 +543,6 @@
             }
         }
     </script>
-
-
 
     <!-- ==== js dependencies start ==== -->
     <!-- jquery  -->
