@@ -63,7 +63,6 @@ Route::middleware(['auth'])->group(function () {
 
     // User Routes
     Route::middleware('user')->group(function () {
-        Route::get('/teams/create', [TeamController::class, 'createId'])->name('team.createId');
         Route::post('/teams', [TeamController::class, 'storeId'])->name('team.storeId')->name('team.create');
         Route::get('DashboardUser', [DashboardUserController::class, 'index'])->name('dashboardUser');
 
@@ -71,7 +70,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Public Routes
+Route::get('/teams.create', [TeamController::class, 'createId'])->name('team.createId');
+
 Route::get('tournament', [TournamentController::class, 'indexuser'])->name('user.tournament');
+Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
+
+
+
 Route::resource('team', TeamController::class);
 Route::resource('member', MemberController::class);
 Route::get('tournament/{tournament}', [TournamentController::class, 'detail'])->name('detailTournament');

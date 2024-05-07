@@ -52,9 +52,9 @@
                                       </div>
                                       <div class="flex-grow-1">
                                           <span class="fw-medium d-block">
-                                              Admin
+                                              {{ auth()->user()->name }}
                                           </span>
-                                          <small class="text-muted">HummaEsport</small>
+                                          <small class="text-muted">{{ auth()->user()->name }}</small>
                                       </div>
                                   </div>
                               </a>

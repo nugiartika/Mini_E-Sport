@@ -101,8 +101,7 @@
         </div>
     @endif
 
-    <div class="main-content">
-
+    <div class="main-content mt-5">
         @yield('content')
 
     </div>

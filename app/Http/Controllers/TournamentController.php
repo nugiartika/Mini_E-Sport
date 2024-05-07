@@ -48,7 +48,7 @@ class TournamentController extends Controller
             ->get();
         $category = Category::all();
         $teams = Team::all();
-        return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts'));
+        return view('user.tournamentUser', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts'));
     }
     public function dashboard()
     {
@@ -97,6 +97,8 @@ class TournamentController extends Controller
                 $path_gambar = Storage::disk('public')->put('tournament', $gambar);
             }
 
+
+            // Kemudian simpan data ke dalam database
             $tournament = Tournament::create([
                 'name' => $request->input('name'),
                 'pendaftaran' => $request->input('pendaftaran'),
@@ -116,6 +118,7 @@ class TournamentController extends Controller
                 'prize' => $request->input('prize'),
                 'note' => $request->input('note')
             ]);
+
             return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
         } catch (\Exception $e) {
             // Tangani kesalahan
