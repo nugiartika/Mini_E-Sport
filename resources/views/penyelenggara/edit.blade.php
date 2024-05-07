@@ -24,7 +24,7 @@
 
     /* Gaya untuk form */
     #regForm {
-        background-color: rgb(25, 27, 31);
+        background-color: rgb(0, 0, 0);
         margin: 90px auto;
 
     }
@@ -190,7 +190,7 @@
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
                             <img class="" src="{{ asset('assets/img/humma-01.png') }}" height="60px"
-                                width="75px" alt="favicon">
+                                width="75px"  alt="favicon">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
@@ -240,37 +240,37 @@
             <div class="account-items d-grid gap-1" data-tilt>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="bttn account-item" type="submit">Kembali</button>
+                    <button class="bttn account-item" type="submit">Log Out</button>
                 </form>
             </div>
         </div>
     @endif
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-5">
-            <div class="card">
-                <div class="card-body">
-                    <h1>Tambah Turnamen</h1>
-                    <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data"
-                        class="row g-3" id="regForm">
-                        @csrf
+    <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
+        @csrf
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Tambah Turnamen</h1>
                         <div class="tab">
-                            <p>
                             <div class="mb-3">
-                                <label for="name" class="form-label">NAME TOURNAMENT</label>
+                                <label for="name" class="form-label">Nama Turnamen</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name" value="{{ old('name') }}">
+                                    placeholder="Mis: Mobile Legends" id="name" name="name"
+                                    value="{{ $tournament->name }}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            <div class="row">
+
+                            <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="pendaftaran" class="form-label">START REGISTER</label>
+                                    <label for="pendaftaran" class="form-label">Tanggal Pendaftaran</label>
                                     <input type="date"
                                         class="form-control @error('pendaftaran') is-invalid @enderror" id="pendaftaran"
-                                        name="pendaftaran" value="{{ old('pendaftaran') }}">
+                                        name="pendaftaran" value="{{ $tournament->pendaftaran }}">
                                     @error('pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -278,11 +278,11 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="end_pendaftaran" class="form-label">END REGISTER</label>
+                                    <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
                                     <input type="date"
                                         class="form-control @error('end_pendaftaran') is-invalid @enderror"
                                         id="end_pendaftaran" name="end_pendaftaran"
-                                        value="{{ old('end_pendaftaran') }}">
+                                        value="{{ $tournament->end_pendaftaran }}">
                                     @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -291,12 +291,12 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="permainan" class="form-label">START GAME</label>
+                                    <label for="permainan" class="form-label">Mulai Kompetisi</label>
                                     <input type="date"
                                         class="form-control @error('permainan') is-invalid @enderror" id="permainan"
-                                        name="permainan" value="{{ old('permainan') }}">
+                                        name="permainan" value="{{ $tournament->permainan }}">
                                     @error('permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -305,10 +305,10 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="end_permainan" class="form-label">END GAME</label>
+                                    <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
                                     <input type="date"
                                         class="form-control @error('end_permainan') is-invalid @enderror"
-                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}">
+                                        id="end_permainan" name="end_permainan" value="{{ $tournament->end_permainan }}">
                                     @error('end_permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -316,81 +316,69 @@
                                     @enderror
                                 </div>
                             </div>
-                            </p>
-                            <P>
+
                             <div class="mb-3">
-                                <label for="slotTeam" class="form-label">SLOT TEAM</label>
+                                <label for="slotTeam" class="form-label">Jumlah Tim</label>
                                 <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
-                                    id="slotTeam" name="slotTeam" value="{{ old('slotTeam') }}">
+                                    id="slotTeam" name="slotTeam" value="{{ $tournament->slotTeam }}">
                                 @error('slotTeam')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            </P>
                         </div>
                         <div class="tab">
-                            <p>
+
                             <div class="mb-3">
-                                <label for="prizepol" class="form-label">PRIZEPOOL</label>
-                                <form id="prizepol-form"> <!-- Tambahkan id "prizepol-form" pada form -->
+                                <label for="prizepol" class="form-label">Hadiah Turnamen</label>
+                                <form id="prizepol-form">
+                                    <!-- Tambahkan id "prizepol-form" pada form -->
                                     <div id="inputs">
-                                        <div class="container row">
-                                            <div class="input">
-                                                <select class="form-control @error('prize') is-invalid @enderror"
-                                                    name="prize"value="{{ old('prize') }}">
-                                                    <option value="">Select one</option>
+                                        <div class="form-prize">
+                                            <div class="input-group">
+                                                <select class="form-control prize-dropdown @error('prize') is-invalid @enderror"
+                                                    name="prize" value="{{ $tournament->prize }}">
+                                                    <option value="">Pilih Salah Satu</option>
                                                     <option value="uang">Uang</option>
-                                                    <option value="mendali">Mendali</option>
+                                                    <option value="mendali">Medali</option>
                                                     <option value="trophy">Trophy</option>
                                                     <option value="sertifikat">Sertifikat</option>
                                                 </select>
-                                                @error('prize')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+
+                                                <button type="button" class="addRow rounded-end btn btn-info"><i
+                                                        class="ti ti-plus fs-2xl"></i></button>
+
+                                                <button type="button" class="removeRow d-none btn btn-danger"><i
+                                                        class="ti ti-trash fs-2xl"></i></button>
                                             </div>
-                                            <div class="input moneyForm" style="display: none;">
+                                            <div class="w-100 mt-3 moneyForm" style="display: none;">
                                                 <!-- Ubah id menjadi class untuk "moneyForm" -->
                                                 <input class="form-control" type="number"
-                                                    value="inputkan jumlah uang" name="jumlah">
+                                                    placeholder="inputkan jumlah uang" name="jumlah" />
                                             </div>
-                                            <div class="icon-container" style="display: flex;">
-                                                <div class="input removeRow" style="cursor: pointer;"><i
-                                                        class="ti ti-trash fs-2xl" style="color: white;"></i></div>
-                                                <div class="addRow" style="cursor: pointer;"><i
-                                                        class="ti ti-plus fs-2xl" style="color: white;"></i></div>
-                                                <!-- Ubah id menjadi class untuk "addRow" -->
-                                            </div>
+
                                         </div>
                                     </div>
                                 </form>
                             </div>
 
-
-
-                            </p>
-
-                            <p>
                             <div class="mb-3">
-                                <label for="contact" class="form-label">CONTACT</label>
+                                <label for="contact" class="form-label">Kontak Penanggungjawab</label>
                                 <input type="number" class="form-control @error('contact') is-invalid @enderror"
-                                    id="contact" name="contact" value="{{ old('contact') }}">
+                                    id="contact" name="contact" value="{{ $tournament->contact }}">
                                 @error('contact')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            </p>
-                            <p>
+
                             <div class="mb-3">
-                                <label for="category" class="form-label">GAME</label><br>
+                                <label for="category" class="form-label">GAME</label>
                                 <select class="form-control @error('categories_id') is-invalid @enderror"
                                     id="category" name="categories_id" aria-label="Default select example">
-                                    <option value="" selected>Select Game</option>
+                                    <option value="{{$tournament->categories_id}}" selected>Select Game</option>
                                     @foreach ($category as $kat)
                                         <option value="{{ $kat->id }}"
                                             {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
@@ -404,10 +392,9 @@
                                     </span>
                                 @enderror
                             </div>
-                            </p>
-                            <p>
+
                             <div class="mb-3">
-                                <label for="images" class="form-label">POSTER</label>
+                                <label for="images" class="form-label">Unggah Poster</label>
                                 <input type="file" class="form-control @error('images') is-invalid @enderror"
                                     id="images" name="images" onchange="previewImage(event)">
                                 @if (old('images'))
@@ -420,30 +407,26 @@
                                     </span>
                                 @enderror
                             </div>
-                            </p>
                         </div>
                         <div class="tab">
-                            <p>
                             <div class="mb-3">
-                                <label for="description" class="form-label">Fill Description</label>
+                                <label for="description" class="form-label">Deskripsi</label>
+                                <textarea name="description" placeholder="Jelaskan deskripsi turnamennya" id="summernoteModalDescription" class="form-control" aria-label="With textarea">{{ $tournament->description }}</textarea>
+
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <textarea name="description" id="summernoteModalDescription" class="form-control" aria-label="With textarea">{{  $tournament->description ?? old('description') }}</textarea>
                             </div>
-                            </p>
-                            <p>
                             <div class="mb-3">
-                                <label for="rule" class="form-label">Fill Rule</label>
+                                <label for="rule" class="form-label">Aturan Main</label>
+                                <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen" class="form-control" aria-label="With textarea">{{ $tournament->rule }}</textarea>
+
                                 @error('rule')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <textarea name="rule" id="summernoteModalRule" class="form-control" aria-label="With textarea">{{ $tournament->rule ?? old('rule') }}</textarea>
                             </div>
-                            </p>
-                            <p>
                             <div class="mb-3">
-                                <label for="paidment" class="form-label">Paid & Unpaid</label>
+                                <label for="paidment" class="form-label">Event Berbayar atau Gratis?</label>
                                 @error('paidment')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -455,8 +438,6 @@
                                         Berbayar</option>
                                 </select>
                             </div>
-                            </p>
-                            <p>
                             <div class="mb-3" id="nominal" style="display: none;">
                                 <label for="nominal_input" class="form-label">Masukkan Nominal</label>
                                 @error('nominal')
@@ -464,29 +445,31 @@
                                 @enderror
                                 <input type="number" name="nominal" id="nominal_input" class="form-control">
                             </div>
-                            </p>
                         </div>
-                        <div style="overflow:auto;">
-                            <div style="float:right;">
+                        <div class="d-flex gap-2 justify-content-between">
+                            <button type="button" class="btn btn-secondary"
+                                onclick="window.location.href='/ptournament'">Batal</button>
+
+                            <div class="d-flex align-items-center gap-2">
                                 <button type="button" id="prevBtn" onclick="nextPrev(-1)"
-                                    class="btn btn-danger">Previous</button>
+                                    class="btn btn-danger">Kembali</button>
                                 <button type="button" id="nextBtn" onclick="nextPrev(1)"
-                                    class="btn btn-success">Next</button>
+                                    class="btn btn-success">Lanjut</button>
                             </div>
                         </div>
                         <div>
-                            <a type="button" class="btn btn-secondary" href="/ptournament">CANCEL</a>
+
                         </div>
                         <div style="text-align:center;margin-top:40px;">
                             <span class="step"></span>
                             <span class="step"></span>
                             <span class="step"></span>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <footer class="footer bgn-4 bt">
         <div class="container">
             <div class="row justify-content-between">
@@ -624,106 +607,92 @@
             }
         }
     </script>
-
-
     {{-- script untuk form wizard --}}
     <script>
-        var currentTab = 0; // Langkah saat ini diatur menjadi langkah pertama (0)
-        showTab(currentTab); // Tampilkan langkah saat ini
-
+        var currentTab = 0; 
+        showTab(currentTab); 
+    
         function showTab(n) {
             var x = document.getElementsByClassName("tab");
             x[n].style.display = "block";
-
+    
             if (n == 0) {
                 document.getElementById("prevBtn").style.display = "none";
             } else {
                 document.getElementById("prevBtn").style.display = "inline";
             }
-
+    
             if (n == (x.length - 1)) {
                 document.getElementById("nextBtn").innerHTML = "Submit";
             } else {
                 document.getElementById("nextBtn").innerHTML = "Next";
             }
-
+    
             fixStepIndicator(n);
         }
-
+    
         function nextPrev(n) {
             var x = document.getElementsByClassName("tab");
-
+    
             if (n == 1 && !validateForm()) return false;
-
+    
             x[currentTab].style.display = "none";
             currentTab = currentTab + n;
-
+    
             if (currentTab >= x.length) {
-                document.getElementById("regForm").submit();
+              
+                document.getElementById("regForm").action = "{{ route('ptournament.store') }}";
+                document.getElementById("regForm").submit(); 
                 return false;
             }
-
+    
             showTab(currentTab);
         }
-
+    
         function validateForm() {
             var x, y, i, valid = true;
             x = document.getElementsByClassName("tab");
-            y = x[currentTab].getElementsByTagName("select");
-
+            y = x[currentTab].getElementsByTagName("input");
+    
             for (i = 0; i < y.length; i++) {
                 if (y[i].hasAttribute("required") && y[i].value.trim() === "") {
                     y[i].className += " invalid";
                     valid = false;
                 }
             }
-
+    
             if (valid) {
                 document.getElementsByClassName("step")[currentTab].className += " finish";
             }
-
+    
             return valid;
         }
-
+    
         function fixStepIndicator(n) {
             var i, x = document.getElementsByClassName("step");
-
+    
             for (i = 0; i < x.length; i++) {
                 x[i].className = x[i].className.replace(" active", "");
             }
-
+    
             x[n].className += " active";
         }
     </script>
+    
 
-
-    {{-- script untuk memunculkan form uang apabila memilih Uang --}}
-    <script>
-        function toggleDiv() {
-            let value = document.getElementById("prizepol").value;
-            let div = document.getElementById("uang");
-
-            if (value === "Uang") {
-                div.style.display = "block";
-            } else {
-                div.style.display = "none";
-            }
-        }
-    </script>
-
+    {{-- scrript untuk prizepool --}}
     <script>
         $(document).ready(function() {
             // Event handler untuk tombol "Hapus Baris"
             $(document).on('click', '.removeRow', function() {
-                // Periksa apakah ada lebih dari satu form
-                if ($('#inputs .row').length > 1) {
-                    $(this).closest('.row').remove();
-                }
+                console.log($(this).closest('.form-prize'))
+                $(this).closest('.form-prize').remove();
             });
 
             // Event handler untuk semua select dengan nama "animation[]"
-            $(document).on('change', 'select[name="prize"]', function() {
-                var moneyForm = $(this).closest('.row').find('.moneyForm');
+            $(document).on('change', '.prize-dropdown', function() {
+                console.log($(this).closest('.form-prize'))
+                var moneyForm = $(this).closest('.form-prize').find('.moneyForm');
                 if ($(this).val() === "uang") {
                     moneyForm.show();
                 } else {
@@ -733,8 +702,12 @@
 
             // Event handler untuk tombol "Tambah Baris"
             $(document).on('click', '.addRow', function() {
-                let templateRow = $('#inputs .container.row:first').clone();
-                let lastRow = $('#inputs .container.row:last');
+                let templateRow = $('#inputs .form-prize:first').clone();
+                let lastRow = $('#inputs .form-prize:last');
+
+                templateRow.find('.addRow').remove();
+                templateRow.find('.removeRow').removeClass('d-none');
+                templateRow.find('.moneyForm').css('display', 'none');
 
                 if (lastRow.length) {
                     let nextNumber = parseInt(lastRow.find('.count').text()) + 1;
@@ -744,7 +717,7 @@
                     templateRow.find('.count').text(1);
                 }
 
-                $('#inputs').append('<div class="container row">' + templateRow.html() + '</div>');
+                $('#inputs').append('<div class="form-prize border-top pt-3 mt-3">' + templateRow.html() + '</div>');
 
                 return false;
             });

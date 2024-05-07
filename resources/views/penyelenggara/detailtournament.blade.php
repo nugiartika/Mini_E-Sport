@@ -311,7 +311,7 @@
                                         <img class="w-100" src="{{asset('assets/img/winner-prize.png')}}" alt="prize">
                                     </div>
                                     <div class="content-area">
-                                        <button  class="btn btn-outline-light d-flex justify-content-center align-items-center rounded-circle " data-toggle="modal"
+                                        <button  class="btn btn-outline-light d-flex " data-toggle="modal"
                                         data-target="#exampleModal">
                                         <i class="ti ti-plus fs-2xl"></i> <!-- Icon tambah -->
                                     </button>
@@ -371,6 +371,28 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <table class="table table-dark">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">Urutan Juara</th>
+                                                    <th scope="col">Nama Team</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>Juara 1</td>
+                                                    <td>Otto</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Juara 2</td>
+                                                    <td>Thornton</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Juara 3</td>
+                                                    <td>the Bird</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
                                 </div>
                             </div>
                         </div>

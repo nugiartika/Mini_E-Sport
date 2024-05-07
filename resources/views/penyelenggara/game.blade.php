@@ -9,7 +9,18 @@
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+<style>
 
+/* Untuk memastikan konten dalam elemen tetap di dalamnya */
+.ratio-16x9 > * {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+</style>
 <body>
 
     <header class="header-section w-100 bgn-4">
@@ -95,13 +106,14 @@
             </div>
             <div class="row gy-lg-10 gy-6">
                 @foreach ($category as $index)
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="game-card-wrapper mx-auto">
-                            <div class="game-card mb-5 p-2">
+                 <div class="col-lg-3 col-md-6 col-sm-12  ratio-16x9" >
+                        <div class="game-card-wrapper mx-auto ">
+                            <div class="game-card mb-5 p-2 ">
                                 <div class="game-card-border"></div>
                                 <div class="game-card-border-overlay"></div>
                                 <div class="game-img">
-                                    <img class="w-100 h-100" src="{{ asset('storage/' . $index->photo) }}" alt="game">
+                                    <img class="w-100 h-100" src="{{ asset('storage/' . $index->photo) }}"
+                                        alt="game">
                                 </div>
                                 <div class="game-link d-center">
                                     <a href="tournaments-details.html" class="btn2">
@@ -110,7 +122,8 @@
                                 </div>
                             </div>
                             <a href="tournaments-details.html">
-                                <h4 class="game-title mb-0 tcn-1 cursor-scale growDown2 title-anim">{{ $index->name }}</h4>
+                                <h4 class="game-title mb-0 tcn-1 cursor-scale growDown2 title-anim">{{ $index->name }}
+                                </h4>
                             </a>
                         </div>
                     </div>

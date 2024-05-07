@@ -93,16 +93,6 @@ class TournamentController extends Controller
             // Proses gambar
             $gambar = $request->file('images');
             $path_gambar = null;
-            $amount = collect($request->input('jumlah'));
-            $dataPrize = collect($request->input('prize'))->map(function($item, $index) use ($amount) {
-                $data['item'] = $item;
-
-                if($item === 'uang') {
-                    $data['nominal'] = (int) $amount[$index];
-                }
-
-                return $data;
-            });
             if ($gambar) {
                 $path_gambar = Storage::disk('public')->put('tournament', $gambar);
             }
@@ -123,15 +113,15 @@ class TournamentController extends Controller
                 'paidment' => $request->input('paidment'),
                 'nominal' => $request->input('nominal'),
                 'status' => 'pending',
-                'prize' => $dataPrize->toJson(),
-                'jumlah' => $request->input('jumlah')
+                'prize' => $request->input('prize'),
+                'note' => $request->input('note')
             ]);
             return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
         } catch (\Exception $e) {
             // Tangani kesalahan
             return back()->withErrors([$e->getMessage()]);
         }
-       
+
     }
 
 

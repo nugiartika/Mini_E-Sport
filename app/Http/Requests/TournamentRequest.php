@@ -46,7 +46,7 @@ class TournamentRequest extends FormRequest
             'paidment' => 'required|string',
             'nominal' => 'nullable|numeric',
             'prize' => 'required',
-            'jumlah' => 'nullable|numeric',
+            'keterangan' => 'required',
         ];
 
 
@@ -80,8 +80,7 @@ class TournamentRequest extends FormRequest
             'rule.required' => 'Aturan harus diisi.',
             'rule.max' => 'Aturan tidak boleh lebih dari 2048 karakter.',
             'prize.required' => 'Hadiah harus diisi.',
-            'jumlah.numeric' => 'Jumlah hadiah harus berupa angka.',
-            'jumlah.min' => 'Jumlah hadiah tidak boleh kurang dari 0.',
+            'keterangan.required' => 'Deskripsi Hadiah harus diisi.',
             'slotTeam.required' => 'Slot tim harus diisi.',
             'slotTeam.integer' => 'Slot tim harus berupa angka.',
             'slotTeam.min' => 'Slot tim tidak boleh kurang dari 2.',

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ asset('assets/img/humma-01.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
     <title>Tournament - HummaEsport</title>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -240,13 +240,25 @@
             <div class="account-items d-grid gap-1" data-tilt>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="bttn account-item" type="submit">Kembali</button>
+                    <button class="bttn account-item" type="submit">Log Out</button>
                 </form>
             </div>
         </div>
     @endif
     <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
         @csrf
+        @if ($errors->all())
+        <div class="alert bg-danger">
+            <h5>Ada kesalahan!</h5>
+            <p>Mohon periksa pesan ini dan segera diperbaiki.</p>
+
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <div class="row justify-content-center">
             <div class="col-12 col-md-9 col-lg-7 col-xl-5">
                 <div class="card">
@@ -339,7 +351,7 @@
                                             <div class="input-group">
                                                 <select
                                                     class="form-control prize-dropdown @error('prize') is-invalid @enderror"
-                                                    name="prize[]" value="{{ old('prize') }}">
+                                                    name="prize" value="{{ old('prize') }}">
                                                     <option value="">Pilih Salah Satu</option>
                                                     <option value="uang">Uang</option>
                                                     <option value="mendali">Medali</option>
@@ -353,11 +365,12 @@
                                                 <button type="button" class="removeRow d-none btn btn-danger"><i
                                                         class="ti ti-trash fs-2xl"></i></button>
                                             </div>
-                                            <div class="w-100 mt-3 moneyForm" style="display: none;">
+                                            <div class="w-100 mt-3 noteForm" style="display: none;">
                                                 <!-- Ubah id menjadi class untuk "moneyForm" -->
-                                                <input class="form-control" type="number"
-                                                    placeholder="inputkan jumlah uang" name="jumlah[]" />
+                                                <input class="form-control" type="text"
+                                                    placeholder="tambahkan deskripsi hadiah" name="note" />
                                             </div>
+
                                         </div>
                                     </div>
                                 </form>
@@ -376,9 +389,9 @@
 
                             <div class="mb-3">
                                 <label for="category" class="form-label">GAME</label>
-                                <select class="form-select @error('categories_id') is-invalid @enderror"
+                                <select class="form-control @error('categories_id') is-invalid @enderror"
                                     id="category" name="categories_id" aria-label="Default select example">
-                                    <option value="" selected>Pilih Game</option>
+                                    <option value="" selected>Select Game</option>
                                     @foreach ($category as $kat)
                                         <option value="{{ $kat->id }}"
                                             {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
@@ -432,8 +445,8 @@
                                 @error('paidment')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <select name="paidment" id="paidment" class="form-select" onchange="toggleDiv1()">
-                                    <option value="" selected disabled>Pilih </option>
+                                <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
+                                    <option value="" selected disabled>Pilih</option>
                                     <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
                                     </option>
                                     <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak
@@ -611,8 +624,8 @@
     </script>
     {{-- script untuk form wizard --}}
     <script>
-        var currentTab = 0; // Langkah saat ini diatur menjadi langkah pertama (0)
-        showTab(currentTab); // Tampilkan langkah saat ini
+        var currentTab = 0;
+        showTab(currentTab);
 
         function showTab(n) {
             var x = document.getElementsByClassName("tab");
@@ -642,9 +655,9 @@
             currentTab = currentTab + n;
 
             if (currentTab >= x.length) {
-                // Menghubungkan formulir ke route ptournament.store saat formulir disubmit
+
                 document.getElementById("regForm").action = "{{ route('ptournament.store') }}";
-                document.getElementById("regForm").submit(); // Submit formulir
+                document.getElementById("regForm").submit();
                 return false;
             }
 
@@ -654,7 +667,7 @@
         function validateForm() {
             var x, y, i, valid = true;
             x = document.getElementsByClassName("tab");
-            y = x[currentTab].getElementsByTagName("select");
+            y = x[currentTab].getElementsByTagName("input");
 
             for (i = 0; i < y.length; i++) {
                 if (y[i].hasAttribute("required") && y[i].value.trim() === "") {
@@ -681,50 +694,51 @@
         }
     </script>
 
+
     {{-- scrript untuk prizepool --}}
     <script>
-        $(document).ready(function() {
-            // Event handler untuk tombol "Hapus Baris"
-            $(document).on('click', '.removeRow', function() {
-                console.log($(this).closest('.form-prize'))
-                $(this).closest('.form-prize').remove();
-            });
-
-            // Event handler untuk semua select dengan nama "animation[]"
-            $(document).on('change', '.prize-dropdown', function() {
-                console.log($(this).closest('.form-prize'))
-                var moneyForm = $(this).closest('.form-prize').find('.moneyForm');
-                if ($(this).val() === "uang") {
-                    moneyForm.show();
-                } else {
-                    moneyForm.hide();
-                }
-            });
-
-            // Event handler untuk tombol "Tambah Baris"
-            $(document).on('click', '.addRow', function() {
-                let templateRow = $('#inputs .form-prize:first').clone();
-                let lastRow = $('#inputs .form-prize:last');
-
-                templateRow.find('.addRow').remove();
-                templateRow.find('.removeRow').removeClass('d-none');
-                templateRow.find('.moneyForm').css('display', 'none');
-
-                if (lastRow.length) {
-                    let nextNumber = parseInt(lastRow.find('.count').text()) + 1;
-                    templateRow.find('.count').text(nextNumber);
-                } else {
-                    // Jika tidak ada baris lagi, tambahkan baris pertama
-                    templateRow.find('.count').text(1);
-                }
-
-                $('#inputs').append('<div class="form-prize border-top pt-3 mt-3">' + templateRow.html() +
-                    '</div>');
-
-                return false;
-            });
+    $(document).ready(function() {
+        // Event handler untuk tombol "Hapus Baris"
+        $(document).on('click', '.removeRow', function() {
+            $(this).closest('.form-prize').remove();
         });
-    </script>
+
+        // Event handler untuk semua select dengan nama "animation[]"
+        $(document).on('change', '.prize-dropdown', function() {
+            var selectedValue = $(this).val();
+            var noteForm = $(this).closest('.form-prize').find('.noteForm');
+            // Periksa apakah nilai yang dipilih adalah 'uang', 'mendali', 'trophy', atau 'sertifikat'
+            noteForm.toggle(selectedValue === "uang" || selectedValue === "mendali" || selectedValue === "trophy" ||
+                selectedValue === "sertifikat");
+        });
+
+
+        // Event handler untuk tombol "Tambah Baris"
+        $(document).on('click', '.addRow', function() {
+            let templateRow = $('#inputs .form-prize:first').clone();
+            let lastRow = $('#inputs .form-prize:last');
+
+            templateRow.find('.addRow').remove();
+            templateRow.find('.removeRow').removeClass('d-none');
+            templateRow.find('.noteForm').hide();
+
+            if (lastRow.length) {
+                let nextNumber = parseInt(lastRow.find('.count').text()) + 1;
+                templateRow.find('.count').text(nextNumber);
+            } else {
+                // Jika tidak ada baris lagi, tambahkan baris pertama
+                templateRow.find('.count').text(1);
+            }
+
+            $('#inputs').append('<div class="form-prize border-top pt-3 mt-3">' + templateRow.html() +
+                '</div>');
+
+            return false;
+        });
+    });
+</script>
+
+
 
 
 
