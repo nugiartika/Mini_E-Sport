@@ -74,31 +74,32 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="form-area">
-                        <h1 class="tcn-1 text-center cursor-scale growUp mb-10">Login</h1>
+                        <h1 class="tcn-1 text-center cursor-scale growUp mb-10">Gabung</h1>
                         <form action="{{ route('login') }}" class="sign-in-form" method="POST">
                             @csrf
-                            <div class="single-input mb-6">
+                            <div class="single-input mb-3">
                                 <input type="email" name="email" placeholder="Masukkan Email Anda">
-                                @error('email')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+
                             </div>
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
 
 
-                            <div class="single-input mb-6">
+                            <div class="single-input mb-3">
                                 <input type="password" name="password" placeholder="Masukkan Password Anda">
-                                @error('password')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
 
 
                             <div class="text-center">
-                                <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Login</button>
+                                <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Gabung</button>
                             </div>
                         </form>
                         <p class="tcn-4 text-center mt-lg-10 mt-6">Belum Mempunyai Akun ? <a
-                                href="{{ route('register') }}" class="text-decoration-underline tcp-1">Register</a></p>
+                                href="{{ route('register') }}" class="text-decoration-underline tcp-1">Daftar</a></p>
                     </div>
                 </div>
             </div>

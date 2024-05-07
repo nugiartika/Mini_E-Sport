@@ -44,17 +44,12 @@
                     </div>
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    {{-- <button class="ntf-btn box-style fs-2xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 22 22">
-                            <path fill="currentColor"
-                                d="M13 21H9v-1H8v-6H2v-1H1V9h1V8h6V2h1V1h4v1h1v6h6v1h1v4h-1v1h-6v6h-1M12 5V3h-2v2m-5 7v-2H3v2Z" />
-                        </svg>
-                    </button> --}}
+
 
                     <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                         <li class="menu-link">
                             <a href="{{ route('login') }}"
-                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Login</a>                        </li>
+                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Gabung</a>                        </li>
                         </li>
                     </ul>
 

@@ -53,9 +53,9 @@
                                 <a href="{{ route('game') }}">GAME</a>
                             </li>
                             <li class="menu-item">
-                                    <li class="menu-link">
-                                        <a href="{{ route('team.index') }}">TEAMS</a>
-                                    </li>
+                            <li class="menu-link">
+                                <a href="{{ route('team.index') }}">TEAMS</a>
+                            </li>
                             </li>
                         </ul>
                     </div>
@@ -72,54 +72,57 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="form-area">
-                        <h1 class="tcn-1 text-center cursor-scale growUp mb-10">SIGN UP</h1>
+                        <h1 class="tcn-1 text-center cursor-scale growUp mb-10">Daftar</h1>
                         <form action="{{ route('register') }}" class="sign-in-form" method="POST">
                             @csrf
-                            <div class="single-input mb-6">
+                            <div class="single-input mb-3">
                                 <input type="text" name="name" placeholder="Masukkan nama">
-                                @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
-                            <div class="single-input mb-6">
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <div class="single-input mb-3">
                                 <input type="email" name="email" placeholder="Masukkan email">
-                                @error('email')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
-                            <div class="single-input mb-6">
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <div class="single-input mb-3">
                                 <input type="password" name="password" placeholder="Masukkan password">
-                                @error('password')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
-                            <div class="single-input mb-6">
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <div class="single-input mb-3">
                                 <input type="password" name="password_confirmation" placeholder="Konfirmasi password">
-                                @error('password_confirmation')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
+                            @error('password_confirmation')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
 
-                            <div class="form-group single-input mb-6">
-                                <select id="role" class="form-control select2-selection__arrow @error('role') is-invalid @enderror" name="role">
+                            <div class="form-group single-input mb-3">
+                                <select id="role"
+                                    class="form-select select2-selection__arrow @error('role') is-invalid @enderror"
+                                    name="role">
+                                    <option value="" selected>Pilih Role</option>
                                     <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
-                                    <option value="organizer" {{ old('role') == 'organizer' ? 'selected' : '' }}>Organizer</option>
+                                    <option value="organizer" {{ old('role') == 'organizer' ? 'selected' : '' }}>
+                                        Penyelenggara</option>
                                 </select>
-
-                                @error('role')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
                             </div>
+                            @error('role')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
 
                             <div class="text-center">
-                                <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Register</button>
+                                <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Daftar</button>
                             </div>
                         </form>
 
-                        <p class="tcn-4 text-center mt-lg-10 mt-6">Already have an account? <a
-                                href="{{ route('login') }}" class="text-decoration-underline tcp-1">Login</a></p>
+                        <p class="tcn-4 text-center mt-lg-10 mt-6">Sudah Mempunyai Akun ? <a
+                                href="{{ route('login') }}" class="text-decoration-underline tcp-1">Gabung</a></p>
                     </div>
                 </div>
             </div>
@@ -155,4 +158,5 @@
     <!-- main js  -->
     <script src="assets/js/main.js"></script>
 </body>
+
 </html>
