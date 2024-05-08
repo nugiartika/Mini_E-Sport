@@ -75,14 +75,11 @@
 
                             <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                 <div class="tournament-img mb-8 position-relative">
-                                    <div class="img-area overflow-hidden" style="width:340px; height:200px;">
+                                    <div class="img-area overflow-hidden rounded"
+                                        style="width: auto; height: 200px; border-radius: .5rem;">
                                         <img class="w-100" style="object-fit: cover; width: 100%; height: 100%;"
                                             src="{{ asset('storage/' . $tournament->images) }}" alt="tournament">
                                     </div>
-                                    {{-- <span
-                                class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                <span class="dot-icon alt-icon ps-3">Playing</span>
-                            </span> --}}
                                 </div>
                                 <div class="tournament-content px-xxl-4 mt-3 mt-md-4">
                                     <div class="tournament-info mb-4">
@@ -96,19 +93,15 @@
                                     <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
                                         <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                             <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                                <span class="tcn-1 fs-sm">75</span>
-                                            </div>
-                                            <div class="v-line"></div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                                <span class="tcn-1 fs-sm">$49.97</span>
+                                                <i class="ti ti-moneybag fs-base tcp-2"></i>
+                                                <span class="tcn-1 fs-sm">IDR
+                                                    {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
                                             </div>
                                         </div>
                                         <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                             <i class="ti ti-ticket fs-base tcp-2"></i>
                                             <span class="tcn-1 fs-sm">
-                                                {{ $tournament->paidment == 'unpaid' ?  }}
+                                                {{ $tournament->paidment == 'unpaid' ? 'Gratis' : 'Berbayar' }}
                                             </span>
                                         </div>
                                         <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
@@ -117,17 +110,6 @@
                                                 class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
                                         </div>
                                     </div>
-
-                                    {{-- @php
-                                $teamCount = $teamCounts->firstWhere(
-                                    'tournament_id',
-                                    $tournament->id,
-                                );
-                                $teamIdCount = $teamIdCounts->firstWhere(
-                                    'tournament_id',
-                                    $tournament->id,
-                                );
-                            @endphp --}}
 
                                     @php
                                         $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);

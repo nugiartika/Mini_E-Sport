@@ -45,8 +45,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tournamentHistory()
+    public function team()
     {
-        return $this->hasMany(TeamTournament::class, 'id', 'user_id');
+        return $this->hasMany(Team::class);
     }
 }
