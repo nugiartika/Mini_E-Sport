@@ -17,7 +17,7 @@ class TeamTournamentController extends Controller
     {
         $teams = Team::all();
         $tournaments = Tournament::all();
-        return view('user.tournament', compact('teams','tournaments'));
+        return view('user.tournamentUser', compact('teams','tournaments'));
     }
 
     /**
