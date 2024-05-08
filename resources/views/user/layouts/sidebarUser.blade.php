@@ -39,7 +39,7 @@
                     <path d="M13.45 11.55l2.05 -2.05" />
                     <path d="M6.4 20a9 9 0 1 1 11.2 0z" />
                 </svg>
-                <span class="ms-1">Dashboards</span>
+                <span class="ms-1">Dasbor</span>
             </a>
         </li>
 
@@ -51,14 +51,14 @@
                     <path d="M13.45 11.55l2.05 -2.05" />
                     <path d="M6.4 20a9 9 0 1 1 11.2 0z" />
                 </svg>
-                <span class="ms-1">Tournamet</span>
+                <span class="ms-1">Turnamen</span>
             </a>
         </li>
 
         <li class="menu-item {{ request()->routeIs('team.index') ? 'active' : '' }}">
             <a href="{{ route('team.index') }}" class="menu-link d-flex align-items-center">
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users-group me-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M17 10h2a2 2 0 0 1 2 2v1" /><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg>
-                <span class="ms-1">Team</span>
+                <span class="ms-1">Tim</span>
             </a>
         </li>
 
@@ -84,7 +84,7 @@
                     <path d="M12 8l0 4l2 2" />
                     <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />
                 </svg>
-                <div>History</div>
+                <div>Riwayat</div>
             </a>
         </li>
 

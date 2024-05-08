@@ -47,13 +47,13 @@
     <div class="layout-wrapper layout-content-navbar ">
         <div class="layout-container">
 
-            @include('admin.layouts.sidebar')
+            @include('penyelenggara.layouts.sidebar')
 
             <!-- Layout page -->
             <div class="layout-page">
 
                 <!-- BEGIN: Navbar-->
-                @include('admin.layouts.navbar')
+                @include('penyelenggara.layouts.navbar')
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
