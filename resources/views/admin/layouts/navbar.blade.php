@@ -56,7 +56,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="../pages/profile-user.html">
+                        <a class="dropdown-item" href="javascript:void(0);">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
@@ -81,7 +81,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="mb-0">
                         @csrf
                         <li>
                             <a class="dropdown-item" href="javascript:;"

@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($category as $key => $a)
+                    @forelse ($category as $key => $a)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $a->name }}</td>
@@ -77,7 +77,16 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="7">
+                                <div class="text-center py-4">
+                                    <h3 class="mb-2">Tidak Ada Data</h3>
+                                    <p class="m-0 text-muted">Tambahkan data supaya muncul disini.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

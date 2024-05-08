@@ -130,7 +130,6 @@ class TournamentController extends Controller
 
     }
 
-
     public function filter(Request $request)
     {
         $oldSearch = $request->input('search');
