@@ -1,57 +1,68 @@
 {{-- @extends('layouts.user') --}}
 @extends('user.layouts.app')
 @section('style')
-<style>
-    .custom-btn {
-        width: 100px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #7367f0;
-        border: 2px solid #7367f0 ; /* Warna border */
-        border-radius: 20px; /* Bentuk border */
-        background-color: #ffffffe6; /* Warna latar belakang */
-        transition: background-color 0.3s ease; /* Transisi warna latar belakang */
-    }
+    <style>
+        .custom-btn {
+            width: 100px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #7367f0;
+            border: 2px solid #7367f0;
+            /* Warna border */
+            border-radius: 20px;
+            /* Bentuk border */
+            background-color: #ffffffe6;
+            /* Warna latar belakang */
+            transition: background-color 0.3s ease;
+            /* Transisi warna latar belakang */
+        }
 
-    .custom-btn:hover {
-        background-color: #7367f0 ; /* Warna latar belakang saat dihover */
-        color: #ffffff; /* Warna teks saat dihover */
-    }
-    .custom-icon-detail {
-        width: 40px;
-        height: 40px;
-        display: inline-block;
-        border: 2px solid #7367f0; /* Border awal transparan */
-        border-radius: 50%; /* Membuat border lingkaran */
-        transition: border-color 0.3s ease; /* Transisi warna border saat hover */
-    }
+        .custom-btn:hover {
+            background-color: #7367f0;
+            /* Warna latar belakang saat dihover */
+            color: #ffffff;
+            /* Warna teks saat dihover */
+        }
 
-    .custom-icon-detail:hover {
-        background-color: #7367f0;
-        color: #ffffff;
-        transform: translateY(-3px); /* Bergerak ke atas saat dihover */
-    }
+        .custom-icon-detail {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            border: 2px solid #7367f0;
+            /* Border awal transparan */
+            border-radius: 50%;
+            /* Membuat border lingkaran */
+            transition: border-color 0.3s ease;
+            /* Transisi warna border saat hover */
+        }
 
-    .profile-image {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
+        .custom-icon-detail:hover {
+            background-color: #7367f0;
+            color: #ffffff;
+            transform: translateY(-3px);
+            /* Bergerak ke atas saat dihover */
+        }
 
-    .name-text {
-        color: white;
-        margin-bottom: 0;
-    }
+        .profile-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
 
-    .border-red {
-        border: 2px solid rgb(209, 209, 209) !important;
-        /* Menambahkan border merah */
-    }
-</style>
+        .name-text {
+            color: white;
+            margin-bottom: 0;
+        }
+
+        .border-red {
+            border: 2px solid rgb(209, 209, 209) !important;
+            /* Menambahkan border merah */
+        }
+    </style>
 @endsection
 @section('content')
     <div class="tabcontents">
@@ -96,7 +107,9 @@
                                         </div>
                                         <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                             <i class="ti ti-ticket fs-base tcp-2"></i>
-                                            <span class="tcn-1 fs-sm">Free Entry</span>
+                                            <span class="tcn-1 fs-sm">
+                                                {{ $tournament->paidment == 'unpaid' ?  }}
+                                            </span>
                                         </div>
                                         <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                             <i class="ti ti-calendar fs-base tcn-1"></i>
@@ -136,31 +149,30 @@
                                                         {{ $totalTeams }}/{{ $tournament->slotTeam }}
                                                         Teams
                                                     @else
-                                                        0/{{ $tournament->slotTeam }} Teams
+                                                        0/{{ $tournament->slotTeam }} Team
                                                     @endif
                                                 </span>
                                             </div>
                                         </div>
                                         <!-- Tombol Join -->
                                         @if ($totalTeams && $totalTeams < $tournament->slotTeam)
-                                        <div class="text-center">
-                                            <div class="custom-btn"
-                                                style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
-                                                <a type="button" class="btn-half position-relative d-inline-block py-2"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Join</a>
+                                            <div class="text-center">
+                                                <div class="custom-btn"
+                                                    style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
+                                                    <a type="button" class="btn-half position-relative d-inline-block py-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModalCenter">Gabung</a>
+                                                </div>
                                             </div>
-                                        </div>
-
-
                                         @elseif (!$totalTeams)
-                                        <div class="text-center">
-                                            <div class="custom-btn"
-                                                style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
-                                                <a type="button" class="btn-half position-relative d-inline-block py-2"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Join</a>
+                                            <div class="text-center">
+                                                <div class="custom-btn"
+                                                    style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
+                                                    <a type="button" class="btn-half position-relative d-inline-block py-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModalCenter">Gabung</a>
+                                                </div>
                                             </div>
-                                        </div>
-
                                         @elseif ($totalTeams)
                                             {{-- user sudah terdaftar --}}
                                         @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
@@ -169,7 +181,8 @@
 
                                         <!-- Tombol Detail Tournament -->
                                         <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}"
-                                            class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top" style="display: flex; justify-content: center; align-items: center;"
+                                            class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            style="display: flex; justify-content: center; align-items: center;"
                                             title="Detail Tournament">
                                             <i class="ti ti-arrow-right fs-2xl"></i>
                                         </a>
@@ -197,18 +210,17 @@
                                     <div class="d-flex justify-content-center align-items-center mb-4"
                                         style="height: 100px;">
                                         <center>
-                                            <h6 style="color: white;">Create a New Team for the
-                                                Tournament or Choose an Existing Team</h6>
+                                            <h6 style="color: white;">Buat tim baru atau pilih tim lama</h6>
                                         </center>
                                     </div>
                                     <div class="d-flex justify-content-center">
 
                                         <a href="{{ route('teams.create', ['tournament_id' => $tournament->id]) }}"
                                             type="button" class="btn btn-secondary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#existing" data-bs-dismiss="modal">Existing Team</a>
+                                            data-bs-target="#existing" data-bs-dismiss="modal">Tim Lama</a>
 
                                         <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
-                                            type="button" class="btn btn-primary">New Team</a>
+                                            type="button" class="btn btn-primary">Tim Lama</a>
 
                                     </div>
                                 </div>
@@ -219,67 +231,61 @@
 
 
                     <!-- Modal -->
-                        <div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existingLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog" role="document" style="height: 100vh;">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title text-white" id="exampleModalLabel">Existing
-                                            Team</h5>
-                                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existingLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document" style="height: 100vh;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-white" id="exampleModalLabel">Existing
+                                        Team</h5>
+                                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button> --}}
-                                    </div>
-                                    <div class="modal-body">
+                                </div>
+                                <div class="modal-body">
 
-                                        <form action="{{ route('teams.store') }}" method="POST">
-                                            @csrf
-                                            <div class="form-group">
-                                                <label for="team_id">Select Team:</label>
-                                                <div class="row text-black">
-                                                    @foreach ($teams as $team)
-                                                        {{-- @if ($team->user_id === auth()->user()->id) --}}
-                                                        @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id)
-                                                        <input type="hidden" name="tournament_id" value="{{ $tournament->id }}">
+                                    <form action="{{ route('teams.store') }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="team_id">Select Team:</label>
+                                            <div class="row text-black">
+                                                @foreach ($teams as $team)
+                                                    {{-- @if ($team->user_id === auth()->user()->id) --}}
+                                                    @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id)
+                                                        <input type="hidden" name="tournament_id"
+                                                            value="{{ $tournament->id }}">
                                                         <div class="col-12 mb-3">
-                                                                    <div class="card"
-                                                                        id="teamCard{{ $team->id }}"
-                                                                        onclick="cardRadio(this)">
-                                                                        <div
-                                                                            class="card-body d-flex align-items-center">
-                                                                            <input type="radio"
-                                                                                id="team_id{{ $team->id }}"
-                                                                                name="team_id"
-                                                                                value="{{ $team->id }}"
-                                                                                style="display: none;">
-                                                                            <img src="{{ asset('storage/' . $team->profile) }}"
-                                                                                alt=""
-                                                                                width="25"
-                                                                                height="25"
-                                                                                class="profile-image me-8">
-                                                                            <label class="name-text"
-                                                                                style="font-size: 20px"
-                                                                                for="team_id{{ $team->id }}">
-                                                                                {{ $team->name }}
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
+                                                            <div class="card" id="teamCard{{ $team->id }}"
+                                                                onclick="cardRadio(this)">
+                                                                <div class="card-body d-flex align-items-center">
+                                                                    <input type="radio" id="team_id{{ $team->id }}"
+                                                                        name="team_id" value="{{ $team->id }}"
+                                                                        style="display: none;">
+                                                                    <img src="{{ asset('storage/' . $team->profile) }}"
+                                                                        alt="" width="25" height="25"
+                                                                        class="profile-image me-8">
+                                                                    <label class="name-text" style="font-size: 20px"
+                                                                        for="team_id{{ $team->id }}">
+                                                                        {{ $team->name }}
+                                                                    </label>
                                                                 </div>
-                                                            @endif
-                                                    @endforeach
-                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
                                             </div>
-                                            {{-- <input type="hidden" name="tournament_id"
+                                        </div>
+                                        {{-- <input type="hidden" name="tournament_id"
                                                 value="{{ $tournament->id }}"> --}}
 
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </form>
-
-                                    </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
 
                                 </div>
+
                             </div>
                         </div>
+                    </div>
                 @endforeach
 
 
@@ -287,9 +293,9 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection
 
-    @section('script')
+@section('script')
     <script>
         $(document).ready(function() {
             $('#existing').on('show.bs.modal', function(event) {
