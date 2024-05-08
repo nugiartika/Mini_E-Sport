@@ -208,10 +208,10 @@
                                             data-bs-target="#existing" data-bs-dismiss="modal">Existing Team</a> --}}
                                             <a href="#" class="btn btn-secondary me-2"
                                             data-bs-toggle="modal" data-bs-target="#existing" data-bs-dismiss="modal"
-                                            data-tournament-id="{{ $tournament->id }}">Existing Team</a>
+                                            data-tournament-id="{{ $tournament->id }}">Tim Lama</a>
 
                                         <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
-                                            type="button" class="btn btn-primary">New Team</a>
+                                            type="button" class="btn btn-primary">Tim Baru</a>
 
                                     </div>
                                 </div>
@@ -227,8 +227,7 @@
                             <div class="modal-dialog" role="document" style="height: 100vh;">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title text-white" id="exampleModalLabel">Existing
-                                            Team</h5>
+                                        <h5 class="modal-title text-white" id="exampleModalLabel">Tim Lama</h5>
                                         {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button> --}}
@@ -238,7 +237,7 @@
                                         <form action="{{ route('teams.store') }}" method="POST">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="team_id">Select Team:</label>
+                                                <label for="team_id">Pilih Tim:</label>
                                                 <div class="row text-black">
                                                     @foreach ($teams as $team)
                                                         {{-- @if ($team->user_id === auth()->user()->id) --}}
@@ -275,7 +274,7 @@
                                             {{-- <input type="hidden" name="tournament_id"
                                                 value="{{ $tournament->id }}"> --}}
 
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary">simpan</button>
                                         </form>
 
                                     </div>
