@@ -368,7 +368,7 @@
                                             <div class="w-100 mt-3 noteForm" style="display: none;">
                                                 <!-- Ubah id menjadi class untuk "moneyForm" -->
                                                 <input class="form-control" type="text"
-                                                    placeholder="tambahkan deskripsi hadiah" name="note" />
+                                                    placeholder="Isikan deskripsi hadiah" name="note" />
                                             </div>
 
                                         </div>

@@ -28,7 +28,7 @@
     @endif
 
     <div class="card">
-        <h5 class="card-header">Tournament Confirmation</h5>
+        <h5 class="card-header">Penerimaan Turnamen</h5>
         <div class="table-responsive text-nowrap">
             <table class="table">
                 <thead class="table-light">
@@ -37,7 +37,7 @@
                         <th>Nama</th>
                         <th>Status</th>
                         <th>Aksi</th>
-                        <th>Deatail</th>
+                        <th>Detail</th>
                     </tr>
                 </thead>
 

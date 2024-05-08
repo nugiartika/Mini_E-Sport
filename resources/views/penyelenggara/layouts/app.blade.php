@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" class="light-style layout-compact layout-navbar-fixed layout-menu-fixed   " dir="ltr"
+<html lang="id" class="light-style layout-compact layout-navbar-fixed layout-menu-fixed   " dir="ltr"
     data-theme="theme-default"
     data-assets-path="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/"
     data-base-url="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo-1" data-framework="laravel"
@@ -8,7 +8,7 @@
 
 
 <head>
-@include('penyelenggara.layouts.meta')
+    @include('admin.layouts.meta')
 
     <!-- Vendor Styles -->
     <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
@@ -26,13 +26,11 @@
             defaultStyle: "light",
             defaultShowDropdownOnHover: "true",
             displayCustomizer: "true",
-            lang: 'en',
+            lang: 'id',
             pathResolver: function(path) {
                 var resolvedPaths = {
                     'core.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core.css?id=9dd8321ea008145745a7d78e072a6e36',
                     'core-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core-dark.css?id=d661bae1d0ada9f7e9e3685a3e1f427e',
-
-
                 }
                 return resolvedPaths[path] || path;
             },
@@ -49,13 +47,13 @@
     <div class="layout-wrapper layout-content-navbar ">
         <div class="layout-container">
 
-            @include('penyelenggara.layouts.sidebar')
+            @include('admin.layouts.sidebar')
 
             <!-- Layout page -->
             <div class="layout-page">
 
                 <!-- BEGIN: Navbar-->
-                @include('penyelenggara.layouts.navbar')
+                @include('admin.layouts.navbar')
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">

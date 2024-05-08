@@ -273,14 +273,14 @@
                             <li class="nav-links active">
                                 <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1"
                                     data-toggle="tooltip" data-bs-toggle="modal"
-                                    data-bs-target="#filter">Filter</button>
+                                    data-bs-target="#filter">Saring</button>
                             </li>
                         </ul>
 
                         <div class="px-6">
                             <a type="button"
                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
-                                href="{{ route('ptournament.create') }}">add tournament</a>
+                                href="{{ route('ptournament.create') }}">Buat Turnamen</a>
                         </div>
                     </div>
                     <div class="tabcontents">
