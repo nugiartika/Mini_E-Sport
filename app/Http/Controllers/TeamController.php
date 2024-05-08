@@ -22,7 +22,7 @@ class TeamController extends Controller
     {
         $teams = Team::all();
         $category = Category::all();
-        return view('user.team', compact('teams','category'));
+        return view('user.teamUser', compact('teams','category'));
     }
 
     /**
