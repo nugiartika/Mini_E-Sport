@@ -203,9 +203,12 @@
                                     </div>
                                     <div class="d-flex justify-content-center">
 
-                                        <a href="{{ route('teams.create', ['tournament_id' => $tournament->id]) }}"
+                                        {{-- <a href="{{ route('teams.create', ['tournament_id' => $tournament->id]) }}"
                                             type="button" class="btn btn-secondary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#existing" data-bs-dismiss="modal">Existing Team</a>
+                                            data-bs-target="#existing" data-bs-dismiss="modal">Existing Team</a> --}}
+                                            <a href="#" class="btn btn-secondary me-2"
+                                            data-bs-toggle="modal" data-bs-target="#existing" data-bs-dismiss="modal"
+                                            data-tournament-id="{{ $tournament->id }}">Existing Team</a>
 
                                         <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                             type="button" class="btn btn-primary">New Team</a>
@@ -242,29 +245,29 @@
                                                         @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id)
                                                         <input type="hidden" name="tournament_id" value="{{ $tournament->id }}">
                                                         <div class="col-12 mb-3">
-                                                                    <div class="card"
-                                                                        id="teamCard{{ $team->id }}"
-                                                                        onclick="cardRadio(this)">
-                                                                        <div
-                                                                            class="card-body d-flex align-items-center">
-                                                                            <input type="radio"
-                                                                                id="team_id{{ $team->id }}"
-                                                                                name="team_id"
-                                                                                value="{{ $team->id }}"
-                                                                                style="display: none;">
-                                                                            <img src="{{ asset('storage/' . $team->profile) }}"
-                                                                                alt=""
-                                                                                width="25"
-                                                                                height="25"
-                                                                                class="profile-image me-8">
-                                                                            <label class="name-text"
-                                                                                style="font-size: 20px"
-                                                                                for="team_id{{ $team->id }}">
-                                                                                {{ $team->name }}
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
+                                                            <div class="card"
+                                                                id="teamCard{{ $team->id }}"
+                                                                onclick="cardRadio(this)">
+                                                                <div
+                                                                    class="card-body d-flex align-items-center">
+                                                                    <input type="radio"
+                                                                        id="team_id{{ $team->id }}"
+                                                                        name="team_id"
+                                                                        value="{{ $team->id }}"
+                                                                        style="display: none;">
+                                                                    <img src="{{ asset('storage/' . $team->profile) }}"
+                                                                        alt=""
+                                                                        width="25"
+                                                                        height="25"
+                                                                        class="profile-image me-8">
+                                                                    <label class="name-text"
+                                                                        style="font-size: 20px"
+                                                                        for="team_id{{ $team->id }}">
+                                                                        {{ $team->name }}
+                                                                    </label>
                                                                 </div>
+                                                            </div>
+                                                        </div>
                                                             @endif
                                                     @endforeach
                                                 </div>
@@ -290,7 +293,7 @@
     @endsection
 
     @section('script')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#existing').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget); // Tombol yang memicu modal
@@ -316,5 +319,32 @@
                 card.classList.add('border-red');
             }
         }
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+            $('#existing').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Tombol yang memicu modal
+                var tournamentId = button.data('tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
+                var modal = $(this);
+                modal.find('.modal-body input[name="tournament_id"]').val(tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
+            });
+        });
+
+        function cardRadio(card) {
+            var radioButton = card.querySelector('input[type="radio"]');
+
+            if (!radioButton.checked) {
+                radioButton.checked = true;
+
+                var cards = document.querySelectorAll('.card');
+                cards.forEach(function(card) {
+                    card.classList.remove('border-red');
+                });
+
+                card.classList.add('border-red');
+            }
+        }
     </script>
+
 @endsection
