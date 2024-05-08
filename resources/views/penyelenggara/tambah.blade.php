@@ -10,6 +10,38 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
+    @include('admin.layouts.meta')
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+
+    <!-- laravel style -->
+    <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
+
+    <script src="{{ asset('demo/assets/js/config.js') }}"></script>
+
+    <script>
+        window.templateCustomizer = new TemplateCustomizer({
+            cssPath: '',
+            themesPath: '',
+            defaultStyle: "light",
+            defaultShowDropdownOnHover: "true",
+            displayCustomizer: "true",
+            lang: 'id',
+            pathResolver: function(path) {
+                var resolvedPaths = {
+                    'core.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core.css?id=9dd8321ea008145745a7d78e072a6e36',
+                    'core-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core-dark.css?id=d661bae1d0ada9f7e9e3685a3e1f427e',
+                }
+                return resolvedPaths[path] || path;
+            },
+            'controls': ["rtl", "style", "headerType", "contentLayout", "layoutCollapsed", "layoutNavbarOptions",
+                "themes"
+            ],
+        });
+    </script>
+    @yield('style')
 
 </head>
 <style>
@@ -24,7 +56,6 @@
 
     /* Gaya untuk form */
     #regForm {
-        background-color: rgb(0, 0, 0);
         margin: 90px auto;
 
     }
@@ -70,11 +101,11 @@
     }
 
     .card {
-        margin-top: 200px;
-        margin-bottom: 100px;
+
         background-color: rgb(25, 27, 31);
         border-radius: 15px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        margin-right: 100px;
     }
 
 
@@ -176,7 +207,293 @@
 
 
 <body>
-    <header class="header-section w-100 bgn-4">
+    <div class="layout-wrapper layout-content-navbar ">
+        <div class="layout-container">
+
+            @include('penyelenggara.layouts.sidebar')
+
+            <!-- Layout page -->
+            <div class="layout-page">
+
+                <!-- BEGIN: Navbar-->
+                @include('penyelenggara.layouts.navbar')
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <!-- Content -->
+                        @yield('content')
+                        <!-- / Content -->
+                    </div>
+                </div>
+                @if (auth()->check())
+                <div class="user-account-popup p-4">
+                    <div class="account-items d-grid gap-1" data-tilt>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button class="bttn account-item" type="submit">Log Out</button>
+                        </form>
+                    </div>
+                </div>
+            @endif
+            <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
+                @csrf
+                @if ($errors->all())
+                    <div class="alert bg-danger">
+                        <h5>Ada kesalahan!</h5>
+                        <p>Mohon periksa pesan ini dan segera diperbaiki.</p>
+
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="row justify-content-center">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>Tambah Turnamen</h1>
+                            <div class="tab">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nama Turnamen</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        placeholder="Mis: Mobile Legends" id="name" name="name"
+                                        value="{{ old('name') }}">
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="pendaftaran" class="form-label">Tanggal Pendaftaran</label>
+                                        <input type="date"
+                                            class="form-control @error('pendaftaran') is-invalid @enderror" id="pendaftaran"
+                                            name="pendaftaran" value="{{ old('pendaftaran') }}">
+                                        @error('pendaftaran')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
+                                        <input type="date"
+                                            class="form-control @error('end_pendaftaran') is-invalid @enderror"
+                                            id="end_pendaftaran" name="end_pendaftaran"
+                                            value="{{ old('end_pendaftaran') }}">
+                                        @error('end_pendaftaran')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="permainan" class="form-label">Mulai Kompetisi</label>
+                                        <input type="date" class="form-control @error('permainan') is-invalid @enderror"
+                                            id="permainan" name="permainan" value="{{ old('permainan') }}">
+                                        @error('permainan')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
+                                        <input type="date"
+                                            class="form-control @error('end_permainan') is-invalid @enderror"
+                                            id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}">
+                                        @error('end_permainan')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="slotTeam" class="form-label">Jumlah Tim</label>
+                                    <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
+                                        id="slotTeam" name="slotTeam" value="{{ old('slotTeam') }}">
+                                    @error('slotTeam')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="tab">
+
+                                <div class="mb-3">
+                                    <label for="prizepol" class="form-label">Hadiah Turnamen</label>
+                                    <form id="prizepol-form">
+                                        <!-- Tambahkan id "prizepol-form" pada form -->
+                                        <div id="inputs">
+                                            <div class="form-prize">
+                                                <div class="input-group">
+                                                    <select
+                                                        class="form-control prize-dropdown @error('prize') is-invalid @enderror"
+                                                        name="prize" value="{{ old('prize') }}">
+                                                        <option value="">Pilih Salah Satu</option>
+                                                        <option value="uang">Uang</option>
+                                                        <option value="mendali">Medali</option>
+                                                        <option value="trophy">Trophy</option>
+                                                        <option value="sertifikat">Sertifikat</option>
+                                                    </select>
+
+                                                    <button type="button" class="addRow rounded-end btn btn-info"><i
+                                                            class="ti ti-plus fs-2xl"></i></button>
+
+                                                    <button type="button" class="removeRow d-none btn btn-danger"><i
+                                                            class="ti ti-trash fs-2xl"></i></button>
+                                                </div>
+                                                <div class="w-100 mt-3 noteForm" style="display: none;">
+                                                    <!-- Ubah id menjadi class untuk "moneyForm" -->
+                                                    <input class="form-control" type="text"
+                                                        placeholder="Isikan deskripsi hadiah" name="note" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="contact" class="form-label">Kontak Penanggungjawab</label>
+                                    <input type="number" class="form-control @error('contact') is-invalid @enderror"
+                                        id="contact" name="contact" value="{{ old('contact') }}">
+                                    @error('contact')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">GAME</label>
+                                    <select class="form-control @error('categories_id') is-invalid @enderror"
+                                        id="category" name="categories_id" aria-label="Default select example">
+                                        <option value="" selected>Select Game</option>
+                                        @foreach ($category as $kat)
+                                            <option value="{{ $kat->id }}"
+                                                {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
+                                                {{ $kat->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('categories_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="images" class="form-label">Unggah Poster</label>
+                                    <input type="file" class="form-control @error('images') is-invalid @enderror"
+                                        id="images" name="images" onchange="previewImage(event)">
+                                    @if (old('images'))
+                                        <img id="preview" src="{{ asset('storage/' . old('images')) }}"
+                                            alt="Old images" style="max-width: 100px; max-height: 100px;">
+                                    @endif
+                                    @error('images')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="tab">
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Deskripsi</label>
+                                    <textarea name="description" placeholder="Jelaskan deskripsi turnamennya" id="summernoteModalDescription"
+                                        class="form-control" aria-label="With textarea">{{ old('description') }}</textarea>
+
+                                    @error('description')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="rule" class="form-label">Aturan Main</label>
+                                    <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen"
+                                        class="form-control" aria-label="With textarea">{{ old('rule') }}</textarea>
+
+                                    @error('rule')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="paidment" class="form-label">Event Berbayar atau Gratis?</label>
+                                    @error('paidment')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
+                                        <option value="" selected disabled>Pilih</option>
+                                        <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
+                                        </option>
+                                        <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak
+                                            Berbayar</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3" id="nominal" style="display: none;">
+                                    <label for="nominal_input" class="form-label">Masukkan Nominal</label>
+                                    @error('nominal')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input type="number" name="nominal" id="nominal_input" class="form-control">
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2 justify-content-between">
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="window.location.href='/ptournament'">Batal</button>
+
+                                <div class="d-flex align-items-center gap-2">
+                                    <button type="button" id="prevBtn" onclick="nextPrev(-1)"
+                                        class="btn btn-danger">Kembali</button>
+                                    <button type="button" id="nextBtn" onclick="nextPrev(1)"
+                                        class="btn btn-success">Lanjut</button>
+                                </div>
+                            </div>
+                            <div>
+
+                            </div>
+                            <div style="text-align:center;margin-top:40px;">
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+                <footer class="content-footer footer bg-footer-theme">
+                    <div class="container-xxl">
+                        <div
+                            class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+                            <div>
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>
+                                , Humma <span>Esport</span>
+                            </div>
+                            <div class="d-none d-lg-inline-block">
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <div class="content-backdrop fade"></div>
+            </div>
+        </div>
+        {{-- <header class="header-section w-100 bgn-4">
         <div class="py-sm-6 py-3 mx-xxl-20 mx-md-15 mx-3">
             <div class="d-flex align-items-center justify-content-between gap-xxl-10 gap-lg-8 w-100">
                 <nav
@@ -234,257 +551,9 @@
                 </div>
             </div>
         </div>
-    </header>
-    @if (auth()->check())
-        <div class="user-account-popup p-4">
-            <div class="account-items d-grid gap-1" data-tilt>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button class="bttn account-item" type="submit">Log Out</button>
-                </form>
-            </div>
-        </div>
-    @endif
-    <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
-        @csrf
-        @if ($errors->all())
-        <div class="alert bg-danger">
-            <h5>Ada kesalahan!</h5>
-            <p>Mohon periksa pesan ini dan segera diperbaiki.</p>
+    </header> --}}
 
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-9 col-lg-7 col-xl-5">
-                <div class="card">
-                    <div class="card-body">
-                        <h1>Tambah Turnamen</h1>
-                        <div class="tab">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Nama Turnamen</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    placeholder="Mis: Mobile Legends" id="name" name="name"
-                                    value="{{ old('name') }}">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="pendaftaran" class="form-label">Tanggal Pendaftaran</label>
-                                    <input type="date"
-                                        class="form-control @error('pendaftaran') is-invalid @enderror" id="pendaftaran"
-                                        name="pendaftaran" value="{{ old('pendaftaran') }}">
-                                    @error('pendaftaran')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
-                                    <input type="date"
-                                        class="form-control @error('end_pendaftaran') is-invalid @enderror"
-                                        id="end_pendaftaran" name="end_pendaftaran"
-                                        value="{{ old('end_pendaftaran') }}">
-                                    @error('end_pendaftaran')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="permainan" class="form-label">Mulai Kompetisi</label>
-                                    <input type="date"
-                                        class="form-control @error('permainan') is-invalid @enderror" id="permainan"
-                                        name="permainan" value="{{ old('permainan') }}">
-                                    @error('permainan')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
-                                    <input type="date"
-                                        class="form-control @error('end_permainan') is-invalid @enderror"
-                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}">
-                                    @error('end_permainan')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="slotTeam" class="form-label">Jumlah Tim</label>
-                                <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
-                                    id="slotTeam" name="slotTeam" value="{{ old('slotTeam') }}">
-                                @error('slotTeam')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="tab">
-
-                            <div class="mb-3">
-                                <label for="prizepol" class="form-label">Hadiah Turnamen</label>
-                                <form id="prizepol-form">
-                                    <!-- Tambahkan id "prizepol-form" pada form -->
-                                    <div id="inputs">
-                                        <div class="form-prize">
-                                            <div class="input-group">
-                                                <select
-                                                    class="form-control prize-dropdown @error('prize') is-invalid @enderror"
-                                                    name="prize" value="{{ old('prize') }}">
-                                                    <option value="">Pilih Salah Satu</option>
-                                                    <option value="uang">Uang</option>
-                                                    <option value="mendali">Medali</option>
-                                                    <option value="trophy">Trophy</option>
-                                                    <option value="sertifikat">Sertifikat</option>
-                                                </select>
-
-                                                <button type="button" class="addRow rounded-end btn btn-info"><i
-                                                        class="ti ti-plus fs-2xl"></i></button>
-
-                                                <button type="button" class="removeRow d-none btn btn-danger"><i
-                                                        class="ti ti-trash fs-2xl"></i></button>
-                                            </div>
-                                            <div class="w-100 mt-3 noteForm" style="display: none;">
-                                                <!-- Ubah id menjadi class untuk "moneyForm" -->
-                                                <input class="form-control" type="text"
-                                                    placeholder="Isikan deskripsi hadiah" name="note" />
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="contact" class="form-label">Kontak Penanggungjawab</label>
-                                <input type="number" class="form-control @error('contact') is-invalid @enderror"
-                                    id="contact" name="contact" value="{{ old('contact') }}">
-                                @error('contact')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="category" class="form-label">GAME</label>
-                                <select class="form-control @error('categories_id') is-invalid @enderror"
-                                    id="category" name="categories_id" aria-label="Default select example">
-                                    <option value="" selected>Select Game</option>
-                                    @foreach ($category as $kat)
-                                        <option value="{{ $kat->id }}"
-                                            {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
-                                            {{ $kat->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('categories_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="images" class="form-label">Unggah Poster</label>
-                                <input type="file" class="form-control @error('images') is-invalid @enderror"
-                                    id="images" name="images" onchange="previewImage(event)">
-                                @if (old('images'))
-                                    <img id="preview" src="{{ asset('storage/' . old('images')) }}"
-                                        alt="Old images" style="max-width: 100px; max-height: 100px;">
-                                @endif
-                                @error('images')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="tab">
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Deskripsi</label>
-                                <textarea name="description" placeholder="Jelaskan deskripsi turnamennya" id="summernoteModalDescription"
-                                    class="form-control" aria-label="With textarea">{{ old('description') }}</textarea>
-
-                                @error('description')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="rule" class="form-label">Aturan Main</label>
-                                <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen"
-                                    class="form-control" aria-label="With textarea">{{ old('rule') }}</textarea>
-
-                                @error('rule')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="paidment" class="form-label">Event Berbayar atau Gratis?</label>
-                                @error('paidment')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
-                                    <option value="" selected disabled>Pilih</option>
-                                    <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
-                                    </option>
-                                    <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak
-                                        Berbayar</option>
-                                </select>
-                            </div>
-                            <div class="mb-3" id="nominal" style="display: none;">
-                                <label for="nominal_input" class="form-label">Masukkan Nominal</label>
-                                @error('nominal')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <input type="number" name="nominal" id="nominal_input" class="form-control">
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2 justify-content-between">
-                            <button type="button" class="btn btn-secondary"
-                                onclick="window.location.href='/ptournament'">Batal</button>
-
-                            <div class="d-flex align-items-center gap-2">
-                                <button type="button" id="prevBtn" onclick="nextPrev(-1)"
-                                    class="btn btn-danger">Kembali</button>
-                                <button type="button" id="nextBtn" onclick="nextPrev(1)"
-                                    class="btn btn-success">Lanjut</button>
-                            </div>
-                        </div>
-                        <div>
-
-                        </div>
-                        <div style="text-align:center;margin-top:40px;">
-                            <span class="step"></span>
-                            <span class="step"></span>
-                            <span class="step"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+    </div>
     <footer class="footer bgn-4 bt">
         <div class="container">
             <div class="row justify-content-between">
@@ -605,6 +674,24 @@
     <!-- main js  -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
+    <script src="{{ asset('demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/js/bootstraped84.js?id=9a6c701557297a042348b5aea69e9b76') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/libs/node-waves/node-waves259f.js?id=4fae469a3ded69fb59fce3dcc14cd638') }}">
+    </script>
+    <script
+        src="{{ asset('demo/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar6188.js?id=44b8e955848dc0c56597c09f6aebf89a') }}">
+    </script>
+    <script src="{{ asset('demo/assets/vendor/libs/hammer/hammer2de0.js?id=0a520e103384b609e3c9eb3b732d1be8') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/libs/typeahead-js/typeahead60e7.js?id=f6bda588c16867a6cc4158cb4ed37ec6') }}">
+    </script>
+    <script src="{{ asset('demo/assets/vendor/js/menu2dc9.js?id=c6ce30ded4234d0c4ca0fb5f2a2990d8') }}"></script>
+
+    <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
+
+    <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script>
+
+    @yield('script')
 
     {{-- script untuk memunculkan form nominal apabila memilih paid --}}
     <script>
@@ -697,52 +784,47 @@
 
     {{-- scrript untuk prizepool --}}
     <script>
-    $(document).ready(function() {
-        // Event handler untuk tombol "Hapus Baris"
-        $(document).on('click', '.removeRow', function() {
-            $(this).closest('.form-prize').remove();
+        $(document).ready(function() {
+            // Event handler untuk tombol "Hapus Baris"
+            $(document).on('click', '.removeRow', function() {
+                $(this).closest('.form-prize').remove();
+            });
+
+            // Event handler untuk semua select dengan nama "animation[]"
+            $(document).on('change', '.prize-dropdown', function() {
+                var selectedValue = $(this).val();
+                var noteForm = $(this).closest('.form-prize').find('.noteForm');
+                // Periksa apakah nilai yang dipilih adalah 'uang', 'mendali', 'trophy', atau 'sertifikat'
+                noteForm.toggle(selectedValue === "uang" || selectedValue === "mendali" || selectedValue ===
+                    "trophy" ||
+                    selectedValue === "sertifikat");
+            });
+
+
+            // Event handler untuk tombol "Tambah Baris"
+            $(document).on('click', '.addRow', function() {
+                let templateRow = $('#inputs .form-prize:first').clone();
+                let lastRow = $('#inputs .form-prize:last');
+
+                templateRow.find('.addRow').remove();
+                templateRow.find('.removeRow').removeClass('d-none');
+                templateRow.find('.noteForm').hide();
+
+                if (lastRow.length) {
+                    let nextNumber = parseInt(lastRow.find('.count').text()) + 1;
+                    templateRow.find('.count').text(nextNumber);
+                } else {
+                    // Jika tidak ada baris lagi, tambahkan baris pertama
+                    templateRow.find('.count').text(1);
+                }
+
+                $('#inputs').append('<div class="form-prize border-top pt-3 mt-3">' + templateRow.html() +
+                    '</div>');
+
+                return false;
+            });
         });
-
-        // Event handler untuk semua select dengan nama "animation[]"
-        $(document).on('change', '.prize-dropdown', function() {
-            var selectedValue = $(this).val();
-            var noteForm = $(this).closest('.form-prize').find('.noteForm');
-            // Periksa apakah nilai yang dipilih adalah 'uang', 'mendali', 'trophy', atau 'sertifikat'
-            noteForm.toggle(selectedValue === "uang" || selectedValue === "mendali" || selectedValue === "trophy" ||
-                selectedValue === "sertifikat");
-        });
-
-
-        // Event handler untuk tombol "Tambah Baris"
-        $(document).on('click', '.addRow', function() {
-            let templateRow = $('#inputs .form-prize:first').clone();
-            let lastRow = $('#inputs .form-prize:last');
-
-            templateRow.find('.addRow').remove();
-            templateRow.find('.removeRow').removeClass('d-none');
-            templateRow.find('.noteForm').hide();
-
-            if (lastRow.length) {
-                let nextNumber = parseInt(lastRow.find('.count').text()) + 1;
-                templateRow.find('.count').text(nextNumber);
-            } else {
-                // Jika tidak ada baris lagi, tambahkan baris pertama
-                templateRow.find('.count').text(1);
-            }
-
-            $('#inputs').append('<div class="form-prize border-top pt-3 mt-3">' + templateRow.html() +
-                '</div>');
-
-            return false;
-        });
-    });
-</script>
-
-
-
-
-
-
+    </script>
 
 
 </body>

@@ -31,18 +31,8 @@ return new class extends Migration
             $table->enum('status', ['pending','rejected','accepted'])->default('pending');
             $table->enum('paidment',['paid','unpaid']);
             $table->integer('nominal')->nullable();
-            $table->date('tanggalPenyisihan')->nullable();
-            $table->time('waktuPenyisihan')->nullable();
-            $table->string('boPenyisihan')->nullable();
-            $table->date('tanggalSemi')->nullable();
-            $table->time('waktuSemi')->nullable();
-            $table->string('boSemi')->nullable();
-            $table->date('tanggalFinal')->nullable();
-            $table->time('waktuFinal')->nullable();
-            $table->string('boFinal')->nullable();
-            $table->string('nama_juara1')->nullable();
-            $table->string('nama_juara2')->nullable();
-            $table->string('nama_juara3')->nullable();
+            $table->foreignId('jurnal_id')->nullable();
+
             $table->timestamps();
         });
     }
