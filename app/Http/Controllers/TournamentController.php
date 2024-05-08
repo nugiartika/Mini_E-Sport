@@ -48,7 +48,7 @@ class TournamentController extends Controller
             ->get();
         $category = Category::all();
         $teams = Team::all();
-        return view('user.tournamentUser', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts'));
+        return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts'));
     }
     public function dashboard()
     {
@@ -97,14 +97,12 @@ class TournamentController extends Controller
                 $path_gambar = Storage::disk('public')->put('tournament', $gambar);
             }
 
-
-            // Kemudian simpan data ke dalam database
             $tournament = Tournament::create([
                 'name' => $request->input('name'),
                 'pendaftaran' => $request->input('pendaftaran'),
-                'permainan' => $request->input('permainan'),
-                'end_pendaftaran' => $request->input('end_pendaftaran'),
-                'end_permainan' => $request->input('end_permainan'),
+            'permainan' => $request->input('permainan'),
+            'end_pendaftaran' => $request->input('end_pendaftaran'),
+            'end_permainan' => $request->input('end_permainan'),
                 'categories_id' => $request->input('categories_id'),
                 'users_id' => $user->id,
                 'slotTeam' => $request->input('slotTeam'),
@@ -116,9 +114,8 @@ class TournamentController extends Controller
                 'nominal' => $request->input('nominal'),
                 'status' => 'pending',
                 'prize' => $request->input('prize'),
-                'note' => $request->input('note')
+            'note' => $request->input('note')
             ]);
-
             return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
         } catch (\Exception $e) {
             // Tangani kesalahan
@@ -293,20 +290,22 @@ class TournamentController extends Controller
         }
     }
 
-    public function jadwal(Request $request)
+    public function jadwal(Request $request ,$id)
     {
-        Tournament::create([
-            'tanggalPenyisihan' => $request->input('tanggalPenyisihan'),
-            'waktuPenyisihan' => $request->input('waktuPenyisihan'),
-            'boPenyisihan' => $request->input('boPenyisihan'),
-            'tanggalSemi' => $request->input('tanggalSemi'),
-            'waktuSemi' => $request->input('waktuSemi'),
-            'boSemi' => $request->input('boSemi'),
-            'tanggalFinal' => $request->input('tanggalFinal'),
-            'waktuFinal' => $request->input('waktuFinal'),
-            'boFinal' => $request->input('boFinal'),
+        $tournament = Tournament::findOrFail($id);
+
+        $tournament->update([
+            'tanggalPenyisihan' => $request->tanggalPenyisihan,
+            'waktuPenyisihan' => $request->waktuPenyisihan,
+            'boPenyisihan' => $request->boPenyisihan,
+            'tanggalSemi' => $request->tanggalSemi,
+            'waktuSemi' => $request->waktuSemi,
+            'boSemi' => $request->boSemi,
+            'tanggalFinal' => $request->tanggalFinal,
+            'waktuFinal' => $request->waktuFinal,
+            'boFinal' => $request->boFinal,
         ]);
-        return redirect()->route('ptournament.index')->with('success', 'Jadwal added successfully');
+        return redirect()->route('tournament.detail')->with('success', 'Jadwal added successfully');
     }
 
     public function juara(Request $request)

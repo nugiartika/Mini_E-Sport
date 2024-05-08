@@ -235,18 +235,6 @@
             </div>
         </div>
     </header>
-    @if ($errors->all())
-        <div class="alert bg-danger">
-            <h5>Ada kesalahan!</h5>
-            <p>Mohon periksa pesan ini dan segera diperbaiki.</p>
-
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     @if (auth()->check())
         <div class="user-account-popup p-4">
             <div class="account-items d-grid gap-1" data-tilt>
@@ -362,7 +350,7 @@
                                         <div class="form-prize">
                                             <div class="input-group">
                                                 <select
-                                                    class="form-select prize-dropdown @error('prize') is-invalid @enderror"
+                                                    class="form-control prize-dropdown @error('prize') is-invalid @enderror"
                                                     name="prize" value="{{ old('prize') }}">
                                                     <option value="">Pilih Salah Satu</option>
                                                     <option value="uang">Uang</option>
@@ -401,7 +389,7 @@
 
                             <div class="mb-3">
                                 <label for="category" class="form-label">GAME</label>
-                                <select class="form-select @error('categories_id') is-invalid @enderror"
+                                <select class="form-control @error('categories_id') is-invalid @enderror"
                                     id="category" name="categories_id" aria-label="Default select example">
                                     <option value="" selected>Select Game</option>
                                     @foreach ($category as $kat)
@@ -457,7 +445,7 @@
                                 @error('paidment')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <select name="paidment" id="paidment" class="form-select" onchange="toggleDiv1()">
+                                <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
                                     <option value="" selected disabled>Pilih</option>
                                     <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
                                     </option>

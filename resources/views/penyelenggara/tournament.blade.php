@@ -14,42 +14,54 @@
 <style>
     /* Gaya untuk tema gelap */
     .modal-content {
-        background-color: #343a40; /* Warna latar belakang gelap */
-        color: #fff; /* Warna teks putih */
+        background-color: #343a40;
+        /* Warna latar belakang gelap */
+        color: #fff;
+        /* Warna teks putih */
     }
 
     .modal-header {
-        border-bottom: 1px solid #454d55; /* Garis bawah untuk header */
+        border-bottom: 1px solid #454d55;
+        /* Garis bawah untuk header */
     }
 
     .modal-title {
-        color: #fff; /* Warna judul putih */
+        color: #fff;
+        /* Warna judul putih */
     }
 
     .modal-body {
-        padding: 20px; /* Padding untuk body modal */
+        padding: 20px;
+        /* Padding untuk body modal */
     }
 
     .form-group label {
-        color: #fff; /* Warna label input putih */
+        color: #ffffff;
+        /* Warna label input putih */
     }
 
     .form-control {
-        background-color: #495057; /* Warna latar belakang input */
-        color: #fff; /* Warna teks input putih */
+        background-color: #495057;
+        /* Warna latar belakang input */
+        color: #ffffff;
+        /* Warna teks input putih */
     }
 
     .form-control:focus {
-        background-color: #ffffff; /* Warna latar belakang input saat fokus */
-        color: #fff; /* Warna teks input saat fokus */
+        background-color: #495057;
+        /* Warna latar belakang input saat fokus */
+        color: #ffffff;
+        /* Warna teks input saat fokus */
     }
 
     .close {
-        color: #fff; /* Warna ikon close putih */
+        color: #fff;
+        /* Warna ikon close putih */
     }
 
     .close:hover {
-        color: #fff; /* Warna ikon close putih saat dihover */
+        color: #fff;
+        /* Warna ikon close putih saat dihover */
     }
 </style>
 
@@ -303,84 +315,7 @@
                                                             </button>
                                                         </form>
                                                     </li>
-                                                    <li>
-                                                        <!-- Button trigger modal -->
-                                                        <button class="btn" data-toggle="modal"
-                                                            data-target="#exampleModal">
-                                                            <i class="ti ti-plus fs-2xl"></i> <!-- Icon tambah -->
-                                                        </button>
-                                                        Tambah Jadwal
-                                                        <!-- Modal -->
-
-                                                    </li>
-
                                                 </ul>
-                                            </div>
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content bg-dark text-light">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title text-light" id="exampleModalLabel">
-                                                                Tambah Jadwal</h4>
-                                                                <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>                                                                                                                 </div>
-                                                        <form>
-                                                            <div class="modal-body">
-                                                                <form id="regForm" action="">
-                                                                    <!-- One "tab" for each step in the form: -->
-                                                                    <div class="tab">
-                                                                        <h5>Penyisihan</h5><br>
-                                                                        <p>Tanggal Mulai Game<input type="date" placeholder="Tanggal Mulai Game..." class="form-control"
-                                                                                oninput="this.className = 'form-control'" name="tanggalPenyisihan"></p>
-                                                                        <p>Waktu Mulai<input type="time" placeholder="Waktu Mulai..." class="form-control"
-                                                                                oninput="this.className = 'form-control'" name="waktuPenyisihan"></p>
-                                                                        <p>Best Of<input type="text" placeholder="Best Of..." class="form-control"
-                                                                                oninput="this.className = 'form-control'" name="boPenyisihan"></p>
-                                                                    </div>
-
-                                                                    <div class="tab">
-                                                                        <h5>Semi Final</h5><br>
-                                                                        <p>Tanggal Mulai Game<input type="date" placeholder="Tanggal Mulai Game..." class="form-control"
-                                                                                oninput="this.className = 'form-control'" name="tanggalSemi"></p>
-                                                                        <p>Waktu Mulai<input type="time" placeholder="Waktu Mulai..." class="form-control"
-                                                                                oninput="this.className = 'form-control'" name="waktuSemi"></p>
-                                                                        <p>Best Of<input type="text" placeholder="Best Of..." class="form-control"
-                                                                                oninput="this.className = 'form-control'" name="boSemi"></p>
-                                                                    </div>
-
-                                                                    <div class="tab">
-                                                                        <h5>Final</h5><br>
-                                                                        <p>Tanggal Mulai Game<input type="date" placeholder="Tanggal Mulai Game..." class="form-control"
-                                                                                oninput="this.className = 'form-control'" name="tanggalFinal"></p>
-                                                                        <p>Waktu Mulai<input type="time" placeholder="Waktu Mulai..." class="form-control"
-                                                                                oninput="this.className = 'form-control'" name="waktuFinal"></p>
-                                                                        <p>Best Of<input type="text" placeholder="Best Of..." class="form-control"
-                                                                                oninput="this.className = 'form-control'" name="boFinal"></p>
-                                                                    </div>
-
-                                                                    <div style="overflow:auto;">
-                                                                        <div style="float:right;">
-                                                                            <button type="button" class="btn btn-warning" id="prevBtn"
-                                                                                onclick="nextPrev(-1)">Previous</button>
-                                                                            <button type="button" class="btn btn-success" id="nextBtn"
-                                                                                onclick="nextPrev(1)">Next</button>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- Circles which indicates the steps of the form: -->
-                                                                    <div style="text-align:center;margin-top:40px;">
-                                                                        <span class="step"></span>
-                                                                        <span class="step"></span>
-                                                                        <span class="step"></span>
-                                                                    </div>
-
-                                                                </form>
-                                                                <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div class="tournament-img mb-8 position-relative">
                                                 <div class="img-area overflow-hidden">
@@ -636,7 +571,7 @@
             currentTab = currentTab + n;
 
             // Jika sudah mencapai akhir form, submit form
-            if (currentTab >= x.length) {
+            if (currentTab >= tabs.length) {
                 // Menghubungkan formulir ke route ptournament.store saat formulir disubmit
                 document.getElementById("regForm").action = "{{ route('ptournament.jadwal') }}";
                 document.getElementById("regForm").submit(); // Submit formulir
@@ -646,6 +581,7 @@
             // Tampilkan tab yang sesuai
             showTab(currentTab);
         }
+
 
         function validateForm() {
             // Cek validasi form pada setiap tab di sini (jika diperlukan)
