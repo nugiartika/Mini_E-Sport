@@ -74,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
 // Public Routes
 // Route::get('/teams.create', [TeamController::class, 'createId'])->name('team.createId');
 
-// Route::get('tournament', [TournamentController::class, 'indexuser'])->name('user.tournament');
+// Route::get('tournament', [TournamentController::class, 'indexuser'])->name('');
 Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
 
 route::resource('/teams', TeamTournamentController::class);

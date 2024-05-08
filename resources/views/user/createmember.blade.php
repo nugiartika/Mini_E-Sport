@@ -1,18 +1,18 @@
-@extends('layouts.user')
+@extends('user.layouts.app')
 
 
 @section('style')
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    {{-- <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
     <title>TEAMS - HUMMAESPORT</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="canonical" href="https://1.envato.market/vuexy_admin">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> --}}
 
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+    {{-- <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" /> --}}
 
     <!-- Fonts -->
     {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" /> --}}
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    {{-- <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../../assets/css/demo.css" />
 
@@ -37,18 +37,18 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet"
-        href="../../assets/vendor/libs/@form-validation/form-validation.css" />
+        href="../../assets/vendor/libs/@form-validation/form-validation.css" /> --}}
 
     <!-- Page CSS -->
 
 
     <!-- Helpers -->
-    <script src="../../assets/vendor/js/helpers.js"></script>
+    {{-- <script src="../../assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <script src="../../assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../../assets/js/config.js"></script>
+    <script src="../../assets/js/config.js"></script> --}}
 
 
 
@@ -67,7 +67,7 @@
         }
 
 
-   /* Style untuk tombol radio kustom */
+   /* Style untuk tombol radio kustom */    
    /* .custom-radio {
         display: inline-block;
         position: relative;

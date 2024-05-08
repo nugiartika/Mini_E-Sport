@@ -203,9 +203,10 @@
                                     </div>
                                     <div class="d-flex justify-content-center">
 
-                                        <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
+                                        <a href="{{ route('teams.create', ['tournament_id' => $tournament->id]) }}"
                                             type="button" class="btn btn-secondary me-2" data-bs-toggle="modal"
                                             data-bs-target="#existing" data-bs-dismiss="modal">Existing Team</a>
+
                                         <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                             type="button" class="btn btn-primary">New Team</a>
 
@@ -218,67 +219,67 @@
 
 
                     <!-- Modal -->
-                    <div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existingLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document" style="height: 100vh;">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title text-white" id="exampleModalLabel">Existing
-                                        Team</h5>
-                                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button> --}}
-                                </div>
-                                <div class="modal-body">
+                        <div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existingLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document" style="height: 100vh;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-white" id="exampleModalLabel">Existing
+                                            Team</h5>
+                                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button> --}}
+                                    </div>
+                                    <div class="modal-body">
 
-                                    <form action="{{ route('teams.store') }}" method="POST">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="team_id">Select Team:</label>
-                                            <div class="row text-black">
-                                                @foreach ($teams as $team)
-                                                    {{-- @if ($team->user_id === auth()->user()->id) --}}
-                                                    @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id)
-                                                    <input type="hidden" name="tournament_id" value="{{ $tournament->id }}">
-                                                            <div class="col-12 mb-3">
-                                                                <div class="card"
-                                                                    id="teamCard{{ $team->id }}"
-                                                                    onclick="cardRadio(this)">
-                                                                    <div
-                                                                        class="card-body d-flex align-items-center">
-                                                                        <input type="radio"
-                                                                            id="team_id{{ $team->id }}"
-                                                                            name="team_id"
-                                                                            value="{{ $team->id }}"
-                                                                            style="display: none;">
-                                                                        <img src="{{ asset('storage/' . $team->profile) }}"
-                                                                            alt=""
-                                                                            width="25"
-                                                                            height="25"
-                                                                            class="profile-image me-8">
-                                                                        <label class="name-text"
-                                                                            style="font-size: 20px"
-                                                                            for="team_id{{ $team->id }}">
-                                                                            {{ $team->name }}
-                                                                        </label>
+                                        <form action="{{ route('teams.store') }}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="team_id">Select Team:</label>
+                                                <div class="row text-black">
+                                                    @foreach ($teams as $team)
+                                                        {{-- @if ($team->user_id === auth()->user()->id) --}}
+                                                        @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id)
+                                                        <input type="hidden" name="tournament_id" value="{{ $tournament->id }}">
+                                                        <div class="col-12 mb-3">
+                                                                    <div class="card"
+                                                                        id="teamCard{{ $team->id }}"
+                                                                        onclick="cardRadio(this)">
+                                                                        <div
+                                                                            class="card-body d-flex align-items-center">
+                                                                            <input type="radio"
+                                                                                id="team_id{{ $team->id }}"
+                                                                                name="team_id"
+                                                                                value="{{ $team->id }}"
+                                                                                style="display: none;">
+                                                                            <img src="{{ asset('storage/' . $team->profile) }}"
+                                                                                alt=""
+                                                                                width="25"
+                                                                                height="25"
+                                                                                class="profile-image me-8">
+                                                                            <label class="name-text"
+                                                                                style="font-size: 20px"
+                                                                                for="team_id{{ $team->id }}">
+                                                                                {{ $team->name }}
+                                                                            </label>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        @endif
-                                                @endforeach
+                                                            @endif
+                                                    @endforeach
+                                                </div>
                                             </div>
-                                        </div>
-                                        {{-- <input type="hidden" name="tournament_id"
-                                            value="{{ $tournament->id }}"> --}}
+                                            {{-- <input type="hidden" name="tournament_id"
+                                                value="{{ $tournament->id }}"> --}}
 
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+
+                                    </div>
 
                                 </div>
-
                             </div>
                         </div>
-                    </div>
                 @endforeach
 
 
