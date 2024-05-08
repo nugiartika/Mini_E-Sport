@@ -13,7 +13,7 @@ class Tournament extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    protected $fillable = ['name','pendaftaran','permainan','end_pendaftaran','end_permainan','categories_id','users_id','users_id','images','slotTeam','contact','description','rule','prize','jumlah','status','paidment','nominal'];
+    protected $fillable = ['name','pendaftaran','permainan','end_pendaftaran','end_permainan','categories_id','users_id','users_id','images','slotTeam','contact','description','rule','prizepool_id','status','paidment','nominal'];
 
     public function user()
     {
@@ -27,5 +27,10 @@ class Tournament extends Model
     public function team()
     {
         return $this->hasOne(Team::class);
+    }
+
+    public function prizepool ()
+    {
+        return $this->belongsTo(Prizepool::class,'prizepool_id');
     }
 }
