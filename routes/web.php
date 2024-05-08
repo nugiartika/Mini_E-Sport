@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('konfirmtournament/{id}', [TournamentController::class, 'update'])->name('konfirm.update');
         Route::get('AdminDetailTournament', [DetailTournamentController::class, 'index'])->name('DetailTournament');
         Route::put('listUserPenyelenggara/{sainsRole}', [SainsRoleController::class, 'update'])->name('konfirmUser');
+        Route::delete('HapusDataTournament/{idTournament}', [DashboardAdminController::class, 'destroy'])->name('deleteTournament');
         Route::delete('rejectUser/{idUser}', [SainsRoleController::class, 'destroy'])->name('rejectUser');
         Route::delete('deleteUser/{idUser}', [UserController::class, 'destroy'])->name('deleteUser');
         Route::get('chart', [DashboardAdminController::class, 'response'])->name('chart');

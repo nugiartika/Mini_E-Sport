@@ -13,81 +13,81 @@
 
 <body>
 
-
-    {{-- @foreach ($tournaments as $tournament)
-    @endforeach
- --}}
     @forelse ($tournaments as $tournament)
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Tournamnent</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <table>
-                        <div class="container-fluid">
-                            <div class="row justify-content-center">
-                                <div class="col text-center">
-                                    <img src="{{ asset('storage/' . $tournament->images)  }}" alt="Tournament Image" class="rounded-circle" style="width: 150px; height: 150px;">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Tournamnent</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <div class="container-fluid">
+                                <div class="row justify-content-center">
+                                    <div class="col text-center">
+                                        <img src="{{ asset('storage/' . $tournament->images) }}" alt="Tournament Image"
+                                            class="rounded-circle" style="width: 150px; height: 150px;">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item" style="font-weight: bold;">Nama : <span
+                                                    id="detail-name" style="font-weight: normal;">
+                                                    {{ $tournament->name }}</span>
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Game : <span
+                                                    id="detail-email" style="font-weight: normal;">
+                                                    {{ $tournament->category->name }}</span>
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Pendafataran Dibuka :
+                                                <span id="detail-gender" style="font-weight: normal;">
+                                                    {{ $tournament->pendaftaran }}</span>
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup :
+                                                <span id="detail-national_student_id"
+                                                    style="font-weight: normal;"></span>
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
+                                                <span id="detail-student_identity_number" style="font-weight: normal;">
+                                                    {{ $tournament->permainan }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item" style="font-weight: bold;">
+                                                Nama Penyelenggara : <span id="detail-place_birth"
+                                                    style="font-weight: normal;">{{ $tournament->user->name }}</span>
+
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Slot Tim :
+                                                <span id="detail-national_identity_number"
+                                                    style="font-weight: normal;">{{ $tournament->slotTeam }}</span>
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Description :
+                                                <span id="detail-family_card_id"
+                                                    style="font-weight: normal;">{{ $tournament->description }}</span>
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Rule :
+                                                <span id="detail-number_siblings"
+                                                    style="font-weight: normal;">{{ $tournament->rule }}</span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item" style="font-weight: bold;">Nama : <span
-                                                id="detail-name" style="font-weight: normal;">
-                                                {{ $tournament->name }}</span>
-                                        </li>
-                                        <li class="list-group-item" style="font-weight: bold;">Game : <span
-                                                id="detail-email" style="font-weight: normal;">
-                                                {{ $tournament->category->name }}</span>
-                                        </li>
-                                        <li class="list-group-item" style="font-weight: bold;">Pendafataran Dibuka :
-                                            <span id="detail-gender" style="font-weight: normal;">
-                                                {{ $tournament->pendaftaran }}</span></li>
-                                        <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup :
-                                            <span id="detail-national_student_id"
-                                                style="font-weight: normal;"></span>
-                                        </li>
-                                        <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
-                                            <span id="detail-student_identity_number" style="font-weight: normal;">
-                                                {{ $tournament->permainan }}</span></li>
-                                    </ul>
-                                </div>
-                                <div class="col">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item" style="font-weight: bold;">
-                                            Nama Penyelenggara : <span id="detail-place_birth"
-                                                style="font-weight: normal;">{{ $tournament->user->name }}</span>
-
-                                        </li>
-                                        <li class="list-group-item" style="font-weight: bold;">Slot Tim :
-                                            <span id="detail-national_identity_number"
-                                                style="font-weight: normal;">{{ $tournament->slotTeam }}</span>
-                                        </li>
-                                        <li class="list-group-item" style="font-weight: bold;">Description :
-                                            <span id="detail-family_card_id" style="font-weight: normal;">{{ $tournament->description }}</span>
-                                        </li>
-                                        <li class="list-group-item" style="font-weight: bold;">Rule :
-                                            <span id="detail-number_siblings" style="font-weight: normal;">{{ $tournament->rule }}</span>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @empty
-
     @endforelse
 
 
@@ -104,11 +104,12 @@
                         <thead class="table-light">
                             <tr>
                                 <th>No</th>
-                                <th>Name</th>
+                                <th>Nama</th>
                                 <th>Game</th>
-                                <th>Organizer</th>
+                                <th>Penyelenggara</th>
                                 <th>Status</th>
                                 <th>Detail</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -135,8 +136,22 @@
                                             </svg>
                                         </button>
                                     </td>
+                                    <td>
+                                        <form action="{{ route('deleteTournament', ['idTournament' => $tournament->id]) }}"
+                                            method="POST" class="d-inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="action" value="reject">
+                                            <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill="#FA7070"
+                                                        d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+                                                </svg></button>
+                                        </form>
+                                    </td>
                                 </tr>
-                                @empty
+                            @empty
                                 <tr>
                                     <td colspan="6">
                                         <div class="d-flex justify-content-center">
@@ -144,8 +159,9 @@
                                                 <div class="table-responsive text-nowrap">
                                                     <table class="table"></table>
                                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                                    style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                                                    <h1 class="table-light" style="text-align: center;">Empty Data</h1>
+                                                        style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+                                                    <h1 class="table-light" style="text-align: center;">Empty Data
+                                                    </h1>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,6 +169,8 @@
                                 </tr>
                             @endforelse
                         </tbody>
+
+
                     </table>
                 </div>
             </div>
