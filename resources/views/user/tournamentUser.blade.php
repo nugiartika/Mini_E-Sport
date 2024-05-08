@@ -110,8 +110,8 @@
                                         {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button" class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a> --}}
                                         <a type="button"
                                             class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
-                                            data-toggle="modal"
-                                            data-target="#exampleModalCenter">Join</a>
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalCenter">Join</a>
                                     </div>
                                 @elseif (!$totalTeams)
                                     <div class="text-end ms-8">
@@ -121,8 +121,8 @@
                                         {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button"class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">Join</a> --}}
                                         <a type="button"
                                             class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
-                                            data-toggle="modal"
-                                            data-target="#exampleModalCenter">Join</a>
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalCenter">Join</a>
                                     </div>
                                 @elseif ($totalTeams)
                                     {{-- user sudah terdaftar --}}
@@ -165,8 +165,8 @@
 
                                     <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                         type="button" class="btn btn-secondary me-2"
-                                        data-toggle="modal" data-target="#existing"
-                                        data-dismiss="modal">Existing Team</a>
+                                        data-bs-toggle="modal" data-bs-target="#existing"
+                                        data-bs-dismiss="modal">Existing Team</a>
                                         <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}" type="button" class="btn btn-primary">New Team</a>
 
                                 </div>

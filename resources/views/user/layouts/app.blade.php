@@ -89,7 +89,7 @@
         window.templateCustomizer = new TemplateCustomizer({
             cssPath: '',
             themesPath: '',
-            defaultStyle: "light",
+            defaultStyle: "dark",
             defaultShowDropdownOnHover: "true",
             displayCustomizer: "true",
             lang: 'en',

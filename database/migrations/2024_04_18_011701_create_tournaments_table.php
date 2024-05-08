@@ -26,9 +26,11 @@ return new class extends Migration
             $table->char('contact', 24);
             $table->text('description');
             $table->text('rule');
+            $table->enum('prize',['uang','trophy','sertifikat','mendali'])->nullable();
             $table->text('keterangan')->nullable();
             $table->enum('status', ['pending','rejected','accepted'])->default('pending');
             $table->enum('paidment',['paid','unpaid']);
+            $table->integer('nominal')->nullable();
             $table->date('tanggalPenyisihan')->nullable();
             $table->time('waktuPenyisihan')->nullable();
             $table->string('boPenyisihan')->nullable();

@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Team;
-use App\Models\User;
-use App\Models\member;
-use App\Models\Category;
-use App\Models\Tournament;
-use Illuminate\Http\Request;
-use App\Models\TeamTournament;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TournamentRequest;
-use App\Models\prizepool;
+use App\Models\Category;
+use App\Models\member;
+use App\Models\Team;
+use App\Models\TeamTournament;
+use App\Models\Tournament;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TournamentController extends Controller
 {
@@ -50,7 +48,7 @@ class TournamentController extends Controller
             ->get();
         $category = Category::all();
         $teams = Team::all();
-        return view('user.tournamentUser', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts'));
+        return view('user.tournament', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts'));
     }
     public function dashboard()
     {
@@ -79,8 +77,7 @@ class TournamentController extends Controller
         $tournament = Tournament::all();
         $user = User::all();
         $category = Category::all();
-        $prizepool = prizepool::all();
-        return view('penyelenggara.tambah', compact('prizepool','tournament', 'category', 'user'));
+        return view('penyelenggara.tambah', compact('tournament', 'category', 'user'));
     }
 
 
@@ -100,14 +97,12 @@ class TournamentController extends Controller
                 $path_gambar = Storage::disk('public')->put('tournament', $gambar);
             }
 
-
-            // Kemudian simpan data ke dalam database
             $tournament = Tournament::create([
                 'name' => $request->input('name'),
                 'pendaftaran' => $request->input('pendaftaran'),
-                'permainan' => $request->input('permainan'),
-                'end_pendaftaran' => $request->input('end_pendaftaran'),
-                'end_permainan' => $request->input('end_permainan'),
+            'permainan' => $request->input('permainan'),
+            'end_pendaftaran' => $request->input('end_pendaftaran'),
+            'end_permainan' => $request->input('end_permainan'),
                 'categories_id' => $request->input('categories_id'),
                 'users_id' => $user->id,
                 'slotTeam' => $request->input('slotTeam'),
@@ -118,10 +113,9 @@ class TournamentController extends Controller
                 'paidment' => $request->input('paidment'),
                 'nominal' => $request->input('nominal'),
                 'status' => 'pending',
-                'prizepool_id' => $request->input('prize'),
-                'note' => $request->input('note')
+                'prize' => $request->input('prize'),
+            'note' => $request->input('note')
             ]);
-
             return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
         } catch (\Exception $e) {
             // Tangani kesalahan
