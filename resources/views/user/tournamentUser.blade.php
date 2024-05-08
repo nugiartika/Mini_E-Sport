@@ -1,6 +1,6 @@
 @extends('layouts.user')
-@section('content')
 
+@section('content')
 <div class="tabcontents">
     <div class="tabitem active">
         <div class="row justify-content-md-start justify-content-center g-6">
