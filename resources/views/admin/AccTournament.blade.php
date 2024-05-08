@@ -34,9 +34,9 @@
                 <thead class="table-light">
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Nama</th>
                         <th>Status</th>
-                        <th>Actions</th>
+                        <th>Aksi</th>
                         <th>Deatail</th>
                     </tr>
                 </thead>

@@ -6,11 +6,12 @@ use Carbon\Carbon;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\SainsRole;
 use App\Models\Tournament;
 use App\Models\DashboardAdmin;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreDashboardAdminRequest;
 use App\Http\Requests\UpdateDashboardAdminRequest;
-use App\Models\SainsRole;
 
 class DashboardAdminController extends Controller
 {
@@ -89,8 +90,17 @@ class DashboardAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DashboardAdmin $dashboardAdmin)
+    public function destroy($id)
     {
-        //
+        try {
+            $tournament = Tournament::findOrFail($id);
+            if ($tournament->images) {
+                Storage::disk('public')->delete($tournament->images);
+            }
+            $tournament->delete();
+            return redirect()->route('DetailTournament')->with('success', 'Tournament berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->route('DetailTournament')->with('error', 'Gagal menghapus turnamen. Silakan coba lagi.');
+        }
     }
 }

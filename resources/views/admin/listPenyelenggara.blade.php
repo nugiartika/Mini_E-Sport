@@ -9,8 +9,8 @@
                     <tr>
                         <th>Nama</th>
                         <th>Email</th>
-                        <th>Date</th>
-                        <th>Actions</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
 

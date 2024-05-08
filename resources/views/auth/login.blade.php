@@ -74,7 +74,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="form-area">
-                        <h1 class="tcn-1 text-center cursor-scale growUp mb-10">Gabung</h1>
+                        <h1 class="tcn-1 text-center cursor-scale growUp mb-10">Login</h1>
                         <form action="{{ route('login') }}" class="sign-in-form" method="POST">
                             @csrf
                             <div class="single-input mb-3">
@@ -95,11 +95,11 @@
 
 
                             <div class="text-center">
-                                <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Gabung</button>
+                                <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Login</button>
                             </div>
                         </form>
                         <p class="tcn-4 text-center mt-lg-10 mt-6">Belum Mempunyai Akun ? <a
-                                href="{{ route('register') }}" class="text-decoration-underline tcp-1">Daftar</a></p>
+                                href="{{ route('register') }}" class="text-decoration-underline tcp-1">Register</a></p>
                     </div>
                 </div>
             </div>
