@@ -235,18 +235,6 @@
             </div>
         </div>
     </header>
-    @if ($errors->all())
-        <div class="alert bg-danger">
-            <h5>Ada kesalahan!</h5>
-            <p>Mohon periksa pesan ini dan segera diperbaiki.</p>
-
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     @if (auth()->check())
         <div class="user-account-popup p-4">
             <div class="account-items d-grid gap-1" data-tilt>
@@ -260,16 +248,16 @@
     <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
         @csrf
         @if ($errors->all())
-            <div class="alert bg-danger">
-                <h5>Ada kesalahan!</h5>
-                <p>Mohon periksa pesan ini dan segera diperbaiki.</p>
+        <div class="alert bg-danger">
+            <h5>Ada kesalahan!</h5>
+            <p>Mohon periksa pesan ini dan segera diperbaiki.</p>
 
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
         <div class="row justify-content-center">
             <div class="col-12 col-md-9 col-lg-7 col-xl-5">
@@ -362,15 +350,13 @@
                                         <div class="form-prize">
                                             <div class="input-group">
                                                 <select
-                                                    class="form-select prize-dropdown @error('prize') is-invalid @enderror"
+                                                    class="form-control prize-dropdown @error('prize') is-invalid @enderror"
                                                     name="prize" value="{{ old('prize') }}">
                                                     <option value="">Pilih Salah Satu</option>
-                                                    @foreach ($prizepool as $prize)
-                                                        <option value="{{ $prize->id }}"
-                                                            {{ old('prizepool_id') == $prize->id ? 'selected' : '' }}>
-                                                            {{ $kat->name }}
-                                                        </option>
-                                                    @endforeach
+                                                    <option value="uang">Uang</option>
+                                                    <option value="mendali">Medali</option>
+                                                    <option value="trophy">Trophy</option>
+                                                    <option value="sertifikat">Sertifikat</option>
                                                 </select>
 
                                                 <button type="button" class="addRow rounded-end btn btn-info"><i
@@ -403,7 +389,7 @@
 
                             <div class="mb-3">
                                 <label for="category" class="form-label">GAME</label>
-                                <select class="form-select @error('categories_id') is-invalid @enderror"
+                                <select class="form-control @error('categories_id') is-invalid @enderror"
                                     id="category" name="categories_id" aria-label="Default select example">
                                     <option value="" selected>Select Game</option>
                                     @foreach ($category as $kat)
@@ -459,7 +445,7 @@
                                 @error('paidment')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <select name="paidment" id="paidment" class="form-select" onchange="toggleDiv1()">
+                                <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
                                     <option value="" selected disabled>Pilih</option>
                                     <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
                                     </option>
@@ -711,47 +697,46 @@
 
     {{-- scrript untuk prizepool --}}
     <script>
-        $(document).ready(function() {
-            // Event handler untuk tombol "Hapus Baris"
-            $(document).on('click', '.removeRow', function() {
-                $(this).closest('.form-prize').remove();
-            });
-
-            // Event handler untuk semua select dengan nama "animation[]"
-            $(document).on('change', '.prize-dropdown', function() {
-                var selectedValue = $(this).val();
-                var noteForm = $(this).closest('.form-prize').find('.noteForm');
-                // Periksa apakah nilai yang dipilih adalah 'uang', 'mendali', 'trophy', atau 'sertifikat'
-                noteForm.toggle(selectedValue === "uang" || selectedValue === "mendali" || selectedValue ===
-                    "trophy" ||
-                    selectedValue === "sertifikat");
-            });
-
-
-            // Event handler untuk tombol "Tambah Baris"
-            $(document).on('click', '.addRow', function() {
-                let templateRow = $('#inputs .form-prize:first').clone();
-                let lastRow = $('#inputs .form-prize:last');
-
-                templateRow.find('.addRow').remove();
-                templateRow.find('.removeRow').removeClass('d-none');
-                templateRow.find('.noteForm').hide();
-
-                if (lastRow.length) {
-                    let nextNumber = parseInt(lastRow.find('.count').text()) + 1;
-                    templateRow.find('.count').text(nextNumber);
-                } else {
-                    // Jika tidak ada baris lagi, tambahkan baris pertama
-                    templateRow.find('.count').text(1);
-                }
-
-                $('#inputs').append('<div class="form-prize border-top pt-3 mt-3">' + templateRow.html() +
-                    '</div>');
-
-                return false;
-            });
+    $(document).ready(function() {
+        // Event handler untuk tombol "Hapus Baris"
+        $(document).on('click', '.removeRow', function() {
+            $(this).closest('.form-prize').remove();
         });
-    </script>
+
+        // Event handler untuk semua select dengan nama "animation[]"
+        $(document).on('change', '.prize-dropdown', function() {
+            var selectedValue = $(this).val();
+            var noteForm = $(this).closest('.form-prize').find('.noteForm');
+            // Periksa apakah nilai yang dipilih adalah 'uang', 'mendali', 'trophy', atau 'sertifikat'
+            noteForm.toggle(selectedValue === "uang" || selectedValue === "mendali" || selectedValue === "trophy" ||
+                selectedValue === "sertifikat");
+        });
+
+
+        // Event handler untuk tombol "Tambah Baris"
+        $(document).on('click', '.addRow', function() {
+            let templateRow = $('#inputs .form-prize:first').clone();
+            let lastRow = $('#inputs .form-prize:last');
+
+            templateRow.find('.addRow').remove();
+            templateRow.find('.removeRow').removeClass('d-none');
+            templateRow.find('.noteForm').hide();
+
+            if (lastRow.length) {
+                let nextNumber = parseInt(lastRow.find('.count').text()) + 1;
+                templateRow.find('.count').text(nextNumber);
+            } else {
+                // Jika tidak ada baris lagi, tambahkan baris pertama
+                templateRow.find('.count').text(1);
+            }
+
+            $('#inputs').append('<div class="form-prize border-top pt-3 mt-3">' + templateRow.html() +
+                '</div>');
+
+            return false;
+        });
+    });
+</script>
 
 
 
