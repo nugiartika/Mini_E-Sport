@@ -1,4 +1,5 @@
 @extends('admin.layouts.app')
+
 <style>
     .radio-button {
         display: block;
@@ -85,7 +86,6 @@
             </div>
         </div>
     </div>
-
     @empty
 
     @endforelse

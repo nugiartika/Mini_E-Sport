@@ -27,82 +27,51 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item {{ request()->routeIs(['admin.index', 'category.index']) ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <li class="menu-item {{ request()->routeIs('dashboardPenyelenggara') ? 'active' : '' }}">
+            <a href="{{ url('DashboardOrganizer') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div>Dasbor</div>
+                <div data-i18n="Dashboard">Dasbor</div>
             </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
-                    <a href="{{ route('admin.index') }}" class="menu-link">
-                        <div>Dasbor</div>
-                    </a>
-                </li>
-
-                <li class="menu-item {{ request()->routeIs('category.index') ? 'active' : '' }}">
-                    <a href="{{ route('category.index') }}" class="menu-link">
-                        <div>Game</div>
-                    </a>
-                </li>
-            </ul>
         </li>
-        {{-- end dashboard admin --}}
-
-        {{-- User Diterima --}}
-        <li class="menu-item {{ request()->routeIs(['listUserPenyelenggara', 'listPenyelenggara', 'listUser']) ? 'active open' : '' }}">
+        <li class="menu-item {{ request()->routeIs('game') ? 'active' : '' }}">
+            <a href="{{ url('game') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-device-gamepad-2"></i>
+                <div data-i18n="Dashboard">Game</div>
+            </a>
+        </li>
+        <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-users text-body"></i>
-                <div>Users</div>
+                <i class="menu-icon tf-icons ti ti-id"></i>
+                <div data-i18n="Cards">Cards</div>
+                <div class="badge bg-primary rounded-pill ms-auto">5</div>
             </a>
-
-
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('listUserPenyelenggara') ? 'active' : '' }} ">
-                    <a href="{{ route('listUserPenyelenggara') }}" class="menu-link">
-                        <div>Penerimaan</div>
+                <li class="menu-item">
+                    <a href="cards-basic.html" class="menu-link">
+                        <div data-i18n="Basic">Basic</div>
                     </a>
                 </li>
-            </ul>
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('listUser') ? 'active' : '' }} ">
-                    <a href="{{ route('listUser') }}" class="menu-link">
-                        <div>Daftar Pengguna</div>
+                <li class="menu-item">
+                    <a href="cards-advance.html" class="menu-link">
+                        <div data-i18n="Advance">Advance</div>
                     </a>
                 </li>
-            </ul>
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('listPenyelenggara') ? 'active' : '' }} ">
-                    <a href="{{ route('listPenyelenggara') }}" class="menu-link">
-                        <div>Daftar Penyelenggara</div>
+                <li class="menu-item">
+                    <a href="cards-statistics.html" class="menu-link">
+                        <div data-i18n="Statistics">Statistics</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="cards-analytics.html" class="menu-link">
+                        <div data-i18n="Analytics">Analytics</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="cards-actions.html" class="menu-link">
+                        <div data-i18n="Actions">Actions</div>
                     </a>
                 </li>
             </ul>
         </li>
-
-        {{-- Turnamen --}}
-        <li class="menu-item {{ request()->routeIs(['konfirmtournament','DetailTournament']) ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti-md ti ti-trophy text-body"></i>
-                <div>Turnamen</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('konfirmtournament') ? 'active' : '' }}">
-                    <a href="{{ route('konfirmtournament') }}" class="menu-link">
-                        <div>Terima Turnamen</div>
-                    </a>
-                </li>
-            </ul>
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeIs('DetailTournament') ? 'active' : '' }} ">
-                    <a href="{{ route('DetailTournament') }}" class="menu-link">
-                        <div>Daftar Turnamen</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
     </ul>
-
 </aside>

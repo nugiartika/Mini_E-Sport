@@ -54,9 +54,6 @@ class TournamentController extends Controller
     {
         $tournaments = Tournament::where('status', 'accepted')->get();
         $user = User::all();
-        // $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-        //     ->groupBy('tournament_id')
-        //     ->get();
         $category = Category::all();
         return view('penyelenggara.Dashboard', compact('tournaments', 'category', 'user'));
     }
