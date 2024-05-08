@@ -67,7 +67,7 @@
                               <a class="dropdown-item" href="#"
                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                   <i class='ti ti-login me-2'></i>
-                                  <span class="align-middle">Kembali</span>
+                                  <span class="align-middle">Keluar</span>
                               </a>
 
                               <form id="logout-form" action="{{ route('logout') }}" method="POST"

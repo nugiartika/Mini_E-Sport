@@ -49,13 +49,13 @@
     <div class="layout-wrapper layout-content-navbar ">
         <div class="layout-container">
 
-            @include('penyelenggara.layouts.sidebar')
+            @include('admin.layouts.sidebar')
 
             <!-- Layout page -->
             <div class="layout-page">
 
                 <!-- BEGIN: Navbar-->
-                @include('penyelenggara.layouts.navbar')
+                @include('admin.layouts.navbar')
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">

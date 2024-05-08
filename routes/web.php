@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('user')->group(function () {
         // Route::post('/teams', [TeamController::class, 'storeId'])->name('team.storeId')->name('team.create');
         Route::get('DashboardUser', [DashboardUserController::class, 'index'])->name('dashboardUser');
+        Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
+        Route::get('tournamentUser/history', [TournamentController::class, 'history'])->name('user.tournament.history');
     });
 });
 
