@@ -77,7 +77,12 @@ class TournamentController extends Controller
         return view('penyelenggara.tambah', compact('tournament', 'category', 'user'));
     }
 
+    public function history()
+    {
+        $historyData = Auth::user()->tournamentHistory;
 
+        return view('user.historytournament', compact('historyData'));
+    }
 
     /**
      * Store a newly created resource in storage.
