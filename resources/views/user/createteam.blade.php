@@ -591,27 +591,27 @@
         });
     </script>
 
-{{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script> --}}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    profileInput.addEventListener('change', function() {
-        const file = this.files[0];
-        const reader = new FileReader();
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script> --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        profileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            const reader = new FileReader();
 
-        reader.onload = function(e) {
-            previewImage.setAttribute('src', e.target.result);
-        }
+            reader.onload = function(e) {
+                previewImage.setAttribute('src', e.target.result);
+            }
 
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            previewImage.setAttribute('src', '{{ asset('images/LOGO/profil.jpeg') }}');
-        }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.setAttribute('src', '{{ asset('images/LOGO/profil.jpeg') }}');
+            }
+        });
     });
-});
-</script>
+    </script>
 
     <script src="../../demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a"></script>
     <script src="../../demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c"></script>
