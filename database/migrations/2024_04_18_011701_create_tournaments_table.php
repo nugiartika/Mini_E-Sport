@@ -26,13 +26,12 @@ return new class extends Migration
             $table->char('contact', 24);
             $table->text('description');
             $table->text('rule');
-            $table->enum('prize',['uang','trophy','sertifikat','mendali'])->nullable();
-            $table->text('keterangan')->nullable();
+            // $table->foreignId('prizepool')->constrained(); // Tidak perlu menyebutkan nama tabel jika sudah sesuai dengan konvensi Laravel
+            // $table->foreignId('tournament_prize_id')->constrained('tournament_prizes'); // Jika nama tabel tidak mengikuti konvensi, Anda dapat menyebutkannya secara eksplisit
             $table->enum('status', ['pending','rejected','accepted'])->default('pending');
             $table->text('reason')->nullable();
             $table->enum('paidment',['paid','unpaid']);
-            $table->integer('nominal')->nullable();
-            $table->foreignId('jurnal_id')->nullable();
+            $table->integer('nominal')->nullable(); $table->foreignId('jurnal_id')->nullable();
 
             $table->timestamps();
         });

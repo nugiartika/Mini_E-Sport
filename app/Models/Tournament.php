@@ -38,4 +38,10 @@ class Tournament extends Model
     {
         return $this->belongsTo(jadwal::class,'jadwal_id');
     }
+
+    public function tournament_prize()
+    {
+        return $this->belongsTo(tournament_prize::class);
+    }
+
 }

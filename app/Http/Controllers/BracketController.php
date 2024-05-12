@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
-use App\Models\Jadwal;
+use App\Models\jadwal;
+use App\Models\bracket;
 use App\Models\Category;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class JadwalController extends Controller
+class BracketController extends Controller
 {
-
+    /**
+     * Display a listing of the resource.
+     */
     public function detailTournament($id)
     {
         $user = Auth::user();
@@ -23,30 +26,23 @@ class JadwalController extends Controller
             ->get();
         $category = Category::all();
         $jadwal = jadwal::all();
+        $bracket = bracket::findOrFail($id);
 
         $selectedTournament = Tournament::findOrFail($id);
 
-        return view('penyelenggara.detailtournament', compact('jadwal','tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
+        return view('penyelenggara.detailtournament', compact('bracket','jadwal','tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
-
-    public function jadwal(Request $request, $id)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function bracket(Request $request, $id)
     {
         // Mencari turnamen berdasarkan ID, dan jika tidak ditemukan, akan mengembalikan 404
         $tournament = Tournament::findOrFail($id);
 
         // Membuat jadwal baru dengan data yang diterima dari request
-        Jadwal::create([
-            'tournament_id' => $tournament->id,
-            'tanggalPenyisihan' => $request->tanggalPenyisihan,
-            'waktuPenyisihan' => $request->waktuPenyisihan,
-            'boPenyisihan' => $request->boPenyisihan,
-            'tanggalSemi' => $request->tanggalSemi,
-            'waktuSemi' => $request->waktuSemi,
-            'boSemi' => $request->boSemi,
-            'tanggalFinal' => $request->tanggalFinal,
-            'waktuFinal' => $request->waktuFinal,
-            'boFinal' => $request->boFinal,
-            'bracket' => $request->input('bracket', null),
+        Bracket::create([
+                'bracket' => $request->bracket,
         ]);
 
         // Redirect ke halaman detail turnamen dengan menyertakan ID turnamen

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('boSemi');
             $table->date('tanggalFinal');
             $table->time('waktuFinal');
+            $table->string('boFinal');
             $table->timestamps();
         });
     }

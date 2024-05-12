@@ -4,42 +4,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ asset('assets/img/humma-01.png') }}" type="image/x-icon">
-    <title>Tournament Details - Humma Esport</title>
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
+    <title>Tournament - HummaEsport</title>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    @include('admin.layouts.meta')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+        <meta charset="utf-8" />
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <!-- Vendor Styles -->
-    <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+        <title>
+            Dashboard Penyelenggara
+        </title>
+        <meta name="description" content="Start your development with a Dashboard for Bootstrap 5" />
+        <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+        <!-- laravel CRUD token -->
+        <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
+        <!-- Canonical SEO -->
+        <link rel="canonical" href="https://1.envato.market/vuexy_admin">
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon"
+            href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
 
-    <!-- laravel style -->
-    <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
-    <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
 
-    <script src="{{ asset('demo/assets/js/config.js') }}"></script>
+        <!-- Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
+        <script>
+            (function(w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src =
+                    '{{ asset('') }}www.googletagmanager.com/gtm5445.html?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-5J3LMKC');
+        </script>
+        <!-- End Google Tag Manager -->
 
-    <script>
-        window.templateCustomizer = new TemplateCustomizer({
-            cssPath: '',
-            themesPath: '',
-            defaultStyle: "light",
-            defaultShowDropdownOnHover: "true",
-            displayCustomizer: "true",
-            lang: 'id',
-            pathResolver: function(path) {
-                var resolvedPaths = {
-                    'core.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core.css?id=9dd8321ea008145745a7d78e072a6e36',
-                    'core-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core-dark.css?id=d661bae1d0ada9f7e9e3685a3e1f427e',
-                }
-                return resolvedPaths[path] || path;
-            },
-            'controls': ["rtl", "style", "headerType", "contentLayout", "layoutCollapsed", "layoutNavbarOptions",
-                "themes"
-            ],
-        });
-    </script>
-    @yield('style')
+
+
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
+            rel="stylesheet">
+
+        <link rel="stylesheet"
+            href="{{ asset('demo/assets/vendor/fonts/tabler-iconsea04.css?id=6ad8bc28559d005d792d577cf02a2116') }}" />
+        <link rel="stylesheet"
+            href="{{ asset('demo/assets/vendor/fonts/fontawesome8a69.css?id=a2997cb6a1c98cc3c85f4c99cdea95b5') }}" />
+        <link rel="stylesheet"
+            href="{{ asset('demo/assets/vendor/fonts/flag-icons80a8.css?id=121bcc3078c6c2f608037fb9ca8bce8d') }}" />
+        <!-- Core CSS -->
+        <link rel="stylesheet"
+            href="{{ asset('') }}demo/assets/vendor/css/rtl/core6cc1.css?id=9dd8321ea008145745a7d78e072a6e36"
+            class="template-customizer-core-css" />
+        <link rel="stylesheet"
+            href="{{ asset('demo/assets/vendor/css/rtl/theme-defaultfc79.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9"
+                            class="template-customizer-theme-css') }}" />
+        <link rel="stylesheet" href="{{ asset('demo/assets/css/demof1ed.css?id=ddd2feb83a604f9e432cdcb29815ed44') }}" />
+        <link rel="stylesheet"
+            href="{{ asset('demo/assets/vendor/libs/node-waves/node-wavesd178.css?id=aa72fb97dfa8e932ba88c8a3c04641bc') }}" />
+        <link rel="stylesheet"
+            href="{{ asset('demo/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar7358.css?id=280196ccb54c8ae7e29ea06932c9a4b6') }}" />
+        <link rel="stylesheet"
+            href="{{ asset('demo/assets/vendor/libs/typeahead-js/typeaheadb5e1.css?id=2603197f6b29a6654cb700bd9367e2a3') }}" />
+
+        <!-- Vendor Styles -->
+        <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+
+
+        <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
+        <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
+
+        <script src="{{ asset('demo/assets/js/config.js') }}"></script>
+
+        <script>
+            window.templateCustomizer = new TemplateCustomizer({
+                cssPath: '',
+                themesPath: '',
+                defaultStyle: "dark",
+                defaultShowDropdownOnHover: "true",
+                displayCustomizer: "true",
+                lang: 'en',
+                pathResolver: function(path) {
+                    var resolvedPaths = {
+                        'core.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core.css?id=9dd8321ea008145745a7d78e072a6e36',
+                        'core-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core-dark.css?id=d661bae1d0ada9f7e9e3685a3e1f427e',
+
+                        // Themes
+                        'theme-default.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9',
+                        'theme-default-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default-dark.css?id=ce86d777a4c5030f51d0f609f202bcc5',
+                        'theme-bordered.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-bordered.css?id=786794ca0c68d96058e8ceeb20f4e7c5',
+                        'theme-bordered-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-bordered-dark.css?id=e7122ef6338b22f7cea9eaff5a96aa8b',
+                        'theme-semi-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-semi-dark.css?id=a0a317e88e943fdd62d514e00deebb22',
+                        'theme-semi-dark-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-semi-dark-dark.css?id=e9a2f7cd6ace727264936f6bf93ab1e2',
+                    }
+                    return resolvedPaths[path] || path;
+                },
+                'controls': ["rtl", "style", "headerType", "contentLayout", "layoutCollapsed", "layoutNavbarOptions",
+                    "themes"
+                ],
+            });
+        </script>
+         @yield('style')
+
 </head>
 <style>
     .darkened {
@@ -108,7 +182,7 @@
 <body>
     <div class="cursor"></div>
     <!-- Header area  -->
-<!-- header-section start -->
+    <!-- header-section start -->
     {{-- <header class="header-section w-100 bgn-4">
         <div class="py-sm-6 py-3 mx-xxl-20 mx-md-15 mx-3">
             <div class="d-flex align-items-center justify-content-between gap-xxl-10 gap-lg-8 w-100">
@@ -156,279 +230,59 @@
             </div>
         </div>
     </header> --}}
-<!-- header-section end -->
+    <!-- header-section end -->
     @foreach ($tournaments as $tournament)
-    <div class="layout-wrapper layout-content-navbar ">
-        <div class="layout-container">
+        <div class="layout-wrapper layout-content-navbar ">
+            <div class="layout-container">
 
-            @include('penyelenggara.layouts.sidebar')
+                @include('penyelenggara.layouts.sidebar')
 
-            <!-- Layout page -->
-            <div class="layout-page">
+                <!-- Layout page -->
+                <div class="layout-page">
 
-                <!-- BEGIN: Navbar-->
-                @include('penyelenggara.layouts.navbar')
+                    <!-- BEGIN: Navbar-->
+                    @include('penyelenggara.layouts.navbar')
 
-                <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <div class="container-xxl flex-grow-1 container-p-y">
-                        <!-- Content -->
-                        @yield('content')
-        <!-- tournament details banner section start -->
-                        <div class="tournament-details pb-10 pt-120 mt-lg-0 mt-sm-15 mt-10 overflow-hidden">
-                            <div class="container">
-                                <a href="{{ route('ptournament.index') }}">
-                                    <i class="ti ti-arrow-left" style="color: rgb(0, 0, 0);"></i>
-                                </a>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div
-                                            class="parallax-banner-area parallax-container position-relative rounded-5 overflow-hidden">
-                                            <!-- Periksa apakah $selectedTournament adalah objek yang valid -->
-                                            @if ($selectedTournament)
-                                                <img class="w-100 h-100 parallax-img darkened"
-                                                    src="{{ asset('storage/' . $selectedTournament->images) }}"
-                                                    alt="tournament banner">
-                                                <!-- running tournament content here -->
-                                                <div
-                                                    class="running-tournament d-flex flex-lg-row flex-column position-absolute top-50 start-50 translate-middle w-100">
-                                                    <div class="running-tournament-thumb w-100">
-                                                        <img class="w-100 h-100"
-                                                            src="{{ asset('storage/' . $selectedTournament->images) }}"
-                                                            alt="tournament thumb">
-                                                    </div>
-                                                    <div class="running-tour-info py-sm-6 py-4 px-xl-15 px-lg-10 px-sm-6 px-2 w-100">
-                                                        <h3 class="tcn-1 mb-lg-6 mb-4">{{ $selectedTournament->name }}</h3>
-                                                        <span class="tcn-1 d-block fs-five fw-semibold mb-4">Tournament ending in</span>
-                                                        <div class="ending-date d-flex align-items-center gap-sm-5 gap-2 mb-lg-8 mb-6">
-                                                            <!-- Tambahkan logika waktu turnamen di sini -->
+                    <!-- Content wrapper -->
+                    <div class="content-wrapper">
+                        <div class="container-xxl flex-grow-1 container-p-y">
+                            <!-- Content -->
+                            @yield('content')
+                            <!-- tournament details banner section start -->
+                            <div class="tournament-details pb-10 pt-120 mt-lg-0 mt-sm-15 mt-10 overflow-hidden">
+                                <div class="container">
+                                    <a href="{{ route('ptournament.index') }}">
+                                        <i class="ti ti-arrow-left" style="color: rgb(0, 0, 0);"></i>
+                                    </a>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div
+                                                class="parallax-banner-area parallax-container position-relative rounded-5 overflow-hidden">
+                                                <!-- Periksa apakah $selectedTournament adalah objek yang valid -->
+                                                @if ($selectedTournament)
+                                                    <img class="w-100 h-100 parallax-img darkened"
+                                                        src="{{ asset('storage/' . $selectedTournament->images) }}"
+                                                        alt="tournament banner">
+                                                    <!-- running tournament content here -->
+                                                    <div
+                                                        class="running-tournament d-flex flex-lg-row flex-column position-absolute top-50 start-50 translate-middle w-100">
+                                                        <div class="running-tournament-thumb w-100">
+                                                            <img class="w-100 h-100"
+                                                                src="{{ asset('storage/' . $selectedTournament->images) }}"
+                                                                alt="tournament thumb">
                                                         </div>
-                                                        <div class="d-flex align-items-center gap-md-6 gap-3">
-                                                            <a href="tournaments.html"
-                                                                class="btn-half-border position-relative d-inline-block py-2 bgp-1 px-sm-6 px-4 rounded-pill">View
-                                                                More</a>
-                                                            <div class="d-flex align-items-center flex-wrap gap-md-6 gap-3 w-50">
-                                                                <div class="end-date">
-                                                                    <span
-                                                                        class="tcn-6">{{ $selectedTournament->end_permainan }}</span>
-                                                                </div>
-                                                                <div class="players">
-                                                                    <i class="ti ti-users-group tcn-1"></i>
-                                                                    <span class="tcn-6">{{ $selectedTournament->slotTeam }}
-                                                                        Team</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @else
-                                                <div class="alert alert-danger" role="alert">
-                                                    Tournament not found!
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- tournament details banner section end -->
-
-                        <!-- tournament details prize section start -->
-                        <section class="tournament-prize-section mb-10">
-                            <div class="container bgn-4 p-lg-10 p-sm-6 p-4">
-                                <div class="d-flex align-items-center gap-xxl-20 gap-6 flex-wrap">
-                                    <div class="tour-prize-card">
-                                        <div class="icon-area mb-6">
-                                            <i class="ti ti-coin-bitcoin display-five fw-normal tcp-2"></i>
-                                        </div>
-                                        <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Prize Pool</h4>
-                                        <p class="tcn-1 title-anim">{{ $tournament->prize }} {{ $tournament->jumlah }}</p>
-                                    </div>
-                                    <div class="tour-prize-card">
-                                        <div class="icon-area mb-6">
-                                            <i class="ti ti-wallet display-five fw-normal tcp-2"></i>
-                                        </div>
-                                        <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Entry Fee</h4>
-                                        <p class="tcn-1 title-anim">{{ $selectedTournament->paidment }}
-                                            {{ $selectedTournament->nominal }}</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </section>
-                        <!-- Modal -->
-                        <div class="modal fade" id="cobaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="regForm" action="{{ route('ptournament.jadwal') }}" method="POST">
-                                            <!-- One "tab" for each step in the form: -->
-                                            <div class="tab" id="tab1">
-                                                <h5>Penyisihan</h5><br>
-                                                <p>Tanggal Mulai Game<input type="date" placeholder="Tanggal Mulai Game..."
-                                                        class="form-control @error('tanggalPenyisihan') is-invalid @enderror"
-                                                        oninput="this.className = 'form-control'" name="tanggalPenyisihan"></p>
-                                                @error('tanggalPenyisihan')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <p>Waktu Mulai<input type="time" placeholder="Waktu Mulai..."
-                                                        class="form-control @error('waktuPenyisihan') is-invalid @enderror"
-                                                        oninput="this.className = 'form-control'" name="waktuPenyisihan">
-                                                </p>
-                                                @error('waktuPenyisihan')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <p>Best Of<input type="text" placeholder="Best Of..."
-                                                        class="form-control @error('boPenyisihan') is-invalid @enderror"
-                                                        oninput="this.className = 'form-control'" name="boPenyisihan">
-                                                </p>
-                                                @error('boPenyisihan')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="tab" id="tab2">
-                                                <h5>Semi Final</h5><br>
-                                                <p>Tanggal Mulai Game<input type="date" placeholder="Tanggal Mulai Game..."
-                                                        class="form-control @error('tanggalSemi') is-invalid @enderror"
-                                                        oninput="this.className = 'form-control'" name="tanggalSemi">
-                                                </p>
-                                                @error('tanggalSemi')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <p>Waktu Mulai<input type="time" placeholder="Waktu Mulai..."
-                                                        class="form-control @error('waktuSemi') is-invalid @enderror"
-                                                        oninput="this.className = 'form-control'" name="waktuSemi">
-                                                </p>
-                                                @error('waktuSemi')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <p>Best Of<input type="text" placeholder="Best Of..."
-                                                        class="form-control @error('boSemi') is-invalid @enderror"
-                                                        oninput="this.className = 'form-control'" name="boSemi">
-                                                </p>
-                                                @error('boSemi')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="tab" id="tab3">
-                                                <h5>Final</h5><br>
-                                                <p>Tanggal Mulai Game<input type="date" placeholder="Tanggal Mulai Game..."
-                                                        class="form-control @error('tanggalFinal') is-invalid @enderror"
-                                                        oninput="this.className = 'form-control'" name="tanggalFinal">
-                                                </p>
-                                                @error('tanggalFinal')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <p>Waktu Mulai<input type="time" placeholder="Waktu Mulai..."
-                                                        class="form-control @error('waktuFinal') is-invalid @enderror"
-                                                        oninput="this.className = 'form-control'" name="waktuFinal">
-                                                </p>
-                                                @error('waktuFinal')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <p>Best Of<input type="text" placeholder="Best Of..."
-                                                        class="form-control @error('boFinal') is-invalid @enderror"
-                                                        oninput="this.className = 'form-control'" name="boFinal">
-                                                </p>
-                                                @error('boFinal')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-
-                                            <div style="overflow:auto;" class="btnpn">
-                                                <div style="float:right;">
-                                                    <button type="button" class="btn btn-warning" id="prevBtn"
-                                                        onclick="nextPrev(-1)">Previous</button>
-                                                    <button type="button" class="btn btn-success" id="nextBtn"
-                                                        onclick="nextPrev(1)">Next</button>
-                                                </div>
-                                            </div>
-                                            <!-- Circles which indicates the steps of the form: -->
-                                            <div style="text-align:center;margin-top:40px;">
-                                                <span class="step"></span>
-                                                <span class="step"></span>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- tournament more details section start -->
-                        <section class="tournament-more-details pb-120">
-                            <div class="container">
-                                <div class="singletab tournaments-tab">
-                                    <ul class="tablinks d-flex flex-wrap align-items-center gap-3 pb-10">
-                                        <li class="nav-links active">
-                                            <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Brackets</button>
-                                        </li>
-                                        <li class="nav-links">
-                                            <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Players</button>
-                                        </li>
-                                        <li class="nav-links">
-                                            <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Winners</button>
-                                        </li>
-                                        <li class="nav-links">
-                                            <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Rules</button>
-                                        </li>
-                                    </ul>
-
-
-                                    <div class="tabcontents">
-                                        <div class="tabitem active">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
-                                                data-bs-target="#cobaModal">
-                                                <i class="ti ti-plus"></i>
-                                                Tambah Jadwal
-                                            </button>
-
-
-                                            <div class="row g-6 mb-10 ">
-                                                <!-- Brackets-->
-                                                @foreach ($jadwal as $tournament)
-                                                    <div class="col-lg-3 col-md-4 col-sm-6">
-                                                        <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
-                                                            <div class="bracket-card-header d-flex align-items-center gap-2 mb-2">
-                                                                <h4 class="tcn-1">Penyisihan</h4>
-                                                                <span
-                                                                    class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">{{ $tournament->boPenyisihan }}</span>
-                                                            </div>
+                                                        <div
+                                                            class="running-tour-info py-sm-6 py-4 px-xl-15 px-lg-10 px-sm-6 px-2 w-100">
+                                                            <h3 class="tcn-1 mb-lg-6 mb-4">
+                                                                {{ $selectedTournament->name }}</h3>
                                                             <span
-                                                                class="tcn-1 d-block mb-3">{{ $tournament->tanggalPenyisihan }},{{ $tournament->waktuPenyisihan }}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-4 col-sm-6">
-                                                        <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded"> wire:
-                                                            <div class="bracket-card-header d-flex align-items-center gap-2 mb-2">
-                                                                <h4 class="tcn-1">Semi Final</h4>
-                                                                <span
-                                                                    class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">{{ $tournament->boSemi }}</span>
+                                                                class="tcn-1 d-block fs-five fw-semibold mb-4">Tournament
+                                                                ending in</span>
+                                                            <div
+                                                                class="ending-date d-flex align-items-center gap-sm-5 gap-2 mb-lg-8 mb-6">
+                                                                <!-- Tambahkan logika waktu turnamen di sini -->
                                                             </div>
+<<<<<<< Updated upstream
                                                             <span class="tcn-1 d-block mb-3"{{ $tournament->tanggalSemi }},
                                                                 {{ $tournament->waktuSemi }}</span>
                                                         </div>
@@ -681,98 +535,588 @@
                                                                                 </div>
                                                                             </form>
                                                                         </div>
+=======
+                                                            <div class="d-flex align-items-center gap-md-6 gap-3">
+                                                                <a href="tournaments.html"
+                                                                    class="btn-half-border position-relative d-inline-block py-2 bgp-1 px-sm-6 px-4 rounded-pill">View
+                                                                    More</a>
+                                                                <div
+                                                                    class="d-flex align-items-center flex-wrap gap-md-6 gap-3 w-50">
+                                                                    <div class="end-date">
+                                                                        <span
+                                                                            class="tcn-6">{{ $selectedTournament->end_permainan }}</span>
+                                                                    </div>
+                                                                    <div class="players">
+                                                                        <i class="ti ti-users-group tcn-1"></i>
+                                                                        <span
+                                                                            class="tcn-6">{{ $selectedTournament->slotTeam }}
+                                                                            Team</span>
+>>>>>>> Stashed changes
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <table class="table table-dark">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th scope="col">Urutan Juara</th>
-                                                                        <th scope="col">Nama Team</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Juara 1</td>
-                                                                        <td>Otto</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Juara 2</td>
-                                                                        <td>Thornton</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Juara 3</td>
-                                                                        <td>the Bird</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="tabitem">
-                                                <div class="row g-6">
-                                                    <div class="accordion-section rule-accordion d-grid gap-6">
-                                                        <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
-                                                            <h5 class="acc-header-area">
-                                                                <button
-                                                                    class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
-                                                                    type="button">
-                                                                    DESKRIPSI
-                                                                </button>
-                                                            </h5>
-                                                            <div class="acc-content-area">
-                                                                <div class="content-body mt-lg-6 mt-4">
-                                                                    <p class="tcn-6">
-                                                                        {{ $tournament->description }}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
-                                                            <h5 class="acc-header-area">
-                                                                <button
-                                                                    class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
-                                                                    type="button">
-                                                                    RULES
-                                                                </button>
-                                                            </h5>
-                                                            <div class="acc-content-area">
-                                                                <div class="content-body mt-lg-6 mt-4">
-                                                                    <p class="tcn-6">
-                                                                        {{ $tournament->rule }}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
-                                                            <h5 class="acc-header-area">
-                                                                <button
-                                                                    class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
-                                                                    type="button">
-                                                                    CONTACT PERSON
-                                                                </button>
-                                                            </h5>
-                                                            <div class="acc-content-area">
-                                                                <div class="content-body mt-lg-6 mt-4">
-                                                                    <p class="tcn-6">
-                                                                        {{ $tournament->contact }}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                @else
+                                                    <div class="alert alert-danger" role="alert">
+                                                        Tournament not found!
                                                     </div>
-                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                        </section>
+                            </div>
+
+                            <!-- tournament details banner section end -->
+
+                            <!-- tournament details prize section start -->
+                            <section class="tournament-prize-section mb-10">
+                                <div class="container bgn-4 p-lg-10 p-sm-6 p-4">
+                                    <div class="d-flex align-items-center gap-xxl-20 gap-6 flex-wrap">
+                                        <div class="tour-prize-card">
+                                            <div class="icon-area mb-6">
+                                                <i class="ti ti-coin-bitcoin display-five fw-normal tcp-2"></i>
+                                            </div>
+                                            <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Prize Pool</h4>
+                                            <p class="tcn-1 title-anim">{{ $tournament->prize }}
+                                                {{ $tournament->jumlah }}</p>
+                                        </div>
+                                        <div class="tour-prize-card">
+                                            <div class="icon-area mb-6">
+                                                <i class="ti ti-wallet display-five fw-normal tcp-2"></i>
+                                            </div>
+                                            <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Entry Fee</h4>
+                                            <p class="tcn-1 title-anim">{{ $selectedTournament->paidment }}
+                                                {{ $selectedTournament->nominal }}</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- Modal -->
+                            <div class="modal fade" id="cobaModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="regForm"
+                                                action="{{ route('ptournament.jadwal', ['id' => $tournaments->first()->id]) }}"
+                                                method="POST"> @csrf
+                                                <div class="row mb-3">
+                                                    <h5>Penyisihan</h5><br>
+                                                    <div class="col-md-6">
+                                                        Tanggal Mulai Game<input type="date"
+                                                            placeholder="Tanggal Mulai Game..."
+                                                            class="form-control @error('tanggalPenyisihan') is-invalid @enderror"
+                                                            oninput="this.className = 'form-control'"
+                                                            name="tanggalPenyisihan">
+                                                        @error('tanggalPenyisihan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        Waktu Mulai<input type="time" placeholder="Waktu Mulai..."
+                                                            class="form-control @error('waktuPenyisihan') is-invalid @enderror"
+                                                            oninput="this.className = 'form-control'"
+                                                            name="waktuPenyisihan">
+
+                                                        @error('waktuPenyisihan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        Best Of<input type="text" placeholder="Best Of..."
+                                                            class="form-control @error('boPenyisihan') is-invalid @enderror"
+                                                            oninput="this.className = 'form-control'"
+                                                            name="boPenyisihan">
+
+                                                        @error('boPenyisihan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <h5>Semi Final</h5><br>
+                                                    <div class="col-md-6">
+                                                        Tanggal Mulai Game<input type="date"
+                                                            placeholder="Tanggal Mulai Game..."
+                                                            class="form-control @error('tanggalSemi') is-invalid @enderror"
+                                                            oninput="this.className = 'form-control'"
+                                                            name="tanggalSemi">
+
+                                                        @error('tanggalSemi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        Waktu Mulai<input type="time" placeholder="Waktu Mulai..."
+                                                            class="form-control @error('waktuSemi') is-invalid @enderror"
+                                                            oninput="this.className = 'form-control'"
+                                                            name="waktuSemi">
+
+                                                        @error('waktuSemi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        Best Of<input type="text" placeholder="Best Of..."
+                                                            class="form-control @error('boSemi') is-invalid @enderror"
+                                                            oninput="this.className = 'form-control'" name="boSemi">
+
+                                                        @error('boSemi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <h5>Final</h5><br>
+                                                    <div class="col-md-6">
+                                                        Tanggal Mulai Game<input type="date"
+                                                            placeholder="Tanggal Mulai Game..."
+                                                            class="form-control @error('tanggalFinal') is-invalid @enderror"
+                                                            oninput="this.className = 'form-control'"
+                                                            name="tanggalFinal">
+
+                                                        @error('tanggalFinal')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        Waktu Mulai<input type="time" placeholder="Waktu Mulai..."
+                                                            class="form-control @error('waktuFinal') is-invalid @enderror"
+                                                            oninput="this.className = 'form-control'"
+                                                            name="waktuFinal">
+
+                                                        @error('waktuFinal')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        Best Of<input type="text" placeholder="Best Of..."
+                                                            class="form-control @error('boFinal') is-invalid @enderror"
+                                                            oninput="this.className = 'form-control'" name="boFinal">
+
+                                                        @error('boFinal')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <button name="submit" class="btn btn-success">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Masukkan URL Bracket</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="text" class="form-control" id="bracketLinkInput" placeholder="Masukkan URL Bracket">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <button type="button" class="btn btn-primary" id="saveLinkBtn" data-bs-dismiss="modal">Simpan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- tournament more details section start -->
+                            <section class="tournament-more-details pb-120">
+                                <div class="container">
+                                    <div class="singletab tournaments-tab">
+                                        <ul class="tablinks d-flex flex-wrap align-items-center gap-3 pb-10">
+                                            <li class="nav-links active">
+                                                <button
+                                                    class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Brackets</button>
+                                            </li>
+                                            <li class="nav-links">
+                                                <button
+                                                    class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Players</button>
+                                            </li>
+                                            <li class="nav-links">
+                                                <button
+                                                    class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Winners</button>
+                                            </li>
+                                            <li class="nav-links">
+                                                <button
+                                                    class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">Rules</button>
+                                            </li>
+                                        </ul>
+
+
+                                        <div class="tabcontents">
+                                            <div class="tabitem active">
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#cobaModal" id="btn">
+                                                    <i class="ti ti-plus"></i>
+                                                    Tambah Jadwal
+                                                </button>
+
+
+                                                <div class="row g-6 mb-10 ">
+                                                    <!-- Brackets-->
+                                                    @foreach ($jadwal as $tournament)
+                                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                                            <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
+                                                                <div
+                                                                    class="bracket-card-header d-flex align-items-center gap-2 mb-2">
+                                                                    <h4 class="tcn-1">Penyisihan</h4>
+                                                                    <span
+                                                                        class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">{{ $tournament->boPenyisihan }}</span>
+                                                                </div>
+                                                                <span
+                                                                    class="tcn-1 d-block mb-3">{{ $tournament->tanggalPenyisihan }},{{ $tournament->waktuPenyisihan }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                                            <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
+                                                                <div
+                                                                    class="bracket-card-header d-flex align-items-center gap-2 mb-2">
+                                                                    <h4 class="tcn-1">Semi Final</h4>
+                                                                    <span
+                                                                        class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">{{ $tournament->boSemi }}</span>
+                                                                </div>
+                                                                <span
+                                                                    class="tcn-1 d-block mb-3">{{ $tournament->tanggalSemi }},
+                                                                    {{ $tournament->waktuSemi }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                                            <div class="bracket-card p-lg-8 p-sm-6 p-4 bgn-4 rounded">
+                                                                <div
+                                                                    class="bracket-card-header d-flex align-items-center gap-2 mb-2">
+                                                                    <h4 class="tcn-1">Final</h4>
+                                                                    <span
+                                                                        class="bracket-badge fs-xs tcn-1 rounded-pill py-1 px-2">{{ $tournament->boFinal }}</span>
+                                                                </div>
+                                                                <span
+                                                                    class="tcn-1 d-block mb-3">{{ $tournament->tanggalFinal }},
+                                                                    {{ $tournament->waktuFinal }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 ">
+                                                            <h4>Link Pembuatan Bracket</h4>
+                                                            <a href="https://challonge.com/id/tournament/bracket_generator"
+                                                                class="form-control d-block"
+                                                                style="width: 100%;">https://challonge.com/id/tournament/bracket_generator</a>
+                                                            <!-- Button untuk memasukkan URL langsung -->
+                                                            <button type="button" class="btn btn-primary mt-3"
+                                                                id="showModalBtn" data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal">
+                                                                Masukkan Link Bracket Pertandingan Disini
+                                                            </button>
+                                                            <div class="mt-3">
+                                                                <h5>Link Bracket:</h5>
+                                                                <!-- Tautan yang akan diperbarui secara dinamis -->
+                                                                <a id="dynamicLink" href="#"
+                                                                    target="_blank"></a>
+                                                            </div>
+                                                            <!-- Modal -->
+
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <div class="tabitem">
+                                                <div class="row g-6 gy-md-10">
+                                                    <!-- branch 01 -->
+                                                    <div class="col-lg-4 col-md-6">
+                                                        <h4 class="tcn-1 mb-6">Branch 01</h4>
+                                                        <ul class="team-branch-list d-grid gap-3">
+                                                            <li class="team-branch-item d-between p-3 rounded bgn-4">
+                                                                <div class="d-flex align-items-center gap-3">
+                                                                    <div class="team-branch-thumb">
+                                                                        <img class="w-100 rounded-circle"
+                                                                            src="assets/img/team-b1.png"
+                                                                            alt="branch-thumb">
+                                                                    </div>
+                                                                    <span class="tcn-1">Maixito</span>
+                                                                </div>
+                                                            </li>
+                                                            <li class="team-branch-item d-between p-3 rounded bgn-4">
+                                                                <div class="d-flex align-items-center gap-3">
+                                                                    <div class="team-branch-thumb">
+                                                                        <img class="w-100 rounded-circle"
+                                                                            src="assets/img/team-b2.png"
+                                                                            alt="branch-thumb">
+                                                                    </div>
+                                                                    <span class="tcn-1">Dianne Russell</span>
+                                                                </div>
+                                                            </li>
+                                                            <li class="team-branch-item d-between p-3 rounded bgn-4">
+                                                                <div class="d-flex align-items-center gap-3">
+                                                                    <div class="team-branch-thumb">
+                                                                        <img class="w-100 rounded-circle"
+                                                                            src="assets/img/team-b3.png"
+                                                                            alt="branch-thumb">
+                                                                    </div>
+                                                                    <span class="tcn-1">El nano</span>
+                                                                </div>
+                                                            </li>
+                                                            <li class="team-branch-item d-between p-3 rounded bgn-4">
+                                                                <div class="d-flex align-items-center gap-3">
+                                                                    <div class="team-branch-thumb">
+                                                                        <img class="w-100 rounded-circle"
+                                                                            src="assets/img/team-b4.png"
+                                                                            alt="branch-thumb">
+                                                                    </div>
+                                                                    <span class="tcn-1">Fermin Medrano</span>
+                                                                </div>
+                                                            </li>
+                                                            <li class="team-branch-item d-between p-3 rounded bgn-4">
+                                                                <div class="d-flex align-items-center gap-3">
+                                                                    <div class="team-branch-thumb">
+                                                                        <img class="w-100 rounded-circle"
+                                                                            src="assets/img/team-b5.png"
+                                                                            alt="branch-thumb">
+                                                                    </div>
+                                                                    <span class="tcn-1">Murilotm</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @foreach ($tournaments as $tournament)
+                                                <div class="tabitem">
+                                                    <div
+                                                        class="row align-items-center justify-content-center pt-lg-20 pt-sm-10">
+                                                        <div class="col-lg-4 col-sm-6">
+                                                            <div
+                                                                class="d-grid justify-content-center align-items-center gap-10">
+                                                                <div class="img-area mx-auto winner-img">
+                                                                    <img class="w-100"
+                                                                        src="{{ asset('assets/img/winner-prize.png') }}"
+                                                                        alt="prize">
+                                                                </div>
+                                                                <div class="content-area">
+                                                                    <button class="btn btn-outline-light d-flex "
+                                                                        data-toggle="modal"
+                                                                        data-target="#exampleModal">
+                                                                        <i class="ti ti-plus fs-2xl"></i>
+                                                                        <!-- Icon tambah -->
+                                                                    </button>
+                                                                    <span class="tcn-6 text-center d-block">Silahkan
+                                                                        tambah pemenang
+                                                                        setelah turnamen selesai</span>
+                                                                </div>
+                                                                <div class="modal fade" id="exampleModal"
+                                                                    tabindex="-1" role="dialog"
+                                                                    aria-labelledby="exampleModalLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content bg-dark text-light">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title text-light"
+                                                                                    id="exampleModalLabel">
+                                                                                    Tambah Jadwal</h4>
+                                                                                <button type="button"
+                                                                                    class="btn btn-danger close"
+                                                                                    data-dismiss="modal"
+                                                                                    aria-label="Close">
+                                                                                    <span
+                                                                                        aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="modal-body">
+                                                                                <form id="regForm" action="">
+                                                                                    <!-- One "tab" for each step in the form: -->
+                                                                                    <div class="tab">
+                                                                                        <h5>Juara 1</h5><br>
+                                                                                        Nama Tim <input type="text"
+                                                                                            placeholder="Masukan Nama Tim..."
+                                                                                            class="form-control"
+                                                                                            oninput="this.className = 'form-control'"
+                                                                                            name="nama_juara1">
+                                                                                    </div>
+
+                                                                                    <div class="tab">
+                                                                                        <h5>Juara 2</h5><br>
+                                                                                        Nama Tim <input type="text"
+                                                                                            placeholder="Masukan Nama Tim..."
+                                                                                            class="form-control"
+                                                                                            oninput="this.className = 'form-control'"
+                                                                                            name="nama_juara2">
+                                                                                    </div>
+
+                                                                                    <div class="tab">
+                                                                                        <h5>Juara 3</h5><br>
+                                                                                        Nama Tim <input type="text"
+                                                                                            placeholder="Masukan Nama Tim..."
+                                                                                            class="form-control"
+                                                                                            oninput="this.className = 'form-control'"
+                                                                                            name="nama_juara3">
+                                                                                    </div>
+
+                                                                                    <div style="overflow:auto;">
+                                                                                        <div style="float:right;">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-warning"
+                                                                                                id="prevBtn"
+                                                                                                onclick="nextPrev(-1)">Previous</button>
+                                                                                            <button type="button"
+                                                                                                class="btn btn-success"
+                                                                                                id="nextBtn"
+                                                                                                onclick="nextPrev(1)">Next</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- Circles which indicates the steps of the form: -->
+                                                                                    <div
+                                                                                        style="text-align:center;margin-top:40px;">
+                                                                                        <span class="step"></span>
+                                                                                        <span class="step"></span>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <table class="table table-dark">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Urutan Juara</th>
+                                                                            <th scope="col">Nama Team</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Juara 1</td>
+                                                                            <td>Otto</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Juara 2</td>
+                                                                            <td>Thornton</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Juara 3</td>
+                                                                            <td>the Bird</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tabitem">
+                                                    <div class="row g-6">
+                                                        <div class="accordion-section rule-accordion d-grid gap-6">
+                                                            <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
+                                                                <h5 class="acc-header-area">
+                                                                    <button
+                                                                        class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
+                                                                        type="button">
+                                                                        DESKRIPSI
+                                                                    </button>
+                                                                </h5>
+                                                                <div class="acc-content-area">
+                                                                    <div class="content-body mt-lg-6 mt-4">
+                                                                        <p class="tcn-6">
+                                                                            {{ $tournament->description }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
+                                                                <h5 class="acc-header-area">
+                                                                    <button
+                                                                        class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
+                                                                        type="button">
+                                                                        RULES
+                                                                    </button>
+                                                                </h5>
+                                                                <div class="acc-content-area">
+                                                                    <div class="content-body mt-lg-6 mt-4">
+                                                                        <p class="tcn-6">
+                                                                            {{ $tournament->rule }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
+                                                                <h5 class="acc-header-area">
+                                                                    <button
+                                                                        class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
+                                                                        type="button">
+                                                                        CONTACT PERSON
+                                                                    </button>
+                                                                </h5>
+                                                                <div class="acc-content-area">
+                                                                    <div class="content-body mt-lg-6 mt-4">
+                                                                        <p class="tcn-6">
+                                                                            {{ $tournament->contact }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <footer class="content-footer footer bg-footer-theme">
+                                <div class="container-xxl">
+                                    <div
+                                        class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+                                        <div>
+                                            ©
+                                            <script>
+                                                document.write(new Date().getFullYear())
+                                            </script>
+                                            , Humma <span>Esport</span>
+                                        </div>
+                                        <div class="d-none d-lg-inline-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
+                            <div class="content-backdrop fade"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tournament more deails section end -->
+        <!-- call to action section start -->
+
+        <!-- call to action section end -->
     @endforeach
-</body>
-    <!-- tournament more deails section end -->
-    <!-- call to action section start -->
-    <div class="call-to-action pt-120 pb-120 bgn-4 overflow-x-hidden" id="cta">
+    <!-- footer section start  -->
+    @endforeach
+    {{-- <div class="call-to-action pt-120 pb-120 bgn-4 overflow-x-hidden" id="cta">
         <div class="container">
             <div class="row justify-content-between g-6">
                 <div class="col-lg-6">
@@ -809,9 +1153,6 @@
             </div>
         </div>
     </div>
-    <!-- call to action section end -->
-    @endforeach
-    <!-- footer section start  -->
     <footer class="footer bgn-4 bt">
         <div class="container">
             <div class="row justify-content-between">
@@ -820,10 +1161,9 @@
                         <div class="footer-logo mb-8">
                             <a href="#" class="d-grid gap-6">
                                 <div class="flogo-1">
-                                    <img class="w-100" src="assets/img/LOGO WEB.png" alt="favicon">
+                                    <img class="w-100" src="{{ asset('assets/img/humma-01.png') }}" alt="favicon">
                                 </div>
                                 <div class="flogo-2">
-                                    {{-- <img class="w-100" src="{{ asset('assets/img/logo.png') }}" alt="logo"> --}}
                                     <h3>HUMMAESPORT</h3>
                                 </div>
                             </a>
@@ -902,11 +1242,9 @@
         <div class="footer-banner-img" id="faa">
             <img class="w-100" src="{{ asset('assets/img/fbanner.png') }}" alt="banner">
         </div>
-    </footer>
+    </footer> --}}
     <!-- footer section end  -->
 
-    <!-- ==== js dependencies start ==== -->
-    <!-- jquery  -->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- gsap  -->
     <script src="{{ asset('assets/js/gsap.min.js') }}"></script>
@@ -924,6 +1262,8 @@
     <script src="{{ asset('assets/js/animation.gsap.min.js') }}"></script>
     <!-- gsap customization  -->
     <script src="{{ asset('assets/js/gsap-customization.js') }}"></script>
+    <!-- apex chart  -->
+    <script src="{{ asset('assets/js/apexcharts.js') }}"></script>
     <!-- swiper js -->
     <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
     <!-- magnific popup  -->
@@ -933,131 +1273,41 @@
     <!-- main js  -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <script>
-        var currentTab = 0; // Saat ini tab yang ditampilkan
-        showTab(currentTab); // Tampilkan tab saat ini
-
-        function showTab(n) {
-            // Ambil semua tab dan sembunyikan mereka
-            var tabs = document.getElementsByClassName("tab");
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].style.display = "none";
-            }
-
-            // Tampilkan tab yang sesuai
-            tabs[n].style.display = "block";
-
-            // Perbarui tombol Next/Previous sesuai dengan tab yang ditampilkan
-            if (n == 0) {
-                document.getElementById("prevBtn").style.display = "none";
-            } else {
-                document.getElementById("prevBtn").style.display = "inline";
-            }
-            if (n == (tabs.length - 1)) {
-                document.getElementById("nextBtn").innerHTML = "Submit";
-            } else {
-                document.getElementById("nextBtn").innerHTML = "Next";
-            }
-
-            // Perbarui langkah indikator
-            fixStepIndicator(n);
-        }
-
-        function nextPrev(n) {
-            var tabs = document.getElementsByClassName("tab");
-            // Cek validasi form sebelum pindah ke tab berikutnya
-            if (n == 1 && !validateForm()) {
-                // Tambahkan pesan kesalahan atau tindakan lain jika validasi gagal
-                alert("Harap isi semua bidang sebelum melanjutkan.");
-                return false;
-            }
-
-            // Sembunyikan tab saat ini dan tampilkan yang berikutnya
-            tabs[currentTab].style.display = "none";
-            currentTab = currentTab + n;
-
-            // Jika sudah mencapai akhir form, submit form
-            if (currentTab >= tabs.length) {
-                // Menghubungkan formulir ke route ptournament.jadwal saat formulir disubmit
-                document.getElementById("regForm").submit(); // Submit formulir
-                return false;
-            }
-
-            // Tampilkan tab yang sesuai
-            showTab(currentTab);
-        }
-
-
-        function validateForm() {
-            // Cek validasi form pada setiap tab di sini (jika diperlukan)
-            return true; // Kembalikan true jika form valid
-        }
-
-        function fixStepIndicator(n) {
-            // Ambil semua langkah indikator dan tandai langkah saat ini sebagai selesai
-            var steps = document.getElementsByClassName("step");
-            for (var i = 0; i < steps.length; i++) {
-                if (i <= n) {
-                    steps[i].className = steps[i].className.replace(" active", "");
-                }
-            }
-            steps[n].className += " active"; // Tandai langkah saat ini sebagai aktif
-        }
+    <script src="{{ asset('demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/js/bootstraped84.js?id=9a6c701557297a042348b5aea69e9b76') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/libs/node-waves/node-waves259f.js?id=4fae469a3ded69fb59fce3dcc14cd638') }}">
     </script>
+    <script
+        src="{{ asset('demo/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar6188.js?id=44b8e955848dc0c56597c09f6aebf89a') }}">
+    </script>
+    <script src="{{ asset('demo/assets/vendor/libs/hammer/hammer2de0.js?id=0a520e103384b609e3c9eb3b732d1be8') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/libs/typeahead-js/typeahead60e7.js?id=f6bda588c16867a6cc4158cb4ed37ec6') }}">
+    </script>
+    <script src="{{ asset('demo/assets/vendor/js/menu2dc9.js?id=c6ce30ded4234d0c4ca0fb5f2a2990d8') }}"></script>
+
+    <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
+
+    <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script>
 
     <script>
-        // Array untuk menyimpan link-link yang dimasukkan
-        var links = [];
-
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("openModalBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
+        // Memeriksa apakah link telah disimpan di localStorage
+        var savedLink = localStorage.getItem('savedBracketLink');
+        if (savedLink) {
+            document.getElementById('dynamicLink').href = savedLink;
+            document.getElementById('dynamicLink').textContent = savedLink;
         }
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Get the submit button
-        var submitBtn = document.getElementById("submitBtn");
-
-        // Function to handle submission
-        submitBtn.onclick = function() {
-            var linkInput = document.getElementById("linkInput").value;
-            links.push(linkInput); // Menambahkan link ke dalam array
-            displayLinks(); // Menampilkan link-link yang sudah dimasukkan
-            modal.style.display = "none"; // Menutup modal setelah submission
-        }
-
-        // Function to display links
-        function displayLinks() {
-            var linksContainer = document.getElementById("linksContainer");
-            linksContainer.innerHTML = ""; // Menghapus isi container sebelum menampilkan link yang baru
-
-            for (var i = 0; i < links.length; i++) {
-                var linkElement = document.createElement("p");
-                linkElement.textContent = links[i];
-                linksContainer.appendChild(linkElement);
-            }
-        }
+        // Menyimpan link ke localStorage saat tombol "Simpan" ditekan
+        document.getElementById('saveLinkBtn').addEventListener('click', function() {
+            var bracketLink = document.getElementById('bracketLinkInput').value;
+            document.getElementById('dynamicLink').href = bracketLink;
+            document.getElementById('dynamicLink').textContent = bracketLink;
+            localStorage.setItem('savedBracketLink', bracketLink); // Menyimpan link ke localStorage
+        });
     </script>
+
+
 </body>
 
 </html>

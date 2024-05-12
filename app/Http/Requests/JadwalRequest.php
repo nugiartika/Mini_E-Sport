@@ -13,10 +13,10 @@ class JadwalRequest extends FormRequest
             'tanggalPenyisihan' => 'required|date_format:Y-m-d',
             'waktuPenyisihan' => 'required|time_format:hh:mm:ss',
             'boPenyisihan' => 'required',
-            'tanggalSemi' => 'required|date_format:Y-m-d',
+            'tanggalSemi' => 'required|date_format:Y-m-d|after:tanggalPenyisihan',
             'waktuSemi' => 'required|time_format:hh:mm:ss',
             'boSemi' => 'required',
-            'tanggalFinal' => 'required|date_format:Y-m-d',
+            'tanggalFinal' => 'required|date_format:Y-m-d|after:tanggalSemi',
             'waktuFinal' => 'required|time_format:hh:mm:ss',
             'boFinal' => 'required',
         ];
