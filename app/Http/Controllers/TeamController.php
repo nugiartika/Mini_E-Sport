@@ -42,8 +42,7 @@ class TeamController extends Controller
      */
     public function store(TeamRequest $request)
     {
-        $tournament_id = $request->tournament_id;
-
+        $tournament_id = $request->get('tournament_id');
         $user = Auth::user();
         // $loggedInUserName = $loggedInUser->name;
 

@@ -8,6 +8,7 @@ use App\Models\jadwal;
 use App\Models\member;
 use App\Models\Category;
 use App\Models\Tournament;
+use DOMDocument;
 use Illuminate\Http\Request;
 use App\Models\TeamTournament;
 use Illuminate\Support\Facades\DB;
@@ -88,54 +89,84 @@ class TournamentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TournamentRequest $request)
     {
-        try {
-            $user = Auth::user();
+        // try {
+        $user = Auth::user();
 
-            // Proses gambar
-            $gambar = $request->file('images');
-            $path_gambar = null;
+        $description = $request->description;
 
-            $amount = collect($request->input('jumlah'));
-            $dataPrize = collect($request->input('prize'))->map(function($item, $index) use ($amount) {
-                $data['item'] = $item;
+        if (!empty($description)) {
+            $dom = new \DomDocument();
+            $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-                if($item === 'uang') {
-                    $data['nominal'] = (int) $amount[$index];
-                }
+            $images = $dom->getElementsByTagName('img');
+            foreach ($images as $k => $img) {
+                $data = $img->getAttribute('src');
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
+                $data = base64_decode($data);
 
-                return $data;
-            });
+                $image_name = "/uploads" . time() . $k . '.png';
+                $path = public_path() . $image_name;
+                file_put_contents($path, $data);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $image_name);
 
-            if ($gambar) {
-                $path_gambar = Storage::disk('public')->put('tournament', $gambar);
+                // $image_name = "uploads/" . time() . $k . '.png';
+                // Storage::put($image_name, $data);
+
+                // $img->removeAttribute('src');
+                // $img->setAttribute('src', Storage::url($image_name));
+            }
+            $description = $dom->saveHTML();
+        }
+
+
+        // Proses gambar
+        $gambar = $request->file('images');
+        $path_gambar = null;
+
+        $amount = collect($request->input('jumlah'));
+        $dataPrize = collect($request->input('prize'))->map(function ($item, $index) use ($amount) {
+            $data['item'] = $item;
+
+            if ($item === 'uang') {
+                $data['nominal'] = (int) $amount[$index];
             }
 
-            $tournament = Tournament::create([
-                'name' => $request->input('name'),
-                'pendaftaran' => $request->input('pendaftaran'),
+            return $data;
+        });
+
+        if ($gambar) {
+            $path_gambar = Storage::disk('public')->put('tournament', $gambar);
+        }
+
+        $tournament = Tournament::create([
+            'name' => $request->input('name'),
+            'pendaftaran' => $request->input('pendaftaran'),
             'permainan' => $request->input('permainan'),
             'end_pendaftaran' => $request->input('end_pendaftaran'),
             'end_permainan' => $request->input('end_permainan'),
-                'categories_id' => $request->input('categories_id'),
-                'users_id' => $user->id,
-                'slotTeam' => $request->input('slotTeam'),
-                'contact' => $request->input('contact'),
-                'images' => $path_gambar,
-                'description' => $request->input('description'),
-                'rule' => $request->input('rule'),
-                'paidment' => $request->input('paidment'),
-                'nominal' => $request->input('nominal'),
-                'status' => 'pending',
-                'prize' => $request->input('prize'),
+            'categories_id' => $request->input('categories_id'),
+            'users_id' => $user->id,
+            'slotTeam' => $request->input('slotTeam'),
+            'contact' => $request->input('contact'),
+            'images' => $path_gambar,
+            'description' => $description,
+            'rule' => $request->input('rule'),
+            'paidment' => $request->input('paidment'),
+            'nominal' => $request->input('nominal'),
+            'status' => 'pending',
+            'prize' => $request->input('prize'),
             'note' => $request->input('note')
-            ]);
-            return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
-        } catch (\Exception $e) {
-            // Tangani kesalahan
-            dd($e->getMessage());
-        }
+        ]);
+        // dd($tournament);
+        return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
+        // } catch (\Exception $e) {
+        // Tangani kesalahan
+        // dd($e->getMessage());
+        // }
     }
 
     public function filter(Request $request)
@@ -235,42 +266,36 @@ class TournamentController extends Controller
     //     return redirect()->back()->with('error', 'Gagal memperbarui status turnamen.');
     // }
 
-   public function update(Request $request, $id)
-{
-    $tournament = Tournament::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $tournament = Tournament::findOrFail($id);
 
-    $request->validate([
-        'status' => 'required|in:accepted,rejected',
-        'reason' => $request->input('status') === 'rejected' ? 'required|string|max:255' : '',
-    ], [
-        'status.required' => 'Kolom STATUS wajib diisi.',
-        'status.in' => 'Status harus berupa "accepted" atau "rejected".',
-        'reason.required' => 'Alasan penolakan wajib diisi jika status "rejected".',
-        'reason.string' => 'Alasan penolakan harus berupa teks.',
-        'reason.max' => 'Alasan penolakan tidak boleh melebihi 255 karakter.',
-    ]);
+        $request->validate([
+            'status' => 'required|in:accepted,rejected',
+            'reason' => 'nullable|string|max:255',
+        ], [
+            'status.required' => 'Kolom STATUS wajib diisi.',
+            'status.in' => 'Status harus berupa "accepted" atau "rejected".',
+            // 'reason.required' => 'Alasan penolakan wajib diisi jika status "rejected".',
+            'reason.string' => 'Alasan penolakan harus berupa teks.',
+            'reason.max' => 'Alasan penolakan tidak boleh melebihi 255 karakter.',
+        ]);
 
-    $status = $request->input('status');
+        $tournament->status = $request->status;
 
-    $data = [
-        'status' => $status,
-    ];
+         // Update status turnamen sesuai dengan input dari form
+         $tournament->status = $request->status;
 
-    // Tambahkan alasan penolakan jika status "rejected"
-    if ($status === 'rejected') {
-        $data['reason'] = $request->input('reason');
-    }
+         // Jika status adalah 'rejected' dan alasan telah diberikan, simpan alasan
+         if ($request->status == 'rejected' && $request->has('reason')) {
+             $tournament->reason = $request->reason;
+         }
 
-    $tournament->update($data);
+         // Simpan perubahan pada data turnamen
+         $tournament->save();
 
-    if ($status === 'rejected') {
-        return redirect()->route('konfirmtournament')->with('success', 'Turnamen berhasil ditolak.');
-    } elseif ($status === 'accepted') {
-        return redirect()->route('konfirmtournament')->with('success', 'Turnamen berhasil diterima.');
-    }
-
-    return redirect()->back()->with('error', 'Gagal memperbarui status turnamen.');
-}
+         return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');
+        }
 
 
 

@@ -29,6 +29,7 @@ class TournamentRequest extends FormRequest
             'end_pendaftaran' => 'required|date_format:Y-m-d',
             'end_permainan' => 'required|date_format:Y-m-d',
             'categories_id' => 'required|exists:categories,id',
+            'users_id' => 'nullable',
             'slotTeam' => [
                 'required',
                 'integer',
@@ -41,12 +42,12 @@ class TournamentRequest extends FormRequest
             ],
             'contact' => 'required|string',
             'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'required|string',
+            'description' => 'required',
             'rule' => 'required|string',
             'paidment' => 'required|string',
             'nominal' => 'nullable|numeric',
             'prize' => 'required',
-            'keterangan' => 'required',
+            'note' => 'required',
         ];
 
 
@@ -76,11 +77,10 @@ class TournamentRequest extends FormRequest
             'contact.required' => 'Kontak harus diisi.',
             'contact.integer' => 'Kontak harus berupa angka.',
             'description.required' => 'Deskripsi harus diisi.',
-            'description.max' => 'Deskripsi tidak boleh lebih dari 2048 karakter.',
             'rule.required' => 'Aturan harus diisi.',
             'rule.max' => 'Aturan tidak boleh lebih dari 2048 karakter.',
             'prize.required' => 'Hadiah harus diisi.',
-            'keterangan.required' => 'Deskripsi Hadiah harus diisi.',
+            'note.required' => 'Deskripsi Hadiah harus diisi.',
             'slotTeam.required' => 'Slot tim harus diisi.',
             'slotTeam.integer' => 'Slot tim harus berupa angka.',
             'slotTeam.min' => 'Slot tim tidak boleh kurang dari 2.',

@@ -57,7 +57,6 @@
                                     <li class="menu-link">
                                         <a href="{{ route('user.tournament') }}">TOURNAMENTS</a>
                                     </li>
-
                                 </ul>
                             </li>
                             <li class="menu-link">

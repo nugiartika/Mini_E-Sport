@@ -81,14 +81,13 @@
                             </li>
 
                             <li class="menu-item">
-                                    <li class="menu-link">
-                                        <a href="{{ route('login') }}">LOGIN</a>
-                                    </li>
+                            <li class="menu-link">
+                                <a href="{{ route('login') }}">LOGIN</a>
+                            </li>
                             </li>
                         </ul>
                     </div>
                 </nav>
-
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
                     <button class="ntf-btn box-style fs-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 22 22">
@@ -184,10 +183,10 @@
                                             <div class="tournament-content px-xxl-4">
                                                 <div class="tournament-info mb-5">
                                                     {{-- <a href="{{ route('ptournament.detail') }}" class="d-block"> --}}
-                                                        <h4
-                                                            class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                            {{ $tournament->name }}
-                                                        </h4>
+                                                    <h4
+                                                        class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                        {{ $tournament->name }}
+                                                    </h4>
                                                     {{-- </a> --}}
                                                     <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
                                                 </div>
@@ -326,12 +325,13 @@
                                                     </div>
                                                     <div class="d-flex justify-content-center">
 
+                                                        <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
+                                                            type="button" class="btn btn-secondary me-2"
+                                                            data-bs-toggle="modal" data-bs-target="#existing"
+                                                            data-bs-dismiss="modal">Existing Team</a>
 
-                                        <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
-                                            type="button" class="btn btn-secondary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#existing" data-bs-dismiss="modal">Existing Team</a>
-                                        <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
-                                            type="button" class="btn btn-primary">New Team</a>
+                                                         <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
+                                                            type="button" class="btn btn-primary">New Team</a>
 
                                                     </div>
                                                 </div>
@@ -341,7 +341,7 @@
 
 
 
-                                        <!-- Modal -->
+                                    <!-- Modal -->
                                     <div class="modal fade" id="existing" tabindex="-1" role="dialog"
                                         aria-labelledby="existingLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document" style="height: 100vh;">
@@ -363,32 +363,32 @@
                                                                 @foreach ($teams as $team)
                                                                     {{-- @if ($team->user_id === auth()->user()->id) --}}
                                                                     @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id)
-                                                                    <input type="hidden" name="tournament_id" value="{{ $tournament->id }}">
-                                                                            <div class="col-12 mb-3">
-                                                                                <div class="card"
-                                                                                    id="teamCard{{ $team->id }}"
-                                                                                    onclick="cardRadio(this)">
-                                                                                    <div
-                                                                                        class="card-body d-flex align-items-center">
-                                                                                        <input type="radio"
-                                                                                            id="team_id{{ $team->id }}"
-                                                                                            name="team_id"
-                                                                                            value="{{ $team->id }}"
-                                                                                            style="display: none;">
-                                                                                        <img src="{{ asset('storage/' . $team->profile) }}"
-                                                                                            alt=""
-                                                                                            width="25"
-                                                                                            height="25"
-                                                                                            class="profile-image me-8">
-                                                                                        <label class="name-text"
-                                                                                            style="font-size: 20px"
-                                                                                            for="team_id{{ $team->id }}">
-                                                                                            {{ $team->name }}
-                                                                                        </label>
-                                                                                    </div>
+                                                                        <input type="hidden" name="tournament_id"
+                                                                            value="{{ $tournament->id }}">
+                                                                        <div class="col-12 mb-3">
+                                                                            <div class="card"
+                                                                                id="teamCard{{ $team->id }}"
+                                                                                onclick="cardRadio(this)">
+                                                                                <div
+                                                                                    class="card-body d-flex align-items-center">
+                                                                                    <input type="radio"
+                                                                                        id="team_id{{ $team->id }}"
+                                                                                        name="team_id"
+                                                                                        value="{{ $team->id }}"
+                                                                                        style="display: none;">
+                                                                                    <img src="{{ asset('storage/' . $team->profile) }}"
+                                                                                        alt="" width="25"
+                                                                                        height="25"
+                                                                                        class="profile-image me-8">
+                                                                                    <label class="name-text"
+                                                                                        style="font-size: 20px"
+                                                                                        for="team_id{{ $team->id }}">
+                                                                                        {{ $team->name }}
+                                                                                    </label>
                                                                                 </div>
                                                                             </div>
-                                                                        @endif
+                                                                        </div>
+                                                                    @endif
                                                                 @endforeach
                                                             </div>
                                                         </div>

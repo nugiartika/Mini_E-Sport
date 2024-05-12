@@ -8,6 +8,9 @@
     <title>Tournament - HummaEsport</title>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+    <!-- Bootstrap JS -->
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
     @include('admin.layouts.meta')
@@ -43,8 +46,14 @@
     </script>
     @yield('style')
 
+
 </head>
 <style>
+    /* .white-text .note-editable {
+        color: white !important;
+        background-color: #fff;
+    } */
+
     h1 {
         text-align: center;
         color: white;
@@ -414,12 +423,11 @@
                             <div class="tab">
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Deskripsi</label>
-                                    <textarea name="description" placeholder="Jelaskan deskripsi turnamennya" id="summernoteModalDescription"
-                                        class="form-control" aria-label="With textarea">{{ old('description') }}</textarea>
-
-                                    @error('description')
+                                    <textarea name="description" id="custom-summernote" class="custom-summernote"
+                                        aria-label="With textarea">{{ old('description') }}</textarea>
+                                    {{-- @error('description')
                                         <p class="text-danger">{{ $message }}</p>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                                 <div class="mb-3">
                                     <label for="rule" class="form-label">Aturan Main</label>
@@ -825,6 +833,68 @@
             });
         });
     </script>
+
+    <!-- Script Tambahan -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+
+
+    {{-- <script>
+        $(document).ready(function() {
+            $('.custom-summernote').summernote({
+                placeholder: 'Isi content...',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+
+            $('#summernoteModal1').summernote({
+                placeholder: 'Isi content...',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        });
+    </script> --}}
+    <script>
+     $(document).ready(function() {
+        $('.custom-summernote').summernote({
+             placeholder: 'Hello stand alone ui',
+             tabsize: 2,
+             height: 120,
+             toolbar: [
+               ['style', ['style']],
+               ['font', ['bold', 'underline', 'clear']],
+               ['color', ['color']],
+               ['para', ['ul', 'ol', 'paragraph']],
+               ['table', ['table']],
+               ['insert', ['link', 'picture', 'video']],
+               ['view', ['fullscreen', 'codeview', 'help']]
+             ]
+           });
+         });
+   </script>
 
 
 </body>

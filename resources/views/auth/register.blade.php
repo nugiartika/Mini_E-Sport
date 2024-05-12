@@ -41,7 +41,7 @@
                             {{-- <img class="w-100 logo2" src="{{ asset('asset/img/Huuma-04.png') }}" alt="logo"> --}}
                         </a>
                     </div>
-                    <div class="navbar-toggle-item w-100 position-lg-relative">
+                    {{-- <div class="navbar-toggle-item w-100 position-lg-relative">
                         <ul class="custom-nav gap-3 gap-lg-7 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
                                 <a href="{{ route('index') }}">HOME</a>
@@ -58,8 +58,14 @@
                             </li>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </nav>
+                <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
+                    <li class="menu-link">
+                        <a href="{{ route('index') }}"
+                        class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Kembali</a>                        </li>
+                    </li>
+                </ul>
             </div>
         </div>
     </header>
@@ -122,7 +128,7 @@
                         </form>
 
                         <p class="tcn-4 text-center mt-lg-10 mt-6">Sudah Mempunyai Akun ? <a
-                                href="{{ route('login') }}" class="text-decoration-underline tcp-1">Gabung</a></p>
+                                href="{{ route('login') }}" class="text-decoration-underline tcp-1">Masuk</a></p>
                     </div>
                 </div>
             </div>

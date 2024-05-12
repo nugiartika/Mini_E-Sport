@@ -43,7 +43,7 @@
                             <img class="w-100 logo1" src="{{ asset('assets/img/humma-01.png') }}" alt="favicon">
                         </a>
                     </div>
-                    <div class="navbar-toggle-item w-100 position-lg-relative">
+                    {{-- <div class="navbar-toggle-item w-100 position-lg-relative">
                         <ul class="custom-nav gap-3 gap-lg-7 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
                                 <a href="{{ route('index') }}">HOME</a>
@@ -61,8 +61,14 @@
 
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </nav>
+                <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
+                    <li class="menu-link">
+                        <a href="{{ route('index') }}"
+                        class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Kembali</a>                        </li>
+                    </li>
+                </ul>
             </div>
         </div>
     </header>
@@ -74,7 +80,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="form-area">
-                        <h1 class="tcn-1 text-center cursor-scale growUp mb-10">Login</h1>
+                        <h1 class="tcn-1 text-center cursor-scale growUp mb-10">Masuk</h1>
                         <form action="{{ route('login') }}" class="sign-in-form" method="POST">
                             @csrf
                             <div class="single-input mb-3">
@@ -95,11 +101,11 @@
 
 
                             <div class="text-center">
-                                <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Login</button>
+                                <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Masuk</button>
                             </div>
                         </form>
                         <p class="tcn-4 text-center mt-lg-10 mt-6">Belum Mempunyai Akun ? <a
-                                href="{{ route('register') }}" class="text-decoration-underline tcp-1">Register</a></p>
+                                href="{{ route('register') }}" class="text-decoration-underline tcp-1">Daftar</a></p>
                     </div>
                 </div>
             </div>

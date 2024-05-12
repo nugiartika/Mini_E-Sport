@@ -49,7 +49,7 @@
                     <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                         <li class="menu-link">
                             <a href="{{ route('login') }}"
-                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Gabung</a>                        </li>
+                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Masuk</a>                        </li>
                         </li>
                     </ul>
 

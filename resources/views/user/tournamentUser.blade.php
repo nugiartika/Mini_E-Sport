@@ -186,11 +186,10 @@
                                         </center>
                                     </div>
                                     <div class="d-flex justify-content-center">
-
                                         {{-- <a href="{{ route('teams.create', ['tournament_id' => $tournament->id]) }}"
                                             type="button" class="btn btn-secondary me-2" data-bs-toggle="modal"
                                             data-bs-target="#existing" data-bs-dismiss="modal">Existing Team</a> --}}
-                                            <a href="#" class="btn btn-secondary me-2"
+                                        <a href="#" class="btn btn-secondary me-2"
                                             data-bs-toggle="modal" data-bs-target="#existing" data-bs-dismiss="modal"
                                             data-tournament-id="{{ $tournament->id }}">Tim Lama</a>
 

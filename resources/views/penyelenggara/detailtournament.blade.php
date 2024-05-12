@@ -483,6 +483,69 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tabitem">
+                                <div class="row g-6">
+                                    <div class="accordion-section rule-accordion d-grid gap-6">
+                                        <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
+                                            <h5 class="acc-header-area">
+                                                <button
+                                                    class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
+                                                    type="button">
+                                                    DESKRIPSI
+                                                </button>
+                                            </h5>
+                                            <div class="acc-content-area">
+                                                <div class="content-body mt-lg-6 mt-4">
+                                                    <p class="tcn-6">
+                                                        {!! $tournament->description !!}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
+                                            <h5 class="acc-header-area">
+                                                <button
+                                                    class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
+                                                    type="button">
+                                                    RULES
+                                                </button>
+                                            </h5>
+                                            <div class="acc-content-area">
+                                                <div class="content-body mt-lg-6 mt-4">
+                                                    <p class="tcn-6">
+                                                        {{ $tournament->rule }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
+                                            <h5 class="acc-header-area">
+                                                <button
+                                                    class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
+                                                    type="button">
+                                                    CONTACT PERSON
+                                                </button>
+                                            </h5>
+                                            <div class="acc-content-area">
+                                                <div class="content-body mt-lg-6 mt-4">
+                                                    <p class="tcn-6">
+                                                        {{ $tournament->contact }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+    @endforeach
+    </div>
+    </section>
+    <!-- tournament more details section end -->
 
                                         <div class="tabitem">
                                             <div class="row g-6 gy-md-10">
