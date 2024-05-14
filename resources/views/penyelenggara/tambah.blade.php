@@ -11,7 +11,7 @@
 
     <!-- Bootstrap JS -->
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script> --}}
         <meta charset="utf-8" />
         <meta name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -50,8 +50,36 @@
         <!-- End Google Tag Manager -->
 
 
+<!-- Icons -->
+<link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+<link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css"/>
+<link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com/">
+<!-- Core CSS -->
+<link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+<link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+<link rel="stylesheet" href="../../assets/css/demo.css" />
+
+<!-- Vendors CSS -->
+<link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
+
+<!-- Page CSS -->
+
+
+<!-- Helpers -->
+<script src="../../assets/vendor/js/helpers.js"></script>
+<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+<!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+<script src="../../assets/vendor/js/template-customizer.js"></script>
+<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<script src="../../assets/js/config.js"></script>
+
+        {{-- <link rel="preconnect" href="https://fonts.googleapis.com/">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
         <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
@@ -76,16 +104,16 @@
         <link rel="stylesheet"
             href="{{ asset('demo/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar7358.css?id=280196ccb54c8ae7e29ea06932c9a4b6') }}" />
         <link rel="stylesheet"
-            href="{{ asset('demo/assets/vendor/libs/typeahead-js/typeaheadb5e1.css?id=2603197f6b29a6654cb700bd9367e2a3') }}" />
+            href="{{ asset('demo/assets/vendor/libs/typeahead-js/typeaheadb5e1.css?id=2603197f6b29a6654cb700bd9367e2a3') }}" /> --}}
 
         <!-- Vendor Styles -->
-        <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+        {{-- <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
 
         <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
         <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
 
-        <script src="{{ asset('demo/assets/js/config.js') }}"></script>
+        <script src="{{ asset('demo/assets/js/config.js') }}"></script> --}}
 
         <script>
             window.templateCustomizer = new TemplateCustomizer({
@@ -120,10 +148,9 @@
 
 </head>
 <style>
-    /* .white-text .note-editable {
+    .custom-summernote {
         color: white !important;
-        background-color: #fff;
-    } */
+    }
 
     h1 {
         text-align: center;
@@ -146,6 +173,9 @@
         width: 100%;
         font-size: 17px;
         border: 1px solid #aaaaaa;
+    }
+    textarea{
+        color: #ffffff;
     }
 
     /* Mark input boxes that gets an error on validation: */
@@ -181,7 +211,6 @@
     }
 
     .card {
-
         background-color: rgb(25, 27, 31);
         border-radius: 15px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -488,14 +517,34 @@
                                 </div>
                             </div>
                             <div class="tab">
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="description" class="form-label">Deskripsi</label>
-                                    <textarea name="description" id="custom-summernote" class="custom-summernote"
+                                    <textarea name="description" id="full-editor" class="custom-summernote"
                                         aria-label="With textarea">{{ old('description') }}</textarea>
-                                    {{-- @error('description')
+                                    @error('description')
                                         <p class="text-danger">{{ $message }}</p>
-                                    @enderror --}}
-                                </div>
+                                    @enderror
+                                </div> --}} 
+                                <div class="row">
+                                    <!-- Full Editor -->
+                                    <div class="col-12">
+                                      <div class="card">
+                                        <h5 class="card-header">Full Editor</h5>
+                                        <div class="card-body">
+                                          <div id="full-editor">
+                                            <h6>Quill Rich Text Editor</h6>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- /Full Editor -->
+                                  </div>
+
+
+
+
+
+
                                 <div class="mb-3">
                                     <label for="rule" class="form-label">Aturan Main</label>
                                     <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen"
@@ -719,7 +768,7 @@
         </div>
     </footer> --}}
 
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- gsap  -->
     <script src="{{ asset('assets/js/gsap.min.js') }}"></script>
     <!-- gsap scroll trigger -->
@@ -762,7 +811,41 @@
 
     <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
 
-    <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script>
+    <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script> --}}
+
+
+    <div class="buy-now">
+        <a href="https://1.envato.market/vuexy_admin" target="_blank" class="btn btn-danger btn-buy-now">Buy Now</a>
+      </div>
+
+
+
+
+      <!-- Core JS -->
+      <!-- build:js assets/vendor/js/core.js -->
+
+      <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+      <script src="../../assets/vendor/libs/popper/popper.js"></script>
+      <script src="../../assets/vendor/js/bootstrap.js"></script>
+      <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
+      <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+      <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+      <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+      <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+       <script src="../../assets/vendor/js/menu.js"></script>
+
+      <!-- endbuild -->
+
+      <!-- Vendors JS -->
+      <script src="../../assets/vendor/libs/quill/katex.js"></script>
+    <script src="../../assets/vendor/libs/quill/quill.js"></script>
+
+      <!-- Main JS -->
+      <script src="../../assets/js/main.js"></script>
+
+
+      <!-- Page JS -->
+      <script src="../../assets/js/forms-editors.js"></script>
 
     @yield('script')
 
@@ -901,12 +984,10 @@
 
     <!-- Script Tambahan -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+    </script> --}}
 
 
     {{-- <script>
@@ -945,7 +1026,7 @@
     <script>
      $(document).ready(function() {
         $('.custom-summernote').summernote({
-             placeholder: 'Hello stand alone ui',
+             placeholder: 'Isi deskripsi tournament',
              tabsize: 2,
              height: 120,
              toolbar: [
@@ -956,7 +1037,12 @@
                ['table', ['table']],
                ['insert', ['link', 'picture', 'video']],
                ['view', ['fullscreen', 'codeview', 'help']]
-             ]
+             ],
+             callbacks: {
+                onChange: function(contents, $editable) {
+                    $('.custom-summernote .note-editable').css('color', 'white'); // Mengatur warna teks menjadi putih
+                }
+            }
            });
          });
    </script>

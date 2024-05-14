@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('DashboardUser', [DashboardUserController::class, 'index'])->name('dashboardUser');
         Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
         Route::get('tournamentUser/history', [TournamentController::class, 'history'])->name('user.tournament.history');
+        Route::get('/tournamentfilter', [TournamentController::class, 'filteruser'])->name('tournament.filteruser');
     });
 });
 

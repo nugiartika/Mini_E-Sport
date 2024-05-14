@@ -8,6 +8,12 @@
     <title>Register Humma Esport</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .black-select {
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -63,7 +69,8 @@
                 <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                     <li class="menu-link">
                         <a href="{{ route('index') }}"
-                        class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Kembali</a>                        </li>
+                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Kembali</a>
+                    </li>
                     </li>
                 </ul>
             </div>
@@ -106,16 +113,16 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
 
-                            <div class="form-group single-input mb-3">
-                                <select id="role"
-                                    class="form-select select2-selection__arrow @error('role') is-invalid @enderror"
-                                    name="role">
-                                    <option value="" selected>Pilih Role</option>
-                                    <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
-                                    <option value="organizer" {{ old('role') == 'organizer' ? 'selected' : '' }}>
-                                        Penyelenggara</option>
-                                </select>
-                            </div>
+                            {{-- <div class="form-group single-input mb-3"> --}}
+                            <select id="role"
+                                class="single-input mb-3 select2-selection__arrow black-select @error('role') is-invalid @enderror"
+                                name="role">
+                                {{-- <option value="" selected>Pilih Role</option> --}}
+                                <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                                <option value="organizer" {{ old('role') == 'organizer' ? 'selected' : '' }}>
+                                    Penyelenggara</option>
+                            </select>
+                            {{-- </div> --}}
                             @error('role')
                                 <div class="invalid-feedback">
                                     {{ $message }}

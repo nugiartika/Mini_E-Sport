@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tournaments', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            Schema::create('tournaments', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
             $table->date('pendaftaran');
             $table->date('permainan');
             $table->date('end_pendaftaran');

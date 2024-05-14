@@ -9,15 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('team_tournaments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('team_id')->constrained();
-            $table->foreignId('tournament_id')->constrained();
-            $table->timestamps();
-        });
-    }
+        public function up(): void
+        {
+                Schema::create('team_tournaments', function (Blueprint $table) {
+                    $table->id();
+                    $table->foreignId('team_id')->constrained();
+                    $table->foreignId('tournament_id')->constrained();
+                    $table->timestamps();
+                });
+        }
 
     /**
      * Reverse the migrations.

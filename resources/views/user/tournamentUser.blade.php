@@ -2,6 +2,18 @@
 @extends('user.layouts.app')
 @section('style')
 <style>
+    .saring-btn {
+        width: 100px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        border: 2px solid #7367f0 ; /* Warna border */
+        border-radius: 20px; /* Bentuk border */
+        background-color: #7367f0; /* Warna latar belakang */
+        transition: background-color 0.3s ease; /* Transisi warna latar belakang */
+    }
     .custom-btn {
         width: 100px;
         height: 40px;
@@ -54,11 +66,52 @@
 </style>
 @endsection
 @section('content')
+<div class="modal" tabindex="-1" id="filter" style="color: #ffffff;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-split">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Filter</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('tournament.filteruser') }}" method="GET">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="widget-title"><b>Category</b></h4>
+                        <button type="submit" class="btn btn-primary"
+                            style="background-color:#7367f0; border:none;">Saring</button>
+                    </div>
+                    @php
+                        $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
+                    @endphp
+                    @foreach ($category as $categories)
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input"
+                                id="category{{ $categories->id }}" name="categories_id[]"
+                                value="{{ $categories->id }}"
+                                @if (in_array($categories->id, (array) $selectedCategories)) checked @endif>
+                            <label class="form-check-label" for="category{{ $categories->id }}">
+                                {{ $categories->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="tabcontents">
         <div class="tabitem active">
             <div class="row justify-content-md-start justify-content-center g-6">
+                <div class="singletab tournaments-tab">
+                    <div class="d-flex align-items-center gap-6 flex-wrap mb-lg-5 mb-sm-3 mb-2" style="margin-left: 30px; margin-top: 10px; width: 100px; height: 40px;">
+                        <button class="saring-btn"
+                        data-toggle="tooltip" data-bs-toggle="modal"
+                            data-bs-target="#filter">Saring</button>
+                    </div>
+                </div>
 
-                @foreach ($tournaments->where('status', 'accepted') as $index => $tournament)
+                @forelse ($tournaments->where('status', 'accepted') as $index => $tournament)
                     <div class="col-xl-4 col-md-6 col-sm-10">
                         <div class="card h-100">
 
@@ -101,6 +154,7 @@
                                     </div>
 
                                     @php
+                                        // $teams = Team
                                         $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
                                         $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
                                         $totalTeams =
@@ -135,7 +189,6 @@
                                             </div>
                                         </div>
 
-
                                         @elseif (!$totalTeams)
                                         <div class="text-center">
                                             <div class="custom-btn"
@@ -146,9 +199,7 @@
                                         </div>
 
                                         @elseif ($totalTeams)
-                                            {{-- user sudah terdaftar --}}
                                         @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
-                                            {{-- Jika jumlah tim sama dengan slot tim, tidak ada tindakan yang diambil --}}
                                         @endif
 
                                         <!-- Tombol Detail Tournament -->
@@ -186,12 +237,13 @@
                                         </center>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        {{-- <a href="{{ route('teams.create', ['tournament_id' => $tournament->id]) }}"
+
+                                        <a href="{{ route('teams.create', ['tournament_id' => $tournament->id]) }}"
                                             type="button" class="btn btn-secondary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#existing" data-bs-dismiss="modal">Existing Team</a> --}}
-                                        <a href="#" class="btn btn-secondary me-2"
+                                            data-bs-target="#existing" data-bs-dismiss="modal">Existing Team</a>
+                                            {{-- <a href="#" class="btn btn-secondary me-2"
                                             data-bs-toggle="modal" data-bs-target="#existing" data-bs-dismiss="modal"
-                                            data-tournament-id="{{ $tournament->id }}">Tim Lama</a>
+                                            data-tournament-id="{{ $tournament->id }}">Tim Lama</a> --}}
 
                                         <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                             type="button" class="btn btn-primary">Tim Baru</a>
@@ -265,7 +317,17 @@
                                 </div>
                             </div>
                         </div>
-                @endforeach
+                @empty
+                <div class="col-lg-12">
+                    <center>
+                        <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                        style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+                    </center>
+                    <h1 class="table-light" style="text-align: center;">
+                        Data Tidak Tersedia
+                    </h1>
+                </div>
+            @endforelse
 
 
 
