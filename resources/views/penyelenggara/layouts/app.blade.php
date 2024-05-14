@@ -86,7 +86,7 @@
 
 
             <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
-            <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
+            {{-- <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script> --}}
 
             <script src="{{ asset('demo/assets/js/config.js') }}"></script>
 
@@ -140,7 +140,7 @@
                     <div class="container-xxl flex-grow-1 container-p-y" >
                         <!-- Content -->
                         @yield('content')
-                      
+
 
                         <!-- / Content -->
                     </div>

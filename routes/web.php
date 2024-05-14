@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\TeamTournamentController;
 use App\Http\Controllers\DetailTournamentController;
 use App\Http\Controllers\RegisterOrganizerController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('tournamentUser/history', [TournamentController::class, 'history'])->name('user.tournament.history');
     });
 });
+
+Route::resource('transaction', TransactionController::class)->parameters([
+    'transaksi' => 'transaksi:slug'
+]);
 
 // Public Routes
 // Route::get('/teams.create', [TeamController::class, 'createId'])->name('team.createId');

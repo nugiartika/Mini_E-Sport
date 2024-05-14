@@ -83,14 +83,15 @@
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="mb-0">
                         @csrf
-                        <li>
-                            <a class="dropdown-item" href="javascript:;"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="ti ti-login me-2"></i>
-                                <span class="align-middle">Keluar</span>
-                            </a>
-                        </li>
                     </form>
+
+                    <li>
+                        <a class="dropdown-item" href="javascript:void(0)"
+                            onclick="document.getElementById('logout-form').submit();">
+                            <i class="ti ti-login me-2"></i>
+                            <span class="align-middle">Keluar</span>
+                        </a>
+                    </li>
 
                 </ul>
             </li>

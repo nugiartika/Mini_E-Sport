@@ -16,7 +16,7 @@
                 <div class="swiper-slide">
                     <div class="card-3d d-grid justify-content-center p-3">
                         <div class="img-area w-100 mb-8 position-relative">
-                            <img class="w-100" src="{{ asset('storage/' . $index->photo) }}" alt="game">
+                            <img class="w-100" src="{{ asset('storage/' . $tournament->photo) }}" alt="game">
                             <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
                                 <span class="dot-icon alt-icon ps-3">Playing</span>
                             </span>

@@ -20,6 +20,10 @@ class TeamTournament extends Model
     }
     public function team()
     {
-        return $this->belongsTo(Team::class);
+        return $this->hasOne(Team::class);
+    }
+    public function toTeam()
+    {
+        return $this->belongsTo(Team::class, 'team_id', 'id');
     }
 }

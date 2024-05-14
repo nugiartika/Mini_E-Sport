@@ -30,7 +30,7 @@
             href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
 
 
-        <!-- Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
+        {{-- <!-- Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
         <script>
             (function(w, d, s, l, i) {
                 w[l] = w[l] || [];
@@ -47,7 +47,7 @@
                 f.parentNode.insertBefore(j, f);
             })(window, document, 'script', 'dataLayer', 'GTM-5J3LMKC');
         </script>
-        <!-- End Google Tag Manager -->
+        <!-- End Google Tag Manager --> --}}
 
 
 
@@ -83,11 +83,11 @@
 
 
         <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
-        <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
+        {{-- <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script> --}}
 
         <script src="{{ asset('demo/assets/js/config.js') }}"></script>
 
-        <script>
+        {{-- <script>
             window.templateCustomizer = new TemplateCustomizer({
                 cssPath: '',
                 themesPath: '',
@@ -114,7 +114,7 @@
                     "themes"
                 ],
             });
-        </script>
+        </script> --}}
          @yield('style')
 
 
@@ -762,7 +762,7 @@
 
     <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
 
-    <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script>
+    {{-- <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script> --}}
 
     @yield('script')
 
@@ -902,8 +902,8 @@
     <!-- Script Tambahan -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"> --}}
     </script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>

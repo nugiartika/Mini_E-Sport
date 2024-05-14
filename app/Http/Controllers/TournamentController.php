@@ -96,84 +96,6 @@ class TournamentController extends Controller
      */
     public function store(TournamentRequest $request)
     {
-<<<<<<< Updated upstream
-        // try {
-        $user = Auth::user();
-
-        $description = $request->description;
-
-        if (!empty($description)) {
-            $dom = new \DomDocument();
-            $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-            $images = $dom->getElementsByTagName('img');
-            foreach ($images as $k => $img) {
-                $data = $img->getAttribute('src');
-                list($type, $data) = explode(';', $data);
-                list(, $data) = explode(',', $data);
-                $data = base64_decode($data);
-
-                $image_name = "/uploads" . time() . $k . '.png';
-                $path = public_path() . $image_name;
-                file_put_contents($path, $data);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $image_name);
-
-                // $image_name = "uploads/" . time() . $k . '.png';
-                // Storage::put($image_name, $data);
-
-                // $img->removeAttribute('src');
-                // $img->setAttribute('src', Storage::url($image_name));
-            }
-            $description = $dom->saveHTML();
-        }
-
-
-        // Proses gambar
-        $gambar = $request->file('images');
-        $path_gambar = null;
-
-        $amount = collect($request->input('jumlah'));
-        $dataPrize = collect($request->input('prize'))->map(function ($item, $index) use ($amount) {
-            $data['item'] = $item;
-
-            if ($item === 'uang') {
-                $data['nominal'] = (int) $amount[$index];
-            }
-
-            return $data;
-        });
-
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('tournament', $gambar);
-        }
-
-        $tournament = Tournament::create([
-            'name' => $request->input('name'),
-            'pendaftaran' => $request->input('pendaftaran'),
-            'permainan' => $request->input('permainan'),
-            'end_pendaftaran' => $request->input('end_pendaftaran'),
-            'end_permainan' => $request->input('end_permainan'),
-            'categories_id' => $request->input('categories_id'),
-            'users_id' => $user->id,
-            'slotTeam' => $request->input('slotTeam'),
-            'contact' => $request->input('contact'),
-            'images' => $path_gambar,
-            'description' => $description,
-            'rule' => $request->input('rule'),
-            'paidment' => $request->input('paidment'),
-            'nominal' => $request->input('nominal'),
-            'status' => 'pending',
-            'prize' => $request->input('prize'),
-            'note' => $request->input('note')
-        ]);
-        // dd($tournament);
-        return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
-        // } catch (\Exception $e) {
-        // Tangani kesalahan
-        // dd($e->getMessage());
-        // }
-=======
         // dd($request);
         try {
 
@@ -210,7 +132,6 @@ class TournamentController extends Controller
             // Tangani kesalahan
             dd($e->getMessage());
         }
->>>>>>> Stashed changes
     }
 
     public function filter(Request $request)
