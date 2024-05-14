@@ -2,7 +2,11 @@
 
 @section('content')
 <style>
-    jh1 {
+    .custom-summernote {
+        color: white !important;
+    }
+
+    h1 {
         text-align: center;
         color: white;
     }
@@ -23,6 +27,9 @@
         width: 100%;
         font-size: 17px;
         border: 1px solid #aaaaaa;
+    }
+    textarea{
+        color: #ffffff;
     }
 
     /* Mark input boxes that gets an error on validation: */
@@ -57,7 +64,6 @@
     }
 
     .card {
-
         background-color: rgb(25, 27, 31);
         border-radius: 15px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -347,12 +353,19 @@
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="rule" class="form-label">Aturan Main</label>
-                                        <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen"
-                                            class="form-control" aria-label="With textarea">{{ old('rule') }}</textarea>
+                                    <!-- /Full Editor -->
+                                  </div>
 
-                                        @error('rule')
+
+
+
+
+
+                                <div class="mb-3">
+                                    <label for="rule" class="form-label">Aturan Main</label>
+                                    <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen"
+                                        class="form-control" aria-label="With textarea">{{ old('rule') }}</textarea>
+
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>

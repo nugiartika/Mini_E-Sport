@@ -538,21 +538,75 @@
         </div>
     </div>
 
-
     <script>
-        // Memeriksa apakah link telah disimpan di localStorage
-        var savedLink = localStorage.getItem('savedBracketLink');
-        if (savedLink) {
-            document.getElementById('dynamicLink').href = savedLink;
-            document.getElementById('dynamicLink').textContent = savedLink;
+        var currentTab = 0; // Saat ini tab yang ditampilkan
+        showTab(currentTab); // Tampilkan tab saat ini
+
+        function showTab(n) {
+            // Ambil semua tab dan sembunyikan mereka
+            var tabs = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = "none";
+            }
+
+            // Tampilkan tab yang sesuai
+            tabs[n].style.display = "block";
+
+            // Perbarui tombol Next/Previous sesuai dengan tab yang ditampilkan
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (tabs.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+
+            // Perbarui langkah indikator
+            fixStepIndicator(n);
         }
 
-        // Menyimpan link ke localStorage saat tombol "Simpan" ditekan
-        document.getElementById('saveLinkBtn').addEventListener('click', function() {
-            var bracketLink = document.getElementById('bracketLinkInput').value;
-            document.getElementById('dynamicLink').href = bracketLink;
-            document.getElementById('dynamicLink').textContent = bracketLink;
-            localStorage.setItem('savedBracketLink', bracketLink); // Menyimpan link ke localStorage
-        });
+        function nextPrev(n) {
+            var tabs = document.getElementsByClassName("tab");
+            // Cek validasi form sebelum pindah ke tab berikutnya
+            if (n == 1 && !validateForm()) {
+                // Tambahkan pesan kesalahan atau tindakan lain jika validasi gagal
+                alert("Harap isi semua bidang sebelum melanjutkan.");
+                return false;
+            }
+
+            // Sembunyikan tab saat ini dan tampilkan yang berikutnya
+            tabs[currentTab].style.display = "none";
+            currentTab = currentTab + n;
+
+            // Jika sudah mencapai akhir form, submit form
+            if (currentTab >= tabs.length) {
+                // Menghubungkan formulir ke route ptournament.jadwal saat formulir disubmit
+                document.getElementById("regForm").submit(); // Submit formulir
+                return false;
+            }
+
+            // Tampilkan tab yang sesuai
+            showTab(currentTab);
+        }
+
+
+        function validateForm() {
+            // Cek validasi form pada setiap tab di sini (jika diperlukan)
+            return true; // Kembalikan true jika form valid
+        }
+
+        function fixStepIndicator(n) {
+            // Ambil semua langkah indikator dan tandai langkah saat ini sebagai selesai
+            var steps = document.getElementsByClassName("step");
+            for (var i = 0; i < steps.length; i++) {
+                if (i <= n) {
+                    steps[i].className = steps[i].className.replace(" active", "");
+                }
+            }
+            steps[n].className += " active"; // Tandai langkah saat ini sebagai aktif
+        }
     </script>
 @endsection

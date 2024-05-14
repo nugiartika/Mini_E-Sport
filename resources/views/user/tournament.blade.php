@@ -273,7 +273,7 @@
                                                             <a type="button"
                                                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
                                                                 data-toggle="modal"
-                                                                data-target="#exampleModalCenter">Join</a>
+                                                                data-target="#exampleModalCenter">Daftar</a>
                                                         </div>
                                                     @elseif (!$totalTeams)
                                                         <div class="text-end ms-8">
@@ -284,7 +284,7 @@
                                                             <a type="button"
                                                                 class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
                                                                 data-toggle="modal"
-                                                                data-target="#exampleModalCenter">Join</a>
+                                                                data-target="#exampleModalCenter">Daftar</a>
                                                         </div>
                                                     @elseif ($totalTeams)
                                                         {{-- user sudah terdaftar --}}
