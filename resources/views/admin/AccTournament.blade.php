@@ -22,7 +22,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Status</th>
+                        <th>Mulai Game</th>
                         <th>Aksi</th>
                         <th>Detail</th>
                     </tr>
@@ -34,7 +34,8 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td> <span class="fw-medium">{{ $tournament->name }}</span></td>
-                            <td><span class="badge bg-label-primary me-1">{{ $tournament->status }}</span></td>
+                            <td><span class="badge bg-label-primary me-1">
+                                {{ $tournament->permainan }}</span></td>
                             <td>
                                 <form id="updateForm{{ $tournament->id }}"
                                     action="{{ route('konfirm.update', $tournament->id) }}" method="POST">
@@ -42,13 +43,13 @@
                                     @method('PUT')
                                     <div class="radio-button">
                                         <span class="badge bg-label-danger me-1">
-                                            <label for="rejected{{ $tournament->id }}">Rejected</label>
+                                            <label for="rejected{{ $tournament->id }}">Tolak</label>
                                             <input type="radio" id="rejected{{ $tournament->id }}" name="status"
                                                 value="rejected" {{ $tournament->status == 'rejected' ? 'checked' : '' }}>
                                         </span>
 
                                         <span class="badge bg-label-success me-1">
-                                            <label for="accepted{{ $tournament->id }}">Accepted</label>
+                                            <label for="accepted{{ $tournament->id }}">Terima</label>
                                             <input type="radio" id="accepted{{ $tournament->id }}" name="status"
                                                 value="accepted" {{ $tournament->status == 'accepted' ? 'checked' : '' }}>
                                         </span>
@@ -60,69 +61,29 @@
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="reasonModalLabel">Reason for Rejection</h5>
+                                                    <h5 class="modal-title" id="reasonModalLabel">Alasan Tournament Ditolak</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <textarea class="form-control" id="reason{{ $tournament->id }}"
-                                                        name="reason" rows="3" placeholder="Alasan penolakan"></textarea>
+                                                    <textarea class="form-control" id="reason{{ $tournament->id }}" name="reason" rows="3"
+                                                        placeholder="Alasan penolakan"></textarea>
                                                 </div>
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                        data-bs-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
-                                {{-- <td>
-                                    <form id="updateForm{{ $tournament->id }}" action="{{ route('konfirm.update', $tournament->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="radio-button">
-                                            <span class="badge bg-label-danger me-1">
-                                                <label for="rejected{{ $tournament->id }}">Rejected</label>
-                                                <input type="radio" id="rejected{{ $tournament->id }}" name="status"
-                                                    value="rejected" {{ $tournament->status == 'rejected' ? 'checked' : '' }}>
-                                            </span>
-
-                                            <span class="badge bg-label-success me-1">
-                                                <label for="accepted{{ $tournament->id }}">Accepted</label>
-                                                <input type="radio" id="accepted{{ $tournament->id }}" name="status"
-                                                    value="accepted" {{ $tournament->status == 'accepted' ? 'checked' : '' }}>
-                                            </span>
-                                        </div>
-
-                                        <!-- Modal untuk input alasan penolakan -->
-                                        <div id="reasonModal{{ $tournament->id }}" class="modal fade" tabindex="-1"
-                                            aria-labelledby="reasonModalLabel{{ $tournament->id }}" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="reasonModalLabel{{ $tournament->id }}">Reason for Rejection</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <textarea class="form-control" id="reason{{ $tournament->id }}"
-                                                            name="reason" rows="3" placeholder="Alasan penolakan"></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" id="submitReason{{ $tournament->id }}" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                            </td> --}}
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $tournament->id }}">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal{{ $tournament->id }}">
 
-                                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"> --}}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                         viewBox="0 0 32 32">
@@ -143,7 +104,7 @@
                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
                                         style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
                                     <h1 class="table-light" style="text-align: center;">
-                                        Data Tidak Tersedia
+                                        Data Kosong
                                     </h1>
                                 </div>
                             </td>
@@ -157,8 +118,9 @@
 
 @section('script')
     @foreach ($tournaments as $tournament)
-    <div class="modal fade" id="exampleModal{{ $tournament->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $tournament->id }}" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal fade" id="exampleModal{{ $tournament->id }}" tabindex="-1"
+            aria-labelledby="exampleModalLabel{{ $tournament->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Tournamnent</h1>
@@ -188,12 +150,16 @@
                                                 <span id="detail-gender" style="font-weight: normal;">
                                                     {{ $tournament->pendaftaran }}</span>
                                             </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup :
+                                            <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup : {{ $tournament->end_pendaftaran }}
                                                 <span id="detail-national_student_id" style="font-weight: normal;"></span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
                                                     {{ $tournament->permainan }}</span>
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
+                                                <span id="detail-student_identity_number" style="font-weight: normal;">
+                                                    {{ $tournament->end_permainan }}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -231,11 +197,11 @@
         </div>
     @endforeach
 
-<!-- Bootstrap JS -->
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> --}}
 
-{{-- <script>
+    {{-- <script>
     $(document).ready(function() {
         $('input[type=radio][name=status]').change(function() {
             if (this.value === 'rejected') {
@@ -262,38 +228,31 @@
 </script> --}}
 
 
-<!-- Bootstrap JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 
-<!-- Modifikasi JavaScript -->
-<script>
-  $(document).ready(function() {
-    $('input[type=radio][name=status]').change(function() {
-        if (this.value === 'accepted') {
-            // Directly submit the form for 'accepted' status
-            $(this).closest('form').submit();
-        } else if (this.value === 'rejected') {
-            var modalId = '#reasonModal' + $(this).closest('form').attr('id').substring(10);
-            $(modalId).modal('show');
+    <!-- Modifikasi JavaScript -->
+    <script>
+        $(document).ready(function() {
+            $('input[type=radio][name=status]').change(function() {
+                if (this.value === 'accepted') {
+                    // Directly submit the form for 'accepted' status
+                    $(this).closest('form').submit();
+                } else if (this.value === 'rejected') {
+                    var modalId = '#reasonModal' + $(this).closest('form').attr('id').substring(10);
+                    $(modalId).modal('show');
 
-            // Submit reason form
-            $(modalId).find('.btn-primary').click(function() {
-                var reason = $(modalId).find('.form-control').val();
-                if (reason.trim() !== '') {
-                    $(modalId).find('.form-control').val(reason);
-                    $(modalId).find('form').submit();
+                    // Submit reason form
+                    $(modalId).find('.btn-primary').click(function() {
+                        var reason = $(modalId).find('.form-control').val();
+                        if (reason.trim() !== '') {
+                            $(modalId).find('.form-control').val(reason);
+                            $(modalId).find('form').submit();
+                        }
+                    });
                 }
             });
-        }
-    });
-});
-
-
-</script>
-
-
-
-
-
+        });
+    </script>

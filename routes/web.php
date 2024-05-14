@@ -59,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/DashboardOrganizer', [TournamentController::class, 'dashboard'])->name('dashboardPenyelenggara');
         Route::resource('ptournament', TournamentController::class);
         Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');
+        Route::get('/NotifikasiTournament', [TournamentController::class, 'notification'])->name('notificationTournament');
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
         Route::post('/jadwal/{id}', [JadwalController::class, 'jadwal'])->name('ptournament.jadwal');
         Route::post('/bracket/{id}', [BracketController::class, 'bracket'])->name('ptournament.bracket');

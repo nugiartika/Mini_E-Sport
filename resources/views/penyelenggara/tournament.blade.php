@@ -13,153 +13,122 @@
     <!-- Bootstrap JS -->
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-        <meta charset="utf-8" />
-        <meta name="viewport"
-            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-        <title>
-            Dashboard Penyelenggara
-        </title>
-        <meta name="description" content="Start your development with a Dashboard for Bootstrap 5" />
-        <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
-        <!-- laravel CRUD token -->
-        <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
-        <!-- Canonical SEO -->
-        <link rel="canonical" href="https://1.envato.market/vuexy_admin">
-        <!-- Favicon -->
-        <link rel="icon" type="image/x-icon"
-            href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
-
-
-        <!-- Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-        <script>
-            (function(w, d, s, l, i) {
-                w[l] = w[l] || [];
-                w[l].push({
-                    'gtm.start': new Date().getTime(),
-                    event: 'gtm.js'
-                });
-                var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s),
-                    dl = l != 'dataLayer' ? '&l=' + l : '';
-                j.async = true;
-                j.src =
-                    '{{ asset('') }}www.googletagmanager.com/gtm5445.html?id=' + i + dl;
-                f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-5J3LMKC');
-        </script>
-        <!-- End Google Tag Manager -->
+    <title>
+        Dashboard Penyelenggara
+    </title>
+    <meta name="description" content="Start your development with a Dashboard for Bootstrap 5" />
+    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+    <!-- laravel CRUD token -->
+    <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://1.envato.market/vuexy_admin">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon"
+        href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
 
 
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
+        rel="stylesheet">
 
-        <link rel="preconnect" href="https://fonts.googleapis.com/">
-        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
-            rel="stylesheet">
+    <link rel="stylesheet"
+        href="{{ asset('demo/assets/vendor/fonts/tabler-iconsea04.css?id=6ad8bc28559d005d792d577cf02a2116') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('demo/assets/vendor/fonts/fontawesome8a69.css?id=a2997cb6a1c98cc3c85f4c99cdea95b5') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('demo/assets/vendor/fonts/flag-icons80a8.css?id=121bcc3078c6c2f608037fb9ca8bce8d') }}" />
+    <!-- Core CSS -->
+    <link rel="stylesheet"
+        href="{{ asset('') }}demo/assets/vendor/css/rtl/core6cc1.css?id=9dd8321ea008145745a7d78e072a6e36"
+        class="template-customizer-core-css" />
+    <link rel="stylesheet"
+        href="{{ asset('demo/assets/vendor/css/rtl/theme-defaultfc79.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9"
+                                                            class="template-customizer-theme-css') }}" />
+    <link rel="stylesheet" href="{{ asset('demo/assets/css/demof1ed.css?id=ddd2feb83a604f9e432cdcb29815ed44') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('demo/assets/vendor/libs/node-waves/node-wavesd178.css?id=aa72fb97dfa8e932ba88c8a3c04641bc') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('demo/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar7358.css?id=280196ccb54c8ae7e29ea06932c9a4b6') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('demo/assets/vendor/libs/typeahead-js/typeaheadb5e1.css?id=2603197f6b29a6654cb700bd9367e2a3') }}" />
 
-        <link rel="stylesheet"
-            href="{{ asset('demo/assets/vendor/fonts/tabler-iconsea04.css?id=6ad8bc28559d005d792d577cf02a2116') }}" />
-        <link rel="stylesheet"
-            href="{{ asset('demo/assets/vendor/fonts/fontawesome8a69.css?id=a2997cb6a1c98cc3c85f4c99cdea95b5') }}" />
-        <link rel="stylesheet"
-            href="{{ asset('demo/assets/vendor/fonts/flag-icons80a8.css?id=121bcc3078c6c2f608037fb9ca8bce8d') }}" />
-        <!-- Core CSS -->
-        <link rel="stylesheet"
-            href="{{ asset('') }}demo/assets/vendor/css/rtl/core6cc1.css?id=9dd8321ea008145745a7d78e072a6e36"
-            class="template-customizer-core-css" />
-        <link rel="stylesheet"
-            href="{{ asset('demo/assets/vendor/css/rtl/theme-defaultfc79.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9"
-                            class="template-customizer-theme-css') }}" />
-        <link rel="stylesheet" href="{{ asset('demo/assets/css/demof1ed.css?id=ddd2feb83a604f9e432cdcb29815ed44') }}" />
-        <link rel="stylesheet"
-            href="{{ asset('demo/assets/vendor/libs/node-waves/node-wavesd178.css?id=aa72fb97dfa8e932ba88c8a3c04641bc') }}" />
-        <link rel="stylesheet"
-            href="{{ asset('demo/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar7358.css?id=280196ccb54c8ae7e29ea06932c9a4b6') }}" />
-        <link rel="stylesheet"
-            href="{{ asset('demo/assets/vendor/libs/typeahead-js/typeaheadb5e1.css?id=2603197f6b29a6654cb700bd9367e2a3') }}" />
-
-        <!-- Vendor Styles -->
-        <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
 
-        <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
-        <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
 
-        <script src="{{ asset('demo/assets/js/config.js') }}"></script>
+    <script src="{{ asset('demo/assets/js/config.js') }}"></script>
 
-        <script>
-            window.templateCustomizer = new TemplateCustomizer({
-                cssPath: '',
-                themesPath: '',
-                defaultStyle: "dark",
-                defaultShowDropdownOnHover: "true",
-                displayCustomizer: "true",
-                lang: 'en',
-                pathResolver: function(path) {
-                    var resolvedPaths = {
-                        'core.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core.css?id=9dd8321ea008145745a7d78e072a6e36',
-                        'core-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core-dark.css?id=d661bae1d0ada9f7e9e3685a3e1f427e',
+    <script>
+        window.templateCustomizer = new TemplateCustomizer({
+            cssPath: '',
+            themesPath: '',
+            defaultStyle: "dark",
+            defaultShowDropdownOnHover: "true",
+            displayCustomizer: "true",
+            lang: 'en',
+            pathResolver: function(path) {
+                var resolvedPaths = {
+                    'core.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core.css?id=9dd8321ea008145745a7d78e072a6e36',
+                    'core-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core-dark.css?id=d661bae1d0ada9f7e9e3685a3e1f427e',
 
-                        // Themes
-                        'theme-default.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9',
-                        'theme-default-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default-dark.css?id=ce86d777a4c5030f51d0f609f202bcc5',
-                        'theme-bordered.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-bordered.css?id=786794ca0c68d96058e8ceeb20f4e7c5',
-                        'theme-bordered-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-bordered-dark.css?id=e7122ef6338b22f7cea9eaff5a96aa8b',
-                        'theme-semi-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-semi-dark.css?id=a0a317e88e943fdd62d514e00deebb22',
-                        'theme-semi-dark-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-semi-dark-dark.css?id=e9a2f7cd6ace727264936f6bf93ab1e2',
-                    }
-                    return resolvedPaths[path] || path;
-                },
-                'controls': ["rtl", "style", "headerType", "contentLayout", "layoutCollapsed", "layoutNavbarOptions",
-                    "themes"
-                ],
-            });
-        </script>
-         @yield('style')
+                    // Themes
+                    'theme-default.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9',
+                    'theme-default-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default-dark.css?id=ce86d777a4c5030f51d0f609f202bcc5',
+                    'theme-bordered.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-bordered.css?id=786794ca0c68d96058e8ceeb20f4e7c5',
+                    'theme-bordered-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-bordered-dark.css?id=e7122ef6338b22f7cea9eaff5a96aa8b',
+                    'theme-semi-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-semi-dark.css?id=a0a317e88e943fdd62d514e00deebb22',
+                    'theme-semi-dark-dark.css': 'https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-semi-dark-dark.css?id=e9a2f7cd6ace727264936f6bf93ab1e2',
+                }
+                return resolvedPaths[path] || path;
+            },
+            'controls': ["rtl", "style", "headerType", "contentLayout", "layoutCollapsed", "layoutNavbarOptions",
+                "themes"
+            ],
+        });
+    </script>
+    @yield('style')
 
 </head>
 <style>
     /* Gaya untuk tema gelap */
     .modal-content {
         background-color: #343a40;
-        /* Warna latar belakang gelap */
         color: #fff;
-        /* Warna teks putih */
     }
 
     .modal-header {
         border-bottom: 1px solid #454d55;
-        /* Garis bawah untuk header */
     }
 
     .modal-title {
         color: #fff;
-        /* Warna judul putih */
     }
 
     .modal-body {
         padding: 20px;
-        /* Padding untuk body modal */
     }
 
     .form-group label {
         color: #ffffff;
-        /* Warna label input putih */
     }
 
     .form-control {
         background-color: #495057;
-        /* Warna latar belakang input */
         color: #ffffff;
-        /* Warna teks input putih */
     }
 
     .form-control:focus {
         background-color: #495057;
-        /* Warna latar belakang input saat fokus */
         color: #ffffff;
-        /* Warna teks input saat fokus */
     }
 
     .close {
@@ -231,8 +200,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- cursor effect-->
-                <div class="cursor"></div>
+
                 <!-- Header area  -->
 
                 <!-- header-section start -->
@@ -249,88 +217,49 @@
                 @endif
 
 
-                <!-- notification area start -->
-                {{-- <div class="notification-area p-4" data-lenis-prevent>
-        <div class="notification-card d-grid gap-4" data-tilt>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
+{{--
+                <!-- Two Factor Auth Modal -->
+
+                <div class="modal fade" id="Notifikasi" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-simple">
+                        <div class="modal-content p-3 p-md-5">
+                            <div class="modal-body">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                <div class="text-center mb-4">
+                                    <h3 class="mb-2">Pesan Tournament Ditolak</h3>
+                                </div>
+                                @foreach ($tournaments as $tournament)
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <div class="form-check custom-option custom-option-basic">
+                                            <label class="form-check-label custom-option-content ps-3"
+                                                for="customRadioTemp1" data-bs-target="#twoFactorAuthOne"
+                                                data-bs-toggle="modal">
+                                                <span class="d-flex align-items-start">
+                                                    <i class="ti ti-settings ti-xl me-3"></i>
+                                                    <span>
+                                                        <span class="custom-option-header">
+                                                            <span class="h4 mb-2">Nama Tournment : {{ $tournament->name }}</span>
+                                                        </span>
+                                                        <span class="custom-option-body">
+                                                            <span class="mb-0">Alasan Tournament : {{ $tournament->reason }}</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                @endforeach
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> cristofer dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">winners the last game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> piter maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> copa punto gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> daily bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar1.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> cristofer dorwart</span>
-                        <span class="card-text d-block tcn-1 fs-sm">winners the last game</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-img-area">
-                        <img class="w-100 rounded-circle" src="assets/img/avatar2.png" alt="profile">
-                    </div>
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> piter maio </span>
-                        <span class="card-text d-block tcn-1 fs-sm">accept your challenge</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> copa punto gamer </span>
-                        <span class="card-text d-block tcn-1 fs-sm">tournament start</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="card-item d-flex align-items-center gap-4">
-                    <div class="card-info">
-                        <span class="card-title d-block tcn-1"> daily bonus </span>
-                        <span class="card-text d-block tcn-1 fs-sm">tournament start</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div> --}}
-                <!-- notification area end -->
+                </div> --}}
+
+
 
                 <!-- tournament section start -->
                 <section class="tournament-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
@@ -338,14 +267,16 @@
                         <div class="container">
                             <div class="">
                                 <div class="col">
-                                    <h2 class="display-four tcn-1 cursor-scale growUp title-anim" style=" color:#ffffff">Tournaments</h2>
+                                    <h2 class="display-four tcn-1 cursor-scale growUp title-anim"
+                                        style=" color:#ffffff">Tournaments</h2>
                                 </div>
                             </div>
                             <div class="singletab tournaments-tab">
                                 <div class="d-between gap-6 flex-wrap mb-lg-15 mb-sm-10 mb-6">
                                     <ul class="tablinks d-flex flex-wrap align-items-center gap-3">
                                         <li class="nav-links active">
-                                            <button class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
+                                            <button
+                                                class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
                                                 data-toggle="tooltip" data-bs-toggle="modal"
                                                 data-bs-target="#filter">Saring</button>
                                         </li>
@@ -354,7 +285,8 @@
                                     <div class="px-6">
                                         <a type="button"
                                             class="btn-half position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill"
-                                            href="{{ route('ptournament.create') }}" style="color :white">Buat Turnamen</a>
+                                            href="{{ route('ptournament.create') }}" style="color :white">Buat
+                                            Turnamen</a>
                                     </div>
                                 </div>
                                 <div class="tabcontents">
@@ -365,14 +297,6 @@
                                                     <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                                         <div class="dropdown"
                                                             style="margin-bottom: 15px; margin-left:350px;">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="30"
-                                                                height="30" fill="currentColor"
-                                                                class="bi bi-three-dots-vertical dropdown-toggle"
-                                                                viewBox="0 0 16 16" id="dropdownMenuButton"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <path
-                                                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                                            </svg>
                                                             <ul class="dropdown-menu dropdown-menu-end"
                                                                 aria-labelledby="dropdownMenuButton">
                                                                 <li><a href="{{ route('ptournament.edittour', $tournament->id) }}"
@@ -388,7 +312,7 @@
                                                                         <button type="submit"
                                                                             class="dropdown-item delete"
                                                                             data-id="{{ $tournament->id }}">
-                                                                            <i class="ti ti-trash fs-2xl"></i> Delete
+                                                                            <i class="ti ti-trash fs-2xl"></i> Hapus
                                                                             Tournament
                                                                         </button>
                                                                     </form>
@@ -403,7 +327,17 @@
                                                             </div>
                                                             <span
                                                                 class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                                                <span class="dot-icon alt-icon ps-3">Playing</span>
+                                                                <span class="dot-icon alt-icon ps-3">
+                                                                    @if ($tournament->status === 'rejected')
+                                                                        <span>Tolak</span>
+                                                                    @elseif ($tournament->status === 'pending')
+                                                                        <span>Tertunda</span>
+                                                                    @elseif ($tournament->status === 'acepted')
+                                                                        <span>Terima</span>
+                                                                    @else
+                                                                        <span>Status turnamen tidak valid.</span>
+                                                                    @endif
+                                                                </span>
                                                             </span>
                                                         </div>
                                                         <div class="tournament-content px-xxl-4">
@@ -434,8 +368,15 @@
                                                                 <div
                                                                     class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                                     <i class="ti ti-ticket fs-base tcp-2"></i>
-                                                                    <span
-                                                                        class="tcn-1 fs-sm">{{ $tournament->paidment }}</span>
+                                                                    <span class="tcn-1 fs-sm">
+                                                                        @if ($tournament->paidment === 'unpaid')
+                                                                            <span>Gratis</span>
+                                                                        @elseif ($tournament->paidment === 'paid')
+                                                                            <p>Berbayar</p>
+                                                                        @else
+                                                                            <p>Status pembayaran tidak valid</p>
+                                                                        @endif
+                                                                    </span>
                                                                 </div>
                                                                 <div
                                                                     class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
@@ -508,96 +449,6 @@
         </div>
     </div>
 
-    {{-- <footer class="footer bgn-4 bt">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <div class="footer-logo mb-8">
-                            <a href="#" class="d-grid gap-6">
-                                <div class="flogo-1">
-                                    <img class="w-100" src="assets/img/humma-01.png" alt="favicon">
-                                </div>
-                                <div class="flogo-2">
-                                    <h3>HUMMAESPORT</h3>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="social-links">
-                            <ul class="d-flex align-items-center gap-3 flex-wrap">
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-facebook fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-twitter fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-youtube fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-linkedin fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-instagram fs-2xl"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 br br-res py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">QUICK LINKS</h4>
-                        <ul class="footer-list d-grid gap-4">
-                            <li><a href="tournament" class="footer-link d-flex align-items-center tcn-6">
-                                    <i class="ti ti-chevron-right"></i> TOURNAMENTS</a></li>
-                            <li><a href="game" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> GAMES </a></li>
-                            <li><a href="team" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> TEAMS</a></li>
-                            <li><a href="faq" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">EXPLORE</h4>
-                        <ul class="footer-list d-grid gap-4">
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> TOP PLAYERS</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> MESSAGES</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> PROFILE</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">FOLLOW US</h4>
-                        <ul class="footer-list d-grid gap-4">
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> FACEBOOK</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> INSTAGRAM</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
-                                        class="ti ti-chevron-right"></i> TWITER</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
-                <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
-                    <span>COPYRIGHT © <span class="currentYear"></span> HUMMAESPORT | DESIGNED BY <a href=""
-                            class="tcp-1">MAGANG HUMMA </a></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-banner-img" id="faa">
-            <img class="w-100" src="{{ asset('assets/img/fbanner.png') }}" alt="banner">
-        </div>
-    </footer> --}}
 
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- gsap  -->
@@ -713,7 +564,7 @@
             steps[n].className += " active"; // Tandai langkah saat ini sebagai aktif
         }
     </script>
-@endforeach
+    @endforeach
 
 </body>
 

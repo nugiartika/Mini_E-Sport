@@ -278,7 +278,7 @@
                                 <th>Category</th>
                                 <th>Photo</th>
                                 <th>Members Per Team</th>
-                                <th>Del/Edit</th>
+                                <th>Tes</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -454,19 +454,16 @@
         </div>
     </div>
 @empty
-    <tr>
-        <td colspan="6">
-            <div class="d-flex justify-content-center">
-                <div class="card">
-                    <div class="table-responsive text-nowrap">
-                        <table class="table"></table>
-                        <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                            style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                        <h1 class="table-light" style="text-align: center;">Empty Data</h1>
-                    </div>
-                </div>
-            </div>
-        </td>
-    </tr>
+<tr>
+    <td colspan="6">
+        <div class="d-flex flex-column justify-content-center">
+            <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+            <h1 class="table-light" style="text-align: center;">
+                Data Kosong
+            </h1>
+        </div>
+    </td>
+</tr>
 @endforelse
 @endsection

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Http\Requests\CategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
 use Exception;
+use App\Models\Category;
+use App\Models\Tournament;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -24,8 +26,10 @@ class CategoryController extends Controller
     }
     public function indexuser()
     {
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+
       $category = Category::all();
-        return view('penyelenggara.game', compact('category'));
+        return view('penyelenggara.game', compact('category', 'counttournaments'));
     }
 
     public function indexusers()
