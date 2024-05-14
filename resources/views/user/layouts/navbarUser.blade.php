@@ -52,7 +52,7 @@
                                       </div>
                                       <div class="flex-grow-1">
                                           <span class="fw-medium d-block">
-                                              {{ auth()->user()->name }}
+                                              Nama :
                                           </span>
                                           <small class="text-muted">{{ auth()->user()->name }}</small>
                                       </div>
