@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use DOMDocument;
 use App\Models\Team;
-use App\Models\tournament_prize;
 use App\Models\User;
+use App\Models\juara;
 use App\Models\jadwal;
 use App\Models\member;
 use App\Models\bracket;
 use App\Models\Category;
 use App\Models\prizepool;
 use App\Models\Tournament;
-use DOMDocument;
 use Illuminate\Http\Request;
 use App\Models\TeamTournament;
+use App\Models\tournament_prize;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -36,7 +37,9 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get();
         $category = Category::all();
-        return view('penyelenggara.tournament', compact('tournaments', 'counttournaments','category', 'user', 'teamCounts', 'teamIdCounts'));
+        $prizes = tournament_prize::all();
+        $tournaments = tournament::all();
+        return view('penyelenggara.tournament', compact('counttournaments','prizes','tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
     }
 
     public function notification()
@@ -87,9 +90,9 @@ class TournamentController extends Controller
         $tournament = Tournament::all();
         $user = User::all();
         $category = Category::all();
-        // $prize = prizepool::all();
-        // $note = tournament_prize::all();
-        return view('penyelenggara.tambah', compact('tournament', 'counttournaments', 'category', 'user'));
+        $prizes = Prizepool::all();
+        $note = tournament_prize::all();
+        return view('penyelenggara.tambah', compact('counttournaments','note','prizes','tournament', 'category', 'user'));
     }
 
     public function history()
@@ -105,7 +108,7 @@ class TournamentController extends Controller
     public function store(TournamentRequest $request)
     {
         try {
-
+            $prizepoolId = $request->input('prizepool_id');
             $description = $request->description;
 
             if (!empty($description)) {
@@ -142,7 +145,8 @@ class TournamentController extends Controller
                 $path_gambar = Storage::disk('public')->put('tournament', $gambar);
             }
 
-            Tournament::create([
+
+            $tournament = Tournament::create([
                 'name' => $request->input('name'),
                 'pendaftaran' => $request->input('pendaftaran'),
                 'permainan' => $request->input('permainan'),
@@ -153,19 +157,29 @@ class TournamentController extends Controller
                 'slotTeam' => $request->input('slotTeam'),
                 'contact' => $request->input('contact'),
                 'images' => $path_gambar,
-                'description' => $request->input('description'),
+                'description' => $description,
                 'rule' => $request->input('rule'),
                 'paidment' => $request->input('paidment'),
                 'nominal' => $request->input('nominal'),
                 'status' => 'pending',
-                'prize' => $request->input('prize'),
-                'note' => $request->input('note')
             ]);
+            $tournamentId = $tournament->id;
+
+
+            foreach ($prizepoolId as $index => $value) {
+                $tournamentPrize    = Tournament_Prize::create([
+                    'tournament_id' => $tournamentId,
+                    'note' => $request->input('note')[$index],
+                    'prizepool_id' => $value
+                ]);
+            }
+
             return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
         } catch (\Exception $e) {
             // Tangani kesalahan
             dd($e->getMessage());
         }
+
     }
 
     public function filter(Request $request)
@@ -205,10 +219,10 @@ class TournamentController extends Controller
         return view('user.detailtournament', compact('tournaments', 'category', 'user', 'team'));
     }
 
-    public function detailTournament($id)
+    public function detailTournament(Tournament $tournament,$id)
     {
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
         $user = Auth::user();
-        $tournaments = Tournament::where('users_id', $user->id)->get();
         // $tournaments = Tournament::all();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
@@ -216,10 +230,13 @@ class TournamentController extends Controller
         $category = Category::all();
         $jadwal = jadwal::all();
         $bracket = bracket::all();
-
+        $juara = juara::all();
+        $prizes = tournament_prize::all();
         $selectedTournament = Tournament::findOrFail($id);
+        $teams = team::all();
 
-        return view('penyelenggara.detailtournament', compact('bracket', 'jadwal', 'tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
+
+        return view('penyelenggara.detailtournament', compact('tournament','counttournaments','teams','prizes','juara','bracket','jadwal', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
 
 
@@ -302,10 +319,13 @@ class TournamentController extends Controller
 
     public function edittour($id)
     {
-        $tournament = Tournament::findOrFail($id);
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $tournament = Tournament::all();
         $user = User::all();
         $category = Category::all();
-        return view('penyelenggara.edit', compact('tournament', 'category', 'user'));
+        $prizes = Prizepool::all();
+        $note = tournament_prize::all();
+        return view('penyelenggara.edit', compact('counttournaments','note','prizes','tournament', 'category', 'user'));
     }
 
     public function updatetour(Request $request, $id)
@@ -346,14 +366,14 @@ class TournamentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Tournament $ptournament)
     {
+        $ptournament->delete();
         try {
-            $tournament = Tournament::findOrFail($id);
-            if ($tournament->images) {
-                Storage::disk('public')->delete($tournament->images);
+            if ($ptournament->images) {
+                Storage::disk('public')->delete($ptournament->images);
             }
-            $tournament->delete();
+            $ptournament->delete();
             return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil dihapus');
         } catch (\Exception $e) {
             return redirect()->route('ptournament.index')->with('error', 'Gagal menghapus turnamen. Silakan coba lagi.');

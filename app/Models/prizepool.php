@@ -14,4 +14,9 @@ class prizepool extends Model
     {
         return $this->hasMany(tournament_prize::class);
     }
+
+    public function tournament()
+    {
+        return $this->belongsTo(tournament::class);
+    }
 }

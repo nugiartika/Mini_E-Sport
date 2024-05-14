@@ -25,9 +25,6 @@ return new class extends Migration
             $table->integer('slotTeam');
             $table->char('contact', 24);
             $table->text('description');
-            $table->text('rule');
-            // $table->foreignId('prizepool')->constrained(); // Tidak perlu menyebutkan nama tabel jika sudah sesuai dengan konvensi Laravel
-            // $table->foreignId('tournament_prize_id')->constrained('tournament_prizes'); // Jika nama tabel tidak mengikuti konvensi, Anda dapat menyebutkannya secara eksplisit
             $table->enum('status', ['pending','rejected','accepted'])->default('pending');
             $table->text('reason')->nullable();
             $table->enum('paidment',['paid','unpaid']);
