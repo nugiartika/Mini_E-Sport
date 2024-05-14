@@ -27,8 +27,8 @@ class TournamentController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $tournaments = Tournament::where('users_id', $user->id)->get();
-        // $tournaments = Tournament::all();
+        $tournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->get();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
@@ -36,10 +36,16 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get();
         $category = Category::all();
-
-        return view('penyelenggara.tournament', compact('tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
+        return view('penyelenggara.tournament', compact('tournaments', 'counttournaments','category', 'user', 'teamCounts', 'teamIdCounts'));
     }
 
+    public function notification()
+    {
+        $tournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->get();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+
+        return view('penyelenggara.notification', compact('tournaments', 'counttournaments'));
+    }
     public function indexuser()
     {
         // $tournaments = Tournament::where('status', 'accepted')->get();
@@ -57,10 +63,11 @@ class TournamentController extends Controller
     }
     public function dashboard()
     {
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
         $tournaments = Tournament::where('status', 'accepted')->get();
         $user = User::all();
         $category = Category::all();
-        return view('penyelenggara.Dashboard', compact('tournaments', 'category', 'user'));
+        return view('penyelenggara.Dashboard', compact('tournaments', 'category', 'user', 'counttournaments'));
     }
 
     public function indexadmin()
@@ -76,12 +83,13 @@ class TournamentController extends Controller
      */
     public function create()
     {
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
         $tournament = Tournament::all();
         $user = User::all();
         $category = Category::all();
         // $prize = prizepool::all();
         // $note = tournament_prize::all();
-        return view('penyelenggara.tambah', compact('tournament', 'category', 'user'));
+        return view('penyelenggara.tambah', compact('tournament', 'counttournaments', 'category', 'user'));
     }
 
     public function history()
@@ -96,87 +104,35 @@ class TournamentController extends Controller
      */
     public function store(TournamentRequest $request)
     {
-<<<<<<< Updated upstream
-        // try {
-        $user = Auth::user();
-
-        $description = $request->description;
-
-        if (!empty($description)) {
-            $dom = new \DomDocument();
-            $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-            $images = $dom->getElementsByTagName('img');
-            foreach ($images as $k => $img) {
-                $data = $img->getAttribute('src');
-                list($type, $data) = explode(';', $data);
-                list(, $data) = explode(',', $data);
-                $data = base64_decode($data);
-
-                $image_name = "/uploads" . time() . $k . '.png';
-                $path = public_path() . $image_name;
-                file_put_contents($path, $data);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $image_name);
-
-                // $image_name = "uploads/" . time() . $k . '.png';
-                // Storage::put($image_name, $data);
-
-                // $img->removeAttribute('src');
-                // $img->setAttribute('src', Storage::url($image_name));
-            }
-            $description = $dom->saveHTML();
-        }
-
-
-        // Proses gambar
-        $gambar = $request->file('images');
-        $path_gambar = null;
-
-        $amount = collect($request->input('jumlah'));
-        $dataPrize = collect($request->input('prize'))->map(function ($item, $index) use ($amount) {
-            $data['item'] = $item;
-
-            if ($item === 'uang') {
-                $data['nominal'] = (int) $amount[$index];
-            }
-
-            return $data;
-        });
-
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('tournament', $gambar);
-        }
-
-        $tournament = Tournament::create([
-            'name' => $request->input('name'),
-            'pendaftaran' => $request->input('pendaftaran'),
-            'permainan' => $request->input('permainan'),
-            'end_pendaftaran' => $request->input('end_pendaftaran'),
-            'end_permainan' => $request->input('end_permainan'),
-            'categories_id' => $request->input('categories_id'),
-            'users_id' => $user->id,
-            'slotTeam' => $request->input('slotTeam'),
-            'contact' => $request->input('contact'),
-            'images' => $path_gambar,
-            'description' => $description,
-            'rule' => $request->input('rule'),
-            'paidment' => $request->input('paidment'),
-            'nominal' => $request->input('nominal'),
-            'status' => 'pending',
-            'prize' => $request->input('prize'),
-            'note' => $request->input('note')
-        ]);
-        // dd($tournament);
-        return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
-        // } catch (\Exception $e) {
-        // Tangani kesalahan
-        // dd($e->getMessage());
-        // }
-=======
-        // dd($request);
         try {
 
+            $description = $request->description;
+
+            if (!empty($description)) {
+                $dom = new \DomDocument();
+                $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+                $images = $dom->getElementsByTagName('img');
+                foreach ($images as $k => $img) {
+                    $data = $img->getAttribute('src');
+                    list($type, $data) = explode(';', $data);
+                    list(, $data) = explode(',', $data);
+                    $data = base64_decode($data);
+
+                    $image_name = "/uploads" . time() . $k . '.png';
+                    $path = public_path() . $image_name;
+                    file_put_contents($path, $data);
+                    $img->removeAttribute('src');
+                    $img->setAttribute('src', $image_name);
+
+                    // $image_name = "uploads/" . time() . $k . '.png';
+                    // Storage::put($image_name, $data);
+
+                    // $img->removeAttribute('src');
+                    // $img->setAttribute('src', Storage::url($image_name));
+                }
+                $description = $dom->saveHTML();
+            }
             $user = Auth::user();
             // Proses gambar
             $gambar = $request->file('images');
@@ -210,11 +166,11 @@ class TournamentController extends Controller
             // Tangani kesalahan
             dd($e->getMessage());
         }
->>>>>>> Stashed changes
     }
 
     public function filter(Request $request)
     {
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
         $oldSearch = $request->input('search');
         $user = Auth::user();
         $category = Category::all();
@@ -263,7 +219,7 @@ class TournamentController extends Controller
 
         $selectedTournament = Tournament::findOrFail($id);
 
-        return view('penyelenggara.detailtournament', compact('bracket','jadwal','tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
+        return view('penyelenggara.detailtournament', compact('bracket', 'jadwal', 'tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
 
 
@@ -328,19 +284,19 @@ class TournamentController extends Controller
 
         $tournament->status = $request->status;
 
-         // Update status turnamen sesuai dengan input dari form
-         $tournament->status = $request->status;
+        // Update status turnamen sesuai dengan input dari form
+        $tournament->status = $request->status;
 
-         // Jika status adalah 'rejected' dan alasan telah diberikan, simpan alasan
-         if ($request->status == 'rejected' && $request->has('reason')) {
-             $tournament->reason = $request->reason;
-         }
-
-         // Simpan perubahan pada data turnamen
-         $tournament->save();
-
-         return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');
+        // Jika status adalah 'rejected' dan alasan telah diberikan, simpan alasan
+        if ($request->status == 'rejected' && $request->has('reason')) {
+            $tournament->reason = $request->reason;
         }
+
+        // Simpan perubahan pada data turnamen
+        $tournament->save();
+
+        return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');
+    }
 
 
 
@@ -403,8 +359,4 @@ class TournamentController extends Controller
             return redirect()->route('ptournament.index')->with('error', 'Gagal menghapus turnamen. Silakan coba lagi.');
         }
     }
-
-
-
-
 }

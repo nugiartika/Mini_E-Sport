@@ -120,7 +120,15 @@
                                     <td>{{ $tournament->category->name }}</td>
 
                                     <td>{{ $tournament->user->name }}</td>
-                                    <td><span class="badge bg-label-primary me-1">{{ $tournament->status }}</span>
+                                    <td><span class="badge bg-label-primary me-1"> @if ($tournament->status === 'rejected')
+                                        <span>Tolak</span>
+                                    @elseif ($tournament->status === 'pending')
+                                        <span>Tertunda</span>
+                                    @elseif ($tournament->status === 'accepted')
+                                        <span>Aktif</span>
+                                    @else
+                                        <span>Status turnamen tidak valid.</span>
+                                    @endif</span>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -160,7 +168,7 @@
                                                     <table class="table"></table>
                                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
                                                         style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                                                    <h1 class="table-light" style="text-align: center;">Empty Data
+                                                    <h1 class="table-light" style="text-align: center;">Data Kosong
                                                     </h1>
                                                 </div>
                                             </div>
