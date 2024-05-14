@@ -89,7 +89,7 @@
                                 <div class="d-flex flex-column align-items-center justify-content-center">
                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
                                         style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                                    <h1>Tidak Ada Data</h1>
+                                    <h1>Data Kosong</h1>
                                 </div>
                             </td>
                         </tr>

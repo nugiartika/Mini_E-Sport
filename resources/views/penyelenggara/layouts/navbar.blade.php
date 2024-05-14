@@ -13,15 +13,27 @@
         <!-- Search -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item navbar-search-wrapper mb-0">
-                <a class="nav-item nav-link search-toggler d-flex align-items-center px-0"
-                    href="javascript:void(0);">
+                <a class="nav-item nav-link search-toggler d-flex align-items-center px-0" href="javascript:void(0);">
                     <i class="ti ti-search ti-md me-2"></i>
                     <span class="d-none d-md-inline-block text-muted">Search (Ctrl+/)</span>
                 </a>
             </div>
         </div>
         <!-- /Search -->
+
+
+
         <ul class="navbar-nav flex-row align-items-center ms-auto">
+
+            <!-- Notification -->
+            <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+                <a class="nav-link dropdown-toggle hide-arrow" href="{{ route('notificationTournament') }}" 
+                    data-bs-target="#Notifikasi" aria-expanded="false">
+                    <i class="ti ti-bell ti-md"></i>
+                    <span class="badge bg-danger rounded-pill badge-notifications">{{ $counttournaments }}</span>
+                </a>
+            </li>
+            <!--/ Notification -->
 
             <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -38,14 +50,10 @@
                             <span class="align-middle"><i class="ti ti-moon me-2"></i>Dark</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
-                            <span class="align-middle"><i class="ti ti-device-desktop me-2"></i>System</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
             <!--/ Style Switcher -->
+
 
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown ">
