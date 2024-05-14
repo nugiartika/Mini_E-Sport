@@ -27,7 +27,7 @@
 
             <!-- Notification -->
             <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-                <a class="nav-link dropdown-toggle hide-arrow" href="{{ route('notificationTournament') }}" 
+                <a class="nav-link dropdown-toggle hide-arrow" href="{{ route('notificationTournament') }}"
                     data-bs-target="#Notifikasi" aria-expanded="false">
                     <i class="ti ti-bell ti-md"></i>
                     <span class="badge bg-danger rounded-pill badge-notifications">{{ $counttournaments }}</span>
