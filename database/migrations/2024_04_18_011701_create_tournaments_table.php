@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tournaments', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            Schema::create('tournaments', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
             $table->date('pendaftaran');
             $table->date('permainan');
             $table->date('end_pendaftaran');
@@ -26,11 +26,9 @@ return new class extends Migration
             $table->char('contact', 24);
             $table->text('description');
             $table->text('rule');
-            // $table->foreignId('prizepool')->constrained(); // Tidak perlu menyebutkan nama tabel jika sudah sesuai dengan konvensi Laravel
-            // $table->foreignId('tournament_prize_id')->constrained('tournament_prizes'); // Jika nama tabel tidak mengikuti konvensi, Anda dapat menyebutkannya secara eksplisit
             $table->enum('status', ['pending','rejected','accepted'])->default('pending');
             $table->text('reason')->nullable();
-            $table->enum('paidment',['paid','unpaid']);
+            $table->enum('paidment',['Berbayar','Gratis']);
             $table->integer('nominal')->nullable(); $table->foreignId('jurnal_id')->nullable();
 
             $table->timestamps();

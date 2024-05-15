@@ -31,7 +31,7 @@ class Tournament extends Model
 
     public function prizepool ()
     {
-        return $this->belongsTo(Prizepool::class,'prizepool_id');
+        return $this->hasMany(Prizepool::class,'prizepool_id');
     }
 
     public function jadwal ()
@@ -41,7 +41,7 @@ class Tournament extends Model
 
     public function tournament_prize()
     {
-        return $this->belongsTo(tournament_prize::class);
+        return $this->hasMany(tournament_prize::class);
     }
 
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\DashboardUser;
 use App\Http\Requests\StoreDashboardUserRequest;
 use App\Http\Requests\UpdateDashboardUserRequest;
+use App\Models\Category;
+use App\Models\Tournament;
 
 class DashboardUserController extends Controller
 {
@@ -13,7 +15,12 @@ class DashboardUserController extends Controller
      */
     public function index()
     {
-        return view('user.Dashboard');
+        $categorys = Category::all()->count();
+        $tournaments = Tournament::all()->count();
+        $tournament = Tournament::all();
+        $tournamentFree = Tournament::where('paidment','unpaid')->count();
+        $tournamentPaid = Tournament::where('paidment','paid')->count();
+        return view('user.Dashboard', compact('categorys', 'tournaments', 'tournament', 'tournamentFree', 'tournamentPaid'));
     }
 
     /**

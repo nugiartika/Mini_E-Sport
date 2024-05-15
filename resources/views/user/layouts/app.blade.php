@@ -133,8 +133,8 @@
                                     <script>
                                         document.write(new Date().getFullYear())
                                     </script>
-                                    , made with ❤️ by <a href="https://pixinvent.com/" target="_blank"
-                                        class="footer-link fw-medium">Pixinvent</a>
+                                by <a href="" target="_blank"
+                                        class="footer-link fw-medium">Humma Esport</a>
                                 </div>
 
                             </div>

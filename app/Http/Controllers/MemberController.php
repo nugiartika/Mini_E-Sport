@@ -85,6 +85,8 @@ class MemberController extends Controller
             'nickname.*' => 'required', // Nickname inti wajib diisi
             'member_cadangan.*' => 'nullable', // Member cadangan dapat kosong
             'nickname_cadangan.*' => 'nullable', // Nickname cadangan dapat kosong
+            'is_captain.*' => 'nullable', // Isi kapten harus boolean
+
         ]);
 
         // Cek validasi
@@ -99,22 +101,26 @@ class MemberController extends Controller
 
         // Store "inti" members
         foreach ($request->member as $index => $memberName) {
-            Member::create([
+            $is_captain = $index === 0 ? 1 : 0;
+
+            $member = Member::create([
                 'member' => $memberName,
                 'nickname' => $request->nickname[$index],
                 'team_id' => $teams_id,
                 'status' => 'inti',
+                'is_captain' => $is_captain,
             ]);
         }
 
         // Store "cadangan" members
         if ($request->has('member_cadangan')) {
             foreach ($request->member_cadangan as $index => $memberName) {
-                Member::create([
+            $member = Member::create([
                     'member' => $memberName,
                     'nickname' => $request->nickname_cadangan[$index],
                     'team_id' => $teams_id,
                     'status' => 'cadangan',
+                    'is_captain' => 0,
                 ]);
             }
         }

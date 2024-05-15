@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JuaraController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\BracketController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\TeamTournamentController;
 use App\Http\Controllers\DetailTournamentController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\RegisterOrganizerController;
 use App\Http\Controllers\TransactionController;
 
@@ -64,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
         Route::post('/jadwal/{id}', [JadwalController::class, 'jadwal'])->name('ptournament.jadwal');
         Route::post('/bracket/{id}', [BracketController::class, 'bracket'])->name('ptournament.bracket');
-        Route::post('/juara', [TournamentController::class, 'juara'])->name('ptournament.juara');
+        Route::post('/juara', [JuaraController::class, 'juara'])->name('ptournament.juara');
     });
 
     // User Routes
@@ -73,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('DashboardUser', [DashboardUserController::class, 'index'])->name('dashboardUser');
         Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
         Route::get('tournamentUser/history', [TournamentController::class, 'history'])->name('user.tournament.history');
+        Route::get('/tournamentfilter', [TournamentController::class, 'filteruser'])->name('tournament.filteruser');
     });
 });
 
@@ -97,8 +100,10 @@ Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
 Route::get('/detailteam', function () {
     return view('detailteam');
 })->name('team.detail');
-Route::get('/', function () {
-    return view('user.index');
-})->name('index');
+
+Route::get('/', [LandingPageController::class, 'index'])->name('index');
+// Route::get('/', function () {
+//     return view('user.index');
+// })->name('index');
 
 

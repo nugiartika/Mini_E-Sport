@@ -22,7 +22,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Status</th>
+                        <th>Mulai Game</th>
                         <th>Aksi</th>
                         <th>Detail</th>
                     </tr>
@@ -35,16 +35,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td> <span class="fw-medium">{{ $tournament->name }}</span></td>
                             <td><span class="badge bg-label-primary me-1">
-                                    @if ($tournament->status === 'rejected')
-                                        <span>Tolak</span>
-                                    @elseif ($tournament->status === 'pending')
-                                        <span>Tertunda</span>
-                                    @elseif ($tournament->status === 'acepted')
-                                        <span>Terima</span>
-                                    @else
-                                        <span>Status turnamen tidak valid.</span>
-                                    @endif
-                                </span></td>
+                                {{ $tournament->permainan }}</span></td>
                             <td>
                                 <form id="updateForm{{ $tournament->id }}"
                                     action="{{ route('konfirm.update', $tournament->id) }}" method="POST">
@@ -88,47 +79,6 @@
                                         </div>
                                     </div>
                                 </form>
-                                {{-- <td>
-                                    <form id="updateForm{{ $tournament->id }}" action="{{ route('konfirm.update', $tournament->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="radio-button">
-                                            <span class="badge bg-label-danger me-1">
-                                                <label for="rejected{{ $tournament->id }}">Rejected</label>
-                                                <input type="radio" id="rejected{{ $tournament->id }}" name="status"
-                                                    value="rejected" {{ $tournament->status == 'rejected' ? 'checked' : '' }}>
-                                            </span>
-
-                                            <span class="badge bg-label-success me-1">
-                                                <label for="accepted{{ $tournament->id }}">Accepted</label>
-                                                <input type="radio" id="accepted{{ $tournament->id }}" name="status"
-                                                    value="accepted" {{ $tournament->status == 'accepted' ? 'checked' : '' }}>
-                                            </span>
-                                        </div>
-
-                                        <!-- Modal untuk input alasan penolakan -->
-                                        <div id="reasonModal{{ $tournament->id }}" class="modal fade" tabindex="-1"
-                                            aria-labelledby="reasonModalLabel{{ $tournament->id }}" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="reasonModalLabel{{ $tournament->id }}">Reason for Rejection</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <textarea class="form-control" id="reason{{ $tournament->id }}"
-                                                            name="reason" rows="3" placeholder="Alasan penolakan"></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" id="submitReason{{ $tournament->id }}" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                            </td> --}}
                             <td>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal{{ $tournament->id }}">
@@ -200,12 +150,16 @@
                                                 <span id="detail-gender" style="font-weight: normal;">
                                                     {{ $tournament->pendaftaran }}</span>
                                             </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup :
+                                            <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup : {{ $tournament->end_pendaftaran }}
                                                 <span id="detail-national_student_id" style="font-weight: normal;"></span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
                                                     {{ $tournament->permainan }}</span>
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
+                                                <span id="detail-student_identity_number" style="font-weight: normal;">
+                                                    {{ $tournament->end_permainan }}</span>
                                             </li>
                                         </ul>
                                     </div>

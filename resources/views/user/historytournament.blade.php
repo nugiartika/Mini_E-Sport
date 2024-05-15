@@ -20,8 +20,8 @@
                     @endphp
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="card">
-                            <img src="{{ asset("storage/{$tournament->tournament->images}") }}"
-                                alt="{{ $tournament->tournament->name }}" class="card-img-top" />
+                            <img src="{{ asset("storage/{$team->tournament->images}") }}"
+                                alt="{{ $team->tournament->name }}" class="card-img-top" />
                             <div class="card-body">
                                 <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
                                     <a href="{{ route('detailTournament', ['tournament' => $tournament->tournament->id]) }}">
