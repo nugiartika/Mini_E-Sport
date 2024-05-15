@@ -77,12 +77,56 @@
             margin-bottom: 5px;
         }
 
-        input,
-        select,
-        {
-        margin-bottom: 15px;
-        background: none;
-        padding: .6em .8em .5em .8em;
+    input,
+    select,
+    {
+    margin-bottom: 15px;
+    background: none;
+    padding: .6em .8em .5em .8em;
+    border: 0;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    }
+
+    .main {
+        width: 480px;
+        margin: 0 auto;
+    }
+
+
+    .input,
+    .label {
+        padding: 0 20px;
+        width: 200px;
+    }
+
+
+    .input {
+        height: 55px;
+    }
+
+    .input:nth-of-type(3) {
+        padding-right: 0;
+        width: 220px;
+    }
+
+    .input span {
+        padding-left: 5px;
+    }
+
+    .count {
+        padding: .9em 0 0;
+        width: 20px;
+    }
+
+    .submit {
+        margin: 20px auto;
+        display: block;
+        width: 100px;
         border: 0;
         border-bottom: 1px solid #fff;
         border-radius: 0;
@@ -207,17 +251,154 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
-                                    <input type="date"
-                                        class="form-control @error('end_pendaftaran') is-invalid @enderror"
-                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran') }}">
-                                    @error('end_pendaftaran')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                <div class="tab">
+                                    <div class="mb-3">
+                                        <label for="prizepol" class="form-label">Hadiah Turnamen</label>
+                                        <form id="prizepol-form">
+                                            <div id="inputs">
+                                                <div class="form-prize">
+                                                    <div class="input-group">
+                                                        <select class="form-control prize-dropdown"
+                                                            name="prizepool_id[]">
+                                                            <option value="">Pilih Hadiah</option>
+                                                            @foreach ($prizes as $kat)
+                                                                <option value="{{ $kat->id }}"
+                                                                    {{ old('prizepool_id') == $kat->id ? 'selected' : '' }}>
+                                                                    {{ $kat->prize }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        <button type="button"
+                                                            class="addRow rounded-end btn btn-info"><i
+                                                                class="ti ti-plus fs-2xl"></i></button>
+
+                                                        <button type="button"
+                                                            class="removeRow d-none btn btn-danger"><i
+                                                                class="ti ti-trash fs-2xl"></i></button>
+                                                    </div>
+
+                                                    <div class="w-100 mt-3 noteForm" style="display: none;">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Isikan deskripsi hadiah" name="note[]" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="contact" class="form-label">Kontak Penanggungjawab</label>
+                                        <input type="number"
+                                            class="form-control @error('contact') is-invalid @enderror" id="contact"
+                                            name="contact" value="{{ old('contact') }}">
+                                        @error('contact')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="category" class="form-label">GAME</label>
+                                        <select class="form-control @error('categories_id') is-invalid @enderror"
+                                            id="category" name="categories_id" aria-label="Default select example">
+                                            <option value="" selected>Select Game</option>
+                                            @foreach ($category as $kat)
+                                                <option value="{{ $kat->id }}"
+                                                    {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
+                                                    {{ $kat->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('categories_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="images" class="form-label">Unggah Poster</label>
+                                        <input type="file"
+                                            class="form-control @error('images') is-invalid @enderror" id="images"
+                                            name="images" onchange="previewImage(event)">
+                                        @if (old('images'))
+                                            <img id="preview" src="{{ asset('storage/' . old('images')) }}"
+                                                alt="Old images" style="max-width: 100px; max-height: 100px;">
+                                        @endif
+                                        @error('images')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="tab">
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Deskripsi</label>
+                                        <textarea name="description" id="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('description') }}</textarea>
+                                        @error('description')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <!-- /Full Editor -->
+                                  </div>
+
+
+
+
+
+
+                                <div class="mb-3">
+                                    <label for="rule" class="form-label">Aturan Main</label>
+                                    <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen"
+                                        class="form-control" aria-label="With textarea">{{ old('rule') }}</textarea>
+
+                                    @error('rule')
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+                                <div class="mb-3">
+                                    <label for="paidment" class="form-label">Event Berbayar atau Gratis?</label>
+                                    @error('paidment')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
+                                        <option value="" selected disabled>Pilih</option>
+                                        <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
+                                        </option>
+                                        <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak
+                                            Berbayar</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3" id="nominal" style="display: none;">
+                                    <label for="nominal_input" class="form-label">Masukkan Nominal</label>
+                                    @error('nominal')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                    <input type="number" name="nominal" id="nominal_input" class="form-control">
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2 justify-content-between">
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="window.location.href='/ptournament'">Batal</button>
+
+                                <div class="d-flex align-items-center gap-2">
+                                    <button type="button" id="prevBtn" onclick="nextPrev(-1)"
+                                        class="btn btn-danger">Kembali</button>
+                                    <button type="button" id="nextBtn" onclick="nextPrev(1)"
+                                        class="btn btn-success">Lanjut</button>
+                                </div>
+                            </div>
+                            <div>
+
+                            </div>
+                            <div style="text-align:center;margin-top:40px;">
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
                             </div>
 
                             <div class="row mb-3">
@@ -550,22 +731,29 @@
             });
         });
     </script>
+   
     <script>
-        $(document).ready(function() {
-            $('#custom-summernote').summernote({
-                placeholder: 'Hello stand alone ui',
-                tabsize: 2,
-                height: 120,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
-        });
-    </script>
+     $(document).ready(function() {
+        $('.custom-summernote').summernote({
+             placeholder: 'Isi deskripsi tournament',
+             tabsize: 2,
+             height: 120,
+             toolbar: [
+               ['style', ['style']],
+               ['font', ['bold', 'underline', 'clear']],
+               ['color', ['color']],
+               ['para', ['ul', 'ol', 'paragraph']],
+               ['table', ['table']],
+               ['insert', ['link', 'picture', 'video']],
+               ['view', ['fullscreen', 'codeview', 'help']]
+             ],
+             callbacks: {
+                onChange: function(contents, $editable) {
+                    $('.custom-summernote .note-editable').css('color', 'white'); // Mengatur warna teks menjadi putih
+                }
+            }
+           });
+         });
+   </script>
+
 @endsection

@@ -49,7 +49,8 @@
                     <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                         <li class="menu-link">
                             <a href="{{ route('login') }}"
-                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Masuk</a>                        </li>
+                                class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Masuk</a>
+                        </li>
                         </li>
                     </ul>
 
@@ -183,25 +184,40 @@
 
     <!-- 3D swiper section start-->
     <section class="swiper-3d-section position-relative z-1" id="swiper-3d">
+
+
         <div class="container">
+
             <!-- Slider main container -->
             <div class="swiper swiper-3d-container">
+
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
-                    <!-- Slides -->
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                    class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="assets/img/slide-3d-7.png" alt="game">
-                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">Apex Legends</h5>
-                            <div class="d-center">
+                    @foreach ($Tournaments as $Tournament)
+                        <div class="swiper-slide">
+                            <div class="card-3d d-grid justify-content-center p-3"style="min-heigt:200px;">
+                                <div class="img-area w-100 mb-8 position-relative">
+                                    <span
+                                        class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
+                                        <i class="ti ti-calendar-due"></i> 15.02.2</span>
+                                    <img class="w-100" src=" {{ asset('storage/' . $Tournament->category->photo) }}"
+                                        alt="game" style="min-heigt:100px;">
+                                    <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
+                                        <span class="ps-3">
+                                            @if ($Tournament->status === 'rejected')
+                                                <span>Tolak</span>
+                                            @elseif ($Tournament->status === 'pending')
+                                                <span>Belum Dimulai</span>
+                                            @elseif ($Tournament->status === 'accepted')
+                                                <span>Dimulai</span>
+                                            @else
+                                                <span>Status turnamen tidak valid.</span>
+                                            @endif
+                                        </span>
+                                    </span>
+                                </div>
+                                <h5 class="card-title text-center tcn-1 mb-4 title-anim">{{ $Tournament->name }}</h5>
+                                {{-- <div class="d-center">
                                 <div class="card-info d-center gap-3 py-1 px-3">
                                     <div class="d-flex align-items-center gap-2">
                                         <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
@@ -213,9 +229,11 @@
                                         <span class="tcn-1 fs-xs">$49.97</span>
                                     </div>
                                 </div>
+                            </div> --}}
                             </div>
                         </div>
-                    </div>
+                    @endforeach
+                    <!-- Slides -->
                 </div>
             </div>
             <div class="swiper-btn-area d-center gap-6">
@@ -244,6 +262,7 @@
         </div>
         <div class="red-ball top-50"></div>
 
+
         <div class="tournament-wrapper">
             <div class="tournament-wrapper-border">
                 <div class="container pt-120 pb-120">
@@ -251,35 +270,41 @@
                         <div class="col-md-6 col-sm-8">
                             <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENTS</h2>
                         </div>
-                        <div class="col-md-6 col-sm-4 text-sm-end">
+                        {{-- <div class="col-md-6 col-sm-4 text-sm-end">
                             <a href="tournaments.html"
                                 class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill">VIEW
                                 MORE</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="row justify-content-between align-items-center g-6">
+                        @foreach ($Tournaments as $index => $Tournament)
+                        @if ($index < 3)
                         <div class="col-xl-4 col-md-6">
                             <div class="tournament-card p-xl-4 p-3 bgn-4">
                                 <div class="tournament-img mb-8 position-relative">
                                     <div class="img-area overflow-hidden">
-                                        <img class="w-100" src="assets/img/tournament3.png" alt="tournament">
+                                        <img class="w-100"
+                                            src="{{ asset('storage/' . $Tournament->category->photo) }}"
+                                            alt="tournament">
                                     </div>
-                                    <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                        <span class="dot-icon alt-icon ps-3">Playing</span>
-                                    </span>
+                                    {{-- <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
+                                     <span class="dot-icon alt-icon ps-3">Playing</span>
+                                </span> --}}
                                 </div>
                                 <div class="tournament-content px-xl-4 px-sm-2">
                                     <div class="tournament-info mb-5">
                                         <a href="tournaments-details.html" class="d-block">
-                                            <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                Liga
-                                                Triunfo</h4>
+                                            <h4
+                                                class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                {{ $Tournament->name }}</h4>
+
                                         </a>
-                                        <span class="tcn-6 fs-sm">Torneo Individual</span>
+                                        {{-- <span class="tcn-6 fs-sm">Torneo Individual</span> --}}
                                     </div>
                                     <div class="hr-line line3"></div>
                                     <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
-                                        <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
+                                        <div
+                                            class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                             <div class="d-flex align-items-center gap-2">
                                                 <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
                                                 <span class="tcn-1 fs-sm">75</span>
@@ -290,13 +315,23 @@
                                                 <span class="tcn-1 fs-sm">$49.97</span>
                                             </div>
                                         </div>
-                                        <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                        <div
+                                            class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                             <i class="ti ti-ticket fs-base tcp-2"></i>
-                                            <span class="tcn-1 fs-sm">Free Entry</span>
+                                            <span class="tcn-1 fs-sm">
+                                                @if ($Tournament->paidment === 'unpaid')
+                                                    Gratis
+                                                @elseif ($Tournament->paidment === 'paid')
+                                                    Berbayar
+                                                @else
+                                                    Status pembayaran tidak valid
+                                                @endif
+                                            </span>
                                         </div>
-                                        <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                        <div
+                                            class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                             <i class="ti ti-calendar fs-base tcn-1"></i>
-                                            <span class="tcn-1 fs-sm">OCT 07, 5:10 AM</span>
+                                            <span class="tcn-1 fs-sm">{{ $Tournament->permainan }}</span>
                                         </div>
                                     </div>
                                     <div class="hr-line line3"></div>
@@ -304,23 +339,28 @@
                                         <div class="teams-info d-between gap-xl-5 gap-3">
                                             <div class="teams d-flex align-items-center gap-1">
                                                 <i class="ti ti-users fs-base"></i>
-                                                <span class="tcn-6 fs-sm">12/12 Teams</span>
+                                                <span class="tcn-6 fs-sm"> Slot Tim : {{ $Tournament->slotTeam }}</span>
                                             </div>
-                                            <div class="player d-flex align-items-center gap-1">
-                                                <i class="ti ti-user fs-base"></i>
-                                                <span class="tcn-6 fs-sm">128 Players</span>
-                                            </div>
+                                            {{-- <div class="player d-flex align-items-center gap-1">
+                                            <i class="ti ti-user fs-base"></i>
+                                            <span class="tcn-6 fs-sm">128 Players</span>
+                                        </div> --}}
                                         </div>
-                                        <a href="tournaments-details.html" class="btn2">
-                                            <i class="ti ti-arrow-right fs-2xl"></i>
-                                        </a>
+                                        {{-- <a href="tournaments-details.html" class="btn2">
+                                        <i class="ti ti-arrow-right fs-2xl"></i>
+                                    </a> --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        @endif
+                        @endforeach
                     </div>
+
                 </div>
             </div>
+
         </div>
     </section>
     <!-- tournament section end -->
