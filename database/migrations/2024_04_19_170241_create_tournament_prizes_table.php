@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tournament_prizes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tournament_id');
-            $table->foreignId('prizepool_id');
+            $table->foreignId('tournament_id')->constrained('tournaments')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('prizepool_id')->constrained('prizepools')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('note');
             $table->timestamps();
         });

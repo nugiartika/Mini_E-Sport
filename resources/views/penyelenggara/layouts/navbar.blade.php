@@ -33,6 +33,7 @@
                     <span class="badge bg-danger rounded-pill badge-notifications">{{ $counttournaments }}</span>
                 </a>
             </li>
+
             <!--/ Notification -->
 
             <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
@@ -89,24 +90,22 @@
                         <div class="dropdown-divider"></div>
                     </li>
 
+                    <li>
+                        <a class="dropdown-item" href="javascript:;"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="ti ti-login me-2"></i>
+                            <span class="align-middle">Keluar</span>
+                        </a>
+                    </li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="mb-0">
                         @csrf
-                        <li>
-                            <a class="dropdown-item" href="javascript:;"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="ti ti-login me-2"></i>
-                                <span class="align-middle">Keluar</span>
-                            </a>
-                        </li>
-                    </form>
+                    </form>                    
 
                 </ul>
             </li>
-            <!--/ User -->
         </ul>
     </div>
 
-    <!-- Search Small Screens -->
     <div class="navbar-search-wrapper search-input-wrapper  d-none">
         <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..."
             aria-label="Search...">

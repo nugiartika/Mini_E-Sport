@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <h1>TOURNAMENT LIST</h1>
 
 <section class="position-relative z-1" id="swiper-3d">

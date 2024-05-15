@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JuaraController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\BracketController;
@@ -64,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
         Route::post('/jadwal/{id}', [JadwalController::class, 'jadwal'])->name('ptournament.jadwal');
         Route::post('/bracket/{id}', [BracketController::class, 'bracket'])->name('ptournament.bracket');
-        Route::post('/juara', [TournamentController::class, 'juara'])->name('ptournament.juara');
+        Route::post('/juara', [JuaraController::class, 'juara'])->name('ptournament.juara');
     });
 
     // User Routes
