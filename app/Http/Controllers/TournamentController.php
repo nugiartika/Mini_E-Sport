@@ -61,10 +61,11 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get();
         $category = Category::all();
-        $teams = Team::all();
+        $teams = Team::with('tournament')->where('user_id', auth()->id())->get();
         $teamTournament = TeamTournament::all();
         return view('user.tournamentUser', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts','teamTournament'));
     }
+    
     public function dashboard()
     {
         $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();

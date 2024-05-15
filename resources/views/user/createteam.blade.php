@@ -79,18 +79,18 @@
         <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
             @csrf
             <div class="customer-avatar-section">
-                <div class="d-flex justify-content-center">
+                {{-- <div class="d-flex justify-content-center"> --}}
                     {{-- @if ($teams->profile)
                     <img id="preview-image" src="{{ asset('storage/' . $teams->profile) }}" style="width: 100%; height: 100%; object-fit: cover;" alt="">
-                @else
-                    <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" style="width: 100%; height: 100%; object-fit: cover;" alt>
-                @endif --}}
+                @else --}}
+                    {{-- <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" style="width: 100%; height: 100%; object-fit: cover;" alt> --}}
+                {{-- @endif --}}
                     {{-- <img class="rounded my-3" id="preview-images" style="border: 2px solid #000000; object-fit: cover;" width="110px" height="110px" src="{{ asset('assets/img/game-x10.png') }}" alt="User avatar" /> --}}
 
 
                     {{-- <span class="btn-text" style=" bottom: 5px; right: 5px;"><i class="fas fa-camera"></i></span>
                     <input type="file" class="upload" name="profile" id="profile-input"> --}}
-                </div>
+                {{-- </div> --}}
                 {{-- <div class="fileupload d-flex justify-content-center">
                     <span class="btn-text" style="display: block; width: 32px; height: 32px; background-color: rgba(0, 0, 0, 0.5); border-radius: 50%; text-align: center; line-height: 32px; cursor: pointer;"><i class="fas fa-camera"></i>
                     <input type="file" class="upload" name="profile" id="profile-input" ></span>

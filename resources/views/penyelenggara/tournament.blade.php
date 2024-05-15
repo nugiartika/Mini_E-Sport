@@ -181,7 +181,7 @@
                                                         </div>
                                                     </div>
                                                     <a href="{{ route('tournament.detail', ['id' => $tournament->id]) }}"
-                                                        class="btn2">
+                                                        class="btn2" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Tournament">
                                                         <i class="ti ti-arrow-right fs-2xl"></i>
                                                     </a>
                                                 </div>

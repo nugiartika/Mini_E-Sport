@@ -36,14 +36,16 @@ class TeamTournamentController extends Controller
     // }
     public function create(Request $request)
     {
-        $teams = Team::all();
+        $teams = Team::where('user_id', auth()->id())->get();
         $tournaments = Tournament::all();
-        return view('user.tournamentUser', compact('teams', 'tournaments'));
+        $selectedTournamentId = $request->input('tournament_id');
+
+        return view('user.teams', compact('teams', 'tournaments','selectedTournamentId'));
     }
 
     public function store(TeamTournamentRequest $request)
     {
-        $tournament_id = $request->tournament_id;
+        $tournament_id = $request->get('tournament_id');
         $team_id = $request->team_id;
 
         TeamTournament::create([
@@ -59,7 +61,7 @@ class TeamTournamentController extends Controller
         //     'user_id' => $team->user_id,
         //     'tournament_id' => $tournament_id,
         // ]);
-        return redirect()->back()->with('success', 'Team added successfully');
+        return redirect()->route('user.tournament')->with('success', 'Team added successfully');
     }
 
     /**
