@@ -125,7 +125,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="regForm" action="{{ route('ptournament.juara', ['id' => $tournaments->first()->id]) }}"
+                    <form id="regForm" action="{{ route('ptournament.juara', ['id' => $tournament->first()->id]) }}"
                         method="POST">
                         @csrf
                         <h5>Juara 1</h5>
@@ -195,8 +195,9 @@
                     </div>
                     <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Prize Pool</h4>
                     @foreach ($prizes as $prize)
-                        <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }}
-                            {{ $prize->note }}</p>
+                        @if ($prize->tournament_id == $tournament->id)
+                            <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }} {{ $prize->note }}</p>
+                        @endif
                     @endforeach
                 </div>
                 <div class="tour-prize-card">
@@ -317,10 +318,14 @@
                         </div>
                     </div>
                     <div class="tabitem">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            Tambah Juara
-                        </button>
+                        @if ($juara->isEmpty())
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Tambah Juara
+                            </button>
+                        @else
+                            <p>Data juara sudah terisi. Anda tidak dapat menambahkan data juara lagi.</p>
+                        @endif
                         <div class="row align-items-center justify-content-center pt-lg-20 pt-sm-10">
                             <div class="col-lg-4 col-sm-6">
                                 <div class="d-grid justify-content-center align-items-center gap-10">
@@ -422,7 +427,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="regForm" action="{{ route('ptournament.jadwal', ['id' => $tournaments->first()->id]) }}"
+                    <form id="regForm" action="{{ route('ptournament.jadwal', ['id' => $tournament->first()->id]) }}"
                         method="POST"> @csrf
                         <div class="row mb-3">
                             <h5>Penyisihan</h5><br>
