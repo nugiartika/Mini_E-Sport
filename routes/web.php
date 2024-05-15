@@ -76,9 +76,10 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::any('transaction/callback', [TransactionController::class, 'callback'])->name('transaction.callback');
 Route::resource('transaction', TransactionController::class)->parameters([
-    'transaksi' => 'transaksi:slug'
-]);
+    'transaction' => 'transaction:ref_id'
+])->middleware('auth');
 
 // Public Routes
 // Route::get('/teams.create', [TeamController::class, 'createId'])->name('team.createId');

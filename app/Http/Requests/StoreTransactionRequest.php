@@ -11,7 +11,7 @@ class StoreTransactionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'payment_method' => 'required',
+            'team_tournament_id' => 'required|exists:team_tournaments,id',
+            'user_id' => 'required|exists:users,id'
         ];
     }
 }

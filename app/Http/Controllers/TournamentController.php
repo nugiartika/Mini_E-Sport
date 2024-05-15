@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
-use App\Models\tournament_prize;
 use App\Models\User;
 use App\Models\jadwal;
-use App\Models\member;
 use App\Models\bracket;
 use App\Models\Category;
-use App\Models\prizepool;
 use App\Models\Tournament;
-use DOMDocument;
 use Illuminate\Http\Request;
 use App\Models\TeamTournament;
 use Illuminate\Support\Facades\DB;

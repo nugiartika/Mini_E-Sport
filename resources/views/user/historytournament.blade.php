@@ -11,18 +11,39 @@
         @forelse ($teams as $team)
             @if ($team->teamTournament)
                 @foreach ($team->teamTournament as $tournament)
+                    @php
+                        $transaction = $tournament->transaction()->where('status', 'PAID');
+                        $findIsNotSuccess = $tournament->transaction()->whereNotIn('status', ['PAID', 'UNPAID', 'PENDING']);
+                        $findIsSuccess = $tournament->transaction()->whereIn('status', ['PAID', 'UNPAID', 'PENDING']);
+                        $transactionExists = $transaction->exists();
+                        $latestTransaction = $tournament->transaction()->latest()->first();
+                    @endphp
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="card">
                             <img src="{{ asset("storage/{$tournament->tournament->images}") }}"
                                 alt="{{ $tournament->tournament->name }}" class="card-img-top" />
                             <div class="card-body">
-                                <a class="stretched-link" href="{{ route('detailTournament', ['tournament' => $tournament->tournament->id]) }}">
-                                    <h3 class="mb-3">{{ $tournament->tournament->name }}</h3>
-                                </a>
+                                <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
+                                    <a href="{{ route('detailTournament', ['tournament' => $tournament->tournament->id]) }}">
+                                        <h3 class="mb-0">{{ $tournament->tournament->name }}</h3>
+                                    </a>
 
-                                <div class="d-flex gap-3 border-top justify-content-between pt-4 pb-3">
+                                    @if(!$transactionExists && !$findIsSuccess->exists())
+                                    <a href="{{ route('transaction.create', ['tournament_id' => $tournament->id]) }}" class="btn btn-sm btn-primary">Bayar Sekarang</a>
+                                    @endif
+                                </div>
+
+                                <div class="d-flex gap-3 justify-content-between py-3">
                                     <span>Tanggal Ikut</span>
-                                    <span>{{ $tournament->created_at->isoFormat('dddd, DD MMMM YYYY') }}</span>
+                                    <span>{{ $tournament->created_at->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}</span>
+                                </div>
+                                <div class="d-flex gap-3 border-top justify-content-between py-3">
+                                    <span>Sudah Bayar?</span>
+                                    <span>{{ $transactionExists ? 'Sudah' : 'Belum' }}</span>
+                                </div>
+                                <div class="d-flex gap-3 border-top justify-content-between pt-3">
+                                    <span>Transaksi Terakhir</span>
+                                    <span>{{ $latestTransaction ? $latestTransaction->status : 'Belum Ada Transaksi' }}</span>
                                 </div>
                             </div>
                         </div>

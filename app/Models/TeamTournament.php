@@ -26,4 +26,8 @@ class TeamTournament extends Model
     {
         return $this->belongsTo(Team::class, 'team_id', 'id');
     }
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
