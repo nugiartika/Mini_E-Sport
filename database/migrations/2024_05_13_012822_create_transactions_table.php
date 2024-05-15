@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->char('transaction_id', 48)->unique();
             $table->string('ref_id')->default(Str::random());
-            $table->unsignedBigInteger('amount')->unique();
+            $table->unsignedBigInteger('amount');
             $table->string('payment_method');
             $table->string('name');
             $table->string('phone');
