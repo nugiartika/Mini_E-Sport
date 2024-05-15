@@ -182,7 +182,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h1>Edit Turnamen</h1>  
+                        <h1>Edit Turnamen</h1>
                         <div class="tab">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama Turnamen</label>
