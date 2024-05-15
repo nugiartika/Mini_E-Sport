@@ -11,7 +11,7 @@
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                @foreach ($tournaments as $tournament)
+                @forelse ($tournaments as $tournament)
                         <div class="swiper-slide card">
                             <div class="card-3d d-grid justify-content-center p-3">
                                 <div class="img-area w-100 mb-8 position-relative">
@@ -37,7 +37,9 @@
                                 </div>
                             </div>
                         </div>
-                @endforeach
+                    @empty
+                        <p>No tournaments found</p>
+                    @endforelse
             </div>
         </div>
         <div class="swiper-btn-area d-center gap-6">
