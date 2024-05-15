@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <span class="fw-medium d-block">
-                                        Admin
+                                        Penyelenggara
                                     </span>
                                     <small class="text-muted">Humma Esport</small>
                                 </div>
@@ -99,7 +99,7 @@
                     </li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="mb-0">
                         @csrf
-                    </form>                    
+                    </form>
 
                 </ul>
             </li>

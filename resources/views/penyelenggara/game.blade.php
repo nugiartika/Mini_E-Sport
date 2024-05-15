@@ -8,7 +8,9 @@
     </div>
 
     @foreach ($category as $index)
-        <div class="col-lg-3 col-md-6 col-sm-12  ratio-16x9">
+
+    <div class="col-lg-3 col-md-6 col-sm-12  ratio-16x9">
+        <div class="card">
             <div class="game-card-wrapper mx-auto ">
                 <div class="game-card mb-5 p-2 ">
                     <div class="game-card-border"></div>
@@ -28,5 +30,6 @@
                 </a>
             </div>
         </div>
+    </div>
     @endforeach
 @endsection
