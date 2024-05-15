@@ -94,12 +94,10 @@
                                                             class="dropdown-item"><i class="ti ti-edit fs-2xl"></i> Edit
                                                             Tournament</a></li>
                                                     <li>
-                                                        <form id="deleteForm{{ $tournament->id }}"
-                                                            action="{{ route('ptournament.destroy', $tournament->id) }}"
-                                                            method="POST">
+                                                        <form id="deleteForm{{ $tournament->id }}" action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="dropdown-item">
+                                                            <button type="submit" class="dropdown-item" onclick="confirmDelete('{{ $tournament->id }}')">
                                                                 <i class="ti ti-trash fs-2xl"></i> Delete Tournament
                                                             </button>
                                                         </form>
@@ -154,7 +152,7 @@
                                                     <i class="ti ti-gift fs-base tcn-1"></i>
                                                     @foreach ($prizes as $prize)
                                                         @if ($prize->tournament_id == $tournament->id)
-                                                            <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }}
+                                                            <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }} ,
                                                                 {{ $prize->note }}</p>
                                                         @endif
                                                     @endforeach
@@ -199,21 +197,30 @@
         </div>
     </section>
     <script>
-        swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this imaginary file!",
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('form[id^="deleteForm"]').forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent the form from submitting immediately
+                    const tournamentId = this.id.replace('deleteForm', '');
+                    confirmDelete(tournamentId, this);
+                });
+            });
+        });
+
+        function confirmDelete(tournamentId, form) {
+            swal({
+                title: "apakah anda yakin untuk menghapus tournament ini?",
+                text: "Setelah dihapus maka tournament tidak akan muncul dimanapun",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
-            })
-            .then((willDelete) => {
+            }).then((willDelete) => {
                 if (willDelete) {
-                    swal("Poof! Your imaginary file has been deleted!", {
-                        icon: "success",
-                    });
+                    form.submit(); // Submit the form if the user confirms
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("Tournament masih tersimpan");
                 }
             });
+        }
     </script>
 @endsection

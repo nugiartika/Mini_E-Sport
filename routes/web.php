@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\TeamTournamentController;
 use App\Http\Controllers\DetailTournamentController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\RegisterOrganizerController;
 
 /*
@@ -93,8 +94,10 @@ Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
 Route::get('/detailteam', function () {
     return view('detailteam');
 })->name('team.detail');
-Route::get('/', function () {
-    return view('user.index');
-})->name('index');
+
+Route::get('/', [LandingPageController::class, 'index'])->name('index');
+// Route::get('/', function () {
+//     return view('user.index');
+// })->name('index');
 
 
