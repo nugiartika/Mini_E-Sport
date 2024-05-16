@@ -80,6 +80,14 @@
                         @csrf
                     </form>
 
+                    <li>
+                        <a class="dropdown-item" href="javascript:void(0)"
+                            onclick="document.getElementById('logout-form').submit();">
+                            <i class="ti ti-login me-2"></i>
+                            <span class="align-middle">Keluar</span>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
         </ul>

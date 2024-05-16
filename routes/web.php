@@ -18,6 +18,7 @@ use App\Http\Controllers\TeamTournamentController;
 use App\Http\Controllers\DetailTournamentController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\RegisterOrganizerController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/tournamentfilter', [TournamentController::class, 'filteruser'])->name('tournament.filteruser');
     });
 });
+
+Route::any('transaction/callback', [TransactionController::class, 'callback'])->name('transaction.callback');
+Route::resource('transaction', TransactionController::class)->parameters([
+    'transaction' => 'transaction:ref_id'
+])->middleware('auth');
 
 // Public Routes
 // Route::get('/teams.create', [TeamController::class, 'createId'])->name('team.createId');

@@ -32,7 +32,9 @@
             <link rel="icon" type="image/x-icon"
                 href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
 
-
+                <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+                <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+                <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
             <link rel="preconnect" href="https://fonts.googleapis.com/">
             <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -69,7 +71,7 @@
 
             <!-- laravel style -->
             <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
-            <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
+            {{-- <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script> --}}
 
             <script src="{{ asset('demo/assets/js/config.js') }}"></script>
 
@@ -187,7 +189,7 @@
     </script>
     <script
         src="{{ asset('demo/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar6188.js?id=44b8e955848dc0c56597c09f6aebf89a') }}">
-    </>
+    </script>
     <script src="{{ asset('demo/assets/vendor/libs/hammer/hammer2de0.js?id=0a520e103384b609e3c9eb3b732d1be8') }}"></script>
     <script src="{{ asset('demo/assets/vendor/libs/typeahead-js/typeahead60e7.js?id=f6bda588c16867a6cc4158cb4ed37ec6') }}">
     </script>

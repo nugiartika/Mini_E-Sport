@@ -109,7 +109,7 @@
     <div class="container d-flex justify-content-center align-items-center" style="margin-top: 10%; color: #939393">
 
         <!-- Second column -->
-        <div class="col-12 col-lg-4">
+        <div class="col-12 col-lg-6">
             <!-- Pricing Card -->
             <div class="card mb-4">
                 {{-- <div class="card-header">

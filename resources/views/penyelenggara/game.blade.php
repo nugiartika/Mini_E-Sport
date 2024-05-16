@@ -19,9 +19,10 @@
                                 <img class="w-100 h-100" src="{{ asset('storage/' . $index->photo) }}" alt="game">
                             </div>
                         </div>
-                        <a href="tournaments-details.html">
-                            <h4 class="game-title mb-0 tcn-1 cursor-scale growDown2 title-anim">{{ $index->name }}</h4>
+                        <a href="tournaments-details.html" style="display: block; text-align: center;">
+                            <h4>{{ $index->name }}</h4>
                         </a>
+
                     </div>
                 </div>
             </div>

@@ -67,18 +67,15 @@
 @endsection
 @section('content')
 
-                   
-                        <div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existingLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog" role="document" style="height: 100vh;">
-                                <div class="modal-content">
-                                    <div class="modal-header">
+
+
+                                    <div class="col-xl-6 col-12 mb-4">
+                                    <div class="card">
+                                    <div class="card-header">
                                         <h5 class="modal-title text-white" id="exampleModalLabel">Tim Lama</h5>
-                                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button> --}}
+
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="card-body">
 
                                         <form action="{{ route('teams.store') }}" method="POST">
                                             @csrf
@@ -87,8 +84,8 @@
                                                 <div class="row text-black">
                                                     @foreach ($teams as $team)
                                                         {{-- @if ($team->user_id === auth()->user()->id) --}}
-                                                        @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id)
-                                                        <input type="hidden" name="tournament_id" value="{{ $tournament->id }}">
+                                                        {{-- @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id) --}}
+                                                        <input type="hidden" name="tournament_id" value="{{ $selectedTournamentId }}">
                                                         <div class="col-12 mb-3">
                                                             <div class="card"
                                                                 id="teamCard{{ $team->id }}"
@@ -113,7 +110,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                            @endif
+                                                            {{-- @endif --}}
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -122,27 +119,42 @@
 
                                             <button type="submit" class="btn btn-primary">simpan</button>
                                         </form>
-
+                                    </div>
+                                    </div>
                                     </div>
 
-                                </div>
-                            </div>
-                        </div>
-                @empty
-                <div class="col-lg-12">
-                    <center>
-                        <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                        style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                    </center>
-                    <h1 class="table-light" style="text-align: center;">
-                        Data Tidak Tersedia
-                    </h1>
-                </div>
-            @endforelse
 
 
 
-            </div>
-        </div>
-    </div>
+
+
+    @endsection
+    @section('script')
+    <script>
+        $(document).ready(function() {
+            $('#existing').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Tombol yang memicu modal
+                var tournamentId = button.data(
+                'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
+                var modal = $(this);
+                modal.find('.modal-body input[name="tournament_id"]').val(
+                tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
+            });
+        });
+
+        function cardRadio(card) {
+            var radioButton = card.querySelector('input[type="radio"]');
+
+            if (!radioButton.checked) {
+                radioButton.checked = true;
+
+                var cards = document.querySelectorAll('.card');
+                cards.forEach(function(card) {
+                    card.classList.remove('border-red');
+                });
+
+                card.classList.add('border-red');
+            }
+        }
+    </script>
     @endsection

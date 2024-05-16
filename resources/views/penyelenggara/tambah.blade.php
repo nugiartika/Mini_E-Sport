@@ -1,5 +1,16 @@
 @extends('penyelenggara.layouts.app')
 
+@section('style')
+<head><link href="summernote-bs5.css" rel="stylesheet">
+    <script src="summernote-bs5.js"></script>
+
+    <style>
+        .note-editable {
+    color: white; /* Atur warna teks menjadi putih */
+}
+    </style>
+</head>
+@endsection
 @section('content')
     <style>
         .custom-summernote {
@@ -206,6 +217,7 @@
         .select-css option {
             color: #222;
         }
+
     </style>
 
     <div class="layout-container">
@@ -251,154 +263,16 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="tab">
-                                    <div class="mb-3">
-                                        <label for="prizepol" class="form-label">Hadiah Turnamen</label>
-                                        <form id="prizepol-form">
-                                            <div id="inputs">
-                                                <div class="form-prize">
-                                                    <div class="input-group">
-                                                        <select class="form-control prize-dropdown"
-                                                            name="prizepool_id[]">
-                                                            <option value="">Pilih Hadiah</option>
-                                                            @foreach ($prizes as $kat)
-                                                                <option value="{{ $kat->id }}"
-                                                                    {{ old('prizepool_id') == $kat->id ? 'selected' : '' }}>
-                                                                    {{ $kat->prize }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-
-                                                        <button type="button"
-                                                            class="addRow rounded-end btn btn-info"><i
-                                                                class="ti ti-plus fs-2xl"></i></button>
-
-                                                        <button type="button"
-                                                            class="removeRow d-none btn btn-danger"><i
-                                                                class="ti ti-trash fs-2xl"></i></button>
-                                                    </div>
-
-                                                    <div class="w-100 mt-3 noteForm" style="display: none;">
-                                                        <input class="form-control" type="text"
-                                                            placeholder="Isikan deskripsi hadiah" name="note[]" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="contact" class="form-label">Kontak Penanggungjawab</label>
-                                        <input type="number"
-                                            class="form-control @error('contact') is-invalid @enderror" id="contact"
-                                            name="contact" value="{{ old('contact') }}">
-                                        @error('contact')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="category" class="form-label">GAME</label>
-                                        <select class="form-control @error('categories_id') is-invalid @enderror"
-                                            id="category" name="categories_id" aria-label="Default select example">
-                                            <option value="" selected>Select Game</option>
-                                            @foreach ($category as $kat)
-                                                <option value="{{ $kat->id }}"
-                                                    {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
-                                                    {{ $kat->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('categories_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="images" class="form-label">Unggah Poster</label>
-                                        <input type="file"
-                                            class="form-control @error('images') is-invalid @enderror" id="images"
-                                            name="images" onchange="previewImage(event)">
-                                        @if (old('images'))
-                                            <img id="preview" src="{{ asset('storage/' . old('images')) }}"
-                                                alt="Old images" style="max-width: 100px; max-height: 100px;">
-                                        @endif
-                                        @error('images')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="tab">
-                                    <div class="mb-3">
-                                        <label for="description" class="form-label">Deskripsi</label>
-                                        <textarea name="description" id="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('description') }}</textarea>
-                                        @error('description')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                    <!-- /Full Editor -->
-                                  </div>
-
-
-
-
-
-
-                                <div class="mb-3">
-                                    <label for="rule" class="form-label">Aturan Main</label>
-                                    <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen"
-                                        class="form-control" aria-label="With textarea">{{ old('rule') }}</textarea>
-
-                                    @error('rule')
-                                        <p class="text-danger">{{ $message }}</p>
+                                <div class="col-md-6">
+                                    <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
+                                    <input type="date" class="form-control @error('end_permainan') is-invalid @enderror"
+                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}">
+                                    @error('end_permainan')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
-                                <div class="mb-3">
-                                    <label for="paidment" class="form-label">Event Berbayar atau Gratis?</label>
-                                    @error('paidment')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
-                                        <option value="" selected disabled>Pilih</option>
-                                        <option value="paid" {{ old('paidment') == 'paid' ? 'selected' : '' }}>Berbayar
-                                        </option>
-                                        <option value="unpaid" {{ old('paidment') == 'unpaid' ? 'selected' : '' }}>Tidak
-                                            Berbayar</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3" id="nominal" style="display: none;">
-                                    <label for="nominal_input" class="form-label">Masukkan Nominal</label>
-                                    @error('nominal')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <input type="number" name="nominal" id="nominal_input" class="form-control">
-                                </div>
-                            </div>
-                            <div class="d-flex gap-2 justify-content-between">
-                                <button type="button" class="btn btn-secondary"
-                                    onclick="window.location.href='/ptournament'">Batal</button>
-
-                                <div class="d-flex align-items-center gap-2">
-                                    <button type="button" id="prevBtn" onclick="nextPrev(-1)"
-                                        class="btn btn-danger">Kembali</button>
-                                    <button type="button" id="nextBtn" onclick="nextPrev(1)"
-                                        class="btn btn-success">Lanjut</button>
-                                </div>
-                            </div>
-                            <div>
-
-                            </div>
-                            <div style="text-align:center;margin-top:40px;">
-                                <span class="step"></span>
-                                <span class="step"></span>
-                                <span class="step"></span>
                             </div>
 
                             <div class="row mb-3">
@@ -412,22 +286,22 @@
                                         </span>
                                     @enderror
                                 </div>
-
                                 <div class="col-md-6">
-                                    <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
-                                    <input type="date" class="form-control @error('end_permainan') is-invalid @enderror"
-                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}">
-                                    @error('end_permainan')
+                                    <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
+                                    <input type="date"
+                                        class="form-control @error('end_pendaftaran') is-invalid @enderror"
+                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran') }}">
+                                    @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="mb-3">
                                 <label for="slotTeam" class="form-label">Jumlah Tim</label>
-                                <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
+                                <input type="number"
+                                    class="form-control @error('slotTeam') is-invalid @enderror"
                                     id="slotTeam" name="slotTeam" value="{{ old('slotTeam') }}">
                                 @error('slotTeam')
                                     <span class="invalid-feedback" role="alert">
@@ -436,6 +310,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="tab">
                             <div class="mb-3">
                                 <label for="prizepol" class="form-label">Hadiah Turnamen</label>
@@ -518,7 +393,7 @@
                         <div class="tab">
                             <div class="mb-3">
                                 <label for="description" class="form-label">Deskripsi</label>
-                                <textarea name="description" id="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('description') }}</textarea>
+                                <textarea name="description" id="custom-summernote" class="custom-summernote text-white" aria-label="With textarea">{{ old('description') }}</textarea>
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -541,7 +416,7 @@
                                 @enderror
                                 <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
                                     <option value="" selected disabled>Pilih</option>
-                                    <option value="Berbayar" {{ old('paidment') == 'paid' ? 'selected' : '' }}>
+                                    <option value="Berbayar" {{ old('paidment') == 'Berbayar' ? 'selected' : '' }}>
                                         Berbayar
                                     </option>
                                     <option value="Gratis" {{ old('paidment') == 'Gratis' ? 'selected' : '' }}>
@@ -596,7 +471,7 @@
             console.log("Nilai yang dipilih:", value); // Tambahkan pesan log untuk memeriksa nilai yang dipilih
             let div = document.getElementById("nominal");
 
-            if (value === "paid") {
+            if (value === "Berbayar") {
                 console.log("Menampilkan form nominal"); // Tambahkan pesan log untuk memeriksa logika ini
                 div.style.display = "block";
             } else {
@@ -748,12 +623,20 @@
                ['view', ['fullscreen', 'codeview', 'help']]
              ],
              callbacks: {
+                onInit: function() {
+                    // Set background color to white
+                    $('.custom-summernote .note-editor').css('background-color', 'white');
+                    // Set text color to white
+                    $('.custom-summernote .note-editable').css('color', 'white');
+                },
                 onChange: function(contents, $editable) {
-                    $('.custom-summernote .note-editable').css('color', 'white'); // Mengatur warna teks menjadi putih
+                    // Set text color to white
+                    $('.custom-summernote .note-editable').css('color', 'white');
                 }
             }
-           });
+          });
          });
+
    </script>
 
 @endsection
