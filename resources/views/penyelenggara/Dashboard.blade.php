@@ -31,7 +31,7 @@
                                         <div class="v-line"></div>
                                         <div class="d-flex align-items-center gap-2">
                                             <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                            <span class="tcn-1 fs-xs">Rp.{{ number_format(floatval($tournament->nominal), 0, ',', '.') }}</span>
+                                            <span class="tcn-1 fs-xs">Rp.{{ number_format(floatval($tournament->nominal), 000, ',', '.') }}</span>
                                         </div>
                                     </div>
                                 </div>
