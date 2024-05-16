@@ -94,10 +94,13 @@
                                                             class="dropdown-item"><i class="ti ti-edit fs-2xl"></i> Edit
                                                             Tournament</a></li>
                                                     <li>
-                                                        <form id="deleteForm{{ $tournament->id }}" action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST">
+                                                        <form id="deleteForm{{ $tournament->id }}"
+                                                            action="{{ route('ptournament.destroy', $tournament->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="dropdown-item" onclick="confirmDelete('{{ $tournament->id }}')">
+                                                            <button type="submit" class="dropdown-item"
+                                                                onclick="confirmDelete('{{ $tournament->id }}')">
                                                                 <i class="ti ti-trash fs-2xl"></i> Delete Tournament
                                                             </button>
                                                         </form>
@@ -129,7 +132,8 @@
                                                     <div
                                                         class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                                         <div class="d-flex align-items-center gap-2">
-                                                            <img class="w-100" src="{{ asset('assets/img/tether.png') }}"
+                                                            <img class="w-100"
+                                                                src="{{ asset('assets/img/tether.png') }}"
                                                                 alt="tether">
                                                             <span
                                                                 class="tcn-1 fs-sm">Rp.{{ number_format(floatval($tournament->nominal), 0, ',', '.') }}</span>
@@ -179,7 +183,7 @@
                                                         </div>
                                                     </div>
                                                     <a href="{{ route('tournament.detail', ['id' => $tournament->id]) }}"
-                                                        class="btn2" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Tournament">
+                                                        class="btn2">
                                                         <i class="ti ti-arrow-right fs-2xl"></i>
                                                     </a>
                                                 </div>
@@ -196,10 +200,22 @@
             </div>
         </div>
     </section>
+    @if (session()->has('success'))
+        <script>
+            swal({
+                title: "Success!",
+                text: "{{ session()->get('success') }}",
+                icon: "success",
+                button: "Okay",
+            });
+        </script>
+    @endif
+
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('form[id^="deleteForm"]').forEach(function (form) {
-                form.addEventListener('submit', function (event) {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('form[id^="deleteForm"]').forEach(function(form) {
+                form.addEventListener('submit', function(event) {
                     event.preventDefault(); // Prevent the form from submitting immediately
                     const tournamentId = this.id.replace('deleteForm', '');
                     confirmDelete(tournamentId, this);

@@ -10,56 +10,39 @@ class PrizepoolController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function addprizepool()
     {
-        //
-    }
+        $prizepool = Prizepool::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('admin.addprizepool', compact('prizepool'));
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function storePrize(Request $request)
     {
-        //
+        prizepool::create([
+            'prize' => $request->input('prize'),
+        ]);
+        return redirect()->route('admin.prizepool')->with('success', 'Hadiah berhasil ditambahkan');
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(prizepool $prizepool)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(prizepool $prizepool)
-    {
-        //
-    }
+     public function destroyPrize($prizepoolId)
+     {
+         try {
+             $prizepool = Prizepool::findOrFail($prizepoolId);
+             $prizepool->delete();
+             return redirect()->route('admin.prizepool')->with('success', 'Hadiah berhasil dihapus');
+         } catch (\Exception $e) {
+             return redirect()->route('admin.prizepool')->with('error', 'Gagal menghapus Hadiah. Silakan coba lagi.');
+         }
+     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, prizepool $prizepool)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(prizepool $prizepool)
-    {
-        //
-    }
 }

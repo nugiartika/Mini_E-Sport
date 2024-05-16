@@ -13,7 +13,7 @@
 
 <body>
 
-  
+
 
     <!-- cursor effect-->
     <div class="cursor"></div>

@@ -176,7 +176,7 @@
                 </div>
             </div>
         @endif
-        <form action="{{ route('ptournament.updatetour') }}" method="POST" enctype="multipart/form-data" id="regForm">
+        <form action="{{ route('ptournament.updatetour', ['id' => $id]) }}" method="POST" enctype="multipart/form-data" id="regForm">
             @csrf
             <div class="row justify-content-center">
 
@@ -188,7 +188,7 @@
                                 <label for="name" class="form-label">Nama Turnamen</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     placeholder="Mis: Mobile Legends" id="name" name="name"
-                                    value="{{ old('name') }}">
+                                    value="{{ old('name', $tournament->name ) }}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -200,7 +200,7 @@
                                 <div class="col-md-6">
                                     <label for="pendaftaran" class="form-label">Tanggal Pendaftaran</label>
                                     <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror"
-                                        id="pendaftaran" name="pendaftaran" value="{{ old('pendaftaran') }}">
+                                        id="pendaftaran" name="pendaftaran" value="{{ old('pendaftaran', $tournament->pendaftaran ) }}">
                                     @error('pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -211,7 +211,7 @@
                                     <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
                                     <input type="date"
                                         class="form-control @error('end_pendaftaran') is-invalid @enderror"
-                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran') }}">
+                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran', $tournament->end_pendaftaran ) }}">
                                     @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -224,7 +224,7 @@
                                 <div class="col-md-6">
                                     <label for="permainan" class="form-label">Mulai Kompetisi</label>
                                     <input type="date" class="form-control @error('permainan') is-invalid @enderror"
-                                        id="permainan" name="permainan" value="{{ old('permainan') }}">
+                                        id="permainan" name="permainan" value="{{ old('permainan', $tournament->permainan ) }}">
                                     @error('permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -235,7 +235,7 @@
                                 <div class="col-md-6">
                                     <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
                                     <input type="date" class="form-control @error('end_permainan') is-invalid @enderror"
-                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}">
+                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan', $tournament->end_permainan ) }}">
                                     @error('end_permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -247,7 +247,7 @@
                             <div class="mb-3">
                                 <label for="slotTeam" class="form-label">Jumlah Tim</label>
                                 <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
-                                    id="slotTeam" name="slotTeam" value="{{ old('slotTeam') }}">
+                                    id="slotTeam" name="slotTeam" value="{{ old('slotTeam', $tournament->slotTeam ) }}">
                                 @error('slotTeam')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -292,7 +292,7 @@
                             <div class="mb-3">
                                 <label for="contact" class="form-label">Kontak Penanggungjawab</label>
                                 <input type="number" class="form-control @error('contact') is-invalid @enderror"
-                                    id="contact" name="contact" value="{{ old('contact') }}">
+                                    id="contact" name="contact" value="{{ old('contact', $tournament->contact ) }}">
                                 @error('contact')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -337,7 +337,7 @@
                         <div class="tab">
                             <div class="mb-3">
                                 <label for="description" class="form-label">Deskripsi</label>
-                                <textarea name="description" id="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('description') }}</textarea>
+                                <textarea name="description" id="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('description', $tournament->description ) }}</textarea>
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -347,7 +347,7 @@
                             <div class="mb-3">
                                 <label for="rule" class="form-label">Aturan Main</label>
                                 <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen"
-                                    class="form-control" aria-label="With textarea">{{ old('rule') }}</textarea>
+                                    class="form-control" aria-label="With textarea">{{ old('rule', $tournament->rule ) }}</textarea>
 
                                 @error('rule')
                                     <p class="text-danger">{{ $message }}</p>
@@ -429,6 +429,15 @@
         var currentTab = 0;
         showTab(currentTab);
 
+        @if ($errors->any())
+        swal({
+            title: "Error",
+            text: "{{ $errors->all()[0] }}",
+            icon: "error",
+            button: "ok",
+        });
+        @endif
+
         function showTab(n) {
             var x = document.getElementsByClassName("tab");
             x[n].style.display = "block";
@@ -455,20 +464,9 @@
 
             x[currentTab].style.display = "none";
             currentTab = currentTab + n;
-
             if (currentTab >= x.length) {
-                swal({
-                    title: "Berhasi!",
-                    text: "anda mengubah data tournament!",
-                    icon: "success",
-                    button: "ok",
-                }).then((willSubmit) => {
-                    if (willSubmit) {
-                        document.getElementById("regForm").action = "{{ route('ptournament.updatetour') }}";
-                        document.getElementById("regForm").submit();
-                    }
-                });
-                return false;
+                document.getElementById("regForm").action = "{{ route('ptournament.updatetour', ['id' => $id]) }}";
+                document.getElementById("regForm").submit();
             }
 
             showTab(currentTab);

@@ -47,6 +47,12 @@
                         <div>Game</div>
                     </a>
                 </li>
+
+                <li class="menu-item {{ request()->routeIs('admin.prizepool') ? 'active' : '' }}">
+                    <a href="{{ route('admin.prizepool') }}" class="menu-link">
+                        <div>Prizepool</div>
+                    </a>
+                </li>
             </ul>
         </li>
         {{-- end dashboard admin --}}

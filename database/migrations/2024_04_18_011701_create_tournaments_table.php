@@ -29,7 +29,8 @@ return new class extends Migration
             $table->enum('status', ['pending','rejected','accepted'])->default('pending');
             $table->text('reason')->nullable();
             $table->enum('paidment',['Berbayar','Gratis']);
-            $table->integer('nominal')->nullable(); $table->foreignId('jurnal_id')->nullable();
+            $table->integer('nominal')->nullable();
+            $table->foreignId('jurnal_id')->nullable();
 
             $table->timestamps();
         });

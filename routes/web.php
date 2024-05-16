@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\prizepool;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
@@ -9,14 +10,15 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\BracketController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PrizepoolController;
 use App\Http\Controllers\SainsRoleController;
 use App\Http\Controllers\TournamentController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\TeamTournamentController;
 use App\Http\Controllers\DetailTournamentController;
-use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\RegisterOrganizerController;
 
 /*
@@ -50,6 +52,10 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('rejectUser/{idUser}', [SainsRoleController::class, 'destroy'])->name('rejectUser');
         Route::delete('deleteUser/{idUser}', [UserController::class, 'destroy'])->name('deleteUser');
         Route::get('chart', [DashboardAdminController::class, 'response'])->name('chart');
+        Route::get('/addprizepool', [PrizepoolController::class, 'addprizepool'])->name('admin.prizepool');
+        Route::post('/storePrize', [PrizepoolController::class, 'storePrize'])->name('admin.storePrize');
+        Route::delete('/destroyPrize/{id}', [PrizepoolController::class, 'destroyPrize'])->name('admin.destroyPrize');
+
     });
 
     // Organizer Routes

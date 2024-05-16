@@ -25,9 +25,9 @@ class TournamentRequest extends FormRequest
         return [
             'name' => 'required|string',
             'pendaftaran' => 'required|date_format:Y-m-d',
-            'permainan' => 'required|date_format:Y-m-d',
-            'end_pendaftaran' => 'required|date_format:Y-m-d',
-            'end_permainan' => 'required|date_format:Y-m-d',
+            'permainan' => 'required|date_format:Y-m-d|after:end_pendaftaran',
+            'end_pendaftaran' => 'required|date_format:Y-m-d|after:pendaftaran',
+            'end_permainan' => 'required|date_format:Y-m-d|after:permainan',
             'categories_id' => 'required|exists:categories,id',
             'users_id' => 'nullable',
             'slotTeam' => [
@@ -45,9 +45,8 @@ class TournamentRequest extends FormRequest
             'description' => 'required',
             'rule' => 'required|string',
             'paidment' => 'required|string',
-            'nominal' => 'nullable|numeric',
-            'prizepool_id' => 'required',
-            'note' => 'required',
+            'nominal' => 'numeric|required_if:paidment,Berbayar',
+
         ];
 
 

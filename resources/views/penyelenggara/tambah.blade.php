@@ -1,15 +1,18 @@
 @extends('penyelenggara.layouts.app')
 
 @section('style')
-<head><link href="summernote-bs5.css" rel="stylesheet">
-    <script src="summernote-bs5.js"></script>
 
-    <style>
-        .note-editable {
-    color: white; /* Atur warna teks menjadi putih */
-}
-    </style>
-</head>
+    <head>
+        <link href="summernote-bs5.css" rel="stylesheet">
+        <script src="summernote-bs5.js"></script>
+
+        <style>
+            .note-editable {
+                color: white;
+                /* Atur warna teks menjadi putih */
+            }
+        </style>
+    </head>
 @endsection
 @section('content')
     <style>
@@ -88,56 +91,12 @@
             margin-bottom: 5px;
         }
 
-    input,
-    select,
-    {
-    margin-bottom: 15px;
-    background: none;
-    padding: .6em .8em .5em .8em;
-    border: 0;
-    border-bottom: 1px solid #fff;
-    border-radius: 0;
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.3;
-    }
-
-    .main {
-        width: 480px;
-        margin: 0 auto;
-    }
-
-
-    .input,
-    .label {
-        padding: 0 20px;
-        width: 200px;
-    }
-
-
-    .input {
-        height: 55px;
-    }
-
-    .input:nth-of-type(3) {
-        padding-right: 0;
-        width: 220px;
-    }
-
-    .input span {
-        padding-left: 5px;
-    }
-
-    .count {
-        padding: .9em 0 0;
-        width: 20px;
-    }
-
-    .submit {
-        margin: 20px auto;
-        display: block;
-        width: 100px;
+        input,
+        select,
+        {
+        margin-bottom: 15px;
+        background: none;
+        padding: .6em .8em .5em .8em;
         border: 0;
         border-bottom: 1px solid #fff;
         border-radius: 0;
@@ -145,6 +104,50 @@
         font-weight: 700;
         color: #fff;
         line-height: 1.3;
+        }
+
+        .main {
+            width: 480px;
+            margin: 0 auto;
+        }
+
+
+        .input,
+        .label {
+            padding: 0 20px;
+            width: 200px;
+        }
+
+
+        .input {
+            height: 55px;
+        }
+
+        .input:nth-of-type(3) {
+            padding-right: 0;
+            width: 220px;
+        }
+
+        .input span {
+            padding-left: 5px;
+        }
+
+        .count {
+            padding: .9em 0 0;
+            width: 20px;
+        }
+
+        .submit {
+            margin: 20px auto;
+            display: block;
+            width: 100px;
+            border: 0;
+            border-bottom: 1px solid #fff;
+            border-radius: 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.3;
         }
 
 
@@ -217,7 +220,6 @@
         .select-css option {
             color: #222;
         }
-
     </style>
 
     <div class="layout-container">
@@ -264,15 +266,17 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
-                                    <input type="date" class="form-control @error('end_permainan') is-invalid @enderror"
-                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}">
-                                    @error('end_permainan')
+                                    <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
+                                    <input type="date"
+                                        class="form-control @error('end_pendaftaran') is-invalid @enderror"
+                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran') }}">
+                                    @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
+
                             </div>
 
                             <div class="row mb-3">
@@ -287,21 +291,20 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
-                                    <input type="date"
-                                        class="form-control @error('end_pendaftaran') is-invalid @enderror"
-                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran') }}">
-                                    @error('end_pendaftaran')
+                                    <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
+                                    <input type="date" class="form-control @error('end_permainan') is-invalid @enderror"
+                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}">
+                                    @error('end_permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
+
                             </div>
                             <div class="mb-3">
                                 <label for="slotTeam" class="form-label">Jumlah Tim</label>
-                                <input type="number"
-                                    class="form-control @error('slotTeam') is-invalid @enderror"
+                                <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
                                     id="slotTeam" name="slotTeam" value="{{ old('slotTeam') }}">
                                 @error('slotTeam')
                                     <span class="invalid-feedback" role="alert">
@@ -318,15 +321,22 @@
                                     <div id="inputs">
                                         <div class="form-prize">
                                             <div class="input-group">
-                                                <select class="form-control prize-dropdown" name="prizepool_id[]">
+                                                <select
+                                                    class="form-control prize-dropdown @error('prizepool_id[]') is-invalid @enderror"
+                                                    name="prizepool_id[]">
                                                     <option value="">Pilih Hadiah</option>
                                                     @foreach ($prizes as $kat)
                                                         <option value="{{ $kat->id }}"
-                                                            {{ old('prizepool_id') == $kat->id ? 'selected' : '' }}>
+                                                            {{ old('prizepool_id[]') == $kat->id ? 'selected' : '' }}>
                                                             {{ $kat->prize }}
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                @error('prizepool_id[]')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
 
                                                 <button type="button" class="addRow rounded-end btn btn-info"><i
                                                         class="ti ti-plus fs-2xl"></i></button>
@@ -336,8 +346,13 @@
                                             </div>
 
                                             <div class="w-100 mt-3 noteForm" style="display: none;">
-                                                <input class="form-control" type="text"
+                                                <input class="form-control @error('note') is-invalid @enderror" type="text"
                                                     placeholder="Isikan deskripsi hadiah" name="note[]" />
+                                                @error('note')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -485,6 +500,15 @@
         var currentTab = 0;
         showTab(currentTab);
 
+        @if ($errors->any())
+        swal({
+            title: "Error",
+            text: "{{ $errors->all()[0] }}",
+            icon: "error",
+            button: "ok",
+        });
+        @endif
+
         function showTab(n) {
             var x = document.getElementsByClassName("tab");
             x[n].style.display = "block";
@@ -513,20 +537,10 @@
             currentTab = currentTab + n;
 
             if (currentTab >= x.length) {
-                swal({
-                    title: "Berhasi membuat tournament baru!",
-                    text: "tunggu persetujuan admin",
-                    icon: "success",
-                    button: "ok",
-                }).then((willSubmit) => {
-                    if (willSubmit) {
-                        document.getElementById("regForm").action = "{{ route('ptournament.store') }}";
-                        document.getElementById("regForm").submit();
-                    }
-                });
+                document.getElementById("regForm").action = "{{ route('ptournament.store') }}";
+                document.getElementById("regForm").submit();
                 return false;
             }
-
             showTab(currentTab);
         }
 
@@ -608,35 +622,33 @@
     </script>
 
     <script>
-     $(document).ready(function() {
-        $('.custom-summernote').summernote({
-             placeholder: 'Isi deskripsi tournament',
-             tabsize: 2,
-             height: 120,
-             toolbar: [
-               ['style', ['style']],
-               ['font', ['bold', 'underline', 'clear']],
-               ['color', ['color']],
-               ['para', ['ul', 'ol', 'paragraph']],
-               ['table', ['table']],
-               ['insert', ['link', 'picture', 'video']],
-               ['view', ['fullscreen', 'codeview', 'help']]
-             ],
-             callbacks: {
-                onInit: function() {
-                    // Set background color to white
-                    $('.custom-summernote .note-editor').css('background-color', 'white');
-                    // Set text color to white
-                    $('.custom-summernote .note-editable').css('color', 'white');
-                },
-                onChange: function(contents, $editable) {
-                    // Set text color to white
-                    $('.custom-summernote .note-editable').css('color', 'white');
+        $(document).ready(function() {
+            $('.custom-summernote').summernote({
+                placeholder: 'Isi deskripsi tournament',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ],
+                callbacks: {
+                    onInit: function() {
+                        // Set background color to white
+                        $('.custom-summernote .note-editor').css('background-color', 'white');
+                        // Set text color to white
+                        $('.custom-summernote .note-editable').css('color', 'white');
+                    },
+                    onChange: function(contents, $editable) {
+                        // Set text color to white
+                        $('.custom-summernote .note-editable').css('color', 'white');
+                    }
                 }
-            }
-          });
-         });
-
-   </script>
-
+            });
+        });
+    </script>
 @endsection

@@ -165,7 +165,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="BracketModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -282,14 +282,13 @@
                                         style="width: 100%;">https://challonge.com/id/tournament/bracket_generator</a>
                                     <!-- Button untuk memasukkan URL langsung -->
                                     <button type="button" class="btn btn-primary mt-3" id="showModalBtn"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        data-bs-toggle="modal" data-bs-target="#BracketModal">
                                         Masukkan Link Bracket Pertandingan Disini
                                     </button>
                                     <div class="mt-3">
                                         <h5>Link Bracket:</h5>
                                         <!-- Tautan yang akan diperbarui secara dinamis -->
                                         <a id="dynamicLink" href="#" target="_blank"></a>
-                                        <iframe id="dynamicLink" href="#" target="_blank"></iframe>
                                     </div>
                                     <!-- Modal -->
                                 </div>

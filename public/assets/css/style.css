@@ -66,31 +66,6 @@ body {
   position: relative;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: #fff;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-button,
-::-webkit-scrollbar-thumb {
-  background: #1791C8;
-  border-radius: 5px;
-}
-
-::-moz-selection {
-  color: #1791C8;
-  background: rgb(var(--n0));
-}
-
-::selection {
-  color: #1791C8;
-  background: rgb(var(--n1));
-}
 
 section,
 footer {

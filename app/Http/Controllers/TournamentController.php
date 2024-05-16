@@ -195,14 +195,23 @@ class TournamentController extends Controller
 
 
             foreach ($prizepoolId as $index => $value) {
-                $tournamentPrize    = Tournament_Prize::create([
+                $note = $request->input('note')[$index];
+                if (empty($note)) {
+                    return redirect()->back()->with('error', 'Catatan harus diisi');
+                }
+
+                if (empty($value)) {
+                    return redirect()->back()->with('error', 'Prizepool harus dipilih');
+                }
+                $tournamentPrize = Tournament_Prize::create([
                     'tournament_id' => $tournamentId,
-                    'note' => $request->input('note')[$index],
+                    'note' => $note,
                     'prizepool_id' => $value
                 ]);
             }
 
-            return redirect()->route('ptournament.index')->with('success', 'Tournament added successfully');
+
+            return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil ditambahkan');
         } catch (\Exception $e) {
             // Tangani kesalahan
             // dd($e->getMessage());
@@ -349,21 +358,22 @@ class TournamentController extends Controller
     public function edittour($id)
     {
         $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
-        $tournament = Tournament::all();
+        $tournament = Tournament::FindOrFail($id);
         $user = User::all();
         $category = Category::all();
         $prizes = Prizepool::all();
         $note = tournament_prize::all();
-        return view('penyelenggara.edit', compact('counttournaments','note','prizes','tournament', 'category', 'user'));
+        return view('penyelenggara.edit',  ['id' => $id], compact('counttournaments','note','prizes','tournament', 'category', 'user'));
     }
 
     public function updatetour(Tournament $tournament, Request $request, $id)
 {
     try {
+        $tournament = Tournament::find($id);
         $prizepoolIds = $request->input('prizepool_id');
         $description = $request->input('description');
         $user = Auth::user();
-
+        $id = $tournament->id;
         // Mengolah deskripsi untuk menyimpan gambar yang diunggah
         if (!empty($description)) {
             $dom = new \DomDocument();
@@ -434,7 +444,7 @@ class TournamentController extends Controller
             }
         }
 
-        return redirect()->route('tournament.index')->with('success', 'Tournament edited successfully');
+        return redirect()->route('tournament.index')->with('success', 'Tournament berhasil diedit');
     } catch (\Exception $e) {
         // Tangani kesalahan
         return back()->with('error', $e->getMessage());
