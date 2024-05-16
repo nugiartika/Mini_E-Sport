@@ -223,17 +223,6 @@
     </style>
 
     <div class="layout-container">
-
-        @if (auth()->check())
-            <div class="user-account-popup p-4">
-                <div class="account-items d-grid gap-1" data-tilt>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button class="bttn account-item" type="submit">Log Out</button>
-                    </form>
-                </div>
-            </div>
-        @endif
         <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
             @csrf
             <div class="row justify-content-center">

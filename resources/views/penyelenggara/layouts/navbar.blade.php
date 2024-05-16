@@ -61,13 +61,6 @@
                             </div>
                         </a>
                     </li>
-                    {{-- <li>
-                        <div class="dropdown-divider"></div>
-                    </li> --}}
-
-                    <li>
-                        <div class="dropdown-divider"></div>
-                    </li>
 
                     <li>
                         <a class="dropdown-item" href="javascript:;"
@@ -79,14 +72,6 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="mb-0">
                         @csrf
                     </form>
-
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0)"
-                            onclick="document.getElementById('logout-form').submit();">
-                            <i class="ti ti-login me-2"></i>
-                            <span class="align-middle">Keluar</span>
-                        </a>
-                    </li>
 
                 </ul>
             </li>
