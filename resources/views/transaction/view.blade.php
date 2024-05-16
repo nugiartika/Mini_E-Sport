@@ -83,11 +83,12 @@
                 @if (!in_array($transaction->status, ['PAID', 'EXPIRED', 'REFUND', 'FAILED']))
                     <div class="mt-4">
                         <div class="row align-items-center">
-                            <div class="col-md-9">
+                            <div class="col-md-9 @if (!$paymentDetail['data']['pay_code']) mx-auto text-center @endif">
                                 @if ($paymentDetail['data']['pay_code'])
                                     <h3 class="mb-0" id="paymentCode">{{ $paymentDetail['data']['pay_code'] }}</h3>
                                 @else
-                                    <img src="" alt="" />
+                                    <img class="p-2 bg-white rounded-3" src="{{ $paymentDetail['data']['qr_url'] }}"
+                                        height="150" alt="URL QR Code" />
                                 @endif
 
                                 <p class="fw-bold mb-0 mt-2">Kode / QR Pembayaran</p>
@@ -103,6 +104,8 @@
                     </div>
                 @endif
             </div>
+
+            <p class="mb-0 mt-3">Didukung oleh <a href="https://tripay.co.id">PT Trijaya Digital Group (Tripay)</a></p>
         </div>
 
         <div class="col-md-4">
@@ -112,12 +115,9 @@
                 <div class="list-group list-group-flush">
                     <div class="list-group-item d-flex justify-content-between align-items-center">
                         <span class="fw-bold">Metode</span>
-                        <div class="d-flex gap-2 align-items-center">
-                            <div class="bg-white p-2 px-3 rounded-3" style="width: min-content">
-                                <img src="{{ $paymentList->where('code', $transaction->payment_method)->first()['icon_url'] }}"
-                                    alt="{{ $transaction->payment_method }}" height="32" />
-                            </div>
-                        </div>
+                        <span>
+                            {{ $paymentList->where('code', $transaction->payment_method)->first()['name'] }}
+                        </span>
                     </div>
                     <div class="list-group-item d-flex justify-content-between align-items-center">
                         <span class="fw-bold">Tanggal Pembayaran</span>
