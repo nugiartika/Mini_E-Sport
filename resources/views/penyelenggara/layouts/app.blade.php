@@ -18,7 +18,7 @@
 
             <!-- laravel style -->
             <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
-            <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script>
+            {{-- <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script> --}}
 
             <script src="{{ asset('demo/assets/js/config.js') }}"></script>
 

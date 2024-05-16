@@ -1,6 +1,7 @@
 @extends('penyelenggara.layouts.app')
 
 @section('content')
+
     <style>
         .darkened {
             filter: brightness(50%);

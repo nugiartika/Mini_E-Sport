@@ -7,10 +7,8 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\juara;
 use App\Models\jadwal;
-use App\Models\member;
 use App\Models\bracket;
 use App\Models\Category;
-use App\Models\prizepool;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
 use App\Models\TeamTournament;
@@ -295,6 +293,7 @@ class TournamentController extends Controller
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
+            // dd($teamCounts);
         $category = Category::all();
         $jadwal = jadwal::all();
         $bracket = bracket::all();
@@ -308,6 +307,28 @@ class TournamentController extends Controller
         return view('penyelenggara.detailtournament', compact('tournament','counttournaments','teams','prizes','juara','bracket','jadwal', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
 
+    public function detailTournamentUser(Tournament $tournament,$id)
+    {
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $user = Auth::user();
+        // $tournaments = Tournament::all();
+        $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('tournament_id')
+            ->get();
+            // dd($teamCounts);
+        $category = Category::all();
+        $jadwal = jadwal::all();
+        $bracket = bracket::all();
+        $juara = juara::all();
+        $selectedTournament = Tournament::findOrFail($id);
+        $teams = team::all();
+        $tournament = Tournament::find($id);
+        $prizes = tournament_prize::where('tournament_id', $id)->get();
+        // dd($prizes);
+
+        return view('user.detailtournament', compact('counttournaments', 'user', 'category', 'jadwal', 'bracket', 'juara', 'selectedTournament', 'teams', 'tournament', 'prizes'));
+
+    }
 
     /**
      * Show the form for editing the specified resource.
