@@ -169,7 +169,7 @@
     <script src="{{ asset('demo/assets/vendor/js/menu2dc9.js?id=c6ce30ded4234d0c4ca0fb5f2a2990d8') }}"></script>
     <script src="{{ asset('demo/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
-    <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script>
+
     @yield('script')
 
 </body>

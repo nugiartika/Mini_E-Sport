@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::any('transaction/callback', [TransactionController::class, 'callback'])->name('transaction.callback');
 Route::resource('transaction', TransactionController::class)->parameters([
-    'transaction' => 'transaction:ref_id'
+    'transaction' => 'transaction:transaction_id'
 ])->middleware('auth');
 
 // Public Routes

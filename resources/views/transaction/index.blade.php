@@ -18,25 +18,25 @@
                 <tr>
                     <th>ID Transaksi</th>
                     <th>Tanggal Transaksi</th>
-                    <th>Jenis Transaksi</th>
+                    <th>Metode Pembayaran</th>
                     <th>Status</th>
                     <th>Total</th>
-                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($transactionData as $transaction)
                 <tr>
-                    <td>
-                        <a href="{{ route('transaction.show', $transaction->ref_id) }}">#{{ $transaction->ref_id }}</a>
-                    </td>
+                    <th>
+                        <a class="text-white" href="{{ route('transaction.show', $transaction->transaction_id) }}">#{{ $transaction->transaction_id }}</a>
+                    </th>
                     <td>{{ \Carbon\Carbon::parse($transaction->created_at)->isoFormat('D MMMM YYYY') }}</td>
-                    <td>{{ $transaction->payment_method }}</td>
-                    <td>{{ $transaction->status }}</td>
-                    <td>{{ $transaction->amount }}</td>
                     <td>
-                        {{-- <a href="{{ route('transaction.detail', $transaction->id) }}" class="btn btn-primary btn-sm">Detail</a> --}}
+                        <div class="bg-white p-2 px-3 rounded-3" style="width: min-content">
+                            <img src="{{ $paymentList->where('code', $transaction->payment_method)->first()['icon_url'] }}" alt="{{ $transaction->payment_method }}" height="32" />
+                        </div>
                     </td>
+                    <td><span class="badge bg-{{ \App\Enums\TransactionStatus::color($transaction->status) }}">{{ \App\Enums\TransactionStatus::label($transaction->status) }}</span></td>
+                    <td>{{ number_format($transaction->amount, 0, '.', ',') }} IDR</td>
                 </tr>
                 @empty
                 <tr>

@@ -49,9 +49,11 @@ class TransactionController extends Controller
             ]);
         }
 
-        $transactionData = $transactionData->paginate(20);
+        $transactionData = $transactionData->latest()->paginate(20);
+        $getPaymentList = $this->paymentService->getPaymentList();
+        $paymentList = collect($getPaymentList['data']);
 
-        return view('transaction.index', compact('transactionData'));
+        return view('transaction.index', compact('transactionData', 'paymentList'));
     }
 
     /**
@@ -116,7 +118,7 @@ class TransactionController extends Controller
 
             return redirect()->route('transaction.show', $transactionData->ref_id);
         } catch (\Throwable $th) {
-            dd($th);
+            abort(500, $th->getMessage());
         }
     }
 
@@ -127,7 +129,10 @@ class TransactionController extends Controller
     {
         try {
             $paymentDetail = $this->paymentService->getTransactionDetail($transaction->ref_id);
-            return view('transaction.view', compact('transaction', 'paymentDetail'));
+            $getPaymentList = $this->paymentService->getPaymentList();
+            $paymentList = collect($getPaymentList['data']);
+
+            return view('transaction.view', compact('transaction', 'paymentDetail', 'paymentList'));
         } catch (\Throwable $th) {
             abort(500, $th->getMessage());
         }

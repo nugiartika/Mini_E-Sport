@@ -13,23 +13,27 @@
                 @foreach ($team->teamTournament as $tournament)
                     @php
                         $transaction = $tournament->transaction()->where('status', 'PAID');
-                        $findIsNotSuccess = $tournament->transaction()->whereNotIn('status', ['PAID', 'UNPAID', 'PENDING']);
+                        $findIsNotSuccess = $tournament
+                            ->transaction()
+                            ->whereNotIn('status', ['PAID', 'UNPAID', 'PENDING']);
                         $findIsSuccess = $tournament->transaction()->whereIn('status', ['PAID', 'UNPAID', 'PENDING']);
                         $transactionExists = $transaction->exists();
                         $latestTransaction = $tournament->transaction()->latest()->first();
                     @endphp
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="card">
-                            <img src="{{ asset("storage/{$team->tournament->images}") }}"
-                                alt="{{ $team->tournament->name }}" class="card-img-top" />
+                            <img src="{{ asset("storage/{$team->tournament->images}") }}" alt="{{ $team->tournament->name }}"
+                                class="card-img-top" />
                             <div class="card-body">
                                 <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
-                                    <a href="{{ route('detailTournament', ['tournament' => $tournament->tournament->id]) }}">
+                                    <a
+                                        href="{{ route('detailTournament', ['tournament' => $tournament->tournament->id]) }}">
                                         <h3 class="mb-0">{{ $tournament->tournament->name }}</h3>
                                     </a>
 
-                                    @if(!$transactionExists && !$findIsSuccess->exists())
-                                    <a href="{{ route('transaction.create', ['tournament_id' => $tournament->id]) }}" class="btn btn-sm btn-primary">Bayar Sekarang</a>
+                                    @if (!$transactionExists && !$findIsSuccess->exists())
+                                        <a href="{{ route('transaction.create', ['tournament_id' => $tournament->id]) }}"
+                                            class="btn btn-sm btn-primary">Bayar Sekarang</a>
                                     @endif
                                 </div>
 
@@ -43,7 +47,12 @@
                                 </div>
                                 <div class="d-flex gap-3 border-top justify-content-between pt-3">
                                     <span>Transaksi Terakhir</span>
-                                    <span>{{ $latestTransaction ? $latestTransaction->status : 'Belum Ada Transaksi' }}</span>
+                                    @if ($latestTransaction)
+                                        <span
+                                            class="badge bg-{{ \App\Enums\TransactionStatus::color($latestTransaction->status) }}">{{ \App\Enums\TransactionStatus::label($latestTransaction->status) }}</span>
+                                    @else
+                                        <span>Belum Ada Transaksi</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
