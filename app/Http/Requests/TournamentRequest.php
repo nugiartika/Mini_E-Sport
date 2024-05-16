@@ -45,7 +45,7 @@ class TournamentRequest extends FormRequest
             'description' => 'required',
             'rule' => 'required|string',
             'paidment' => 'required|string',
-            'nominal' => 'numeric|required_if:paidment,Berbayar',
+            'nominal' => 'nullable|numeric|required_if:paidment,Berbayar',
 
         ];
 

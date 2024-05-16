@@ -295,7 +295,6 @@ class TournamentController extends Controller
         // dd($teamCounts);
         $category = Category::all();
         $jadwal = jadwal::all();
-        $bracket = bracket::all();
         $juara = juara::all();
         $selectedTournament = Tournament::findOrFail($id);
         $teams = team::all();
@@ -303,8 +302,28 @@ class TournamentController extends Controller
         $prizes = tournament_prize::where('tournament_id', $id)->get();
 
 
-        return view('penyelenggara.detailtournament', compact('tournament', 'counttournaments', 'teams', 'prizes', 'juara', 'bracket', 'jadwal', 'category', 'user', 'teamCounts', 'selectedTournament'));
+        return view('penyelenggara.detailtournament', compact('tournament', 'counttournaments', 'teams', 'prizes', 'juara', 'jadwal', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
+
+//     public function bracket(Tournament $tournament, Request $request)
+// {
+//     $request->validate([
+//         'urlBracket' => 'required',
+//     ],[
+//         'urlBracket.required' => 'bracket harus ada',
+//     ]);
+
+//     $tournament->update([
+//         'urlBracket' => $request->input('urlBracket'),
+//     ]);
+
+//     if ($tournament) {
+//         return redirect()->route('tournament.detail', ['id' => $tournament->id])->with('success', 'Pesan berhasil');
+//     } else {
+//         return redirect()->back()->with('error', 'Turnamen tidak ditemukan');
+//     }
+//     }
+
 
     public function detailTournamentUser(Tournament $tournament, $id)
     {
@@ -317,7 +336,6 @@ class TournamentController extends Controller
         // dd($teamCounts);
         $category = Category::all();
         $jadwal = jadwal::all();
-        $bracket = bracket::all();
         $juara = juara::all();
         $selectedTournament = Tournament::findOrFail($id);
         $teams = team::all();
@@ -463,7 +481,7 @@ class TournamentController extends Controller
                 }
             }
 
-            return redirect()->route('tournament.index')->with('success', 'Tournament berhasil diedit');
+            return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil diedit');
         } catch (\Exception $e) {
             // Tangani kesalahan
             return back()->with('error', $e->getMessage());

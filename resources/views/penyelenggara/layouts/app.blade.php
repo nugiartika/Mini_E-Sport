@@ -98,7 +98,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- gsap  -->
     <script src="{{ asset('assets/js/gsap.min.js') }}"></script>

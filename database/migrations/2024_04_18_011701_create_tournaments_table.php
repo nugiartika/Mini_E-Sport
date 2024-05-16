@@ -31,6 +31,7 @@ return new class extends Migration
             $table->enum('paidment',['Berbayar','Gratis']);
             $table->integer('nominal')->nullable();
             $table->foreignId('jurnal_id')->nullable();
+            $table->text('urlBracket')->nullable();
 
             $table->timestamps();
         });
