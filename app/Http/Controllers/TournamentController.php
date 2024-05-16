@@ -9,7 +9,6 @@ use App\Models\juara;
 use App\Models\jadwal;
 use App\Models\bracket;
 use App\Models\Category;
-use App\Models\prizepool;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
 use App\Models\TeamTournament;
@@ -18,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TournamentRequest;
+use App\Models\prizepool;
 
 class TournamentController extends Controller
 {
