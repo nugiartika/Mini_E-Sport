@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 
-<html lang="en" >
+<html lang="en" class="light-style layout-compact layout-navbar-fixed layout-menu-fixed   " dir="ltr"
+    data-theme="theme-default"
+    data-assets-path="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/"
+    data-base-url="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo-1" data-framework="laravel"
+    data-template="vertical-menu-theme-default-light">
 
 
-<head>
+    <head>
 
 
-    @include('penyelenggara.layouts.meta')
+        @include('penyelenggara.layouts.meta')
 
 
-    <!-- Vendor Styles -->
-    <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+            <!-- Vendor Styles -->
+            <link rel="stylesheet" href="{{ asset('demo/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
-    <!-- laravel style -->
-    <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
-    {{-- <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script> --}}
+            <!-- laravel style -->
+            <script src="{{ asset('demo/assets/vendor/js/helpers.js') }}"></script>
+            {{-- <script src="{{ asset('demo/assets/vendor/js/template-customizer.js') }}"></script> --}}
 
-    <script src="{{ asset('demo/assets/js/config.js') }}"></script>
+            <script src="{{ asset('demo/assets/js/config.js') }}"></script>
 
-    <script>
+            <script>
         window.templateCustomizer = new TemplateCustomizer({
             cssPath: '',
             themesPath: '',
@@ -47,7 +51,7 @@
         });
     </script>
             @yield('style')
-</head>
+        </head>
 
 <body>
     <!-- Layout Content -->
@@ -63,8 +67,8 @@
                 @include('penyelenggara.layouts.navbar')
 
                 <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="content-wrapper" >
+                    <div class="container-xxl flex-grow-1 container-p-y" >
                         <!-- Content -->
                         @yield('content')
 
@@ -139,13 +143,12 @@
 
     <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
 
-    <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script>
 
-    <!-- Bootstrap Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Summernote JS -->
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- Bootstrap Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Summernote JS -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     @yield('script')
 

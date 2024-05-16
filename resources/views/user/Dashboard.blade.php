@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        @foreach ($tournament as $index => $tour)
+        @forelse ($tournament as $index => $tour)
         @if ($index < 3)
         <div class="col-12 col-xl-4 col-md-6">
             <div class="card h-100">
@@ -146,10 +146,18 @@
                 </div>
             </div>
         </div>
-
         @endif
-        @endforeach
-
+        @empty
+        <div class="col-lg-12">
+            <center>
+                <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                    style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+            </center>
+            <h1 class="table-light" style="text-align: center;">
+                Data Tidak Tersedia
+            </h1>
+        </div>
+        @endforelse
 
 
     </div>

@@ -288,6 +288,5 @@
     <!-- BEGIN: Theme JS-->
     <script src="../../demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a"></script>
 
-    <script src="../../demo/assets/js/dashboards-crm.js"></script>
     <!-- END: Page JS-->
 @endsection

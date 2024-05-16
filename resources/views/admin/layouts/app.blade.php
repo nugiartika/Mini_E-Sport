@@ -141,7 +141,6 @@
 
     <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
 
-    <script src="{{ asset('demo/assets/js/dashboards-crm.js') }}"></script>
 
     @yield('script')
 

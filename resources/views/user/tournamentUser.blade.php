@@ -82,6 +82,9 @@
     </style>
 @endsection
 @section('content')
+@php
+    use App\Models\TeamTournament;
+@endphp
     <div class="modal" tabindex="-1" id="filter" style="color: #ffffff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
@@ -167,25 +170,36 @@
                                         </div>
                                     </div>
 
+
                                     @php
-                                        // $teams = Team
-                                        $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
-                                        $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
-                                        $totalTeams =
-                                            ($teamCount ? $teamCount->count : 0) +
-                                            ($teamIdCount ? $teamIdCount->count : 0);
 
-                                        $userTeams = $teams ?? collect();
-                                        $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
-                                        $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+                                    // Ambil total tim dari hasil perhitungan
+                                    $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+                                    $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+                                    $totalTeams = ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
 
-                                        $team = App\Models\TeamTournament::all();
+                                    $userTeams = $teams ?? collect();
+                                    $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
+                                    $isUserInTournament = $userTeamsInTournament->isNotEmpty();
 
-//                                         $userTim = $teamTournament ?? collect();
-// $userTeamIdTournament = $userTim->pluck('team_id'); // Mengambil semua team_id dari koleksi $userTim
+                                    if ($isUserInTournament) {
+                                        // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+                                        $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
 
-// $isUserTournament = $userTeamIdTournament->contains($team->id); // Mengecek apakah $team->id ada di dalam koleksi $userTeamIdTournament
-// $isUserInTournaments = $userTeamIdTournament->contains($teams->pluck('team_id')); // Mengecek apakah ada team_id yang ada di koleksi $teams
+                                        // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+                                        $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+                                            ->where('tournament_id', $tournament->id)
+                                            ->get();
+                                    }
+                                    @endphp
+
+                                    {{-- Kode blade lainnya di sini
+
+                                        // $userTim = $teamTournament ?? collect();
+                                        // $userTeamIdTournament = $userTim->pluck('team_id'); // Mengambil semua team_id dari koleksi $userTim
+
+                                        // $isUserTournament = $userTeamIdTournament->contains($team->id); // Mengecek apakah $team->id ada di dalam koleksi $userTeamIdTournament
+                                        // $isUserInTournaments = $userTeamIdTournament->contains($teams->pluck('team_id')); // Mengecek apakah ada team_id yang ada di koleksi $teams
 
                                         // $team = $userTim->first(); // Pastikan $team berisi nilai yang valid sebelum ini
 
@@ -193,7 +207,7 @@
                                         //     $userTeamIdTournament = $userTim->where('team_id', $team->id); // Sekarang ini seharusnya berfungsi
                                         // }
 
-                                    @endphp
+                                    @endphp --}}
 
 
                                     <div class="hr-line line3"></div>
@@ -217,7 +231,7 @@
                                             $teamId = $teams->users_id;
                                         @endphp --}}
 
-                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && !$isUserInTournament)
+                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && (!$isUserInTournament && !$userTeamsWithRelation))
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"

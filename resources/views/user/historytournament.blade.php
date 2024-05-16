@@ -62,6 +62,10 @@
         @empty
             <div class="col-md-6 mx-auto">
                 <div class="d-flex align-items-center justify-content-center py-4 flex-column">
+                    <center>
+                        <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                            style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+                    </center>
                     <h3 class="text-center mb-1">Tidak ada data</h3>
                     <p class="text-center">Silahkan ikuti turnamen yang tersedia...</p>
 

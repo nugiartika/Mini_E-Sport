@@ -180,7 +180,7 @@
             </div>
             <!-- teams card  -->
             <div class="row g-6 justify-content-md-start justify-content-center mb-lg-15 mb-10">
-                @foreach ($teams as $team)
+                @forelse ($teams as $team)
                 <div class="col-xl-4 col-md-6">
                     <div class="team-card gap-6 p-xxl-8 p-4 bgn-4 box-style alt-box" data-tilt>
                         <div class="team-thumb"
@@ -229,7 +229,18 @@
                             </div>
                         </div>
                     </div>
-                </div> @endforeach
+                </div>
+                @empty
+                <div class="col-lg-12">
+                    <center>
+                        <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                            style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+                    </center>
+                    <h1 class="table-light" style="text-align: center;">
+                        Data Tidak Tersedia
+                    </h1>
+                </div> @endforelse
+
             </div>
             <div class="d-center">
     <button class="btn-half-border position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill z-2 border-0">VIEW
@@ -286,5 +297,4 @@
     <!-- BEGIN: Theme JS-->
     <script src="../../demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a"></script>
 
-    <script src="../../demo/assets/js/dashboards-crm.js"></script>
 @endsection

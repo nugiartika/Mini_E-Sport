@@ -58,16 +58,6 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user) {
-            return redirect()->back()->withInput()->withErrors(['email_password_mismatch' => 'Email ' . $request->email . ' tidak ditemukan atau password salah.']);
-        }
-
-        if (!Hash::check($request->password, $user->password)) {
-            return redirect()->back()->withInput()->withErrors(['password_wrong']);
-        }
-
         if (auth()->attempt($credentials)) {
             $user = auth()->user();
             if ($user->role === 'organizer') {
