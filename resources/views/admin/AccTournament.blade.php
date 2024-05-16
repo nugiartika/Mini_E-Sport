@@ -35,7 +35,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td> <span class="fw-medium">{{ $tournament->name }}</span></td>
                             <td><span class="badge bg-label-primary me-1">
-                                {{ $tournament->permainan }}</span></td>
+                                {{ \Carbon\Carbon::parse($tournament->permainan)->isoFormat('D MMMM YYYY') }}
+                            </span></td>
                             <td>
                                 <form id="updateForm{{ $tournament->id }}"
                                     action="{{ route('konfirm.update', $tournament->id) }}" method="POST">
@@ -67,7 +68,10 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <textarea class="form-control" id="reason{{ $tournament->id }}" name="reason" rows="3"
-                                                        placeholder="Alasan penolakan"></textarea>
+                                                        placeholder="Alasan penolakan">{{ old('reason', $tournament->reason) }}</textarea>
+                                                    @error('reason')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="modal-footer">
@@ -150,8 +154,9 @@
                                                 <span id="detail-gender" style="font-weight: normal;">
                                                     {{ $tournament->pendaftaran }}</span>
                                             </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup : {{ $tournament->end_pendaftaran }}
-                                                <span id="detail-national_student_id" style="font-weight: normal;"></span>
+                                            <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup :
+                                                <span id="detail-national_student_id" style="font-weight: normal;">
+                                                    {{ $tournament->end_pendaftaran }}</span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
@@ -256,3 +261,5 @@
             });
         });
     </script>
+
+

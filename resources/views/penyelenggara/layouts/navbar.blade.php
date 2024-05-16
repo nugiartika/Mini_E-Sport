@@ -11,14 +11,14 @@
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
         <!-- Search -->
-        <div class="navbar-nav align-items-center">
+        {{-- <div class="navbar-nav align-items-center">
             <div class="nav-item navbar-search-wrapper mb-0">
                 <a class="nav-item nav-link search-toggler d-flex align-items-center px-0" href="javascript:void(0);">
                     <i class="ti ti-search ti-md me-2"></i>
                     <span class="d-none d-md-inline-block text-muted">Search (Ctrl+/)</span>
                 </a>
             </div>
-        </div>
+        </div> --}}
         <!-- /Search -->
 
 
@@ -48,15 +48,15 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('demo/assets/img/avatars/1.png') }}" alt
+                                        <img src="{{ asset('assets/img/download.png') }}" alt
                                             class="h-auto rounded-circle">
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
                                     <span class="fw-medium d-block">
-                                        Penyelenggara
+                                        {{ auth()->user()->name }}
                                     </span>
-                                    <small class="text-muted">Humma Esport</small>
+                                    <small class="text-muted">Penyelenggara</small>
                                 </div>
                             </div>
                         </a>

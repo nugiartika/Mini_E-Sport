@@ -84,7 +84,7 @@
                         <form action="{{ route('login') }}" class="sign-in-form" method="POST">
                             @csrf
                             <div class="single-input mb-3">
-                                <input type="email" name="email" placeholder="Masukkan Email Anda">
+                                <input type="email" name="email" placeholder="Masukkan Email Anda" value="{{ old('email') }}">
 
                             </div>
                             @error('email')

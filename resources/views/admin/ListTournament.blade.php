@@ -46,8 +46,12 @@
                                                     {{ $tournament->pendaftaran }}</span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup :
-                                                <span id="detail-national_student_id"
-                                                    style="font-weight: normal;"></span>
+                                                <span id="detail-national_student_id" style="font-weight: normal;">
+                                                    {{ $tournament->end_pendaftaran }}</span>
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
+                                                <span id="detail-student_identity_number" style="font-weight: normal;">
+                                                    {{ $tournament->permainan }}</span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
@@ -68,7 +72,7 @@
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Description :
                                                 <span id="detail-family_card_id"
-                                                    style="font-weight: normal;">{{ $tournament->description }}</span>
+                                                    style="font-weight: normal;">{!! $tournament->description !!}</span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Rule :
                                                 <span id="detail-number_siblings"
@@ -98,7 +102,7 @@
         <div class="container-xxl flex-grow-1 container-p-y">
 
             <div class="card">
-                <h5 class="card-header">Tournament detail</h5>
+                <h5 class="card-header">Daftar Tournament</h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table">
                         <thead class="table-light">

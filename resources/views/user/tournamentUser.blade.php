@@ -174,6 +174,25 @@
                                         $totalTeams =
                                             ($teamCount ? $teamCount->count : 0) +
                                             ($teamIdCount ? $teamIdCount->count : 0);
+
+                                        $userTeams = $teams ?? collect();
+                                        $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
+                                        $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+
+                                        $team = App\Models\TeamTournament::all();
+
+//                                         $userTim = $teamTournament ?? collect();
+// $userTeamIdTournament = $userTim->pluck('team_id'); // Mengambil semua team_id dari koleksi $userTim
+
+// $isUserTournament = $userTeamIdTournament->contains($team->id); // Mengecek apakah $team->id ada di dalam koleksi $userTeamIdTournament
+// $isUserInTournaments = $userTeamIdTournament->contains($teams->pluck('team_id')); // Mengecek apakah ada team_id yang ada di koleksi $teams
+
+                                        // $team = $userTim->first(); // Pastikan $team berisi nilai yang valid sebelum ini
+
+                                        // if ($team) {
+                                        //     $userTeamIdTournament = $userTim->where('team_id', $team->id); // Sekarang ini seharusnya berfungsi
+                                        // }
+
                                     @endphp
 
 
@@ -198,31 +217,33 @@
                                             $teamId = $teams->users_id;
                                         @endphp --}}
 
-                                        @if ($totalTeams && $totalTeams < $tournament->slotTeam)
-                                        <div class="text-center">
-                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                                                        data-tournament-id="{{ $tournament->id }}">
-                                                        <div class="custom-btn"
-                                                    style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
-                                                    {{-- <a type="button" class="btn-half position-relative d-inline-block py-2"
+                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && !$isUserInTournament)
+                                            <div class="text-center">
+                                                <a type="button" class="btn-half position-relative d-inline-block py-2"
+                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                                                    data-tournament-id="{{ $tournament->id }}">
+                                                    <div class="custom-btn"
+                                                        style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
+                                                        {{-- <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Join</a> --}}
-                                                   Daftar
-                                                </div></a>
+                                                        Daftar
+                                                    </div>
+                                                </a>
                                             </div>
                                         @elseif (!$totalTeams)
                                             {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
                                             type="button" class="btn btn-primary">New Team</a> --}}
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                                                        data-tournament-id="{{ $tournament->id }}">
-                                                        <div class="custom-btn"
-                                                    style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
-                                                    {{-- <a type="button" class="btn-half position-relative d-inline-block py-2"
+                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                                                    data-tournament-id="{{ $tournament->id }}">
+                                                    <div class="custom-btn"
+                                                        style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
+                                                        {{-- <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Join</a> --}}
-                                                    Daftar
-                                                </div></a>
+                                                        Daftar
+                                                    </div>
+                                                </a>
                                             </div>
                                         @elseif ($totalTeams)
 
@@ -347,7 +368,7 @@
                     </div> --}}
 
                     <!-- Modal -->
-{{-- <div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existingLabel" aria-hidden="true">
+                    {{-- <div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existingLabel" aria-hidden="true">
     <div class="modal-dialog" role="document" style="height: 100vh;">
         <div class="modal-content">
             <div class="modal-header">
@@ -411,7 +432,7 @@
             exampleModal.addEventListener('show.bs.modal', function(event) {
                 var button = event.relatedTarget; // Tombol yang memicu modal
                 var tournamentId = button.getAttribute(
-                'data-tournament-id'); // Ambil ID turnamen dari atribut data
+                    'data-tournament-id'); // Ambil ID turnamen dari atribut data
 
                 // Update tautan dengan ID turnamen yang benar
                 var existingTeamLink = exampleModal.querySelector('.btn-secondary');
@@ -457,10 +478,10 @@
             $('#existing').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget); // Tombol yang memicu modal
                 var tournamentId = button.data(
-                'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
+                    'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
                 var modal = $(this);
                 modal.find('.modal-body input[name="tournament_id"]').val(
-                tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
+                    tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
             });
         });
 

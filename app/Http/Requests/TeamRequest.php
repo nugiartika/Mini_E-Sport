@@ -22,7 +22,7 @@ class TeamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|max:30',
+            'name'=>'required|max:30|unique:teams,name',
             'profile'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'tournament_id' => 'nullable|exists:tournaments,id',
             'user_id'=>'nullable',
@@ -42,6 +42,7 @@ class TeamRequest extends FormRequest
         return [
             'name.required'=>'name must be filled in.',
             'name.max' => 'name must not exceed 2048 characters.',
+            'name.unique' => 'Nama tim Sudah di gunakan',
             // 'categories_id.required' => 'Category must be filled in.',
             // 'categories_id.exists' => 'The Category you entered is invalid.',
             'profile.required'=>'profile must be filled in.',

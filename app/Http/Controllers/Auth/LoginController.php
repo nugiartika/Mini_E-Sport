@@ -45,13 +45,14 @@ class LoginController extends Controller
         $messages = [
             'email.required' => 'Email wajib diisi.',
             'email.email' => 'Format email tidak valid.',
+            'email.exists' => 'Email tidak terdaftar.',
             'password.required' => 'Password wajib diisi.',
             'email_password_mismatch' => 'Email :email tidak ditemukan.',
             'password_wrong' => 'Password salah.',
         ];
 
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
             'password' => 'required',
         ], $messages);
 

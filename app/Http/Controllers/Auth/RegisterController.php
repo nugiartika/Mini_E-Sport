@@ -7,6 +7,7 @@ use App\Models\SainsRole;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -46,12 +47,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:50|',
-            'email' => 'required|string|email|max:50|unique:sains_roles,email',
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|min:6'
-        ], [
+        $messages = [
             'name.required' => 'Nama wajib di isi',
             'name.max' => 'Nama maksimal 50 karakter',
             'email.required' => 'Email wajib di isi',
@@ -61,7 +57,25 @@ class RegisterController extends Controller
             'password.min' => 'Password minimal 6 karakter',
             'password_confirmation.required' => 'Password konfirmasi wajib di isi',
             'password_confirmation.min' => 'Minimum password 6 karakter'
-        ]);
+        ];
+
+        $request->validate([
+            'name' => 'required|string|max:50|',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:50',
+                function ($attribute, $value, $fail) {
+                    if (DB::table('users')->where('email', $value)->exists() ||
+                        DB::table('sains_roles')->where('email', $value)->exists()) {
+                        $fail('Email sudah digunakan, Gunakan email yang belum terdaftar');
+                    }
+                },
+            ],
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|min:6'
+        ], $messages);
 
         if ($request->role == 'user') {
             $user = new User();

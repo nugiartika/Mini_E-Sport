@@ -61,7 +61,11 @@ class TournamentController extends Controller
         $category = Category::all();
         $teams = Team::with('tournament')->where('user_id', auth()->id())->get();
         $teamTournament = TeamTournament::all();
-        return view('user.tournamentUser', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts','teamTournament'));
+        $team = $teams;
+
+        // $userTeamsInTournament = auth()->user()->teams->where('tournament_id', $tournament->id);
+
+        return view('user.tournamentUser', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts','teamTournament','team'));
     }
 
     public function dashboard()
@@ -212,7 +216,7 @@ class TournamentController extends Controller
             return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil ditambahkan');
         } catch (\Exception $e) {
             // Tangani kesalahan
-            // dd($e->getMessage());
+            dd($e->getMessage());
         }
 
     }
@@ -349,11 +353,11 @@ class TournamentController extends Controller
 
         $request->validate([
             'status' => 'required|in:accepted,rejected',
-            'reason' => 'nullable|string|max:255',
+            'reason' => 'required_if:status,rejected|nullable|string|max:255',
         ], [
             'status.required' => 'Kolom STATUS wajib diisi.',
             'status.in' => 'Status harus berupa "accepted" atau "rejected".',
-            // 'reason.required' => 'Alasan penolakan wajib diisi jika status "rejected".',
+            'reason.required_if' => 'Alasan penolakan wajib diisi.',
             'reason.string' => 'Alasan penolakan harus berupa teks.',
             'reason.max' => 'Alasan penolakan tidak boleh melebihi 255 karakter.',
         ]);

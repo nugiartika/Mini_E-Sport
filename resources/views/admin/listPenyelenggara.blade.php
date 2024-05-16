@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <h5 class="card-header">List Users</h5>
+        <h5 class="card-header">Daftar Penyelenggara</h5>
         <div class="table-responsive text-nowrap">
             <table class="table">
                 <thead class="table-light">
