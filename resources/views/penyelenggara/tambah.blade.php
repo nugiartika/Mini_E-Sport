@@ -731,7 +731,7 @@
             });
         });
     </script>
-   
+
     <script>
      $(document).ready(function() {
         $('.custom-summernote').summernote({
