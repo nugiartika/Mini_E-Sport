@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="card">
-        <h5 class="card-header">Tournament Confirmation</h5>
+        <h5 class="card-header">Game</h5>
 
         <div class="card-header d-flex justify-content-between align-items-center">
             <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
                 style="background-color:rgb(40, 144, 204); color:#fff;">
-                Tambahkan Kategori
+                Tambahkan Game
             </a>
 
 
@@ -25,7 +25,7 @@
                 <thead class="table-light">
                     <tr>
                         <th>No</th>
-                        <th>Kategori</th>
+                        <th>Game</th>
                         <th>Foto Cover</th>
                         <th>Anggota Per Tim</th>
                         <th>Aksi</th>
@@ -117,6 +117,9 @@
                             <label for="photo" class="form-label">Foto Cover</label>
                             <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
                                 name="photo">
+                                @if(old('photo'))
+                                <img id="preview" src="{{ asset('storage/' . old('photo')) }}" alt="Old gambar" style="max-width: 100px; max-height: 100px;">
+                            @endif
                             @error('photo')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -126,7 +129,7 @@
                         <div class="mb-3">
                             <label for="membersPerTeam" class="form-label">Anggota Per Tim</label>
                             <input type="number" class="form-control @error('membersPerTeam') is-invalid @enderror"
-                                id="membersPerTeam" name="membersPerTeam">
+                                id="membersPerTeam" value="{{ old('membersPerTeam') }}" name="membersPerTeam">
                             @error('membersPerTeam')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -158,9 +161,9 @@
 
                             <div class="mb-3">
                                 <label for="Category" class="form-label">Kategori</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name" value="{{ old('name', $a->name) }}">
-                                @error('name')
+                                <input type="text" class="form-control @error('name_update') is-invalid @enderror"
+                                    id="name" name="name_update" value="{{ old('name_update', $a->name) }}">
+                                @error('name_update')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -168,15 +171,15 @@
                             </div>
                             <div class="mb-3">
                                 <label for="photo" class="form-label">Foto Cover</label>
-                                <input type="file" class="form-control @error('photo') is-invalid @enderror"
-                                    id="photo" name="photo" />
+                                <input type="file" class="form-control @error('photo_update') is-invalid @enderror"
+                                    id="photo" name="photo_update" />
 
                                 @if ($a->photo)
                                     <img src="{{ asset('storage/' . $a->photo) }}" class="w-100 mt-3 rounded-3" alt="{{ $a->name }}" />
                                 @else
                                     No Image
                                 @endif
-                                @error('photo')
+                                @error('photo_update')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -184,10 +187,10 @@
                             </div>
                             <div class="mb-3">
                                 <label for="membersPerTeam" class="form-label">Anggota per Tim</label>
-                                <input type="text" class="form-control @error('membersPerTeam') is-invalid @enderror"
-                                    id="membersPerTeam" name="membersPerTeam"
-                                    value="{{ old('membersPerTeam', $a->membersPerTeam) }}">
-                                @error('membersPerTeam')
+                                <input type="number" class="form-control @error('membersPerTeam_update') is-invalid @enderror"
+                                    id="membersPerTeam" name="membersPerTeam_update"
+                                    value="{{ old('membersPerTeam_update', $a->membersPerTeam) }}">
+                                @error('membersPerTeam_update')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -375,7 +378,7 @@
                     <div class="mb-3">
                         <label for="membersPerTeam" class="form-label">Members Per Team:</label>
                         <input type="number" class="form-control @error('membersPerTeam') is-invalid @enderror"
-                            id="membersPerTeam" name="membersPerTeam">
+                            id="membersPerTeam" name="membersPerTeam" value="{{ old('membersPerTeam') }}">
                         @error('membersPerTeam')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

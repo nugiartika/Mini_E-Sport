@@ -11,7 +11,7 @@
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
         <!-- Search -->
-        <div class="navbar-nav align-items-center">
+        {{-- <div class="navbar-nav align-items-center">
             <div class="nav-item navbar-search-wrapper mb-0">
                 <a class="nav-item nav-link search-toggler d-flex align-items-center px-0"
                     href="javascript:void(0);">
@@ -19,7 +19,7 @@
                     <span class="d-none d-md-inline-block text-muted">Search (Ctrl+/)</span>
                 </a>
             </div>
-        </div>
+        </div> --}}
         <!-- /Search -->
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
@@ -60,7 +60,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('demo/assets/img/avatars/1.png') }}" alt
+                                        <img src="{{ asset('assets/img/download.png') }}" alt
                                             class="h-auto rounded-circle">
                                     </div>
                                 </div>
@@ -99,11 +99,11 @@
     </div>
 
     <!-- Search Small Screens -->
-    <div class="navbar-search-wrapper search-input-wrapper  d-none">
+    {{-- <div class="navbar-search-wrapper search-input-wrapper  d-none">
         <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..."
             aria-label="Search...">
         <i class="ti ti-x ti-sm search-toggler cursor-pointer"></i>
-    </div>
+    </div> --}}
 </nav>
 <!-- / Navbar -->
 <!-- END: Navbar-->

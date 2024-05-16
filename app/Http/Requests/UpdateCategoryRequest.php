@@ -25,24 +25,27 @@ class UpdateCategoryRequest extends FormRequest
 
         $categoryId = $this->route('category');
         return [
-            'name' => [
+            'name_update' => [
                 'required',
                 Rule::unique('categories', 'name')->ignore($categoryId),
                 'max:50'
             ],
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'membersPerTeam' => 'required|integer|min:1|max:7'
+            'photo_update' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'membersPerTeam_update' => 'required|integer|min:1|max:7'
         ];
     }
     public function messages(): array
     {
         return [
-            'name.required' => 'The name field is required.',
-            'name.unique' => 'The name has already been taken.',
-            'name.max' => 'maximum 50 character',
-            'membersPerTeam.required' => 'Member per team must be filled in.',
-            'membersPerTeam.min' => 'Minimum 1 member',
-            'membersPerTeam.max' => 'Maximum 7 members'
+            'name_update.required' => 'nama harus diisi.',
+            'name_update.unique' => 'nama sudah digunakan.',
+            'name_update.max' => 'Nama Tidak Boleh lebih dari 50 karakter.',
+            'photo_update.required' => 'Foto harus diisi.',
+            'photo_update.mimes' => 'Foto harus berupa file jpeg,png,jpg',
+            'photo_update.max' => 'Ukuran foto harus kurang 2MB',
+            'membersPerTeam_update.required' => 'Member per team harus diisi.',
+            'membersPerTeam_update.min' => 'Minimal 1 member',
+            'membersPerTeam_update.max' => 'Maksimal 7 members'
         ];
     }
 }

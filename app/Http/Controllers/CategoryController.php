@@ -81,12 +81,12 @@ class CategoryController extends Controller
         $oldPhotoPath = $category->photo;
 
         $dataToUpdate = [
-            'name' => $request->input('name'),
-            'membersPerTeam' => $request->input('membersPerTeam'),
+            'name' => $request->input('name_update'),
+            'membersPerTeam' => $request->input('membersPerTeam_update'),
         ];
 
-        if ($request->hasFile('photo')) {
-            $foto = $request->file('photo');
+        if ($request->hasFile('photo_update')) {
+            $foto = $request->file('photo_update');
             $path = $foto->store('game', 'public');
             $dataToUpdate['photo'] = $path;
         }

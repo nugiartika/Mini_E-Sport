@@ -1,28 +1,25 @@
 @extends('penyelenggara.layouts.app')
 
 @section('content')
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header d-flex gap-3">
             <h3 class="mb-0">Daftar Game</h3>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-4 mb-5">
         @forelse ($category as $index)
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex align-items-stretch ratio-16x9">
-                <div class="card">
-                    <div class="game-card-wrapper">
-                        <div class="game-card mb-5 p-2">
-                            <div class="game-card-border"></div>
-                            <div class="game-card-border-overlay"></div>
-                            <div class="game-img">
-                                <img class="w-100 h-100" src="{{ asset('storage/' . $index->photo) }}" alt="game">
-                            </div>
-                        </div>
-                        <a href="tournaments-details.html" style="display: block; text-align: center;">
-                            <h4>{{ $index->name }}</h4>
-                        </a>
-
+            <div class="col-md-4 col-lg-3 mb-3">
+                <div class="card h-100">
+                    <img class="card-img-top" src="{{ asset('storage/' . $index->photo) }}" alt="game"/>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nama Game : {{ $index->name }}</h5>
+                        <p class="card-text ">
+                            Anggota per Tim : {{ $index->membersPerTeam }}
+                        </p>
+                        {{-- <a href="" data-bs-target="#detail{{ $category->id }}" data-bs-toggle="modal" class="btn btn-primary">
+                            Connected
+                        </a> --}}
                     </div>
                 </div>
             </div>

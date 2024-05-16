@@ -81,8 +81,9 @@ class SainsRoleController extends Controller
             $user->email = $sainsRole->email;
             $user->password = Hash::make($sainsRole->password);
             $user->role = $sainsRole->role;
+            $user->email_verified_at = now();
             $user->save();
-            
+
             $sainsRole->delete();
 
         }elseif($status === 'rejected'){

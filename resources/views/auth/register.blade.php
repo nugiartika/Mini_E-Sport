@@ -89,13 +89,13 @@
                         <form action="{{ route('register') }}" class="sign-in-form" method="POST">
                             @csrf
                             <div class="single-input mb-3">
-                                <input type="text" name="name" placeholder="Masukkan nama">
+                                <input type="text" name="name" placeholder="Masukkan nama" value="{{ old('name') }}">
                             </div>
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                             <div class="single-input mb-3">
-                                <input type="email" name="email" placeholder="Masukkan email">
+                                <input type="email" name="email" placeholder="Masukkan email" value="{{ old('email') }}">
                             </div>
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
