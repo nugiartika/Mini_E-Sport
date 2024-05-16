@@ -116,7 +116,7 @@ class TransactionController extends Controller
 
             $transactionData = $this->transaction->create($data->all());
 
-            return redirect()->route('transaction.show', $transactionData->ref_id);
+            return redirect()->route('transaction.show', $transactionData->transaction_id);
         } catch (\Throwable $th) {
             abort(500, $th->getMessage());
         }
