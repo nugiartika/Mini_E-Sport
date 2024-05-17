@@ -118,7 +118,7 @@
                                 class="single-input mb-3 select2-selection__arrow black-select @error('role') is-invalid @enderror"
                                 name="role">
                                 {{-- <option value="" selected>Pilih Role</option> --}}
-                                <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                                <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>Pengguna</option>
                                 <option value="organizer" {{ old('role') == 'organizer' ? 'selected' : '' }}>
                                     Penyelenggara</option>
                             </select>

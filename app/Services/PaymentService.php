@@ -155,7 +155,6 @@ class PaymentService
         }
     }
 
-
     /**
      * Get the list of transactions for a specific open payment.
      *
@@ -172,7 +171,7 @@ class PaymentService
                     "verify" => false,
                     "timeout" => $this->timeoutSent
                 ])
-                ->get("https://tripay.co.id/api/open-payment/{$uuid}/transactions");
+                ->get($this->urlBuilder("/open-payment/{$uuid}/transactions"));
 
             return $response->json();
         } catch (\Illuminate\Http\Client\RequestException $e) {

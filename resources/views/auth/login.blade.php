@@ -66,7 +66,8 @@
                 <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                     <li class="menu-link">
                         <a href="{{ route('index') }}"
-                        class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Kembali</a>                        </li>
+                            class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Kembali</a>
+                    </li>
                     </li>
                 </ul>
             </div>
@@ -74,9 +75,18 @@
     </header>
     <!-- header-section end -->
 
-
     <section class="sign-in-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
         <div class="container pt-120">
+            @if ($errors->any())
+                <div class="alert bg-danger">
+                    <h3>Kesalahan!</h3>
+
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="form-area">
@@ -84,7 +94,8 @@
                         <form action="{{ route('login') }}" class="sign-in-form" method="POST">
                             @csrf
                             <div class="single-input mb-3">
-                                <input type="email" name="email" placeholder="Masukkan Email Anda" value="{{ old('email') }}">
+                                <input type="email" name="email" placeholder="Masukkan Email Anda"
+                                    value="{{ old('email') }}">
 
                             </div>
                             @error('email')

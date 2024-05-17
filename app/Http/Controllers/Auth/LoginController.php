@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -40,35 +42,34 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request)
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \App\Http\Requests\LoginRequest  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function login(LoginRequest $request)
     {
-        $messages = [
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'email.exists' => 'Email tidak terdaftar.',
-            'password.required' => 'Password wajib diisi.',
-            'email_password_mismatch' => 'Email :email tidak ditemukan.',
-            'password_wrong' => 'Password salah.',
-        ];
+        $data = $request->validated();
+        $data['status'] = 'active'; // Tambahkan status aktif supaya yang terbanned dan masih pending gak bisa masuk
 
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required',
-        ], $messages);
+        if (Auth::attempt($data)) {
+            $user = Auth::user();
 
-        $credentials = $request->only('email', 'password');
-
-        if (auth()->attempt($credentials)) {
-            $user = auth()->user();
             if ($user->role === 'organizer') {
-                return redirect()->route('dashboardPenyelenggara');
+                $this->redirectTo = route('dashboardPenyelenggara');
             } elseif ($user->role === 'admin') {
-                return redirect()->route('admin.index');
+                $this->redirectTo = route('admin.index');
             } elseif ($user->role === 'user') {
-                return redirect()->route('dashboardUser');
+                $this->redirectTo = route('dashboardUser');
             }
-        } else {
-            return redirect()->back()->withInput()->withErrors(['email_password_mismatch' => 'Email ' . $request->email . ' tidak ditemukan atau password salah.']);
+
+            return redirect($this->redirectTo);
         }
+
+        return redirect()->back()->withInput()->withErrors([
+            'email_password_mismatch' => "Surel {$request->email} tidak ditemukan, status tidak aktif atau password salah."
+        ]);
     }
 }

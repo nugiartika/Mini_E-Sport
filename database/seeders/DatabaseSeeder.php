@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'admin',
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
+            'status' => 'active',
         ]);
 
         User::create([
@@ -29,7 +30,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'user',
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
+            'status' => 'active',
         ]);
 
         User::create([
@@ -37,7 +39,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'penyelenggara@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'organizer',
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
+            'status' => 'active',
         ]);
 
         // Category::create([

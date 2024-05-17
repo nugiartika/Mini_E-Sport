@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\SainsRole;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
+use \Illuminate\Support\Arr;
 
 class RegisterController extends Controller
 {
+    private User $user;
+
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -24,15 +23,7 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-
 
     /**
      * Create a new controller instance.
@@ -42,91 +33,29 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->user = new User();
     }
 
-
-    public function register(Request $request)
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \App\Http\Requests\RegisterRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    public function register(RegisterRequest $request)
     {
-        $messages = [
-            'name.required' => 'Nama wajib di isi',
-            'name.max' => 'Nama maksimal 50 karakter',
-            'email.required' => 'Email wajib di isi',
-            'email.max:50' => 'Email maksimal 50 karakter',
-            'email.unique' => 'Email sudah digunakan, Gunakan email yang belum terdaftar',
-            'password.required' => 'Password wajib di isi',
-            'password.min' => 'Password minimal 6 karakter',
-            'password_confirmation.required' => 'Password konfirmasi wajib di isi',
-            'password_confirmation.min' => 'Minimum password 6 karakter'
-        ];
+        try {
+            $data = Arr::except($request->validated(), 'password_confirmation');
+            $data['password'] = bcrypt($data['password']);
+            $data['status'] = $data['role'] == 'user' ? 'active' : 'pending';
 
-        $request->validate([
-            'name' => 'required|string|max:50|',
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:50',
-                function ($attribute, $value, $fail) {
-                    if (DB::table('users')->where('email', $value)->exists() ||
-                        DB::table('sains_roles')->where('email', $value)->exists()) {
-                        $fail('Email sudah digunakan, Gunakan email yang belum terdaftar');
-                    }
-                },
-            ],
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|min:6'
-        ], $messages);
+            $this->user->create($data);
 
-        if ($request->role == 'user') {
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->role = $request->role;
-            $user->save();
-        } elseif ($request->role == 'organizer') {
-            $sainsRole = new SainsRole();
-            $sainsRole->name = $request->name;
-            $sainsRole->email = $request->email;
-            $sainsRole->password = Hash::make($request->password);
-            $sainsRole->role = $request->role;
-            $sainsRole->save();
+            return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan masuk ke akun anda.');
+        } catch (\Throwable $th) {
+            Log::error('Registration failed', ['error' => $th->getMessage(), 'trace' => $th->getTrace()]);
+
+            return redirect()->back()->withInput()->withErrors(['error' => 'Registrasi gagal, silahkan coba lagi.']);
         }
-
-
-
-        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan masuk ke akun anda.');
-    }
-
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role' => 'user',
-        ]);
     }
 }
