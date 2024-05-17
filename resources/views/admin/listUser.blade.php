@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <h5 class="card-header">
+        <h5 class="card-header pb-0 pt-3 mb-0">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('user') && !request()->has('action') && !request()->has('role') ? 'active' : '' }}"
@@ -119,6 +119,8 @@
             </table>
         </div>
     </div>
+
+    {{ $users->links() }}
 @endsection
 
 @section('script')

@@ -43,6 +43,7 @@
                     <td colspan="6">
                         <div class="p-3 text-center">
                             <h3 class="mb-2">Tidak Ada Data</h3>
+                            <p class="mb-0 text-muted">Tidak ada data transaksi yang tampil untuk saat ini.</p>
                         </div>
                     </td>
                 </tr>

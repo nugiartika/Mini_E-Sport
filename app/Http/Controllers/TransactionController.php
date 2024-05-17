@@ -41,13 +41,13 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role === 'user') {
-            $transactionData = $this->transaction->with([
+        $transactionData = $this->transaction->when(Auth::user()->role === 'user', function ($query) {
+            $query->with([
                 'teamTournament.toTeam' => function ($query) {
                     $query->where('user_id', Auth::id());
                 }
             ]);
-        }
+        });
 
         $transactionData = $transactionData->latest()->paginate(20);
         $getPaymentList = $this->paymentService->getPaymentList();
@@ -163,11 +163,11 @@ class TransactionController extends Controller
             $transaction->delete();
             return redirect()->back()->with('success', 'Data berhasil di hapus');
         } catch (\Exception $e) {
-            Log::error('Tidak dapat melakukan penghapusan. Karena: '. $e->getMessage());
-            return redirect()->back()->with('error', 'Tidak dapat melakukan penghapusan. Karena: '. $e->getMessage());
+            Log::error('Tidak dapat melakukan penghapusan. Karena: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Tidak dapat melakukan penghapusan. Karena: ' . $e->getMessage());
         } catch (\Throwable $th) {
-            Log::error('Tidak dapat melakukan penghapusan. Karena: '. $th->getMessage());
-            return redirect()->back()->with('error', 'Tidak dapat melakukan penghapusan. Karena: '. $th->getMessage());
+            Log::error('Tidak dapat melakukan penghapusan. Karena: ' . $th->getMessage());
+            return redirect()->back()->with('error', 'Tidak dapat melakukan penghapusan. Karena: ' . $th->getMessage());
         }
     }
 

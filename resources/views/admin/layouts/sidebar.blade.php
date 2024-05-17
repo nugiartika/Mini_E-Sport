@@ -18,7 +18,7 @@
     <ul class="menu-inner py-1">
         <li class="menu-item {{ request()->routeIs(['admin.index', 'category.index','admin.prizepool']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <i class="menu-icon ti ti-smart-home"></i>
                 <div>Dasbor</div>
             </a>
 
@@ -47,7 +47,7 @@
         {{-- Turnamen --}}
         <li class="menu-item {{ request()->routeIs(['konfirmtournament','DetailTournament']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti-md ti ti-trophy text-body"></i>
+                <i class="menu-icon ti ti-trophy"></i>
                 <div>Turnamen</div>
             </a>
 
@@ -67,14 +67,21 @@
             </ul>
         </li>
 
-        {{-- User Diterima --}}
-        <li class="menu-item {{ request()->routeIs('user') ? 'active' : '' }}">
+        {{-- User --}}
+        <li class="menu-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
             <a href="{{ route('user.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-users"></i>
-                <div>Users</div>
+                <i class="menu-icon ti ti-users"></i>
+                <div>Pengguna</div>
+            </a>
+        </li>
+
+        {{-- User --}}
+        <li class="menu-item {{ request()->routeIs('transaction.*') ? 'active' : '' }}">
+            <a href="{{ route('transaction.index') }}" class="menu-link">
+                <i class="menu-icon ti ti-moneybag"></i>
+                <div>Data Transaksi</div>
             </a>
         </li>
 
     </ul>
-
 </aside>
