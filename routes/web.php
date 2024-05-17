@@ -41,7 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('/admin', [DashboardAdminController::class, 'index'])->name('admin.index');
         Route::get('/listUserPenyelenggara', [SainsRoleController::class, 'index'])->name('listUserPenyelenggara');
-        Route::get('/listUser', [UserController::class, 'index'])->name('listUser');
+        Route::resource('user', UserController::class);
         Route::get('/listOrganizer', [UserController::class, 'indexpenyelenggara'])->name('listPenyelenggara');
         Route::resource('category', CategoryController::class);
         Route::get('confirmtournament', [TournamentController::class, 'indexadmin'])->name('konfirmtournament');
@@ -56,7 +56,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/addprizepool', [PrizepoolController::class, 'addprizepool'])->name('admin.prizepool');
         Route::post('/storePrize', [PrizepoolController::class, 'storePrize'])->name('admin.storePrize');
         Route::delete('/destroyPrize/{id}', [PrizepoolController::class, 'destroyPrize'])->name('admin.destroyPrize');
-
     });
 
     // Organizer Routes

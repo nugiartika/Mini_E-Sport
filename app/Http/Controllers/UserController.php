@@ -7,12 +7,36 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    private User $user;
+
+    public function __construct()
+    {
+        $this->user = new User();
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where('role', 'user')->get();
+        $role = $request->get('role');
+        $action = $request->get('action') == 'approval';
+
+        $users = $this->user
+            ->when($action, function ($query) {
+                $query->where([
+                    'status' => 'pending',
+                    'role' => 'organizer'
+                ]);
+            })
+            ->when($role, function ($query) use ($role) {
+                $query->where([
+                    'role' => $role,
+                    'status' => 'active'
+                ]);
+            })
+            ->paginate(15);
+
         return view('admin.listuser', compact('users'));
     }
 
@@ -59,24 +83,23 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $data = $request->except('_token');
+        $data['email_verified_at'] = $data['status'] === 'active' ? now() : null;
+
+        $user->update($data);
+        
+        return redirect()->back()->with('success', 'User berhasil diubah statusnya');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $idUser)
+    public function destroy(User $user)
     {
-        $user = $idUser;
-
-        if(!$user) {
-            return redirect()->back()->with('error', 'User Tidak ');
-        }
-
         $user->delete();
 
         return redirect()->back()->with('success', 'Berhasil Menghapus Data');
     }
-    }
+}

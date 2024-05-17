@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'admin',
+            'name' => 'Administrator',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'admin',
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'user',
+            'name' => 'Regular User',
             'email' => 'user@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'user',
@@ -35,8 +35,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'penyelenggara',
-            'email' => 'penyelenggara@gmail.com',
+            'name' => 'Event Organizer',
+            'email' => 'eo@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'organizer',
             'email_verified_at' => now(),
