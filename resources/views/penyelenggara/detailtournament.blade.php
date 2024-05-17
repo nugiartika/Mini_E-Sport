@@ -170,19 +170,20 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Masukkan URL
-                        Bracket
-                    </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Masukkan URL Bracket</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <input type="text" class="form-control" id="bracketLinkInput" placeholder="Masukkan URL Bracket">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary" id="saveLinkBtn"
-                        data-bs-dismiss="modal">Simpan</button>
-                </div>
+                <!-- Form dengan action dan method yang sesuai -->
+                {{-- <form id="bracketForm" action="{{ route('ptournament.bracket')}}" method="post"> --}}
+                    @csrf <!-- Menambahkan token CSRF -->
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="bracketLinkInput" name="urlBracket" placeholder="Masukkan URL Bracket">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                {{-- </form> --}}
             </div>
         </div>
     </div>
@@ -276,22 +277,21 @@
                                             {{ $tournament->waktuFinal }}</span>
                                     </div>
                                 </div>
-                                <div class="col-md-4 ">
+                                <div class="col-md-4">
                                     <h4>Link Pembuatan Bracket</h4>
-                                    <a href="https://challonge.com/id/tournament/bracket_generator"
-                                        class="form-control d-block"
-                                        style="width: 100%;">https://challonge.com/id/tournament/bracket_generator</a>
+                                    <a href="https://challonge.com/id/tournament/bracket_generator" class="form-control d-block" style="width: 100%;">
+                                        https://challonge.com/id/tournament/bracket_generator
+                                    </a>
                                     <!-- Button untuk memasukkan URL langsung -->
-                                    <button type="button" class="btn btn-primary mt-3" id="showModalBtn"
-                                        data-bs-toggle="modal" data-bs-target="#BracketModal">
+                                    <button type="button" class="btn btn-primary mt-3" id="showModalBtn" data-bs-toggle="modal" data-bs-target="#BracketModal">
                                         Masukkan Link Bracket Pertandingan Disini
                                     </button>
                                     <div class="mt-3">
                                         <h5>Link Bracket:</h5>
-                                        <!-- Tautan yang akan diperbarui secara dinamis -->
-                                        <a id="dynamicLink" href="#" target="_blank"></a>
+                                            <!-- Tautan yang akan diperbarui secara dinamis -->
+                                            <a href="{{ $tournament->urlBracket }}" target="_blank">{{ $tournament->urlBracket }}</a>
                                     </div>
-                                    <!-- Modal -->
+                                    
                                 </div>
                             @endforeach
                         </div>
@@ -542,6 +542,23 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const bracketForm = document.getElementById('bracketForm');
+            bracketForm.action = "{{ route('ptournament.bracket', ['id' => $selectedTournament->id]) }}";
+
+            const saveLinkBtn = document.getElementById('saveLinkBtn');
+            const bracketLinkInput = document.getElementById('bracketLinkInput');
+
+            saveLinkBtn.addEventListener('click', function () {
+                const bracketLink = bracketLinkInput.value;
+                localStorage.setItem('savedBracketLink', bracketLink);
+            });
+        });
+    </script>
+
 
     <script>
         var currentTab = 0; // Saat ini tab yang ditampilkan

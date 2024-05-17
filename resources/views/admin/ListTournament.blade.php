@@ -13,7 +13,7 @@
 
 <body>
 
-    @forelse ($tournaments as $tournament)
+    @foreach ($tournaments as $tournament)
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -91,8 +91,7 @@
                 </div>
             </div>
         </div>
-    @empty
-    @endforelse
+    @endforeach
 
 
 
@@ -124,15 +123,17 @@
                                     <td>{{ $tournament->category->name }}</td>
 
                                     <td>{{ $tournament->user->name }}</td>
-                                    <td><span class="badge bg-label-primary me-1"> @if ($tournament->status === 'rejected')
-                                        <span>Tolak</span>
-                                    @elseif ($tournament->status === 'pending')
-                                        <span>Tertunda</span>
-                                    @elseif ($tournament->status === 'accepted')
-                                        <span>Aktif</span>
-                                    @else
-                                        <span>Status turnamen tidak valid.</span>
-                                    @endif</span>
+                                    <td><span class="badge bg-label-primary me-1">
+                                            @if ($tournament->status === 'rejected')
+                                                <span>Tolak</span>
+                                            @elseif ($tournament->status === 'pending')
+                                                <span>Tertunda</span>
+                                            @elseif ($tournament->status === 'accepted')
+                                                <span>Aktif</span>
+                                            @else
+                                                <span>Status turnamen tidak valid.</span>
+                                            @endif
+                                        </span>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -149,7 +150,8 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <form action="{{ route('deleteTournament', ['idTournament' => $tournament->id]) }}"
+                                        <form
+                                            action="{{ route('deleteTournament', ['idTournament' => $tournament->id]) }}"
                                             method="POST" class="d-inline-block">
                                             @csrf
                                             @method('DELETE')
@@ -166,17 +168,12 @@
                             @empty
                                 <tr>
                                     <td colspan="6">
-                                        <div class="d-flex justify-content-center">
-                                            <div class="card">
-                                                <div class="table-responsive text-nowrap">
-                                                    <table class="table"></table>
-                                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                                        style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                                                    <h1 class="table-light" style="text-align: center;">Data Kosong
-                                                    </h1>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                        <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                            style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+                                        <h1 class="table-light" style="text-align: center;">Data Kosong
+                                        </h1>
+
                                     </td>
                                 </tr>
                             @endforelse

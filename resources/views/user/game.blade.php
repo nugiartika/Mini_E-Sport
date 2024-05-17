@@ -2,13 +2,8 @@
 
 @section('content')
     <div class="row mb-5">
-<<<<<<< Updated upstream
-        @foreach ($categories as $category)
-            <div class="col-md-4 col-lg-3 mb-3">
-=======
         @forelse ($categories as $category)
             <div class="col-md-6 col-lg-4 mb-3">
->>>>>>> Stashed changes
                 <div class="card h-100">
                     <img class="card-img-top" src="{{ asset('storage/' . $category->photo) }}" alt="Gambar Game    " />
                     <div class="card-body text-center">

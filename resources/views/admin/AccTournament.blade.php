@@ -69,9 +69,9 @@
                                                 <div class="modal-body">
                                                     <textarea class="form-control" id="reason{{ $tournament->id }}" name="reason" rows="3"
                                                         placeholder="Alasan penolakan">{{ old('reason', $tournament->reason) }}</textarea>
-                                                    @error('reason')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                    @enderror
+                                                        @error('reason')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
                                                 </div>
 
                                                 <div class="modal-footer">
@@ -231,7 +231,37 @@
         @endforeach
     });
 </script> --}}
-
+@if (session('success'))
+    <!-- Modal Success -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">SUCCESS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ session('success') }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Success -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#successModal').modal('show');
+        });
+    </script>
+@endif
+@if (session('warning'))
+    <div class="alert alert-warning">
+        {{ session('warning') }}
+    </div>
+@endif
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

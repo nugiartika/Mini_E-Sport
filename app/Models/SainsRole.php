@@ -13,4 +13,9 @@ class SainsRole extends Model
 
     protected $guarded = ['id'];
 
+    public function user()
+    {
+        return $this->hasOne(user::class);
+    }
+
 }

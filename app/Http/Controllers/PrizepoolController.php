@@ -27,7 +27,6 @@ class PrizepoolController extends Controller
             'prize' => $request->input('prize'),
         ]);
         return redirect()->route('admin.prizepool')->with('success', 'Hadiah berhasil ditambahkan');
-
     }
 
     /**

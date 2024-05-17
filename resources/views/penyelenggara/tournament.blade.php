@@ -72,11 +72,11 @@
                                 href="{{ route('ptournament.create') }}" style="color :white">Buat Turnamen</a>
                         </div>
                     </div>
-                    <div class="tabcontents">
+                    <div class="tabcontents ">
                         <div class="tabitem active">
                             <div class="row justify-content-md-start justify-content-center g-6">
                                 @forelse ($tournaments as $tournament)
-                                    <div class="col-xl-4 col-md-6 col-sm-10 mb-4">
+                                    <div class="col-xl-4 col-md-6 col-sm-10 mb-4 card">
                                         <!-- Tambahkan kelas mb-4 untuk memberi jarak bawah antara card -->
                                         <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                             <div class="dropdown">
@@ -112,8 +112,8 @@
                                                     <img class="w-100" src="{{ asset('storage/' . $tournament->images) }}"
                                                         alt="tournament">
                                                 </div>
-                                                <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                                    <span class="dot-icon alt-icon ps-3">Playing</span>
+                                                <span class="btn btn-success" style="margin-top: -20px; margin-left:10px;">
+                                                    <span class="fas fa-gamepad	">   Playing</span>
                                                 </span>
                                             </div>
                                             <div class="tournament-content px-xxl-4">
@@ -121,7 +121,7 @@
                                                     <a href="{{ route('tournament.detail', ['id' => $tournament->id]) }}"
                                                         class="d-block">
                                                         <h4
-                                                            class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                            class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim" style="margin-top:50px">
                                                             {{ $tournament->name }}
                                                         </h4>
                                                     </a>
