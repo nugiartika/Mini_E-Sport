@@ -101,36 +101,9 @@
     <div class="drag-target"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    <!-- gsap  -->
-    <script src="{{ asset('assets/js/gsap.min.js') }}"></script>
-    <!-- gsap scroll trigger -->
-    <script src="{{ asset('assets/js/ScrollTrigger.min.js') }}"></script>
-    <!-- lenis  -->
-    <script src="{{ asset('assets/js/lenis.min.js') }}"></script>
-    <!-- gsap split text -->
-    <script src="{{ asset('assets/js/SplitText.min.js') }}"></script>
-    <!-- tilt js -->
-    <script src="{{ asset('assets/js/vanilla-tilt.js') }}"></script>
-    <!-- scroll magic -->
-    <script src="{{ asset('assets/js/ScrollMagic.min.js') }}"></script>
-    <!-- animation.gsap -->
-    <script src="{{ asset('assets/js/animation.gsap.min.js') }}"></script>
-    <!-- gsap customization  -->
-    <script src="{{ asset('assets/js/gsap-customization.js') }}"></script>
-    <!-- apex chart  -->
-    <script src="{{ asset('assets/js/apexcharts.js') }}"></script>
-    <!-- swiper js -->
-    <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
-    <!-- magnific popup  -->
-    <script src="{{ asset('assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js') }}"></script>
-    <!-- bootstrap js -->
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- main js  -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-
     <script src="{{ asset('demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c') }}"></script>
+    <script src="{{ asset('demo/assets/vendor/js/bootstraped84.js?id=9a6c701557297a042348b5aea69e9b76') }}"></script>
     <script src="{{ asset('demo/assets/vendor/libs/node-waves/node-waves259f.js?id=4fae469a3ded69fb59fce3dcc14cd638') }}">
     </script>
     <script
@@ -142,7 +115,6 @@
     <script src="{{ asset('demo/assets/vendor/js/menu2dc9.js?id=c6ce30ded4234d0c4ca0fb5f2a2990d8') }}"></script>
 
     <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
-
 
 <!-- Bootstrap Bundle JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
