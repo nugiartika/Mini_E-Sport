@@ -93,7 +93,7 @@
 
 
                             <div class="single-input mb-3">
-                                <input type="password" name="password" placeholder="Masukkan Password Anda">
+                                <input type="password" name="password" placeholder="Masukkan Password Anda" value="{{ old('password') }}">
                             </div>
                             @error('password')
                                 <span class="text-danger">{{ $message }}</span>

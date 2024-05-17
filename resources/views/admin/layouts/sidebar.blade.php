@@ -29,7 +29,7 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item {{ request()->routeIs(['admin.index', 'category.index']) ? 'active open' : '' }}">
+        <li class="menu-item {{ request()->routeIs(['admin.index', 'category.index','admin.prizepool']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div>Dasbor</div>

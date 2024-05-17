@@ -365,26 +365,23 @@ class TournamentController extends Controller
 
         $request->validate([
             'status' => 'required|in:accepted,rejected',
-            'reason' => 'nullable|string|max:255',
+            'reason' => 'required_if:status,rejected|nullable|string|max:255',
         ], [
             'status.required' => 'Kolom STATUS wajib diisi.',
             'status.in' => 'Status harus berupa "accepted" atau "rejected".',
-            // 'reason.required' => 'Alasan penolakan wajib diisi jika status "rejected".',
+            'reason.required_if' => 'Alasan penolakan wajib diisi.',
             'reason.string' => 'Alasan penolakan harus berupa teks.',
             'reason.max' => 'Alasan penolakan tidak boleh melebihi 255 karakter.',
         ]);
 
+        // $tournament->status = $request->status;
+
         $tournament->status = $request->status;
 
-        // Update status turnamen sesuai dengan input dari form
-        $tournament->status = $request->status;
-
-        // Jika status adalah 'rejected' dan alasan telah diberikan, simpan alasan
         if ($request->status == 'rejected' && $request->has('reason')) {
             $tournament->reason = $request->reason;
         }
 
-        // Simpan perubahan pada data turnamen
         $tournament->save();
 
         return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');

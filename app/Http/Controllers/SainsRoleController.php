@@ -79,7 +79,7 @@ class SainsRoleController extends Controller
             $user = new User();
             $user->name = $sainsRole->name;
             $user->email = $sainsRole->email;
-            $user->password = Hash::make($sainsRole->password);
+            $user->password = $sainsRole->password;
             $user->role = $sainsRole->role;
             $user->email_verified_at = now();
             $user->save();

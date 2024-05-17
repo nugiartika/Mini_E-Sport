@@ -57,6 +57,7 @@ class LoginController extends Controller
         ], $messages);
 
         $credentials = $request->only('email', 'password');
+        // dd($credentials);
 
         if (auth()->attempt($credentials)) {
             $user = auth()->user();
