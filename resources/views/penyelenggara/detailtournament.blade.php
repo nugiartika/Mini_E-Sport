@@ -122,11 +122,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">DAFTAR JUARA $ MVP TOURNAMENT</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">DAFTAR JUARA & MVP TOURNAMENT</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="regForm" action="{{ route('ptournament.juara', ['id' => $tournament->first()->id]) }}"
+                    <form id="regForm" action="{{ route('ptournament.juara') }}"
                         method="POST">
                         @csrf
                         <h5>Juara 1</h5>
@@ -291,7 +291,7 @@
                                             <!-- Tautan yang akan diperbarui secara dinamis -->
                                             <a href="{{ $tournament->urlBracket }}" target="_blank">{{ $tournament->urlBracket }}</a>
                                     </div>
-                                    
+
                                 </div>
                             @endforeach
                         </div>
@@ -547,7 +547,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const bracketForm = document.getElementById('bracketForm');
-            bracketForm.action = "{{ route('ptournament.bracket', ['id' => $selectedTournament->id]) }}";
 
             const saveLinkBtn = document.getElementById('saveLinkBtn');
             const bracketLinkInput = document.getElementById('bracketLinkInput');

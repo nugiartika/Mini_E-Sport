@@ -39,17 +39,6 @@
 
     <!-- header-section start -->
 
-    @if (auth()->check())
-        <div class="user-account-popup p-4">
-            <div class="account-items d-grid gap-1" data-tilt>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button class="bttn account-item" type="submit">Kembali</button>
-                </form>
-            </div>
-        </div>
-    @endif
-
     <section class="tournament-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
         <div class="tournament-wrapper alt">
             <div class="container">

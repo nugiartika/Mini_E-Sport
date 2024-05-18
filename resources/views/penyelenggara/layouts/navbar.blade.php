@@ -10,19 +10,6 @@
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
-        <!-- Search -->
-        {{-- <div class="navbar-nav align-items-center">
-            <div class="nav-item navbar-search-wrapper mb-0">
-                <a class="nav-item nav-link search-toggler d-flex align-items-center px-0" href="javascript:void(0);">
-                    <i class="ti ti-search ti-md me-2"></i>
-                    <span class="d-none d-md-inline-block text-muted">Search (Ctrl+/)</span>
-                </a>
-            </div>
-        </div> --}}
-        <!-- /Search -->
-
-
-
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
             <!-- Notification -->
@@ -59,19 +46,19 @@
                                     <small class="text-muted">Penyelenggara</small>
                                 </div>
                             </div>
-                        </a>
-                    </li>
 
-                    <li>
+                        </a>
                         <a class="dropdown-item" href="javascript:;"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="ti ti-login me-2"></i>
                             <span class="align-middle">Keluar</span>
                         </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="mb-0">
+                            @csrf
+                        </form>
+
                     </li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="mb-0">
-                        @csrf
-                    </form>
+
 
                 </ul>
             </li>

@@ -22,34 +22,6 @@ class MemberController extends Controller
     }
 
 
-
-// public function store(Request $request)
-// {
-//     $request->validate([
-//         'team_id' => 'required|exists:teams,id',
-//         'members.*' => 'required|string|max:255', // You can adjust the validation rules as needed
-//     ]);
-
-//     // Fetch the team based on the selected team_id
-//     $team = Team::findOrFail($request->team_id);
-
-//     // Get the category ID from the team
-//     $categoryId = $team->category_id;
-
-//     // Get the membersPerTeam from the category
-//     $membersPerTeam = Category::findOrFail($categoryId)->membersPerTeam;
-
-//     // Create members
-//     foreach ($request->members as $memberName) {
-//         Member::create([
-//             'team_id' => $request->team_id,
-//             'name' => $memberName,
-//         ]);
-//     }
-
-//     return redirect()->route('member.create')->with('success', 'Members added successfully.');
-// }
-
     public function create(Request $request)
     {
         $members = Member::all();
@@ -59,23 +31,6 @@ class MemberController extends Controller
         return view('user.createmember', compact('members', 'teams', 'selectedTeamId'));
     }
 
-    // public function store(Request $request)
-    // {
-    //     $teams_id = $request->team_id;
-    //     $nicknames = $request->nickname;
-
-    //     foreach ($request->member as $index => $memberName) {
-    //         Member::create([
-    //             'member' => $memberName,
-    //             'nickname' => $request->nickname[$index],
-    //             'team_id' => $teams_id,
-    //         ]);
-    //     }
-
-    //     // dd($member);
-
-    //     return redirect()->route('team.index')->with('success', 'Members added successfully');
-    // }
 
     public function store(Request $request)
     {

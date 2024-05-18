@@ -22,7 +22,8 @@ class TeamController extends Controller
     {
         $teams = Team::all();
         $category = Category::all();
-        return view('user.teamUser', compact('teams','category'));
+        $tournaments = Tournament::all();
+        return view('user.teamUser', compact('teams','category','tournaments'));
     }
 
     /**
@@ -79,8 +80,9 @@ class TeamController extends Controller
         $members = Member::all();
         $teams = Team::all();
         $teamId = $team->id;
+        $user = User::all();
 
-        return view('user.createmember', compact('members', 'teams', 'teamId'));
+        return view('user.createmember', compact('members', 'teams', 'teamId','user'));
     }
 
     /**

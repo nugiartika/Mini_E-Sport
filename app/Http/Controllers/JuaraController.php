@@ -29,14 +29,17 @@ class JuaraController extends Controller
 
         return view('penyelenggara.detailtournament', compact('juara','jadwal','tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
-    public function juara(Tournament $tournament,Request $request)
-    {
-        juara::create([
-            'nama_juara1' => $request->input('nama_juara1'),
-            'nama_juara2' => $request->input('nama_juara2'),
-            'nama_juara3' => $request->input('nama_juara3'),
-            'mvp' => $request->input('mvp'),
-        ]);
-        return redirect()->route('tournament.detail', ['id' => $tournament->id])->with('success', 'Jadwal added successfully');
-    }
+
+    public function juara(Tournament $tournament, Request $request)
+{
+
+    Juara::create([
+        'nama_juara1' => $request['nama_juara1'],
+        'nama_juara2' => $request['nama_juara2'],
+        'nama_juara3' => $request['nama_juara3'],
+        'mvp' => $request['mvp'],
+    ]);
+
+    return redirect()->route('tournament.detail', ['id' => $tournament->id])->with('success', 'Juara ditambahkan dengan sukses');
+}
 }
