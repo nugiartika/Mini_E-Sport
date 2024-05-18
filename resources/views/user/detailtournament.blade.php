@@ -190,7 +190,6 @@
                         <div class="icon-area mb-6">
                             <i class="ti ti-coin-bitcoin display-five fw-normal tcp-2"></i>
                         </div>
-                        <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">Hadiah</h4>
                         @foreach ($prizes as $prize)
                             @if ($prize->tournament_id == $tournament->id)
                                 <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }} {{ $prize->note }}</p>

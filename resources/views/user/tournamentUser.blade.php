@@ -193,21 +193,6 @@
                                     }
                                     @endphp
 
-                                    {{-- Kode blade lainnya di sini
-
-                                        // $userTim = $teamTournament ?? collect();
-                                        // $userTeamIdTournament = $userTim->pluck('team_id'); // Mengambil semua team_id dari koleksi $userTim
-
-                                        // $isUserTournament = $userTeamIdTournament->contains($team->id); // Mengecek apakah $team->id ada di dalam koleksi $userTeamIdTournament
-                                        // $isUserInTournaments = $userTeamIdTournament->contains($teams->pluck('team_id')); // Mengecek apakah ada team_id yang ada di koleksi $teams
-
-                                        // $team = $userTim->first(); // Pastikan $team berisi nilai yang valid sebelum ini
-
-                                        // if ($team) {
-                                        //     $userTeamIdTournament = $userTim->where('team_id', $team->id); // Sekarang ini seharusnya berfungsi
-                                        // }
-
-                                    @endphp --}}
 
 
                                     <div class="hr-line line3"></div>
@@ -265,7 +250,7 @@
                                         @endif
 
                                         <!-- Tombol Detail Tournament -->
-                                        <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}"
+                                        <a href="{{ route('tournament.detailUser', $tournament->id) }}"
                                             class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
                                             style="display: flex; justify-content: center; align-items: center;"
                                             title="Detail Tournament">

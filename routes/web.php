@@ -79,7 +79,6 @@ Route::middleware(['auth'])->group(function () {
         // Route::post('/teams', [TeamController::class, 'storeId'])->name('team.storeId')->name('team.create');
         Route::get('/detailTournamentUser/{id}', [TournamentController::class, 'detailTournamentUser'])->name('tournament.detailUser');
         Route::get('DashboardUser', [DashboardUserController::class, 'index'])->name('dashboardUser');
-        Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
         Route::get('tournamentUser/history', [TournamentController::class, 'history'])->name('user.tournament.history');
         Route::get('/tournamentfilter', [TournamentController::class, 'filteruser'])->name('tournament.filteruser');
     });
@@ -90,10 +89,6 @@ Route::resource('transaction', TransactionController::class)->parameters([
     'transaction' => 'transaction:transaction_id'
 ])->middleware('auth');
 
-// Public Routes
-// Route::get('/teams.create', [TeamController::class, 'createId'])->name('team.createId');
-
-Route::get('tournament', [TournamentController::class, 'indexuser'])->name('');
 Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
 
 Route::resource('/teams', TeamTournamentController::class);
@@ -101,7 +96,6 @@ Route::get('teams/{team}', [TeamController::class, 'show'])->name('teams.show');
 
 Route::resource('team', TeamController::class);
 Route::resource('member', MemberController::class);
-Route::get('tournament/{tournament}', [TournamentController::class, 'detail'])->name('detailTournament');
 Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
 Route::get('/detailteam', function () {
     return view('detailteam');
@@ -111,5 +105,3 @@ Route::get('/', [LandingPageController::class, 'index'])->name('index');
 // Route::get('/', function () {
 //     return view('user.index');
 // })->name('index');
-
-
