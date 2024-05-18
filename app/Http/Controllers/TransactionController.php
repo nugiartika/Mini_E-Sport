@@ -12,7 +12,6 @@ use App\Services\PaymentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use PHPUnit\Event\Code\Throwable;
 
 class TransactionController extends Controller
 {
@@ -45,7 +44,7 @@ class TransactionController extends Controller
             $query->with([
                 'teamTournament.toTeam' => function ($query) {
                     $query->where('user_id', Auth::id());
-                }
+                },
             ]);
         });
 
@@ -227,12 +226,12 @@ class TransactionController extends Controller
                 'message' => $th->getMessage(),
                 'code' => $th->getCode() ?? 500,
             ], 500);
-        } catch (\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface $hei) {
+        } catch (\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface $http) {
             return response()->json([
                 'success' => false,
-                'message' => $hei->getMessage(),
-                'code' => $hei->getCode() ?? 500,
-            ], 500);
+                'message' => $http->getMessage(),
+                'code' => $http->getCode() ?? 404,
+            ], 404);
         }
     }
 }

@@ -286,14 +286,6 @@ class TournamentController extends Controller
         //
     }
 
-    public function detail($id)
-    {
-        $tournaments = Tournament::findOrFail($id);
-        $user = User::all();
-        $team = Team::count();
-        $category = Category::all();
-        return view('user.detailtournament', compact('tournaments', 'category', 'user', 'team'));
-    }
 
     public function detailTournament(Tournament $tournament, $id)
     {
@@ -354,7 +346,7 @@ class TournamentController extends Controller
         $prizes = tournament_prize::where('tournament_id', $id)->get();
         // dd($prizes);
 
-        return view('user.detailtournament', compact('counttournaments', 'user', 'category', 'jadwal', 'bracket', 'juara', 'selectedTournament', 'teams', 'tournament', 'prizes'));
+        return view('user.detailtournament', compact('counttournaments', 'user', 'category', 'jadwal', 'juara', 'selectedTournament', 'teams', 'tournament', 'prizes'));
     }
 
     /**

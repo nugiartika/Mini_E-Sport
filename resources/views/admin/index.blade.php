@@ -28,7 +28,7 @@
 
         <!-- Total Sales -->
         <div class="col-xl-2 col-md-4 col-6 mb-4">
-            <a href="{{ route('user.index', ['role' => 'user']) }}">
+            <a href="{{ route('user.index') }}">
             <div class="card">
                 <div class="card-body">
                     <div class="badge p-2 bg-label-info mb-2 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="32"
