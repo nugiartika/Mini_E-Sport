@@ -93,23 +93,27 @@
                         <h1 class="tcn-1 text-center cursor-scale growUp mb-10">Masuk</h1>
                         <form action="{{ route('login') }}" class="sign-in-form" method="POST">
                             @csrf
-                            <div class="single-input mb-3">
-                                <input type="email" name="email" placeholder="Masukkan Email Anda"
-                                    value="{{ old('email') }}">
 
+                            <div class="mb-3">
+                                <div class="single-input">
+                                    <input type="email" name="email" placeholder="Masukkan Email Anda"
+                                        value="{{ old('email') }}">
+                                </div>
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            @error('email')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
 
+                            <div class="mb-3">
 
-                            <div class="single-input mb-3">
-                                <input type="password" name="password" placeholder="Masukkan Password Anda" value="{{ old('password') }}">
+                                <div class="single-input">
+                                    <input type="password" name="password" placeholder="Masukkan Password Anda"
+                                        value="{{ old('password') }}">
+                                </div>
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            @error('password')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-
 
                             <div class="text-center">
                                 <button type="submit" class="bttn py-3 px-6 rounded bgp-1">Masuk</button>
