@@ -16,7 +16,8 @@ class LandingPageController extends Controller
     public function index()
     {
         $Tournaments = Tournament::where('status', 'accepted')->orWhere('status', 'pending')->get();
-        return view('user.index', compact('Tournaments'));
+        $Categories = Category::all();
+        return view('user.index', compact('Tournaments', 'Categories'));
     }
 
 

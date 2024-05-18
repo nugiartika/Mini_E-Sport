@@ -32,7 +32,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name.required' => 'Nama Game Wajib Diisi',
-            'name.unique' => 'Nama Game Tidak Boleh sama',
+            'name.unique' => 'Nama Game sudah digunakan.',
             'name.max' => 'Nama Tidak Boleh lebih dari 50 character.',
             'photo.required' => 'Foto Wajib diisi.',
             'photo.image' => 'Masukan harus berupa foto',

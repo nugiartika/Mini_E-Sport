@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Event Organizer',
-            'email' => 'eo@gmail.com',
+            'email' => 'penyelenggara@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'organizer',
             'email_verified_at' => now(),

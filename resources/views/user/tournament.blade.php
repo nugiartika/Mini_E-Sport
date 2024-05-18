@@ -294,7 +294,7 @@
 
 
 
-                                                <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}"
+                                                <a href="{{ route('tournament.detailUser', ['tournament' => $tournament->id]) }}"
                                                     class="btn2" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" title="Tooltip on top">
                                                     <i class="ti ti-arrow-right fs-2xl"></i>

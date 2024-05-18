@@ -13,9 +13,38 @@
     </style>
 @endsection
 
+
+{{-- <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
+            style="background-color:rgb(40, 144, 204); color:#fff;">
+            Tambahkan Game
+        </a>
+
+
+        <form action="{{ route('category.index') }}" method="get">
+            @csrf
+            <div class="input-group mb-3">
+                <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;" value="{{ old('search', request('search')) }}"/>
+                <button type="submit" class="btn btn-secondary">Cari</button>
+            </div>
+        </form>
+    </div> --}}
+
 @section('content')
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
-        <h5 class="card-header">Penerimaan Turnamen</h5>
+        <div class="card-header d-flex justify-content-between align-items-center">
+        <h5>Penerimaan Turnamen</h5>
+        <form action="{{ route('konfirmtournament') }}" method="get">
+            @csrf
+            <div class="input-group mb-3">
+                <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;" value="{{ old('search', request('search')) }}"/>
+                <button type="submit" class="btn btn-secondary">Cari</button>
+            </div>
+        </form>
+        </div>
         <div class="table-responsive text-nowrap">
             <table class="table">
                 <thead class="table-light">
@@ -102,26 +131,26 @@
                             </td>
                         </tr>
                     @empty
-                        <tr>
-                            <td colspan="6">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                        style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                                    <h1 class="table-light" style="text-align: center;">
-                                        Data Kosong
-                                    </h1>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colspan="6">
+                            <div class="d-flex flex-column justify-content-center">
+                                <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                    style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                                <h4 class="table-light" style="text-align: center;">
+                                    Data Tidak Tersedia
+                                </h4>
+                            </div>
+                        </td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>
+            {{$tournaments->links()}}
         </div>
     </div>
-@endsection
-
-@section('script')
-    @foreach ($tournaments as $tournament)
+    </div>
+</div>
+@foreach ($tournaments as $tournament)
         <div class="modal fade" id="exampleModal{{ $tournament->id }}" tabindex="-1"
             aria-labelledby="exampleModalLabel{{ $tournament->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -201,6 +230,10 @@
             </div>
         </div>
     @endforeach
+@endsection
+
+@section('script')
+
 
     <!-- Bootstrap JS -->
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -231,37 +264,7 @@
         @endforeach
     });
 </script> --}}
-@if (session('success'))
-    <!-- Modal Success -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">SUCCESS</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{ session('success') }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Modal Success -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#successModal').modal('show');
-        });
-    </script>
-@endif
-@if (session('warning'))
-    <div class="alert alert-warning">
-        {{ session('warning') }}
-    </div>
-@endif
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

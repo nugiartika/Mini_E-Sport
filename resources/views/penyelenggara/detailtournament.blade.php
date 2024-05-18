@@ -291,7 +291,7 @@
                                             <!-- Tautan yang akan diperbarui secara dinamis -->
                                             <a href="{{ $tournament->urlBracket }}" target="_blank">{{ $tournament->urlBracket }}</a>
                                     </div>
-                                    
+
                                 </div>
                             @endforeach
                         </div>
@@ -547,7 +547,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const bracketForm = document.getElementById('bracketForm');
-            bracketForm.action = "{{ route('ptournament.bracket', ['id' => $selectedTournament->id]) }}";
 
             const saveLinkBtn = document.getElementById('saveLinkBtn');
             const bracketLinkInput = document.getElementById('bracketLinkInput');
