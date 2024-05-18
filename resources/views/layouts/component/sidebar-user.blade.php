@@ -1,6 +1,4 @@
 <ul class="menu-inner py-1">
-
-
     <li class="menu-item {{ request()->routeIs('dashboardUser') ? 'active' : '' }}">
         <a href="{{ route('dashboardUser') }}" class="menu-link d-flex align-items-center">
             <i class="menu-icon tf-icons ti ti-tabler-dashboard"></i>
@@ -48,5 +46,4 @@
             <div>Riwayat Transaksi</div>
         </a>
     </li>
-
 </ul>

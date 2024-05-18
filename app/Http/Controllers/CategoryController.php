@@ -16,25 +16,28 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->has('search')) {
+        $category = Category::when($request->has('search'), function ($query) use ($request) {
             $a = $request->input('search');
-            $category = Category::where('name', 'LIKE', "%$a%")->paginate(5);
-        } else {
-            $category = Category::paginate(5);
-        }
+            return $query->where('name', 'LIKE', "%$a%");
+        })->paginate(5);
+
         return view('admin.category', compact('category'));
     }
+
     public function indexuser()
     {
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $categories = Category::all();
+        $countTournaments = Tournament::where('users_id', auth()->id())
+            ->where('status', 'rejected')
+            ->count();
 
-      $category = Category::all();
-        return view('penyelenggara.game', compact('category', 'counttournaments'));
+        return view('penyelenggara.game', compact('categories', 'countTournaments'));
     }
 
     public function indexusers()
     {
         $categories = Category::all();
+
         return view('user.game', compact('categories'));
     }
 
@@ -55,8 +58,8 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $category=Category::all();
-        return view ('admin.category',compact('category'));
+        $category = Category::all();
+        return view('admin.category', compact('category'));
     }
 
     public function store(CategoryRequest $request)
@@ -106,7 +109,6 @@ class CategoryController extends Controller
         }
 
         return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY UPDATED');
-
     }
 
     public function destroy(Category $category)
@@ -114,7 +116,7 @@ class CategoryController extends Controller
         try {
 
             if (Storage::disk('public')->exists($category->photo)) {
-               Storage::disk('public')->delete($category->photo);
+                Storage::disk('public')->delete($category->photo);
             }
 
             $category->delete();
@@ -124,5 +126,4 @@ class CategoryController extends Controller
             return redirect()->route('category.index')->with('error', 'GAGAL MENGHAPUS CATEGORY. ');
         }
     }
-
 }

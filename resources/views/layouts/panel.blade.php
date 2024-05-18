@@ -1,5 +1,6 @@
 @php
-    $userRole = auth()->user()->role ?? 'user';
+    $user = auth()->user();
+    $userRole = $user->role ?? 'user';
 @endphp
 
 <!doctype html>
@@ -153,8 +154,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-medium d-block">John Doe</span>
-                                                    <small class="text-muted">Admin</small>
+                                                    <span class="fw-medium d-block">{{ $user->name }}</span>
+                                                    <small class="text-muted">
+                                                        @if($userRole === 'admin')
+                                                            Admin
+                                                        @elseif($userRole === 'organizer')
+                                                            Penyelenggara
+                                                        @elseif($userRole === 'user')
+                                                            Pengguna
+                                                        @endif
+                                                    </small>
                                                 </div>
                                             </div>
                                         </a>
@@ -163,34 +172,13 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="ti ti-user-check me-2 ti-sm"></i>
-                                            <span class="align-middle">My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="ti ti-settings me-2 ti-sm"></i>
-                                            <span class="align-middle">Settings</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
-                                                <span class="flex-grow-1 align-middle">Billing</span>
-                                                <span
-                                                    class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20">2</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                        </form>
+
+                                        <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit()">
                                             <i class="ti ti-logout me-2 ti-sm"></i>
-                                            <span class="align-middle">Log Out</span>
+                                            <span class="align-middle">Keluar</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -223,10 +211,6 @@
                                     </script>
                                     Humma E-Sport
                                 </div>
-                                {{-- <div class="d-none d-lg-inline-block">
-                                    <a href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/"
-                                        target="_blank" class="footer-link me-4">Documentation</a>
-                                </div> --}}
                             </div>
                         </div>
                     </footer>
@@ -267,15 +251,13 @@
     <script src="/admin-panel/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    @stack('script')
-
     <script>
         if (typeof TemplateCustomizer !== 'undefined') {
             window.templateCustomizer = new TemplateCustomizer({
                 cssPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
                 themesPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
                 displayCustomizer: false,
-                lang: localStorage.getItem('templateCustomizer-' + templateName + '--Lang') || 'id', // Set default language here
+                lang: localStorage.getItem('templateCustomizer-' + templateName + '--Lang') || 'en', // Set default language here
                 defaultTheme: 1,
                 defaultStyle: 'system',
                 defaultContentLayout: 'wide',
@@ -283,6 +265,7 @@
             });
         }
     </script>
-</body>
 
+    @stack('script')
+</body>
 </html>

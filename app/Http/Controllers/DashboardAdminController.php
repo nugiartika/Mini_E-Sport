@@ -6,12 +6,8 @@ use Carbon\Carbon;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Category;
-use App\Models\SainsRole;
 use App\Models\Tournament;
-use App\Models\DashboardAdmin;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\StoreDashboardAdminRequest;
-use App\Http\Requests\UpdateDashboardAdminRequest;
 
 class DashboardAdminController extends Controller
 {
@@ -20,14 +16,14 @@ class DashboardAdminController extends Controller
      */
     public function index()
     {
-        $user = User::all()->count();
+        $user = User::count();
         $organizer = User::where('role', 'organizer')->count();
         $category = Category::all()->count();
         $tournament = Tournament::all()->count();
         $team = Team::all()->count();
-        $sainsRole = SainsRole::all()->count();
+        $eoConfirm = User::where('status', 'pending')->count();
 
-        return view('admin.index', compact('user', 'organizer', 'category', 'tournament', 'team', 'sainsRole'));
+        return view('admin.index', compact('user', 'organizer', 'category', 'tournament', 'team', 'eoConfirm'));
     }
 
     public function response()
@@ -44,47 +40,6 @@ class DashboardAdminController extends Controller
         }
 
         return response()->json(['user_count' => $userGrowth]);
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreDashboardAdminRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(DashboardAdmin $dashboardAdmin)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(DashboardAdmin $dashboardAdmin)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateDashboardAdminRequest $request, DashboardAdmin $dashboardAdmin)
-    {
-        //
     }
 
     /**

@@ -1,30 +1,28 @@
 <ul class="menu-inner py-1">
-    <li class="menu-item {{ request()->routeIs(['admin.index', 'category.index','admin.prizepool']) ? 'active open' : '' }}">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
+    {{-- Dasbor --}}
+    <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
+        <a href="{{ route('admin.index') }}" class="menu-link">
             <i class="menu-icon tf-icons ti ti-smart-home"></i>
             <div>Dasbor</div>
         </a>
-
-        <ul class="menu-sub">
-            <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
-                <a href="{{ route('admin.index') }}" class="menu-link">
-                    <div>Dasbor</div>
-                </a>
-            </li>
-
-            <li class="menu-item {{ request()->routeIs('category.index') ? 'active' : '' }}">
-                <a href="{{ route('category.index') }}" class="menu-link">
-                    <div>Game</div>
-                </a>
-            </li>
-
-            <li class="menu-item {{ request()->routeIs('admin.prizepool') ? 'active' : '' }}">
-                <a href="{{ route('admin.prizepool') }}" class="menu-link">
-                    <div>Hadiah Turnamen</div>
-                </a>
-            </li>
-        </ul>
     </li>
+
+    {{-- Game --}}
+    <li class="menu-item {{ request()->routeIs('category.index') ? 'active' : '' }}">
+        <a href="{{ route('category.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-device-gamepad-2"></i>
+            <div>Game</div>
+        </a>
+    </li>
+
+    {{-- Hadiah Turnamen --}}
+    <li class="menu-item {{ request()->routeIs('admin.prizepool') ? 'active' : '' }}">
+        <a href="{{ route('admin.prizepool') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-gift"></i>
+            <div>Hadiah Turnamen</div>
+        </a>
+    </li>
+
     {{-- end dashboard admin --}}
 
     {{-- Turnamen --}}
@@ -42,7 +40,7 @@
             </li>
         </ul>
         <ul class="menu-sub">
-            <li class="menu-item {{ request()->routeIs('DetailTournament') ? 'active' : '' }} ">
+            <li class="menu-item {{ request()->routeIs('DetailTournament') ? 'active' : '' }}">
                 <a href="{{ route('DetailTournament') }}" class="menu-link">
                     <div>Daftar Turnamen</div>
                 </a>
@@ -58,12 +56,11 @@
         </a>
     </li>
 
-    {{-- User --}}
+    {{-- Data Transaksi --}}
     <li class="menu-item {{ request()->routeIs('transaction.*') ? 'active' : '' }}">
         <a href="{{ route('transaction.index') }}" class="menu-link">
             <i class="menu-icon tf-icons ti ti-moneybag"></i>
             <div>Data Transaksi</div>
         </a>
     </li>
-
 </ul>

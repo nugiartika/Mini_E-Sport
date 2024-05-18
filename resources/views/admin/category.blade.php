@@ -1,8 +1,7 @@
-@extends('admin.layouts.app')
+@extends('layouts.panel')
 
 @section('content')
-
-{{-- @if (session('success'))
+    {{-- @if (session('success'))
 <!-- Modal Success -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel"
     aria-hidden="true">
@@ -34,8 +33,6 @@
     {{ session('warning') }}
 </div>
 @endif --}}
-<div class="content-wrapper">
-    <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
@@ -47,7 +44,8 @@
             <form action="{{ route('category.index') }}" method="get">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;" value="{{ old('search', request('search')) }}"/>
+                    <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;"
+                        value="{{ old('search', request('search')) }}" />
                     <button type="submit" class="btn btn-secondary">Cari</button>
                 </div>
             </form>
@@ -111,24 +109,22 @@
                             </td>
                         </tr>
                     @empty
-                    <tr>
-                        <td colspan="6">
-                            <div class="d-flex flex-column justify-content-center">
-                                <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                    style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
-                                <h4 class="table-light" style="text-align: center;">
-                                    Data Tidak Tersedia
-                                </h4>
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                        style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                                    <h4 class="table-light" style="text-align: center;">
+                                        Data Tidak Tersedia
+                                    </h4>
+                                </div>
+                            </td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
     </div>
-    </div>
-</div>
 
     <div class="modal fade" tabindex="-1" id="tambahModal">
         <div class="modal-dialog">
@@ -249,5 +245,3 @@
         </div>
     @endforeach
 @endsection
-
-

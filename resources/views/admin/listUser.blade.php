@@ -26,24 +26,17 @@
                         </ul>
 
 
-                        <form action="{{ route('user.index') }}" method="get" class="d-flex mt-n3">
-                            @csrf
+                        <form action="{{ request()->fullUrl() }}" method="GET" class="d-flex mt-n3">
+                            @if(request()->input('role')) <input type="hidden" name="role" value="{{ old('role', request()->input('role')) }}" /> @endif
+                            @if(request()->input('action')) <input type="hidden" name="action" value="{{ old('action', request()->input('action')) }}" /> @endif
+
                             <div class="input-group">
-                                <!-- Retain role and action parameters in the search form -->
-                                @if(request()->has('action'))
-                                    <input type="hidden" name="action" value="{{ request('action') }}">
-                                @endif
-                                @if(request()->has('role'))
-                                    <input type="hidden" name="role" value="{{ request('role') }}">
-                                @endif
-                                <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;" value="{{ old('search', request('search')) }}"/>
+                                <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;" value="{{ old('search', request()->input('search')) }}" />
                                 <button type="submit" class="btn btn-secondary">Cari</button>
                             </div>
                         </form>
                     </div>
                 </h5>
-
-
 
                 <div class="table-responsive text-nowrap">
                     <table class="table">
