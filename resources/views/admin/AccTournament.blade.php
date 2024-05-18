@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('layouts.panel')
 
 @section('style')
     <style>
@@ -32,18 +32,17 @@
     </div> --}}
 
 @section('content')
-<div class="content-wrapper">
-    <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-        <h5>Penerimaan Turnamen</h5>
-        <form action="{{ route('konfirmtournament') }}" method="get">
-            @csrf
-            <div class="input-group mb-3">
-                <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;" value="{{ old('search', request('search')) }}"/>
-                <button type="submit" class="btn btn-secondary">Cari</button>
-            </div>
-        </form>
+            <h5>Penerimaan Turnamen</h5>
+            <form action="{{ route('konfirmtournament') }}" method="get">
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;"
+                        value="{{ old('search', request('search')) }}" />
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
+            </form>
         </div>
         <div class="table-responsive text-nowrap">
             <table class="table">
@@ -64,8 +63,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td> <span class="fw-medium">{{ $tournament->name }}</span></td>
                             <td><span class="badge bg-label-primary me-1">
-                                {{ \Carbon\Carbon::parse($tournament->permainan)->isoFormat('D MMMM YYYY') }}
-                            </span></td>
+                                    {{ \Carbon\Carbon::parse($tournament->permainan)->isoFormat('D MMMM YYYY') }}
+                                </span></td>
                             <td>
                                 <form id="updateForm{{ $tournament->id }}"
                                     action="{{ route('konfirm.update', $tournament->id) }}" method="POST">
@@ -91,16 +90,17 @@
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="reasonModalLabel">Alasan Tournament Ditolak</h5>
+                                                    <h5 class="modal-title" id="reasonModalLabel">Alasan Tournament Ditolak
+                                                    </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <textarea class="form-control" id="reason{{ $tournament->id }}" name="reason" rows="3"
                                                         placeholder="Alasan penolakan">{{ old('reason', $tournament->reason) }}</textarea>
-                                                        @error('reason')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
+                                                    @error('reason')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="modal-footer">
@@ -131,26 +131,25 @@
                             </td>
                         </tr>
                     @empty
-                    <tr>
-                        <td colspan="6">
-                            <div class="d-flex flex-column justify-content-center">
-                                <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                    style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
-                                <h4 class="table-light" style="text-align: center;">
-                                    Data Tidak Tersedia
-                                </h4>
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                        style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                                    <h4 class="table-light" style="text-align: center;">
+                                        Data Tidak Tersedia
+                                    </h4>
+                                </div>
+                            </td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
-            {{$tournaments->links()}}
+            {{ $tournaments->links() }}
         </div>
     </div>
-    </div>
-</div>
-@foreach ($tournaments as $tournament)
+
+    @foreach ($tournaments as $tournament)
         <div class="modal fade" id="exampleModal{{ $tournament->id }}" tabindex="-1"
             aria-labelledby="exampleModalLabel{{ $tournament->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -294,5 +293,3 @@
             });
         });
     </script>
-
-

@@ -15,56 +15,51 @@ class DetailTournamentController extends Controller
 {
     public function index(Request $request)
     {
-        // $tournaments =Tournament::where('status', 'accepted')->get();
-        $query = Tournament::query();
+        $tournaments = Tournament::with('category', 'user')
+            ->where('status', 'accepted')
+            ->when($request->input('search'), function ($query, $search) {
+                $query->where('name', 'LIKE', "%{$search}%");
+            })
+            ->paginate(5);
 
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where('status', 'accepted')
-                  ->where('name', 'LIKE', "%{$search}%");
-        } else {
-            $query->where('status', 'accepted');
-        }
-        $tournaments = $query->paginate(5);
-
-        $user = User::all();
         $category = Category::all();
-        return view('admin.ListTournament', compact('tournaments', 'user', 'category'));
 
+        return view('admin.ListTournament', compact('tournaments', 'category'));
     }
 
-    public function detail()
+    public function detail($id)
     {
-        $turnamets = Tournament::all();
-        $user  = User::all();
-        $category = Category::all();
+        $tournament = Tournament::with('category', 'user')->findOrFail($id);
 
-        return view('admin.detailTournament', compact('turnamets', 'user', ));
+        return view('admin.detailTournament', compact('tournament'));
     }
 
     public function filter(Request $request)
     {
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
-        $oldSearch = $request->input('search');
         $user = Auth::user();
-        $category = Category::all();
+        $categories = Category::all();
         $selectedCategories = $request->input('categories_id', []);
+        $search = $request->input('search');
+
+        $tournaments = Tournament::with('category', 'user')
+            ->where('status', 'accepted')
+            ->when($selectedCategories, function ($query, $selectedCategories) {
+                $query->whereIn('category_id', $selectedCategories);
+            })
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'LIKE', "%{$search}%");
+            })
+            ->paginate(5);
+
+        // Collecting team counts and team tournament counts
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
-            ->get();
+            ->pluck('count', 'tournament_id');
+
         $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
-            ->get();
-        $teams = Team::all();
-        $query = Tournament::query();
+            ->pluck('count', 'tournament_id');
 
-        if (!empty($selectedCategories)) {
-            $query->whereIn('categories_id', $selectedCategories);
-        }
-
-        $tournaments = $query->paginate(5); 
-
-        return view('admin.ListTournament', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams'));
+        return view('admin.ListTournament', compact('tournaments', 'categories', 'selectedCategories', 'teamCounts', 'teamIdCounts', 'search'));
     }
-
 }

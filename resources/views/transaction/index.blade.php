@@ -1,19 +1,12 @@
-@php
-    if(auth()->user()->role === 'user') {
-        $layout = 'user.layouts.app';
-    } elseif(auth()->user()->role === 'organizer') {
-        $layout = 'layouts.penyelenggara';
-    } else {
-        $layout = 'admin.layouts.app';
-    }
-@endphp
-
-@extends($layout)
+@extends('layouts.panel')
 
 @section('content')
-<div class="card card-body mb-3">
+<div class="card mb-3">
+    <div class="card-header">
+        <h3 class="mb-0">Riwayat Transaksi</h3>
+    </div>
     <div class="table-responsive">
-        <table class="table table-bordered table-hover">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>ID Transaksi</th>

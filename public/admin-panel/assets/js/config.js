@@ -91,17 +91,11 @@ if (typeof TemplateCustomizer !== 'undefined') {
   window.templateCustomizer = new TemplateCustomizer({
     cssPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
     themesPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
-    displayCustomizer: true,
+    displayCustomizer: false,
     lang: localStorage.getItem('templateCustomizer-' + templateName + '--Lang') || 'en', // Set default language here
-    // defaultTheme: 2,
-    // defaultStyle: 'system',
-    // defaultTextDir: 'rtl',
-    // defaultContentLayout: 'wide',
-    // defaultHeaderType: 'static',
-    // defaultMenuCollapsed: true,
-    // defaultNavbarType: 'sticky',
-    // defaultFooterFixed: false,
-    // defaultShowDropdownOnHover: false,
+    defaultTheme: 1,
+    defaultStyle: 'system',
+    defaultContentLayout: 'wide',
     controls: ['rtl', 'style', 'headerType', 'contentLayout', 'layoutCollapsed', 'layoutNavbarOptions', 'themes']
   });
 }
