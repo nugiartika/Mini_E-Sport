@@ -82,11 +82,22 @@ class TournamentController extends Controller
         return view('penyelenggara.Dashboard', compact('counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
     }
 
-    public function indexadmin()
+    public function indexadmin(Request $request)
     {
-        $tournaments = Tournament::where('status', 'pending')->get();
+        $query = Tournament::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('status', 'pending')
+                  ->where('name', 'LIKE', "%{$search}%");
+        } else {
+            $query->where('status', 'pending');
+        }
+        $tournaments = $query->paginate(5);
+
         $user = User::all();
         $category = Category::all();
+
         return view('admin.AccTournament', compact('tournaments', 'category', 'user'));
     }
 
@@ -275,14 +286,6 @@ class TournamentController extends Controller
         //
     }
 
-    public function detail($id)
-    {
-        $tournaments = Tournament::findOrFail($id);
-        $user = User::all();
-        $team = Team::count();
-        $category = Category::all();
-        return view('user.detailtournament', compact('tournaments', 'category', 'user', 'team'));
-    }
 
     public function detailTournament(Tournament $tournament, $id)
     {
@@ -343,7 +346,7 @@ class TournamentController extends Controller
         $prizes = tournament_prize::where('tournament_id', $id)->get();
         // dd($prizes);
 
-        return view('user.detailtournament', compact('counttournaments', 'user', 'category', 'jadwal', 'bracket', 'juara', 'selectedTournament', 'teams', 'tournament', 'prizes'));
+        return view('user.detailtournament', compact('counttournaments', 'user', 'category', 'jadwal', 'juara', 'selectedTournament', 'teams', 'tournament', 'prizes'));
     }
 
     /**

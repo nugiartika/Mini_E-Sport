@@ -193,30 +193,15 @@
 
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
-                    @foreach ($Tournaments as $Tournament)
+                    @foreach ($Categories as $category)
                         <div class="swiper-slide">
                             <div class="card-3d d-grid justify-content-center p-3"style="min-heigt:200px;">
                                 <div class="img-area w-100 mb-8 position-relative">
-                                    <span
-                                        class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                        <i class="ti ti-calendar-due"></i> 15.02.2</span>
-                                    <img class="w-100" src=" {{ asset('storage/' . $Tournament->category->photo) }}"
+
+                                    <img class="w-100" src=" {{ asset('storage/' . $category->photo) }}"
                                         alt="game" style="min-heigt:100px;">
-                                    <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                        <span class="ps-3">
-                                            @if ($Tournament->status === 'rejected')
-                                                <span>Tolak</span>
-                                            @elseif ($Tournament->status === 'pending')
-                                                <span>Belum Dimulai</span>
-                                            @elseif ($Tournament->status === 'accepted')
-                                                <span>Dimulai</span>
-                                            @else
-                                                <span>Status turnamen tidak valid.</span>
-                                            @endif
-                                        </span>
-                                    </span>
                                 </div>
-                                <h5 class="card-title text-center tcn-1 mb-4 title-anim">{{ $Tournament->name }}</h5>
+                                <h5 class="card-title text-center tcn-1 mb-4 title-anim">{{ $category->name }}</h5>
                                 {{-- <div class="d-center">
                                 <div class="card-info d-center gap-3 py-1 px-3">
                                     <div class="d-flex align-items-center gap-2">
@@ -248,6 +233,86 @@
     </section>
     <!-- 3D swiper section end-->
 
+
+        <!-- tournament section start -->
+        <section class="tournament-section pb-120" id="tournament-hero">
+            <!-- Diamond animation -->
+            <div class="diamond-area">
+                <img class="w-100" src="assets/img/diamond.png" alt="diamond">
+            </div>
+            <!-- game console animation -->
+            <div class="game-console-area">
+                <img class="w-100" src="assets/img/game-console2.png" alt="game-console">
+            </div>
+            <div class="red-ball top-50"></div>
+
+
+            <div class="tournament-wrapper">
+                <div class="tournament-wrapper-border">
+                    <div class="container pt-120 pb-120">
+                        <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15">
+                            <div class="col-md-6 col-sm-8">
+                                <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENTS</h2>
+                            </div>
+                            <div class="col-md-6 col-sm-4 text-sm-end">
+                                <a href="tournaments.html"
+                                    class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill">VIEW
+                                    MORE</a>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between align-items-center g-6">
+                            @foreach ($Categories as $Category)
+                            <div class="col-xl-4 col-md-6">
+                                <div class="tournament-card p-xl-4 p-3 bgn-4">
+                                    <div class="tournament-img mb-8 position-relative">
+                                        <div class="img-area overflow-hidden">
+                                            <img class="w-100"
+                                                src="{{ asset('storage/' . $Category->photo) }}"
+                                                alt="tournament">
+                                        </div>
+                                        {{-- <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
+                                         <span class="dot-icon alt-icon ps-3">Playing</span>
+                                    </span> --}}
+                                    </div>
+                                    <div class="tournament-content px-xl-4 px-sm-2">
+                                        <div class="tournament-info mb-5">
+                                            <a href="tournaments-details.html" class="d-block">
+                                                <h4
+                                                    class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                    {{ $Category->name }}</h4>
+
+                                            </a>
+                                            {{-- <span class="tcn-6 fs-sm">Torneo Individual</span> --}}
+                                        </div>
+                                        <div class="hr-line line3"></div>
+                                        <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5  ">
+                                            <div
+                                                class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="ti ti-users-group"></i>
+                                                    <span class="tcn-1 fs-sm">Jummlah Anggota PerTim</span>
+                                                </div>
+                                                <div class="v-line"></div>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <span class="tcn-1 fs-sm">{{ $Category->membersPerTeam }}</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="hr-line line3"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- tournament section end -->
 
 
     <!-- tournament section start -->

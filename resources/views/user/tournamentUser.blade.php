@@ -129,7 +129,7 @@
                 </div>
 
                 @forelse ($tournaments->where('status', 'accepted') as $index => $tournament)
-                    <div class="col-xl-4 col-md-6 col-sm-10">
+                    <div class="col-xl-4 col-md-6 col-sm-10 mb-4">
                         <div class="card h-100">
 
                             <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
@@ -193,21 +193,6 @@
                                     }
                                     @endphp
 
-                                    {{-- Kode blade lainnya di sini
-
-                                        // $userTim = $teamTournament ?? collect();
-                                        // $userTeamIdTournament = $userTim->pluck('team_id'); // Mengambil semua team_id dari koleksi $userTim
-
-                                        // $isUserTournament = $userTeamIdTournament->contains($team->id); // Mengecek apakah $team->id ada di dalam koleksi $userTeamIdTournament
-                                        // $isUserInTournaments = $userTeamIdTournament->contains($teams->pluck('team_id')); // Mengecek apakah ada team_id yang ada di koleksi $teams
-
-                                        // $team = $userTim->first(); // Pastikan $team berisi nilai yang valid sebelum ini
-
-                                        // if ($team) {
-                                        //     $userTeamIdTournament = $userTim->where('team_id', $team->id); // Sekarang ini seharusnya berfungsi
-                                        // }
-
-                                    @endphp --}}
 
 
                                     <div class="hr-line line3"></div>
@@ -265,12 +250,12 @@
                                         @endif
 
                                         <!-- Tombol Detail Tournament -->
-                                        <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}"
+                                        {{-- <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}"
                                             class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
                                             style="display: flex; justify-content: center; align-items: center;"
                                             title="Detail Tournament">
                                             <i class="ti ti-arrow-right fs-2xl"></i>
-                                        </a>
+                                        </a> --}}
                                     </div>
 
 

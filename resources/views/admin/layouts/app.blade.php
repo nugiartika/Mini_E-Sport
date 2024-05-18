@@ -92,13 +92,13 @@
                 @include('admin.layouts.navbar')
 
                 <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <div class="container-xxl flex-grow-1 container-p-y">
+                {{-- <div class="content-wrapper">
+                    <div class="container-xxl flex-grow-1 container-p-y"> --}}
                         <!-- Content -->
                         @yield('content')
                         <!-- / Content -->
-                    </div>
-                </div>
+                    {{-- </div>
+                </div> --}}
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl">
                         <div
@@ -115,13 +115,13 @@
                         </div>
                     </div>
                 </footer>
-                <div class="content-backdrop fade"></div>
+                {{-- <div class="content-backdrop fade"></div> --}}
             </div>
         </div>
     </div>
 
-    <div class="layout-overlay layout-menu-toggle"></div>
-    <div class="drag-target"></div>
+    {{-- <div class="layout-overlay layout-menu-toggle"></div>
+    <div class="drag-target"></div> --}}
     </div>
 
     <script src="{{ asset('demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a') }}"></script>
@@ -139,6 +139,52 @@
 
     <script src="{{ asset('demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a') }}"></script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
+
+@if ($errors->any())
+<script>
+    // toastr.error(`{!! implode('\n', $errors->all()) !!}`);
+    toastr.error("{{ session('error') }}");
+</script>
+@endif
+
+@if (session('warning'))
+<script>
+    toastr.warning("{{ session('warning') }}");
+</script>
+@endif
+
+@if (session('success'))
+<script>
+    toastr.success("{{ session('success') }}");
+</script>
+@endif
+
+<script>
+    function swalpFunction() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("Data dihapus");
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+    }
+</script>
 
     @yield('script')
 

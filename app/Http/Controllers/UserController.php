@@ -19,23 +19,28 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $role = $request->get('role');
-        $action = $request->get('action') == 'approval';
+            $role = $request->get('role');
+            $action = $request->get('action') == 'approval';
+            $search = $request->input('search');
 
-        $users = $this->user
-            ->when($action, function ($query) {
-                $query->where([
-                    'status' => 'pending',
-                    'role' => 'organizer'
-                ]);
-            })
-            ->when($role, function ($query) use ($role) {
-                $query->where([
-                    'role' => $role,
-                    'status' => 'active'
-                ]);
-            })
-            ->paginate(15);
+            $users = $this->user
+                ->when($action, function ($query) {
+                    $query->where([
+                        'status' => 'pending',
+                        'role' => 'organizer'
+                    ]);
+                })
+                ->when($role, function ($query) use ($role) {
+                    $query->where([
+                        'role' => $role,
+                        'status' => 'active'
+                    ]);
+                })
+                ->when($search, function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%{$search}%")
+                          ->orWhere('email', 'LIKE', "%{$search}%");
+                })
+                ->paginate(15);
 
         return view('admin.listuser', compact('users'));
     }
@@ -89,7 +94,7 @@ class UserController extends Controller
         $data['email_verified_at'] = $data['status'] === 'active' ? now() : null;
 
         $user->update($data);
-        
+
         return redirect()->back()->with('success', 'User berhasil diubah statusnya');
     }
 
