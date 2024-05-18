@@ -54,9 +54,14 @@
                                           <span class="fw-medium d-block">
                                               {{ auth()->user()->name }}
                                           </span>
-                                          <small class="text-muted">User</small>
+                                          <small class="text-muted">{{ auth()->user()->email }}</small>
+
                                       </div>
                                   </div>
+                                  <a class="dropdown-item" href="{{ route('user.tournament.history') }}">
+                                  <i class='fas fa-history me-2'></i>
+                                  <span class="align-middle">Riwayat Ikut Serta</span>
+                                  </a>
                               </a>
                           </li>
 
