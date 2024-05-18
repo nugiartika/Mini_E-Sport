@@ -108,8 +108,9 @@ Route::get('/detailteam', function () {
 })->name('team.detail');
 
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
-// Route::get('/', function () {
-//     return view('user.index');
-// })->name('index');
+
+Route::get('/test-ui', function () {
+    return view('test');
+});
 
 
