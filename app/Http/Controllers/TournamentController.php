@@ -82,11 +82,22 @@ class TournamentController extends Controller
         return view('penyelenggara.Dashboard', compact('counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
     }
 
-    public function indexadmin()
+    public function indexadmin(Request $request)
     {
-        $tournaments = Tournament::where('status', 'pending')->get();
+        $query = Tournament::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('status', 'pending')
+                  ->where('name', 'LIKE', "%{$search}%");
+        } else {
+            $query->where('status', 'pending');
+        }
+        $tournaments = $query->paginate(5);
+
         $user = User::all();
         $category = Category::all();
+
         return view('admin.AccTournament', compact('tournaments', 'category', 'user'));
     }
 

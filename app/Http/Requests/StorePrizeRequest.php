@@ -22,7 +22,14 @@ class StorePrizeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'prize' => 'required|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'prize.required' => 'Hadiah harus diisi.',
         ];
     }
 }

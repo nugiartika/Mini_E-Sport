@@ -61,18 +61,22 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        $gambar = $request->file('photo');
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('game', $gambar);
+        try {
+            $gambar = $request->file('photo');
+            if ($gambar) {
+                $path_gambar = Storage::disk('public')->put('game', $gambar);
+            }
+
+            Category::create([
+                'name' => $request->name,
+                'photo' => $path_gambar,
+                'membersPerTeam' => $request->membersPerTeam,
+            ]);
+
+            return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY ADDED');
+        } catch (\Throwable $th) {
+            return redirect()->route('category.index')->with('error', 'CATEGORY ADDED FAILED');
         }
-
-        Category::create([
-            'name' => $request->name,
-            'photo' => $path_gambar,
-            'membersPerTeam' => $request->membersPerTeam,
-        ]);
-
-        return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY ADDED');
     }
 
     public function update(UpdateCategoryRequest $request, $id)
@@ -102,6 +106,7 @@ class CategoryController extends Controller
         }
 
         return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY UPDATED');
+
     }
 
     public function destroy(Category $category)

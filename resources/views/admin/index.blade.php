@@ -2,10 +2,12 @@
 
 
 @section('content')
+ <div class="content-wrapper">
+                    <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row">
 
         <div class="col-xl-2 col-md-4 col-6 mb-4">
-            <a href="{{ route('listPenyelenggara') }}">
+            <a href="{{ route('user.index', ['role' => 'organizer']) }}">
             <div class="card">
                 <div class="card-body">
                     <div class="badge p-2 bg-label-danger mb-2 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="32"
@@ -26,7 +28,7 @@
 
         <!-- Total Sales -->
         <div class="col-xl-2 col-md-4 col-6 mb-4">
-            <a href="{{ route('listUser') }}">
+            <a href="{{ route('user.index', ['role' => 'user']) }}">
             <div class="card">
                 <div class="card-body">
                     <div class="badge p-2 bg-label-info mb-2 rounded"><svg xmlns="http://www.w3.org/2000/svg" width="32"
@@ -140,6 +142,8 @@
         <!-- /Line Chart -->
 
     </div>
+</div>
+ </div>
 @endsection
 
 @section('script')

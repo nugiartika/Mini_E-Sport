@@ -1,6 +1,8 @@
 @extends('admin.layouts.app')
 
 @section('content')
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
         <h5 class="card-header">Daftar Hadiah Tournament</h5>
 
@@ -11,10 +13,10 @@
             </a>
 
 
-            <form action="{{ route('category.index') }}" method="get">
+            <form action="{{ route('admin.prizepool') }}" method="get">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;" />
+                    <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;" value="{{ old('search', request('search')) }}" />
                     <button type="submit" class="btn btn-secondary">Cari</button>
                 </div>
             </form>
@@ -44,19 +46,22 @@
                                                 <path fill="#FA7070" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
                                             </svg>
                                         </button>
-                                    </form> 
+                                    </form>
                                 </div>
                             </td>
                         </tr>
                     @empty
-                        <tr>
-                            <td colspan="7">
-                                <div class="text-center py-4">
-                                    <h3 class="mb-2">Tidak Ada Data</h3>
-                                    <p class="m-0 text-muted">Tambahkan data supaya muncul disini.</p>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colspan="6">
+                            <div class="d-flex flex-column justify-content-center">
+                                <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                    style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                                <h4 class="table-light" style="text-align: center;">
+                                    Data Tidak Tersedia
+                                </h4>
+                            </div>
+                        </td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>
@@ -92,39 +97,6 @@
             </div>
         </div>
     </div>
+    </div>
+</div>
 @endsection
-
- @section('content')
- @if (session('success'))
-    <!-- Modal Success -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">SUCCESS</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{ session('success') }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Modal Success -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#successModal').modal('show');
-        });
-    </script>
-@endif
-@if (session('warning'))
-    <div class="alert alert-warning">
-        {{ session('warning') }}
-    </div>
-@endif
-
-

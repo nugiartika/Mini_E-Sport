@@ -129,7 +129,7 @@
                 </div>
 
                 @forelse ($tournaments->where('status', 'accepted') as $index => $tournament)
-                    <div class="col-xl-4 col-md-6 col-sm-10">
+                    <div class="col-xl-4 col-md-6 col-sm-10 mb-4">
                         <div class="card h-100">
 
                             <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
@@ -265,12 +265,12 @@
                                         @endif
 
                                         <!-- Tombol Detail Tournament -->
-                                        <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}"
+                                        {{-- <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}"
                                             class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
                                             style="display: flex; justify-content: center; align-items: center;"
                                             title="Detail Tournament">
                                             <i class="ti ti-arrow-right fs-2xl"></i>
-                                        </a>
+                                        </a> --}}
                                     </div>
 
 
