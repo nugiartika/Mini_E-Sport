@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="row">
-
         <div class="col-xl-2 col-md-4 col-6 mb-4">
             <a href="{{ route('user.index', ['role' => 'organizer']) }}">
                 <div class="card">
@@ -14,10 +13,7 @@
                             </svg>
                         </div>
                         <h6 class="card-title mb-1 pt-2">Penyelenggara</h6>
-                        {{-- <small class="text-muted">Penyelenggara</small> --}}
                         <p class="mb-2 mt-1">{{ $organizer }}</p>
-                        <div class="pt-1">
-                        </div>
                     </div>
                 </div>
             </a>
@@ -28,17 +24,11 @@
             <a href="{{ route('user.index') }}">
                 <div class="card">
                     <div class="card-body">
-                        <div class="badge p-2 bg-label-info mb-2 rounded"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="32" height="32" viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="M18.39 14.56C16.71 13.7 14.53 13 12 13s-4.71.7-6.39 1.56A2.97 2.97 0 0 0 4 17.22V20h16v-2.78c0-1.12-.61-2.15-1.61-2.66M9.78 12h4.44c1.21 0 2.14-1.06 1.98-2.26l-.32-2.45C15.57 5.39 13.92 4 12 4S8.43 5.39 8.12 7.29L7.8 9.74c-.16 1.2.77 2.26 1.98 2.26" />
-                            </svg>
+                        <div class="badge p-2 bg-label-info mb-2 rounded">
+                            <i class="ti ti-users"></i>
                         </div>
                         <h6 class="card-title mb-1 pt-2">Pengguna</h6>
-                        {{-- <small class="text-muted">User</small> --}}
                         <p class="mb-2 mt-1">{{ $user }}</p>
-                        <div class="pt-1">
-                        </div>
                     </div>
                 </div>
             </a>
@@ -56,8 +46,6 @@
                             </svg></div>
                         <h6 class="card-title mb-1 pt-2">Game</h6>
                         <p class="mb-2 mt-1">{{ $category }}</p>
-                        <div class="pt-1">
-                        </div>
                     </div>
                 </div>
             </a>
@@ -72,10 +60,7 @@
                                 d="M16.5 13c-1.2 0-3.07.34-4.5 1c-1.43-.67-3.3-1-4.5-1C5.33 13 1 14.08 1 16.25V19h22v-2.75c0-2.17-4.33-3.25-6.5-3.25m-4 4.5h-10v-1.25c0-.54 2.56-1.75 5-1.75s5 1.21 5 1.75zm9 0H14v-1.25c0-.46-.2-.86-.52-1.22c.88-.3 1.96-.53 3.02-.53c2.44 0 5 1.21 5 1.75zM7.5 12c1.93 0 3.5-1.57 3.5-3.5S9.43 5 7.5 5S4 6.57 4 8.5S5.57 12 7.5 12m0-5.5c1.1 0 2 .9 2 2s-.9 2-2 2s-2-.9-2-2s.9-2 2-2m9 5.5c1.93 0 3.5-1.57 3.5-3.5S18.43 5 16.5 5S13 6.57 13 8.5s1.57 3.5 3.5 3.5m0-5.5c1.1 0 2 .9 2 2s-.9 2-2 2s-2-.9-2-2s.9-2 2-2" />
                         </svg></i></div>
                     <h6 class="card-title mb-1 pt-2">Tim</h6>
-                    {{-- <small class="text-muted">Team</small> --}}
                     <p class="mb-2 mt-1">{{ $team }}</p>
-                    <div class="pt-1">
-                    </div>
                 </div>
             </div>
         </div>
@@ -90,16 +75,11 @@
                                     d="M8.385 20v-1H11.5v-3.754q-1.283-.102-2.36-1.047t-1.317-2.21q-1.586-.187-2.705-1.302T4 8V6h3.654V4h8.692v2H20v2q0 1.573-1.118 2.688q-1.119 1.114-2.705 1.3q-.239 1.266-1.316 2.211T12.5 15.246V19h3.115v1zm-.731-9.085V7H5v1q0 1.142.762 1.963q.761.82 1.892.952m8.692 0q1.13-.132 1.892-.952T19 8V7h-2.654z" />
                             </svg></div>
                         <h6 class="card-title mb-1 pt-2">Turnamen</h6>
-                        {{-- <small class="text-muted">Tournament</small> --}}
                         <p class="mb-2 mt-1">{{ $tournament }}</p>
-                        <div class="pt-1">
-                        </div>
                     </div>
                 </div>
             </a>
         </div>
-
-
 
         <div class="col-xl-2 col-md-4 col-6 mb-4">
             <a href="{{ route('konfirmtournament') }}">
@@ -110,13 +90,10 @@
                         </div>
                         <h6 class="card-title mb-1 pt-2">Pengajuan</h6>
                         <p class="mb-2 mt-1">{{ $eoConfirm }}</p>
-                        <div class="pt-1">
-                        </div>
                     </div>
                 </div>
             </a>
         </div>
-
     </div>
 
     <div class="card">
