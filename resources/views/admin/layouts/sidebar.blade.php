@@ -32,13 +32,13 @@
         <li class="menu-item {{ request()->routeIs(['admin.index', 'category.index','admin.prizepool']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon ti ti-smart-home"></i>
-                <div>Dasbor</div>
+                <div>Dasboard</div>
             </a>
 
             <ul class="menu-sub">
                 <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.index') }}" class="menu-link">
-                        <div>Dasbor</div>
+                        <div>Dasboard</div>
                     </a>
                 </li>
 

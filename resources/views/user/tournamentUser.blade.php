@@ -117,6 +117,7 @@
             </div>
         </div>
     </div>
+
     <div class="tabcontents">
         <div class="tabitem active">
             <div class="row justify-content-md-start justify-content-center g-6">
@@ -129,7 +130,7 @@
                 </div>
 
                 @forelse ($tournaments->where('status', 'accepted') as $index => $tournament)
-                    <div class="col-xl-4 col-md-6 col-sm-10 mb-4">
+                    <div class="col-xl-4 col-md-6 col-sm-10">
                         <div class="card h-100">
 
                             <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
@@ -256,9 +257,12 @@
                                             title="Detail Tournament">
                                             <i class="ti ti-arrow-right fs-2xl"></i>
                                         </a>
+<<<<<<< Updated upstream
                                     </div>
 
 
+=======
+>>>>>>> Stashed changes
                                     </div>
 
 

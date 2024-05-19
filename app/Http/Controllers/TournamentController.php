@@ -89,7 +89,7 @@ class TournamentController extends Controller
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where('status', 'pending')
-                  ->where('name', 'LIKE', "%{$search}%");
+                ->where('name', 'LIKE', "%{$search}%");
         } else {
             $query->where('status', 'pending');
         }
@@ -265,7 +265,6 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get();
         $teams = Team::all();
-
         $query = Tournament::query();
 
         if (!empty($selectedCategories)) {
@@ -277,6 +276,25 @@ class TournamentController extends Controller
         return view('user.tournamentUser', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams'));
     }
 
+    public function filterLanding(Request $request)
+    {
+        $oldSearch = $request->input('search');
+        $user = Auth::user();
+        $selectedCategories = $request->input('categories_id', []);
+        $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('tournament_id')
+            ->get();
+        $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->groupBy()
+            ->get();
+        $teams = Team::all();
+        $query = Tournament::query();
+        if (!empty($selectedCategories)) {
+            $query->whereIn('categories_id', $selectedCategories);
+        }
+        $tournaments = $query->get();
+        return view('user.index', compact('oldSearch', 'user', 'category', 'selectedCategories', 'teamCounts', 'teams', 'query'));
+    }
 
     /**
      * Display the specified resource.
@@ -308,24 +326,24 @@ class TournamentController extends Controller
         return view('penyelenggara.detailtournament', compact('tournament', 'counttournaments', 'teams', 'prizes', 'juara', 'jadwal', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
 
-//     public function bracket(Tournament $tournament, Request $request)
-// {
-//     $request->validate([
-//         'urlBracket' => 'required',
-//     ],[
-//         'urlBracket.required' => 'bracket harus ada',
-//     ]);
+    //     public function bracket(Tournament $tournament, Request $request)
+    // {
+    //     $request->validate([
+    //         'urlBracket' => 'required',
+    //     ],[
+    //         'urlBracket.required' => 'bracket harus ada',
+    //     ]);
 
-//     $tournament->update([
-//         'urlBracket' => $request->input('urlBracket'),
-//     ]);
+    //     $tournament->update([
+    //         'urlBracket' => $request->input('urlBracket'),
+    //     ]);
 
-//     if ($tournament) {
-//         return redirect()->route('tournament.detail', ['id' => $tournament->id])->with('success', 'Pesan berhasil');
-//     } else {
-//         return redirect()->back()->with('error', 'Turnamen tidak ditemukan');
-//     }
-//     }
+    //     if ($tournament) {
+    //         return redirect()->route('tournament.detail', ['id' => $tournament->id])->with('success', 'Pesan berhasil');
+    //     } else {
+    //         return redirect()->back()->with('error', 'Turnamen tidak ditemukan');
+    //     }
+    //     }
 
 
     public function detailTournamentUser(Tournament $tournament, $id)

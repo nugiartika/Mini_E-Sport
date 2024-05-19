@@ -252,7 +252,7 @@
                     <div class="container pt-120 pb-120">
                         <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15">
                             <div class="col-md-6 col-sm-8">
-                                <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENTS</h2>
+                                <h2 class="display-four tcn-1 cursor-scale growUp title-anim">GAME</h2>
                             </div>
                             <div class="col-md-6 col-sm-4 text-sm-end">
                                 <a href="tournaments.html"
@@ -285,9 +285,9 @@
                                             {{-- <span class="tcn-6 fs-sm">Torneo Individual</span> --}}
                                         </div>
                                         <div class="hr-line line3"></div>
-                                        <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5  ">
+                                        <div class="card-info d-flex justify-content-center gap-3 flex-wrap my-5  ">
                                             <div
-                                                class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
+                                                class=" price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                                 <div class="d-flex align-items-center gap-2">
                                                     <i class="ti ti-users-group"></i>
                                                     <span class="tcn-1 fs-sm">Jummlah Anggota PerTim</span>
@@ -335,15 +335,13 @@
                         <div class="col-md-6 col-sm-8">
                             <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENTS</h2>
                         </div>
-                        {{-- <div class="col-md-6 col-sm-4 text-sm-end">
-                            <a href="tournaments.html"
-                                class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill">VIEW
-                                MORE</a>
-                        </div> --}}
+                        <div class="col-md-6 col-sm-4 text-sm-end">
+                            <a href=""
+                                class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#filter">Cari Bedasarkan Game</a>
+                        </div>
                     </div>
                     <div class="row justify-content-between align-items-center g-6">
                         @foreach ($Tournaments as $index => $Tournament)
-                        @if ($index < 3)
                         <div class="col-xl-4 col-md-6">
                             <div class="tournament-card p-xl-4 p-3 bgn-4">
                                 <div class="tournament-img mb-8 position-relative">
@@ -376,17 +374,16 @@
                                             </div>
                                             <div class="v-line"></div>
                                             <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                                <span class="tcn-1 fs-sm">$49.97</span>
+                                                <i class="ti ti-gift"></i>                                                <span class="tcn-1 fs-sm">{{ $Tournament->status }}</span>
                                             </div>
                                         </div>
                                         <div
                                             class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                             <i class="ti ti-ticket fs-base tcp-2"></i>
                                             <span class="tcn-1 fs-sm">
-                                                @if ($Tournament->paidment === 'unpaid')
+                                                @if ($Tournament->paidment === 'Gratis')
                                                     Gratis
-                                                @elseif ($Tournament->paidment === 'paid')
+                                                @elseif ($Tournament->paidment === 'Berbayar')
                                                     Berbayar
                                                 @else
                                                     Status pembayaran tidak valid
@@ -419,7 +416,6 @@
                             </div>
                         </div>
 
-                        @endif
                         @endforeach
                     </div>
 
@@ -429,6 +425,38 @@
         </div>
     </section>
     <!-- tournament section end -->
+    <!-- Start modal Filter-->
+    <div class="modal fade" tabindex="-1" id="filter" style="color: #ffffff;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-split">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-black">Filter</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('index') }}" method="GET">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="widget-title text-black"><b>Game Filters</b></h4>
+                            <button type="submit" class="btn btn-primary" style="background-color:#7367f0; border:none;">Search</button>
+                        </div>
+
+                        @foreach ($Categories as $game)
+                        <div class="form-check text-black">
+                            <input type="checkbox" class="form-check-input text-black" id="category{{ $game->id }}"
+                                   name="categories_id" value="{{ $game->id }}"
+                            <label class="text-black" for="category{{ $game->id }}">
+                                {{ $game->name }}
+                            </label>
+                        </div>
+                        @endforeach
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end modal Filter-->
+
 
 
     <!-- call to action section start -->

@@ -89,11 +89,10 @@ Route::resource('transaction', TransactionController::class)->parameters([
     'transaction' => 'transaction:transaction_id'
 ])->middleware('auth');
 
+// Route::get('/landingTournamentFilter', [TournamentController::class, 'filterLanding'])->name('landingPage');
 Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
-
 Route::resource('/teams', TeamTournamentController::class);
 Route::get('teams/{team}', [TeamController::class, 'show'])->name('teams.show');
-
 Route::resource('team', TeamController::class);
 Route::resource('member', MemberController::class);
 Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
@@ -101,6 +100,7 @@ Route::get('/detailteam', function () {
     return view('detailteam');
 })->name('team.detail');
 
+<<<<<<< Updated upstream
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
 
 Route::get('/test-ui', function () {
@@ -108,3 +108,9 @@ Route::get('/test-ui', function () {
 });
 
 
+=======
+Route::get('', [LandingPageController::class, 'index'])->name('index');
+// Route::get('/', function () {
+//     return view('user.index');
+// })->name('index');
+>>>>>>> Stashed changes
