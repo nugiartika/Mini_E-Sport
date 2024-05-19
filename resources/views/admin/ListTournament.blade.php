@@ -2,6 +2,23 @@
 
 @section('style')
     <style>
+        .saring-btn {
+            width: 100px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            border: 2px solid #7367f0;
+            /* Warna border */
+            border-radius: 20px;
+            /* Bentuk border */
+            background-color: #7367f0;
+            /* Warna latar belakang */
+            transition: background-color 0.3s ease;
+            /* Transisi warna latar belakang */
+        }
+
         .radio-button {
             display: block;
             margin-top: 10px;
@@ -18,7 +35,12 @@
         <h5 class="card-header">Daftar Tournament</h5>
         <div class="card-header">
             <div class="row justify-content-between">
-                <div class="col-md-2">
+                <div class="d-flex align-items-center gap-6 flex-wrap mb-lg-5 mb-sm-3 mb-2"
+                style="margin-left: 30px; margin-top: 10px; width: 100px; height: 40px;">
+                <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
+                    data-bs-target="#filter">Saring</button>
+            </div>
+                {{-- <div class="col-md-2">
                     <form id="category-selector-form" action="{{ request()->fullUrl() }}">
                         <select id="category-selector" name="category" class="form-control" onchange="this.form.submit()">
                             <option value="" selected>Semuanya</option>
@@ -29,7 +51,7 @@
                             @endforeach
                         </select>
                     </form>
-                </div>
+                </div> --}}
                 <div class="col-md-4">
                     <form action="{{ route('DetailTournament') }}" method="get">
                         @csrf
@@ -124,6 +146,42 @@
         </div>
     </div>
 
+
+
+     <div class="modal" tabindex="-1" id="filter">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-split">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Filter</b></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('tournamentfilter') }}" method="GET">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="widget-title">Category</h5>
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color:#7367f0; border:none; color: #ffffff;">Saring</button>
+                        </div>
+                        @php
+                            $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
+                        @endphp
+                        @foreach ($category as $categories)
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="category{{ $categories->id }}"
+                                    name="categories_id[]" value="{{ $categories->id }}"
+                                    @if (in_array($categories->id, (array) $selectedCategories)) checked @endif>
+                                <label class="form-check-label" for="category{{ $categories->id }}">
+                                    {{ $categories->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     @foreach ($tournaments as $tournament)
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -203,6 +261,7 @@
             </div>
         </div>
     @endforeach
+
 @endsection
 
 @push('script')

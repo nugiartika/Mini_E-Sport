@@ -35,31 +35,30 @@ class DetailTournamentController extends Controller
     }
 
     public function filter(Request $request)
-    {
-        $user = Auth::user();
-        $categories = Category::all();
-        $selectedCategories = $request->input('categories_id', []);
-        $search = $request->input('search');
+{
+    $counttournaments = Tournament::where('users_id', auth()->user()->id)
+                                  ->where('status', 'rejected')
+                                  ->count();
+    $oldSearch = $request->input('search');
+    $user = Auth::user();
+    $category = Category::all();
+    $selectedCategories = $request->input('categories_id', []);
+    $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+                      ->groupBy('tournament_id')
+                      ->get();
+    $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+                                  ->groupBy('tournament_id')
+                                  ->get();
+    $teams = Team::all();
+    $query = Tournament::where('status', 'accepted');
 
-        $tournaments = Tournament::with('category', 'user')
-            ->where('status', 'accepted')
-            ->when($selectedCategories, function ($query, $selectedCategories) {
-                $query->whereIn('category_id', $selectedCategories);
-            })
-            ->when($search, function ($query, $search) {
-                $query->where('name', 'LIKE', "%{$search}%");
-            })
-            ->paginate(5);
-
-        // Collecting team counts and team tournament counts
-        $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->groupBy('tournament_id')
-            ->pluck('count', 'tournament_id');
-
-        $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->groupBy('tournament_id')
-            ->pluck('count', 'tournament_id');
-
-        return view('admin.ListTournament', compact('tournaments', 'categories', 'selectedCategories', 'teamCounts', 'teamIdCounts', 'search'));
+    if (!empty($selectedCategories)) {
+        $query->whereIn('categories_id', $selectedCategories);
     }
+
+    $tournaments = $query->paginate(5);
+
+    return view('admin.ListTournament', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams'));
+}
+
 }

@@ -250,12 +250,15 @@
                                         @endif
 
                                         <!-- Tombol Detail Tournament -->
-                                        {{-- <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}"
+                                        <a href="{{ route('tournament.detailUser', $tournament->id) }}"
                                             class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
                                             style="display: flex; justify-content: center; align-items: center;"
                                             title="Detail Tournament">
                                             <i class="ti ti-arrow-right fs-2xl"></i>
-                                        </a> --}}
+                                        </a>
+                                    </div>
+
+
                                     </div>
 
 

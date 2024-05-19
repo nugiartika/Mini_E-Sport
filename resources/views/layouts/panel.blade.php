@@ -50,6 +50,10 @@
     <script src="/admin-panel/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/admin-panel/assets/js/config.js"></script>
+
+
+    @yield('style')
+
 </head>
 
 <body>
