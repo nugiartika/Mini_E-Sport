@@ -1,5 +1,6 @@
 {{-- @extends('layouts.user') --}}
-@extends('user.layouts.app')
+@extends('layouts.panel')
+
 @section('style')
     <style>
         .saring-btn {
@@ -85,7 +86,7 @@
 @php
     use App\Models\TeamTournament;
 @endphp
-    <div class="modal" tabindex="-1" id="filter" style="color: #ffffff;">
+    <div class="modal fade" tabindex="-1" id="filter" style="color: #ffffff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
                 <div class="modal-header">
@@ -257,16 +258,7 @@
                                             title="Detail Tournament">
                                             <i class="ti ti-arrow-right fs-2xl"></i>
                                         </a>
-<<<<<<< Updated upstream
                                     </div>
-
-
-=======
->>>>>>> Stashed changes
-                                    </div>
-
-
-
                                 </div>
                             </div>
                         </div>

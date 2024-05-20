@@ -16,12 +16,12 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $category = Category::when($request->has('search'), function ($query) use ($request) {
+        $categories = Category::when($request->has('search'), function ($query) use ($request) {
             $a = $request->input('search');
             return $query->where('name', 'LIKE', "%$a%");
         })->paginate(5);
 
-        return view('admin.category', compact('category'));
+        return view('admin.category', compact('categories'));
     }
 
     public function indexuser()

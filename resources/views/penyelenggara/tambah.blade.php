@@ -1,19 +1,15 @@
-@extends('penyelenggara.layouts.app')
+@extends('layouts.panel')
 
 @section('style')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
 
-    <head>
-        <link href="summernote-bs5.css" rel="stylesheet">
-        <script src="summernote-bs5.js"></script>
-
-        <style>
-            .note-editable {
-                color: white;
-                /* Atur warna teks menjadi putih */
-            }
-        </style>
-    </head>
+    <style>
+        .note-editable {
+            color: white;
+        }
+    </style>
 @endsection
+
 @section('content')
     <style>
         .custom-summernote {
@@ -222,12 +218,11 @@
         }
     </style>
 
-    <div class="layout-container">
-        <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
-            @csrf
-            <div class="row justify-content-center">
-
-                <div class="card">
+    <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
+        @csrf
+        <div class="row justify-content-center">
+            <div class="col-sm-6 col-xxl-5">
+                <div class="card w-100">
                     <div class="card-body">
                         <h1>Tambah Turnamen</h1>
                         <div class="tab">
@@ -335,8 +330,8 @@
                                             </div>
 
                                             <div class="w-100 mt-3 noteForm" style="display: none;">
-                                                <input class="form-control @error('note') is-invalid @enderror" type="text"
-                                                    placeholder="Isikan deskripsi hadiah" name="note[]" />
+                                                <input class="form-control @error('note') is-invalid @enderror"
+                                                    type="text" placeholder="Isikan deskripsi hadiah" name="note[]" />
                                                 @error('note')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -440,10 +435,12 @@
                                 onclick="window.location.href='/ptournament'">Batal</button>
 
                             <div class="d-flex align-items-center gap-2">
-                                <button type="button" id="prevBtn" onclick="nextPrev(-1)"
+                                <button type="button" disabled id="prevBtn" onclick="nextPrev(-1)"
                                     class="btn btn-danger">Kembali</button>
                                 <button type="button" id="nextBtn" onclick="nextPrev(1)"
                                     class="btn btn-success">Lanjut</button>
+                                <button type="submit" id="submitButton"
+                                    class="btn d-none btn-success">Tambahkan</button>
                             </div>
                         </div>
                         <div>
@@ -457,15 +454,15 @@
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
+@endsection
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+@push('script')
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 
     {{-- script untuk memunculkan form nominal apabila memilih paid --}}
@@ -485,18 +482,21 @@
         }
     </script>
     {{-- script untuk form wizard --}}
+
+    @if ($errors->any())
+        <script>
+            swal({
+                title: "Error",
+                text: "{{ $errors->all()[0] }}",
+                icon: "error",
+                button: "ok",
+            });
+        </script>
+    @endif
+
     <script>
         var currentTab = 0;
         showTab(currentTab);
-
-        @if ($errors->any())
-        swal({
-            title: "Error",
-            text: "{{ $errors->all()[0] }}",
-            icon: "error",
-            button: "ok",
-        });
-        @endif
 
         function showTab(n) {
             var x = document.getElementsByClassName("tab");
@@ -509,9 +509,9 @@
             }
 
             if (n == (x.length - 1)) {
-                document.getElementById("nextBtn").innerHTML = "Submit";
+                document.getElementById("nextBtn").innerHTML = "Tambahkan";
             } else {
-                document.getElementById("nextBtn").innerHTML = "Next";
+                document.getElementById("nextBtn").innerHTML = "Lanjut";
             }
 
             fixStepIndicator(n);
@@ -524,6 +524,20 @@
 
             x[currentTab].style.display = "none";
             currentTab = currentTab + n;
+
+            if (currentTab >= 1) {
+                $('#prevBtn').removeAttr('disabled');
+            } else {
+                $('#prevBtn').attr('disabled', 'disabled');
+            }
+
+            if (currentTab == (x.length - 1)) {
+                $('#nextBtn').addClass('d-none');
+                $('#submitButton').removeClass('d-none');
+            } else {
+                $('#nextBtn').removeClass('d-none');
+                $('#submitButton').addClass('d-none');
+            }
 
             if (currentTab >= x.length) {
                 document.getElementById("regForm").action = "{{ route('ptournament.store') }}";
@@ -563,6 +577,7 @@
         }
     </script>
     {{-- scrript untuk prizepool --}}
+
     <script>
         $(document).ready(function() {
             // Event handler untuk tombol "Hapus Baris"
@@ -617,13 +632,7 @@
                 tabsize: 2,
                 height: 120,
                 toolbar: [
-                    ['style', ['style']],
                     ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
                 ],
                 callbacks: {
                     onInit: function() {
@@ -640,4 +649,4 @@
             });
         });
     </script>
-@endsection
+@endpush

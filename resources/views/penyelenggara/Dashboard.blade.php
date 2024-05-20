@@ -1,9 +1,7 @@
 @extends('layouts.panel')
 
 @section('content')
-<<<<<<< Updated upstream
-=======
-    <h1>TOURNAMENT LIST</h1>
+    <h1>Daftar Turnamen</h1>
 
     <section class="position-relative z-1" id="swiper-3d">
         <div class="container">
@@ -43,18 +41,17 @@
                         </div>
                     @empty
                         <div class="col-lg-12">
-                            <center>
+                            <div class="d-flex justify-content-center">
                                 <img src="{{ asset('assets/img/No-data.png') }}" alt=""
                                     style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                            </center>
-                            <h1 class="table-light" style="text-align: center;">
-                                Tournament Tidak Tersedia
-                            </h1>
+                            </div>
+                            <h3 class="table-light" style="text-align: center;">
+                                Turnamen Tidak Tersedia
+                            </h3>
                         </div>
                     @endforelse
                 </div>
             </div>
         </div>
     </section>
->>>>>>> Stashed changes
 @endsection

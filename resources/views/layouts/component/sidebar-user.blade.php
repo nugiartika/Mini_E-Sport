@@ -1,7 +1,7 @@
 <ul class="menu-inner py-1">
     <li class="menu-item {{ request()->routeIs('dashboardUser') ? 'active' : '' }}">
         <a href="{{ route('dashboardUser') }}" class="menu-link d-flex align-items-center">
-            <i class="menu-icon tf-icons ti ti-tabler-dashboard"></i>
+            <i class="menu-icon tf-icons ti ti-dashboard"></i>
             <span class="ms-1">Dasbor</span>
         </a>
     </li>
@@ -15,7 +15,7 @@
 
     <li class="menu-item {{ request()->routeIs('team.index') ? 'active' : '' }}">
         <a href="{{ route('team.index') }}" class="menu-link d-flex align-items-center">
-            <i class="menu-icon tf-icons ti ti-user-group"></i>
+            <i class="menu-icon tf-icons ti ti-users-group"></i>
             <span class="ms-1">Tim</span>
         </a>
     </li>
