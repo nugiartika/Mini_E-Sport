@@ -100,7 +100,6 @@ Route::get('/detailteam', function () {
     return view('detailteam');
 })->name('team.detail');
 
-<<<<<<< Updated upstream
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
 
 Route::get('/test-ui', function () {
@@ -108,9 +107,3 @@ Route::get('/test-ui', function () {
 });
 
 
-=======
-Route::get('', [LandingPageController::class, 'index'])->name('index');
-// Route::get('/', function () {
-//     return view('user.index');
-// })->name('index');
->>>>>>> Stashed changes
