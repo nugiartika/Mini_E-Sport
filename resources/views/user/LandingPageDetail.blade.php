@@ -259,56 +259,7 @@
                                             </ol>
                                         </div>
                                     </div>
-                                </div> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- tournament more details section end -->
-
-
-    <!-- footer section start  -->
-    <footer class="footer bgn-4 bt">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <div class="footer-logo mb-8">
-                            <a href="#" class="d-grid gap-6">
-                                <div class="flogo-1">
-                                    <img class="w-100" src="{{ asset('assets/img/humma-01.png') }}" alt="favicon">
-                                </div>
-                            </a>
-                        </div>
-                        <div class="social-links">
-                            <ul class="d-flex align-items-center gap-3 flex-wrap">
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-facebook fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-twitter fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-youtube fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-linkedin fs-2xl"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="ti ti-brand-instagram fs-2xl"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 br br-res py-lg-20 pt-sm-15 pt-10 footer-card-area">
-                    <div class="py-lg-10">
-                        <h4 class="footer-title mb-8 title-anim">Quick Links</h4>
-                        <ul class="footer-list d-grid gap-4">
-                            <li><a href="tournaments.html" class="footer-link d-flex align-items-center tcn-6">
+                                </div> --}}Fr tcn-6">
                                     <i class="ti ti-chevron-right"></i> Tournaments</a></li>
                             <li><a href="game.html" class="footer-link d-flex align-items-center tcn-6"> <i
                                         class="ti ti-chevron-right"></i> Games </a></li>
