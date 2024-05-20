@@ -2,13 +2,10 @@
 @section('content')
 
     <div class="row mb-5">
-        @foreach ( $tournaments as $tournament )
         <div class="mb-4">
-            <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"  class=" btn btn-primary"> Buat Team</a>
+            <a href="{{ route('team.addteam')}}"  class=" btn btn-primary"> Buat Team</a>
         </div>
-        @endforeach
-
-        @forelse ($teams as $team)
+        @forelse ($teams as $team)  
             <div class="col-md-6 col-lg-4 mb-3">
 
                 <div class="card h-100">

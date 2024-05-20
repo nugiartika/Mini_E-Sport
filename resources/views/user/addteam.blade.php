@@ -69,7 +69,7 @@
             <h5 class="card-title mb-0">new team</h5>
           </div>
           <div class="card-body">
-        <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
+        <form action="{{ route('team.storeteam') }}" method="POST" enctype="multipart/form-data" class="row g-3">
             @csrf
             <div class="customer-avatar-section">
             <div class="mb-3">
