@@ -5,7 +5,7 @@
         <div class="mb-4">
             <a href="{{ route('team.addteam')}}"  class=" btn btn-primary"> Buat Team</a>
         </div>
-        @forelse ($teams as $team)  
+        @forelse ($teams as $team)
             <div class="col-md-6 col-lg-4 mb-3">
 
                 <div class="card h-100">
@@ -13,7 +13,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Nama Team : {{ $team->name }}</h5>
                         <div>
-                            <a href="" class="btn btn-primary">
+                            <a href="{{ route('user.detailTeam', ['id' => $team->id]) }}" class="btn btn-primary">
                                 Detail
                             </a>
                         </div>
