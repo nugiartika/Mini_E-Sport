@@ -84,6 +84,12 @@
             color: #ffffff;
         }
     </style>
+
+    <style>
+        .no-caret .dropdown-toggle::after {
+            display: none !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -120,9 +126,6 @@
         </div>
     </div>
 
-
-
-
     <!-- header-section start -->
     <div class="tabcontents">
         <div class="tabitem active">
@@ -145,85 +148,81 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
                     @forelse ($tournaments as $tournament)
                         <div class="col-xl-4 col-md-6 col-sm-10 mb-4">
                             <div class="card h-100">
 
-                                <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
-                                        <div class="d-flex justify-content-end">
-                                            <div class="dropdown">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                                    fill="currentColor" class="bi bi-three-dots-vertical dropdown-toggle"
-                                                    viewBox="0 0 16 16" id="dropdownMenuButton-{{ $tournament->id }}"
-                                                    data-bs-toggle="dropdown" aria-expanded="false"
-                                                    style="margin-left:345px ;">
-                                                    <path
-                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                                </svg>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuButton-{{ $tournament->id }}">
-                                                    <li><a href="{{ route('ptournament.edittour', $tournament->id) }}"
-                                                            class="dropdown-item"><i class="ti ti-edit fs-2xl"></i> Edit
-                                                            Tournament</a></li>
-                                                    <li>
-                                                        <form id="deleteForm{{ $tournament->id }}"
-                                                            action="{{ route('ptournament.destroy', $tournament->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="dropdown-item"
-                                                                onclick="confirmDelete('{{ $tournament->id }}')">
-                                                                <i class="ti ti-trash fs-2xl"></i> Delete Tournament
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div><br>
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between align-items-center pb-4">
+                                        <h4 class="mb-0">{{ $tournament->name }}</h4>
+                                        <div class="dropdown no-caret">
+                                            <a href="#" class="dropdown-toggle btn btn-link"
+                                                id="dropdownMenuButton-{{ $tournament->id }}" data-bs-toggle="dropdown"
+                                                aria-expanded="false" style="margin-left: auto;">
+                                                <i class="ti ti-dots-vertical"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-end"
+                                                aria-labelledby="dropdownMenuButton-{{ $tournament->id }}">
+                                                <li>
+                                                    <a href="{{ route('ptournament.edittour', $tournament->id) }}"
+                                                        class="dropdown-item"><i class="ti ti-edit fs-2xl"></i> Edit
+                                                        Tournament</a>
+                                                </li>
+                                                <li>
+                                                    <form id="deleteForm{{ $tournament->id }}"
+                                                        action="{{ route('ptournament.destroy', $tournament->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item"
+                                                            onclick="confirmDelete('{{ $tournament->id }}')">
+                                                            <i class="ti ti-trash fs-2xl"></i> Delete Tournament
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
 
                                     <div class="tournament-img mb-8 position-relative">
                                         <div class="img-area overflow-hidden rounded"
-                                            style="width: auto; height: 200px; border-radius: .5rem;">
+                                            style="width: auto; height: 400px; border-radius: .5rem;">
                                             <img class="w-100" style="object-fit: cover; width: 100%; height: 100%;"
-                                                src="{{ asset('storage/' . $tournament->images) }}" alt="tournament">
+                                                src="{{ asset("storage/{$tournament->images}") }}" alt="tournament">
                                         </div>
                                     </div>
-                                    <div class="tournament-content px-xxl-4 mt-3 mt-md-4">
+                                    <div class="py-3">
                                         <div class="tournament-info mb-4">
-                                            <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                {{ $tournament->name }}
-                                            </h4>
                                             <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
                                         </div>
 
-                                        <div class="hr-line line3"></div>
-                                        <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
-                                            <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
-                                                <div class="d-flex align-items-center gap-2">
+                                        <div class="row pb-4">
+                                            <div class="col-md-4">
+                                                <div class="d-flex gap-2">
+                                                    <i class="ti ti-calendar fs-base tcp-2"></i>
+                                                    <span
+                                                        class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->locale('id')->format('d F Y') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="d-flex gap-2">
                                                     <i class="ti ti-moneybag fs-base tcp-2"></i>
                                                     <span class="tcn-1 fs-sm">IDR
                                                         {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
                                                 </div>
                                             </div>
-                                            <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                                <i class="ti ti-ticket fs-base tcp-2"></i>
-                                                <span class="tcn-1 fs-sm">
-                                                    {{ $tournament->paidment === 'Gratis' ? 'Gratis' : ($tournament->paidment === 'Berbayar' ? 'Berbayar' : '') }}
-                                                </span>
-                                            </div>
-
-                                            {{-- <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                                <i class="ti ti-ticket fs-base tcp-2"></i>
-                                                <span class="tcn-1 fs-sm">
-                                                    {{ $tournament->paidment == 'unpaid' ? 'Gratis' : 'Berbayar' }}
-                                                </span>
-                                            </div> --}}
-                                            <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                                <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                <span
-                                                    class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
+                                            <div class="col-md-4">
+                                                <div class="d-flex gap-2">
+                                                    <i class="ti ti-ticket fs-base tcp-2"></i>
+                                                    <span class="tcn-1 fs-sm">
+                                                        {{ $tournament->paidment === 'Gratis' ? 'Gratis' : ($tournament->paidment === 'Berbayar' ? 'Berbayar' : '') }}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
+
                                         @php
 
                                             // Ambil total tim dari hasil perhitungan
@@ -254,8 +253,6 @@
                                             }
                                         @endphp
 
-
-
                                         <div class="hr-line line3"></div>
                                         <div class="card-more-info d-flex justify-content-between align-items-center mt-6">
                                             <!-- Informasi Jumlah Teams -->
@@ -265,16 +262,17 @@
                                                     <span class="tcn-6 fs-sm">
                                                         @if ($totalTeams)
                                                             {{ $totalTeams }}/{{ $tournament->slotTeam }}
-                                                            Teams
+                                                            Tim
                                                         @else
-                                                            0/{{ $tournament->slotTeam }} Teams
+                                                            0/{{ $tournament->slotTeam }} Tim
                                                         @endif
                                                     </span>
                                                 </div>
                                             </div>
 
                                             <a href="{{ route('tournament.detailUser', $tournament->id) }}"
-                                                class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                class="custom-icon-detail" data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
                                                 style="display: flex; justify-content: center; align-items: center;"
                                                 title="Detail Tournament">
                                                 <i class="ti ti-arrow-right fs-2xl"></i>
@@ -297,6 +295,7 @@
                             </h4>
                         </div>
                     @endforelse
+                </div>
             </div>
         </div>
     </div>
@@ -343,15 +342,14 @@
         }
     </script>
 
-@if (session()->has('success'))
-<script>
-    swal({
-        title: "Success!",
-        text: "{{ session()->get('success') }}",
-        icon: "success",
-        button: "Okay",
-    });
-</script>
-@endif
-
+    @if (session()->has('success'))
+        <script>
+            swal({
+                title: "Success!",
+                text: "{{ session()->get('success') }}",
+                icon: "success",
+                button: "Okay",
+            });
+        </script>
+    @endif
 @endpush

@@ -1,7 +1,6 @@
 @extends('layouts.panel')
 
 @section('content')
-    <h1>TOURNAMENT LIST</h1>
     <h1>Daftar Turnamen</h1>
 
     <section class="swiper-3d">
