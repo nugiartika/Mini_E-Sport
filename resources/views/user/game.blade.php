@@ -1,19 +1,20 @@
-@extends('user.layouts.app')
+@extends('layouts.panel')
 
 @section('content')
     <div class="row mb-5">
         @forelse ($categories as $category)
             <div class="col-md-4 col-lg-3 mb-3">
                 <div class="card h-100">
-                    <img class="card-img-top" src="{{ asset('storage/' . $category->photo) }}" alt="Gambar Game    " />
+                    <img class="card-img-top" src="{{ asset('storage/' . $category->photo) }}" alt="{{ $category->name }}" />
                     <div class="card-body text-center">
-                        <h5 class="card-title">Nama Game : {{ $category->name }}</h5>
-                        <p class="card-text ">
-                            Anggota per Tim : {{ $category->membersPerTeam }}
-                        </p>
-                        {{-- <a href="" data-bs-target="#detail{{ $category->id }}" data-bs-toggle="modal" class="btn btn-primary">
-                        Connected
-                    </a> --}}
+                        <div class="d-flex gap-2 justify-content-between pb-3 mb-3 border-bottom">
+                            <strong>Nama Game</strong>
+                            <span>{{ $category->name }}</span>
+                        </div>
+                        <div class="d-flex gap-2 justify-content-between">
+                            <strong>Anggota per Tim</strong>
+                            <span>{{ $category->membersPerTeam }} orang</span>
+                        </div>
                     </div>
                 </div>
             </div>

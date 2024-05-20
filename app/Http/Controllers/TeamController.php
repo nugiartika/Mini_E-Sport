@@ -83,11 +83,10 @@ class TeamController extends Controller
 
     public function addTeam(Request $request)
     {
-        $teams = Team::all();
         $user = User::all();
         $selectedTournamentId = $request->input('tournament_id');
 
-        return view('user.addteam', compact('teams','user','selectedTournamentId'));
+        return view('user.addteam', compact('user', 'selectedTournamentId'));
     }
 
     public function storeTeam(TeamRequest $request)
@@ -96,9 +95,7 @@ class TeamController extends Controller
         $user = Auth::user();
 
         $gambar = $request->file('profile');
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('team', $gambar);
-        }
+        $path_gambar = $gambar ? Storage::disk('public')->put('team', $gambar) : null;
 
         $team = Team::create([
             'name' => $request->name,
@@ -113,11 +110,10 @@ class TeamController extends Controller
     public function showTeam(Team $team)
     {
         $members = Member::all();
-        $teams = Team::all();
         $teamId = $team->id;
         $user = User::all();
 
-        return view('user.addmember', compact('members', 'teams', 'teamId','user'));
+        return view('user.addmember', compact('members', 'team', 'teamId', 'user'));
     }
 
 }

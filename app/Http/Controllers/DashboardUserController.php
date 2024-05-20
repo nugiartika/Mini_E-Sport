@@ -42,7 +42,7 @@ class DashboardUserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DashboardUser $dashboardUser)
+    public function show()
     {
         //
     }
@@ -50,7 +50,7 @@ class DashboardUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DashboardUser $dashboardUser)
+    public function edit()
     {
         //
     }
@@ -58,7 +58,7 @@ class DashboardUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDashboardUserRequest $request, DashboardUser $dashboardUser)
+    public function update(UpdateDashboardUserRequest $request)
     {
         //
     }
@@ -66,7 +66,7 @@ class DashboardUserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DashboardUser $dashboardUser)
+    public function destroy()
     {
         //
     }

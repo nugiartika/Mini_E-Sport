@@ -161,7 +161,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('tournamentfilter') }}" method="GET">
+                    {{-- <form action="{{ route('tournamentfilter') }}" method="GET">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="widget-title">Category</h5>
                             <button type="submit" class="btn btn-primary"
@@ -180,7 +180,7 @@
                                 </label>
                             </div>
                         @endforeach
-                    </form>
+                    </form> --}}
                 </div>
             </div>
         </div>
