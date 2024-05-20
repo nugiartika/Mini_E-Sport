@@ -477,7 +477,7 @@ class TournamentController extends Controller
                 'rule' => $request->input('rule'),
                 'paidment' => $request->input('paidment'),
                 'nominal' => $request->input('nominal'),
-                'status' => 'pending',
+                'status' => $request->input('status'),
             ]);
 
             // Update prize pools

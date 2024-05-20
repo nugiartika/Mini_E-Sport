@@ -270,6 +270,54 @@
         }
     </script>
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
+
+{{-- @if ($errors->any())
+<script> --}}
+    {{-- // toastr.error(`{!! implode('\n', $errors->all()) !!}`);
+//     toastr.error("{{ session('error') }}");
+// </script>
+// @endif --}}
+
+@if (session('warning'))
+<script>
+    toastr.warning("{{ session('warning') }}");
+</script>
+@endif
+
+@if (session('success'))
+<script>
+    toastr.success("{{ session('success') }}");
+</script>
+@endif
+
+<script>
+    function swalpFunction() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("Data dihapus");
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+    }
+</script>
+
     @stack('script')
 </body>
 </html>

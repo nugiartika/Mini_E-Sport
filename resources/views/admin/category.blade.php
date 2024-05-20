@@ -1,13 +1,7 @@
 @extends('layouts.panel')
 
 @section('content')
-<<<<<<< Updated upstream
     {{-- @if (session('success'))
-=======
-<<<<<<< Updated upstream
-
-{{-- @if (session('success'))
->>>>>>> Stashed changes
 <!-- Modal Success -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel"
     aria-hidden="true">
@@ -39,48 +33,10 @@
     {{ session('warning') }}
 </div>
 @endif --}}
-<<<<<<< Updated upstream
-=======
-<div class="content-wrapper">
-    <div class="container-xxl flex-grow-1 container-p-y">
-=======
-    @if (session('success'))
-        <!-- Modal Success -->
-        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="successModalLabel">SUCCESS</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        {{ session('success') }}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Modal Success -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#successModal').modal('show');
-            });
-        </script>
-    @endif
-    @if (session('warning'))
-        <div class="alert alert-warning">
-            {{ session('warning') }}
-        </div>
-    @endif
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal"
-                data-bs-target="#tambahModal" style="background-color:rgb(40, 144, 204); color:#fff;">
+            <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
+                style="background-color:rgb(40, 144, 204); color:#fff;">
                 Tambahkan Game
             </a>
 
@@ -153,7 +109,6 @@
                             </td>
                         </tr>
                     @empty
-<<<<<<< Updated upstream
                         <tr>
                             <td colspan="6">
                                 <div class="d-flex flex-column justify-content-center">
@@ -165,33 +120,6 @@
                                 </div>
                             </td>
                         </tr>
-=======
-                    <tr>
-<<<<<<< Updated upstream
-                        <td colspan="6">
-                            <div class="d-flex flex-column justify-content-center">
-                                <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                    style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
-                                <h4 class="table-light" style="text-align: center;">
-                                    Data Tidak Tersedia
-                                </h4>
-                            </div>
-=======
-                        <td colspan="5">
-                            <div class="col-lg-12">
-                                <center>
-                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                        style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                                </center>
-                                <h1 class="table-light" style="text-align: center;">
-                                    Tournament Tidak Tersedia
-                                </h1>
-                            </div>
-
->>>>>>> Stashed changes
-                        </td>
-                    </tr>
->>>>>>> Stashed changes
                     @endforelse
                 </tbody>
             </table>
@@ -221,8 +149,8 @@
 
                         <div class="mb-3">
                             <label for="photo" class="form-label">Foto Cover</label>
-                            <input type="file" class="form-control @error('photo') is-invalid @enderror"
-                                id="photo" name="photo">
+                            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
+                                name="photo">
                             @if (old('photo'))
                                 <img id="preview" src="{{ asset('storage/' . old('photo')) }}" alt="Old gambar"
                                     style="max-width: 100px; max-height: 100px;">

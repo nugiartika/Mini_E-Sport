@@ -257,12 +257,9 @@
                                             title="Detail Tournament">
                                             <i class="ti ti-arrow-right fs-2xl"></i>
                                         </a>
-<<<<<<< Updated upstream
                                     </div>
 
 
-=======
->>>>>>> Stashed changes
                                     </div>
 
 

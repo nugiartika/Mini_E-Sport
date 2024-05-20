@@ -76,9 +76,9 @@ class CategoryController extends Controller
                 'membersPerTeam' => $request->membersPerTeam,
             ]);
 
-            return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY ADDED');
+            return redirect()->route('category.index')->with('success', 'Game berhasil ditambahkan');
         } catch (\Throwable $th) {
-            return redirect()->route('category.index')->with('error', 'CATEGORY ADDED FAILED');
+            return redirect()->route('category.index')->with('warning', 'Game gagal ditambahkan');
         }
     }
 
@@ -108,22 +108,48 @@ class CategoryController extends Controller
             }
         }
 
-        return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY UPDATED');
+        return redirect()->route('category.index')->with('success', 'Game berhasil di ubah');
     }
 
     public function destroy(Category $category)
     {
         try {
+            // Check if the category is being used by any tournaments
+            if ($category->tournament()->exists()) { // Use `()->exists()` instead of `->isEmpty()`
+                return redirect()->route('category.index')->with('warning', 'Gagal menghapus data karena data masih digunakan..');
+            }
 
+            // If category is not used, delete the photo if it exists
             if (Storage::disk('public')->exists($category->photo)) {
                 Storage::disk('public')->delete($category->photo);
             }
 
+            // Delete the category
             $category->delete();
 
-            return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY REMOVED');
+            return redirect()->route('category.index')->with('success', 'Game berhasil di hapus');
         } catch (Exception $th) {
-            return redirect()->route('category.index')->with('error', 'GAGAL MENGHAPUS CATEGORY. ');
+            return redirect()->route('category.index')->with('error', 'Game gagal di hapus.');
         }
+
+        // try {
+        //     // Check if the category is being used by any tournaments
+        //     if ($category->tournament()->exists()) {
+        //         return redirect()->route('category.index')->with('warning', 'CATEGORY IS USED BY A TOURNAMENT AND CANNOT BE DELETED.');
+        //     }
+
+        //     // If category is not used, delete the photo if it exists
+        //     if (Storage::disk('public')->exists($category->photo)) {
+        //         Storage::disk('public')->delete($category->photo);
+        //     }
+
+        //     // Delete the category
+        //     $category->delete();
+
+        //     return redirect()->route('category.index')->with('success', 'CATEGORY SUCCESSFULLY REMOVED');
+        // } catch (Exception $th) {
+        //     return redirect()->route('category.index')->with('error', 'FAILED TO DELETE CATEGORY.');
+        // }
     }
+
 }

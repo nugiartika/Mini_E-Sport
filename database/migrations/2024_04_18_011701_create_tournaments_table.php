@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-            Schema::create('tournaments', function (Blueprint $table) {
-                $table->id();
-                $table->string('name');
+        Schema::create('tournaments', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
             $table->date('pendaftaran');
             $table->date('permainan');
             $table->date('end_pendaftaran');
@@ -26,9 +26,9 @@ return new class extends Migration
             $table->char('contact', 24);
             $table->text('description');
             $table->text('rule');
-            $table->enum('status', ['pending','rejected','accepted'])->default('pending');
+            $table->enum('status', ['pending', 'rejected', 'accepted'])->default('pending');
             $table->text('reason')->nullable();
-            $table->enum('paidment',['Berbayar','Gratis']);
+            $table->enum('paidment', ['Berbayar', 'Gratis']);
             $table->integer('nominal')->nullable();
             $table->foreignId('jurnal_id')->nullable();
             $table->text('urlBracket')->nullable();

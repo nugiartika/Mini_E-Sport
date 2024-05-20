@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('photo');
             $table->integer('membersPerTeam');
-            $table->timestamps(); 
+            $table->timestamps();
         });
     }
 

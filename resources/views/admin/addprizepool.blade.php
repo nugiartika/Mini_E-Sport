@@ -36,10 +36,10 @@
                         <td>{{ $a->prize }}</td>
                         <td style="width: 15%">
                             <div class="actions-btn">
-                                <form action="{{ route('admin.destroyPrize', ['id' => $a->id]) }}" method="POST" style="display:inline">
+                                <form id="delete-form-{{ $a->id }}" action="{{ route('admin.destroyPrize', ['id' => $a->id]) }}" method="POST" style="display:inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" style="background: none" class="badge bg-label-danger me-1 border-0" onclick="return confirm('Apakah Anda yakin ingin menghapus ini?');">
+                                    <button type="button" style="background: none" class="badge bg-label-danger me-1 border-0" onclick="confirmDeletion({{ $a->id }});">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                             <path fill="#FA7070" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
                                         </svg>
@@ -96,3 +96,23 @@
     </div>
 </div>
 @endsection
+
+@push('script')
+<script>
+    function confirmDeletion(prizeId) {
+        Swal.fire({
+            title: "Apa kamu yakin?",
+            text: "Anda tidak akan dapat mengembalikan ini!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + prizeId).submit();
+            }
+        });
+    }
+</script>
+@endpush

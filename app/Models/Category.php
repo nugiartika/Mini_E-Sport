@@ -13,7 +13,7 @@ class Category extends Model
 
     public function tournament()
     {
-        return $this->hasMany(Tournament::class);
+        return $this->hasMany(Tournament::class, 'categories_id');
     }
-    
+
 }
