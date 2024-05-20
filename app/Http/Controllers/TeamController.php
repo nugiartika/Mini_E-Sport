@@ -45,7 +45,6 @@ class TeamController extends Controller
     {
         $tournament_id = $request->get('tournament_id');
         $user = Auth::user();
-        // $loggedInUserName = $loggedInUser->name;
 
         $gambar = $request->file('profile');
         if ($gambar) {
@@ -57,9 +56,6 @@ class TeamController extends Controller
             'profile' => $path_gambar,
             'tournament_id' => $tournament_id,
             'user_id' => $user->id,
-            // 'member_id' => $request->member_id,
-            // 'cadangan1' => $request->cadangan1,
-            // 'cadangan2' => $request->cadangan2,
         ]);
 
         return redirect()->route('team.show', $team->id)->with('success', 'Team added successfully');
@@ -85,27 +81,43 @@ class TeamController extends Controller
         return view('user.createmember', compact('members', 'teams', 'teamId','user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Team $team)
+    public function addTeam(Request $request)
     {
-        //
+        $teams = Team::all();
+        $user = User::all();
+        $selectedTournamentId = $request->input('tournament_id');
+
+        return view('user.addteam', compact('teams','user','selectedTournamentId'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Team $team)
+    public function storeTeam(TeamRequest $request)
     {
-        //
+        $tournament_id = $request->get('tournament_id');
+        $user = Auth::user();
+
+        $gambar = $request->file('profile');
+        if ($gambar) {
+            $path_gambar = Storage::disk('public')->put('team', $gambar);
+        }
+
+        $team = Team::create([
+            'name' => $request->name,
+            'profile' => $path_gambar,
+            'tournament_id' => $tournament_id,
+            'user_id' => $user->id,
+        ]);
+
+        return redirect()->route('team.showteam', $team->id)->with('success', 'Team added successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Team $team)
+    public function showTeam(Team $team)
     {
-        //
+        $members = Member::all();
+        $teams = Team::all();
+        $teamId = $team->id;
+        $user = User::all();
+
+        return view('user.addmember', compact('members', 'teams', 'teamId','user'));
     }
+
 }

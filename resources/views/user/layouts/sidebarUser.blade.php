@@ -102,7 +102,12 @@
                 <div>Game</div>
             </a>
         </li>
-        
+        <li class="menu-item {{ request()->routeIs('user.tournament.history') ? 'active' : '' }}">
+            <a class="menu-link d-flex align-items-center" href="{{ route('user.tournament.history') }}">
+                <i class='fas fa-history me-2'></i>
+                <span class="align-middle">Riwayat Ikut Serta</span>
+            </a>
+        </li>
         <li class="menu-item {{ request()->routeIs('transaction.index') ? 'active' : '' }}">
             <a href="{{ route('transaction.index') }}" class="menu-link d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="me-2">

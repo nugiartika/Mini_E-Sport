@@ -82,6 +82,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('tournamentUser/history', [TournamentController::class, 'history'])->name('user.tournament.history');
         Route::get('/tournamentfilter', [TournamentController::class, 'filteruser'])->name('tournament.filteruser');
         Route::get('/detailTeam/{id}', [TournamentController::class, 'indexdetail'])->name('user.detailTeam');
+        Route::get('/addteam', [TeamController::class, 'addteam'])->name('team.addteam');
+        Route::post('/storeteam', [TeamController::class, 'Storeteam'])->name('team.storeteam');
+        Route::get('/showteam', [TeamController::class, 'Showteam'])->name('team.showteam');
+        Route::get('/addmember', [MemberController::class, 'createMember'])->name('team.addmember');
+        Route::post('/storemember', [MemberController::class, 'storemember'])->name('team.storemember');
     });
 });
 
@@ -95,13 +100,13 @@ Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('
 Route::resource('/teams', TeamTournamentController::class);
 Route::get('teams/{team}', [TeamController::class, 'show'])->name('teams.show');
 Route::resource('team', TeamController::class);
+
 Route::resource('member', MemberController::class);
 Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
 Route::get('/detailteam', function () {
     return view('detailteam');
 })->name('team.detail');
 
-<<<<<<< Updated upstream
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
 
 Route::get('/test-ui', function () {
@@ -109,9 +114,3 @@ Route::get('/test-ui', function () {
 });
 
 
-=======
-Route::get('', [LandingPageController::class, 'index'])->name('index');
-// Route::get('/', function () {
-//     return view('user.index');
-// })->name('index');
->>>>>>> Stashed changes

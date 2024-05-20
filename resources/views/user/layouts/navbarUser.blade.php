@@ -52,16 +52,20 @@
                                       </div>
                                       <div class="flex-grow-1">
                                           <span class="fw-medium d-block">
-                                              {{ auth()->user()->name }}
+                                            @if (auth()->check())
+                                                {{ auth()->user()->name }}
+                                            @endif
+
                                           </span>
-                                          <small class="text-muted">{{ auth()->user()->email }}</small>
+                                          <small class="text-muted">
+                                            @if (auth()->check())
+                                                {{ auth()->user()->email }}
+                                                @endif
+                                            </small>
 
                                       </div>
                                   </div>
-                                  <a class="dropdown-item" href="{{ route('user.tournament.history') }}">
-                                  <i class='fas fa-history me-2'></i>
-                                  <span class="align-middle">Riwayat Ikut Serta</span>
-                                  </a>
+
                               </a>
                           </li>
 
