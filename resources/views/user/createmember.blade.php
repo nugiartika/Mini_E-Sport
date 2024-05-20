@@ -33,7 +33,7 @@
                         @csrf
                         <div class="customer-avatar-section">
                             @php
-                                $loggedInUserName = auth()->user()->email; 
+                                $loggedInUserName = auth()->user()->email;
                             @endphp
 
                             @foreach ($teams as $team)

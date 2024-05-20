@@ -82,9 +82,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('tournamentUser/history', [TournamentController::class, 'history'])->name('user.tournament.history');
         Route::get('/tournamentfilter', [TournamentController::class, 'filteruser'])->name('tournament.filteruser');
         Route::get('/detailTeam/{id}', [TeamController::class, 'indexdetail'])->name('user.detailTeam');
-        Route::get('/addteam', [TeamController::class, 'addteam'])->name('team.addteam');
-        Route::post('/storeteam', [TeamController::class, 'Storeteam'])->name('team.storeteam');
-        Route::get('/showteam', [TeamController::class, 'Showteam'])->name('team.showteam');
+        Route::get('/addteam', [TeamController::class, 'addTeam'])->name('team.addteam');
+        Route::post('/storeteam', [TeamController::class, 'storeTeam'])->name('team.storeteam');
+        Route::get('/showteam', [TeamController::class, 'showTeam'])->name('team.showteam');
         Route::get('/addmember', [MemberController::class, 'createMember'])->name('team.addmember');
         Route::post('/storemember', [MemberController::class, 'storemember'])->name('team.storemember');
         Route::resource('/teams', TeamTournamentController::class);
