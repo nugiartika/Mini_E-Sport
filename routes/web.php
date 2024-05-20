@@ -107,10 +107,8 @@ Route::get('/detailteam', function () {
     return view('detailteam');
 })->name('team.detail');
 
+Route::get('DetailTournametUser/{id}', [LandingPageController::class, 'detailTOurnament'])->name('landingpageDetailTournamet');
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
-
-Route::get('/test-ui', function () {
-    return view('test');
-});
-
-
+// Route::get('/', function () {
+//     return view('user.index');
+// })->name('index');

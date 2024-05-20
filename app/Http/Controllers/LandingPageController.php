@@ -7,19 +7,33 @@ use App\Http\Requests\StoreLandingPageRequest;
 use App\Http\Requests\UpdateLandingPageRequest;
 use App\Models\Category;
 use App\Models\Tournament;
+use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Tournaments = Tournament::where('status', 'accepted')->orWhere('status', 'pending')->get();
+        if ($request->has('categories_id')) {
+            $a = $request->input('categories_id', []);
+            $Tournaments = Tournament::where('categories_id', $a)->paginate(5);
+        } else {
+            $Tournaments = Tournament::all();
+        }
         $Categories = Category::all();
-        return view('user.index', compact('Tournaments', 'Categories'));
+        $categoryFilter = Category::all();
+        $listGame = $Categories;
+
+        return view('user.index', compact('Tournaments', 'Categories', 'listGame','categoryFilter'));
     }
 
+    public function detailTournament($id)
+    {
+        $tournaments = Tournament::findOrFail($id);
+        return view('user.LandingPageDetail', compact('tournaments'));
+    }
 
     /**
      * Show the form for creating a new resource.

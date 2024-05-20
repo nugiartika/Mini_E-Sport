@@ -35,5 +35,8 @@
             @endforelse
         </div>
     </section>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 @endsection
