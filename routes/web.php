@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('konfirmtournament/{konfirmtournament}/edit', [TournamentController::class, 'edit'])->name('konfirm.edit');
         Route::put('konfirmtournament/{id}', [TournamentController::class, 'update'])->name('konfirm.update');
         Route::get('AdminTournament', [DetailTournamentController::class, 'index'])->name('DetailTournament');
+        Route::get('AdminTournamentFilter', [DetailTournamentController::class, 'filter'])->name('tournamentfilter');
         Route::put('listUserPenyelenggara/{sainsRole}', [SainsRoleController::class, 'update'])->name('konfirmUser');
         Route::delete('HapusDataTournament/{idTournament}', [DashboardAdminController::class, 'destroy'])->name('deleteTournament');
         Route::delete('rejectUser/{idUser}', [SainsRoleController::class, 'destroy'])->name('rejectUser');
@@ -81,6 +82,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('tournamentUser/history', [TournamentController::class, 'history'])->name('user.tournament.history');
         Route::get('/tournamentfilter', [TournamentController::class, 'filteruser'])->name('tournament.filteruser');
         Route::get('/detailTeam/{id}', [TournamentController::class, 'indexdetail'])->name('user.detailTeam');
+        Route::get('/addteam', [TeamController::class, 'addteam'])->name('team.addteam');
+        Route::post('/storeteam', [TeamController::class, 'Storeteam'])->name('team.storeteam');
+        Route::get('/showteam', [TeamController::class, 'Showteam'])->name('team.showteam');
+        Route::get('/addmember', [MemberController::class, 'createMember'])->name('team.addmember');
+        Route::post('/storemember', [MemberController::class, 'storemember'])->name('team.storemember');
     });
 });
 
@@ -94,6 +100,7 @@ Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('
 Route::resource('/teams', TeamTournamentController::class);
 Route::get('teams/{team}', [TeamController::class, 'show'])->name('teams.show');
 Route::resource('team', TeamController::class);
+
 Route::resource('member', MemberController::class);
 Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
 Route::get('/detailteam', function () {

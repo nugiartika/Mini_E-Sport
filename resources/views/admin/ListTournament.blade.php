@@ -33,35 +33,37 @@
 @section('content')
     <div class="card">
         <h5 class="card-header">Daftar Tournament</h5>
-        <div class="card-header">
-            <div class="row justify-content-between">
-                <div class="d-flex align-items-center gap-6 flex-wrap mb-lg-5 mb-sm-3 mb-2"
-                style="margin-left: 30px; margin-top: 10px; width: 100px; height: 40px;">
-                <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
-                    data-bs-target="#filter">Saring</button>
-            </div>
-                {{-- <div class="col-md-2">
-                    <form id="category-selector-form" action="{{ request()->fullUrl() }}">
-                        <select id="category-selector" name="category" class="form-control" onchange="this.form.submit()">
-                            <option value="" selected>Semuanya</option>
-                            @foreach ($category as $cat)
-                                <option value="{{ $cat->id }}" {{ $cat->id == request()->category ? 'selected' : '' }}>
-                                    {{ $cat->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </form>
-                </div> --}}
-                <div class="col-md-4">
-                    <form action="{{ route('DetailTournament') }}" method="get">
-                        @csrf
-                        <div class="input-group mb-3">
-                            <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;"
-                                value="{{ old('search', request('search')) }}" />
-                            <button type="submit" class="btn btn-primary">Cari</button>
+        {{-- <div class="card-header">
+            <div class="row justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-6 flex-wrap" style="margin-left: 30px;">
+                    <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
+                        data-bs-target="#filter">Saring</button>
+                        <div class="col-md-3 ms-auto">
+                            <form action="{{ route('DetailTournament') }}" method="get">
+                                @csrf
+                                <div class="input-group mb-3">
+                                    <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;"
+                                        value="{{ old('search', request('search')) }}" />
+                                    <button type="submit" class="btn btn-primary">Cari</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
                 </div>
+            </div>
+        </div> --}}
+
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
+                data-bs-target="#filter">Saring</button>
+                <form action="{{ route('DetailTournament') }}" method="get">
+                    @csrf
+                    <div class="input-group">
+                        <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;"
+                            value="{{ old('search', request('search')) }}" />
+                        <button type="submit" class="btn btn-primary">Cari</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -113,17 +115,20 @@
                                 </button>
                             </td>
                             <td>
-                                <form action="{{ route('deleteTournament', ['idTournament' => $tournament->id]) }}"
+                                <form id="delete-form-{{ $tournament->id }}"
+                                    action="{{ route('deleteTournament', ['idTournament' => $tournament->id]) }}"
                                     method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <input type="hidden" name="action" value="reject">
-                                    <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                        onclick="confirmDeletion({{ $tournament->id }});">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                             viewBox="0 0 24 24">
                                             <path fill="#FA7070"
                                                 d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                                        </svg></button>
+                                        </svg>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -148,7 +153,7 @@
 
 
 
-     <div class="modal" tabindex="-1" id="filter">
+    <div class="modal" tabindex="-1" id="filter">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
                 <div class="modal-header">
@@ -210,6 +215,20 @@
                                                     id="detail-email" style="font-weight: normal;">
                                                     {{ $tournament->category->name }}</span>
                                             </li>
+                                            <li class="list-group-item" style="font-weight: bold;">
+                                                Nama Penyelenggara : <span id="detail-place_birth"
+                                                    style="font-weight: normal;">{{ $tournament->user->name }}</span>
+
+                                            </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Slot Tim :
+                                                <span id="detail-national_identity_number"
+                                                    style="font-weight: normal;">{{ $tournament->slotTeam }}</span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
                                             <li class="list-group-item" style="font-weight: bold;">Pendafataran Dibuka :
                                                 <span id="detail-gender" style="font-weight: normal;">
                                                     {{ $tournament->pendaftaran }}</span>
@@ -226,30 +245,25 @@
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
                                                     {{ $tournament->permainan }}</span>
                                             </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item" style="font-weight: bold;">
-                                                Nama Penyelenggara : <span id="detail-place_birth"
-                                                    style="font-weight: normal;">{{ $tournament->user->name }}</span>
-
-                                            </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Slot Tim :
-                                                <span id="detail-national_identity_number"
-                                                    style="font-weight: normal;">{{ $tournament->slotTeam }}</span>
-                                            </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Description :
-                                                <span id="detail-family_card_id"
-                                                    style="font-weight: normal;">{!! $tournament->description !!}</span>
-                                            </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Rule :
-                                                <span id="detail-number_siblings"
-                                                    style="font-weight: normal;">{{ $tournament->rule }}</span>
-                                            </li>
 
                                         </ul>
                                     </div>
+                                    <div class="row mx-2">
+                                        <div class="col">
+                                            {{-- <div class="list-group"> --}}
+                                                <li class="list-group-item" style="font-weight: bold;">Description: <span style="font-weight: normal;" id="detail-family_card_id">{!! $tournament->description !!}</span></li>
+                                                <li class="list-group-item" style="font-weight: bold;">Rule: <span style="font-weight: normal;" id="detail-number_siblings">{{ $tournament->rule }}</span></li>
+                                            {{-- </div> --}}
+                                        </div>
+                                    </div>
+                                    {{-- <li class="list-group-item" style="font-weight: bold;">Description :
+                                        <span id="detail-family_card_id"
+                                            style="font-weight: normal;">{!! $tournament->description !!}</span>
+                                    </li>
+                                    <li class="list-group-item" style="font-weight: bold;">Rule :
+                                        <span id="detail-number_siblings"
+                                            style="font-weight: normal;">{{ $tournament->rule }}</span>
+                                    </li> --}}
                                 </div>
                             </div>
                         </table>
@@ -261,7 +275,6 @@
             </div>
         </div>
     @endforeach
-
 @endsection
 
 @push('script')
@@ -269,5 +282,24 @@
         $('#category-selector').on('change', function() {
             $(this).closest('#category-selector-form').submit();
         });
+    </script>
+
+
+    <script>
+        function confirmDeletion(tournamentId) {
+            Swal.fire({
+                title: "Apa kamu yakin?",
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + tournamentId).submit();
+                }
+            });
+        }
     </script>
 @endpush

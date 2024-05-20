@@ -1,42 +1,26 @@
 @extends('layouts.panel')
 
 @section('content')
+    <h1>TOURNAMENT LIST</h1>
     <h1>Daftar Turnamen</h1>
 
-    <section class="position-relative z-1" id="swiper-3d">
-        <div class="container">
-            <!-- Slider main container -->
-            <div class="swiper swiper-3d-container">
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-                    <!-- Slides -->
-                    @forelse ($tournaments as $tournament)
-                        <div class="swiper-slide card">
-                            <div class="card-3d d-grid justify-content-center p-3">
-                                <div class="img-area w-100 mb-8 position-relative">
-                                    <img class="w-100" src="{{ asset('storage/' . $tournament->images) }}" alt="game">
-                                    <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                        <span class="btn btn-light">Playing</span>
-                                    </span>
-                                </div>
-                                <h5 class="card-title text-center tcn-1 mb-4 title-anim">{{ $tournament->name }}</h5>
-                                <div class="d-center">
-                                    <div class="card-info d-center gap-3 py-1 px-3">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <span
-                                                class="card-date position-absolute top-0 end-0 py-2 px-3 mt-4 me-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                                <i
-                                                    class="ti ti-calendar-due"></i>{{ $tournament->pendaftaran ? \Carbon\Carbon::parse($tournament->pendaftaran)->format('d F Y') : '-' }}
-                                            </span>
-                                        </div>
-                                        <div class="v-line"></div>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                            <span
-                                                class="tcn-1 fs-xs">Rp.{{ number_format(floatval($tournament->nominal), 000, ',', '.') }}</span>
-                                        </div>
-                                    </div>
-                                </div>
+    <section class="swiper-3d">
+        <div class="row">
+            @forelse ($tournaments as $tournament)
+                <div class="col-md-4 col-lg-3 mb-3">
+                    <div class="card h-100">
+                        <div class="overflow-hidden w-100" style="height: 200px">
+                            <img class="w-100 h-100" src="{{ asset("storage/{$tournament->gambar}") }}" alt="game"
+                                style="object-fit: cover;" />
+                        </div>
+                        <div class="card-body">
+                            <div class="pb-3 border-bottom mb-3 d-flex justify-content-between">
+                                <h5 class="mb-0">Nama Game</h5>
+                                <span>{{ $tournament->name }}</span>
+                            </div>
+                            <div class="pb-2 d-flex justify-content-between">
+                                <h5 class="mb-0">Anggota per Tim</h5>
+                                <span>{{ $tournament->membersPerTeam }} orang / tim</span>
                             </div>
                         </div>
                     @empty
@@ -51,7 +35,15 @@
                         </div>
                     @endforelse
                 </div>
-            </div>
+            @empty
+                <div class="col-12 d-flex flex-column justify-content-center">
+                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                        style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                    <h4 class="table-light" style="text-align: center;">
+                        Data Turnamen Tidak Tersedia
+                    </h4>
+                </div>
+            @endforelse
         </div>
     </section>
 @endsection

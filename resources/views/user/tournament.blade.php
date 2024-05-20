@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,8 +9,73 @@
     <title>TOURNAMENT `- HUMMAESPORT</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
+=======
+>>>>>>> Stashed changes
 
+{{-- @extends('layouts.user') --}}
+@extends('user.layouts.app')
+@section('style')
     <style>
+        .saring-btn {
+            width: 100px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            border: 2px solid #7367f0;
+            /* Warna border */
+            border-radius: 20px;
+            /* Bentuk border */
+            background-color: #7367f0;
+            /* Warna latar belakang */
+            transition: background-color 0.3s ease;
+            /* Transisi warna latar belakang */
+        }
+
+        .custom-btn {
+            width: 100px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #7367f0;
+            border: 2px solid #7367f0;
+            /* Warna border */
+            border-radius: 20px;
+            /* Bentuk border */
+            background-color: #ffffffe6;
+            /* Warna latar belakang */
+            transition: background-color 0.3s ease;
+            /* Transisi warna latar belakang */
+        }
+
+        .custom-btn:hover {
+            background-color: #7367f0;
+            /* Warna latar belakang saat dihover */
+            color: #ffffff;
+            /* Warna teks saat dihover */
+        }
+
+        .custom-icon-detail {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            border: 2px solid #7367f0;
+            /* Border awal transparan */
+            border-radius: 50%;
+            /* Membuat border lingkaran */
+            transition: border-color 0.3s ease;
+            /* Transisi warna border saat hover */
+        }
+
+        .custom-icon-detail:hover {
+            background-color: #7367f0;
+            color: #ffffff;
+            transform: translateY(-3px);
+            /* Bergerak ke atas saat dihover */
+        }
+
         .profile-image {
             width: 50px;
             height: 50px;
@@ -19,150 +85,62 @@
         }
 
         .name-text {
-            color: black;
+            color: white;
             margin-bottom: 0;
         }
 
         .border-red {
-            border: 2px solid rgb(0, 0, 0) !important;
+            border: 2px solid rgb(209, 209, 209) !important;
             /* Menambahkan border merah */
         }
     </style>
-</head>
-
-<body>
-
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <span></span>
+@endsection
+@section('content')
+@php
+    use App\Models\TeamTournament;
+@endphp
+    <div class="modal" tabindex="-1" id="filter" style="color: #ffffff;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-split">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filter</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('tournament.filteruser') }}" method="GET">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="widget-title"><b>Category</b></h4>
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color:#7367f0; border:none;">Saring</button>
+                        </div>
+                        @php
+                            $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
+                        @endphp
+                        @foreach ($category as $categories)
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="category{{ $categories->id }}"
+                                    name="categories_id[]" value="{{ $categories->id }}"
+                                    @if (in_array($categories->id, (array) $selectedCategories)) checked @endif>
+                                <label class="form-check-label" for="category{{ $categories->id }}">
+                                    {{ $categories->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- cursor effect-->
-    <div class="cursor"></div>
-    <!-- Header area  -->
-
-    <header class="header-section w-100">
-        <div class="py-sm-6 py-3 mx-xxl-20 mx-md-15 mx-3">
-            <div class="d-flex align-items-center justify-content-between gap-xxl-10 gap-lg-8 w-100">
-                <nav
-                    class="navbar-custom d-flex gap-lg-6 align-items-center flex-column flex-lg-row justify-content-start justify-content-lg-between w-100">
-                    <div class="top-bar w-100 d-flex align-items-center gap-lg-0 gap-6">
-                        <button class="navbar-toggle-btn d-block d-lg-none" type="button">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                        <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="" src="assets/img/humma-01.png" width="60px" height="60px"
-                                alt="favicon">
-                        </a>
-                    </div>
-
-                    <div class="navbar-toggle-item w-100 position-lg-relative">
-                        <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
-                            <li class="menu-link">
-                                <a href="{{ route('index') }}">HOME</a>
-                            </li>
-                            <li class="menu-item">
-                            <li class="menu-link">
-                                <a href="{{ route('user.tournament') }}">TOURNAMENT</a>
-                            </li>
-                            </li>
-                            <li class="menu-link">
-                                <a href="{{ route('game') }}">GAME</a>
-                            </li>
-                            <li class="menu-item">
-                            <li class="menu-link">
-                                <a href="{{ route('team.index') }}">TEAMS</a>
-                            </li>
-                            </li>
-
-                            <li class="menu-item">
-                            <li class="menu-link">
-                                <a href="{{ route('login') }}">LOGIN</a>
-                            </li>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-                <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    <button class="ntf-btn box-style fs-2xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 22 22">
-                            <path fill="currentColor"
-                                d="M13 21H9v-1H8v-6H2v-1H1V9h1V8h6V2h1V1h4v1h1v6h6v1h1v4h-1v1h-6v6h-1M12 5V3h-2v2m-5 7v-2H3v2Z" />
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
-                    @if (auth()->check())
-                        <div class="header-profile pointer">
-                            <div class="profile-wrapper d-flex align-items-center gap-3">
-                                <div class="img-area overflow-hidden">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                        viewBox="0 0 36 36">
-                                        <path fill="currentColor"
-                                            d="M30.61 24.52a17.16 17.16 0 0 0-25.22 0a1.51 1.51 0 0 0-.39 1v6A1.5 1.5 0 0 0 6.5 33h23a1.5 1.5 0 0 0 1.5-1.5v-6a1.51 1.51 0 0 0-.39-.98"
-                                            class="clr-i-solid clr-i-solid-path-1" />
-                                        <circle cx="18" cy="10" r="7" fill="currentColor"
-                                            class="clr-i-solid clr-i-solid-path-2" />
-                                        <path fill="none" d="M0 0h36v36H0z" />
-                                    </svg>
-                                </div>
-                                <span class="user-name d-none d-xxl-block text-nowrap">{{ auth()->user()->name }}</span>
-                                <i class="ti ti-chevron-down d-none d-xxl-block"></i>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-
-            </div>
-        </div>
-    </header>
-    <!-- header-section end -->
-
-    @if (auth()->check())
-        <div class="user-account-popup p-4">
-            <div class="account-items d-grid gap-1" data-tilt>
-                <div class="user-level-area p-3">
-                    <div class="user-info d-between">
-                        <span class="user-name fs-five">Nama : {{ auth()->user()->name }}</span>
-                    </div>
-                </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button class="bttn account-item" type="submit">Log Out</button>
-                </form>
-            </div>
-        </div>
-    @endif
-
-
-    <!-- tournament section start -->
-    <section class="tournament-section pb-120 pt-120 mt-lg-0 mt-sm-15 mt-10">
-        <div class="tournament-wrapper alt">
-            <div class="container">
-                <div class="row justify-content-between align-items-end mb-8">
-                    <div class="col">
-                        <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENTS</h2>
-                    </div>
-                </div>
+    <div class="tabcontents">
+        <div class="tabitem active">
+            <div class="row justify-content-md-start justify-content-center g-6">
                 <div class="singletab tournaments-tab">
-                    <div class="d-between gap-6 flex-wrap mb-lg-15 mb-sm-10 mb-6">
-                        <ul class="tablinks d-flex flex-wrap align-items-center gap-3">
-                            <li class="nav-links active">
-                                <button class="tablink py-sm-3 py-2 px-sm-8 px-6 rounded-pill tcn-1">All</button>
-                            </li>
-                        </ul>
-                        <div class="px-6">
-                            <a href="#"
-                                class="btn-half-border position-relative d-inline-block py-2 bgp-1 px-6 rounded-pill">VIEW
-                                MORE</a>
-                        </div>
+                    <div class="d-flex align-items-center gap-6 flex-wrap mb-lg-5 mb-sm-3 mb-2"
+                        style="margin-left: 30px; margin-top: 10px; width: 100px; height: 40px;">
+                        <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
+                            data-bs-target="#filter">Saring</button>
                     </div>
+<<<<<<< Updated upstream
                     <div class="tabcontents">
                         <div class="tabitem active">
                             <div class="row justify-content-md-start justify-content-center g-6">
@@ -392,18 +370,170 @@
                                         </h1>
                                     </div>
                                 @endforelse
+=======
+                </div>
+
+                @forelse ($tournaments->where('status', 'accepted') as $index => $tournament)
+                    <div class="col-xl-4 col-md-6 col-sm-10 mb-4">
+                        <div class="card h-100">
+
+                            <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
+                                <div class="tournament-img mb-8 position-relative">
+                                    <div class="img-area overflow-hidden rounded"
+                                        style="width: auto; height: 200px; border-radius: .5rem;">
+                                        <img class="w-100" style="object-fit: cover; width: 100%; height: 100%;"
+                                            src="{{ asset('storage/' . $tournament->images) }}" alt="tournament">
+                                    </div>
+                                </div>
+                                <div class="tournament-content px-xxl-4 mt-3 mt-md-4">
+                                    <div class="tournament-info mb-4">
+                                        <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                            {{ $tournament->name }}
+                                        </h4>
+                                        <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
+                                    </div>
+
+                                    <div class="hr-line line3"></div>
+                                    <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
+                                        <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class="ti ti-moneybag fs-base tcp-2"></i>
+                                                <span class="tcn-1 fs-sm">IDR
+                                                    {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                            <i class="ti ti-ticket fs-base tcp-2"></i>
+                                            <span class="tcn-1 fs-sm">
+                                                {{ $tournament->paidment == 'unpaid' ? 'Gratis' : 'Berbayar' }}
+                                            </span>
+                                        </div>
+                                        <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                            <i class="ti ti-calendar fs-base tcn-1"></i>
+                                            <span
+                                                class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
+                                        </div>
+                                    </div>
+
+
+                                    @php
+
+                                    // Ambil total tim dari hasil perhitungan
+                                    $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+                                    $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+                                    $totalTeams = ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
+
+                                    $userTeams = $teams ?? collect();
+                                    $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
+                                    $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+
+                                    if ($isUserInTournament) {
+                                        // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+                                        $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+
+                                        // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+                                        $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+                                            ->where('tournament_id', $tournament->id)
+                                            ->get();
+                                    }
+                                    @endphp
+
+
+
+                                    <div class="hr-line line3"></div>
+                                    <div class="card-more-info d-flex justify-content-between align-items-center mt-6">
+                                        <!-- Informasi Jumlah Teams -->
+                                        <div class="teams-info d-flex align-items-center gap-3">
+                                            <div class="teams d-flex align-items-center gap-1">
+                                                <i class="ti ti-users fs-base"></i>
+                                                <span class="tcn-6 fs-sm">
+                                                    @if ($totalTeams)
+                                                        {{ $totalTeams }}/{{ $tournament->slotTeam }}
+                                                        Teams
+                                                    @else
+                                                        0/{{ $tournament->slotTeam }} Teams
+                                                    @endif
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && (!$isUserInTournament && !$userTeamsWithRelation))
+                                            <div class="text-center">
+                                                <a type="button" class="btn-half position-relative d-inline-block py-2"
+                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                                                    data-tournament-id="{{ $tournament->id }}">
+                                                    <div class="custom-btn"
+                                                        style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
+                                                        Daftar
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @elseif (!$totalTeams)
+                                            <div class="text-center">
+                                                <a type="button" class="btn-half position-relative d-inline-block py-2"
+                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                                                    data-tournament-id="{{ $tournament->id }}">
+                                                    <div class="custom-btn"
+                                                        style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
+                                                        Daftar
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @elseif ($totalTeams)
+
+                                        @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
+                                        @endif
+
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body d-flex flex-column align-items-center">
+                                    <div class="d-flex justify-content-center align-items-center mb-4"
+                                        style="height: 100px;">
+                                        <center>
+                                            <h6 style="color: white;">Create a New Team for the Tournament or Choose an
+                                                Existing Team</h6>
+                                        </center>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" type="button" class="btn btn-secondary me-2">Existing Team</a>
+                                        <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
+                                    </div>
+                                </div>
+>>>>>>> Stashed changes
                             </div>
                         </div>
                     </div>
-                </div>
+                @empty
+                    <div class="col-lg-12">
+                        <center>
+                            <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+                        </center>
+                        <h1 class="table-light" style="text-align: center;">
+                            Data Tidak Tersedia
+                        </h1>
+                    </div>
+                @endforelse
+
+
+
             </div>
         </div>
-        </div>
-        </div>
-    </section>
-    <!-- tournament section end -->
+    </div>
+@endsection
 
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var exampleModal = document.getElementById('exampleModalCenter');
+            exampleModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget; // Tombol yang memicu modal
+                var tournamentId = button.getAttribute(
+                    'data-tournament-id'); // Ambil ID turnamen dari atribut data
 
+<<<<<<< Updated upstream
     <!-- footer section start  -->
     <footer class="footer bgn-4 bt">
         <div class="container">
@@ -496,6 +626,18 @@
         </div>
     </footer>
     <!-- footer section end  -->
+=======
+                // Update tautan dengan ID turnamen yang benar
+                var existingTeamLink = exampleModal.querySelector('.btn-secondary');
+                var newTeamLink = exampleModal.querySelector('.btn-primary');
+
+                existingTeamLink.href = '/teams/create?tournament_id=' + tournamentId;
+                newTeamLink.href = '/team/create?tournament_id=' + tournamentId;
+            });
+        });
+    </script>
+
+>>>>>>> Stashed changes
     <script>
         $(document).ready(function() {
             $('#existing').on('show.bs.modal', function(event) {
@@ -523,46 +665,4 @@
             }
         }
     </script>
-
-    <!-- ==== js dependencies start ==== -->
-    <!-- jquery  -->
-    <script src="assets/js/jquery.min.js"></script>
-    <!-- gsap  -->
-    <script src="assets/js/gsap.min.js"></script>
-    <!-- gsap scroll trigger -->
-    <script src="assets/js/ScrollTrigger.min.js"></script>
-    <!-- lenis  -->
-    <script src="assets/js/lenis.min.js"></script>
-    <!-- gsap split text -->
-    <script src="assets/js/SplitText.min.js"></script>
-    <!-- tilt js -->
-    <script src="assets/js/vanilla-tilt.js"></script>
-    <!-- scroll magic -->
-    <script src="assets/js/ScrollMagic.min.js"></script>
-    <!-- animation.gsap -->
-    <script src="assets/js/animation.gsap.min.js"></script>
-    <!-- gsap customization  -->
-    <script src="assets/js/gsap-customization.js"></script>
-    <!-- apex chart  -->
-    <script src="assets/js/apexcharts.js"></script>
-    <!-- swiper js -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <!-- magnific popup  -->
-    <script src="assets/js/magnific-popup.js_1.1.0_jquery.magnific-popup.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <!-- main js  -->
-    <script src="assets/js/main.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+@endsection

@@ -1,10 +1,25 @@
 @extends('penyelenggara.layouts.app')
 
+@section('style')
+
+    <head>
+        <link href="summernote-bs5.css" rel="stylesheet">
+        <script src="summernote-bs5.js"></script>
+
+        <style>
+            .note-editable {
+                color: white;
+                /* Atur warna teks menjadi putih */
+            }
+        </style>
+    </head>
+@endsection
 @section('content')
     <style>
-        .custom-summernote {
+         .custom-summernote {
             color: white !important;
         }
+
 
         h1 {
             text-align: center;
@@ -166,7 +181,7 @@
 
     <div class="layout-container">
 
-        @if (auth()->check())
+        {{-- @if (auth()->check())
             <div class="user-account-popup p-4">
                 <div class="account-items d-grid gap-1" data-tilt>
                     <form method="POST" action="{{ route('logout') }}">
@@ -175,7 +190,7 @@
                     </form>
                 </div>
             </div>
-        @endif
+        @endif --}}
         <form action="{{ route('ptournament.updatetour', ['id' => $id]) }}" method="POST" enctype="multipart/form-data" id="regForm">
             @csrf
             <div class="row justify-content-center">
@@ -300,6 +315,21 @@
                                 @enderror
                             </div>
 
+                            {{-- <div class="mb-3">
+                                <label for="kategori_id" class="form-label">Kategori Produk</label>
+                                <select class="form-select @error('kategori_id') is-invalid @enderror" name="kategori_id" aria-label="Default select example">
+                                    <option value="" {{ old('kategori_id', $barang->kategori_id) ? '' : 'selected' }}>- Pilih barang -</option>
+                                    @foreach ($kategoriOptions as $option)
+                                    <option value="{{ $option->id }}" {{ old('kategori_id', $barang->kategori_id) == $option->id ? 'selected' : '' }}>
+                                        {{ $option->nama_kategori }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('kategori_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div> --}}
+
                             <div class="mb-3">
                                 <label for="category" class="form-label">GAME</label>
                                 <select class="form-control @error('categories_id') is-invalid @enderror" id="category"
@@ -307,7 +337,7 @@
                                     <option value="" selected>Select Game</option>
                                     @foreach ($category as $kat)
                                         <option value="{{ $kat->id }}"
-                                            {{ old('categories_id') == $kat->id ? 'selected' : '' }}>
+                                            {{ old('categories_id',$tournament->categories_id) == $kat->id ? 'selected' : '' }}>
                                             {{ $kat->name }}
                                         </option>
                                     @endforeach
@@ -322,10 +352,11 @@
                             <div class="mb-3">
                                 <label for="images" class="form-label">Unggah Poster</label>
                                 <input type="file" class="form-control @error('images') is-invalid @enderror"
-                                    id="images" name="images" onchange="previewImage(event)">
-                                @if (old('images'))
-                                    <img id="preview" src="{{ asset('storage/' . old('images')) }}" alt="Old images"
-                                        style="max-width: 100px; max-height: 100px;">
+                                    id="images" name="images">
+                                @if ($tournament->images)
+                                    <img src="{{ asset('storage/' . $tournament->images) }}" alt="" width="50" height="50">
+                                @else
+                                No Image
                                 @endif
                                 @error('images')
                                     <span class="invalid-feedback" role="alert">
