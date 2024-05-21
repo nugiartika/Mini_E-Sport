@@ -86,7 +86,7 @@
     @php
         use App\Models\TeamTournament;
     @endphp
-    <div class="modal" tabindex="-1" id="filter" style="color: #ffffff;">
+    <div class="modal fade" tabindex="-1" id="filter" style="color: #ffffff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
                 <div class="modal-header">
@@ -314,7 +314,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var exampleModal = document.getElementById('exampleModalCenter');
@@ -362,4 +362,4 @@
             }
         }
     </script>
-@endsection
+@endpush

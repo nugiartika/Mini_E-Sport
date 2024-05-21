@@ -24,23 +24,23 @@ class TournamentController extends Controller
     /**
      * Display a listing of the resource.
      */
-        public function index()
-        {
-            $user = Auth::user();
-            $tournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->get();
-            $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
-            // $isRegistered = Auth::user()->
-            $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-                ->groupBy('tournament_id')
-                ->get();
-            $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-                ->groupBy('tournament_id')
-                ->get();
-            $category = Category::all();
-            $prizes = tournament_prize::all();
-            $tournaments = tournament::all();
-            return view('penyelenggara.tournament', compact('counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
-        }
+    public function index()
+    {
+        $user = Auth::user();
+        $tournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->get();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        // $isRegistered = Auth::user()->
+        $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('tournament_id')
+            ->get();
+        $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('tournament_id')
+            ->get();
+        $category = Category::all();
+        $prizes = tournament_prize::all();
+        $tournaments = tournament::all();
+        return view('penyelenggara.tournament', compact('counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
+    }
 
     public function notification()
     {
@@ -394,13 +394,13 @@ class TournamentController extends Controller
             'reason.max' => 'Alasan penolakan tidak boleh melebihi 255 karakter.',
         ]);
 
-        $tournament->status = $request->status;
+        $tournamentData = ['status' => $request->status];
 
         if ($request->status == 'rejected' && $request->has('reason')) {
-            $tournament->reason = $request->reason;
+            $tournamentData['reason'] = $request->reason;
         }
 
-        $tournament->save();
+        $tournament->update($tournamentData);
 
         return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');
     }

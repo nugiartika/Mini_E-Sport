@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('category', CategoryController::class);
         Route::get('confirmtournament', [TournamentController::class, 'indexadmin'])->name('konfirmtournament');
         Route::get('konfirmtournament/{konfirmtournament}/edit', [TournamentController::class, 'edit'])->name('konfirm.edit');
-        Route::put('konfirmtournament/{id}', [TournamentController::class, 'update'])->name('konfirm.update');
+        Route::put('konfirmtournament/{tournament}', [TournamentController::class, 'update'])->name('konfirm.update');
         Route::get('AdminTournament', [DetailTournamentController::class, 'index'])->name('DetailTournament');
         Route::get('AdminTournamentFilter', [DetailTournamentController::class, 'filter'])->name('tournamentfilter');
         Route::put('listUserPenyelenggara/{sainsRole}', [SainsRoleController::class, 'update'])->name('konfirmUser');
@@ -91,9 +91,30 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::any('transaction/callback', [TransactionController::class, 'callback'])->name('transaction.callback');
-Route::resource('transaction', TransactionController::class)->parameters([
-    'transaction' => 'transaction:transaction_id'
-])->middleware('auth');
+Route::group(['prefix' => 'transaction', 'as' => 'transaction.', 'middleware' => 'auth'], function () {
+    // Route untuk menampilkan daftar transaksi
+    Route::get('/', [TransactionController::class, 'index'])->name('index');
+
+    // Route untuk menampilkan form pembuatan transaksi baru
+    Route::get('create', [TransactionController::class, 'create'])->name('create');
+
+    // Route untuk menyimpan transaksi baru
+    Route::post('/', [TransactionController::class, 'store'])->name('store');
+
+    // Route untuk menampilkan detail transaksi tertentu (menggunakan transaction_id)
+    Route::get('{transaction:transaction_id}', [TransactionController::class, 'show'])->name('show');
+
+    // Route untuk menampilkan form edit transaksi tertentu (menggunakan transaction_id)
+    Route::get('{transaction:transaction_id}/edit', [TransactionController::class, 'edit'])->name('edit');
+
+    // Route untuk memperbarui transaksi tertentu (menggunakan transaction_id)
+    Route::put('{transaction:id}', [TransactionController::class, 'update'])->name('update');
+    Route::patch('{transaction:id}', [TransactionController::class, 'update'])->name('update');
+
+    // Route untuk menghapus transaksi tertentu (menggunakan transaction_id)
+    Route::delete('{transaction:transaction_id}', [TransactionController::class, 'destroy'])->name('destroy');
+});
+
 
 // Route::get('/landingTournamentFilter', [TournamentController::class, 'filterLanding'])->name('landingPage');
 Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
