@@ -40,7 +40,7 @@ class TournamentRequest extends FormRequest
                     }
                 },
             ],
-            'contact' => 'required|string',
+            'contact' => 'required|string|max:14',
             'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'required',
             'rule' => 'required|string',
@@ -75,6 +75,7 @@ class TournamentRequest extends FormRequest
             'images.max' => 'Gambar tidak boleh lebih dari 2048 kilobita.',
             'contact.required' => 'Kontak harus diisi.',
             'contact.integer' => 'Kontak harus berupa angka.',
+            'contact.max' => 'Kontak tidak boleh lebih dari 14 angka',
             'description.required' => 'Deskripsi harus diisi.',
             'rule.required' => 'Aturan harus diisi.',
             'rule.max' => 'Aturan tidak boleh lebih dari 2048 karakter.',

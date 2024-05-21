@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email');
-            $table->foreignId('team_tournament_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('team_tournament_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->enum('status', ['PENDING', 'UNPAID', 'PAID', 'REFUND', 'EXPIRED', 'FAILED'])->default('PENDING');
         });
     }

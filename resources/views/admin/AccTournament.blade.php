@@ -153,13 +153,41 @@
                                     <div class="col">
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item" style="font-weight: bold;">Nama : <span
-                                                    id="detail-name" style="font-weight: normal;">
-                                                    {{ $tournament->name }}</span>
-                                            </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Game : <span
-                                                    id="detail-email" style="font-weight: normal;">
-                                                    {{ $tournament->category->name }}</span>
-                                            </li>
+                                                id="detail-name" style="font-weight: normal;">
+                                                {{ $tournament->name }}</span>
+                                        </li>
+                                        <li class="list-group-item" style="font-weight: bold;">Game : <span
+                                                id="detail-email" style="font-weight: normal;">
+                                                {{ $tournament->category->name }}</span>
+                                        </li>
+                                        <li class="list-group-item" style="font-weight: bold;">
+                                            Nama Penyelenggara : <span id="detail-place_birth"
+                                                style="font-weight: normal;">{{ $tournament->user->name }}</span>
+
+                                        </li>
+                                        <li class="list-group-item" style="font-weight: bold;">Kontak Penyelenggara :
+                                            <span id="detail-national_identity_number"
+                                                style="font-weight: normal;">{{ $tournament->contact }}</span>
+                                        </li>
+                                        <li class="list-group-item" style="font-weight: bold;">Slot Tim :
+                                            <span id="detail-national_identity_number"
+                                                style="font-weight: normal;">{{ $tournament->slotTeam }}</span>
+                                        </li>
+                                        <li class="list-group-item" style="font-weight: bold;">Hadiah :
+                                            <span id="detail-student_identity_number" style="font-weight: normal;">
+                                                @foreach ($prizes as $prize)
+                                                @if ($prize->tournament_id == $tournament->id)
+                                                    <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }}
+                                                        {{ $prize->note }}</p>
+                                                @endif
+                                            @endforeach
+                                                </span>
+                                        </li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group list-group-flush">
                                             <li class="list-group-item" style="font-weight: bold;">Pendafataran Dibuka :
                                                 <span id="detail-gender" style="font-weight: normal;">
                                                     {{ $tournament->pendaftaran }}</span>
@@ -174,31 +202,31 @@
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
-                                                    {{ $tournament->end_permainan }}</span>
+                                                    {{ $tournament->permainan }}</span>
                                             </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Tipe Tournament :
+                                                <span id="detail-national_identity_number"
+                                                    style="font-weight: normal;">{{ $tournament->paidment }}</span>
+                                            </li>
+                                            @if ($tournament->paidment === 'Berbayar')
+                                            <li class="list-group-item" style="font-weight: bold;">Nominal :
+                                                <span id="detail-national_identity_number"
+                                                    style="font-weight: normal;">IDR
+                                                    {{-- {{ $tournament->paidment }} --}}
+                                                    {{ number_format($tournament->nominal, 0, '.', ',') }}
+                                                </span>
+                                            </li>
+                                            @endif
+
                                         </ul>
                                     </div>
-                                    <div class="col">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item" style="font-weight: bold;">
-                                                Nama Penyelenggara : <span id="detail-place_birth"
-                                                    style="font-weight: normal;">{{ $tournament->user->name }}</span>
-
-                                            </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Slot Tim :
-                                                <span id="detail-national_identity_number"
-                                                    style="font-weight: normal;">{{ $tournament->slotTeam }}</span>
-                                            </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Description :
-                                                <span id="detail-family_card_id"
-                                                    style="font-weight: normal;">{!! $tournament->description !!}</span>
-                                            </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Rule :
-                                                <span id="detail-number_siblings"
-                                                    style="font-weight: normal;">{{ $tournament->rule }}</span>
-                                            </li>
-
-                                        </ul>
+                                    <div class="row mx-2">
+                                        <div class="col">
+                                            {{-- <div class="list-group"> --}}
+                                                <li class="list-group-item" style="font-weight: bold;">Description: <br><span style="font-weight: normal;" id="detail-family_card_id">{!! $tournament->description !!}</span></li>
+                                                <li class="list-group-item" style="font-weight: bold;">Rule: <br><span style="font-weight: normal;" id="detail-number_siblings">{{ $tournament->rule }}</span></li>
+                                            {{-- </div> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

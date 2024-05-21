@@ -110,13 +110,13 @@
                         @php
                             $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
                         @endphp
-                        @foreach ($category as $categories)
+                        @foreach ($categories as $category)
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="category{{ $categories->id }}"
-                                    name="categories_id[]" value="{{ $categories->id }}"
-                                    @if (in_array($categories->id, (array) $selectedCategories)) checked @endif>
-                                <label class="form-check-label" for="category{{ $categories->id }}">
-                                    {{ $categories->name }}
+                                <input type="checkbox" class="form-check-input" id="category{{ $category->id }}"
+                                    name="categories_id[]" value="{{ $category->id }}"
+                                    @if (in_array($category->id, (array) $selectedCategories)) checked @endif>
+                                <label class="form-check-label" for="category{{ $category->id }}">
+                                    {{ $category->name }}
                                 </label>
                             </div>
                         @endforeach
@@ -323,37 +323,39 @@
 @endsection
 
 @push('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
-        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     document.querySelectorAll('form[id^="deleteForm"]').forEach(function(form) {
+    //         form.addEventListener('submit', function(event) {
+    //             event.preventDefault(); // Prevent the form from submitting immediately
+    //             const tournamentId = this.id.replace('deleteForm', '');
+    //             confirmDelete(tournamentId, this);
+    //         });
+    //     });
+    // });
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('form[id^="deleteForm"]').forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault();
-                    const tournamentId = this.id.replace('deleteForm', '');
-                    confirmDelete(tournamentId, this);
-                });
-            });
-        });
-
-        function confirmDelete(tournamentId, form) {
-            swal({
-                title: "apakah anda yakin untuk menghapus tournament ini?",
-                text: "Setelah dihapus maka tournament tidak akan muncul dimanapun",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                cancelButtonText: "Batalkan",
-                confirmButtonText: "Hapus",
-            }).then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                }
-            });
+    function confirmDelete(tournamentId) {
+    Swal.fire({
+        title: "Apakah anda yakin untuk menghapus tournament ini?",
+        text: "Setelah dihapus maka tournament tidak akan muncul dimanapun",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('deleteForm' + tournamentId).submit();
+        } else {
+            Swal.fire("Tournament masih tersimpan");
         }
-    </script>
+    });
+}
+
+
+</script>
+
+
 
     @if (session()->has('success'))
         <script>
@@ -365,4 +367,32 @@
             });
         </script>
     @endif
+
+        {{-- <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('form[id^="deleteForm"]').forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        event.preventDefault(); // Prevent the form from submitting immediately
+                        const tournamentId = this.id.replace('deleteForm', '');
+                        confirmDelete(tournamentId, this);
+                    });
+                });
+            });
+
+            function confirmDelete(tournamentId, form) {
+                swal({
+                    title: "apakah anda yakin untuk menghapus tournament ini?",
+                    text: "Setelah dihapus maka tournament tidak akan muncul dimanapun",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        form.submit(); // Submit the form if the user confirms
+                    } else {
+                        swal("Tournament masih tersimpan");
+                    }
+                });
+            }
+        </script> --}}
 @endpush

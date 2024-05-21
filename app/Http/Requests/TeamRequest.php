@@ -40,8 +40,8 @@ class TeamRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required'=>'name must be filled in.',
-            'name.max' => 'name must not exceed 2048 characters.',
+            'name.required'=>'Nama harus diisi.',
+            'name.max' => 'nama  2048 characters.',
             'name.unique' => 'Nama tim Sudah di gunakan',
             // 'categories_id.required' => 'Category must be filled in.',
             // 'categories_id.exists' => 'The Category you entered is invalid.',

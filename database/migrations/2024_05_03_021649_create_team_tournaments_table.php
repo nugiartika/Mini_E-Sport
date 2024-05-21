@@ -14,7 +14,7 @@
             Schema::create('team_tournaments', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('team_id')->constrained();
-                $table->foreignId('tournament_id')->constrained();
+                $table->foreignId('tournament_id')->nullable()->constrained('tournaments')->onUpdate('cascade')->onDelete('cascade');
                 $table->timestamps();
             });
         }

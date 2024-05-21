@@ -633,6 +633,9 @@
                 height: 120,
                 toolbar: [
                     ['font', ['bold', 'underline', 'clear']],
+                    ['insert', ['link', 'picture']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
                 ],
                 callbacks: {
                     onInit: function() {

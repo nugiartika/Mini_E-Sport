@@ -103,8 +103,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-
-        return redirect()->back()->with('success', 'Berhasil Menghapus Data');
+        try {
+            $user->delete();
+            return redirect()->back()->with('success', 'Berhasil Menghapus Data');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal Menghapus Data');
+        }
     }
+
 }
