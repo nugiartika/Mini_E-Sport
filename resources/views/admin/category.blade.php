@@ -5,8 +5,6 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
                 style="background-color:rgb(40, 144, 204); color:#fff;">
-            <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-                style="background-color:rgb(40, 144, 204); color:#fff;">
                 Tambahkan Game
             </a>
 
@@ -91,8 +89,7 @@
                             <label for="photo" class="form-label">Foto Cover</label>
                             <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
                                 name="photo">
-                            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
-                                name="photo">
+                                
                             @if (old('photo'))
                                 <img id="preview" src="{{ asset('storage/' . old('photo')) }}" alt="Old gambar"
                                     style="max-width: 100px; max-height: 100px;">

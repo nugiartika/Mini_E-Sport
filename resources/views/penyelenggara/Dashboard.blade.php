@@ -9,10 +9,28 @@
                 <div class="col-md-4 col-lg-3 mb-3">
                     <div class="card h-100">
                         <div class="overflow-hidden w-100" style="height: 200px">
-                            <img class="w-100 h-100" src="{{ asset("storage/{$tournament->gambar}") }}" alt="game"
+                            <img class="w-100 h-100" src="{{ asset("storage/{$tournament->images}") }}" alt="game"
                                 style="object-fit: cover;" />
                         </div>
+                            <div>
+                                @if ($tournament->status === 'accepted')
+                                    <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Diterima</span>
+                                @elseif ($tournament->status === 'pending')
+                                    <span class="badge text-bg-warning position-absolute me-4" style="right: 0;">Menunggu Konfirmasi Admin</span>
+                                @else
+                                    <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Ditolak</span>
+                                @endif
+                            </div>
+                            <div class="mt-4 mb-3">
+                                @if ($tournament->end_permainan > now())
+                                    <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Sedang Berlangsung</span>
+                                @else
+                                    <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Sudah Berakhir</span>
+                                @endif
+                            </div>
+
                         <div class="card-body">
+
                             <div class="pb-3 border-bottom mb-3 d-flex justify-content-between">
                                 <h5 class="mb-0">Nama Game</h5>
                                 <span>{{ $tournament->name }}</span>
@@ -22,17 +40,7 @@
                                 <span>{{ $tournament->membersPerTeam }} orang / tim</span>
                             </div>
                         </div>
-                    @empty
-                        <div class="col-lg-12">
-                            <div class="d-flex justify-content-center">
-                                <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                    style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                            </div>
-                            <h3 class="table-light" style="text-align: center;">
-                                Turnamen Tidak Tersedia
-                            </h3>
-                        </div>
-                    @endforelse
+                    </div>
                 </div>
             @empty
                 <div class="col-12 d-flex flex-column justify-content-center">

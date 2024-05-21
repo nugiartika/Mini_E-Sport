@@ -2,10 +2,7 @@
 
 
 @section('style')
-
-
     <style>
-
         input {
             color: #939393;
         }
@@ -20,7 +17,6 @@
             background-color: #2196F3;
             /* Warna tanda centang saat dipilih */
         }
-
     </style>
 @endsection
 @section('content')
@@ -48,30 +44,29 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         @if ($i === 1)
-                                        <label for="nickname{{ $i }}" class="form-label">Kapten</label>
+                                            <label for="nickname{{ $i }}" class="form-label">Kapten</label>
 
                                             <input type="text"
                                                 class="form-control @error('nickname.' . ($i - 1)) is-invalid @enderror"
                                                 id="nickname{{ $i }}" name="nickname[]"
                                                 value="{{ old('nickname.' . ($i - 1), $loggedInUserName) }}"
                                                 placeholder="Masukkan nickname">
-
                                         @else
-                                        <label for="email{{ $i }}" class="form-label">anggota
-                                            {{ $i-1 }}</label>
+                                            <label for="email{{ $i }}" class="form-label">anggota
+                                                {{ $i - 1 }}</label>
 
                                             <select type="text"
                                                 class="form-control @error('nickname.' . ($i - 1)) is-invalid @enderror"
-                                                id="email{{ $i }}" name="email[]" placeholder="Masukkan akun pengguna lain">
+                                                id="email{{ $i }}" name="email[]"
+                                                placeholder="Masukkan akun pengguna lain">
                                                 <option>Pilih Akun Pengguna</option>
-                                                @foreach ($user->where('role', 'user') as $u )
-                                                <option value="{{ $u->id }}"
-                                                    {{ old('email[]') == $u->id ? 'selected' : '' }}>
-                                                    {{ $u->email }}
-                                                </option>
+                                                @foreach ($user->where('role', 'user') as $u)
+                                                    <option value="{{ $u->id }}"
+                                                        {{ old('email[]') == $u->id ? 'selected' : '' }}>
+                                                        {{ $u->email }}
+                                                    </option>
                                                 @endforeach
                                             </select>
-
                                         @endif
                                         @error('nickname.' . ($i - 1))
                                             <span class="invalid-feedback" role="alert">
@@ -112,7 +107,7 @@
                                             value="{{ old('nickname_cadangan.' . ($i - 1)) }}"
                                             placeholder="Masukkan nickname">
                                             <option>Pilih Akun Pengguna</option>
-                                            @foreach ($user->where('role', 'user') as $u )
+                                            @foreach ($user->where('role', 'user') as $u)
                                                 <option value="{{ $u->id }}"
                                                     {{ old('email[]') == $u->id ? 'selected' : '' }}>
                                                     {{ $u->email }}
