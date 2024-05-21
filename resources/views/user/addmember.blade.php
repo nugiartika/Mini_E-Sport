@@ -36,9 +36,10 @@
                                 $loggedInUserName = auth()->user()->email;
                             @endphp
 
-                            @foreach ($teams as $team)
+                            @foreach ($team as $team)
                                 @php
-                                    $membersPerTeam = $team->tournament->category->membersPerTeam;
+                                    dd($team);
+                                    // $membersPerTeam = $team->tournament->category->membersPerTeam;
                                 @endphp
                             @endforeach
 

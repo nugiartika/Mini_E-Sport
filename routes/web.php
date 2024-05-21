@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\prizepool;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
@@ -8,18 +7,15 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\JuaraController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\BracketController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PrizepoolController;
 use App\Http\Controllers\SainsRoleController;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\TeamTournamentController;
 use App\Http\Controllers\DetailTournamentController;
-use App\Http\Controllers\RegisterOrganizerController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -61,7 +57,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Organizer Routes
     Route::middleware('organizer')->group(function () {
-        Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
         Route::get('/tambah', [TournamentController::class, 'create'])->name('tambahtournament');
         Route::get('/tournament/{id}/edit', [TournamentController::class, 'edittour'])->name('ptournament.edittour');
         Route::post('/tournament/{id}/proses', [TournamentController::class, 'updatetour'])->name('ptournament.updatetour');
@@ -74,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/juara', [JuaraController::class, 'juara'])->name('ptournament.juara');
     });
 
+    Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
     Route::get('/detailTournamentUser/{id}', [TournamentController::class, 'detailTournamentUser'])->name('tournament.detailUser');
 
     // User Routes
