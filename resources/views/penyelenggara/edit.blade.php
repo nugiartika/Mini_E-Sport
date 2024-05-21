@@ -279,13 +279,16 @@
                                             <div class="input-group">
                                                 <select class="form-control prize-dropdown" name="prizepool_id[]">
                                                     <option value="">Pilih Hadiah</option>
-                                                    @foreach ($prizes as $kat)
-                                                        <option value="{{ $kat->id }}"
-                                                            {{ old('prizepool_id') == $kat->id ? 'selected' : '' }}>
-                                                            {{ $kat->prize }}
+                                                    @foreach ($prizes as $prize)
+                                                        <option value="{{ $prize->id }}" {{ old('prizepool_id') && in_array($prize->id, old('prizepool_id')) ? 'selected' : '' }}>
+                                                            {{ $prize->prize }}
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                @error('prizepool_id')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
+
 
                                                 <button type="button" class="addRow rounded-end btn btn-info"><i
                                                         class="ti ti-plus fs-2xl"></i></button>
@@ -403,7 +406,7 @@
                                 @error('nominal')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="number" name="nominal" id="nominal_input" class="form-control">
+                                <input type="number" name="nominal" id="nominal_input" class="form-control" value="{{ old('contact', $tournament->contact ) }}">
                             </div>
                         </div>
                         <div class="d-flex gap-2 justify-content-between">
@@ -446,7 +449,7 @@
             console.log("Nilai yang dipilih:", value); // Tambahkan pesan log untuk memeriksa nilai yang dipilih
             let div = document.getElementById("nominal");
 
-            if (value === "paid") {
+            if (value === "Berbayar") {
                 console.log("Menampilkan form nominal"); // Tambahkan pesan log untuk memeriksa logika ini
                 div.style.display = "block";
             } else {

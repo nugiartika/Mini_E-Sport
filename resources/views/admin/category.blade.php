@@ -99,6 +99,7 @@
                             <label for="photo" class="form-label">Foto Cover</label>
                             <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
                                 name="photo">
+
                             @if (old('photo'))
                                 <img id="preview" src="{{ asset('storage/' . old('photo')) }}" alt="Old gambar"
                                     style="max-width: 100px; max-height: 100px;">

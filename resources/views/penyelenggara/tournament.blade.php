@@ -193,6 +193,24 @@
                             </div>
                         </div>
                         <div class="py-3">
+                            <div>
+                                @if ($tournament->status === 'accepted')
+                                    <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Diterima</span>
+                                @elseif ($tournament->status === 'pending')
+                                    <span class="badge text-bg-warning position-absolute me-4" style="right: 0;">Menunggu Konfirmasi Admin</span>
+                                @else
+                                    <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Ditolak</span>
+                                @endif
+                            </div>
+                            <div class="mt-4 mb-5">
+                                @if ($tournament->end_permainan > now())
+                                    <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Sedang Berlangsung</span>
+                                @else
+                                    <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Sudah Berakhir</span>
+                                @endif
+                            </div>
+
+
                             <div class="tournament-info mb-4">
                                 <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
                             </div>
@@ -277,7 +295,7 @@
                                     </div>
                                 </div>
 
-                                <a href="{{ route('tournament.detailUser', $tournament->id) }}"
+                                <a href="{{ route('tournament.detail', $tournament->id) }}"
                                     class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
                                     style="display: flex; justify-content: center; align-items: center;"
                                     title="Detail Turnamen">
@@ -305,7 +323,9 @@
 @endsection
 
 @push('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
