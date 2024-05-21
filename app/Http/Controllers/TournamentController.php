@@ -240,7 +240,7 @@ class TournamentController extends Controller
         // $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
         $oldSearch = $request->input('search');
         $user = Auth::user();
-        $category = Category::all();
+        $categories = Category::all();
         $selectedCategories = $request->input('categories_id', []);
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
@@ -257,7 +257,7 @@ class TournamentController extends Controller
 
         $tournaments = $query->get();
 
-        return view('penyelenggara.tournament', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams','counttournaments','prizes'));
+        return view('penyelenggara.tournament', compact('tournaments', 'categories', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams','counttournaments','prizes'));
     }
 
     public function filteruser(Request $request)

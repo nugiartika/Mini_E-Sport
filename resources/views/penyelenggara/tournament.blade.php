@@ -110,16 +110,16 @@
                         @php
                             $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
                         @endphp
-                        {{-- @foreach ($category as $categories)
+                        @foreach ($categories as $category)
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="category{{ $categories->id }}"
-                                    name="categories_id[]" value="{{ $categories->id }}"
-                                    @if (in_array($categories->id, (array) $selectedCategories)) checked @endif>
-                                <label class="form-check-label" for="category{{ $categories->id }}">
-                                    {{ $categories->name }}
+                                <input type="checkbox" class="form-check-input" id="category{{ $category->id }}"
+                                    name="categories_id[]" value="{{ $category->id }}"
+                                    @if (in_array($category->id, (array) $selectedCategories)) checked @endif>
+                                <label class="form-check-label" for="category{{ $category->id }}">
+                                    {{ $category->name }}
                                 </label>
                             </div>
-                        @endforeach --}}
+                        @endforeach
                     </form>
                 </div>
             </div>
@@ -143,21 +143,12 @@
                     </div>
                 </form>
 
-                    <div class="row justify-content-between align-items-center gap-6 flex-wrap mb-lg-15 mb-sm-10 mb-6">
-                        <div class="d-flex align-items-center gap-6 mb-lg-5 mb-sm-3 mb-2 mx-4"
-                            style="margin-left: 30px; margin-top: 10px;">
-                            <button class="saring-btn btn-square" data-toggle="tooltip" data-bs-toggle="modal"
-                                data-bs-target="#filter">Saring</button>
+                <a type="button" class="btn-half position-relative d-inline-block py-2 px-6 rounded"
+                    href="{{ route('ptournament.create') }}">Buat Turnamen</a>
+            </div>
+        </div>
+    </div>
 
-                            <div class="px-6 ms-auto mx-4">
-                                <a type="button" class="btn-half position-relative d-inline-block py-2 px-6 rounded"
-                                    href="{{ route('ptournament.create') }}">Buat Turnamen</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            
     <div class="row">
         @forelse ($tournaments as $tournament)
             <div class="col-md-6 col-xxl-4 mb-4">
@@ -329,9 +320,6 @@
             </div>
         @endforelse
     </div>
-</div>
-</div>
-</div>
 @endsection
 
 @push('script')
