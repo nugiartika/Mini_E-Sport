@@ -106,10 +106,8 @@ Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('
 Route::resource('member', MemberController::class);
 Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
 
+Route::get('DetailTournametUser/{id}', [LandingPageController::class, 'detailTOurnament'])->name('landingpageDetailTournamet');
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
-
-Route::get('/test-ui', function () {
-    return view('test');
-});
-
-
+// Route::get('/', function () {
+//     return view('user.index');
+// })->name('index');
