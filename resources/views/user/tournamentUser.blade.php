@@ -1,5 +1,6 @@
 {{-- @extends('layouts.user') --}}
-@extends('user.layouts.app')
+@extends('layouts.panel')
+
 @section('style')
     <style>
         .saring-btn {
@@ -82,9 +83,9 @@
     </style>
 @endsection
 @section('content')
-@php
-    use App\Models\TeamTournament;
-@endphp
+    @php
+        use App\Models\TeamTournament;
+    @endphp
     <div class="modal" tabindex="-1" id="filter" style="color: #ffffff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
@@ -121,7 +122,7 @@
     <div class="tabcontents">
         <div class="tabitem active">
             <div class="row justify-content-md-start justify-content-center g-6">
-                <div class="singletab tournaments-tab">
+                <div class="singletab col-12 tournaments-tab">
                     <div class="d-flex align-items-center gap-6 flex-wrap mb-lg-5 mb-sm-3 mb-2"
                         style="margin-left: 30px; margin-top: 10px; width: 100px; height: 40px;">
                         <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
@@ -132,7 +133,6 @@
                 @forelse ($tournaments->where('status', 'accepted') as $index => $tournament)
                     <div class="col-xl-4 col-md-6 col-sm-10">
                         <div class="card h-100">
-
                             <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                 <div class="tournament-img mb-8 position-relative">
                                     <div class="img-area overflow-hidden rounded"
@@ -143,11 +143,22 @@
                                 </div>
                                 <div class="tournament-content px-xxl-4 mt-3 mt-md-4">
                                     <div class="tournament-info mb-4">
+                                            @if ($tournament->end_permainan > now())
+                                                <span class="badge text-bg-success position-absolute me-4"
+                                                    style="right: 0;">Sedang
+                                                    Berlangsung</span>
+                                            @else
+                                                <span class="badge text-bg-danger position-absolute me-4"
+                                                    style="right: 0;">Sudah
+                                                    Berakhir</span>
+                                            @endif
+
                                         <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                             {{ $tournament->name }}
                                         </h4>
                                         <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
                                     </div>
+
 
                                     <div class="hr-line line3"></div>
                                     <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
@@ -174,27 +185,29 @@
 
                                     @php
 
-                                    // Ambil total tim dari hasil perhitungan
-                                    $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
-                                    $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
-                                    $totalTeams = ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
+                                        // Ambil total tim dari hasil perhitungan
+                                        $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+                                        $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+                                        $totalTeams =
+                                            ($teamCount ? $teamCount->count : 0) +
+                                            ($teamIdCount ? $teamIdCount->count : 0);
 
-                                    $userTeams = $teams ?? collect();
-                                    $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
-                                    $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+                                        $userTeams = $teams ?? collect();
+                                        $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
+                                        $isUserInTournament = $userTeamsInTournament->isNotEmpty();
 
-                                    if ($isUserInTournament) {
-                                        // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-                                        $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+                                        if ($isUserInTournament) {
+                                            // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+                                            $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
 
-                                        // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-                                        $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-                                            ->where('tournament_id', $tournament->id)
-                                            ->get();
-                                    }
-
+                                            // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+                                            $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+                                                ->where('tournament_id', $tournament->id)
+                                                ->get();
+                                        }
 
                                     @endphp
+
 
 
                                     <div class="hr-line line3"></div>
@@ -214,34 +227,26 @@
                                             </div>
                                         </div>
 
-                                        {{-- @php
-                                            $teamId = $teams->users_id;
-                                        @endphp --}}
 
-                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && (!$isUserInTournament && !$userTeamsWithRelation))
+                                        {{-- @dd($tournament->users_id == Auth::user()->id) --}}
+                                        @if (($tournament->users_id == Auth::user()->id) )
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
                                                     data-tournament-id="{{ $tournament->id }}">
                                                     <div class="custom-btn"
                                                         style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
-                                                        {{-- <a type="button" class="btn-half position-relative d-inline-block py-2"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Join</a> --}}
                                                         Daftar
                                                     </div>
                                                 </a>
                                             </div>
                                         @elseif (!$totalTeams)
-                                            {{-- <a href="{{ route('team.create', ['tournament_id' => $tournament->id]) }}"
-                                            type="button" class="btn btn-primary">New Team</a> --}}
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
                                                     data-tournament-id="{{ $tournament->id }}">
                                                     <div class="custom-btn"
                                                         style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
-                                                        {{-- <a type="button" class="btn-half position-relative d-inline-block py-2"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Join</a> --}}
                                                         Daftar
                                                     </div>
                                                 </a>
@@ -261,14 +266,11 @@
                                     </div>
 
 
+
                                 </div>
-
-
-
                             </div>
                         </div>
                     </div>
-
 
 
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -279,14 +281,11 @@
                                     <div class="d-flex justify-content-center align-items-center mb-4"
                                         style="height: 100px;">
                                         <center>
-                                            <h6 style="color: white;">Create a New Team for the Tournament or Choose an
-                                                Existing Team</h6>
+                                            <h6 style="color: white;">Buat tim baru atau
+                                                gunakan Tim yang Sudah Ada</h6>
                                         </center>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        {{-- <a href="#" type="button" class="btn btn-secondary me-2"
-                                            data-bs-toggle="modal" data-bs-target="#existing"
-                                            data-bs-dismiss="modal">Existing Team</a> --}}
                                         <a href="#" type="button" class="btn btn-secondary me-2">Existing Team</a>
                                         <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
                                     </div>
@@ -296,9 +295,7 @@
                     </div>
 
 
-
-
-                @empty
+               @empty
                     <div class="col-lg-12">
                         <center>
                             <img src="{{ asset('assets/img/No-data.png') }}" alt=""

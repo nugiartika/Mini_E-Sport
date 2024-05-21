@@ -33,7 +33,10 @@
                                         <h6 class="mb-2">Tournament Tersedia</h6>
                                         @php
                                             // Ambil koleksi turnamen dari model atau dari sumber data
-                                            $acceptedCount = App\Models\Tournament::where('status', 'accepted')->count();
+                                            $acceptedCount = App\Models\Tournament::where(
+                                                'status',
+                                                'accepted',
+                                            )->count();
                                         @endphp
                                         <h4 class="mb-2">{{ $acceptedCount }}</h4>
                                         <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
@@ -105,15 +108,12 @@
 
                         </div>
                         @if ($tour->end_permainan > now())
-                            <span class="badge text-bg-success position-absolute me-4" style="right: 0;">
-                                Sedang Berlangsung
-                            </span>
+                            <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Sedang
+                                Berlangsung</span>
                         @else
-                            <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">
-                                Sudah Berakhir
-                            </span>
+                            <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Sudah
+                                Berakhir</span>
                         @endif
-
 
                         <h4 class="mb-2 pb-1">{{ $tour->name }}</h4>
                         <p class="small">{{ $tour->category->name }}</p>

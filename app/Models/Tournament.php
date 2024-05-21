@@ -13,7 +13,11 @@ class Tournament extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    // protected $fillable = ['name','pendaftaran','permainan','end_pendaftaran','end_permainan','categories_id','users_id','users_id','images','slotTeam','contact','description','rule','prizepool_id','status','paidment','nominal'];
+
+    protected $casts = [
+        'end_permainan' => 'datetime',
+        'permainan' => 'datetime',
+    ];
 
     public function user()
     {

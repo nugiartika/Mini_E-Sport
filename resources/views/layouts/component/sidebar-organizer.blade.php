@@ -29,4 +29,10 @@
             </li>
         </ul>
     </li>
+    <li class="menu-item {{ request()->routeIs('transaction.*') ? 'active' : '' }}">
+        <a href="{{ url('transaction') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-wallet"></i>
+            <div data-i18n="Dashboard">Transaksi</div>
+        </a>
+    </li>
 </ul>

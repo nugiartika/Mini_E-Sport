@@ -44,16 +44,19 @@
                                     data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}">
                                     <i class="ti ti-pencil"></i>
                                 </button>
-                                <form action="{{ route('category.destroy', ['category' => $category->id]) }}" method="POST"
+                                <form id="delete-form-{{ $category->id }}" action="{{ route('category.destroy', ['category' => $category->id]) }}" method="POST"
                                     style="display:inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" style="background: none"
-                                        class="badge bg-label-danger me-1 border-0"
-                                        onclick="return confirm('Apakah Anda yakin ingin menghapus ini?');">
-                                        <i class="ti ti-trash"></i>
+                                    <button type="button" style="background: none" class="badge bg-label-danger me-1 border-0"
+                                        onclick="confirmDeletion({{ $category->id }});">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                                            <path fill="#FA7070"
+                                                d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+                                        </svg>
                                     </button>
                                 </form>
+
                             </td>
                         </tr>
                         @empty
@@ -196,3 +199,24 @@
         </div>
     @endforeach
 @endsection
+
+@push('script')
+<script>
+    function confirmDeletion(categoryId) {
+        Swal.fire({
+            title: "Apa kamu yakin?",
+            text: "Anda tidak akan dapat mengembalikan ini!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + categoryId).submit();
+            }
+        });
+    }
+</script>
+
+@endpush

@@ -25,7 +25,7 @@
                                 class="card-img-top" />
                             <div class="card-body">
                                 <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
-                                    <a href="{{ route('detailTournament', ['tournament' => $tournament->id]) }}">
+                                    <a href="{{ route('user.tournament.history', ['tournament' => $tournament->id]) }}">
                                         <h3 class="mb-0">{{ $tournament->name }}</h3>
                                     </a>
 

@@ -93,7 +93,7 @@
 @endsection
 
 @section('content')
-    <div class="modal" tabindex="-1" id="filter" style="color: #fff;">
+    <div class="modal fade" tabindex="-1" id="filter" style="color: #fff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
                 <div class="modal-header">
@@ -127,13 +127,21 @@
     </div>
 
     <!-- header-section start -->
-    <div class="tabcontents">
-        <div class="tabitem active">
-            <div class="row justify-content-md-start justify-content-center g-6">
-                <div class="singletab tournaments-tab">
-                    <div>
-                        <h4 class="h4 mb-3 mx-4">Daftar Turnamen</h4>
+    <div class="row mb-4 justify-content-between">
+        <div class="col-md-4">
+            <button class="saring-btn btn-square" data-toggle="tooltip" data-bs-toggle="modal"
+                data-bs-target="#filter">Saring</button>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-flex justify-content-end gap-2">
+                <form action="{{ route('ptournament.index') }}" method="get">
+                    <div class="input-group">
+                        <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;"
+                            value="{{ old('search', request('search')) }}" />
+                        <button type="submit" class="btn btn-primary">Cari</button>
                     </div>
+                </form>
 
                     <div class="row justify-content-between align-items-center gap-6 flex-wrap mb-lg-15 mb-sm-10 mb-6">
                         <div class="d-flex align-items-center gap-6 mb-lg-5 mb-sm-3 mb-2 mx-4"
@@ -149,195 +157,183 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    @forelse ($tournaments as $tournament)
-                        <div class="col-xl-4 col-md-6 col-sm-10 mb-4">
-                            <div class="card h-100">
+            
+    <div class="row">
+        @forelse ($tournaments as $tournament)
+            <div class="col-md-6 col-xxl-4 mb-4">
+                <div class="card h-100">
 
-
-                                <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
-                                    <div class="d-flex justify-content-end">
-                                        <div class="dropdown">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                                fill="currentColor" class="bi bi-three-dots-vertical dropdown-toggle"
-                                                viewBox="0 0 16 16" id="dropdownMenuButton-{{ $tournament->id }}"
-                                                data-bs-toggle="dropdown" aria-expanded="false" style="margin-left:345px ;">
-                                                <path
-                                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                            </svg>
-                                            <ul class="dropdown-menu dropdown-menu-end"
-                                                aria-labelledby="dropdownMenuButton-{{ $tournament->id }}">
-                                                <li><a href="{{ route('ptournament.edittour', $tournament->id) }}"
-                                                        class="dropdown-item"><i class="ti ti-edit fs-2xl"></i> Edit
-                                                        Tournament</a></li>
-                                                        <li>
-                                                            <form id="deleteForm{{ $tournament->id }}" action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST" style="display:inline">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="button" class="dropdown-item" onclick="confirmDelete('{{ $tournament->id }}')">
-                                                                    <i class="ti ti-trash fs-2xl"></i> Delete Tournament
-                                                                </button>
-                                                            </form>
-                                                        </li>
-
-                                            </ul>
-                                        </div>
-                                    </div><br>
-
-                                    <div class="tournament-img mb-8 position-relative">
-                                        <div class="img-area overflow-hidden rounded"
-                                            style="width: auto; height: 200px; border-radius: .5rem;">
-                                            <img class="w-100" style="object-fit: cover; width: 100%; height: 100%;"
-                                                src="{{ asset('storage/' . $tournament->images) }}" alt="tournament">
-                                        </div>
-                                    </div>
-                                    <div class="tournament-content px-xxl-4 mt-3 mt-md-4">
-                                        <div class="tournament-info mb-4">
-                                            <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                {{ $tournament->name }}
-                                            </h4>
-                                            <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
-                                        </div>
-
-                                        <div class="hr-line line3"></div>
-                                        <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
-                                            <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <i class="ti ti-moneybag fs-base tcp-2"></i>
-                                                    <span class="tcn-1 fs-sm">IDR
-                                                        {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                                <i class="ti ti-ticket fs-base tcp-2"></i>
-                                                <span class="tcn-1 fs-sm">
-                                                    {{ $tournament->paidment === 'Gratis' ? 'Gratis' : ($tournament->paidment === 'Berbayar' ? 'Berbayar' : '') }}
-                                                </span>
-                                            </div>
-
-                                            {{-- <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                                <i class="ti ti-ticket fs-base tcp-2"></i>
-                                                <span class="tcn-1 fs-sm">
-                                                    {{ $tournament->paidment == 'unpaid' ? 'Gratis' : 'Berbayar' }}
-                                                </span>
-                                            </div> --}}
-                                            <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                                <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                <span
-                                                    class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="hr-line line3"></div>
-                                        {{-- <div class="prize bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-gift fs-base tcn-1"></i>
-                                            @foreach ($prizes as $prize)
-                                                @if ($prize->tournament_id == $tournament->id)
-                                                    <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }}
-                                                        {{ $prize->note }}</p>
-                                                @endif
-                                            @endforeach
-                                        </div> --}}
-                                        <div class="prize bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-gift fs-base tcn-1"></i>
-                                            @foreach ($prizes as $prize)
-                                                @if ($prize->tournament_id == $tournament->id)
-                                                    <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }} {{ $prize->note }}</p>
-                                                @endif
-                                            @endforeach
-                                        </div>
-
-                                        @php
-
-                                            // Ambil total tim dari hasil perhitungan
-                                            $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
-                                            $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
-                                            $totalTeams =
-                                                ($teamCount ? $teamCount->count : 0) +
-                                                ($teamIdCount ? $teamIdCount->count : 0);
-
-                                            $userTeams = $teams ?? collect();
-                                            $userTeamsInTournament = $userTeams->where(
-                                                'tournament_id',
-                                                $tournament->id,
-                                            );
-                                            $isUserInTournament = $userTeamsInTournament->isNotEmpty();
-
-                                            if ($isUserInTournament) {
-                                                // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-                                                $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
-
-                                                // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-                                                $userTeamsWithRelation = TeamTournament::whereIn(
-                                                    'team_id',
-                                                    $userTeamIds,
-                                                )
-                                                    ->where('tournament_id', $tournament->id)
-                                                    ->get();
-                                            }
-                                        @endphp
-
-                                        <div class="hr-line line3"></div>
-                                        <div class="card-more-info d-flex justify-content-between align-items-center mt-6">
-                                            <!-- Informasi Jumlah Teams -->
-                                            <div class="teams-info d-flex align-items-center gap-3">
-                                                <div class="teams d-flex align-items-center gap-1">
-                                                    <i class="ti ti-users fs-base"></i>
-                                                    <span class="tcn-6 fs-sm">
-                                                        @if ($totalTeams)
-                                                            {{ $totalTeams }}/{{ $tournament->slotTeam }}
-                                                            Tim
-                                                        @else
-                                                            0/{{ $tournament->slotTeam }} Tim
-                                                        @endif
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <a href="{{ route('tournament.detailUser', $tournament->id) }}"
-                                                class="custom-icon-detail" data-bs-toggle="tooltip"
-                                                data-bs-placement="top"
-                                                style="display: flex; justify-content: center; align-items: center;"
-                                                title="Detail Tournament">
-                                                <i class="ti ti-arrow-right fs-2xl"></i>
-                                            </a>
-                                        </div>
-
-                                    </div>
-
-                                </div>
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between align-items-center pb-4">
+                            <h4 class="mb-0">{{ $tournament->name }}</h4>
+                            <div class="dropdown no-caret">
+                                <a href="#" class="dropdown-toggle btn btn-link"
+                                    id="dropdownMenuButton-{{ $tournament->id }}" data-bs-toggle="dropdown"
+                                    aria-expanded="false" style="margin-left: auto;">
+                                    <i class="ti ti-dots-vertical"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="dropdownMenuButton-{{ $tournament->id }}">
+                                    <li>
+                                        <a href="{{ route('ptournament.edittour', $tournament->id) }}"
+                                            class="dropdown-item"><i class="ti ti-edit fs-2xl"></i> Edit
+                                            Tournament</a>
+                                    </li>
+                                    <li>
+                                        <form id="deleteForm{{ $tournament->id }}"
+                                            action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="dropdown-item"
+                                                onclick="confirmDelete('{{ $tournament->id }}')">
+                                                <i class="ti ti-trash fs-2xl"></i> Delete Tournament
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
 
-
-                    @empty
-                        <div class="col-12 d-flex flex-column justify-content-center">
-                            <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
-                            <h4 class="table-light" style="text-align: center;">
-                                Data Turnamen Tidak Tersedia
-                            </h4>
+                        <div class="tournament-img mb-8 position-relative">
+                            <div class="img-area overflow-hidden rounded"
+                                style="width: auto; height: 400px; border-radius: .5rem;">
+                                <img class="w-100" style="object-fit: cover; width: 100%; height: 100%;"
+                                    src="{{ asset("storage/{$tournament->images}") }}" alt="tournament">
+                            </div>
                         </div>
-                    @endforelse
+                        <div class="py-3">
+                            <div>
+                                @if ($tournament->status === 'accepted')
+                                    <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Diterima</span>
+                                @elseif ($tournament->status === 'pending')
+                                    <span class="badge text-bg-warning position-absolute me-4" style="right: 0;">Menunggu Konfirmasi Admin</span>
+                                @else
+                                    <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Ditolak</span>
+                                @endif
+                            </div>
+                            <div class="mt-4 mb-5">
+                                @if ($tournament->end_permainan > now())
+                                    <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Sedang Berlangsung</span>
+                                @else
+                                    <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Sudah Berakhir</span>
+                                @endif
+                            </div>
+
+
+                            <div class="tournament-info mb-4">
+                                <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
+                            </div>
+
+                            {{-- <div class="row pb-4">
+                                <div class="col-md-4">
+                                    <div class="d-flex gap-2">
+                                        <i class="ti ti-calendar fs-base tcp-2"></i>
+                                        <span
+                                            class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->locale('id')->format('d F Y') }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex gap-2">
+                                        <i class="ti ti-moneybag fs-base tcp-2"></i>
+                                        <span class="tcn-1 fs-sm">IDR
+                                            {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex gap-2">
+                                        <i class="ti ti-ticket fs-base tcp-2"></i>
+                                        <span class="tcn-1 fs-sm">
+                                            {{ $tournament->paidment === 'Gratis' ? 'Gratis' : ($tournament->paidment === 'Berbayar' ? 'Berbayar' : '') }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div> --}}
+
+                            <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
+                                <strong>Tanggal</strong>
+                                <span>{{ \Carbon\Carbon::parse($tournament->permainan)->locale('id')->format('d F Y') }}</span>
+                            </div>
+
+                            <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
+                                <strong>Nominal</strong>
+                                <span>IDR {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
+                            </div>
+
+                            <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
+                                <strong>Jenis Turnamen</strong>
+                                <span>{{ $tournament->paidment === 'Gratis' ? 'Gratis' : ($tournament->paidment === 'Berbayar' ? 'Berbayar' : '') }}</span>
+                            </div>
+
+                            @php
+
+                                // Ambil total tim dari hasil perhitungan
+                                $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+                                $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+                                $totalTeams =
+                                    ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
+
+                                $userTeams = $teams ?? collect();
+                                $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
+                                $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+
+                                if ($isUserInTournament) {
+                                    // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+                                    $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+
+                                    // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+                                    $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+                                        ->where('tournament_id', $tournament->id)
+                                        ->get();
+                                }
+                            @endphp
+
+                            <div class="hr-line line3"></div>
+                            <div class="card-more-info d-flex justify-content-between align-items-center mt-6">
+                                <!-- Informasi Jumlah Teams -->
+                                <div class="teams-info d-flex align-items-center gap-3">
+                                    <div class="teams d-flex align-items-center gap-1">
+                                        <i class="ti ti-users fs-base"></i>
+                                        <span class="tcn-6 fs-sm">
+                                            @if ($totalTeams)
+                                                {{ $totalTeams }}/{{ $tournament->slotTeam }}
+                                                Tim
+                                            @else
+                                                0/{{ $tournament->slotTeam }} Tim
+                                            @endif
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <a href="{{ route('tournament.detail', $tournament->id) }}"
+                                    class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    style="display: flex; justify-content: center; align-items: center;"
+                                    title="Detail Turnamen">
+                                    <i class="ti ti-arrow-right fs-2xl"></i>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
+
+
+        @empty
+            <div class="col-12 d-flex flex-column justify-content-center">
+                <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                    style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                <h4 class="table-light" style="text-align: center;">
+                    Data Turnamen Tidak Tersedia
+                </h4>
+            </div>
+        @endforelse
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
+</div>
+</div>
 @endsection
+
 @push('script')
 <script>
     // document.addEventListener('DOMContentLoaded', function() {

@@ -13,24 +13,6 @@
     </style>
 @endsection
 
-
-{{-- <div class="card">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-            style="background-color:rgb(40, 144, 204); color:#fff;">
-            Tambahkan Game
-        </a>
-
-
-        <form action="{{ route('category.index') }}" method="get">
-            @csrf
-            <div class="input-group mb-3">
-                <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;" value="{{ old('search', request('search')) }}"/>
-                <button type="submit" class="btn btn-secondary">Cari</button>
-            </div>
-        </form>
-    </div> --}}
-
 @section('content')
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
@@ -260,44 +242,6 @@
 @endsection
 
 @section('script')
-
-
-    <!-- Bootstrap JS -->
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> --}}
-
-    {{-- <script>
-    $(document).ready(function() {
-        $('input[type=radio][name=status]').change(function() {
-            if (this.value === 'rejected') {
-                var modalId = '#reasonModal' + $(this).closest('form').attr('id').substring(10); // Get the modal ID
-                $(modalId).modal('show'); // Show the modal
-            }
-        });
-
-        // Submit form on radio button change
-        @foreach ($tournaments as $tournament)
-            var form{{ $tournament->id }} = document.getElementById('updateForm{{ $tournament->id }}');
-            var rejectedRadio{{ $tournament->id }} = document.getElementById('rejected{{ $tournament->id }}');
-            var acceptedRadio{{ $tournament->id }} = document.getElementById('accepted{{ $tournament->id }}');
-
-            rejectedRadio{{ $tournament->id }}.addEventListener('change', function() {
-                form{{ $tournament->id }}.submit();
-            });
-
-            acceptedRadio{{ $tournament->id }}.addEventListener('change', function() {
-                form{{ $tournament->id }}.submit();
-            });
-        @endforeach
-    });
-</script> --}}
-
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
-
     <!-- Modifikasi JavaScript -->
     <script>
         $(document).ready(function() {
@@ -321,3 +265,4 @@
             });
         });
     </script>
+@endsection

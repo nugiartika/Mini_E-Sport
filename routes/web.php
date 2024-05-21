@@ -74,10 +74,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/juara', [JuaraController::class, 'juara'])->name('ptournament.juara');
     });
 
+    Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
+
     // User Routes
     Route::middleware('user')->group(function () {
         // Route::post('/teams', [TeamController::class, 'storeId'])->name('team.storeId')->name('team.create');
-        Route::get('/detailTournamentUser/{id}', [TournamentController::class, 'detailTournamentUser'])->name('tournament.detailUser');
         Route::get('DashboardUser', [DashboardUserController::class, 'index'])->name('dashboardUser');
         Route::get('tournamentUser/history', [TournamentController::class, 'history'])->name('user.tournament.history');
         Route::get('/tournamentfilter', [TournamentController::class, 'filteruser'])->name('tournament.filteruser');
@@ -105,10 +106,8 @@ Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('
 Route::resource('member', MemberController::class);
 Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
 
+Route::get('DetailTournametUser/{id}', [LandingPageController::class, 'detailTOurnament'])->name('landingpageDetailTournamet');
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
-
-Route::get('/test-ui', function () {
-    return view('test');
-});
-
-
+// Route::get('/', function () {
+//     return view('user.index');
+// })->name('index');

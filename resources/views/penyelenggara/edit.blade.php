@@ -285,13 +285,16 @@
                                             <div class="input-group">
                                                 <select class="form-control prize-dropdown" name="prizepool_id[]">
                                                     <option value="">Pilih Hadiah</option>
-                                                    @foreach ($prizes as $kat)
-                                                        <option value="{{ $kat->id }}"
-                                                            {{ old('prizepool_id') == $kat->id ? 'selected' : '' }}>
-                                                            {{ $kat->prize }}
+                                                    @foreach ($prizes as $prize)
+                                                        <option value="{{ $prize->id }}" {{ old('prizepool_id') && in_array($prize->id, old('prizepool_id')) ? 'selected' : '' }}>
+                                                            {{ $prize->prize }}
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                @error('prizepool_id')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
+
 
                                                 <button type="button" class="addRow rounded-end btn btn-info"><i
                                                         class="ti ti-plus fs-2xl"></i></button>
