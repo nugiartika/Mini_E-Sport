@@ -226,7 +226,10 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        @if ($totalTeams && $totalTeams < $tournament->slotTeam && (!$isUserInTournament && !$userTeamsWithRelation))
+
+
+                                        {{-- @dd($tournament->users_id == Auth::user()->id) --}}
+                                        @if (($tournament->users_id == Auth::user()->id) )
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
@@ -292,9 +295,7 @@
                     </div>
 
 
-
-
-                @empty
+               @empty
                     <div class="col-lg-12">
                         <center>
                             <img src="{{ asset('assets/img/No-data.png') }}" alt=""

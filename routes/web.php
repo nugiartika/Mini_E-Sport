@@ -74,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/juara', [JuaraController::class, 'juara'])->name('ptournament.juara');
     });
 
-    Route::get('/detailTournamentUser/{id}', [TournamentController::class, 'detailTournamentUser'])->name('tournament.detailUser');
+    Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
 
     // User Routes
     Route::middleware('user')->group(function () {
