@@ -93,7 +93,7 @@
 @endsection
 
 @section('content')
-    <div class="modal" tabindex="-1" id="filter" style="color: #fff;">
+    <div class="modal fade" tabindex="-1" id="filter" style="color: #fff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
                 <div class="modal-header">

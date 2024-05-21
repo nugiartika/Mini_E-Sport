@@ -1,5 +1,6 @@
 {{-- @extends('layouts.user') --}}
 @extends('layouts.panel')
+
 @section('style')
     <style>
         .saring-btn {
