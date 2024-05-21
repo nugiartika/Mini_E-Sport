@@ -27,11 +27,11 @@ class CategoryController extends Controller
     public function indexuser()
     {
         $categories = Category::all();
-        $countTournaments = Tournament::where('users_id', auth()->id())
-            ->where('status', 'rejected')
-            ->count();
 
-        return view('penyelenggara.game', compact('categories', 'countTournaments'));
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+        ->where('status', 'rejected')
+        ->count();
+        return view('penyelenggara.game', compact('categories', 'counttournaments'));
     }
 
     public function indexusers()
@@ -78,12 +78,15 @@ class CategoryController extends Controller
 
             return redirect()->route('category.index')->with('success', 'Game berhasil ditambahkan');
         } catch (\Throwable $th) {
-            return redirect()->route('category.index')->with('warning', 'Game gagal ditambahkan');
+            return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+
+            // return redirect()->route('category.index')->with('warning', 'Game gagal ditambahkan');
         }
     }
 
     public function update(UpdateCategoryRequest $request, $id)
     {
+        try{
         $category = Category::findOrFail($id);
         $oldPhotoPath = $category->photo;
 
@@ -109,6 +112,9 @@ class CategoryController extends Controller
         }
 
         return redirect()->route('category.index')->with('success', 'Game berhasil di ubah');
+    } catch (\Throwable $th) {
+        return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+    }
     }
 
     public function destroy(Category $category)

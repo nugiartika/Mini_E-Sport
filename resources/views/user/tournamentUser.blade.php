@@ -338,7 +338,6 @@
 
 
 
-
     <script>
         $(document).ready(function() {
             $('#existing').on('show.bs.modal', function(event) {

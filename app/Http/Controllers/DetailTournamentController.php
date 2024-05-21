@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Team;
 use App\Models\TeamTournament;
 use App\Models\Tournament;
+use App\Models\tournament_prize;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,15 +24,19 @@ class DetailTournamentController extends Controller
             ->paginate(5);
 
         $category = Category::all();
+        $prizes = tournament_prize::all();
 
-        return view('admin.ListTournament', compact('tournaments', 'category'));
+
+        return view('admin.ListTournament', compact('tournaments', 'category','prizes'));
     }
 
     public function detail($id)
     {
         $tournament = Tournament::with('category', 'user')->findOrFail($id);
+        $prizes = tournament_prize::where('tournament_id', $id)->get();
 
-        return view('admin.detailTournament', compact('tournament'));
+
+        return view('admin.detailTournament', compact('tournament','prizes'));
     }
 
     public function filter(Request $request)
@@ -54,11 +59,12 @@ class DetailTournamentController extends Controller
 
     if (!empty($selectedCategories)) {
         $query->whereIn('categories_id', $selectedCategories);
-    }
+    }  
 
     $tournaments = $query->paginate(5);
+    $prizes = tournament_prize::all();
 
-    return view('admin.ListTournament', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams'));
+    return view('admin.ListTournament', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams','prizes'));
 }
 
 }

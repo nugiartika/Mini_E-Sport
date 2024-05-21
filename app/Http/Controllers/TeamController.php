@@ -112,8 +112,9 @@ class TeamController extends Controller
         $members = Member::all();
         $teamId = $team->id;
         $user = User::all();
+        $teams = Team::all();
 
-        return view('user.addmember', compact('members', 'team', 'teamId', 'user'));
+        return view('user.addmember', compact('members', 'teams', 'teamId', 'user'));
     }
 
 }

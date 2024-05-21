@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('profile');
-            $table->foreignId('tournament_id')->nullable()->constrained();
+            $table->foreignId('tournament_id')->nullable()->constrained('tournaments')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

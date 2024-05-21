@@ -106,18 +106,17 @@
                                         </div>
                                     </form>
                                 @else
-                                    <form action="{{ route('deleteUser', ['idUser' => $user->id]) }}" method="POST"
-                                        class="d-inline-block">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="action" value="reject">
-                                        <button type="submit" class="btn p-0 dropdown-toggle hide-arrow"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                                viewBox="0 0 24 24">
-                                                <path fill="#FA7070"
-                                                    d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                                            </svg></button>
-                                    </form>
+                                <form id="delete-form-{{ $user->id }}" action="{{ route('user.destroy', ['user' => $user->id]) }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="action" value="reject">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" onclick="confirmDeletion({{ $user->id }});">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                                            <path fill="#FA7070" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+                                        </svg>
+                                    </button>
+                                </form>
+
                                 @endif
                             </td>
                         </tr>
@@ -143,10 +142,29 @@
     {{ $users->links() }}
 @endsection
 
-@section('script')
+@push('script')
     <script>
         function submitForm(radioBtn) {
             var form = radioBtn.closest('form').submit();
         }
     </script>
-@endsection
+
+
+<script>
+    function confirmDeletion(userId) {
+        Swal.fire({
+            title: "Apa kamu yakin?",
+            text: "Anda tidak akan dapat mengembalikan ini!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + userId).submit();
+            }
+        });
+    }
+</script>
+@endpush

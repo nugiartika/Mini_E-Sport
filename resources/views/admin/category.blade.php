@@ -3,8 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-                style="background-color:rgb(40, 144, 204); color:#fff;">
+
             <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
                 style="background-color:rgb(40, 144, 204); color:#fff;">
                 Tambahkan Game
@@ -23,7 +22,7 @@
             <table class="table table-hover table-nowrap">
                 <thead class="thead-light">
                     <tr>
-                        <th>#</th>
+                        <th>No.</th>
                         <th>Cover</th>
                         <th>Game</th>
                         <th>Jumlah Anggota / Tim</th>
@@ -31,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @forelse ($categories as $category)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
@@ -57,7 +56,19 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="6">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                        style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                                    <h4 class="table-light" style="text-align: center;">
+                                        Data Tidak Tersedia
+                                    </h4>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -89,8 +100,6 @@
 
                         <div class="mb-3">
                             <label for="photo" class="form-label">Foto Cover</label>
-                            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
-                                name="photo">
                             <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
                                 name="photo">
                             @if (old('photo'))

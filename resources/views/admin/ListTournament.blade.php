@@ -82,7 +82,7 @@
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @forelse ($tournaments as $tournament)
-                        <tr>
+                     <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td> <span class="fw-medium">{{ $tournament->name }}</span></td>
                             <td>{{ $tournament->category->name }}</td>
@@ -161,7 +161,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {{-- <form action="{{ route('tournamentfilter') }}" method="GET">
+                    <form action="{{ route('tournamentfilter') }}" method="GET">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="widget-title">Category</h5>
                             <button type="submit" class="btn btn-primary"
@@ -180,7 +180,7 @@
                                 </label>
                             </div>
                         @endforeach
-                    </form> --}}
+                    </form>
                 </div>
             </div>
         </div>
@@ -220,10 +220,28 @@
                                                     style="font-weight: normal;">{{ $tournament->user->name }}</span>
 
                                             </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Kontak Penyelenggara :
+                                                <span id="detail-national_identity_number"
+                                                    style="font-weight: normal;">{{ $tournament->contact }}</span>
+                                            </li>
                                             <li class="list-group-item" style="font-weight: bold;">Slot Tim :
                                                 <span id="detail-national_identity_number"
                                                     style="font-weight: normal;">{{ $tournament->slotTeam }}</span>
                                             </li>
+                                            <li class="list-group-item" style="font-weight: bold;">Hadiah :
+                                                <span id="detail-student_identity_number" style="font-weight: normal;">
+                                                    @foreach ($prizes as $prize)
+                                                    @if ($prize->tournament_id == $tournament->id)
+                                                        <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }}
+                                                            </p>
+                                                            <label style="font-weight: bold;">Keterangan:</label>
+                                                        <p class="tcn-1 title-anim">
+                                                            {{ $prize->note }}</p>
+                                                    @endif
+                                                @endforeach
+                                                    </span>
+                                            </li>
+
 
                                         </ul>
                                     </div>
@@ -245,14 +263,26 @@
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
                                                     {{ $tournament->permainan }}</span>
                                             </li>
-
+                                            <li class="list-group-item" style="font-weight: bold;">Tipe Tournament :
+                                                <span id="detail-national_identity_number"
+                                                    style="font-weight: normal;">{{ $tournament->paidment }}</span>
+                                            </li>
+                                            @if ($tournament->paidment === 'Berbayar')
+                                            <li class="list-group-item" style="font-weight: bold;">Nominal :
+                                                <span id="detail-national_identity_number"
+                                                    style="font-weight: normal;">IDR
+                                                    {{-- {{ $tournament->paidment }} --}}
+                                                    {{ number_format($tournament->nominal, 0, '.', ',') }}
+                                                </span>
+                                            </li>
+                                            @endif
                                         </ul>
                                     </div>
                                     <div class="row mx-2">
                                         <div class="col">
                                             {{-- <div class="list-group"> --}}
-                                                <li class="list-group-item" style="font-weight: bold;">Description: <span style="font-weight: normal;" id="detail-family_card_id">{!! $tournament->description !!}</span></li>
-                                                <li class="list-group-item" style="font-weight: bold;">Rule: <span style="font-weight: normal;" id="detail-number_siblings">{{ $tournament->rule }}</span></li>
+                                                <li class="list-group-item" style="font-weight: bold;">Description: <br><span style="font-weight: normal;" id="detail-family_card_id">{!! $tournament->description !!}</span></li>
+                                                <li class="list-group-item" style="font-weight: bold;">Rule: <br><span style="font-weight: normal;" id="detail-number_siblings">{{ $tournament->rule }}</span></li>
                                             {{-- </div> --}}
                                         </div>
                                     </div>

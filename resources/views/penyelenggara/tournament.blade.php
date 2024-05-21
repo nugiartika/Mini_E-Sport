@@ -110,7 +110,7 @@
                         @php
                             $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
                         @endphp
-                        @foreach ($category as $categories)
+                        {{-- @foreach ($category as $categories)
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="category{{ $categories->id }}"
                                     name="categories_id[]" value="{{ $categories->id }}"
@@ -119,7 +119,7 @@
                                     {{ $categories->name }}
                                 </label>
                             </div>
-                        @endforeach
+                        @endforeach --}}
                     </form>
                 </div>
             </div>
@@ -154,73 +154,98 @@
                         <div class="col-xl-4 col-md-6 col-sm-10 mb-4">
                             <div class="card h-100">
 
-                                <div class="p-4">
-                                    <div class="d-flex justify-content-between align-items-center pb-4">
-                                        <h4 class="mb-0">{{ $tournament->name }}</h4>
-                                        <div class="dropdown no-caret">
-                                            <a href="#" class="dropdown-toggle btn btn-link"
-                                                id="dropdownMenuButton-{{ $tournament->id }}" data-bs-toggle="dropdown"
-                                                aria-expanded="false" style="margin-left: auto;">
-                                                <i class="ti ti-dots-vertical"></i>
-                                            </a>
+
+                                <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
+                                    <div class="d-flex justify-content-end">
+                                        <div class="dropdown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                fill="currentColor" class="bi bi-three-dots-vertical dropdown-toggle"
+                                                viewBox="0 0 16 16" id="dropdownMenuButton-{{ $tournament->id }}"
+                                                data-bs-toggle="dropdown" aria-expanded="false" style="margin-left:345px ;">
+                                                <path
+                                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                            </svg>
                                             <ul class="dropdown-menu dropdown-menu-end"
                                                 aria-labelledby="dropdownMenuButton-{{ $tournament->id }}">
-                                                <li>
-                                                    <a href="{{ route('ptournament.edittour', $tournament->id) }}"
+                                                <li><a href="{{ route('ptournament.edittour', $tournament->id) }}"
                                                         class="dropdown-item"><i class="ti ti-edit fs-2xl"></i> Edit
-                                                        Tournament</a>
-                                                </li>
-                                                <li>
-                                                    <form id="deleteForm{{ $tournament->id }}"
-                                                        action="{{ route('ptournament.destroy', $tournament->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="dropdown-item"
-                                                            onclick="confirmDelete('{{ $tournament->id }}')">
-                                                            <i class="ti ti-trash fs-2xl"></i> Delete Tournament
-                                                        </button>
-                                                    </form>
-                                                </li>
+                                                        Tournament</a></li>
+                                                        <li>
+                                                            <form id="deleteForm{{ $tournament->id }}" action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST" style="display:inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="button" class="dropdown-item" onclick="confirmDelete('{{ $tournament->id }}')">
+                                                                    <i class="ti ti-trash fs-2xl"></i> Delete Tournament
+                                                                </button>
+                                                            </form>
+                                                        </li>
+
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div><br>
 
                                     <div class="tournament-img mb-8 position-relative">
                                         <div class="img-area overflow-hidden rounded"
-                                            style="width: auto; height: 400px; border-radius: .5rem;">
+                                            style="width: auto; height: 200px; border-radius: .5rem;">
                                             <img class="w-100" style="object-fit: cover; width: 100%; height: 100%;"
-                                                src="{{ asset("storage/{$tournament->images}") }}" alt="tournament">
+                                                src="{{ asset('storage/' . $tournament->images) }}" alt="tournament">
                                         </div>
                                     </div>
-                                    <div class="py-3">
+                                    <div class="tournament-content px-xxl-4 mt-3 mt-md-4">
                                         <div class="tournament-info mb-4">
+                                            <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                {{ $tournament->name }}
+                                            </h4>
                                             <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
                                         </div>
 
-                                        <div class="row pb-4">
-                                            <div class="col-md-4">
-                                                <div class="d-flex gap-2">
-                                                    <i class="ti ti-calendar fs-base tcp-2"></i>
-                                                    <span
-                                                        class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->locale('id')->format('d F Y') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="d-flex gap-2">
+                                        <div class="hr-line line3"></div>
+                                        <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
+                                            <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
+                                                <div class="d-flex align-items-center gap-2">
                                                     <i class="ti ti-moneybag fs-base tcp-2"></i>
                                                     <span class="tcn-1 fs-sm">IDR
                                                         {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="d-flex gap-2">
-                                                    <i class="ti ti-ticket fs-base tcp-2"></i>
-                                                    <span class="tcn-1 fs-sm">
-                                                        {{ $tournament->paidment === 'Gratis' ? 'Gratis' : ($tournament->paidment === 'Berbayar' ? 'Berbayar' : '') }}
-                                                    </span>
-                                                </div>
+
+
+                                            <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                                <i class="ti ti-ticket fs-base tcp-2"></i>
+                                                <span class="tcn-1 fs-sm">
+                                                    {{ $tournament->paidment === 'Gratis' ? 'Gratis' : ($tournament->paidment === 'Berbayar' ? 'Berbayar' : '') }}
+                                                </span>
                                             </div>
+
+                                            {{-- <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                                <i class="ti ti-ticket fs-base tcp-2"></i>
+                                                <span class="tcn-1 fs-sm">
+                                                    {{ $tournament->paidment == 'unpaid' ? 'Gratis' : 'Berbayar' }}
+                                                </span>
+                                            </div> --}}
+                                            <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                                <i class="ti ti-calendar fs-base tcn-1"></i>
+                                                <span
+                                                    class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line line3"></div>
+                                        {{-- <div class="prize bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                            <i class="ti ti-gift fs-base tcn-1"></i>
+                                            @foreach ($prizes as $prize)
+                                                @if ($prize->tournament_id == $tournament->id)
+                                                    <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }}
+                                                        {{ $prize->note }}</p>
+                                                @endif
+                                            @endforeach
+                                        </div> --}}
+                                        <div class="prize bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                            <i class="ti ti-gift fs-base tcn-1"></i>
+                                            @foreach ($prizes as $prize)
+                                                @if ($prize->tournament_id == $tournament->id)
+                                                    <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }} {{ $prize->note }}</p>
+                                                @endif
+                                            @endforeach
                                         </div>
 
                                         @php
@@ -314,33 +339,39 @@
 
 @endsection
 @push('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('form[id^="deleteForm"]').forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Prevent the form from submitting immediately
-                    const tournamentId = this.id.replace('deleteForm', '');
-                    confirmDelete(tournamentId, this);
-                });
-            });
-        });
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     document.querySelectorAll('form[id^="deleteForm"]').forEach(function(form) {
+    //         form.addEventListener('submit', function(event) {
+    //             event.preventDefault(); // Prevent the form from submitting immediately
+    //             const tournamentId = this.id.replace('deleteForm', '');
+    //             confirmDelete(tournamentId, this);
+    //         });
+    //     });
+    // });
 
-        function confirmDelete(tournamentId, form) {
-            swal({
-                title: "apakah anda yakin untuk menghapus tournament ini?",
-                text: "Setelah dihapus maka tournament tidak akan muncul dimanapun",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                if (willDelete) {
-                    form.submit(); // Submit the form if the user confirms
-                } else {
-                    swal("Tournament masih tersimpan");
-                }
-            });
+    function confirmDelete(tournamentId) {
+    Swal.fire({
+        title: "Apakah anda yakin untuk menghapus tournament ini?",
+        text: "Setelah dihapus maka tournament tidak akan muncul dimanapun",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('deleteForm' + tournamentId).submit();
+        } else {
+            Swal.fire("Tournament masih tersimpan");
         }
-    </script>
+    });
+}
+
+
+</script>
+
+
 
     @if (session()->has('success'))
         <script>
@@ -352,4 +383,32 @@
             });
         </script>
     @endif
+
+        {{-- <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('form[id^="deleteForm"]').forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        event.preventDefault(); // Prevent the form from submitting immediately
+                        const tournamentId = this.id.replace('deleteForm', '');
+                        confirmDelete(tournamentId, this);
+                    });
+                });
+            });
+
+            function confirmDelete(tournamentId, form) {
+                swal({
+                    title: "apakah anda yakin untuk menghapus tournament ini?",
+                    text: "Setelah dihapus maka tournament tidak akan muncul dimanapun",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        form.submit(); // Submit the form if the user confirms
+                    } else {
+                        swal("Tournament masih tersimpan");
+                    }
+                });
+            }
+        </script> --}}
 @endpush

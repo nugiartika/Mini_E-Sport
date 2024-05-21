@@ -116,7 +116,7 @@
 
 
                         <h4 class="mb-2 pb-1">{{ $tour->name }}</h4>
-                        <p class="small">{{ $tour->rule }}</p>
+                        <p class="small">{{ $tour->category->name }}</p>
 
                         <div class="row w-100">
                             <div class="col-md-6">
