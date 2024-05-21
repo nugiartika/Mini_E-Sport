@@ -326,24 +326,24 @@ class TournamentController extends Controller
         return view('penyelenggara.detailtournament', compact('tournament', 'counttournaments', 'teams', 'prizes', 'juara', 'jadwal', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
 
-    //     public function bracket(Tournament $tournament, Request $request)
-    // {
-    //     $request->validate([
-    //         'urlBracket' => 'required',
-    //     ],[
-    //         'urlBracket.required' => 'bracket harus ada',
-    //     ]);
+        public function bracket(Tournament $tournament, Request $request)
+    {
+        $request->validate([
+            'urlBracket' => 'required',
+        ],[
+            'urlBracket.required' => 'bracket harus ada',
+        ]);
 
-    //     $tournament->update([
-    //         'urlBracket' => $request->input('urlBracket'),
-    //     ]);
+        $tournament->update([
+            'urlBracket' => $request->input('urlBracket'),
+        ]);
 
-    //     if ($tournament) {
-    //         return redirect()->route('tournament.detail', ['id' => $tournament->id])->with('success', 'Pesan berhasil');
-    //     } else {
-    //         return redirect()->back()->with('error', 'Turnamen tidak ditemukan');
-    //     }
-    //     }
+        if ($tournament) {
+            return redirect()->route('tournament.detail', ['id' => $tournament->id])->with('success', 'Pesan berhasil');
+        } else {
+            return redirect()->back()->with('error', 'Turnamen tidak ditemukan');
+        }
+        }
 
 
     public function detailTournamentUser(Tournament $tournament, $id)

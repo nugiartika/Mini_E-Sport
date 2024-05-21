@@ -46,7 +46,6 @@ class JadwalController extends Controller
             'tanggalFinal' => $request->tanggalFinal,
             'waktuFinal' => $request->waktuFinal,
             'boFinal' => $request->boFinal,
-            'bracket' => $request->input('bracket', null),
         ]);
 
         // Redirect ke halaman detail turnamen dengan menyertakan ID turnamen

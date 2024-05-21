@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
         Route::post('/jadwal/{id}', [JadwalController::class, 'jadwal'])->name('ptournament.jadwal');
         Route::post('/juara', [JuaraController::class, 'juara'])->name('ptournament.juara');
+        Route::post('/bracket', [TournamentController::class, 'bracket'])->name('ptournament.bracket');
     });
 
     Route::get('/detailTournamentUser/{id}', [TournamentController::class, 'detailTournamentUser'])->name('tournament.detailUser');

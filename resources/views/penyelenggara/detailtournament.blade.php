@@ -56,7 +56,7 @@
                     <i class="h1 ti ti-location display-five fw-normal tcp-2"></i>
                 </div>
                 <h4 class="mb-1">Jenis Turnamen</h4>
-                <p class="mb-0">{{ $selectedTournament->paidment === 'paid' ? 'Berbayar' : 'Gratis' }}</p>
+                <p class="mb-0">{{ $selectedTournament->paidment }}</p>
             </div>
         </div>
         <div class="col-md-2">
