@@ -1,5 +1,5 @@
 {{-- @extends('layouts.user') --}}
-@extends('user.layouts.app')
+@extends('layouts.panel')
 @section('style')
     <style>
         .saring-btn {
@@ -121,7 +121,7 @@
     <div class="tabcontents">
         <div class="tabitem active">
             <div class="row justify-content-md-start justify-content-center g-6">
-                <div class="singletab tournaments-tab">
+                <div class="singletab col-12 tournaments-tab">
                     <div class="d-flex align-items-center gap-6 flex-wrap mb-lg-5 mb-sm-3 mb-2"
                         style="margin-left: 30px; margin-top: 10px; width: 100px; height: 40px;">
                         <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
@@ -277,8 +277,8 @@
                                     <div class="d-flex justify-content-center align-items-center mb-4"
                                         style="height: 100px;">
                                         <center>
-                                            <h6 style="color: white;">Create a New Team for the Tournament or Choose an
-                                                Existing Team</h6>
+                                            <h6 style="color: white;">Buat tim baru atau
+                                                gunakan Tim yang Sudah Ada</h6>
                                         </center>
                                     </div>
                                     <div class="d-flex justify-content-center">
@@ -332,7 +332,7 @@
     </script>
 
 
-    
+
     <script>
         $(document).ready(function() {
             $('#existing').on('show.bs.modal', function(event) {

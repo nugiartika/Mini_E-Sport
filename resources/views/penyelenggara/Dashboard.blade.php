@@ -9,7 +9,7 @@
                 <div class="col-md-4 col-lg-3 mb-3">
                     <div class="card h-100">
                         <div class="overflow-hidden w-100" style="height: 200px">
-                            <img class="w-100 h-100" src="{{ asset("storage/{$tournament->images}") }}" alt="game"
+                            <img class="w-100 h-100 rounded-2 border-bottom" src="{{ asset("storage/{$tournament->images}") }}" alt="game"
                                 style="object-fit: cover;" />
                         </div>
                             <div>

@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @forelse ($categories as $category)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
@@ -55,7 +55,17 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="6">
+                                <div class="d-flex flex-column align-items-center justify-content-center">
+                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                        style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+                                    <h1>Tidak Ada Data</h1>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -89,7 +99,7 @@
                             <label for="photo" class="form-label">Foto Cover</label>
                             <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
                                 name="photo">
-                                
+
                             @if (old('photo'))
                                 <img id="preview" src="{{ asset('storage/' . old('photo')) }}" alt="Old gambar"
                                     style="max-width: 100px; max-height: 100px;">
