@@ -9,7 +9,7 @@
                 <div class="col-md-4 col-lg-3 mb-3">
                     <div class="card h-100">
                         <div class="overflow-hidden w-100" style="height: 200px">
-                            <img class="w-100 h-100" src="{{ asset("storage/{$tournament->gambar}") }}" alt="game"
+                            <img class="w-100 h-100 rounded-2 border-bottom" src="{{ asset("storage/{$tournament->images}") }}" alt="game"
                                 style="object-fit: cover;" />
                         </div>
                         <div class="card-body">
@@ -22,17 +22,7 @@
                                 <span>{{ $tournament->membersPerTeam }} orang / tim</span>
                             </div>
                         </div>
-                    @empty
-                        <div class="col-lg-12">
-                            <div class="d-flex justify-content-center">
-                                <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                    style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                            </div>
-                            <h3 class="table-light" style="text-align: center;">
-                                Turnamen Tidak Tersedia
-                            </h3>
-                        </div>
-                    @endforelse
+                    </div>
                 </div>
             @empty
                 <div class="col-12 d-flex flex-column justify-content-center">

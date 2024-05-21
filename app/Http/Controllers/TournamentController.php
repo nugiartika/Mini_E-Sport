@@ -380,10 +380,8 @@ class TournamentController extends Controller
 
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Tournament $tournament)
     {
-        $tournament = Tournament::findOrFail($id);
-
         $request->validate([
             'status' => 'required|in:accepted,rejected',
             'reason' => 'required_if:status,rejected|nullable|string|max:255',
@@ -394,8 +392,6 @@ class TournamentController extends Controller
             'reason.string' => 'Alasan penolakan harus berupa teks.',
             'reason.max' => 'Alasan penolakan tidak boleh melebihi 255 karakter.',
         ]);
-
-        // $tournament->status = $request->status;
 
         $tournament->status = $request->status;
 
@@ -408,8 +404,6 @@ class TournamentController extends Controller
         return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');
     }
 
-
-
     public function edittour($id)
     {
         $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
@@ -418,6 +412,7 @@ class TournamentController extends Controller
         $category = Category::all();
         $prizes = prizepool::all();
         $note = tournament_prize::all();
+
         return view('penyelenggara.edit',  ['id' => $id], compact('counttournaments', 'note', 'prizes', 'tournament', 'category', 'user'));
     }
 
@@ -513,6 +508,7 @@ class TournamentController extends Controller
     public function destroy(Tournament $ptournament)
     {
         $ptournament->delete();
+
         try {
             if ($ptournament->images) {
                 Storage::disk('public')->delete($ptournament->images);

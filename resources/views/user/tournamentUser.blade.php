@@ -1,5 +1,5 @@
 {{-- @extends('layouts.user') --}}
-@extends('user.layouts.app')
+@extends('layouts.panel')
 @section('style')
     <style>
         .saring-btn {
@@ -82,9 +82,9 @@
     </style>
 @endsection
 @section('content')
-@php
-    use App\Models\TeamTournament;
-@endphp
+    @php
+        use App\Models\TeamTournament;
+    @endphp
     <div class="modal" tabindex="-1" id="filter" style="color: #ffffff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
@@ -121,7 +121,7 @@
     <div class="tabcontents">
         <div class="tabitem active">
             <div class="row justify-content-md-start justify-content-center g-6">
-                <div class="singletab tournaments-tab">
+                <div class="singletab col-12 tournaments-tab">
                     <div class="d-flex align-items-center gap-6 flex-wrap mb-lg-5 mb-sm-3 mb-2"
                         style="margin-left: 30px; margin-top: 10px; width: 100px; height: 40px;">
                         <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
@@ -174,25 +174,26 @@
 
                                     @php
 
-                                    // Ambil total tim dari hasil perhitungan
-                                    $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
-                                    $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
-                                    $totalTeams = ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
+                                        // Ambil total tim dari hasil perhitungan
+                                        $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+                                        $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+                                        $totalTeams =
+                                            ($teamCount ? $teamCount->count : 0) +
+                                            ($teamIdCount ? $teamIdCount->count : 0);
 
-                                    $userTeams = $teams ?? collect();
-                                    $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
-                                    $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+                                        $userTeams = $teams ?? collect();
+                                        $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
+                                        $isUserInTournament = $userTeamsInTournament->isNotEmpty();
 
-                                    if ($isUserInTournament) {
-                                        // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-                                        $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+                                        if ($isUserInTournament) {
+                                            // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+                                            $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
 
-                                        // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-                                        $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-                                            ->where('tournament_id', $tournament->id)
-                                            ->get();
-                                    }
-
+                                            // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+                                            $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+                                                ->where('tournament_id', $tournament->id)
+                                                ->get();
+                                        }
 
                                     @endphp
 
@@ -218,7 +219,7 @@
                                             $teamId = $teams->users_id;
                                         @endphp --}}
 
-                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && (!$isUserInTournament && !$userTeamsWithRelation))
+                                        @if ($totalTeams && $totalTeams < $tournament->slotTeam && (!$isUserInTournament && !$userTeamsWithRelation))
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
@@ -259,17 +260,11 @@
                                             <i class="ti ti-arrow-right fs-2xl"></i>
                                         </a>
                                     </div>
-
-
                                 </div>
-
-
 
                             </div>
                         </div>
                     </div>
-
-
 
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -279,15 +274,13 @@
                                     <div class="d-flex justify-content-center align-items-center mb-4"
                                         style="height: 100px;">
                                         <center>
-                                            <h6 style="color: white;">Create a New Team for the Tournament or Choose an
-                                                Existing Team</h6>
+                                            <h6 style="color: white;">Buat tim baru atau
+                                                gunakan Tim yang Sudah Ada</h6>
                                         </center>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        {{-- <a href="#" type="button" class="btn btn-secondary me-2"
-                                            data-bs-toggle="modal" data-bs-target="#existing"
-                                            data-bs-dismiss="modal">Existing Team</a> --}}
-                                        <a href="#" type="button" class="btn btn-secondary me-2">Existing Team</a>
+                                        <a href="#" type="button" class="btn btn-secondary me-2">Tim Yang Sudah
+                                            Ada</a>
                                         <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
                                     </div>
                                 </div>
