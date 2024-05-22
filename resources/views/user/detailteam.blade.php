@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex pb-4">
-        <a href="{{ url('ptournament') }}" class="btn btn-primary d-flex gap-2 align-items-center"><i
+        <a href="{{ route('user.tournament') }}" class="btn btn-primary d-flex gap-2 align-items-center"><i
                 class="ti ti-arrow-left"></i><span>Kembali Ke Daftar Turnamen</span></a>
     </div>
 
@@ -35,15 +35,15 @@
                         <span>{{ $teams->name }}</span>
                     </div>
                 </div>
+
                 <div class="col-md-6 p-3">
                     <div class="d-flex gap-2 align-items-center">
                         <i class="ti ti-users-group"></i>
-                        @if ($teamsCount)
-                        
                         <span>{{ $teamsCount }} tim</span>
-                        @endif
                     </div>
                 </div>
+
+
             </div>
 
         </div>
