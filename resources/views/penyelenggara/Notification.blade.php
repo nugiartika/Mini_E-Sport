@@ -1,4 +1,5 @@
-@extends('penyelenggara.layouts.app')
+@extends('layouts.panel')
+
 @section('content')
     <div class="col-12">
         @foreach ($tournaments as $tournament)

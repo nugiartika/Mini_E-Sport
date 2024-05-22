@@ -186,30 +186,31 @@
                         </div>
 
                         <div class="tournament-img mb-8 position-relative">
-                            <div class="img-area overflow-hidden rounded"
+                            <div class="img-area overflow-hidden position-relative rounded"
                                 style="width: auto; height: 400px; border-radius: .5rem;">
                                 <img class="w-100" style="object-fit: cover; width: 100%; height: 100%;"
                                     src="{{ asset("storage/{$tournament->images}") }}" alt="tournament">
+
+                                    <div class="position-absolute align-items-end pb-3 end-0 bottom-0 flex-column d-flex gap-2">
+                                        @if ($tournament->status === 'accepted')
+                                            <span class="badge text-bg-success me-4">Diterima</span>
+                                        @elseif ($tournament->status === 'pending')
+                                            <span class="badge text-bg-warning me-4">Menunggu
+                                                Konfirmasi</span>
+                                        @else
+                                            <span class="badge text-bg-danger me-4">Ditolak</span>
+                                        @endif
+                                        @if ($tournament->end_permainan > now())
+                                            <span class="badge text-bg-success me-4">Sedang
+                                                Berlangsung</span>
+                                        @else
+                                            <span class="badge text-bg-danger me-4">Sudah
+                                                Berakhir</span>
+                                        @endif
+                                    </div>
                             </div>
                         </div>
                         <div class="py-3">
-                            <div>
-                                @if ($tournament->status === 'accepted')
-                                    <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Diterima</span>
-                                @elseif ($tournament->status === 'pending')
-                                    <span class="badge text-bg-warning position-absolute me-4" style="right: 0;">Menunggu Konfirmasi Admin</span>
-                                @else
-                                    <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Ditolak</span>
-                                @endif
-                            </div>
-                            <div class="mt-4 mb-5">
-                                @if ($tournament->end_permainan > now())
-                                    <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Sedang Berlangsung</span>
-                                @else
-                                    <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Sudah Berakhir</span>
-                                @endif
-                            </div>
-
 
                             <div class="tournament-info mb-4">
                                 <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>

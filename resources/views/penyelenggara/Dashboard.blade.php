@@ -6,28 +6,30 @@
     <section class="swiper-3d">
         <div class="row">
             @forelse ($tournaments as $tournament)
-                <div class="col-md-4 col-lg-3 mb-3">
+                <div class="col-md-4 col-xxl-3 mb-3">
                     <div class="card h-100">
-                        <div class="overflow-hidden w-100" style="height: 200px">
-                            <img class="w-100 h-100 rounded-2 border-bottom" src="{{ asset("storage/{$tournament->images}") }}" alt="game"
-                                style="object-fit: cover;" />
-                        </div>
-                            <div>
+                        <div class="overflow-hidden position-relative w-100" style="height: 200px">
+                            <img class="w-100 h-100 rounded-2 border-bottom"
+                                src="{{ asset("storage/{$tournament->images}") }}" alt="game" style="object-fit: cover;" />
+
+                            <div class="position-absolute align-items-end pb-3 end-0 bottom-0 flex-column d-flex gap-2">
                                 @if ($tournament->status === 'accepted')
-                                    <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Diterima</span>
+                                    <span class="badge text-bg-success me-4">Diterima</span>
                                 @elseif ($tournament->status === 'pending')
-                                    <span class="badge text-bg-warning position-absolute me-4" style="right: 0;">Menunggu Konfirmasi Admin</span>
+                                    <span class="badge text-bg-warning me-4">Menunggu
+                                        Konfirmasi</span>
                                 @else
-                                    <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Ditolak</span>
+                                    <span class="badge text-bg-danger me-4">Ditolak</span>
                                 @endif
-                            </div>
-                            <div class="mt-4 mb-3">
                                 @if ($tournament->end_permainan > now())
-                                    <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Sedang Berlangsung</span>
+                                    <span class="badge text-bg-success me-4">Sedang
+                                        Berlangsung</span>
                                 @else
-                                    <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Sudah Berakhir</span>
+                                    <span class="badge text-bg-danger me-4">Sudah
+                                        Berakhir</span>
                                 @endif
                             </div>
+                        </div>
 
                         <div class="card-body">
 

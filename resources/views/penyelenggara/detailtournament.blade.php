@@ -153,10 +153,7 @@
                                     <form id="updateBracketForm"
                                         action="{{ route('add.bracket', $selectedTournament->id) }}" method="POST">
                                         @csrf
-                                        @method('POST') <!-- Tetap gunakan POST disini -->
-
-                                        <!-- Tambahkan input tersembunyi untuk menentukan metode PATCH -->
-                                        <input type="hidden" name="_method" value="PATCH">
+                                        @method('PATCH')
 
                                         <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
                                         <input type="hidden" name="column" value="urlBracket" />
