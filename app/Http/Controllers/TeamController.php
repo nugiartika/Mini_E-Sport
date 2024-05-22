@@ -64,8 +64,10 @@ class TeamController extends Controller
     public function indexdetail($id)
     {
         $teams = Team::findOrFail($id);
+        $teamsCount = Team::count();
         $category = Category::all();
-        return view('user.detailteam', compact('teams','category'));
+
+        return view('user.detailteam', compact('teams','category', 'teamsCount'));
     }
 
     /**

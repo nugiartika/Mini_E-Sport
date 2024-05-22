@@ -226,7 +226,10 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        @if ($totalTeams && $totalTeams < $tournament->slotTeam && (!$isUserInTournament && !$userTeamsWithRelation))
+
+
+                                        {{-- @dd($tournament->users_id == Auth::user()->id) --}}
+                                        @if (($tournament->users_id == Auth::user()->id) )
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
@@ -292,95 +295,7 @@
                     </div>
 
 
-
-                    <!-- modal -->
-                    {{-- <div class="modal fade" id="existing" tabindex="-1" role="dialog"
-                        aria-labelledby="existinglabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document" style="height: 100vh;">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title text-white" id="examplemodallabel">tim lama</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('teams.store') }}" method="post">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="team_id">pilih tim:</label>
-                                            <div class="row text-black">
-                                                @foreach ($teams as $team)
-                                                    @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id)
-                                                        <input type="hidden" name="tournament_id"
-                                                            value="{{ $tournament->id }}">
-                                                        <div class="col-12 mb-3">
-                                                            <div class="card" id="teamcard{{ $team->id }}"
-                                                                onclick="cardradio(this)">
-                                                                <div class="card-body d-flex align-items-center">
-                                                                    <input type="radio" id="team_id{{ $team->id }}"
-                                                                        name="team_id" value="{{ $team->id }}"
-                                                                        style="display: none;">
-                                                                    <img src="{{ asset('storage/' . $team->profile) }}"
-                                                                        alt="" width="25" height="25"
-                                                                        class="profile-image me-8">
-                                                                    <label class="name-text" style="font-size: 20px"
-                                                                        for="team_id{{ $team->id }}">
-                                                                        {{ $team->name }}
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">simpan</button>
-                                    </form>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> --}}
-
-                    <!-- modal -->
-                    {{-- <div class="modal fade" id="existing" tabindex="-1" role="dialog" aria-labelledby="existinglabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="height: 100vh;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-white" id="examplemodallabel">tim lama</h5>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('teams.store') }}" method="post">
-                    @csrf
-                    <!-- hidden input for tournament_id -->
-                    <input type="hidden" name="tournament_id" id="tournament_id" value="">
-                    <div class="form-group">
-                        <label for="team_id">pilih tim:</label>
-                        <div class="row text-black">
-                            @foreach ($teams as $team)
-                                @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id)
-                                    <div class="col-12 mb-3">
-                                        <div class="card" id="teamcard{{ $team->id }}" onclick="cardradio(this)">
-                                            <div class="card-body d-flex align-items-center">
-                                                <input type="radio" id="team_id{{ $team->id }}" name="team_id" value="{{ $team->id }}" style="display: none;">
-                                                <img src="{{ asset('storage/' . $team->profile) }}" alt="" width="25" height="25" class="profile-image me-8">
-                                                <label class="name-text" style="font-size: 20px" for="team_id{{ $team->id }}">
-                                                    {{ $team->name }}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">simpan</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
-                @empty
+               @empty
                     <div class="col-lg-12">
                         <center>
                             <img src="{{ asset('assets/img/No-data.png') }}" alt=""
