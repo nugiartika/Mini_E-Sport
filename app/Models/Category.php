@@ -15,5 +15,9 @@ class Category extends Model
     {
         return $this->hasMany(Tournament::class, 'categories_id');
     }
+    public function team()
+    {
+        return $this->hasMany(Team::class, 'categories_id');
+    }
 
 }

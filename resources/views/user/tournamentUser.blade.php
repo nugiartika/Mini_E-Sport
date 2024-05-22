@@ -312,8 +312,7 @@
         </div>
     </div>
 @endsection
-
-@push('script')
+@section('script')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var exampleModal = document.getElementById('exampleModalCenter');
@@ -388,4 +387,5 @@
             }
         }
     </script>
-@endpush
+@endsection
+

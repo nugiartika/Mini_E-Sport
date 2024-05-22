@@ -84,7 +84,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/detailTeam/{id}', [TeamController::class, 'indexdetail'])->name('user.detailTeam');
         Route::get('/addteam', [TeamController::class, 'addTeam'])->name('team.addteam');
         Route::post('/storeteam', [TeamController::class, 'storeTeam'])->name('team.storeteam');
-        Route::get('/showteam', [TeamController::class, 'showTeam'])->name('team.showteam');
+        Route::get('/showteam/{team}', [TeamController::class, 'showTeam'])->name('team.showteam');
         Route::get('/addmember', [MemberController::class, 'createMember'])->name('team.addmember');
         Route::post('/storemember', [MemberController::class, 'storemember'])->name('team.storemember');
         Route::resource('/teams', TeamTournamentController::class);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TeamBaruRequest;
 use App\Http\Requests\TeamRequest;
 use App\Models\Category;
 use App\Models\Member;
@@ -37,7 +38,6 @@ class TeamController extends Controller
 
         return view('user.createteam', compact('teams','user','selectedTournamentId'));
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -57,9 +57,27 @@ class TeamController extends Controller
             'tournament_id' => $tournament_id,
             'user_id' => $user->id,
         ]);
-
-        return redirect()->route('team.show', $team->id)->with('success', 'Team added successfully');
+        return redirect()->route('team.show', $team->id);
     }
+    // public function store(TeamRequest $request)
+    // {
+    //     $tournament_id = $request->get('tournament_id');
+    //     $user = Auth::user();
+
+    //     $gambar = $request->file('profile');
+    //     if ($gambar) {
+    //         $path_gambar = Storage::disk('public')->put('team', $gambar);
+    //     }
+
+    //     $team = Team::create([
+    //         'name' => $request->name,
+    //         'profile' => $path_gambar,
+    //         'tournament_id' => $tournament_id,
+    //         'user_id' => $user->id,
+    //     ]);
+
+    //     return redirect()->route('team.show', $team->id)->with('success', 'Team added successfully');
+    // }
 
     public function indexdetail($id)
     {
@@ -92,7 +110,7 @@ class TeamController extends Controller
         return view('user.addteam', compact('user', 'selectedTournamentId','category'));
     }
 
-    public function storeTeam(TeamRequest $request)
+    public function storeTeam(TeamBaruRequest $request)
     {
         // $tournament_id = $request->get('tournament_id');
         $user = Auth::user();
@@ -108,18 +126,20 @@ class TeamController extends Controller
             'categories_id' => $request->categories_id,
         ]);
 
-        return redirect()->route('team.showteam', $team->id)->with('success', 'Team added successfully');
+        return redirect()->route('team.showteam', $team->id);
     }
 
     public function showTeam(Team $team)
     {
         $members = Member::all();
+        $teams = Team::all();
         $teamId = $team->id;
         $user = User::all();
-        $teams = Team::all();
         $category = Category::all();
+        $membersPerTeam = $team->category->membersPerTeam;
 
-        return view('user.addmember', compact('members', 'teams', 'teamId', 'user','category'));
+
+        return view('user.addmember', compact('members', 'teams', 'teamId', 'user','category','membersPerTeam'));
     }
 
 }

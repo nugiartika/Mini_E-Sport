@@ -411,10 +411,10 @@ class TournamentController extends Controller
         $tournament->status = $request->status;
 
         if ($request->status == 'rejected' && $request->has('reason')) {
-            $tournamentData['reason'] = $request->reason;
+            $tournament->reason = $request->reason;
         }
 
-        $tournament->update($tournamentData);
+        $tournament->save();
 
         return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');
     }
