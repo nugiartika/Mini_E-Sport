@@ -63,7 +63,7 @@
                                 <label for="categories" class="form-label">Game</label>
                                     <select class="form-control @error('categories_id') is-invalid @enderror" id="categories" name="categories_id" aria-label="Default select example">
                                         <option value="" selected>Pilih Game</option>
-                                        @foreach ($categories as $x)
+                                        @foreach ($category as $x)
                                             <option value="{{ $x->id }}" {{ old('categories_id') == $x->id ? 'selected' : '' }}>
                                                 {{ $x->name }}
                                             </option>

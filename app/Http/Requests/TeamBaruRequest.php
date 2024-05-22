@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TeamRequest extends FormRequest
+class TeamBaruRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class TeamRequest extends FormRequest
             'profile'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'tournament_id' => 'nullable|exists:tournaments,id',
             'user_id'=>'nullable',
-            'categories_id' => 'nullable|exists:categories,id',
+            'categories_id' => 'required|exists:categories,id'
         ];
     }
 
@@ -36,7 +36,7 @@ class TeamRequest extends FormRequest
             'name.required'=>'Nama harus diisi.',
             'name.max' => 'nama  2048 characters.',
             'name.unique' => 'Nama tim Sudah di gunakan',
-            // 'categories_id.required' => 'Category must be filled in.',
+            'categories_id.required' => 'Game harus diisi.',
             // 'categories_id.exists' => 'The Category you entered is invalid.',
             'profile.required'=>'profile must be filled in.',
         ];
