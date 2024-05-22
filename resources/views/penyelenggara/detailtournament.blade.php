@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex pb-4">
-        <a href="{{ url('ptournament') }}" class="btn btn-primary d-flex gap-2 align-items-center"><i
+        <a href="{{ url(auth()->user()->role === 'organizer' ? 'ptournament' : 'tournamentUser') }}" class="btn btn-primary d-flex gap-2 align-items-center"><i
                 class="ti ti-arrow-left"></i><span>Kembali Ke Daftar Turnamen</span></a>
     </div>
 
@@ -207,7 +207,7 @@
                 </button>
            @endif
 
-            
+
                 <!-- Modal -->
                 <div class="modal fade" id="exampleJuara" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -257,7 +257,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            
+
                                 <td>{{ $juara->nama_juara1 }}</td>
                                 <td>{{ $juara->nama_juara2 }}</td>
                                 <td>{{ $juara->nama_juara3 }}</td>
@@ -311,7 +311,7 @@
                                     <label for="boPenyisihan" class="form-label">Best Of</label>
                                     <input type="text" class="form-control" id="boPenyisihan" name="boPenyisihan" required>
                                 </div>
-            
+
                                 <!-- Semi Final -->
                                 <h5>Semi Final</h5>
                                 <div class="mb-3">
@@ -326,7 +326,7 @@
                                     <label for="boSemi" class="form-label">Best Of</label>
                                     <input type="text" class="form-control" id="boSemi" name="boSemi" required>
                                 </div>
-            
+
                                 <!-- Final -->
                                 <h5>Final</h5>
                                 <div class="mb-3">
@@ -463,7 +463,7 @@
                     <h6>Kontak Personal</h6>
                     <small>{{ $tournaments->contact }}</small>
                 </div>
-                
+
             </div>
         </div>
     </div>
