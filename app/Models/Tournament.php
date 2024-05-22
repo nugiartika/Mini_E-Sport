@@ -17,8 +17,8 @@ class Tournament extends Model
     protected $casts = [
         'end_pendaftaran' => 'datetime',
         'end_permainan' => 'datetime',
-        'permainan' => 'datetime',
         'pendaftaran' => 'datetime',
+        'permainan' => 'datetime',
     ];
 
     public function user()

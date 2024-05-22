@@ -331,13 +331,14 @@ class TournamentController extends Controller
         // dd($teamCounts);
         $category = Category::all();
         $jadwals = jadwal::all();
+        $juaras = juara::find($id);
         $juaras = juara::all();
         $selectedTournament = Tournament::findOrFail($id);
         $teams = team::all();
-        $tournament = Tournament::find($id);
+        $tournaments = Tournament::find($id);
         $prizes = tournament_prize::where('tournament_id', $id)->get();
 
-        return view('penyelenggara.detailtournament', compact('tournament', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts', 'selectedTournament'));
+        return view('penyelenggara.detailtournament', compact('tournaments', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
 
     public function bracket(Tournament $tournament, Request $request)
