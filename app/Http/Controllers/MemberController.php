@@ -35,53 +35,6 @@ class MemberController extends Controller
     }
 
 
-    // public function store(Request $request)
-    // {
-    //     // Validasi data input
-    //     $validator = Validator::make($request->all(), [
-    //         'member.*' => 'nullable', // Member inti wajib diisi
-    //         'nickname.*' => 'required', // Nickname inti wajib diisi
-    //         'member_cadangan.*' => 'nullable', // Member cadangan dapat kosong
-    //         'nickname_cadangan.*' => 'nullable', // Nickname cadangan dapat kosong
-    //         'is_captain.*' => 'nullable', // Isi kapten harus boolean
-
-    //     ]);
-
-    //     // Cek validasi
-    //     if ($validator->fails()) {
-    //         return redirect()->back()
-    //             ->withErrors($validator)
-    //             ->withInput();
-    //     }
-
-    //     $teams_id = $request->team_id;
-    //     $nicknames = $request->nickname;
-
-    //     // Store "inti" members
-    //     foreach ($request->member as $index => $memberName) {
-    //         $is_captain = $index === 0 ? 1 : 0;
-
-    //         $member = Member::create([
-    //             'member' => $memberName,
-    //             'nickname' => $request->nickname[$index],
-    //             'team_id' => $teams_id,
-    //             'status' => 'inti',
-    //             'is_captain' => $is_captain,
-    //         ]);
-    //     }
-
-    //     // Store "cadangan" members
-    //     if ($request->has('member_cadangan')) {
-    //         foreach ($request->member_cadangan as $index => $memberName) {
-    //         $member = Member::create([
-    //                 'member' => $memberName,
-    //                 'nickname' => $request->nickname_cadangan[$index],
-    //                 'team_id' => $teams_id,
-    //                 'status' => 'cadangan',
-    //                 'is_captain' => 0,
-    //             ]);
-    //         }
-    //     }
     public function store(Request $request)
     {
         // Validasi data input
@@ -162,7 +115,11 @@ class MemberController extends Controller
 
     {
         try {
-
+            $duplicates = $this->getDuplicates($request->nickname);
+            if (!empty($duplicates)) {
+                // Lakukan sesuatu untuk menangani duplikat
+                return redirect()->back()->withInput()->withErrors(['error' => 'Duplikat ditemukan dalam nickname']);
+            }
         // // Validasi data input
         // $validator = Validator::make($request->all(), [
         //     'member.*' => 'nullable', // Member inti wajib diisi
@@ -227,6 +184,22 @@ class MemberController extends Controller
     } catch (\Throwable $th) {
         return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
     }
+    }
+
+    private function getDuplicates(array $arr)
+    {
+        // Menghitung frekuensi setiap elemen dalam array
+        $counts = array_count_values($arr);
+
+        // Memilih elemen yang muncul lebih dari sekali
+        $duplicates = [];
+        foreach ($counts as $item => $count) {
+            if ($count > 1) {
+                $duplicates[] = $item;
+            }
+        }
+
+        return $duplicates;
     }
 
 }
