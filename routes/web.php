@@ -110,8 +110,7 @@ Route::group(['prefix' => 'transaction', 'as' => 'transaction.', 'middleware' =>
     Route::get('{transaction:transaction_id}/edit', [TransactionController::class, 'edit'])->name('edit');
 
     // Route for updating transactions (changed name)
-    Route::put('{transaction:id}', [TransactionController::class, 'update'])->name('transaction.updateTransaction');
-    Route::patch('{transaction:id}', [TransactionController::class, 'update'])->name('transaction.updateTransaction'); // You probably need to change this too
+    Route::match(['put', 'patch'], '{transaction:id}', [TransactionController::class, 'update'])->name('update');
 
     // Route untuk menghapus transaksi tertentu (menggunakan transaction_id)
     Route::delete('{transaction:transaction_id}', [TransactionController::class, 'destroy'])->name('destroy');
