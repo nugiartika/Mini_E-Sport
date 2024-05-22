@@ -315,10 +315,21 @@
         </div>
         <div class="tab-pane fade" id="detail-info" role="tabpanel" aria-labelledby="detail-info-tab">
             <h3>Detail dan Informasi</h3>
-            <div class=""></div>
-            <h4>Deskripsi</h4>
-            <h4>Peraturan</h4>
-            <h4>Kontak Personal</h4>
+
+            <div class="pt-4">
+                <div class="pb-3">
+                    <h4 class="mb-1">Deskripsi</h4>
+                    <div>{!! $selectedTournament->description !!}</div>
+                </div>
+
+                <div class="pb-3">
+                    <h4 class="mb-1">Peraturan</h4>
+                    <div>{!! $selectedTournament->rule !!}</div>
+                </div>
+
+                <h4 class="mb-1">Kontak Personal</h4>
+                <div>{!! $selectedTournament->contact !!}</div>
+            </div>
         </div>
     </div>
 

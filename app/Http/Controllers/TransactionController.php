@@ -41,6 +41,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
         $transactionData = $this->transaction->when(Auth::user()->role === 'user', function ($query) {
             $query->with([
                 'teamTournament.toTeam' => function ($query) {
@@ -52,7 +53,7 @@ class TransactionController extends Controller
         $transactionData = $transactionData->latest()->paginate(20);
         $paymentList = $this->paymentService->getPaymentList();
 
-        return view('transaction.index', compact('transactionData', 'paymentList'));
+        return view('transaction.index', compact('transactionData', 'paymentList', 'counttournaments'));
     }
 
     /**
@@ -108,9 +109,10 @@ class TransactionController extends Controller
     public function show(Transaction $transaction)
     {
         try {
+            $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
             $paymentList = $this->paymentService->getPaymentList();
 
-            return view('transaction.view', compact('transaction', 'paymentList'));
+            return view('transaction.view', compact('transaction', 'paymentList', 'counttournaments'));
         } catch (\Throwable $th) {
             abort(500, $th->getMessage());
         }
