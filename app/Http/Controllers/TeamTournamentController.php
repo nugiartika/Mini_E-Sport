@@ -6,7 +6,9 @@ use App\Http\Requests\TeamTournamentRequest;
 use App\Models\Team;
 use App\Models\TeamTournament;
 use App\Models\Tournament;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TeamTournamentController extends Controller
 {
@@ -17,7 +19,7 @@ class TeamTournamentController extends Controller
     {
         $teams = Team::all();
         $tournaments = Tournament::all();
-        return view('user.tournamentUser', compact('teams','tournaments'));
+        return view('user.tournamentUser', compact('teams', 'tournaments'));
     }
 
     /**
@@ -26,7 +28,7 @@ class TeamTournamentController extends Controller
 
     // public function create(Request $request)
     // {
-        //     $tournament_id = $request->query('tournament_id');
+    //     $tournament_id = $request->query('tournament_id');
     //     $tournaments = Tournament::all();
     //     $teams = Team::whereHas('tournament', function ($query) use ($tournament_id) {
     //         $query->where('category_id', $tournament_id);
@@ -40,27 +42,37 @@ class TeamTournamentController extends Controller
         $tournaments = Tournament::all();
         $selectedTournamentId = $request->input('tournament_id');
 
-        return view('user.teams', compact('teams', 'tournaments','selectedTournamentId'));
+        return view('user.teams', compact('teams', 'tournaments', 'selectedTournamentId'));
     }
 
     public function store(TeamTournamentRequest $request)
     {
         $tournament_id = $request->get('tournament_id');
         $team_id = $request->team_id;
+        $tournamentData = Tournament::where([
+            ['id', $tournament_id],
+            ['paidment', 'Gratis']
+        ]);
 
-        TeamTournament::create([
+        $teamTournament = TeamTournament::create([
             'tournament_id' => $tournament_id,
             'team_id' => $team_id,
         ]);
 
-        // $team = Team::findOrFail($team_id);
+        if ($tournamentData->exists()) {
+            Transaction::create([
+                'name' => auth()->user()->name,
+                'email' => auth()->user()->email,
+                'phone' => '081234567890',
+                'status' => 'PAID',
+                'team_tournament_id' => $teamTournament->id,
+                'payment_method' => 'FREE',
+                'amount' => 0,
+                'transaction_id' => 'TRANS-'. Str::upper(Str::random(16)),
+                'ref_id' => 'INV-'. Str::upper(Str::random(16))
+            ]);
+        }
 
-        // Team::create([
-        //     'name' => $team->name,
-        //     'profile' => $team->profile,
-        //     'user_id' => $team->user_id,
-        //     'tournament_id' => $tournament_id,
-        // ]);
         return redirect()->route('user.tournament')->with('success', 'Team added successfully');
     }
 
