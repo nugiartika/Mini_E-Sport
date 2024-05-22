@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Bank Central Asia (BCA)",
+        "code": "BCA",
+        "fee": "5000"
+    },
+    {
+        "name": "Bank Negara Indonesia (BNI)",
+        "code": "BNI",
+        "fee": "4800"
+    },
+    {
+        "name": "Bank Rakyat Indonesia (BRI)",
+        "code": "BRI",
+        "fee": "4700"
+    },
+    {
+        "name": "Bank Syariah Indonesia (BSI)",
+        "code": "BSI",
+        "fee": "4600"
+    },
+    {
+        "name": "Bank Tabungan Negara (BTN)",
+        "code": "BTN",
+        "fee": "4900"
+    },
+    {
+        "name": "DANA",
+        "code": "DANA",
+        "fee": "4800"
+    },
+    {
+        "name": "Bank Danamon",
+        "code": "DANAMON",
+        "fee": "4700"
+    },
+    {
+        "name": "GoPay",
+        "code": "GOPAY",
+        "fee": "4500"
+    },
+    {
+        "name": "Bank Mandiri",
+        "code": "MANDIRI",
+        "fee": "4500"
+    },
+    {
+        "name": "ShopeePay",
+        "code": "SHOPEEPAY",
+        "fee": "4900"
+    }
+]

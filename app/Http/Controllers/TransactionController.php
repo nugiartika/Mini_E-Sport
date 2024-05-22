@@ -12,6 +12,7 @@ use App\Services\PaymentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class TransactionController extends Controller
 {
@@ -40,6 +41,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
         $transactionData = $this->transaction->when(Auth::user()->role === 'user', function ($query) {
             $query->with([
                 'teamTournament.toTeam' => function ($query) {
@@ -49,10 +51,9 @@ class TransactionController extends Controller
         });
 
         $transactionData = $transactionData->latest()->paginate(20);
-        $getPaymentList = $this->paymentService->getPaymentList();
-        $paymentList = collect($getPaymentList['data']);
+        $paymentList = $this->paymentService->getPaymentList();
 
-        return view('transaction.index', compact('transactionData', 'paymentList'));
+        return view('transaction.index', compact('transactionData', 'paymentList', 'counttournaments'));
     }
 
     /**
@@ -80,36 +81,17 @@ class TransactionController extends Controller
         try {
             $userData = $this->getUser($data->get('user_id'));
             $tourData = $this->getTournament($data->get('team_tournament_id'));
+            $paymentList = $this->paymentService->getPaymentList();
 
-            $transaction = $this->paymentService->createTransaction(
-                $tourData->nominal,
-                $userData->name,
-                $userData->email,
-                $data->get('payment_method'),
-                '081234567890',
-                [
-                    [
-                        'sku'         => "TOURNAMENT-{$tourData->id}",
-                        'name'        => "Pendaftaran Turnamen {$tourData->name}",
-                        'price'       => $tourData->nominal,
-                        'quantity'    => 1,
-                        'product_url' => 'https://tokokamu.com/product/nama-produk-1',
-                        'image_url'   => 'https://tokokamu.com/product/nama-produk-1.jpg',
-                    ],
-                ],
-                route('transaction.index')
-            );
+            $amountTotal = (int)$tourData->nominal + (int)$paymentList->where('code', $request->payment_method)->first()['fee'];
 
-            if (!is_array($transaction['data'])) {
-                throw new \Exception('Permintaan tidak dapat diproses');
-            }
-
-            $data->put('ref_id', $transaction['data']['reference']);
-            $data->put('amount', $transaction['data']['amount']);
-            $data->put('transaction_id', $transaction['data']['merchant_ref']);
-            $data->put('name', $transaction['data']['customer_name']);
-            $data->put('email', $transaction['data']['customer_email']);
-            $data->put('phone', $transaction['data']['customer_phone']);
+            $data->put('ref_id', "INV-". Str::upper(Str::random(16)));
+            $data->put('amount', $amountTotal);
+            $data->put('transaction_id', "TRANS-". Str::upper(Str::random(16)));
+            $data->put('name', $userData->name);
+            $data->put('email', $userData->email);
+            $data->put('phone', '081234567890');
+            $data->put('status', 'PENDING');
 
             $data->forget('user_id');
 
@@ -127,11 +109,10 @@ class TransactionController extends Controller
     public function show(Transaction $transaction)
     {
         try {
-            $paymentDetail = $this->paymentService->getTransactionDetail($transaction->ref_id);
-            $getPaymentList = $this->paymentService->getPaymentList();
-            $paymentList = collect($getPaymentList['data']);
+            $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+            $paymentList = $this->paymentService->getPaymentList();
 
-            return view('transaction.view', compact('transaction', 'paymentDetail', 'paymentList'));
+            return view('transaction.view', compact('transaction', 'paymentList', 'counttournaments'));
         } catch (\Throwable $th) {
             abort(500, $th->getMessage());
         }
@@ -150,7 +131,15 @@ class TransactionController extends Controller
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
-        //
+        $data = collect($request->validated());
+
+        try {
+            $transaction->update($data->all());
+
+            return redirect()->route('transaction.show', $transaction->transaction_id);
+        } catch (\Throwable $th) {
+            abort(500, $th->getMessage());
+        }
     }
 
     /**

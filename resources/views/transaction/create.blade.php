@@ -1,14 +1,4 @@
-@php
-    if (auth()->user()->role === 'user') {
-        $layout = 'user.layouts.app';
-    } elseif (auth()->user()->role === 'organizer') {
-        $layout = 'layouts.penyelenggara';
-    } else {
-        $layout = 'admin.layouts.app';
-    }
-@endphp
-
-@extends($layout)
+@extends('layouts.panel')
 
 @section('content')
     <div class="card">
@@ -34,17 +24,20 @@
                 <input type="hidden" name="user_id" value="{{ $eventData->toTeam->user->id }}">
 
                 <div class="row gy-4">
-                    @forelse ($paymentList['data'] as $index => $payment)
+                    @forelse ($paymentList as $index => $payment)
                         <div class="col-md-3">
                             <div class="form-check custom-option custom-option-icon">
                                 <label class="form-check-label custom-option-content" for="method-{{ $index }}" />
                                 <span class="custom-option-body">
+                                    @php
+                                        $codeLower = strtolower($payment['code']);
+                                    @endphp
                                     <div class="mb-2 bg-white p-2 py-3 rounded-2 mx-auto">
-                                        <img src="{{ $payment['icon_url'] }}" style="height: 48px;width: auto;"
+                                        <img src="{{ asset("images/bank/{$codeLower}.svg") }}" style="height: 48px;width: auto;"
                                             alt="{{ $payment['name'] }}" />
                                     </div>
                                     <span class="custom-option-title">{{ $payment['name'] }}</span>
-                                    <span>{{ number_format($payment['total_fee']['flat'], 0, ',', '.') }} IDR / transaksi</span>
+                                    <span>{{ number_format($payment['fee'], 0, ',', '.') }} IDR / transaksi</span>
                                 </span>
                                 <input name="payment_method" class="form-check-input" type="radio"
                                     value="{{ $payment['code'] }}" id="method-{{ $index }}">

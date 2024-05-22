@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\prizepool;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
@@ -8,18 +7,15 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\JuaraController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\BracketController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PrizepoolController;
 use App\Http\Controllers\SainsRoleController;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\TeamTournamentController;
 use App\Http\Controllers\DetailTournamentController;
-use App\Http\Controllers\RegisterOrganizerController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -46,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('category', CategoryController::class);
         Route::get('confirmtournament', [TournamentController::class, 'indexadmin'])->name('konfirmtournament');
         Route::get('konfirmtournament/{konfirmtournament}/edit', [TournamentController::class, 'edit'])->name('konfirm.edit');
-        Route::put('konfirmtournament/{id}', [TournamentController::class, 'update'])->name('konfirm.update');
+        Route::put('konfirmtournament/{tournament}', [TournamentController::class, 'update'])->name('konfirm.update');
         Route::get('AdminTournament', [DetailTournamentController::class, 'index'])->name('DetailTournament');
         Route::get('AdminTournamentFilter', [DetailTournamentController::class, 'filter'])->name('tournamentfilter');
         Route::put('listUserPenyelenggara/{sainsRole}', [SainsRoleController::class, 'update'])->name('konfirmUser');
@@ -61,7 +57,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Organizer Routes
     Route::middleware('organizer')->group(function () {
-        Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
         Route::get('/tambah', [TournamentController::class, 'create'])->name('tambahtournament');
         Route::get('/tournament/{id}/edit', [TournamentController::class, 'edittour'])->name('ptournament.edittour');
         Route::post('/tournament/{id}/proses', [TournamentController::class, 'updatetour'])->name('ptournament.updatetour');
@@ -71,12 +66,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/NotifikasiTournament', [TournamentController::class, 'notification'])->name('notificationTournament');
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
         Route::post('/jadwal/{id}', [JadwalController::class, 'jadwal'])->name('ptournament.jadwal');
-        Route::post('/juara', [JuaraController::class, 'juara'])->name('ptournament.juara');
+        Route::post('/juara/{id}', [JuaraController::class, 'juara'])->name('ptournament.juara');
+        Route::patch('/addbracket/{tournament}', [TournamentController::class, 'bracket'])->name('add.bracket');
         Route::get('/tournaments/{id}/edit', [TournamentController::class, 'editStatus'])->name('editStatus');
         Route::put('/tournaments/{id}/update-status', [TournamentController::class, 'updateStatus'])->name('updateStatus');
     });
 
     Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
+    Route::get('/detailTournamentUser/{id}', [TournamentController::class, 'detailTournamentUser'])->name('tournament.detailUser');
 
     // User Routes
     Route::middleware('user')->group(function () {
@@ -93,16 +90,36 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/teams', TeamTournamentController::class);
         Route::get('teams/{team}', [TeamController::class, 'show'])->name('teams.show');
         Route::resource('team', TeamController::class);
+        Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
     });
 });
 
 Route::any('transaction/callback', [TransactionController::class, 'callback'])->name('transaction.callback');
-Route::resource('transaction', TransactionController::class)->parameters([
-    'transaction' => 'transaction:transaction_id'
-])->middleware('auth');
+Route::group(['prefix' => 'transaction', 'as' => 'transaction.', 'middleware' => 'auth'], function () {
+    // Route untuk menampilkan daftar transaksi
+    Route::get('/', [TransactionController::class, 'index'])->name('index');
+
+    // Route untuk menampilkan form pembuatan transaksi baru
+    Route::get('create', [TransactionController::class, 'create'])->name('create');
+
+    // Route untuk menyimpan transaksi baru
+    Route::post('/', [TransactionController::class, 'store'])->name('store');
+
+    // Route untuk menampilkan detail transaksi tertentu (menggunakan transaction_id)
+    Route::get('{transaction:transaction_id}', [TransactionController::class, 'show'])->name('show');
+
+    // Route untuk menampilkan form edit transaksi tertentu (menggunakan transaction_id)
+    Route::get('{transaction:transaction_id}/edit', [TransactionController::class, 'edit'])->name('edit');
+
+    // Route for updating transactions (changed name)
+    Route::match(['put', 'patch'], '{transaction:id}', [TransactionController::class, 'update'])->name('update');
+
+    // Route untuk menghapus transaksi tertentu (menggunakan transaction_id)
+    Route::delete('{transaction:transaction_id}', [TransactionController::class, 'destroy'])->name('destroy');
+});
+
 
 // Route::get('/landingTournamentFilter', [TournamentController::class, 'filterLanding'])->name('landingPage');
-Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
 
 
 Route::resource('member', MemberController::class);

@@ -1,14 +1,4 @@
-@php
-    if (auth()->user()->role === 'user') {
-        $layout = 'user.layouts.app';
-    } elseif (auth()->user()->role === 'organizer') {
-        $layout = 'layouts.penyelenggara';
-    } else {
-        $layout = 'admin.layouts.app';
-    }
-@endphp
-
-@extends($layout)
+@extends('layouts.panel')
 
 @section('content')
     <div class="card card-body mb-4 d-flex gap-2 flex-row justify-content-between">
@@ -35,9 +25,9 @@
                     </div>
                     <div class="col-md-6 text-end">
                         <h5>Ditagihkan Kepada</h5>
-                        <p class="fw-bold mb-2">{{ $paymentDetail['data']['customer_name'] }}</p>
-                        <p class="mb-1">{{ $paymentDetail['data']['customer_phone'] }}</p>
-                        <p class="mb-1">{{ $paymentDetail['data']['customer_email'] }}</p>
+                        <p class="fw-bold mb-2">{{ $transaction->customer_name }}</p>
+                        <p class="mb-1">{{ $transaction->customer_phone }}</p>
+                        <p class="mb-1">{{ $transaction->customer_email }}</p>
                     </div>
                 </div>
 
@@ -50,29 +40,26 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Produk</th>
-                                    <th>Jumlah</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($paymentDetail['data']['order_items'] as $orderItem)
-                                    <tr>
-                                        <th>#{{ $orderItem['sku'] }}</th>
-                                        <td>{{ $orderItem['name'] }}</td>
-                                        <td>1 item</td>
-                                        <td>{{ number_format($orderItem['subtotal'], 0, '.', ',') }} IDR</td>
-                                    </tr>
-                                @endforeach
                                 <tr>
-                                    <th>&nbsp;</th>
+                                    <th>#1</th>
+                                    <td>Pendaftaran "{{ $transaction->teamTournament->tournament->name }}"</td>
+                                    <td>{{ number_format($transaction->teamTournament->tournament->nominal, 2, ',', '.') }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>#2</th>
                                     <td>Biaya Admin</td>
-                                    <td>1 item</td>
-                                    <td>{{ number_format($paymentDetail['data']['total_fee'], 0, '.', ',') }} IDR</td>
+                                    <td>
+                                        {{ number_format($paymentList->where('code', $transaction->payment_method)->first()['fee'], 2, '.', ',') }}
+                                        IDR</td>
                                 </tr>
                                 <tr>
                                     <th colspan="2" class="text-end">Total</th>
-                                    <td>2 item</td>
-                                    <td>{{ number_format($orderItem['subtotal'] + $paymentDetail['data']['total_fee'], 0, '.', ',') }}
+                                    <td>{{ number_format($transaction->amount + $paymentList->where('code', $transaction->payment_method)->first()['fee'], 0, '.', ',') }}
                                         IDR</td>
                                 </tr>
                             </tbody>
@@ -80,7 +67,7 @@
                     </div>
                 </div>
 
-                @if (!in_array($transaction->status, ['PAID', 'EXPIRED', 'REFUND', 'FAILED']))
+                {{-- @if (!in_array($transaction->status, ['PAID', 'EXPIRED', 'REFUND', 'FAILED']))
                     <div class="mt-4">
                         <div class="row align-items-center">
                             <div class="col-md-9 @if (!$paymentDetail['data']['pay_code']) mx-auto text-center @endif">
@@ -102,10 +89,10 @@
                             @endif
                         </div>
                     </div>
-                @endif
+                @endif --}}
             </div>
 
-            <p class="mb-0 mt-3">Didukung oleh <a href="https://tripay.co.id">PT Trijaya Digital Group (Tripay)</a></p>
+            {{-- <p class="mb-0 mt-3">Didukung oleh <a href="https://tripay.co.id">PT Trijaya Digital Group (Tripay)</a></p> --}}
         </div>
 
         <div class="col-md-4">
@@ -128,7 +115,7 @@
                         <span><span
                                 class="badge bg-{{ \App\Enums\TransactionStatus::color($transaction->status) }}">{{ \App\Enums\TransactionStatus::label($transaction->status) }}</span></span>
                     </div>
-                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                    {{-- <div class="list-group-item d-flex justify-content-between align-items-center">
                         <span class="fw-bold">Biaya Admin</span>
                         <span>{{ number_format($paymentDetail['data']['total_fee'], 0, '.', ',') }} IDR</span>
                     </div>
@@ -137,6 +124,7 @@
                         <span>{{ number_format($orderItem['subtotal'] + $paymentDetail['data']['total_fee'], 0, '.', ',') }}
                             IDR</span>
                     </div>
+                    @if (auth()->user()->role !== 'user')
                     <div class="list-group-item d-flex justify-content-between align-items-center">
                         <span class="fw-bold">ID Referensi</span>
                         <div class="d-flex gap-2 align-items-center">
@@ -145,6 +133,26 @@
                             <span id="refId">{{ $transaction->ref_id }}</span>
                         </div>
                     </div>
+                    @endif
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">ID Transaksi</span>
+                        <div class="d-flex gap-2 align-items-center">
+                            <a class="text-white text-decoration-none" href="javascript:copyAndShowAlert('transId')"><i
+                                    class="ti ti-copy"></i></a>
+                            <span id="transId">{{ $transaction->transaction_id }}</span>
+                        </div>
+                    </div> --}}
+
+                    @if (auth()->user()->role !== 'user')
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">ID Referensi</span>
+                            <div class="d-flex gap-2 align-items-center">
+                                <a class="text-white text-decoration-none" href="javascript:copyAndShowAlert('refId')"><i
+                                        class="ti ti-copy"></i></a>
+                                <span id="refId">{{ $transaction->ref_id }}</span>
+                            </div>
+                        </div>
+                    @endif
                     <div class="list-group-item d-flex justify-content-between align-items-center">
                         <span class="fw-bold">ID Transaksi</span>
                         <div class="d-flex gap-2 align-items-center">
@@ -156,7 +164,68 @@
                 </div>
             </div>
 
-            <div class="card overflow-hidden">
+            @if (auth()->user()->role === 'organizer')
+                @php
+                    $income =
+                        $transaction->teamTournament->tournament->nominal -
+                        0.15 * $transaction->teamTournament->tournament->nominal;
+                @endphp
+                <div class="card mb-3">
+                    <h3 class="card-header">Pendapatan anda</h3>
+                    <div class="card-body">
+                        <p>Pendapatan anda ini adalah potongan 15% dari harga penjualan harga tiket turnamen.</p>
+
+                        <div class="mb-0 d-flex justify-content-between">
+                            <span>Total pendapatan anda</span>
+                            <span class="text-success">{{ number_format($income, 0, '.', ',') }} IDR</span>
+                        </div>
+                    </div>
+                </div>
+            @elseif(auth()->user()->role === 'admin')
+                @php
+                    $income = 0.15 * $transaction->teamTournament->tournament->nominal;
+                    @endphp
+                <div class="card mb-3">
+                    <h3 class="card-header">Pendapatan anda</h3>
+                    <div class="card-body">
+                        <p>Pendapatan anda ini adalah 15% dari harga penjualan harga tiket turnamen.</p>
+                        <div class="mb-0 d-flex justify-content-between">
+                            <span>Total pendapatan anda</span>
+                            <span class="text-success">{{ number_format($income, 0, '.', ',') }} IDR</span>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if (auth()->user()->role === 'organizer')
+                <div class="card mt-4">
+                    <h3 class="card-header">Ubah Status</h3>
+                    <div class="card-body">
+                        <form action="{{ route('transaction.update', $transaction->id) }}" method="post">
+                            @csrf
+                            @method('PATCH')
+
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select" name="status" id="status">
+                                    @foreach (\App\Enums\TransactionStatus::cases() as $status)
+                                        <option value="{{ $status->value }}"
+                                            {{ $status->value === $transaction->status ? 'selected' : '' }}>
+                                            {{ $status->label($status->value) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Ubah Status</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            @endif
+
+            {{-- <div class="card overflow-hidden">
                 <div class="card-body pb-0">
                     <h3 class="mb-0">Panduan Pembayaran</h3>
                 </div>
@@ -184,12 +253,12 @@
                     @endforeach
                 </div>
 
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
@@ -213,4 +282,4 @@
             }).showToast();
         }
     </script>
-@endsection
+@endpush

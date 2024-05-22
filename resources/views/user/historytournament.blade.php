@@ -21,16 +21,16 @@
                     @endphp
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="card">
-                            <img src="{{ asset("storage/{$tournament->images}") }}" alt="{{ $tournament->name }}"
+                            <img src="{{ asset("storage/{$tournament->tournament->images}") }}" alt="{{ $tournament->tournament->name }}"
                                 class="card-img-top" />
                             <div class="card-body">
                                 <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
-                                    <a href="{{ route('user.tournament.history', ['tournament' => $tournament->id]) }}">
-                                        <h3 class="mb-0">{{ $tournament->name }}</h3>
+                                    <a href="{{ route('user.tournament.history', ['tournament' => $tournament->tournament->id]) }}">
+                                        <h3 class="mb-0">{{ $tournament->tournament->name }}</h3>
                                     </a>
 
                                     @if (!$transactionExists && !$findIsSuccess->exists())
-                                        <a href="{{ route('transaction.create', ['tournament_id' => $tournament->id]) }}"
+                                        <a href="{{ route('transaction.create', ['tournament_id' => $tournament->tournament->id]) }}"
                                             class="btn btn-sm btn-primary">Bayar Sekarang</a>
                                     @endif
                                 </div>
