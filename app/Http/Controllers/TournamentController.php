@@ -412,10 +412,10 @@ class TournamentController extends Controller
         $tournament->status = $request->status;
 
         if ($request->status == 'rejected' && $request->has('reason')) {
-            $tournamentData['reason'] = $request->reason;
+            $tournament->reason = $request->reason;
         }
 
-        $tournament->update($tournamentData);
+        $tournament->save();
 
         return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');
     }
@@ -532,18 +532,23 @@ class TournamentController extends Controller
     }
     public function updateStatus(Request $request, $id)
     {
-        try {
+            // try {
+            //     $tournament = Tournament::findOrFail($id);
+            //     $aktif = $request->input('aktif');
+
+            //     // Update the 'aktif' column to "Aktif" or "Tidak Aktif"
+            //     $tournament->aktif = $aktif;
+            //     $tournament->save();
+
+            //     return response()->json(['success' => true]);
+            // } catch (\Exception $e) {
+            //     return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            // }
             $tournament = Tournament::findOrFail($id);
-            $aktif = $request->input('aktif');
-
-            // Update the 'aktif' column to "Aktif" or "Tidak Aktif"
-            $tournament->aktif = $aktif;
+            $tournament->aktif = $request->input('aktif');
             $tournament->save();
+            return redirect()->back()->with('success', 'Tournament berhasil diedit');
 
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
-        }
     }
 
 
