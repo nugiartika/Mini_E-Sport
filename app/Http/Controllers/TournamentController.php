@@ -28,7 +28,7 @@ class TournamentController extends Controller
     {
         $user = Auth::user();
         $tournaments = Tournament::where('users_id', auth()->user()->id)->get();
-        $counttournaments = $tournaments->count(); // Use the already fetched tournaments to count
+        $counttournaments = $tournaments->where('status', 'rejected')->count(); // Use the already fetched tournaments to count
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
