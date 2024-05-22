@@ -28,16 +28,13 @@
                 </div>
             </div>
         @empty
-
-        <div class="col-lg-12">
-            <center>
+            <div class="col-12 d-flex flex-column justify-content-center">
                 <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                    style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-            </center>
-            <h1 class="table-light" style="text-align: center;">
-                Tournament Tidak Tersedia
-            </h1>
-        </div>
+                    style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                <h4 class="table-light" style="text-align: center;">
+                    Data Tidak Tersedia
+                </h4>
+            </div>
         @endforelse
     </div>
 @endsection

@@ -257,7 +257,7 @@
                                         @endif
 
                                         <!-- Tombol Detail Tournament -->
-                                        <a href="{{ route('tournament.detailUser', $tournament->id) }}"
+                                        <a href="{{ route('tournament.detail', $tournament->id) }}"
                                             class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
                                             style="display: flex; justify-content: center; align-items: center;"
                                             title="Detail Tournament">
@@ -294,8 +294,7 @@
                         </div>
                     </div>
 
-
-               @empty
+                    @empty
                     <div class="col-lg-12">
                         <center>
                             <img src="{{ asset('assets/img/No-data.png') }}" alt=""

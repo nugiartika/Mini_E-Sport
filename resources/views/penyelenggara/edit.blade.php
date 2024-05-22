@@ -16,7 +16,7 @@
 @endsection
 @section('content')
     <style>
-         .custom-summernote {
+        .custom-summernote {
             color: white !important;
         }
 
@@ -179,7 +179,7 @@
         }
     </style>
 
-    <div class="layout-container">
+    {{-- <div class="layout-container"> --}}
 
         {{-- @if (auth()->check())
             <div class="user-account-popup p-4">
@@ -191,11 +191,13 @@
                 </div>
             </div>
         @endif --}}
-        <form action="{{ route('ptournament.updatetour', ['id' => $id]) }}" method="POST" enctype="multipart/form-data" id="regForm">
+        <form action="{{ route('ptournament.updatetour', ['id' => $id]) }}" method="POST" enctype="multipart/form-data"
+            id="regForm">
             @csrf
             <div class="row justify-content-center">
+                <div class="col-sm-6 col-xxl-5">
 
-                <div class="card">
+                <div class="card w-100">
                     <div class="card-body">
                         <h1>Edit Turnamen</h1>
                         <div class="tab">
@@ -203,7 +205,7 @@
                                 <label for="name" class="form-label">Nama Turnamen</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     placeholder="Mis: Mobile Legends" id="name" name="name"
-                                    value="{{ old('name', $tournament->name ) }}">
+                                    value="{{ old('name', $tournament->name) }}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -215,7 +217,8 @@
                                 <div class="col-md-6">
                                     <label for="pendaftaran" class="form-label">Tanggal Pendaftaran</label>
                                     <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror"
-                                        id="pendaftaran" name="pendaftaran" value="{{ old('pendaftaran', $tournament->pendaftaran ) }}">
+                                        id="pendaftaran" name="pendaftaran"
+                                        value="{{ old('pendaftaran', $tournament->pendaftaran) }}">
                                     @error('pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -226,7 +229,8 @@
                                     <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
                                     <input type="date"
                                         class="form-control @error('end_pendaftaran') is-invalid @enderror"
-                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran', $tournament->end_pendaftaran ) }}">
+                                        id="end_pendaftaran" name="end_pendaftaran"
+                                        value="{{ old('end_pendaftaran', $tournament->end_pendaftaran) }}">
                                     @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -239,7 +243,8 @@
                                 <div class="col-md-6">
                                     <label for="permainan" class="form-label">Mulai Kompetisi</label>
                                     <input type="date" class="form-control @error('permainan') is-invalid @enderror"
-                                        id="permainan" name="permainan" value="{{ old('permainan', $tournament->permainan ) }}">
+                                        id="permainan" name="permainan"
+                                        value="{{ old('permainan', $tournament->permainan) }}">
                                     @error('permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -250,7 +255,8 @@
                                 <div class="col-md-6">
                                     <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
                                     <input type="date" class="form-control @error('end_permainan') is-invalid @enderror"
-                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan', $tournament->end_permainan ) }}">
+                                        id="end_permainan" name="end_permainan"
+                                        value="{{ old('end_permainan', $tournament->end_permainan) }}">
                                     @error('end_permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -262,7 +268,7 @@
                             <div class="mb-3">
                                 <label for="slotTeam" class="form-label">Jumlah Tim</label>
                                 <input type="number" class="form-control @error('slotTeam') is-invalid @enderror"
-                                    id="slotTeam" name="slotTeam" value="{{ old('slotTeam', $tournament->slotTeam ) }}">
+                                    id="slotTeam" name="slotTeam" value="{{ old('slotTeam', $tournament->slotTeam) }}">
                                 @error('slotTeam')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -310,7 +316,7 @@
                             <div class="mb-3">
                                 <label for="contact" class="form-label">Kontak Penanggungjawab</label>
                                 <input type="number" class="form-control @error('contact') is-invalid @enderror"
-                                    id="contact" name="contact" value="{{ old('contact', $tournament->contact ) }}">
+                                    id="contact" name="contact" value="{{ old('contact', $tournament->contact) }}">
                                 @error('contact')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -340,7 +346,7 @@
                                     <option value="" selected>Select Game</option>
                                     @foreach ($category as $kat)
                                         <option value="{{ $kat->id }}"
-                                            {{ old('categories_id',$tournament->categories_id) == $kat->id ? 'selected' : '' }}>
+                                            {{ old('categories_id', $tournament->categories_id) == $kat->id ? 'selected' : '' }}>
                                             {{ $kat->name }}
                                         </option>
                                     @endforeach
@@ -357,9 +363,10 @@
                                 <input type="file" class="form-control @error('images') is-invalid @enderror"
                                     id="images" name="images">
                                 @if ($tournament->images)
-                                    <img src="{{ asset('storage/' . $tournament->images) }}" alt="" width="50" height="50">
+                                    <img src="{{ asset('storage/' . $tournament->images) }}" alt=""
+                                        width="50" height="50">
                                 @else
-                                No Image
+                                    No Image
                                 @endif
                                 @error('images')
                                     <span class="invalid-feedback" role="alert">
@@ -371,7 +378,7 @@
                         <div class="tab">
                             <div class="mb-3">
                                 <label for="description" class="form-label">Deskripsi</label>
-                                <textarea name="description" id="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('description', $tournament->description ) }}</textarea>
+                                <textarea name="description" id="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('description', $tournament->description) }}</textarea>
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -381,20 +388,38 @@
                             <div class="mb-3">
                                 <label for="rule" class="form-label">Aturan Main</label>
                                 <textarea name="rule" id="summernoteModalRule" placeholder="Jelaskan aturan main dalam turnamen"
-                                    class="form-control" aria-label="With textarea">{{ old('rule', $tournament->rule ) }}</textarea>
+                                    class="form-control" aria-label="With textarea">{{ old('rule', $tournament->rule) }}</textarea>
 
                                 @error('rule')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
+
                             <div class="mb-3">
+                                <label for="paidment" class="form-label">Pilih Status Pembayaran</label>
+                                <select name="paidment" id="paidment" class="form-control">
+                                    <option value="Berbayar" {{ old('paidment') == 'Berbayar' ? 'selected' : '' }}>Berbayar</option>
+                                    <option value="Gratis" {{ old('paidment') == 'Gratis' ? 'selected' : '' }}>Gratis</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3" id="nominal" style="display: none;">
+                                <label for="nominal_input" class="form-label">Masukkan Nominal</label>
+                                @error('nominal')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <input type="number" name="nominal" id="nominal_input" class="form-control">
+                            </div>
+
+
+                            {{-- <div class="mb-3">
                                 <label for="paidment" class="form-label">Event Berbayar atau Gratis?</label>
                                 @error('paidment')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                                 <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
                                     <option value="" selected disabled>Pilih</option>
-                                    <option value="Berbayar" {{ old('paidment') == 'paid' ? 'selected' : '' }}>
+                                    <option value="Berbayar" {{ old('paidment') == 'Berbayar' ? 'selected' : '' }}>
                                         Berbayar
                                     </option>
                                     <option value="Gratis" {{ old('paidment') == 'Gratis' ? 'selected' : '' }}>
@@ -406,8 +431,8 @@
                                 @error('nominal')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="number" name="nominal" id="nominal_input" class="form-control" value="{{ old('contact', $tournament->contact ) }}">
-                            </div>
+                                <input type="number" name="nominal" id="nominal_input" class="form-control">
+                            </div> --}}
                         </div>
                         <div class="d-flex gap-2 justify-content-between">
                             <button type="button" class="btn btn-secondary"
@@ -431,8 +456,9 @@
                     </div>
                 </div>
             </div>
+            </div>
         </form>
-    </div>
+    {{-- </div> --}}
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
@@ -443,7 +469,7 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 
     {{-- script untuk memunculkan form nominal apabila memilih paid --}}
-    <script>
+    {{-- <script>
         function toggleDiv1() {
             let value = document.getElementById("paidment").value;
             console.log("Nilai yang dipilih:", value); // Tambahkan pesan log untuk memeriksa nilai yang dipilih
@@ -457,6 +483,29 @@
                 div.style.display = "none";
             }
         }
+    </script> --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function toggleDiv1() {
+                let value = document.getElementById("paidment").value;
+                let div = document.getElementById("nominal");
+                let inputNominal = document.getElementById("nominal_input");
+
+                if (value === "Berbayar") {
+                    div.style.display = "block";
+                    inputNominal.value = "{{ old('nominal') }}"; // Set old value to the input
+                } else {
+                    div.style.display = "none";
+                    inputNominal.value = ""; // Clear input value if not Berbayar
+                }
+            }
+
+            // Initialize the state on page load
+            toggleDiv1();
+
+            // Add event listener for the dropdown change
+            document.getElementById("paidment").addEventListener('change', toggleDiv1);
+        });
     </script>
     {{-- script untuk form wizard --}}
     <script>
@@ -464,12 +513,12 @@
         showTab(currentTab);
 
         @if ($errors->any())
-        swal({
-            title: "Error",
-            text: "{{ $errors->all()[0] }}",
-            icon: "error",
-            button: "ok",
-        });
+            swal({
+                title: "Error",
+                text: "{{ $errors->all()[0] }}",
+                icon: "error",
+                button: "ok",
+            });
         @endif
 
         function showTab(n) {
@@ -589,14 +638,11 @@
                 tabsize: 2,
                 height: 120,
                 toolbar: [
-                    ['style', ['style']],
                     ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
+                    ['insert', ['link', 'picture']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
+                ],
             });
         });
     </script>

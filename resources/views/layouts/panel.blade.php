@@ -111,6 +111,9 @@
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <div class="navbar-nav align-items-center">
+
+
+
                             <div class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
@@ -135,9 +138,22 @@
                                     </li>
                                 </ul>
                             </div>
+
                         </div>
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            @if (auth()->user()->role === 'organizer')
+                             <!-- Notification -->
+                             <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1 mx-2">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="{{ route('notificationTournament') }}"
+                                    data-bs-target="#Notifikasi" aria-expanded="false">
+                                    <i class="ti ti-bell ti-md" style="color: white;"></i>
+                                    <span class="badge bg-danger rounded-pill badge-notifications">{{ $counttournaments }}</span>
+                                </a>
+                            </li>
+                            <!-- End Notification -->
+                            @endif
+
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
@@ -276,47 +292,36 @@
 <script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
 
-{{-- @if ($errors->any())
-<script> --}}
-    {{-- // toastr.error(`{!! implode('\n', $errors->all()) !!}`);
-//     toastr.error("{{ session('error') }}");
-// </script>
-// @endif --}}
+@if ($errors->any())
+<script>
+ toastr.error(`{!! implode('\n', $errors->all()) !!}`);
+    // toastr.error("{{ session('error') }}");
+</script>
+@endif
 
 @if (session('warning'))
 <script>
-    toastr.warning("{{ session('warning') }}");
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "{{ session('warning') }}"
+    });
 </script>
 @endif
+
 
 @if (session('success'))
-<script>
-    toastr.success("{{ session('success') }}");
-</script>
+    <script>
+        Swal.fire({
+            // title: "Good job!",
+            text: "{{ session('success') }}",
+            icon: "success"
+        });
+    </script>
 @endif
 
-<script>
-    function swalpFunction() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log("Data dihapus");
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
-            }
-        });
-    }
-</script>
+
+
 
     @stack('script')
 </body>

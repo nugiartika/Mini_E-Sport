@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id')->constrained()->nullable();
+            $table->foreignId('team_id')->constrained()->onDelete('cascade')->nullable();
             $table->string('member')->nullable();
             $table->string('nickname')->nullable();
             $table->enum('status', ['inti','cadangan'])->nullable();
