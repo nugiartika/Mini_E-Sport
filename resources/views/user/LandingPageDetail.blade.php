@@ -57,7 +57,7 @@
                     <div class="d-flex align-items-center gap-4 mb-4">
                         <a href="javascript:void(0)" onclick="window.history.back()" class="back-btn"><i
                                 class="ti ti-arrow-narrow-left fs-2xl"></i></a>
-                        <h3 class="tcn-1 cursor-scale growDown title-anim">TDL SEA Pro Series 11</h3>
+                        <h3 class="tcn-1 cursor-scale growDown title-anim">Detail Tournament </h3>
                     </div>
                 </div>
             </div>
@@ -237,29 +237,54 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
-                                    <h5 class="acc-header-area">
-                                        <button class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
-                                            type="button">
-                                            Aturan Permainan
-                                        </button>
-                                    </h5>
-                                    <div class="acc-content-area">
-                                        <div class="content-body mt-lg-6 mt-4">
-                                            <ol class="tcn-6 lower-alpha-right-parentheses d-grid gap-3">
-                                                <li>Treat all members and staff with courtesy and respect.
-                                                    Discriminatory or offensive behavior will not be tolerated.
-                                                </li>
-                                                <li>Communication Maintain open and constructive communication.
-                                                    Address concerns through the appropriate channels.</li>
-                                                <li>Emergency Procedures: Familiarize yourself with evacuation
-                                                    procedures and the location of emergency exits.</li>
-                                                <li>Safeguard sensitive information and respect the privacy of
-                                                    others.</li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                </div> --}}Fr tcn-6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- footer section start  -->
+    <!-- footer section start  -->
+    <footer class="footer bgn-4 bt">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-3 col-sm-6 br py-lg-20 pt-sm-15 pt-10 footer-card-area">
+                    <div class="py-lg-10">
+                        <div class="footer-logo mb-8">
+                            <a href="#" class="d-grid gap-6">
+                                <div class="flogo-1">
+                                    <img class="w-100" src="{{ asset('assets/img/humma-01.png') }}" alt="favicon">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="social-links">
+                            <ul class="d-flex align-items-center gap-3 flex-wrap">
+                                <li>
+                                    <a href="#"><i class="ti ti-brand-facebook fs-2xl"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="ti ti-brand-twitter fs-2xl"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="ti ti-brand-youtube fs-2xl"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="ti ti-brand-linkedin fs-2xl"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="ti ti-brand-instagram fs-2xl"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 br br-res py-lg-20 pt-sm-15 pt-10 footer-card-area">
+                    <div class="py-lg-10">
+                        <h4 class="footer-title mb-8 title-anim">Quick Links</h4>
+                        <ul class="footer-list d-grid gap-4">
+                            <li><a href="tournaments.html" class="footer-link d-flex align-items-center tcn-6">
                                     <i class="ti ti-chevron-right"></i> Tournaments</a></li>
                             <li><a href="game.html" class="footer-link d-flex align-items-center tcn-6"> <i
                                         class="ti ti-chevron-right"></i> Games </a></li>
@@ -301,9 +326,10 @@
             </div>
             <div class="row pb-4 pt-lg-4 pt-8 justify-content-between g-2">
                 <div class="col-xxl-4 col-lg-6 order-last order-lg-first">
-                    <span>Copyright © <span class="currentYear"></span> Magang | 2024 <a href=""
-                            class="tcp-1">Humma </a></span>
+                    <span>Copyright © <span class="currentYear"></span> Humma <a href="" class="tcp-1">Esport
+                        </a></span>
                 </div>
+
             </div>
         </div>
         <!-- footer banner img  -->
@@ -311,6 +337,7 @@
             <img class="w-100" src="{{ asset('assets/img/fbanner.png') }}" alt="banner">
         </div>
     </footer>
+    <!-- footer section end  -->
     <!-- footer section end  -->
 
     <!-- ==== js dependencies start ==== -->

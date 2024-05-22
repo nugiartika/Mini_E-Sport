@@ -265,19 +265,16 @@
                                             <img class="w-100" src="{{ asset('storage/' . $Category->photo) }}"
                                                 alt="tournament">
                                         </div>
-                                        {{-- <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                         <span class="dot-icon alt-icon ps-3">Playing</span>
-                                    </span> --}}
+
                                     </div>
                                     <div class="tournament-content px-xl-4 px-sm-2">
                                         <div class="tournament-info mb-5">
-                                            <a href="tournaments-details.html" class="d-block">
+                                            <a href="" class="d-block">
                                                 <h4
                                                     class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                     {{ $Category->name }}</h4>
-
+                                                        
                                             </a>
-                                            {{-- <span class="tcn-6 fs-sm">Torneo Individual</span> --}}
                                         </div>
                                         <div class="hr-line line3"></div>
                                         <div class="card-info d-flex justify-content-center gap-3 flex-wrap my-5  ">
@@ -365,13 +362,21 @@
                                             <div
                                                 class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                                 <div class="d-flex align-items-center gap-2">
-                                                    <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                                    <span class="tcn-1 fs-sm">75</span>
                                                 </div>
                                                 <div class="v-line"></div>
                                                 <div class="d-flex align-items-center gap-2">
-                                                    <i class="ti ti-gift"></i> <span
-                                                        class="tcn-1 fs-sm">{{ $Tournament->status }}</span>
+                                                    <i class="ti ti-gift"></i> <span class="tcn-1 fs-sm">
+                                                        @if ($Tournament->status === 'pending')
+                                                            Status: Menunggu
+                                                        @elseif ($Tournament->status === 'accepted')
+                                                            Status: Sedang Berlangsung
+                                                        @elseif ($Tournament->status === 'rejected')
+                                                            Status: Ditolak
+                                                        @else
+                                                            Status: Tidak Diketahui
+                                                        @endif
+
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div
@@ -404,8 +409,8 @@
 
                                             </div>
                                             <div class="col-md-6 col-sm-4 text-sm-end">
-                                                    <a href="{{ route('landingpageDetailTournamet', ['id' => $Tournament->id]) }}"
-                                                        class="btn-half-border position-relative d-inline-block py-2 px-3 bgp-1 rounded-pill">Detail</a>
+                                                <a href="{{ route('landingpageDetailTournamet', ['id' => $Tournament->id]) }}"
+                                                    class="btn-half-border position-relative d-inline-block py-2 px-3 bgp-1 rounded-pill">Detail</a>
 
                                             </div>
                                             {{-- <a href="tournaments-details.html" class="btn2">

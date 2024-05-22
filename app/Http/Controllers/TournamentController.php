@@ -28,7 +28,7 @@ class TournamentController extends Controller
     {
         $user = Auth::user();
         $tournaments = Tournament::where('users_id', auth()->user()->id)->get();
-        $counttournaments = $tournaments->count(); // Use the already fetched tournaments to count
+        $counttournaments = $tournaments->where('status', 'rejected')->count(); // Use the already fetched tournaments to count
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
@@ -331,13 +331,14 @@ class TournamentController extends Controller
         // dd($teamCounts);
         $category = Category::all();
         $jadwals = jadwal::all();
+        $juaras = juara::find($id);
         $juaras = juara::all();
         $selectedTournament = Tournament::findOrFail($id);
         $teams = team::all();
-        $tournament = Tournament::find($id);
+        $tournaments = Tournament::find($id);
         $prizes = tournament_prize::where('tournament_id', $id)->get();
 
-        return view('penyelenggara.detailtournament', compact('tournament', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts', 'selectedTournament'));
+        return view('penyelenggara.detailtournament', compact('tournaments', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
 
     public function bracket(Tournament $tournament, Request $request)
@@ -531,18 +532,23 @@ class TournamentController extends Controller
     }
     public function updateStatus(Request $request, $id)
     {
-        try {
+            // try {
+            //     $tournament = Tournament::findOrFail($id);
+            //     $aktif = $request->input('aktif');
+
+            //     // Update the 'aktif' column to "Aktif" or "Tidak Aktif"
+            //     $tournament->aktif = $aktif;
+            //     $tournament->save();
+
+            //     return response()->json(['success' => true]);
+            // } catch (\Exception $e) {
+            //     return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            // }
             $tournament = Tournament::findOrFail($id);
-            $aktif = $request->input('aktif');
-
-            // Update the 'aktif' column to "Aktif" or "Tidak Aktif"
-            $tournament->aktif = $aktif;
+            $tournament->aktif = $request->input('aktif');
             $tournament->save();
+            return redirect()->back()->with('success', 'Tournament berhasil diedit');
 
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
-        }
     }
 
 

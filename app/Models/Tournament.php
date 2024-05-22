@@ -15,7 +15,9 @@ class Tournament extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
+        'end_pendaftaran' => 'datetime',
         'end_permainan' => 'datetime',
+        'pendaftaran' => 'datetime',
         'permainan' => 'datetime',
     ];
 
@@ -35,7 +37,7 @@ class Tournament extends Model
 
     public function prizepool ()
     {
-        return $this->hasMany(Prizepool::class,'prizepool_id');
+        return $this->hasMany(Prizepool::class, 'prizepool_id', 'id');
     }
 
     public function jadwal ()

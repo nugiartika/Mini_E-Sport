@@ -12,8 +12,8 @@
 
     <div class="row">
         <div class="col-md-8">
-            <div class="card card-body">
-                <div class="row">
+            <div class="card card-body mb-4">
+                {{-- <div class="row">
                     <div class="col-md-6">
                         <h5>Penagih</h5>
 
@@ -29,7 +29,7 @@
                         <p class="mb-1">{{ $transaction->customer_phone }}</p>
                         <p class="mb-1">{{ $transaction->customer_email }}</p>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="mt-4 mb-2">
                     <h3>Detail Tagihan</h3>
@@ -91,6 +91,39 @@
                     </div>
                 @endif --}}
             </div>
+
+            @if (auth()->user()->role === 'organizer')
+                @php
+                    $income =
+                        $transaction->teamTournament->tournament->nominal -
+                        0.15 * $transaction->teamTournament->tournament->nominal;
+                @endphp
+                <div class="card mb-3">
+                    <h3 class="card-header">Pendapatan anda</h3>
+                    <div class="card-body">
+                        <p>Pendapatan anda ini adalah potongan 15% dari harga penjualan harga tiket turnamen.</p>
+
+                        <div class="mb-0 d-flex justify-content-between">
+                            <span>Total pendapatan anda</span>
+                            <span class="text-success">{{ number_format($income, 0, '.', ',') }} IDR</span>
+                        </div>
+                    </div>
+                </div>
+            @elseif(auth()->user()->role === 'admin')
+                @php
+                    $income = 0.15 * $transaction->teamTournament->tournament->nominal;
+                    @endphp
+                <div class="card mb-3">
+                    <h3 class="card-header">Pendapatan anda</h3>
+                    <div class="card-body">
+                        <p>Pendapatan anda ini adalah 15% dari harga penjualan harga tiket turnamen.</p>
+                        <div class="mb-0 d-flex justify-content-between">
+                            <span>Total pendapatan anda</span>
+                            <span class="text-success">{{ number_format($income, 0, '.', ',') }} IDR</span>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             {{-- <p class="mb-0 mt-3">Didukung oleh <a href="https://tripay.co.id">PT Trijaya Digital Group (Tripay)</a></p> --}}
         </div>
@@ -163,39 +196,6 @@
                     </div>
                 </div>
             </div>
-
-            @if (auth()->user()->role === 'organizer')
-                @php
-                    $income =
-                        $transaction->teamTournament->tournament->nominal -
-                        0.15 * $transaction->teamTournament->tournament->nominal;
-                @endphp
-                <div class="card mb-3">
-                    <h3 class="card-header">Pendapatan anda</h3>
-                    <div class="card-body">
-                        <p>Pendapatan anda ini adalah potongan 15% dari harga penjualan harga tiket turnamen.</p>
-
-                        <div class="mb-0 d-flex justify-content-between">
-                            <span>Total pendapatan anda</span>
-                            <span class="text-success">{{ number_format($income, 0, '.', ',') }} IDR</span>
-                        </div>
-                    </div>
-                </div>
-            @elseif(auth()->user()->role === 'admin')
-                @php
-                    $income = 0.15 * $transaction->teamTournament->tournament->nominal;
-                    @endphp
-                <div class="card mb-3">
-                    <h3 class="card-header">Pendapatan anda</h3>
-                    <div class="card-body">
-                        <p>Pendapatan anda ini adalah 15% dari harga penjualan harga tiket turnamen.</p>
-                        <div class="mb-0 d-flex justify-content-between">
-                            <span>Total pendapatan anda</span>
-                            <span class="text-success">{{ number_format($income, 0, '.', ',') }} IDR</span>
-                        </div>
-                    </div>
-                </div>
-            @endif
 
             @if (auth()->user()->role === 'organizer')
                 <div class="card mt-4">

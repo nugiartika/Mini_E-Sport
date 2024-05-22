@@ -242,7 +242,7 @@
                                 <div class="col-md-6">
                                     <label for="pendaftaran" class="form-label">Tanggal Pendaftaran</label>
                                     <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror"
-                                        id="pendaftaran" name="pendaftaran" value="{{ old('pendaftaran') }}">
+                                        id="pendaftaran" name="pendaftaran" value="{{ old('pendaftaran') }}" min="{{ now()->toDateString()}}">
                                     @error('pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -253,7 +253,7 @@
                                     <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
                                     <input type="date"
                                         class="form-control @error('end_pendaftaran') is-invalid @enderror"
-                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran') }}">
+                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran') }}" min="{{ now()->toDateString()}}">
                                     @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -267,7 +267,7 @@
                                 <div class="col-md-6">
                                     <label for="permainan" class="form-label">Mulai Kompetisi</label>
                                     <input type="date" class="form-control @error('permainan') is-invalid @enderror"
-                                        id="permainan" name="permainan" value="{{ old('permainan') }}">
+                                        id="permainan" name="permainan" value="{{ old('permainan') }}" min="{{ now()->toDateString()}}">
                                     @error('permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -277,7 +277,7 @@
                                 <div class="col-md-6">
                                     <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
                                     <input type="date" class="form-control @error('end_permainan') is-invalid @enderror"
-                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}">
+                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}" min="{{ now()->toDateString()}}">
                                     @error('end_permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -459,10 +459,6 @@
 @endsection
 
 @push('script')
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 
     {{-- script untuk memunculkan form nominal apabila memilih paid --}}

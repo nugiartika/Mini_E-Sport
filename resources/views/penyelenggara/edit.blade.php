@@ -1,4 +1,4 @@
-@extends('penyelenggara.layouts.app')
+@extends('layouts.panel')
 
 @section('style')
 
@@ -14,6 +14,7 @@
         </style>
     </head>
 @endsection
+
 @section('content')
     <style>
         .custom-summernote {
@@ -179,23 +180,11 @@
         }
     </style>
 
-    {{-- <div class="layout-container"> --}}
-
-        {{-- @if (auth()->check())
-            <div class="user-account-popup p-4">
-                <div class="account-items d-grid gap-1" data-tilt>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button class="bttn account-item" type="submit">Log Out</button>
-                    </form>
-                </div>
-            </div>
-        @endif --}}
-        <form action="{{ route('ptournament.updatetour', ['id' => $id]) }}" method="POST" enctype="multipart/form-data"
-            id="regForm">
-            @csrf
-            <div class="row justify-content-center">
-                <div class="col-sm-6 col-xxl-5">
+    <form action="{{ route('ptournament.updatetour', ['id' => $id]) }}" method="POST" enctype="multipart/form-data"
+        id="regForm">
+        @csrf
+        <div class="row justify-content-center">
+            <div class="col-sm-6 col-xxl-5">
 
                 <div class="card w-100">
                     <div class="card-body">
@@ -218,7 +207,7 @@
                                     <label for="pendaftaran" class="form-label">Tanggal Pendaftaran</label>
                                     <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror"
                                         id="pendaftaran" name="pendaftaran"
-                                        value="{{ old('pendaftaran', $tournament->pendaftaran) }}">
+                                        value="{{ old('pendaftaran', $tournament->pendaftaran) }}" min="{{ now()->toDateString()}}">
                                     @error('pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -230,7 +219,7 @@
                                     <input type="date"
                                         class="form-control @error('end_pendaftaran') is-invalid @enderror"
                                         id="end_pendaftaran" name="end_pendaftaran"
-                                        value="{{ old('end_pendaftaran', $tournament->end_pendaftaran) }}">
+                                        value="{{ old('end_pendaftaran', $tournament->end_pendaftaran) }}" min="{{ now()->toDateString()}}">
                                     @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -244,7 +233,7 @@
                                     <label for="permainan" class="form-label">Mulai Kompetisi</label>
                                     <input type="date" class="form-control @error('permainan') is-invalid @enderror"
                                         id="permainan" name="permainan"
-                                        value="{{ old('permainan', $tournament->permainan) }}">
+                                        value="{{ old('permainan', $tournament->permainan) }}" min="{{ now()->toDateString()}}">
                                     @error('permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -256,7 +245,7 @@
                                     <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
                                     <input type="date" class="form-control @error('end_permainan') is-invalid @enderror"
                                         id="end_permainan" name="end_permainan"
-                                        value="{{ old('end_permainan', $tournament->end_permainan) }}">
+                                        value="{{ old('end_permainan', $tournament->end_permainan) }}" min="{{ now()->toDateString()}}">
                                     @error('end_permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -264,6 +253,7 @@
                                     @enderror
                                 </div>
                             </div>
+
 
                             <div class="mb-3">
                                 <label for="slotTeam" class="form-label">Jumlah Tim</label>
@@ -279,37 +269,47 @@
                         <div class="tab">
                             <div class="mb-3">
                                 <label for="prizepol" class="form-label">Hadiah Turnamen</label>
-                                <form id="prizepol-form">
+                                <div id="prizepol-form">
                                     <div id="inputs">
-                                        <div class="form-prize">
-                                            <div class="input-group">
-                                                <select class="form-control prize-dropdown" name="prizepool_id[]">
-                                                    <option value="">Pilih Hadiah</option>
-                                                    @foreach ($prizes as $prize)
-                                                        <option value="{{ $prize->id }}" {{ old('prizepool_id') && in_array($prize->id, old('prizepool_id')) ? 'selected' : '' }}>
-                                                            {{ $prize->prize }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('prizepool_id')
-                                                    <p class="text-danger">{{ $message }}</p>
-                                                @enderror
+                                            @foreach ($tournament->tournament_prize as $index => $prizepools)
+                                            <div class="form-prize @if($index > 0) pt-3 mt-3 border-top @endif">
+                                                <div class="input-group">
+                                                    <select class="form-select prize-dropdown" name="prizepool_id[]">
+                                                        <option value="">Pilih Hadiah</option>
+                                                        @foreach ($prizes as $prize)
+                                                            <option value="{{ $prize->id }}"
+                                                                @php
+                                                                $selectedPrizeIds = old('prizepool_id', [$prizepools->id]); // Ensure it's an array
+                                                                if (!is_array($selectedPrizeIds)) {
+                                                                    $selectedPrizeIds = [$selectedPrizeIds];
+                                                                } @endphp
+                                                                {{ in_array($prize->id, $selectedPrizeIds) ? 'selected' : '' }}>
+                                                                {{ $prize->prize }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('prizepool_id')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
 
+                                                    @if($index === 0)
+                                                    <button type="button" class="addRow rounded-end btn btn-info"><i
+                                                            class="ti ti-plus fs-2xl"></i></button>
+                                                    @endif
 
-                                                <button type="button" class="addRow rounded-end btn btn-info"><i
-                                                        class="ti ti-plus fs-2xl"></i></button>
+                                                    <button type="button" class="removeRow @if($index === 0) d-none @endif btn btn-danger"><i
+                                                            class="ti ti-trash fs-2xl"></i></button>
+                                                </div>
 
-                                                <button type="button" class="removeRow d-none btn btn-danger"><i
-                                                        class="ti ti-trash fs-2xl"></i></button>
+                                                <div class="w-100 mt-3 noteForm" style="display: block;">
+                                                    <input class="form-control" type="text"
+                                                        placeholder="Isikan deskripsi hadiah" value="{{ $prizepools->note }}" name="note[]" />
+                                                </div>
                                             </div>
-
-                                            <div class="w-100 mt-3 noteForm" style="display: none;">
-                                                <input class="form-control" type="text"
-                                                    placeholder="Isikan deskripsi hadiah" name="note[]" />
-                                            </div>
+                                            @endforeach
                                         </div>
-                                    </div>
-                                </form>
+
+                                </div>
 
                             </div>
 
@@ -323,21 +323,6 @@
                                     </span>
                                 @enderror
                             </div>
-
-                            {{-- <div class="mb-3">
-                                <label for="kategori_id" class="form-label">Kategori Produk</label>
-                                <select class="form-select @error('kategori_id') is-invalid @enderror" name="kategori_id" aria-label="Default select example">
-                                    <option value="" {{ old('kategori_id', $barang->kategori_id) ? '' : 'selected' }}>- Pilih barang -</option>
-                                    @foreach ($kategoriOptions as $option)
-                                    <option value="{{ $option->id }}" {{ old('kategori_id', $barang->kategori_id) == $option->id ? 'selected' : '' }}>
-                                        {{ $option->nama_kategori }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('kategori_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div> --}}
 
                             <div class="mb-3">
                                 <label for="category" class="form-label">GAME</label>
@@ -364,7 +349,7 @@
                                     id="images" name="images">
                                 @if ($tournament->images)
                                     <img src="{{ asset('storage/' . $tournament->images) }}" alt=""
-                                        width="50" height="50">
+                                        class="w-100 mt-3 rounded-3">
                                 @else
                                     No Image
                                 @endif
@@ -398,51 +383,34 @@
                             <div class="mb-3">
                                 <label for="paidment" class="form-label">Pilih Status Pembayaran</label>
                                 <select name="paidment" id="paidment" class="form-control">
-                                    <option value="Berbayar" {{ old('paidment') == 'Berbayar' ? 'selected' : '' }}>Berbayar</option>
-                                    <option value="Gratis" {{ old('paidment') == 'Gratis' ? 'selected' : '' }}>Gratis</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3" id="nominal" style="display: none;">
-                                <label for="nominal_input" class="form-label">Masukkan Nominal</label>
-                                @error('nominal')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <input type="number" name="nominal" id="nominal_input" class="form-control">
-                            </div>
-
-
-                            {{-- <div class="mb-3">
-                                <label for="paidment" class="form-label">Event Berbayar atau Gratis?</label>
-                                @error('paidment')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                                <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
-                                    <option value="" selected disabled>Pilih</option>
                                     <option value="Berbayar" {{ old('paidment') == 'Berbayar' ? 'selected' : '' }}>
-                                        Berbayar
+                                        Berbayar</option>
+                                    <option value="Gratis" {{ old('paidment') == 'Gratis' ? 'selected' : '' }}>Gratis
                                     </option>
-                                    <option value="Gratis" {{ old('paidment') == 'Gratis' ? 'selected' : '' }}>
-                                        Gratis</option>
                                 </select>
                             </div>
+
                             <div class="mb-3" id="nominal" style="display: none;">
                                 <label for="nominal_input" class="form-label">Masukkan Nominal</label>
+                                <input type="text" name="nominal" id="nominal_input" value="{{ old('nominal') }}"
+                                    class="form-control" />
+
                                 @error('nominal')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="number" name="nominal" id="nominal_input" class="form-control">
-                            </div> --}}
+                            </div>
                         </div>
                         <div class="d-flex gap-2 justify-content-between">
                             <button type="button" class="btn btn-secondary"
                                 onclick="window.location.href='/ptournament'">Batal</button>
 
                             <div class="d-flex align-items-center gap-2">
-                                <button type="button" id="prevBtn" onclick="nextPrev(-1)"
+                                <button type="button" disabled id="prevBtn" onclick="nextPrev(-1)"
                                     class="btn btn-danger">Kembali</button>
                                 <button type="button" id="nextBtn" onclick="nextPrev(1)"
                                     class="btn btn-success">Lanjut</button>
+                                <button type="submit" id="submitButton"
+                                    class="btn d-none btn-success">Perbaharui</button>
                             </div>
                         </div>
                         <div>
@@ -456,34 +424,31 @@
                     </div>
                 </div>
             </div>
-            </div>
-        </form>
+        </div>
+    </form>
     {{-- </div> --}}
+@endsection
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
+@push('script')
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 
     {{-- script untuk memunculkan form nominal apabila memilih paid --}}
     {{-- <script>
-        function toggleDiv1() {
-            let value = document.getElementById("paidment").value;
-            console.log("Nilai yang dipilih:", value); // Tambahkan pesan log untuk memeriksa nilai yang dipilih
-            let div = document.getElementById("nominal");
+    function toggleDiv1() {
+        let value = document.getElementById("paidment").value;
+        console.log("Nilai yang dipilih:", value); // Tambahkan pesan log untuk memeriksa nilai yang dipilih
+        let div = document.getElementById("nominal");
 
-            if (value === "Berbayar") {
-                console.log("Menampilkan form nominal"); // Tambahkan pesan log untuk memeriksa logika ini
-                div.style.display = "block";
-            } else {
-                console.log("Menyembunyikan form nominal"); // Tambahkan pesan log untuk memeriksa logika ini
-                div.style.display = "none";
-            }
+        if (value === "Berbayar") {
+            console.log("Menampilkan form nominal"); // Tambahkan pesan log untuk memeriksa logika ini
+            div.style.display = "block";
+        } else {
+            console.log("Menyembunyikan form nominal"); // Tambahkan pesan log untuk memeriksa logika ini
+            div.style.display = "none";
         }
-    </script> --}}
+    }
+</script> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             function toggleDiv1() {
@@ -493,7 +458,8 @@
 
                 if (value === "Berbayar") {
                     div.style.display = "block";
-                    inputNominal.value = "{{ old('nominal') }}"; // Set old value to the input
+                    inputNominal.value =
+                    "{{ old('nominal', (int) $tournament->nominal ?? '') }}"; // Set old value to the input
                 } else {
                     div.style.display = "none";
                     inputNominal.value = ""; // Clear input value if not Berbayar
@@ -547,11 +513,26 @@
 
             x[currentTab].style.display = "none";
             currentTab = currentTab + n;
-            if (currentTab >= x.length) {
-                document.getElementById("regForm").action = "{{ route('ptournament.updatetour', ['id' => $id]) }}";
-                document.getElementById("regForm").submit();
+
+            if (currentTab >= 1) {
+                $('#prevBtn').removeAttr('disabled');
+            } else {
+                $('#prevBtn').attr('disabled', 'disabled');
             }
 
+            if (currentTab == (x.length - 1)) {
+                $('#nextBtn').addClass('d-none');
+                $('#submitButton').removeClass('d-none');
+            } else {
+                $('#nextBtn').removeClass('d-none');
+                $('#submitButton').addClass('d-none');
+            }
+
+            if (currentTab >= x.length) {
+                document.getElementById("regForm").action = "{{ route('ptournament.store') }}";
+                document.getElementById("regForm").submit();
+                return false;
+            }
             showTab(currentTab);
         }
 
@@ -612,6 +593,9 @@
                 let templateRow = $('#inputs .form-prize:first').clone();
                 let lastRow = $('#inputs .form-prize:last');
 
+                console.log(templateRow.find('select'))
+
+                templateRow.find('select').val();
                 templateRow.find('.addRow').remove();
                 templateRow.find('.removeRow').removeClass('d-none');
                 templateRow.find('.noteForm').hide();
@@ -646,4 +630,4 @@
             });
         });
     </script>
-@endsection
+@endpush

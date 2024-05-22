@@ -92,6 +92,20 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('team', TeamController::class);
         Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
     });
+
+    Route::get('/home', function() {
+        $user = Auth::user();
+
+        if ($user->role === 'organizer') {
+            $redirectTo = route('dashboardPenyelenggara');
+        } elseif ($user->role === 'admin') {
+            $redirectTo = route('admin.index');
+        } elseif ($user->role === 'user') {
+            $redirectTo = route('dashboardUser');
+        }
+
+        return redirect($redirectTo);
+    });
 });
 
 Route::any('transaction/callback', [TransactionController::class, 'callback'])->name('transaction.callback');
