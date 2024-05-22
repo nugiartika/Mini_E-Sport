@@ -207,7 +207,7 @@
                                     <label for="pendaftaran" class="form-label">Tanggal Pendaftaran</label>
                                     <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror"
                                         id="pendaftaran" name="pendaftaran"
-                                        value="{{ old('pendaftaran', $tournament->pendaftaran ? $tournament->pendaftaran->format('Y-m-d') : '') }}">
+                                        value="{{ old('pendaftaran', $tournament->pendaftaran) }}" min="{{ now()->toDateString()}}">
                                     @error('pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -219,7 +219,7 @@
                                     <input type="date"
                                         class="form-control @error('end_pendaftaran') is-invalid @enderror"
                                         id="end_pendaftaran" name="end_pendaftaran"
-                                        value="{{ old('end_pendaftaran', $tournament->end_pendaftaran ? $tournament->end_pendaftaran->format('Y-m-d') : '') }}">
+                                        value="{{ old('end_pendaftaran', $tournament->end_pendaftaran) }}" min="{{ now()->toDateString()}}">
                                     @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -233,7 +233,7 @@
                                     <label for="permainan" class="form-label">Mulai Kompetisi</label>
                                     <input type="date" class="form-control @error('permainan') is-invalid @enderror"
                                         id="permainan" name="permainan"
-                                        value="{{ old('permainan', $tournament->permainan ? $tournament->permainan->format('Y-m-d') : '') }}">
+                                        value="{{ old('permainan', $tournament->permainan) }}" min="{{ now()->toDateString()}}">
                                     @error('permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -245,7 +245,7 @@
                                     <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
                                     <input type="date" class="form-control @error('end_permainan') is-invalid @enderror"
                                         id="end_permainan" name="end_permainan"
-                                        value="{{ old('end_permainan', $tournament->end_permainan ? $tournament->end_permainan->format('Y-m-d') : '') }}">
+                                        value="{{ old('end_permainan', $tournament->end_permainan) }}" min="{{ now()->toDateString()}}">
                                     @error('end_permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
