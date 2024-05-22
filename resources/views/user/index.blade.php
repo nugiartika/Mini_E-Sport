@@ -265,9 +265,7 @@
                                             <img class="w-100" src="{{ asset('storage/' . $Category->photo) }}"
                                                 alt="tournament">
                                         </div>
-                                        {{-- <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                         <span class="dot-icon alt-icon ps-3">Playing</span>
-                                    </span> --}}
+
                                     </div>
                                     <div class="tournament-content px-xl-4 px-sm-2">
                                         <div class="tournament-info mb-5">
@@ -275,9 +273,8 @@
                                                 <h4
                                                     class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                     {{ $Category->name }}</h4>
-
+                                                        
                                             </a>
-                                            {{-- <span class="tcn-6 fs-sm">Torneo Individual</span> --}}
                                         </div>
                                         <div class="hr-line line3"></div>
                                         <div class="card-info d-flex justify-content-center gap-3 flex-wrap my-5  ">
