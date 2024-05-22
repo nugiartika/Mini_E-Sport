@@ -171,10 +171,12 @@
                                             Tournament</a>
                                     </li>
                                     <li>
-                                        <form id="deleteForm{{ $tournament->id }}" action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST">
+                                        <form id="deleteForm{{ $tournament->id }}"
+                                            action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" class="dropdown-item" onclick="confirmDelete('{{ $tournament->id }}')">
+                                            <button type="button" class="dropdown-item"
+                                                onclick="confirmDelete('{{ $tournament->id }}')">
                                                 <i class="ti ti-trash fs-2xl"></i> Delete Tournament
                                             </button>
                                         </form>
@@ -183,11 +185,15 @@
                                         {{-- <form action="{{ route('updateStatus', $tournament->id) }}" method="POST">
                                             @csrf
                                             @method('PUT') --}}
-                                        <select class="dropdown-item" onchange="updateStatus('{{ $tournament->id }}', this.value)">
-                                            <option value="aktif" {{ $tournament->aktif == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                                            <option value="tidak aktif" {{ $tournament->aktif == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                                        <select class="dropdown-item"
+                                            onchange="updateStatus('{{ $tournament->id }}', this.value)">
+                                            <option value="aktif" {{ $tournament->aktif == 'aktif' ? 'selected' : '' }}>
+                                                Aktif</option>
+                                            <option value="tidak aktif"
+                                                {{ $tournament->aktif == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif
+                                            </option>
                                         </select>
-                                    {{-- </form> --}}
+                                        {{-- </form> --}}
                                     </li>
 
                                 </ul>
@@ -200,23 +206,23 @@
                                 <img class="w-100" style="object-fit: cover; width: 100%; height: 100%;"
                                     src="{{ asset("storage/{$tournament->images}") }}" alt="tournament">
 
-                                    <div class="position-absolute align-items-end pb-3 end-0 bottom-0 flex-column d-flex gap-2">
-                                        @if ($tournament->status === 'accepted')
-                                            <span class="badge text-bg-success me-4">Diterima</span>
-                                        @elseif ($tournament->status === 'pending')
-                                            <span class="badge text-bg-warning me-4">Menunggu
-                                                Konfirmasi</span>
-                                        @else
-                                            <span class="badge text-bg-danger me-4">Ditolak</span>
-                                        @endif
-                                        @if ($tournament->end_permainan > now())
-                                            <span class="badge text-bg-success me-4">Sedang
-                                                Berlangsung</span>
-                                        @else
-                                            <span class="badge text-bg-danger me-4">Sudah
-                                                Berakhir</span>
-                                        @endif
-                                    </div>
+                                <div class="position-absolute align-items-end pb-3 end-0 bottom-0 flex-column d-flex gap-2">
+                                    @if ($tournament->status === 'accepted')
+                                        <span class="badge text-bg-success me-4">Diterima</span>
+                                    @elseif ($tournament->status === 'pending')
+                                        <span class="badge text-bg-warning me-4">Menunggu
+                                            Konfirmasi</span>
+                                    @else
+                                        <span class="badge text-bg-danger me-4">Ditolak</span>
+                                    @endif
+                                    @if ($tournament->end_permainan > now())
+                                        <span class="badge text-bg-success me-4">Sedang
+                                            Berlangsung</span>
+                                    @else
+                                        <span class="badge text-bg-danger me-4">Sudah
+                                            Berakhir</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="py-3">
@@ -224,31 +230,6 @@
                             <div class="tournament-info mb-4">
                                 <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
                             </div>
-
-                            {{-- <div class="row pb-4">
-                                <div class="col-md-4">
-                                    <div class="d-flex gap-2">
-                                        <i class="ti ti-calendar fs-base tcp-2"></i>
-                                        <span
-                                            class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->locale('id')->format('d F Y') }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="d-flex gap-2">
-                                        <i class="ti ti-moneybag fs-base tcp-2"></i>
-                                        <span class="tcn-1 fs-sm">IDR
-                                            {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="d-flex gap-2">
-                                        <i class="ti ti-ticket fs-base tcp-2"></i>
-                                        <span class="tcn-1 fs-sm">
-                                            {{ $tournament->paidment === 'Gratis' ? 'Gratis' : ($tournament->paidment === 'Berbayar' ? 'Berbayar' : '') }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div> --}}
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
                                 <strong>Tanggal</strong>
@@ -266,22 +247,25 @@
                             </div>
 
                             @php
+                                $transactionsCount = App\Models\Transaction::where('status', '!=', 'PAID')
+                                    ->whereHas('teamTournament', function ($query) use ($tournament) {
+                                        $query->where('tournament_id', $tournament->id);
+                                    })
+                                    ->count();
 
-                                // Ambil total tim dari hasil perhitungan
-                                $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
-                                $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+                                // Get the total number of teams from calculations
                                 $totalTeams =
-                                    ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
+                                    ($teamCounts->firstWhere('tournament_id', $tournament->id)->count ?? 0) +
+                                    ($teamIdCounts->firstWhere('tournament_id', $tournament->id)->count ?? 0) - $transactionsCount;
 
-                                $userTeams = $teams ?? collect();
-                                $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
+                                $userTeamsInTournament = ($teams ?? collect())->where('tournament_id', $tournament->id);
                                 $isUserInTournament = $userTeamsInTournament->isNotEmpty();
 
                                 if ($isUserInTournament) {
-                                    // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-                                    $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+                                    // Get user team IDs in the tournament
+                                    $userTeamIds = $userTeamsInTournament->pluck('id');
 
-                                    // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+                                    // Check if there is a relation between user teams and team_tournaments
                                     $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
                                         ->where('tournament_id', $tournament->id)
                                         ->get();
@@ -305,8 +289,8 @@
                                     </div>
                                 </div>
 
-                                <a href="{{ route('tournament.detail', $tournament->id) }}"
-                                    class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
+                                <a href="{{ route('tournament.detail', $tournament->id) }}" class="custom-icon-detail"
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
                                     style="display: flex; justify-content: center; align-items: center;"
                                     title="Detail Turnamen">
                                     <i class="ti ti-arrow-right fs-2xl"></i>
@@ -333,65 +317,67 @@
 @endsection
 
 @push('script')
-<script>
-    function confirmDelete(tournamentId) {
-    Swal.fire({
-        title: "Apakah anda yakin untuk menghapus tournament ini?",
-        text: "Setelah dihapus maka tournament tidak akan muncul dimanapun",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            document.getElementById('deleteForm' + tournamentId).submit();
-        } else {
-            Swal.fire("Tournament masih tersimpan");
+    <script>
+        function confirmDelete(tournamentId) {
+            Swal.fire({
+                title: "Apakah anda yakin untuk menghapus tournament ini?",
+                text: "Setelah dihapus maka tournament tidak akan muncul dimanapun",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm' + tournamentId).submit();
+                } else {
+                    Swal.fire("Tournament masih tersimpan");
+                }
+            });
         }
-    });
-}
+    </script>
 
-</script>
-
-<script>
-    function updateStatus(tournamentId, aktif) {
-        Swal.fire({
-            title: 'Apakah anda yakin?',
-            text: `Anda akan mengubah status tournament ini menjadi ${aktif}.`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, change it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch(`/tournaments/${tournamentId}/update-status`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({ aktif: aktif })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire('Updated!', `Status tournament telah diubah menjadi ${aktif}.`, 'success')
-                        .then(() => {
-                            location.reload(); // Reload the page to reflect the changes
+    <script>
+        function updateStatus(tournamentId, aktif) {
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: `Anda akan mengubah status tournament ini menjadi ${aktif}.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, change it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/tournaments/${tournamentId}/update-status`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                    'content')
+                            },
+                            body: JSON.stringify({
+                                aktif: aktif
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire('Updated!', `Status tournament telah diubah menjadi ${aktif}.`,
+                                        'success')
+                                    .then(() => {
+                                        location.reload(); // Reload the page to reflect the changes
+                                    });
+                            } else {
+                                Swal.fire('Error!', 'Gagal mengubah status tournament.', 'error');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            Swal.fire('Error!', 'Gagal mengubah status tournament.', 'error');
                         });
-                    } else {
-                        Swal.fire('Error!', 'Gagal mengubah status tournament.', 'error');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire('Error!', 'Gagal mengubah status tournament.', 'error');
-                });
-            }
-        });
-    }
-</script>
-
+                }
+            });
+        }
+    </script>
 @endpush
