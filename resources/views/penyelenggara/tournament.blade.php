@@ -186,6 +186,7 @@
                                             @csrf
                                             @method('PUT')
                                             <select class="dropdown-item" id="status" name="status" onchange="submitForm()">
+                                                <option value="">Status</option>
                                                 <option value="aktif" {{ $tournament->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
                                                 <option value="tidak aktif" {{ $tournament->status == 'Rejected' ? 'selected' : '' }}>Tidak Aktif</option>
                                             </select>
