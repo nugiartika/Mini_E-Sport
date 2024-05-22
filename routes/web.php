@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
         Route::post('/jadwal/{id}', [JadwalController::class, 'jadwal'])->name('ptournament.jadwal');
         Route::post('/juara/{id}', [JuaraController::class, 'juara'])->name('ptournament.juara');
-        Route::patch('/addbracket/{id}', [TournamentController::class, 'bracket'])->name('add.bracket');
+        Route::patch('/addbracket/{tournament}', [TournamentController::class, 'bracket'])->name('add.bracket');
     });
 
     Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
@@ -88,6 +88,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/teams', TeamTournamentController::class);
         Route::get('teams/{team}', [TeamController::class, 'show'])->name('teams.show');
         Route::resource('team', TeamController::class);
+        Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
     });
 });
 
@@ -118,7 +119,6 @@ Route::group(['prefix' => 'transaction', 'as' => 'transaction.', 'middleware' =>
 
 
 // Route::get('/landingTournamentFilter', [TournamentController::class, 'filterLanding'])->name('landingPage');
-Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
 
 
 Route::resource('member', MemberController::class);
