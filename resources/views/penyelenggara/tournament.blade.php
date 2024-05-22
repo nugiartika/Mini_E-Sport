@@ -171,16 +171,25 @@
                                             Tournament</a>
                                     </li>
                                     <li>
-                                        <form id="deleteForm{{ $tournament->id }}"
-                                            action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST">
+                                        <form id="deleteForm{{ $tournament->id }}" action="{{ route('ptournament.destroy', $tournament->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="dropdown-item"
-                                                onclick="confirmDelete('{{ $tournament->id }}')">
+                                            <button type="button" class="dropdown-item" onclick="confirmDelete('{{ $tournament->id }}')">
                                                 <i class="ti ti-trash fs-2xl"></i> Delete Tournament
                                             </button>
                                         </form>
                                     </li>
+                                    <li>
+                                        {{-- <form action="{{ route('updateStatus', $tournament->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT') --}}
+                                        <select class="dropdown-item" onchange="updateStatus('{{ $tournament->id }}', this.value)">
+                                            <option value="aktif" {{ $tournament->aktif == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                            <option value="tidak aktif" {{ $tournament->aktif == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                                        </select>
+                                    {{-- </form> --}}
+                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -324,16 +333,6 @@
 
 @push('script')
 <script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     document.querySelectorAll('form[id^="deleteForm"]').forEach(function(form) {
-    //         form.addEventListener('submit', function(event) {
-    //             event.preventDefault(); // Prevent the form from submitting immediately
-    //             const tournamentId = this.id.replace('deleteForm', '');
-    //             confirmDelete(tournamentId, this);
-    //         });
-    //     });
-    // });
-
     function confirmDelete(tournamentId) {
     Swal.fire({
         title: "Apakah anda yakin untuk menghapus tournament ini?",
@@ -352,47 +351,46 @@
     });
 }
 
-
 </script>
 
-
-
-    @if (session()->has('success'))
-        <script>
-            swal({
-                title: "Success!",
-                text: "{{ session()->get('success') }}",
-                icon: "success",
-                button: "Okay",
-            });
-        </script>
-    @endif
-
-        {{-- <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                document.querySelectorAll('form[id^="deleteForm"]').forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        event.preventDefault(); // Prevent the form from submitting immediately
-                        const tournamentId = this.id.replace('deleteForm', '');
-                        confirmDelete(tournamentId, this);
-                    });
-                });
-            });
-
-            function confirmDelete(tournamentId, form) {
-                swal({
-                    title: "apakah anda yakin untuk menghapus tournament ini?",
-                    text: "Setelah dihapus maka tournament tidak akan muncul dimanapun",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        form.submit(); // Submit the form if the user confirms
+<script>
+    function updateStatus(tournamentId, aktif) {
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: `Anda akan mengubah status tournament ini menjadi ${aktif}.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, change it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/tournaments/${tournamentId}/update-status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ aktif: aktif })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire('Updated!', `Status tournament telah diubah menjadi ${aktif}.`, 'success')
+                        .then(() => {
+                            location.reload(); // Reload the page to reflect the changes
+                        });
                     } else {
-                        swal("Tournament masih tersimpan");
+                        Swal.fire('Error!', 'Gagal mengubah status tournament.', 'error');
                     }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire('Error!', 'Gagal mengubah status tournament.', 'error');
                 });
             }
-        </script> --}}
+        });
+    }
+</script>
+
 @endpush

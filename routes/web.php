@@ -72,6 +72,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
         Route::post('/jadwal/{id}', [JadwalController::class, 'jadwal'])->name('ptournament.jadwal');
         Route::post('/juara', [JuaraController::class, 'juara'])->name('ptournament.juara');
+        Route::get('/tournaments/{id}/edit', [TournamentController::class, 'editStatus'])->name('editStatus');
+        Route::put('/tournaments/{id}/update-status', [TournamentController::class, 'updateStatus'])->name('updateStatus');
     });
 
     Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');

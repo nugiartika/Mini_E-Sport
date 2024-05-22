@@ -241,7 +241,7 @@
     @endforeach
 @endsection
 
-@section('script')
+@push('script')
     <!-- Modifikasi JavaScript -->
     <script>
         $(document).ready(function() {
@@ -265,4 +265,4 @@
             });
         });
     </script>
-@endsection
+@endpush

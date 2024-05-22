@@ -36,13 +36,7 @@
                                 $loggedInUserName = auth()->user()->email;
                             @endphp
 
-                            @foreach ($teams as $team)
-                                @php
-                                    $membersPerTeam = $team->tournament->category->membersPerTeam;
-                                @endphp
-                            @endforeach
-
-                            <h5>pemain inti</h5><br>
+                            <h5>Pemain Inti</h5><br>
 
                             @for ($i = 1; $i <= $membersPerTeam; $i++)
                                 <div class="row g-3">

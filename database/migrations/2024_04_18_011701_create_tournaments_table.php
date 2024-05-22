@@ -27,6 +27,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('rule');
             $table->enum('status', ['pending', 'rejected', 'accepted'])->default('pending');
+            $table->enum('aktif', ['aktif', 'tidak aktif'])->default('aktif');
             $table->text('reason')->nullable();
             $table->enum('paidment', ['Berbayar', 'Gratis']);
             $table->integer('nominal')->nullable();

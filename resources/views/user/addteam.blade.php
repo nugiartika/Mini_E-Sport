@@ -59,6 +59,22 @@
                                     </span>
                                 @enderror
                             </div>
+                            <div class="mb-3">
+                                <label for="categories" class="form-label">Game</label>
+                                    <select class="form-control @error('categories_id') is-invalid @enderror" id="categories" name="categories_id" aria-label="Default select example">
+                                        <option value="" selected>Pilih Game</option>
+                                        @foreach ($categories as $x)
+                                            <option value="{{ $x->id }}" {{ old('categories_id') == $x->id ? 'selected' : '' }}>
+                                                {{ $x->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                @error('categories_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                             <input type="hidden" name="tournament_id" value="{{ $selectedTournamentId }}">
                             <button type="submit" class="btn btn-primary ms-2">Buat Baru</button>
 
