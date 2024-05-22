@@ -34,12 +34,12 @@
                         <div class="card-body">
 
                             <div class="pb-3 border-bottom mb-3 d-flex justify-content-between">
-                                <h5 class="mb-0">Nama Game</h5>
+                                <h5 class="mb-0">Nama Turnamen</h5>
                                 <span>{{ $tournament->name }}</span>
                             </div>
                             <div class="pb-2 d-flex justify-content-between">
                                 <h5 class="mb-0">Anggota per Tim</h5>
-                                <span>{{ $tournament->membersPerTeam }} orang / tim</span>
+                                <span>{{ $tournament->slotTeam }} orang / tim</span>
                             </div>
                         </div>
                     </div>
