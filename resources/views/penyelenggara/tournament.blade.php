@@ -182,19 +182,24 @@
                                         </form>
                                     </li>
                                     <li>
-                                        {{-- <form action="{{ route('updateStatus', $tournament->id) }}" method="POST">
+                                        <form id="statusForm" action="{{ route('updateStatus', $tournament->id) }}"
+                                            method="POST">
                                             @csrf
-                                            @method('PUT') --}}
-                                        <select class="dropdown-item"
-                                            onchange="updateStatus('{{ $tournament->id }}', this.value)">
-                                            <option value="aktif" {{ $tournament->aktif == 'aktif' ? 'selected' : '' }}>
-                                                Aktif</option>
-                                            <option value="tidak aktif"
-                                                {{ $tournament->aktif == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif
-                                            </option>
-                                        </select>
-                                        {{-- </form> --}}
+                                            @method('PUT')
+                                            <select class="dropdown-item"
+                                                onchange="updateStatus('{{ $tournament->id }}', this.value)">
+                                                <option value="aktif"
+                                                    {{ $tournament->aktif == 'aktif' ? 'selected' : '' }}>
+                                                    Aktif</option>
+                                                <option value="tidak aktif"
+                                                    {{ $tournament->aktif == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif
+                                                </option>
+                                            </select>
+                                        </form>
                                     </li>
+
+
+
 
                                 </ul>
                             </div>
@@ -256,7 +261,8 @@
                                 // Get the total number of teams from calculations
                                 $totalTeams =
                                     ($teamCounts->firstWhere('tournament_id', $tournament->id)->count ?? 0) +
-                                    ($teamIdCounts->firstWhere('tournament_id', $tournament->id)->count ?? 0) - $transactionsCount;
+                                    ($teamIdCounts->firstWhere('tournament_id', $tournament->id)->count ?? 0) -
+                                    $transactionsCount;
 
                                 $userTeamsInTournament = ($teams ?? collect())->where('tournament_id', $tournament->id);
                                 $isUserInTournament = $userTeamsInTournament->isNotEmpty();

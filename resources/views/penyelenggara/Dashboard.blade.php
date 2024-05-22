@@ -21,12 +21,10 @@
                                 @else
                                     <span class="badge text-bg-danger me-4">Ditolak</span>
                                 @endif
-                                @if ($tournament->end_permainan > now())
-                                    <span class="badge text-bg-success me-4">Sedang
-                                        Berlangsung</span>
-                                @else
-                                    <span class="badge text-bg-danger me-4">Sudah
-                                        Berakhir</span>
+                                @if ($tournament->aktif > now())
+                                    <span class="badge text-bg-success me-4">Tounament : Aktif</span>
+                                @elseif ($tournament->tidakaktif > now())
+                                    <span class="badge text-bg-danger me-4">Tournament : Tidak Aktif</span>
                                 @endif
                             </div>
                         </div>

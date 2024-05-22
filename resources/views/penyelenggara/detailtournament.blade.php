@@ -49,8 +49,8 @@
         </div>
     </div>
 
-    <div class="row py-4 gy-3">
-        <div class="col-sm-4 col-xxl-2">
+    <div class="row py-4">
+        <div class="col-md-2">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-location display-five fw-normal tcp-2"></i>
@@ -59,7 +59,7 @@
                 <p class="mb-0">{{ $selectedTournament->paidment }}</p>
             </div>
         </div>
-        <div class="col-sm-4 col-xxl-2">
+        <div class="col-md-2">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-wallet display-five fw-normal tcp-2"></i>
@@ -68,26 +68,26 @@
                 <p class="mb-0">Rp {{ number_format($selectedTournament->nominal, 0, ',', '.') }}</p>
             </div>
         </div>
-        <div class="col-sm-4 col-xxl-2">
+        <div class="col-md-2">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-calendar display-five fw-normal tcp-2"></i>
                 </div>
-                <h4 class="mb-1">Permainan</h4>
-                <p class="mb-0">{{ $selectedTournament->permainan->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</p>
+                <h4 class="mb-1">Pendaftaran</h4>
+                <p class="mb-0">{{ $selectedTournament->pendaftaran->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</p>
             </div>
         </div>
-        <div class="col-sm-4 col-xxl-2">
+        <div class="col-md-2">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-calendar-x display-five fw-normal tcp-2"></i>
                 </div>
-                <h4 class="mb-1">Pendaftaran</h4>
-                <p class="mb-0">{{ $selectedTournament->end_permainan->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+                <h4 class="mb-1"> Permainan</h4>
+                <p class="mb-0">{{ $selectedTournament->permainan->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
                 </p>
             </div>
         </div>
-        <div class="col-sm-4 col-xxl-2">
+        <div class="col-md-2">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-users-group display-five fw-normal tcp-2"></i>
@@ -96,7 +96,7 @@
                 <p class="mb-0">{{ $selectedTournament->slotTeam }} tim</p>
             </div>
         </div>
-        <div class="col-sm-4 col-xxl-2">
+        <div class="col-md-2">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-device-gamepad-2 display-five fw-normal tcp-2"></i>
@@ -151,7 +151,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <form id="updateBracketForm"
-                                        action="{{ route('add.bracket', $selectedTournament->id) }}" method="POST">
+                                        action="{{ route('add.bracket', $selectedTournament->id) }}"                                        "
+                                        method="POST">
                                         @csrf
                                         @method('PATCH')
 
@@ -197,44 +198,149 @@
             @endif
         </div>
         <div class="tab-pane fade" id="juara" role="tabpanel" aria-labelledby="juara-tab">
+
             <h3>Juara</h3>
             <!-- Button trigger modal -->
+           @if (count($juaras) < 1)
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleJuara">
+                    Tambah Juara
+                </button>
+           @endif
 
-            @php
-                $isJuaraTerisi = !empty($nama_juara1) || !empty($nama_juara2) || !empty($nama_juara3) || !empty($mvp);
-            @endphp
+            
+                <!-- Modal -->
+                <div class="modal fade" id="exampleJuara" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="{{ route('ptournament.juara', ['id' =>$tournaments->id]) }}" method="POST">
+                                <!-- Tambahkan method POST -->
+                                @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Juara</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <label for="nama_juara1" class="form-label">Juara 1</label>
+                                    <input type="text" class="form-control" id="nama_juara1" name="nama_juara1" required>
+                                    <!-- Tambahkan atribut required -->
+                                    <label for="nama_juara2" class="form-label">Juara 2</label>
+                                    <input type="text" class="form-control" id="nama_juara2" name="nama_juara2" required>
+                                    <!-- Tambahkan atribut required -->
+                                    <label for="nama_juara3" class="form-label">Juara 3</label>
+                                    <input type="text" class="form-control" id="nama_juara3" name="nama_juara3" required>
+                                    <!-- Tambahkan atribut required -->
+                                    <label for="mvp" class="form-label">MVP</label>
+                                    <input type="text" class="form-control" id="mvp" name="mvp" required>
+                                    <!-- Tambahkan atribut required -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <!-- Ubah type dari button menjadi submit -->
+                                </div>
+                            </form>
+                        </div>
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                {{ $isJuaraTerisi ? 'disabled' : '' }}>
-                Tambah Juara
+                    </div>
+                </div>
+            @forelse ( $juaras as $juara )
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Juara 1</th>
+                            <th scope="col">Juara 2</th>
+                            <th scope="col">Juara 3</th>
+                            <th scope="col">MVP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            
+                                <td>{{ $juara->nama_juara1 }}</td>
+                                <td>{{ $juara->nama_juara2 }}</td>
+                                <td>{{ $juara->nama_juara3 }}</td>
+                                <td>{{ $juara->mvp }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            @empty
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <img src="{{ asset('assets/img/No-data.png') }}" class="w-100" alt="Image Not Found" />
+                            <h3>Maaf, Belum Disediakan.</h3>
+                            <p class="mb-3 text-center">Bracket belum disediakan oleh penyelenggara.</p>
+                        </div>
+                    </div>
+                </div>
+
+            @endforelse
+        </div>
+        <div class="tab-pane fade" id="jadwal" role="tabpanel" aria-labelledby="jadwal-tab">
+            <h3>Jadwal</h3>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Tambah Jadwal
             </button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <!-- Tambahkan class modal-lg untuk modal yang lebih besar jika diperlukan -->
                     <div class="modal-content">
-                        <form action="{{ route('ptournament.juara', ['id' => $tournament->id]) }}" method="POST">
+                        <!-- Form -->
+                        <form action="{{ route('ptournament.jadwal', ['id' => $tournaments->id]) }}" method="POST">
                             <!-- Tambahkan method POST -->
                             @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Juara</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Jadwal</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <label for="nama_juara1" class="form-label">Juara 1</label>
-                                <input type="text" class="form-control" id="nama_juara1" name="nama_juara1" required>
-                                <!-- Tambahkan atribut required -->
-                                <label for="nama_juara2" class="form-label">Juara 2</label>
-                                <input type="text" class="form-control" id="nama_juara2" name="nama_juara2" required>
-                                <!-- Tambahkan atribut required -->
-                                <label for="nama_juara3" class="form-label">Juara 3</label>
-                                <input type="text" class="form-control" id="nama_juara3" name="nama_juara3" required>
-                                <!-- Tambahkan atribut required -->
-                                <label for="mvp" class="form-label">MVP</label>
-                                <input type="text" class="form-control" id="mvp" name="mvp" required>
-                                <!-- Tambahkan atribut required -->
+                                <!-- Penyisihan -->
+                                <h5>Penyisihan</h5>
+                                <div class="mb-3">
+                                    <label for="tanggalPenyisihan" class="form-label">Tanggal Penyisihan</label>
+                                    <input type="date" class="form-control" id="tanggalPenyisihan" name="tanggalPenyisihan" min="{{ now()->toDateString()}}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="waktuPenyisihan" class="form-label">Waktu Penyisihan</label>
+                                    <input type="time" class="form-control" id="waktuPenyisihan" name="waktuPenyisihan" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="boPenyisihan" class="form-label">Best Of</label>
+                                    <input type="text" class="form-control" id="boPenyisihan" name="boPenyisihan" required>
+                                </div>
+            
+                                <!-- Semi Final -->
+                                <h5>Semi Final</h5>
+                                <div class="mb-3">
+                                    <label for="tanggalSemi" class="form-label">Tanggal Semi</label>
+                                    <input type="date" class="form-control" id="tanggalSemi" name="tanggalSemi" min="{{ now()->toDateString()}}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="waktuSemi" class="form-label">Waktu Semi</label>
+                                    <input type="time" class="form-control" id="waktuSemi" name="waktuSemi" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="boSemi" class="form-label">Best Of</label>
+                                    <input type="text" class="form-control" id="boSemi" name="boSemi" required>
+                                </div>
+            
+                                <!-- Final -->
+                                <h5>Final</h5>
+                                <div class="mb-3">
+                                    <label for="tanggalFinal" class="form-label">Tanggal Final</label>
+                                    <input type="date" class="form-control" id="tanggalFinal" name="tanggalFinal" min="{{ now()->toDateString()}}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="waktuFinal" class="form-label">Waktu Final</label>
+                                    <input type="time" class="form-control" id="waktuFinal" name="waktuFinal" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="boFinal" class="form-label">Best Of</label>
+                                    <input type="text" class="form-control" id="boFinal" name="boFinal" required>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -243,147 +349,122 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Juara 1</th>
-                        <th scope="col">Juara 2</th>
-                        <th scope="col">Juara 3</th>
-                        <th scope="col">MVP</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        @foreach ($juaras as $juara)
-                            <td>{{ $juara->nama_juara1 }}</td>
-                            <td>{{ $juara->nama_juara2 }}</td>
-                            <td>{{ $juara->nama_juara3 }}</td>
-                            <td>{{ $juara->mvp }}</td>
-                        @endforeach
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="tab-pane fade" id="jadwal" role="tabpanel" aria-labelledby="jadwal-tab">
-            <div class="d-flex gap-2 mb-4 align-items-center justify-content-between">
-                <h3 class="mb-0">Jadwal</h3>
+            @forelse ( $jadwals as  $jadwal)
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
 
-                @php
-                    $isJuaraTerisi =
-                        !empty($nama_juara1) || !empty($nama_juara2) || !empty($nama_juara3) || !empty($mvp);
-                @endphp
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                    <form action="{{ route('ptournament.jadwal', ['id' => $jadwal->id]) }}" method="POST">
+                                        <!-- Tambahkan method POST -->
+                                        @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Jadwal</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h5>Penyisihan</h5>
+                                            <label for="tanggalPenyisihan" class="form-label">Tanggal Penyisihan</label>
+                                            <input type="date" class="form-control" id="tanggalPenyisihan" name="tanggalPenyisihan" required>
+                                            <!-- Tambahkan atribut required -->
+                                            <label for="waktuPenyisihan" class="form-label">Waktu Penyisihan</label>
+                                            <input type="time" class="form-control" id="waktuPenyisihan" name="waktuPenyisihan" required>
+                                            <!-- Tambahkan atribut required -->
+                                            <label for="boPenyisihan" class="form-label">Best Of</label>
+                                            <input type="text" class="form-control" id="boPenyisihan" name="boPenyisihan" required>
+                                            <!-- Tambahkan atribut required -->
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editJadwal"
-                    {{ $isJuaraTerisi ? 'disabled' : '' }}>
-                    Tambah Jadwal
-                </button>
-            </div>
+                                            <h5>Semi Fiinal</h5>
+                                            <label for="tanggalSemi" class="form-label">Tanggal Semi</label>
+                                            <input type="date" class="form-control" id="tanggalSemi" name="tanggalSemi" required>
+                                            <!-- Tambahkan atribut required -->
+                                            <label for="waktuSemi" class="form-label">Waktu Semi</label>
+                                            <input type="time" class="form-control" id="waktuSemi" name="waktuSemi" required>
+                                            <!-- Tambahkan atribut required -->
+                                            <label for="boSemi" class="form-label">Best Of</label>
+                                            <input type="text" class="form-control" id="boSemi" name="boSemi" required>
+                                            <!-- Tambahkan atribut required -->
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Penyisihan</th>
-                        <th scope="col">Semi Final</th>
-                        <th scope="col">Final</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        @foreach ($jadwals as $jadwal)
-                            <td>Tanggal Dimulai : {{ $jadwal->tanggalPenyisihan }} <br>
-                                Waktu Dimulai : {{ $jadwal->waktuPenyisihan }} wire:<br>
-                                BO : {{ $jadwal->boPenyisihan }} <br>
-                            </td>
-                            <<td>Tanggal Dimulai : {{ $jadwal->tanggalSemi }} <br>
-                                Waktu Dimulai : {{ $jadwal->waktuSemi }} <br>
-                                BO : {{ $jadwal->boSemi }} <br>
+                                            <h5>Final</h5>
+                                            <label for="tanggalFinal" class="form-label">Tanggal Final</label>
+                                            <input type="date" class="form-control" id="tanggalFinal" name="tanggalFinal" required>
+                                            <!-- Tambahkan atribut required -->
+                                            <label for="waktuFinal" class="form-label">Waktu Final</label>
+                                            <input type="time" class="form-control" id="waktuFinal" name="waktuFinal" required>
+                                            <!-- Tambahkan atribut required -->
+                                            <label for="boFinal" class="form-label">Best Of</label>
+                                            <input type="text" class="form-control" id="boFinal" name="boFinal" required>
+                                            <!-- Tambahkan atribut required -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                            <!-- Ubah type dari button menjadi submit -->
+                                        </div>
+                                    </form>
+                            </div>
+
+                        </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Penyisihan</th>
+                            <th scope="col">Semi Final</th>
+                            <th scope="col">Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @foreach ($jadwals as $jadwal)
+                                <td>Tanggal Dimulai : {{ $jadwal->tanggalPenyisihan }} <br>
+                                    Waktu Dimulai : {{$jadwal->waktuPenyisihan}} <br>
+                                    BO : {{$jadwal->boPenyisihan}} <br>
+                                </td>
+                                <td>Tanggal Dimulai : {{ $jadwal->tanggalSemi }} <br>
+                                    Waktu Dimulai : {{$jadwal->waktuSemi}} <br>
+                                    BO : {{$jadwal->boSemi}} <br>
                                 </td>
                                 <td>Tanggal Dimulai : {{ $jadwal->tanggalFinal }} <br>
-                                    Waktu Dimulai : {{ $jadwal->waktuFinal }} <br>
-                                    BO : {{ $jadwal->boFinal }} <br>
+                                    Waktu Dimulai : {{$jadwal->waktuFinal}} <br>
+                                    BO : {{$jadwal->boFinal}} <br>
                                 </td>
-                        @endforeach
-                    </tr>
-                </tbody>
-            </table>
+                            @endforeach
+                        </tr>
+                    </tbody>
+                </table>
+            @empty
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <img src="{{ asset('assets/img/No-data.png') }}" class="w-100" alt="Image Not Found" />
+                                <h3>Maaf, Belum Disediakan.</h3>
+                                <p class="mb-3 text-center">Bracket belum disediakan oleh penyelenggara.</p>
+                            </div>
+                        </div>
+                    </div>
+            @endforelse
         </div>
         <div class="tab-pane fade" id="detail-info" role="tabpanel" aria-labelledby="detail-info-tab">
-            <h3>Detail dan Informasi</h3>
-
-            <div class="pt-4">
-                <div class="pb-3">
-                    <h4 class="mb-1">Deskripsi</h4>
-                    <div>{!! $selectedTournament->description !!}</div>
+            <div>
+                <h3>Detail dan Informasi</h3>
+                <div class="border-end border-bottom">
+                    <h6>Deskripsi</h6>
+                    <small>{!! $tournaments->description !!}</small>
                 </div>
-
-                <div class="pb-3">
-                    <h4 class="mb-1">Peraturan</h4>
-                    <div>{!! $selectedTournament->rule !!}</div>
+                <div class="border-end border-bottom">
+                    <h6>Peraturan</h6>
+                    <small>{{ $tournaments->rule }}</small>
                 </div>
-
-                <h4 class="mb-1">Kontak Personal</h4>
-                <div>{!! $selectedTournament->contact !!}</div>
+                <div class="border-end border-bottom">
+                    <h6>Kontak Personal</h6>
+                    <small>{{ $tournaments->contact }}</small>
+                </div>
+                
             </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="editJadwal" tabindex="-1" aria-labelledby="editJadwalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="{{ route('ptournament.jadwal', ['id' => $tournament->id]) }}" method="POST">
-                    <!-- Tambahkan method POST -->
-                    @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="editJadwalLabel">Tambah Jadwal</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h5>Penyisihan</h5>
-                        <label for="tanggalPenyisihan" class="form-label">Tanggal Penyisihan</label>
-                        <input type="date" class="form-control" id="tanggalPenyisihan" name="tanggalPenyisihan"
-                            required>
-                        <!-- Tambahkan atribut required -->
-                        <label for="waktuPenyisihan" class="form-label">Waktu Penyisihan</label>
-                        <input type="time" class="form-control" id="waktuPenyisihan" name="waktuPenyisihan" required>
-                        <!-- Tambahkan atribut required -->
-                        <label for="boPenyisihan" class="form-label">Best Of</label>
-                        <input type="text" class="form-control" id="boPenyisihan" name="boPenyisihan" required>
-                        <!-- Tambahkan atribut required -->
-
-                        <h5>Semi Fiinal</h5>
-                        <label for="tanggalSemi" class="form-label">Tanggal Semi</label>
-                        <input type="date" class="form-control" id="tanggalSemi" name="tanggalSemi" required>
-                        <!-- Tambahkan atribut required -->
-                        <label for="waktuSemi" class="form-label">Waktu Semi</label>
-                        <input type="time" class="form-control" id="waktuSemi" name="waktuSemi" required>
-                        <!-- Tambahkan atribut required -->
-                        <label for="boSemi" class="form-label">Best Of</label>
-                        <input type="text" class="form-control" id="boSemi" name="boSemi" required>
-                        <!-- Tambahkan atribut required -->
-
-                        <h5>Final</h5>
-                        <label for="tanggalFinal" class="form-label">Tanggal Final</label>
-                        <input type="date" class="form-control" id="tanggalFinal" name="tanggalFinal" required>
-                        <!-- Tambahkan atribut required -->
-                        <label for="waktuFinal" class="form-label">Waktu Final</label>
-                        <input type="time" class="form-control" id="waktuFinal" name="waktuFinal" required>
-                        <!-- Tambahkan atribut required -->
-                        <label for="boFinal" class="form-label">Best Of</label>
-                        <input type="text" class="form-control" id="boFinal" name="boFinal" required>
-                        <!-- Tambahkan atribut required -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <!-- Ubah type dari button menjadi submit -->
-                    </div>
-                </form>
-            </div>
-
         </div>
     </div>
 @endsection
