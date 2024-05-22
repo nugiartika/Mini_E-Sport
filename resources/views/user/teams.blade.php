@@ -1,5 +1,5 @@
 {{-- @extends('layouts.user') --}}
-@extends('user.layouts.app')
+@extends('layouts.panel')
 @section('style')
     <style>
         .saring-btn {
@@ -126,7 +126,7 @@
         </div>
     </div>
 @endsection
-@section('script')
+@push('script')
     <script>
         $(document).ready(function() {
             $('#existing').on('show.bs.modal', function(event) {
@@ -154,4 +154,4 @@
             }
         }
     </script>
-@endsection
+@endpush

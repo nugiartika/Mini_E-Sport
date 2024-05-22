@@ -1,5 +1,5 @@
 {{-- @extends('layouts.user') --}}
-@extends('user.layouts.app')
+@extends('layouts.panel')
 @section('style')
     <style>
         .saring-btn {
@@ -142,15 +142,15 @@
                                 </div>
                                 <div class="tournament-content px-xxl-4 mt-3 mt-md-4">
                                     <div class="tournament-info mb-4">
-                                            @if ($tournament->end_permainan > now())
-                                                <span class="badge text-bg-success position-absolute me-4"
-                                                    style="right: 0;">Sedang
-                                                    Berlangsung</span>
-                                            @else
-                                                <span class="badge text-bg-danger position-absolute me-4"
-                                                    style="right: 0;">Sudah
-                                                    Berakhir</span>
-                                            @endif
+                                        @if ($tournament->end_permainan > now())
+                                            <span class="badge text-bg-success position-absolute me-4"
+                                                style="right: 0;">Sedang
+                                                Berlangsung</span>
+                                        @else
+                                            <span class="badge text-bg-danger position-absolute me-4"
+                                                style="right: 0;">Sudah
+                                                Berakhir</span>
+                                        @endif
 
                                         <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                             {{ $tournament->name }}
@@ -171,7 +171,7 @@
                                         <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                             <i class="ti ti-ticket fs-base tcp-2"></i>
                                             <span class="tcn-1 fs-sm">
-                                                {{ $tournament->paidment == 'unpaid' ? 'Gratis' : 'Berbayar' }}
+                                                {{ $tournament->paidment == 'Gratis' ? 'Gratis' : 'Berbayar' }}
                                             </span>
                                         </div>
                                         <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
@@ -183,20 +183,18 @@
 
 
                                     @php
-
-                                          // Ambil total tim dari hasil perhitungan
-                                          $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+                                        // Ambil total tim dari hasil perhitungan
+                                        $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
                                         $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
                                         $totalTeams =
                                             ($teamCount ? $teamCount->count : 0) +
                                             ($teamIdCount ? $teamIdCount->count : 0);
 
-                                            $userTeams = $teams ?? collect();
+                                        $userTeams = $teams ?? collect();
                                         $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
                                         $isUserInTournament = $userTeamsInTournament->isNotEmpty();
 
-
-                                       if ($isUserInTournament) {
+                                        if ($isUserInTournament) {
                                             // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
                                             $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
 
@@ -205,7 +203,6 @@
                                                 ->where('tournament_id', $tournament->id)
                                                 ->get();
                                         }
-
                                     @endphp
 
 
@@ -229,7 +226,7 @@
 
 
                                         {{-- @dd($tournament->users_id == Auth::user()->id) --}}
-                                        @if (($tournament->users_id == Auth::user()->id) )
+                                        @if ($tournament->users_id == Auth::user()->id)
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
@@ -294,7 +291,7 @@
                         </div>
                     </div>
 
-                    @empty
+                @empty
                     <div class="col-lg-12">
                         <center>
                             <img src="{{ asset('assets/img/No-data.png') }}" alt=""
