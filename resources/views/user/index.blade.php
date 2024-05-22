@@ -368,8 +368,18 @@
                                                 </div>
                                                 <div class="v-line"></div>
                                                 <div class="d-flex align-items-center gap-2">
-                                                    <i class="ti ti-gift"></i> <span
-                                                        class="tcn-1 fs-sm">{{ $Tournament->status }}</span>
+                                                    <i class="ti ti-gift"></i> <span class="tcn-1 fs-sm">
+                                                        @if ($Tournament->status === 'pending')
+                                                            Status: Menunggu
+                                                        @elseif ($Tournament->status === 'accepted')
+                                                            Status: Sedang Berlangsung
+                                                        @elseif ($Tournament->status === 'rejected')
+                                                            Status: Ditolak
+                                                        @else
+                                                            Status: Tidak Diketahui
+                                                        @endif
+
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div
@@ -402,8 +412,8 @@
 
                                             </div>
                                             <div class="col-md-6 col-sm-4 text-sm-end">
-                                                    <a href="{{ route('landingpageDetailTournamet', ['id' => $Tournament->id]) }}"
-                                                        class="btn-half-border position-relative d-inline-block py-2 px-3 bgp-1 rounded-pill">Detail</a>
+                                                <a href="{{ route('landingpageDetailTournamet', ['id' => $Tournament->id]) }}"
+                                                    class="btn-half-border position-relative d-inline-block py-2 px-3 bgp-1 rounded-pill">Detail</a>
 
                                             </div>
                                             {{-- <a href="tournaments-details.html" class="btn2">

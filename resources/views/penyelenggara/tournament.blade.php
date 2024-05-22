@@ -180,15 +180,20 @@
                                         </form>
                                     </li>
                                     <li>
-                                        {{-- <form action="{{ route('updateStatus', $tournament->id) }}" method="POST">
+                                        <form id="statusForm" action="{{ route('updateStatus', $tournament->id) }}" method="POST">
                                             @csrf
-                                            @method('PUT') --}}
-                                        <select class="dropdown-item" onchange="updateStatus('{{ $tournament->id }}', this.value)">
-                                            <option value="aktif" {{ $tournament->aktif == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                                            <option value="tidak aktif" {{ $tournament->aktif == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
-                                        </select>
-                                    {{-- </form> --}}
+                                            @method('PUT')
+                                            <select class="dropdown-item" id="status" name="aktif" onchange="submitForm()">
+                                                <option value="">Status</option>
+                                                <option value="aktif" {{ $tournament->aktif == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                                                <option value="tidak aktif" {{ $tournament->aktif == 'Rejected' ? 'selected' : '' }}>Tidak Aktif</option>
+                                            </select>
+                                            {{-- <button type="submit" class="btn btn-primary mt-2">Update Status</button> --}}
+                                        </form>
                                     </li>
+
+
+
 
                                 </ul>
                             </div>
@@ -225,30 +230,7 @@
                                 <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
                             </div>
 
-                            {{-- <div class="row pb-4">
-                                <div class="col-md-4">
-                                    <div class="d-flex gap-2">
-                                        <i class="ti ti-calendar fs-base tcp-2"></i>
-                                        <span
-                                            class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->locale('id')->format('d F Y') }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="d-flex gap-2">
-                                        <i class="ti ti-moneybag fs-base tcp-2"></i>
-                                        <span class="tcn-1 fs-sm">IDR
-                                            {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="d-flex gap-2">
-                                        <i class="ti ti-ticket fs-base tcp-2"></i>
-                                        <span class="tcn-1 fs-sm">
-                                            {{ $tournament->paidment === 'Gratis' ? 'Gratis' : ($tournament->paidment === 'Berbayar' ? 'Berbayar' : '') }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div> --}}
+
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
                                 <strong>Tanggal</strong>
@@ -334,6 +316,11 @@
 
 @push('script')
 <script>
+    function submitForm() {
+        document.getElementById("statusForm").submit();
+    }
+</script>
+<script>
     function confirmDelete(tournamentId) {
     Swal.fire({
         title: "Apakah anda yakin untuk menghapus tournament ini?",
@@ -342,7 +329,7 @@
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "Ya  , Hapus"
     }).then((result) => {
         if (result.isConfirmed) {
             document.getElementById('deleteForm' + tournamentId).submit();
@@ -363,7 +350,7 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, change it!'
+            confirmButtonText: 'Ya'
         }).then((result) => {
             if (result.isConfirmed) {
                 fetch(`/tournaments/${tournamentId}/update-status`, {
