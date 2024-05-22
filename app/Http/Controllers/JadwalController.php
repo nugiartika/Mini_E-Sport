@@ -49,7 +49,8 @@ class JadwalController extends Controller
         ]);
 
         // Redirect ke halaman detail turnamen dengan menyertakan ID turnamen
-        return redirect()->route('tournament.detail', ['id' => $tournament]);
+        return redirect()->back()->with('error', 'Tidak dapat menemukan informasi turnamen');
+
     }
 
 }

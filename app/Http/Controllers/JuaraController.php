@@ -31,15 +31,20 @@ class JuaraController extends Controller
     }
 
     public function juara(Tournament $tournament, Request $request)
-{
+    {
 
-    Juara::create([
-        'nama_juara1' => $request['nama_juara1'],
-        'nama_juara2' => $request['nama_juara2'],
-        'nama_juara3' => $request['nama_juara3'],
-        'mvp' => $request['mvp'],
-    ]);
+            Juara::create([
+                'tournament_id' => $tournament->id,
+                'nama_juara1' => $request->input('nama_juara1'),
+                'nama_juara2' => $request->input('nama_juara2'),
+                'nama_juara3' => $request->input('nama_juara3'),
+                'mvp' => $request->input('mvp'),
+            ]);
 
-    return redirect()->route('tournament.detail', ['id' => $tournament->id])->with('success', 'Juara ditambahkan dengan sukses');
-}
+            return redirect()->back()->with('error', 'Tidak dapat menemukan informasi turnamen');
+
+    }
+
+
+
 }
