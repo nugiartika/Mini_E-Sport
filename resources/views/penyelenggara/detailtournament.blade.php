@@ -56,7 +56,7 @@
                     <i class="h1 ti ti-location display-five fw-normal tcp-2"></i>
                 </div>
                 <h4 class="mb-1">Jenis Turnamen</h4>
-                <p class="mb-0">{{ $selectedTournament->paidment === 'paid' ? 'Berbayar' : 'Gratis' }}</p>
+                <p class="mb-0">{{ $selectedTournament->paidment }}</p>
             </div>
         </div>
         <div class="col-md-2">
@@ -150,19 +150,26 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="updateBracketForm">
+                                    <form id="updateBracketForm"
+                                        action="{{ route('add.bracket', ['id' => $selectedTournament->id]) }}"
+                                        method="POST">
                                         @csrf
-                                        @method('PATCH')
+                                        @method('POST') <!-- Tetap gunakan POST disini -->
+
+                                        <!-- Tambahkan input tersembunyi untuk menentukan metode PATCH -->
+                                        <input type="hidden" name="_method" value="PATCH">
 
                                         <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
                                         <input type="hidden" name="column" value="urlBracket" />
 
                                         <div class="mb-3">
                                             <label for="bracketUrl" class="form-label">URL Bracket</label>
-                                            <input type="url" class="form-control" id="bracketUrl"
+                                            <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
                                                 placeholder="Masukkan URL Bracket">
                                         </div>
                                     </form>
+
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
@@ -195,7 +202,74 @@
         </div>
         <div class="tab-pane fade" id="juara" role="tabpanel" aria-labelledby="juara-tab">
             <h3>Juara</h3>
-            <p>Konten untuk tab Juara.</p>
+            <!-- Button trigger modal -->
+
+            @php
+                $isJuaraTerisi = !empty($nama_juara1) || !empty($nama_juara2) || !empty($nama_juara3) || !empty($mvp);
+            @endphp
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                {{ $isJuaraTerisi ? 'disabled' : '' }}>
+                Tambah Juara
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="{{ route('ptournament.juara', ['id' => $tournament->id]) }}" method="POST">
+                            <!-- Tambahkan method POST -->
+                            @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Juara</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <label for="nama_juara1" class="form-label">Juara 1</label>
+                                <input type="text" class="form-control" id="nama_juara1" name="nama_juara1" required>
+                                <!-- Tambahkan atribut required -->
+                                <label for="nama_juara2" class="form-label">Juara 2</label>
+                                <input type="text" class="form-control" id="nama_juara2" name="nama_juara2" required>
+                                <!-- Tambahkan atribut required -->
+                                <label for="nama_juara3" class="form-label">Juara 3</label>
+                                <input type="text" class="form-control" id="nama_juara3" name="nama_juara3" required>
+                                <!-- Tambahkan atribut required -->
+                                <label for="mvp" class="form-label">MVP</label>
+                                <input type="text" class="form-control" id="mvp" name="mvp" required>
+                                <!-- Tambahkan atribut required -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <!-- Ubah type dari button menjadi submit -->
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Juara 1</th>
+                        <th scope="col">Juara 2</th>
+                        <th scope="col">Juara 3</th>
+                        <th scope="col">MVP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @foreach ($juaras as $juara)
+                            <td>{{ $juara->nama_juara1 }}</td>
+                            <td>{{ $juara->nama_juara2 }}</td>
+                            <td>{{ $juara->nama_juara3 }}</td>
+                            <td>{{ $juara->mvp }}</td>
+                        @endforeach
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="tab-pane fade" id="jadwal" role="tabpanel" aria-labelledby="jadwal-tab">
             <h3>Jadwal</h3>
@@ -203,7 +277,11 @@
         </div>
         <div class="tab-pane fade" id="detail-info" role="tabpanel" aria-labelledby="detail-info-tab">
             <h3>Detail dan Informasi</h3>
-            <p>Konten untuk tab Detail dan Informasi.</p>
+            <div class=""></div>
+            <h4>Deskripsi</h4>
+            <h4>Peraturan</h4>
+            <h4>Kontak Personal</h4>
+
         </div>
     </div>
 @endsection

@@ -46,11 +46,11 @@ class JadwalController extends Controller
             'tanggalFinal' => $request->tanggalFinal,
             'waktuFinal' => $request->waktuFinal,
             'boFinal' => $request->boFinal,
-            'bracket' => $request->input('bracket', null),
         ]);
 
         // Redirect ke halaman detail turnamen dengan menyertakan ID turnamen
-        return redirect()->route('tournament.detail', ['id' => $tournament]);
+        return redirect()->back()->with('error', 'Tidak dapat menemukan informasi turnamen');
+
     }
 
 }

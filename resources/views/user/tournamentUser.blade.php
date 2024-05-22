@@ -1,6 +1,5 @@
 {{-- @extends('layouts.user') --}}
-@extends('layouts.panel')
-
+@extends('user.layouts.app')
 @section('style')
     <style>
         .saring-btn {
@@ -122,7 +121,7 @@
     <div class="tabcontents">
         <div class="tabitem active">
             <div class="row justify-content-md-start justify-content-center g-6">
-                <div class="singletab col-12 tournaments-tab">
+                <div class="singletab tournaments-tab">
                     <div class="d-flex align-items-center gap-6 flex-wrap mb-lg-5 mb-sm-3 mb-2"
                         style="margin-left: 30px; margin-top: 10px; width: 100px; height: 40px;">
                         <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
@@ -185,18 +184,19 @@
 
                                     @php
 
-                                        // Ambil total tim dari hasil perhitungan
-                                        $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+                                          // Ambil total tim dari hasil perhitungan
+                                          $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
                                         $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
                                         $totalTeams =
                                             ($teamCount ? $teamCount->count : 0) +
                                             ($teamIdCount ? $teamIdCount->count : 0);
 
-                                        $userTeams = $teams ?? collect();
+                                            $userTeams = $teams ?? collect();
                                         $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
                                         $isUserInTournament = $userTeamsInTournament->isNotEmpty();
 
-                                        if ($isUserInTournament) {
+
+                                       if ($isUserInTournament) {
                                             // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
                                             $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
 
@@ -281,8 +281,8 @@
                                     <div class="d-flex justify-content-center align-items-center mb-4"
                                         style="height: 100px;">
                                         <center>
-                                            <h6 style="color: white;">Buat tim baru atau
-                                                gunakan Tim yang Sudah Ada</h6>
+                                            <h6 style="color: white;">Create a New Team for the Tournament or Choose an
+                                                Existing Team</h6>
                                         </center>
                                     </div>
                                     <div class="d-flex justify-content-center">
@@ -333,6 +333,33 @@
     </script>
 
 
+    {{-- <script>
+        $(document).ready(function() {
+            $('#existing').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Tombol yang memicu modal
+                var tournamentId = button.data(
+                    'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
+                var modal = $(this);
+                modal.find('.modal-body input[name="tournament_id"]').val(
+                    tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
+            });
+        });
+
+        function cardRadio(card) {
+            var radioButton = card.querySelector('input[type="radio"]');
+
+            if (!radioButton.checked) {
+                radioButton.checked = true;
+
+                var cards = document.querySelectorAll('.card');
+                cards.forEach(function(card) {
+                    card.classList.remove('border-red');
+                });
+
+                card.classList.add('border-red');
+            }
+        }
+    </script> --}}
 
     <script>
         $(document).ready(function() {
