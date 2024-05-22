@@ -182,21 +182,18 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <form id="statusForm" action="{{ route('updateStatus', $tournament->id) }}"
-                                            method="POST">
+                                        <form id="statusForm" action="{{ route('updateStatus', $tournament->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
-                                            <select class="dropdown-item"
-                                                onchange="updateStatus('{{ $tournament->id }}', this.value)">
-                                                <option value="aktif"
-                                                    {{ $tournament->aktif == 'aktif' ? 'selected' : '' }}>
-                                                    Aktif</option>
-                                                <option value="tidak aktif"
-                                                    {{ $tournament->aktif == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif
-                                                </option>
+                                            <select class="dropdown-item" id="status" name="status" onchange="submitForm()">
+                                                <option value="aktif" {{ $tournament->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                                                <option value="tidak aktif" {{ $tournament->status == 'Rejected' ? 'selected' : '' }}>Tidak Aktif</option>
                                             </select>
+                                            {{-- <button type="submit" class="btn btn-primary mt-2">Update Status</button> --}}
                                         </form>
                                     </li>
+
+
 
 
 
@@ -220,12 +217,10 @@
                                     @else
                                         <span class="badge text-bg-danger me-4">Ditolak</span>
                                     @endif
-                                    @if ($tournament->end_permainan > now())
-                                        <span class="badge text-bg-success me-4">Sedang
-                                            Berlangsung</span>
-                                    @else
-                                        <span class="badge text-bg-danger me-4">Sudah
-                                            Berakhir</span>
+                                    @if ($tournament->aktif ==='aktif')
+                                        <span class="badge text-bg-success me-4">Aktif</span>
+                                    @elseif ($tournament->aktif === 'tidak aktif')
+                                        <span class="badge text-bg-danger me-4">Tidak aktif</span>
                                     @endif
                                 </div>
                             </div>
@@ -323,6 +318,11 @@
 @endsection
 
 @push('script')
+<script>
+    function submitForm() {
+        document.getElementById("statusForm").submit();
+    }
+</script>
     <script>
         function confirmDelete(tournamentId) {
             Swal.fire({

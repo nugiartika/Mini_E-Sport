@@ -253,8 +253,8 @@
                                         @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
                                         @endif
 
-                                        <!-- Tombol Detail Tournament --> 
-                                        <a href="{{ route('tournament.detailUser') }}"
+                                        <!-- Tombol Detail Tournament -->
+                                        <a href="{{ route('tournament.detail') }}"
                                             class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
                                             style="display: flex; justify-content: center; align-items: center;"
                                             title="Detail Tournament">
