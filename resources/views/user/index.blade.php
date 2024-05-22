@@ -365,8 +365,6 @@
                                             <div
                                                 class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                                 <div class="d-flex align-items-center gap-2">
-                                                    <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                                    <span class="tcn-1 fs-sm">75</span>
                                                 </div>
                                                 <div class="v-line"></div>
                                                 <div class="d-flex align-items-center gap-2">
