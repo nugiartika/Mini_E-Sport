@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMemberRequest;
+use App\Models\Category;
 use App\Models\Member;
 use App\Models\Team;
 use App\Models\Tournament;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -84,14 +86,34 @@ class MemberController extends Controller
     }
 
 
-    public function createMember(Request $request)
-    {
-        $members = Member::all();
-        $teams = Team::all();
-        $selectedTeamId = $request->input('team_id');
+    // public function createMember(Request $request)
+    // {
+    //     $members = Member::all();
+    //     // $teams = Team::all();
+    //     $category = Category::all();
+    //     $teams = Team::with('category')->get(); // Pastikan category di-load dengan eager loading
+    //     $selectedTeamId = $request->input('team_id');
 
-        return view('user.addmember', compact('members', 'teams', 'selectedTeamId'));
-    }
+    //     // Ambil membersPerTeam dari tim yang dipilih
+    //     $selectedTeam = $teams->find($selectedTeamId);
+    //     $membersPerTeam = $selectedTeam ? $selectedTeam->category->membersPerTeam : 0;
+
+
+    //     return view('user.addmember', compact('members', 'teams', 'selectedTeamId', 'membersPerTeam','category'));
+    // }
+
+    public function createMember(Request $request)
+{
+    $members = Member::all();
+    $teams = Team::with('category')->get();
+    $selectedTeamId = $request->input('team_id');
+    $selectedTeam = $teams->find($selectedTeamId);
+    $membersPerTeam = $selectedTeam ? $selectedTeam->category->membersPerTeam : 0;
+    $users = User::where('role', 'user')->get();
+
+    return view('user.addmember', compact('members', 'teams', 'selectedTeamId', 'membersPerTeam', 'users'));
+}
+
 
 
     public function storeMember(Request $request)
@@ -112,9 +134,11 @@ class MemberController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        $nicknames = $request->nickname;
 
         $teams_id = $request->team_id;
-        $nicknames = $request->nickname;
+        $team = Team::with('category')->findOrFail($teams_id);
+        $membersPerTeam = $team->category->membersPerTeam;
 
         // Store "inti" members
         foreach ($request->member as $index => $memberName) {

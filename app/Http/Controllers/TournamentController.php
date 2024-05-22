@@ -211,6 +211,7 @@ class TournamentController extends Controller
                 'paidment' => $request->input('paidment'),
                 'nominal' => $request->input('nominal'),
                 'status' => 'pending',
+                'aktif' => 'aktif'
             ]);
             $tournamentId = $tournament->id;
 
@@ -471,6 +472,7 @@ class TournamentController extends Controller
             }
 
             $status = $request->input('status', $tournament->status);
+            $aktif = $request->input('aktif', $tournament->aktif);
 
             // Update turnamen
             $tournament->update([
@@ -489,6 +491,7 @@ class TournamentController extends Controller
                 'paidment' => $request->input('paidment'),
                 'nominal' => $request->input('nominal'),
                 'status' => $status,
+                'aktif' => $aktif,
             ]);
 
             // Update prize pools
@@ -514,6 +517,35 @@ class TournamentController extends Controller
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
+
+
+    public function editStatus($id)
+    {
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $tournament = Tournament::FindOrFail($id);
+        $user = User::all();
+        $category = Category::all();
+        $prizes = prizepool::all();
+        $note = tournament_prize::all();
+        return view('penyelenggara.tournament',  ['id' => $id], compact('counttournaments', 'note', 'prizes', 'tournament', 'category', 'user'));
+    }
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $tournament = Tournament::findOrFail($id);
+            $aktif = $request->input('aktif');
+
+            // Update the 'aktif' column to "Aktif" or "Tidak Aktif"
+            $tournament->aktif = $aktif;
+            $tournament->save();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+
 
 
     /**
