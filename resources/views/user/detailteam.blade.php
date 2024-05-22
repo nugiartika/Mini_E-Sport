@@ -38,7 +38,10 @@
                 <div class="col-md-6 p-3">
                     <div class="d-flex gap-2 align-items-center">
                         <i class="ti ti-users-group"></i>
-                        <span>{{ $teamsCount->tournament_id }} tim</span>
+                        @if ($teamsCount)
+                        
+                        <span>{{ $teamsCount }} tim</span>
+                        @endif
                     </div>
                 </div>
             </div>
