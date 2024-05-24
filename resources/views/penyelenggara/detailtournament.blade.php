@@ -201,11 +201,11 @@
 
             <h3>Juara</h3>
             <!-- Button trigger modal -->
-           {{-- @if (count($juaras) < 1)
+           @if (count($juaras) < 1)
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleJuara">
                     Tambah Juara
                 </button>
-           @endif --}}
+           @endif
 
 
                 <!-- Modal -->
@@ -280,9 +280,9 @@
         </div>
         <div class="tab-pane fade" id="jadwal" role="tabpanel" aria-labelledby="jadwal-tab">
             <h3>Jadwal</h3>
-            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Tambah Jadwal
-            </button> --}}
+            </button>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
