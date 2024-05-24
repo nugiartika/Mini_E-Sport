@@ -66,6 +66,8 @@
     </div>
 </div>
 
+{{ $prizepool->links() }}
+
 <div class="modal fade" tabindex="-1" id="tambahModal">
     <div class="modal-dialog">
         <div class="modal-content">
