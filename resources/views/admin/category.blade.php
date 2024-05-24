@@ -210,7 +210,7 @@
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Ya, Hapus"
         }).then((result) => {
             if (result.isConfirmed) {
                 document.getElementById('delete-form-' + categoryId).submit();
