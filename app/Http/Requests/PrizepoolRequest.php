@@ -13,7 +13,7 @@ class PrizepoolRequest extends FormRequest
     {
 
         return [
-            'prize' => 'required',
+            'prize' => 'required|max:225',
         ];
 
 
@@ -27,7 +27,8 @@ class PrizepoolRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'prizepool.required' => 'Hadiah wajib diisi',
+            'prize.required' => 'Hadiah wajib diisi',
+            'prize.max' => 'Hadiah tidak boleh melebihi 225 karakter.',
         ];
 
     }

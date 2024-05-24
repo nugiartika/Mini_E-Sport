@@ -107,9 +107,9 @@
                             <img class="img-fluid" src="{{ asset('storage/' . $tour->images) }}" alt="Card girl image" />
 
                         </div>
-                        @if ($tournament->aktif ==='aktif')
+                        @if ($tour->aktif ==='aktif')
                         <span class="badge text-bg-success me-4">Aktif</span>
-                    @elseif ($tournament->aktif === 'tidak aktif')
+                    @elseif ($tour->aktif === 'tidak aktif')
                         <span class="badge text-bg-danger me-4">Tidak aktif</span>
                     @endif
 

@@ -36,8 +36,8 @@
                                 <span>{{ $tournament->name }}</span>
                             </div>
                             <div class="pb-2 d-flex justify-content-between">
-                                <h5 class="mb-0">Anggota per Tim</h5>
-                                <span>{{ $tournament->slotTeam }} orang / tim</span>
+                                <h5 class="mb-0">Slot Tim</h5>
+                                <span>{{ $tournament->slotTeam }} tim</span>
                             </div>
                         </div>
                     </div>

@@ -218,7 +218,7 @@
                                     <div class="acc-content-area">
                                         <div class="content-body mt-lg-6 mt-4">
                                             <p class="tcn-6">
-                                                {{ $tournaments->description }}
+                                                {!! $tournaments->description !!}
                                             </p>
                                         </div>
                                     </div>

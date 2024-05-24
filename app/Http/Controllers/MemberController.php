@@ -35,39 +35,14 @@ class MemberController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(StoreMemberRequest $request)
     {
-        // Validasi data input
-        $validator = Validator::make($request->all(), [
-            'member.*' => 'nullable', // Member inti wajib diisi
-            'nickname.*' => [
-                'required',
-                Rule::unique('members', 'nickname')->where(function ($query) use ($request) {
-                    return $query->where('team_id', $request->team_id);
-                })
-            ],
-            'member_cadangan.*' => 'nullable', // Member cadangan dapat kosong
-            'nickname_cadangan.*' => [
-                'nullable',
-                Rule::unique('members', 'nickname')->where(function ($query) use ($request) {
-                    return $query->where('team_id', $request->team_id);
-                })
-            ],
-            'is_captain.*' => 'nullable', // Isi kapten harus boolean
-
-        ],[
-            'nickname.*.required' => 'Kolom Email wajib diisi.',
-            'nickname.*.unique' => 'Email tidak bolek sama di dalam tim ini.',
-            'nickname_cadangan.*.unique' => 'Email cadangan harus unik di dalam tim ini.',
-        ]);
-
-        // Cek validasi
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
+        try {
+            $duplicates = $this->getDuplicatesEmail($request->nickname);
+        if (!empty($duplicates)) {
+            // Handle duplicates found in the nicknames
+            return redirect()->back()->withInput()->withErrors(['error' => 'Duplikat ditemukan dalam email']);
         }
-
         $teams_id = $request->team_id;
         $nicknames = $request->nickname;
 
@@ -96,10 +71,27 @@ class MemberController extends Controller
                 ]);
             }
         }
-
         return redirect()->route('team.index')->with('success', 'Members added successfully');
+    } catch (\Throwable $th) {
+        return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+    }
     }
 
+    private function getDuplicatesEmail(array $arr)
+{
+    // Count the frequency of each element in the array
+    $counts = array_count_values($arr);
+
+    // Select elements that appear more than once
+    $duplicates = [];
+    foreach ($counts as $item => $count) {
+        if ($count > 1) {
+            $duplicates[] = $item;
+        }
+    }
+
+    return $duplicates;
+}
 
     public function createMember(Request $request)
     {
@@ -118,38 +110,8 @@ class MemberController extends Controller
             $duplicates = $this->getDuplicates($request->nickname);
             if (!empty($duplicates)) {
                 // Lakukan sesuatu untuk menangani duplikat
-                return redirect()->back()->withInput()->withErrors(['error' => 'Duplikat ditemukan dalam nickname']);
+                return redirect()->back()->withInput()->withErrors(['error' => 'Duplikat ditemukan dalam email']);
             }
-        // // Validasi data input
-        // $validator = Validator::make($request->all(), [
-        //     'member.*' => 'nullable', // Member inti wajib diisi
-        //     'nickname.*' => [
-        //         'required',
-        //         Rule::unique('members', 'nickname')->where(function ($query) use ($request) {
-        //             return $query->where('team_id', $request->team_id);
-        //         })
-        //     ],
-        //     'member_cadangan.*' => 'nullable', // Member cadangan dapat kosong
-        //     'nickname_cadangan.*' => [
-        //         'nullable',
-        //         Rule::unique('members', 'nickname')->where(function ($query) use ($request) {
-        //             return $query->where('team_id', $request->team_id);
-        //         })
-        //     ],
-        //     'is_captain.*' => 'nullable', // Isi kapten harus boolean
-
-        // ],[
-        //     'nickname.*.required' => 'Kolom Email wajib diisi.',
-        //     'nickname.*.unique' => 'Email tidak bolek sama di dalam tim ini.',
-        //     'nickname_cadangan.*.unique' => 'Email cadangan harus unik di dalam tim ini.',
-        // ]);
-
-        // // Cek validasi
-        // if ($validator->fails()) {
-        //     return redirect()->back()
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
 
         $teams_id = $request->team_id;
         $nicknames = $request->nickname;

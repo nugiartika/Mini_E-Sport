@@ -202,19 +202,7 @@
                                         alt="game" style="min-heigt:100px;">
                                 </div>
                                 <h5 class="card-title text-center tcn-1 mb-4 title-anim">{{ $category->name }}</h5>
-                                {{-- <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/bitcoin.png" alt="bitcoin">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="assets/img/tether.png" alt="tether">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div> --}}
+
                             </div>
                         </div>
                     @endforeach
@@ -257,7 +245,7 @@
 
                     </div>
                     <div class="row justify-content-between align-items-center g-6">
-                        @foreach ($Categories as $Category)
+                        @forelse ($Categories as $Category)
                             <div class="col-xl-4 col-md-6">
                                 <div class="tournament-card p-xl-4 p-3 bgn-4">
                                     <div class="tournament-img mb-8 position-relative">
@@ -273,7 +261,7 @@
                                                 <h4
                                                     class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                     {{ $Category->name }}</h4>
-                                                        
+
                                             </a>
                                         </div>
                                         <div class="hr-line line3"></div>
@@ -296,7 +284,18 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                            @empty
+                            <div class="col-lg-12">
+                                <center>
+                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                        style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                                </center>
+                                <h4 class="text-light" style="text-align: center;">
+                                    game Tidak Tersedia
+                                </h4>
+                            </div>
+
+                        @endforelse
                     </div>
 
                 </div>
@@ -334,7 +333,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-between align-items-center g-6">
-                        @foreach ($Tournaments as $index => $Tournament)
+                        @forelse ($Tournaments as $index => $Tournament)
                             <div class="col-xl-4 col-md-6">
                                 <div class="tournament-card p-xl-4 p-3 bgn-4">
                                     <div class="tournament-img mb-8 position-relative">
@@ -420,7 +419,18 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                            @empty
+                            <div class="col-lg-12">
+                                <center>
+                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                        style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                                </center>
+                                <h4 class="text-light" style="text-align: center;">
+                                    Tournament Tidak Tersedia
+                                </h4>
+                            </div>
+
+                        @endforelse
                     </div>
 
                 </div>

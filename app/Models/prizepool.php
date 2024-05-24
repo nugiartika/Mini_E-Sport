@@ -9,7 +9,7 @@ class prizepool extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    // protected $fillable = ['prize'];
+
     public function tournament_prize()
     {
         return $this->hasMany(tournament_prize::class);

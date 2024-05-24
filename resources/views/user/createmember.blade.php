@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('layouts.panel')
 
 
 @section('style')
@@ -35,12 +35,6 @@
                             @php
                                 $loggedInUserName = auth()->user()->email;
                             @endphp
-
-                            @foreach ($teams as $team)
-                                @php
-                                    $membersPerTeam = $team->tournament->category->membersPerTeam;
-                                @endphp
-                            @endforeach
 
                             <h5>pemain inti</h5><br>
 
@@ -156,45 +150,6 @@
     </div>
 @endsection
 
-@section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.slide');
-            let currentSlide = 0;
+@push('script')
 
-            function showSlide(slideIndex) {
-                slides.forEach((slide, index) => {
-                    if (index === slideIndex) {
-                        slide.style.display = 'block';
-                    } else {
-                        slide.style.display = 'none';
-                    }
-                });
-            }
-
-            document.querySelector('.next-slide').addEventListener('click', function() {
-                currentSlide++;
-                showSlide(currentSlide);
-            });
-
-            document.querySelector('.prev-slide').addEventListener('click', function() {
-                currentSlide--;
-                showSlide(currentSlide);
-            });
-        });
-    </script>
-
-    <script src="../../demo/assets/vendor/libs/jquery/jquery1e84.js?id=0f7eb1f3a93e3e19e8505fd8c175925a"></script>
-    <script src="../../demo/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c"></script>
-    <script src="../../demo/assets/vendor/js/bootstraped84.js?id=9a6c701557297a042348b5aea69e9b76"></script>
-    <script src="../../demo/assets/vendor/libs/node-waves/node-waves259f.js?id=4fae469a3ded69fb59fce3dcc14cd638"></script>
-    <script src="../../demo/assets/vendor/libs/hammer/hammer2de0.js?id=0a520e103384b609e3c9eb3b732d1be8"></script>
-    <script src="../../demo/assets/vendor/libs/typeahead-js/typeahead60e7.js?id=f6bda588c16867a6cc4158cb4ed37ec6"></script>
-    <script src="../../demo/assets/vendor/js/menu2dc9.js?id=c6ce30ded4234d0c4ca0fb5f2a2990d8"></script>
-    <script src="../../demo/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-    <!-- END: Page Vendor JS-->
-    <!-- BEGIN: Theme JS-->
-    <script src="../../demo/assets/js/mainf696.js?id=8bd0165c1c4340f4d4a66add0761ae8a"></script>
-
-    <!-- END: Page JS-->
-@endsection
+@endpush

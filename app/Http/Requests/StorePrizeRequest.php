@@ -22,7 +22,7 @@ class StorePrizeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'prize' => 'required|string',
+            'prize' => 'required|string|max:225',
         ];
     }
 
@@ -30,7 +30,7 @@ class StorePrizeRequest extends FormRequest
     {
         return [
             'prize.required' => 'Hadiah harus diisi.',
-
+            'prize.max' => 'Hadiah tidak boleh melebihi 225 karakter.',
         ];
     }
 }

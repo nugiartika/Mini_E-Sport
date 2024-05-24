@@ -69,7 +69,7 @@ class LoginController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors([
-            'email_password_mismatch' => "Surel {$request->email} tidak ditemukan, status tidak aktif atau password salah."
+            'email_password_mismatch' => "Surel {$request->email} tidak ditemukan, password salah."
         ]);
     }
 }

@@ -279,50 +279,79 @@
     </div>
 @endsection
 
-@section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var exampleModal = document.getElementById('exampleModalCenter');
-            exampleModal.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget; // Tombol yang memicu modal
-                var tournamentId = button.getAttribute(
-                    'data-tournament-id'); // Ambil ID turnamen dari atribut data
+@push('script')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var exampleModal = document.getElementById('exampleModalCenter');
+        exampleModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget; // Tombol yang memicu modal
+            var tournamentId = button.getAttribute(
+                'data-tournament-id'); // Ambil ID turnamen dari atribut data
 
-                // Update tautan dengan ID turnamen yang benar
-                var existingTeamLink = exampleModal.querySelector('.btn-secondary');
-                var newTeamLink = exampleModal.querySelector('.btn-primary');
+            // Update tautan dengan ID turnamen yang benar
+            var existingTeamLink = exampleModal.querySelector('.btn-secondary');
+            var newTeamLink = exampleModal.querySelector('.btn-primary');
 
-                existingTeamLink.href = '/teams/create?tournament_id=' + tournamentId;
-                newTeamLink.href = '/team/create?tournament_id=' + tournamentId;
-            });
+            existingTeamLink.href = '/teams/create?tournament_id=' + tournamentId;
+            newTeamLink.href = '/team/create?tournament_id=' + tournamentId;
         });
-    </script>
+    });
+</script>
 
-    <script>
-        $(document).ready(function() {
-            $('#existing').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget); // Tombol yang memicu modal
-                var tournamentId = button.data(
-                    'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
-                var modal = $(this);
-                modal.find('.modal-body input[name="tournament_id"]').val(
-                    tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
-            });
+
+{{-- <script>
+    $(document).ready(function() {
+        $('#existing').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Tombol yang memicu modal
+            var tournamentId = button.data(
+                'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
+            var modal = $(this);
+            modal.find('.modal-body input[name="tournament_id"]').val(
+                tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
         });
+    });
 
-        function cardRadio(card) {
-            var radioButton = card.querySelector('input[type="radio"]');
+    function cardRadio(card) {
+        var radioButton = card.querySelector('input[type="radio"]');
 
-            if (!radioButton.checked) {
-                radioButton.checked = true;
+        if (!radioButton.checked) {
+            radioButton.checked = true;
 
-                var cards = document.querySelectorAll('.card');
-                cards.forEach(function(card) {
-                    card.classList.remove('border-red');
-                });
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function(card) {
+                card.classList.remove('border-red');
+            });
 
-                card.classList.add('border-red');
-            }
+            card.classList.add('border-red');
         }
-    </script>
-@endsection
+    }
+</script> --}}
+
+<script>
+    $(document).ready(function() {
+        $('#existing').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Tombol yang memicu modal
+            var tournamentId = button.data(
+                'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
+            var modal = $(this);
+            modal.find('.modal-body input[name="tournament_id"]').val(
+                tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
+        });
+    });
+
+    function cardRadio(card) {
+        var radioButton = card.querySelector('input[type="radio"]');
+
+        if (!radioButton.checked) {
+            radioButton.checked = true;
+
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function(card) {
+                card.classList.remove('border-red');
+            });
+
+            card.classList.add('border-red');
+        }
+    }
+</script>
+@endpush

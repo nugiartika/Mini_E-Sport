@@ -165,27 +165,7 @@ class TournamentController extends Controller
             }
             $user = Auth::user();
 
-            // $description = $request->description;
 
-            // if (!empty($description)) {
-            //     $dom = new \DomDocument();
-            //     $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-            //     $images = $dom->getElementsByTagName('img');
-            //     foreach ($images as $k => $img) {
-            //         $data = $img->getAttribute('src');
-            //         list($type, $data) = explode(';', $data);
-            //         list(, $data) = explode(',', $data);
-            //         $data = base64_decode($data);
-
-            //         $image_name = "/uploads" . time() . $k . '.png';
-            //         $path = public_path() . $image_name;
-            //         file_put_contents($path, $data);
-            //         $img->removeAttribute('src');
-            //         $img->setAttribute('src', $image_name);
-            //     }
-            //     $description = $dom->saveHTML();
-            // }
 
             // Proses gambar
             $gambar = $request->file('images');
@@ -238,8 +218,7 @@ class TournamentController extends Controller
             dd($e->getMessage());
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
 
-            // Tangani kesalahan
-            // dd($e->getMessage());
+
         }
     }
 
@@ -259,9 +238,10 @@ class TournamentController extends Controller
         $teams = Team::all();
         $query = Tournament::query();
 
-        if (!empty($selectedCategories)) {
-            $query->whereIn('categories_id', $selectedCategories);
-        }
+         if (!empty($selectedCategories)) {
+             $query->whereIn('categories_id', $selectedCategories);
+         }
+
 
         $tournaments = $query->get();
         $prizes = tournament_prize::all();
@@ -347,9 +327,10 @@ class TournamentController extends Controller
     public function bracket(Tournament $tournament, Request $request)
     {
         $request->validate([
-            'urlBracket' => 'required',
+            'urlBracket' => 'required|url',
         ], [
             'urlBracket.required' => 'bracket harus ada',
+            'urlBracket.url' => 'Bracket harus berupa URL yang valid.',
         ]);
 
         $tournament->update([
@@ -549,7 +530,6 @@ class TournamentController extends Controller
             // }
             $tournament = Tournament::findOrFail($id);
             $tournament->aktif = $request->input('status');
-
             $tournament->save();
             return redirect()->back()->with('success', 'Tournament berhasil diedit');
 
