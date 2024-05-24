@@ -218,6 +218,16 @@
         }
     </style>
 
+    @if($errors->all())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
         @csrf
         <div class="row justify-content-center">
@@ -331,7 +341,7 @@
 
                                             <div class="w-100 mt-3 noteForm" style="display: none;">
                                                 <input class="form-control @error('note') is-invalid @enderror"
-                                                    type="text" placeholder="Isikan deskripsi hadiah" name="note[]" />
+                                                    type="text" placeholder="Isikan deskripsi hadiah" name="note" />
                                                 @error('note')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

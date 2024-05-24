@@ -142,15 +142,11 @@
                                 </div>
                                 <div class="tournament-content px-xxl-4 mt-3 mt-md-4">
                                     <div class="tournament-info mb-4">
-                                        @if ($tournament->end_permainan > now())
-                                            <span class="badge text-bg-success position-absolute me-4"
-                                                style="right: 0;">Sedang
-                                                Berlangsung</span>
-                                        @else
-                                            <span class="badge text-bg-danger position-absolute me-4"
-                                                style="right: 0;">Sudah
-                                                Berakhir</span>
-                                        @endif
+                                        @if ($tournament->aktif ==='aktif')
+                                        <span class="badge text-bg-success me-4">Aktif</span>
+                                    @elseif ($tournament->aktif === 'tidak aktif')
+                                        <span class="badge text-bg-danger me-4">Tidak aktif</span>
+                                    @endif
 
                                         <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                             {{ $tournament->name }}
@@ -254,7 +250,7 @@
                                         @endif
 
                                         <!-- Tombol Detail Tournament -->
-                                        <a href="{{ route('tournament.detail') }}"
+                                        <a href="{{ route('tournament.detail', $tournament->id) }}"
                                             class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
                                             style="display: flex; justify-content: center; align-items: center;"
                                             title="Detail Tournament">

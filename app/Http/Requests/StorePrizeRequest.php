@@ -30,6 +30,7 @@ class StorePrizeRequest extends FormRequest
     {
         return [
             'prize.required' => 'Hadiah harus diisi.',
+
         ];
     }
 }

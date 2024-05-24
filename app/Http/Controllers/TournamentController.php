@@ -139,6 +139,7 @@ class TournamentController extends Controller
      */
     public function store(TournamentRequest $request)
     {
+
         try {
             $prizepoolId = $request->input('prizepool_id');
             $description = $request->description;
@@ -232,9 +233,9 @@ class TournamentController extends Controller
                 ]);
             }
 
-
             return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil ditambahkan');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
 
             // Tangani kesalahan
@@ -244,7 +245,7 @@ class TournamentController extends Controller
 
     public function filter(Request $request)
     {
-        // $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
         $oldSearch = $request->input('search');
         $user = Auth::user();
         $categories = Category::all();
@@ -263,6 +264,7 @@ class TournamentController extends Controller
         }
 
         $tournaments = $query->get();
+        $prizes = tournament_prize::all();
 
         return view('penyelenggara.tournament', compact('tournaments', 'categories', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'counttournaments', 'prizes'));
     }
@@ -287,6 +289,7 @@ class TournamentController extends Controller
         }
 
         $tournaments = $query->get();
+        $prizes = tournament_prize::all();
 
         return view('user.tournamentUser', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams'));
     }
@@ -545,7 +548,8 @@ class TournamentController extends Controller
             //     return response()->json(['success' => false, 'message' => $e->getMessage()]);
             // }
             $tournament = Tournament::findOrFail($id);
-            $tournament->aktif = $request->input('aktif');
+            $tournament->aktif = $request->input('status');
+
             $tournament->save();
             return redirect()->back()->with('success', 'Tournament berhasil diedit');
 

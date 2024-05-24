@@ -1,7 +1,7 @@
 @extends('layouts.panel')
 
 @section('content')
-    {{-- start row             --}}
+    {{-- start row    --}}
     <div class="row">
 
 
@@ -107,13 +107,11 @@
                             <img class="img-fluid" src="{{ asset('storage/' . $tour->images) }}" alt="Card girl image" />
 
                         </div>
-                        @if ($tour->end_permainan > now())
-                            <span class="badge text-bg-success position-absolute me-4" style="right: 0;">Sedang
-                                Berlangsung</span>
-                        @else
-                            <span class="badge text-bg-danger position-absolute me-4" style="right: 0;">Sudah
-                                Berakhir</span>
-                        @endif
+                        @if ($tournament->aktif ==='aktif')
+                        <span class="badge text-bg-success me-4">Aktif</span>
+                    @elseif ($tournament->aktif === 'tidak aktif')
+                        <span class="badge text-bg-danger me-4">Tidak aktif</span>
+                    @endif
 
                         <h4 class="mb-2 pb-1">{{ $tour->name }}</h4>
                         <p class="small">{{ $tour->category->name }}</p>

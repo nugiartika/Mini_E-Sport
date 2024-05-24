@@ -268,9 +268,9 @@
                                     $userTeamIds = $userTeamsInTournament->pluck('id');
 
                                     // Check if there is a relation between user teams and team_tournaments
-                                    $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-                                        ->where('tournament_id', $tournament->id)
-                                        ->get();
+                                    // $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+                                    //     ->where('tournament_id', $tournament->id)
+                                    //     ->get();
                                 }
                             @endphp
 
