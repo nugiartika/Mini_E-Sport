@@ -70,9 +70,10 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/addbracket/{tournament}', [TournamentController::class, 'bracket'])->name('add.bracket');
         Route::get('/tournaments/{id}/edit', [TournamentController::class, 'editStatus'])->name('editStatus');
         Route::put('/tournaments/{id}/update-status', [TournamentController::class, 'updateStatus'])->name('updateStatus');
+        Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
+
     });
 
-    Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
     Route::get('/detailTournamentUser/{id}', [TournamentController::class, 'detailTournamentUser'])->name('tournament.detailUser');
 
     // User Routes
