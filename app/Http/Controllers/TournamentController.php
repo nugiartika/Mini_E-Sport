@@ -76,6 +76,8 @@ class TournamentController extends Controller
         return view('user.tournamentUser', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts', 'teamTournament'));
     }
 
+
+
     public function dashboard()
     {
         $user = Auth::user();
@@ -311,8 +313,10 @@ class TournamentController extends Controller
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
-        // dd($teamCounts);
-        $category = Category::all();
+
+        $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('tournament_id')
+            ->get();        $category = Category::all();
         $jadwals = jadwal::all();
         $juaras = juara::find($id);
         $juaras = juara::all();
@@ -321,7 +325,7 @@ class TournamentController extends Controller
         $tournaments = Tournament::find($id);
         $prizes = tournament_prize::where('tournament_id', $id)->get();
 
-        return view('penyelenggara.detailtournament', compact('tournaments', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts', 'selectedTournament'));
+        return view('penyelenggara.detailtournament', compact('tournaments', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts','teamIdCounts', 'selectedTournament'));
     }
 
     public function bracket(Tournament $tournament, Request $request)
@@ -514,28 +518,16 @@ class TournamentController extends Controller
         $note = tournament_prize::all();
         return view('penyelenggara.tournament',  ['id' => $id], compact('counttournaments', 'note', 'prizes', 'tournament', 'category', 'user'));
     }
+
+
     public function updateStatus(Request $request, $id)
     {
-            // try {
-            //     $tournament = Tournament::findOrFail($id);
-            //     $aktif = $request->input('aktif');
-
-            //     // Update the 'aktif' column to "Aktif" or "Tidak Aktif"
-            //     $tournament->aktif = $aktif;
-            //     $tournament->save();
-
-            //     return response()->json(['success' => true]);
-            // } catch (\Exception $e) {
-            //     return response()->json(['success' => false, 'message' => $e->getMessage()]);
-            // }
             $tournament = Tournament::findOrFail($id);
             $tournament->aktif = $request->input('status');
             $tournament->save();
             return redirect()->back()->with('success', 'Tournament berhasil diedit');
 
     }
-
-
 
 
     /**

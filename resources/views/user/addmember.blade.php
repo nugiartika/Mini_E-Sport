@@ -55,8 +55,8 @@
                                                             id="nickname{{ $i }}" name="nickname[]" placeholder="Masukkan akun pengguna lain">
                                                             <option value="">Pilih Akun Pengguna</option>
                                                             @foreach ($user->where('role', 'user') as $u )
-                                                            <option value="{{ $u->id }}"
-                                                                {{ old('nickname.' . ($i - 1)) == $u->id ? 'selected' : '' }}>
+                                                            <option value="{{ $u->email }}"
+                                                                {{ old('nickname.' . ($i - 1)) == $u->email ? 'selected' : '' }}>
                                                                 {{ $u->email }}
                                                             </option>
                                                             @endforeach
@@ -146,5 +146,5 @@
 @endsection
 
 @push('script')
-    
+
 @endpush
