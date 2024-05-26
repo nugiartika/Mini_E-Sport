@@ -64,17 +64,25 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @forelse ($members as $index => $member) <!-- Ganti $members dengan $member untuk variabel iterasi -->
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $member->nickname }}</td> <!-- Pastikan akses ke properti name -->
-                        <td>Pemain : {{ $member->status }}</td>
-                        <td><span class="badge bg-label-primary me-1">{{ $member->is_captain }}</span></td> <!-- Asumsi ada properti is_leader -->
-                    </tr>
+                    @forelse ($members as $index => $member)
+                        <!-- Ganti $members dengan $member untuk variabel iterasi -->
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $member->nickname }}</td>
+                            <td>Pemain : {{ $member->status }}</td>
+                            <td><span class="badge bg-label-primary me-1">
+                                    @if ($member->is_captain == 1)
+                                        <p>kapten</p>
+                                    @else
+                                        <p>Member</p>
+                                    @endif
+                                </span></td>
+                        </tr>
                     @empty
-                    <tr>
-                        <td colspan="4">No members found.</td> <!-- Pesan jika tidak ada data -->
-                    </tr>
+                        <tr>
+                            <td colspan="4">No members found.</td>
+                            
+                        </tr>
                     @endforelse
                 </tbody>
             </table>

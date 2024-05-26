@@ -85,7 +85,7 @@ class TeamController extends Controller
         $teamsCount = Member::where('team_id', $id)->count();
         $category = Category::all();
         $tournament = Tournament::all();
-        $members = Member::where('team_id', $id)->whereNotNull('nickname')->where('is_captain', '$id')->get();
+        $members = Member::where('team_id', $id)->whereNotNull('nickname')->orderByDesc('is_captain')->get();
 
         return view('user.detailteam', compact('teams','category', 'teamsCount', 'tournament', 'members'));
     }
