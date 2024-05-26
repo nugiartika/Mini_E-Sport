@@ -47,41 +47,7 @@
             </div>
 
 
-            @php
-                // Ambil total tim dari hasil perhitungan
-                $teamCount = $teamCounts->firstWhere('tournament_id', $tournaments->id);
-                $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournaments->id);
-                $totalTeams = ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
 
-                $userTeams = $teams ?? collect();
-                $userTeamsInTournament = $userTeams->where('tournament_id', $tournaments->id);
-                $isUserInTournament = $userTeamsInTournament->isNotEmpty();
-
-                if ($isUserInTournament) {
-                    // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-                    $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
-
-                    // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-                    $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-                        ->where('tournament_id', $tournaments->id)
-                        ->get();
-                }
-            @endphp
-
-
-
-            @if (auth()->user()->role === 'user' && $tournaments->users_id == Auth::user()->id)
-                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                    data-tournament-id="{{ $tournaments->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
-                    Turnamen</a>
-            @elseif (!$totalTeams)
-                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                    data-tournament-id="{{ $tournaments->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
-                    Turnamen</a>
-            @elseif ($totalTeams)
-
-            @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
-            @endif
         </div>
     </div>
 
@@ -104,7 +70,7 @@
             </div>
         </div>
     </div>
-    
+
 
 
 
@@ -688,9 +654,8 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        @if ($teams && $teamtournament)
-                                            {{-- ada --}}
-                                        @else
+                                        @if ($teams->isEmpty() && $teamtournament->isEmpty())
+                                    
                                             <div class="row justify-content-center">
                                                 <div class="col-md-4">
                                                     <div class="text-center">

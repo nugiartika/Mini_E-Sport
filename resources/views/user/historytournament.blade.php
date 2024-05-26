@@ -30,7 +30,7 @@
                                     </a>
 
                                     @if (!$transactionExists && !$findIsSuccess->exists())
-                                        <a href="{{ route('transaction.create', ['tournament_id' => $tournament->tournament->id]) }}"
+                                        <a href="{{ route('transaction.create', ['tournament_id' => $tournament->id]) }}"
                                             class="btn btn-sm btn-primary">Bayar Sekarang</a>
                                     @endif
                                 </div>

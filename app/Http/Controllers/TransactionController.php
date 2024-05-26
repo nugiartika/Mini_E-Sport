@@ -64,7 +64,7 @@ class TransactionController extends Controller
         $request->validate([
             'tournament_id' => 'exists:team_tournaments,id|required'
         ]);
-
+        
         $eventData = TeamTournament::find($request->tournament_id);
         $paymentList = $this->paymentService->getPaymentList();
 

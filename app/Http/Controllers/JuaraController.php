@@ -23,7 +23,7 @@ class JuaraController extends Controller
             ->get();
         $category = Category::all();
         $jadwal = jadwal::all();
-        $juara = juara::find($id);
+        // $juara = juara::find($id);
         $juara = juara::all();
 
 

@@ -21,7 +21,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::all();
+        $teams = Team::where('user_id', auth()->id())->get();
         $category = Category::all();
         $tournaments = Tournament::all();
         return view('user.teamUser', compact('teams','category','tournaments'));
@@ -87,7 +87,7 @@ class TeamController extends Controller
         $tournament = Tournament::all();
         $members = Member::where('team_id', $id)->whereNotNull('nickname')->orderByDesc('is_captain')->get();
         $categoryName = $teams->category->name ?? '';
-        $categoryId = $teams->tournament->category->name;
+        $categoryId = $teams->tournament->category->name ?? '';
         return view('user.detailteam', compact('teams','category', 'membersCount', 'tournament', 'members','categoryName','categoryId'));
 
 

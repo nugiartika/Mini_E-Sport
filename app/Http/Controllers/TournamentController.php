@@ -336,10 +336,11 @@ class TournamentController extends Controller
 
         $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
-            ->get();        $category = Category::all();
-        $jadwals = jadwal::all();
+            ->get();
+        $category = Category::all();
+        $jadwals = jadwal::where('tournament_id', $id)->get();
         // $juaras = juara::find($id);
-        $juaras = juara::all();
+        $juaras = juara::where('tournament_id', $id)->get();
         $selectedTournament = Tournament::findOrFail($id);
         $teams = Team::where('tournament_id', $id)->get();
         $teamtournament = TeamTournament::where('tournament_id', $id)->with('team')->get();
@@ -379,8 +380,8 @@ public function detailTournamentUser(Tournament $tournament, $id)
         ->groupBy('tournament_id')
         ->get();
     $category = Category::all();
-    $jadwals = jadwal::all();
-    $juaras = juara::all();
+    $jadwals = jadwal::where('tournament_id', $id)->get();
+    $juaras = juara::where('tournament_id', $id)->get();
     $selectedTournament = Tournament::findOrFail($id);
     $teams = Team::where('tournament_id', $id)->get();
     $teamtournament = TeamTournament::where('tournament_id', $id)->with('team')->get();
