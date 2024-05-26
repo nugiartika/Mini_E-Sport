@@ -1,9 +1,7 @@
 @extends('layouts.panel')
 
 @section('content')
-@php
-use App\Models\TeamTournament;
-@endphp
+
     <div class="d-flex pb-4">
         <a href="{{ url(auth()->user()->role === 'organizer' ? 'ptournament' : 'tournamentUser') }}"
             class="btn btn-primary d-flex gap-2 align-items-center"><i class="ti ti-arrow-left"></i><span>Kembali Ke Daftar
@@ -45,70 +43,10 @@ use App\Models\TeamTournament;
                     </div>
                 </div>
             </div>
-
-
-            @php
-            // Ambil total tim dari hasil perhitungan
-            $teamCount = $teamCounts->firstWhere('tournament_id', $tournaments->id);
-            $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournaments->id);
-            $totalTeams =
-                ($teamCount ? $teamCount->count : 0) +
-                ($teamIdCount ? $teamIdCount->count : 0);
-
-            $userTeams = $teams ?? collect();
-            $userTeamsInTournament = $userTeams->where('tournament_id', $tournaments->id);
-            $isUserInTournament = $userTeamsInTournament->isNotEmpty();
-
-            if ($isUserInTournament) {
-                // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-                $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
-
-                // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-                $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-                    ->where('tournament_id', $tournaments->id)
-                    ->get();
-            }
-        @endphp
-
-
-
-            @if (auth()->user()->role === 'user' && $tournaments->users_id == Auth::user()->id)
-            <a type="button"
-            data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-            data-tournament-id="{{ $tournaments->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
-                Turnamen</a>
-            @elseif (!$totalTeams)
-                <a type="button"
-                data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                data-tournament-id="{{ $tournaments->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
-                    Turnamen</a>
-            @elseif ($totalTeams)
-
-            @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
-            @endif
         </div>
     </div>
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body d-flex flex-column align-items-center">
-                <div class="d-flex justify-content-center align-items-center mb-4"
-                    style="height: 100px;">
-                    <center>
-                        <h6 style="color: white;">Create a New Team for the Tournament or Choose an
-                            Existing Team</h6>
-                    </center>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <a href="#" type="button" class="btn btn-secondary me-2">Existing Team</a>
-                    <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 
@@ -183,13 +121,17 @@ use App\Models\TeamTournament;
                 role="tab" aria-controls="juara" aria-selected="false">Juara</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="detail-info-tab" data-bs-toggle="tab" data-bs-target="#detail-info" type="button"
-                role="tab" aria-controls="detail-info" aria-selected="false">Detail dan
+            <button class="nav-link" id="detail-info-tab" data-bs-toggle="tab" data-bs-target="#detail-info"
+                type="button" role="tab" aria-controls="detail-info" aria-selected="false">Detail dan
                 Informasi</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="jadwal-tab" data-bs-toggle="tab" data-bs-target="#jadwal" type="button"
                 role="tab" aria-controls="jadwal" aria-selected="false">Jadwal</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="list-tim-tab" data-bs-toggle="tab" data-bs-target="#list-tim" type="button"
+                role="tab" aria-controls="list-tim" aria-selected="false">Tim</button>
         </li>
     </ul>
 
@@ -216,32 +158,32 @@ use App\Models\TeamTournament;
                                 <div class="modal-body">
                                     <form id="updateBracketForm"
                                         action="{{ route('add.bracket', $selectedTournament->id) }}" "
-                                            method="POST">
-                                            @csrf
-                                            @method('PATCH')
+                                                method="POST">
+                                                @csrf
+                                                @method('PATCH')
 
-                                            <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
-                                            <input type="hidden" name="column" value="urlBracket" />
+                                                <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
+                                                <input type="hidden" name="column" value="urlBracket" />
 
-                                            <div class="mb-3">
-                                                <label for="bracketUrl" class="form-label">URL Bracket</label>
-                                                <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
-                                                    placeholder="Masukkan URL Bracket">
-                                            </div>
-                                        </form>
+                                                <div class="mb-3">
+                                                    <label for="bracketUrl" class="form-label">URL Bracket</label>
+                                                    <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
+                                                        placeholder="Masukkan URL Bracket">
+                                                </div>
+                                            </form>
 
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Batal</button>
-                                        <button type="button" class="btn btn-primary"
-                                            onclick="document.getElementById('updateBracketForm').submit();">Ubah
-                                            Status</button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="document.getElementById('updateBracketForm').submit();">Ubah
+                                                Status</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
      @endif
 
                                 </div>
@@ -267,9 +209,10 @@ use App\Models\TeamTournament;
 
                                 <h3>Juara</h3>
                                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleJuara">
-                    Tambah Juara
-                </button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleJuara">
+                                    Tambah Juara
+                                </button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleJuara" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -285,7 +228,8 @@ use App\Models\TeamTournament;
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <input type="hidden" name="tournament_id" value="{{ request('tournament_id') }}">
+                                                    <input type="hidden" name="tournament_id"
+                                                        value="{{ request('tournament_id') }}">
                                                     <label for="nama_juara1" class="form-label">Juara 1</label>
                                                     <input type="text" class="form-control" id="nama_juara1"
                                                         name="nama_juara1" required>
@@ -350,9 +294,10 @@ use App\Models\TeamTournament;
                             </div>
                             <div class="tab-pane fade" id="jadwal" role="tabpanel" aria-labelledby="jadwal-tab">
                                 <h3>Jadwal</h3>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Tambah Jadwal
-            </button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Tambah Jadwal
+                                </button>
 
                                 <div class="modal fade" id="exampleModal" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -627,6 +572,61 @@ use App\Models\TeamTournament;
                                         <small>{{ $tournaments->contact }}</small>
                                     </div>
 
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="list-tim" role="tabpanel" aria-labelledby="list-tim-tab">
+                                <div>
+                                    <h3>List Tim</h3>
+                                    <div class="row">
+                                        @foreach ($teams as $team)
+                                            <div class="col-md-3 mb-4">
+                                                <div class="card h-100">
+                                                    <div
+                                                        class="card-body d-flex justify-content-between align-items-center">
+                                                        <div class="team-profile">
+                                                            <img src="{{ asset('storage/' . $team->profile) }}"
+                                                                alt="Profile Image" class="img-fluid rounded-circle"
+                                                                style="width: 50px; height: 50px;">
+                                                        </div>
+                                                        <div class="team-info">
+                                                            <h6 class="card-title mb-0">{{ $team->name }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @foreach ($teamtournament as $teamturnamen)
+                                            <div class="col-md-3 mb-4">
+                                                <div class="card h-100">
+                                                    <div
+                                                        class="card-body d-flex justify-content-between align-items-center">
+                                                        <div class="team-profile">
+                                                            <img src="{{ asset('storage/' . $teamturnamen->team->profile) }}"
+                                                                alt="Profile Image" class="img-fluid rounded-circle"
+                                                                style="width: 50px; height: 50px;">
+                                                        </div>
+                                                        <div class="team-info">
+                                                            <h6 class="card-title mb-0">{{ $teamturnamen->team->name }}
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @if ($teams && $teamtournament)
+                                            {{-- ada --}}
+                                        @else
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-4">
+                                                    <div class="text-center">
+                                                        <img src="{{ asset('assets/img/No-data.png') }}" width="70%"
+                                                            alt="Image Not Found" />
+                                                        <h5 class="mb-3 text-center">Belum ada Tim yang bergabung.</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>

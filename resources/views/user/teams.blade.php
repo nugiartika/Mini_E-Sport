@@ -95,7 +95,7 @@
                     <div class="form-group">
                         <label for="team_id">Pilih Tim:</label>
                         <div class="row text-black">
-                            @foreach ($teams as $team)
+                            @forelse ($teams as $team)
                                 {{-- @if ($team->user_id === auth()->user()->id) --}}
                                 {{-- @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id) --}}
                                 <input type="hidden" name="tournament_id" value="{{ $selectedTournamentId }}">
@@ -114,7 +114,12 @@
                                     </div>
                                 </div>
                                 {{-- @endif --}}
-                            @endforeach
+                                @empty
+                                    <div class="p-3 text-center">
+                                        <h4 class="mb-2">Tidak Ada Data</h4>
+                                        <p class="mb-0 text-muted">Anda belum memiliki Tim.</p>
+                                    </div>
+                            @endforelse
                         </div>
                     </div>
                     {{-- <input type="hidden" name="tournament_id"

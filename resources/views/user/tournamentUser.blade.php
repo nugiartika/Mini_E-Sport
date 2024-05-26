@@ -84,6 +84,7 @@
 @section('content')
     @php
         use App\Models\TeamTournament;
+        use App\Models\Team;
     @endphp
     <div class="modal fade" tabindex="-1" id="filter" style="color: #ffffff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
@@ -199,6 +200,15 @@
                                                 ->where('tournament_id', $tournament->id)
                                                 ->get();
                                         }
+                                        $userId = Auth::id();
+
+                                        $userTeamIds = Team::where('user_id', $userId)->pluck('id')->toArray();
+
+                                        // Cek apakah ada tim pengguna dalam turnamen ini
+                                        $teamtournamentId = TeamTournament::where('tournament_id', $tournament->id)
+                                                ->whereIn('team_id', $userTeamIds)
+                                                ->exists();
+
                                     @endphp
 
 
@@ -222,7 +232,10 @@
 
 
                                         {{-- @dd($tournament->users_id == Auth::user()->id) --}}
-                                        @if ($tournament->users_id == Auth::user()->id)
+                                        {{-- @if ($teamCount && $teamCount->count < $tournament->slotTeam) --}}
+                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && !$isUserInTournament && !$teamtournamentId)
+
+                                        {{-- @if ($tournament->users_id == Auth::user()->id) --}}
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
