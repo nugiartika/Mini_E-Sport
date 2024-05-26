@@ -8,8 +8,7 @@
 
     <div class="row">
         <div class="col-md-3">
-            <img class="w-100 rounded-4" src="{{ asset('storage/' . $teams->profile) }}"
-                alt=" {{ $teams->name }}" />
+            <img class="w-100 rounded-4" src="{{ asset('storage/' . $teams->profile) }}" alt=" {{ $teams->name }}" />
         </div>
         <div class="col-md-9">
             <h1 class="title-anim"> Nama Tim : {{ $teams->name }}</h1>
@@ -32,7 +31,7 @@
                 <div class="col-md-6 border-end p-3">
                     <div class="d-flex gap-2 align-items-center">
                         <i class="ti ti-device-gamepad-2"></i>
-                        <span>{{ $teams->name }}</span>
+                        <span>{{ $teams->category->name }}</span>
                     </div>
                 </div>
 
@@ -48,62 +47,39 @@
 
         </div>
     </div>
+    <br>
 
-    {{-- <div class="row py-4">
-        <div class="col-md-2">
-            <div class="card card-body rounded-4 text-center">
-                <div class="icon-area mb-6">
-                    <i class="h1 ti ti-location display-five fw-normal tcp-2"></i>
-                </div>
-                <h4 class="mb-1">Jenis Turnamen</h4>
-                <p class="mb-0">{{ $teams->paidment === 'paid' ? 'Berbayar' : 'Gratis' }}</p>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card card-body rounded-4 text-center">
-                <div class="icon-area mb-6">
-                    <i class="h1 ti ti-wallet display-five fw-normal tcp-2"></i>
-                </div>
-                <h4 class="mb-1">HTM</h4>
-                <p class="mb-0">Rp {{ number_format($teams->nominal, 0, ',', '.') }}</p>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card card-body rounded-4 text-center">
-                <div class="icon-area mb-6">
-                    <i class="h1 ti ti-calendar display-five fw-normal tcp-2"></i>
-                </div>
-                <h4 class="mb-1">Permainan</h4>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card card-body rounded-4 text-center">
-                <div class="icon-area mb-6">
-                    <i class="h1 ti ti-calendar-x display-five fw-normal tcp-2"></i>
-                </div>
-                <h4 class="mb-1">Pendaftaran</h4>
-                <p class="mb-0">{{ $selectedTournament->end_permainan->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
-                </p>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card card-body rounded-4 text-center">
-                <div class="icon-area mb-6">
-                    <i class="h1 ti ti-users-group display-five fw-normal tcp-2"></i>
-                </div>
-                <h4 class="mb-1">Slot Tim</h4>
-                <p class="mb-0">{{ $teams->slotTeam }} tim</p>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card card-body rounded-4 text-center">
-                <div class="icon-area mb-6">
-                    <i class="h1 ti ti-device-gamepad-2 display-five fw-normal tcp-2"></i>
-                </div>
-                <h4 class="mb-1">Kategori Game</h4>
-                <p class="mb-0">{{ $teams->category->name }}</p>
-            </div>
-        </div>
-    </div> --}}
 
+    <!-- Basic Bootstrap Table -->
+    <div class="card">
+        <h5 class="card-header">Table Pemain</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Pemain</th>
+                        <th>Status</th>
+                        <th>Ketua</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @forelse ($members as $index => $member) <!-- Ganti $members dengan $member untuk variabel iterasi -->
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $member->nickname }}</td> <!-- Pastikan akses ke properti name -->
+                        <td>Pemain : {{ $member->status }}</td>
+                        <td><span class="badge bg-label-primary me-1">{{ $member->is_captain }}</span></td> <!-- Asumsi ada properti is_leader -->
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="4">No members found.</td> <!-- Pesan jika tidak ada data -->
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <!--/ Basic Bootstrap Table -->
 @endsection

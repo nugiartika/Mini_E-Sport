@@ -148,7 +148,7 @@
                                         <span class="badge text-bg-danger me-4">Tidak aktif</span>
                                     @endif
 
-                                        <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                        <h4 class="tournament-tFitle tcn-1 mb-1 cursor-scale growDown title-anim">
                                             {{ $tournament->name }}
                                         </h4>
                                         <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
@@ -250,7 +250,7 @@
                                         @endif
 
                                         <!-- Tombol Detail Tournament -->
-                                        <a href="{{ route('tournament.detail', $tournament->id) }}"
+                                        <a href="{{ route('tournament.detailUser', $tournament->id) }}"
                                             class="custom-icon-detail" data-bs-toggle="tooltip" data-bs-placement="top"
                                             style="display: flex; justify-content: center; align-items: center;"
                                             title="Detail Tournament">

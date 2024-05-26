@@ -82,10 +82,12 @@ class TeamController extends Controller
     public function indexdetail($id)
     {
         $teams = Team::findOrFail($id);
-        $teamsCount = Team::count();
+        $teamsCount = Member::where('team_id', $id)->count();
         $category = Category::all();
+        $tournament = Tournament::all();
+        $members = Member::where('team_id', $id)->whereNotNull('nickname')->where('is_captain', '$id')->get();
 
-        return view('user.detailteam', compact('teams','category', 'teamsCount'));
+        return view('user.detailteam', compact('teams','category', 'teamsCount', 'tournament', 'members'));
     }
 
     /**

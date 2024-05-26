@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex pb-4">
-        <a href="{{ url('ptournament') }}" class="btn btn-primary d-flex gap-2 align-items-center"><i
+        <a href="{{ route('user.tournament') }}" class="btn btn-primary d-flex gap-2 align-items-center"><i
                 class="ti ti-arrow-left"></i><span>Kembali Ke Daftar Turnamen</span></a>
     </div>
 
@@ -201,19 +201,19 @@
 
             <h3>Juara</h3>
             <!-- Button trigger modal -->
-           @if (count($juaras) < 1)
+           @if (count($juara) < 1)
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleJuara">
                     Tambah Juara
                 </button>
            @endif
 
-            
+
                 <!-- Modal -->
                 <div class="modal fade" id="exampleJuara" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form action="{{ route('ptournament.juara', ['id' =>$tournaments->id]) }}" method="POST">
+                            <form action="{{ route('ptournament.juara', ['id' =>$tournament->id]) }}" method="POST">
                                 <!-- Tambahkan method POST -->
                                 @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
                                 <div class="modal-header">
@@ -245,7 +245,7 @@
 
                     </div>
                 </div>
-            @forelse ( $juaras as $juara )
+            @forelse ( $juara as $juara )
                 <table class="table">
                     <thead>
                         <tr>
@@ -257,7 +257,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            
+
                                 <td>{{ $juara->nama_juara1 }}</td>
                                 <td>{{ $juara->nama_juara2 }}</td>
                                 <td>{{ $juara->nama_juara3 }}</td>
@@ -289,7 +289,7 @@
                     <!-- Tambahkan class modal-lg untuk modal yang lebih besar jika diperlukan -->
                     <div class="modal-content">
                         <!-- Form -->
-                        <form action="{{ route('ptournament.jadwal', ['id' => $tournaments->id]) }}" method="POST">
+                        <form action="{{ route('ptournament.jadwal', ['id' => $tournament->id]) }}" method="POST">
                             <!-- Tambahkan method POST -->
                             @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
                             <div class="modal-header">
@@ -311,7 +311,7 @@
                                     <label for="boPenyisihan" class="form-label">Best Of</label>
                                     <input type="text" class="form-control" id="boPenyisihan" name="boPenyisihan" required>
                                 </div>
-            
+
                                 <!-- Semi Final -->
                                 <h5>Semi Final</h5>
                                 <div class="mb-3">
@@ -326,7 +326,7 @@
                                     <label for="boSemi" class="form-label">Best Of</label>
                                     <input type="text" class="form-control" id="boSemi" name="boSemi" required>
                                 </div>
-            
+
                                 <!-- Final -->
                                 <h5>Final</h5>
                                 <div class="mb-3">
@@ -351,7 +351,7 @@
                     </div>
                 </div>
             </div>
-            @forelse ( $jadwals as  $jadwal)
+            @forelse ( $jadwal as  $jadwal)
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
 
@@ -453,17 +453,17 @@
                 <h3>Detail dan Informasi</h3>
                 <div class="border-end border-bottom">
                     <h6>Deskripsi</h6>
-                    <small>{!! $tournaments->description !!}</small>
+                    <small>{!! $tournament->description !!}</small>
                 </div>
                 <div class="border-end border-bottom">
                     <h6>Peraturan</h6>
-                    <small>{{ $tournaments->rule }}</small>
+                    <small>{{ $tournament->rule }}</small>
                 </div>
                 <div class="border-end border-bottom">
                     <h6>Kontak Personal</h6>
-                    <small>{{ $tournaments->contact }}</small>
+                    <small>{{ $tournament->contact }}</small>
                 </div>
-                
+
             </div>
         </div>
     </div>
