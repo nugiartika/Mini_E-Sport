@@ -25,17 +25,35 @@ class TournamentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $tournaments = Tournament::where('users_id', auth()->user()->id)->get();
-        $counttournaments = $tournaments->where('status', 'rejected')->count(); // Use the already fetched tournaments to count
+
+        // Apply the search filter and paginate the results
+        $tournamentsQuery = Tournament::when($request->has('search'), function ($query) use ($request){
+            $query->where('name', 'like', '%'.$request->search.'%');
+        });
+
+        // Filter tournaments by the authenticated user
+        $tournamentsQuery->where('users_id', $user->id);
+
+        // Get the paginated results
+        $tournaments = $tournamentsQuery->paginate(5);
+
+        // Count the tournaments with 'rejected' status
+        $counttournaments = $tournamentsQuery->where('status', 'rejected')->count();
+
+        // Get team counts grouped by tournament_id
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
+
+        // Get team tournament counts grouped by tournament_id
         $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
+
+        // Get all categories and prizes
         $categories = Category::all();
         $prizes = tournament_prize::all();
 
