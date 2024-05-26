@@ -341,8 +341,8 @@
 
                                             <div class="w-100 mt-3 noteForm" style="display: none;">
                                                 <input class="form-control @error('note') is-invalid @enderror"
-                                                    type="text" placeholder="Isikan deskripsi hadiah" name="note" />
-                                                @error('note')
+                                                    type="text" placeholder="Isikan deskripsi hadiah" name="note[]" />
+                                                @error('note[]')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>

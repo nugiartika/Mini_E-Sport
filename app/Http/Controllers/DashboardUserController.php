@@ -7,6 +7,7 @@ use App\Http\Requests\StoreDashboardUserRequest;
 use App\Http\Requests\UpdateDashboardUserRequest;
 use App\Models\Category;
 use App\Models\Tournament;
+use App\Models\tournament_prize;
 
 class DashboardUserController extends Controller
 {
@@ -18,9 +19,10 @@ class DashboardUserController extends Controller
         $categorys = Category::all()->count();
         $tournaments = Tournament::all()->count();
         $tournament = Tournament::all();
-        $tournamentFree = Tournament::where('paidment','unpaid')->count();
-        $tournamentPaid = Tournament::where('paidment','paid')->count();
-        return view('user.Dashboard', compact('categorys', 'tournaments', 'tournament', 'tournamentFree', 'tournamentPaid'));
+        $prizes = tournament_prize::all();
+        $tournamentFree = Tournament::where('paidment','Gratis')->count();
+        $tournamentPaid = Tournament::where('paidment','Berbayar')->count();
+        return view('user.Dashboard', compact('prizes','categorys', 'tournaments', 'tournament', 'tournamentFree', 'tournamentPaid'));
     }
 
     /**

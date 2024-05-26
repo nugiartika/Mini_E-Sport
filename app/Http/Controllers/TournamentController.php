@@ -73,8 +73,9 @@ class TournamentController extends Controller
         $category = Category::all();
         $teams = Team::with('tournament')->where('user_id', auth()->id())->get();
         $teamTournament = TeamTournament::all();
+        $prizes = tournament_prize::all();
 
-        return view('user.tournamentUser', compact('tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts', 'teamTournament'));
+        return view('user.tournamentUser', compact('prizes','tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts', 'teamTournament'));
     }
 
 
@@ -342,8 +343,6 @@ class TournamentController extends Controller
             'urlBracket' => $request->input('urlBracket'),
         ]);
 
-        toastr()->success('Bracket Berhasil Ditambahkan');
-
         return redirect()->back()->with('error', 'Turnamen tidak ditemukan');
     }
 
@@ -357,15 +356,15 @@ class TournamentController extends Controller
             ->get();
         // dd($teamCounts);
         $category = Category::all();
-        $jadwal = jadwal::all();
-        $juara = juara::all();
+        $jadwals = jadwal::all();
+        $juaras = juara::all();
         $selectedTournament = Tournament::findOrFail($id);
         $teams = team::all();
         $tournament = Tournament::find($id);
         $prizes = tournament_prize::where('tournament_id', $id)->get();
         // dd($prizes);
 
-        return view('user.detailtournament', compact('counttournaments', 'user', 'category', 'jadwal', 'juara', 'selectedTournament', 'teams', 'tournament', 'prizes'));
+        return view('user.detailtournament', compact('counttournaments', 'user', 'category', 'jadwals', 'juaras', 'selectedTournament', 'teams', 'tournament', 'prizes'));
     }
 
     /**

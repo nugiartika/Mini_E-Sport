@@ -35,6 +35,15 @@
                                 <h5 class="mb-0">Nama Turnamen</h5>
                                 <span>{{ $tournament->name }}</span>
                             </div>
+                            <div class="pb-3 border-bottom mb-3 d-flex justify-content-between">
+                                <h5 class="mb-0">Prizepool</h5>
+                                @foreach ($prizes as $prize)
+                                    @if ($prize->tournament_id == $tournament->id)
+                                    <span class="tcn-1 title-anim">{{ $prize->prizepool->prize }} ,
+                                        {{ $prize->note }}</span>
+                                    @endif
+                                @endforeach
+                            </div>
                             <div class="pb-2 d-flex justify-content-between">
                                 <h5 class="mb-0">Slot Tim</h5>
                                 <span>{{ $tournament->slotTeam }} tim</span>

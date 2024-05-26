@@ -1,9 +1,9 @@
 @extends('layouts.panel')
 
 @section('content')
-@php
-use App\Models\TeamTournament;
-@endphp
+    @php
+        use App\Models\TeamTournament;
+    @endphp
     <div class="d-flex pb-4">
         <a href="{{ url(auth()->user()->role === 'organizer' ? 'ptournament' : 'tournamentUser') }}"
             class="btn btn-primary d-flex gap-2 align-items-center"><i class="ti ti-arrow-left"></i><span>Kembali Ke Daftar
@@ -48,39 +48,35 @@ use App\Models\TeamTournament;
 
 
             @php
-            // Ambil total tim dari hasil perhitungan
-            $teamCount = $teamCounts->firstWhere('tournament_id', $tournaments->id);
-            $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournaments->id);
-            $totalTeams =
-                ($teamCount ? $teamCount->count : 0) +
-                ($teamIdCount ? $teamIdCount->count : 0);
+                // Ambil total tim dari hasil perhitungan
+                $teamCount = $teamCounts->firstWhere('tournament_id', $tournaments->id);
+                $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournaments->id);
+                $totalTeams = ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
 
-            $userTeams = $teams ?? collect();
-            $userTeamsInTournament = $userTeams->where('tournament_id', $tournaments->id);
-            $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+                $userTeams = $teams ?? collect();
+                $userTeamsInTournament = $userTeams->where('tournament_id', $tournaments->id);
+                $isUserInTournament = $userTeamsInTournament->isNotEmpty();
 
-            if ($isUserInTournament) {
-                // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-                $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+                if ($isUserInTournament) {
+                    // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+                    $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
 
-                // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-                $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-                    ->where('tournament_id', $tournaments->id)
-                    ->get();
-            }
-        @endphp
+                    // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+                    $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+                        ->where('tournament_id', $tournaments->id)
+                        ->get();
+                }
+            @endphp
 
 
 
             @if (auth()->user()->role === 'user' && $tournaments->users_id == Auth::user()->id)
-            <a type="button"
-            data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-            data-tournament-id="{{ $tournaments->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
-                Turnamen</a>
+                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                    data-tournament-id="{{ $tournaments->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
+                    Turnamen</a>
             @elseif (!$totalTeams)
-                <a type="button"
-                data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                data-tournament-id="{{ $tournaments->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
+                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                    data-tournament-id="{{ $tournaments->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
                     Turnamen</a>
             @elseif ($totalTeams)
 
@@ -89,26 +85,25 @@ use App\Models\TeamTournament;
         </div>
     </div>
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body d-flex flex-column align-items-center">
-                <div class="d-flex justify-content-center align-items-center mb-4"
-                    style="height: 100px;">
-                    <center>
-                        <h6 style="color: white;">Create a New Team for the Tournament or Choose an
-                            Existing Team</h6>
-                    </center>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <a href="#" type="button" class="btn btn-secondary me-2">Existing Team</a>
-                    <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-items-center">
+                    <div class="d-flex justify-content-center align-items-center mb-4" style="height: 100px;">
+                        <center>
+                            <h6 style="color: white;">Create a New Team for the Tournament or Choose an
+                                Existing Team</h6>
+                        </center>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="#" type="button" class="btn btn-secondary me-2">Existing Team</a>
+                        <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -130,6 +125,20 @@ use App\Models\TeamTournament;
                 </div>
                 <h4 class="mb-1">HTM</h4>
                 <p class="mb-0">Rp {{ number_format($selectedTournament->nominal, 0, ',', '.') }}</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card card-body rounded-4 text-center">
+                <div class="icon-area mb-6">
+                    <i class="h1 ti ti-gift display-five fw-normal tcp-2"></i>
+                </div>
+                <h4 class="mb-1">Prizepool</h4>
+                @foreach ($prizes as $prize)
+                    @if ($prize->tournament_id == $selectedTournament->id)
+                        <p class="mb-0">{{ $prize->prizepool->prize }} ,
+                            {{ $prize->note }}</p>
+                    @endif
+                @endforeach
             </div>
         </div>
         <div class="col-md-2">
@@ -175,16 +184,16 @@ use App\Models\TeamTournament;
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="bracket-tab" data-bs-toggle="tab" data-bs-target="#bracket" type="button"
-                role="tab" aria-controls="bracket" aria-selected="true">Bracket</button>
+            <button class="nav-link active" id="bracket-tab" data-bs-toggle="tab" data-bs-target="#bracket"
+                type="button" role="tab" aria-controls="bracket" aria-selected="true">Bracket</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="juara-tab" data-bs-toggle="tab" data-bs-target="#juara" type="button"
                 role="tab" aria-controls="juara" aria-selected="false">Juara</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="detail-info-tab" data-bs-toggle="tab" data-bs-target="#detail-info" type="button"
-                role="tab" aria-controls="detail-info" aria-selected="false">Detail dan
+            <button class="nav-link" id="detail-info-tab" data-bs-toggle="tab" data-bs-target="#detail-info"
+                type="button" role="tab" aria-controls="detail-info" aria-selected="false">Detail dan
                 Informasi</button>
         </li>
         <li class="nav-item" role="presentation">
@@ -216,32 +225,32 @@ use App\Models\TeamTournament;
                                 <div class="modal-body">
                                     <form id="updateBracketForm"
                                         action="{{ route('add.bracket', $selectedTournament->id) }}" "
-                                            method="POST">
-                                            @csrf
-                                            @method('PATCH')
+                                                method="POST">
+                                                @csrf
+                                                @method('PATCH')
 
-                                            <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
-                                            <input type="hidden" name="column" value="urlBracket" />
+                                                <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
+                                                <input type="hidden" name="column" value="urlBracket" />
 
-                                            <div class="mb-3">
-                                                <label for="bracketUrl" class="form-label">URL Bracket</label>
-                                                <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
-                                                    placeholder="Masukkan URL Bracket">
-                                            </div>
-                                        </form>
+                                                <div class="mb-3">
+                                                    <label for="bracketUrl" class="form-label">URL Bracket</label>
+                                                    <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
+                                                        placeholder="Masukkan URL Bracket">
+                                                </div>
+                                            </form>
 
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Batal</button>
-                                        <button type="button" class="btn btn-primary"
-                                            onclick="document.getElementById('updateBracketForm').submit();">Ubah
-                                            Status</button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="document.getElementById('updateBracketForm').submit();">Ubah
+                                                Status</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
      @endif
 
                                 </div>
@@ -267,9 +276,12 @@ use App\Models\TeamTournament;
 
                                 <h3>Juara</h3>
                                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleJuara">
-                    Tambah Juara
-                </button>
+                                @if (count($juaras) < 1)
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleJuara">
+                                        Tambah Juara
+                                    </button>
+                                @endif
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleJuara" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -285,7 +297,8 @@ use App\Models\TeamTournament;
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <input type="hidden" name="tournament_id" value="{{ request('tournament_id') }}">
+                                                    <input type="hidden" name="tournament_id"
+                                                        value="{{ request('tournament_id') }}">
                                                     <label for="nama_juara1" class="form-label">Juara 1</label>
                                                     <input type="text" class="form-control" id="nama_juara1"
                                                         name="nama_juara1" required>
@@ -350,9 +363,12 @@ use App\Models\TeamTournament;
                             </div>
                             <div class="tab-pane fade" id="jadwal" role="tabpanel" aria-labelledby="jadwal-tab">
                                 <h3>Jadwal</h3>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Tambah Jadwal
-            </button>
+                                @if (count($jadwals) < 1)
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        Tambah Jadwal
+                                    </button>
+                                @endif
 
                                 <div class="modal fade" id="exampleModal" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -175,6 +175,15 @@
                                             <span
                                                 class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
                                         </div>
+                                        <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                            <i class="fa fa-gift fs-base tcn-1"></i>
+                                            @foreach ($prizes as $prize)
+                                                @if ($prize->tournament_id == $tournament->id)
+                                                <span class="tcn-1 title-anim">{{ $prize->prizepool->prize }} ,
+                                                    {{ $prize->note }}</span>
+                                                @endif
+                                            @endforeach
+                                        </div>
                                     </div>
 
 

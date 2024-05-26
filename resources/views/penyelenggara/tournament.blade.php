@@ -235,6 +235,16 @@
                             </div>
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
+                                <strong>Prizepool</strong>
+                                @foreach ($prizes as $prize)
+                                    @if ($prize->tournament_id == $tournament->id)
+                                    <span class="tcn-1 title-anim">{{ $prize->prizepool->prize }} ,
+                                        {{ $prize->note }}</span>
+                                    @endif
+                                @endforeach
+                            </div>
+
+                            <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
                                 <strong>Jenis Turnamen</strong>
                                 <span>{{ $tournament->paidment === 'Gratis' ? 'Gratis' : ($tournament->paidment === 'Berbayar' ? 'Berbayar' : '') }}</span>
                             </div>

@@ -48,10 +48,6 @@ class JadwalController extends Controller
             'boFinal' => $request->boFinal,
         ]);
 
-        toastr()->success('Jadwal Berhasil Ditambahkan');
-
-
-        // Redirect ke halaman detail turnamen dengan menyertakan ID turnamen
         return redirect()->back()->with('error', 'Tidak dapat menemukan informasi turnamen');
 
     }

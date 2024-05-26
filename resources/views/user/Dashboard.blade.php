@@ -158,6 +158,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <div class="avatar flex-shrink-0 me-2">
+                                        <span class="avatar-initial rounded bg-label-primary"><i
+                                                class="fa fa-gift "></i></span>
+                                    </div>
+                                    <div>
+                                        <small>Prizepool</small>
+                                        <h6 class="mb-0 text-nowrap">
+                                            @foreach ($prizes as $prize)
+                                                @if ($prize->tournament_id == $tour->id)
+                                                <span class="tcn-1 title-anim">{{ $prize->prizepool->prize }} ,
+                                                    {{ $prize->note }}</span>
+                                                @endif
+                                            @endforeach
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
