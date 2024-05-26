@@ -339,7 +339,7 @@
                                     <div class="tournament-img mb-8 position-relative">
                                         <div class="img-area overflow-hidden">
                                             <img class="w-100"
-                                                src="{{ asset('storage/' . $Tournament->category->photo) }}"
+                                                src="{{ asset('storage/' . $Tournament->images) }}"
                                                 alt="tournament">
                                         </div>
                                         {{-- <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">

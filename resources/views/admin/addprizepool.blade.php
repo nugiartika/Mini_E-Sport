@@ -89,8 +89,8 @@
                         @enderror
                     </div>
                     <div class="pt-2 d-flex gap-3 justify-content-end">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-                        <button type="submit" class="btn btn-primary">SAVE</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -103,13 +103,13 @@
 <script>
     function confirmDeletion(prizeId) {
         Swal.fire({
-            title: "Apa kamu yakin?",
-            text: "Anda tidak akan dapat mengembalikan ini!",
+            title: "Apa kamu yakin!",
+            text: "Untuk mengahapus hadiah ini?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Ya, Hapus"
         }).then((result) => {
             if (result.isConfirmed) {
                 document.getElementById('delete-form-' + prizeId).submit();

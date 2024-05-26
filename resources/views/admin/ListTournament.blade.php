@@ -319,12 +319,12 @@
         function confirmDeletion(tournamentId) {
             Swal.fire({
                 title: "Apa kamu yakin?",
-                text: "Anda tidak akan dapat mengembalikan ini!",
+                text: " Untuk menghapus tournament!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
+                confirmButtonText: "Ya, Hapus!"
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('delete-form-' + tournamentId).submit();
