@@ -10,7 +10,6 @@
             align-items: center;
             color: #ffffff;
             border: 2px solid #7367f0;
-            /* Warna border */
             border-radius: 20px;
             /* Bentuk border */
             background-color: #7367f0;
@@ -126,7 +125,6 @@
         </div>
     </div>
 
-    <!-- header-section start -->
     <div class="row mb-4 justify-content-between">
         <div class="col-md-4">
             <button class="saring-btn btn-square" data-toggle="tooltip" data-bs-toggle="modal"
@@ -193,12 +191,6 @@
                                             {{-- <button type="submit" class="btn btn-primary mt-2">Update Status</button> --}}
                                         </form>
                                     </li>
-
-
-
-
-
-
                                 </ul>
                             </div>
                         </div>
@@ -239,7 +231,7 @@
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
                                 <strong>Nominal</strong>
-                                <span>IDR {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
+                                <span>Rp. {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
                             </div>
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">

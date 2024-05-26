@@ -9,4 +9,9 @@ class juara extends Model
 {
     use HasFactory;
     protected $guarded=['id'];
+
+    public function tournament()
+    {
+        return $this->OneToMany(tournament::class);
+    }
 }

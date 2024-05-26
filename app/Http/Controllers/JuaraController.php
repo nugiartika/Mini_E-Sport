@@ -32,8 +32,10 @@ class JuaraController extends Controller
         return view('penyelenggara.detailtournament', compact('juara','jadwal','tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
 
-    public function juara(Tournament $tournament, Request $request)
+    public function juara(Tournament $tournament, Request $request, $id)
     {
+
+        $tournament = Tournament::find($id);
 
             Juara::create([
                 'tournament_id' => $tournament->id,
@@ -43,7 +45,9 @@ class JuaraController extends Controller
                 'mvp' => $request->input('mvp'),
             ]);
 
-            return redirect()->back()->with('error', 'Tidak dapat menemukan informasi turnamen');
+            toastr()->success('Daftar Juara Berhasil Ditambahkan');
+
+            return redirect()->route('tournament.detail', $tournament->id);
 
     }
 

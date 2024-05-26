@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tournament_id')->constrained('tournaments')->onUpdate('cascade')->onDelete('cascade');
             $table->date('tanggalPenyisihan');
             $table->time('waktuPenyisihan');
             $table->string('boPenyisihan');

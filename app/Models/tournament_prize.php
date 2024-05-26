@@ -15,7 +15,7 @@ class tournament_prize extends Model
         return $this->belongsTo(prizepool::class);
     }
 
-    public function tournamet()
+    public function tournament()
     {
         return $this->OneToMany(tournament::class);
     }

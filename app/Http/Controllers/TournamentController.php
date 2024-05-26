@@ -340,6 +340,8 @@ class TournamentController extends Controller
         $tournament->update([
             'urlBracket' => $request->input('urlBracket'),
         ]);
+        
+        toastr()->success('Bracket Berhasil Ditambahkan');
 
         return redirect()->back()->with('error', 'Turnamen tidak ditemukan');
     }

@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('juaras', function (Blueprint $table) {
+        Schema::create('juara_jadwals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tournament_id')->constrained('tournaments')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('nama_juara1');
-            $table->string('nama_juara2');
-            $table->string('nama_juara3');
-            $table->string('mvp');
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('juaras');
+        Schema::dropIfExists('juara_jadwals');
     }
 };

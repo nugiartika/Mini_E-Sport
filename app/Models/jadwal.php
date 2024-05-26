@@ -11,6 +11,6 @@ class jadwal extends Model
     protected $guarded = ['id'];
     public function tournament()
     {
-        return $this->hasMany(Tournament::class);
+        return $this->OneToMany(tournament::class);
     }
 }
