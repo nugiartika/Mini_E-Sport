@@ -25,17 +25,35 @@ class TournamentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $tournaments = Tournament::where('users_id', auth()->user()->id)->get();
-        $counttournaments = $tournaments->where('status', 'rejected')->count(); // Use the already fetched tournaments to count
+
+        // Apply the search filter and paginate the results
+        $tournamentsQuery = Tournament::when($request->has('search'), function ($query) use ($request){
+            $query->where('name', 'like', '%'.$request->search.'%');
+        });
+
+        // Filter tournaments by the authenticated user
+        $tournamentsQuery->where('users_id', $user->id);
+
+        // Get the paginated results
+        $tournaments = $tournamentsQuery->paginate(5);
+
+        // Count the tournaments with 'rejected' status
+        $counttournaments = $tournamentsQuery->where('status', 'rejected')->count();
+
+        // Get team counts grouped by tournament_id
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
+
+        // Get team tournament counts grouped by tournament_id
         $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
+
+        // Get all categories and prizes
         $categories = Category::all();
         $prizes = tournament_prize::all();
 
@@ -320,14 +338,16 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get();        $category = Category::all();
         $jadwals = jadwal::all();
-        $juaras = juara::find($id);
+        // $juaras = juara::find($id);
         $juaras = juara::all();
         $selectedTournament = Tournament::findOrFail($id);
-        $teams = team::all();
+        $teams = Team::where('tournament_id', $id)->get();
+        $teamtournament = TeamTournament::where('tournament_id', $id)->with('team')->get();
+
         $tournaments = Tournament::find($id);
         $prizes = tournament_prize::where('tournament_id', $id)->get();
 
-        return view('penyelenggara.detailtournament', compact('tournaments', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts','teamIdCounts', 'selectedTournament'));
+        return view('penyelenggara.detailtournament', compact('tournaments', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts','teamIdCounts', 'selectedTournament','teamtournament'));
     }
 
     public function bracket(Tournament $tournament, Request $request)
@@ -346,26 +366,41 @@ class TournamentController extends Controller
         return redirect()->back()->with('error', 'Turnamen tidak ditemukan');
     }
 
-    public function detailTournamentUser(Tournament $tournament, $id)
-    {
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
-        $user = Auth::user();
-        // $tournaments = Tournament::all();
-        $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->groupBy('tournament_id')
-            ->get();
-        // dd($teamCounts);
-        $category = Category::all();
-        $jadwals = jadwal::all();
-        $juaras = juara::all();
-        $selectedTournament = Tournament::findOrFail($id);
-        $teams = team::all();
-        $tournament = Tournament::find($id);
-        $prizes = tournament_prize::where('tournament_id', $id)->get();
-        // dd($prizes);
 
-        return view('user.detailtournament', compact('counttournaments', 'user', 'category', 'jadwals', 'juaras', 'selectedTournament', 'teams', 'tournament', 'prizes'));
-    }
+public function detailTournamentUser(Tournament $tournament, $id)
+{
+    $userId = Auth::id();
+    $counttournaments = Tournament::where('users_id', $userId)->where('status', 'rejected')->count();
+    $user = Auth::user();
+    $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+        ->groupBy('tournament_id')
+        ->get();
+    $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+        ->groupBy('tournament_id')
+        ->get();
+    $category = Category::all();
+    $jadwals = jadwal::all();
+    $juaras = juara::all();
+    $selectedTournament = Tournament::findOrFail($id);
+    $teams = Team::where('tournament_id', $id)->get();
+    $teamtournament = TeamTournament::where('tournament_id', $id)->with('team')->get();
+
+    $userTeamIds = Team::where('user_id', $userId)->pluck('id')->toArray();
+
+    $teamtournamentId = TeamTournament::where('tournament_id', $id)
+        ->whereIn('team_id', $userTeamIds)
+        ->exists();
+
+    $userTeamInTournament = Team::where('tournament_id', $id)
+        ->where('user_id', $userId)
+        ->exists();
+
+    $tournament = Tournament::find($id);
+    $prizes = tournament_prize::where('tournament_id', $id)->get();
+
+    return view('user.detailtournament', compact('teamIdCounts', 'teamCounts', 'counttournaments', 'user', 'category', 'jadwals', 'juaras', 'selectedTournament', 'teams', 'teamtournament', 'teamtournamentId', 'tournament', 'prizes', 'userTeamInTournament'));
+}
+
 
     /**
      * Show the form for editing the specified resource.

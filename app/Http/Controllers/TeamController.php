@@ -81,13 +81,21 @@ class TeamController extends Controller
 
     public function indexdetail($id)
     {
-        $teams = Team::findOrFail($id);
-        $teamsCount = Member::where('team_id', $id)->count();
+        $teams = Team::with('category')->findOrFail($id);
+        $membersCount = Member::where('team_id', $id)->whereNotNull('nickname')->count();
         $category = Category::all();
         $tournament = Tournament::all();
-        $members = Member::where('team_id', $id)->whereNotNull('nickname')->where('is_captain', '$id')->get();
+        $members = Member::where('team_id', $id)->whereNotNull('nickname')->orderByDesc('is_captain')->get();
+        $categoryName = $teams->category->name ?? '';
+        $categoryId = $teams->tournament->category->name;
+        return view('user.detailteam', compact('teams','category', 'membersCount', 'tournament', 'members','categoryName','categoryId'));
 
-        return view('user.detailteam', compact('teams','category', 'teamsCount', 'tournament', 'members'));
+
+        // $members = Member::where('team_id', $id)->whereNotNull('nickname')->where('is_captain', '$id')->get();
+        // $members = Member::where('team_id', $id)->whereNotNull('nickname')->get();
+        // $categoryName = $teams->category->name ?? '';
+        // $categoryId = $teams->tournament->category->name;
+        // return view('user.detailteam', compact('teams','category', 'membersCount', 'tournament', 'members','categoryName','categoryId'));
     }
 
     /**

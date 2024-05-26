@@ -11,7 +11,7 @@
             <img class="w-100 rounded-4" src="{{ asset('storage/' . $teams->profile) }}" alt=" {{ $teams->name }}" />
         </div>
         <div class="col-md-9">
-            <h1 class="title-anim"> Nama Tim : {{ $teams->name }}</h1>
+            <h1 class="title-anim"> {{ $teams->name }}</h1>
             <p class="text-anim">{!! $teams->description !!}</p>
 
             <div class="row pt-4">
@@ -31,14 +31,18 @@
                 <div class="col-md-6 border-end p-3">
                     <div class="d-flex gap-2 align-items-center">
                         <i class="ti ti-device-gamepad-2"></i>
-                        <span>{{ $teams->category->name }}</span>
+                        @if ($categoryName)
+                        <span>{{ $categoryName }}</span>
+                        @else
+                        <span>{{ $categoryId }}</span>
+                        @endif
                     </div>
                 </div>
 
                 <div class="col-md-6 p-3">
                     <div class="d-flex gap-2 align-items-center">
                         <i class="ti ti-users-group"></i>
-                        <span>{{ $teamsCount }} tim</span>
+                        <span>{{ $membersCount }} anggota</span>
                     </div>
                 </div>
 
@@ -51,7 +55,7 @@
 
 
     <!-- Basic Bootstrap Table -->
-    <div class="card">
+    {{-- <div class="card">
         <h5 class="card-header">Table Pemain</h5>
         <div class="table-responsive text-nowrap">
             <table class="table">
@@ -64,22 +68,69 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @forelse ($members as $index => $member) <!-- Ganti $members dengan $member untuk variabel iterasi -->
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $member->nickname }}</td> <!-- Pastikan akses ke properti name -->
-                        <td>Pemain : {{ $member->status }}</td>
-                        <td><span class="badge bg-label-primary me-1">{{ $member->is_captain }}</span></td> <!-- Asumsi ada properti is_leader -->
-                    </tr>
+                    @forelse ($members as $index => $member)
+                        <!-- Ganti $members dengan $member untuk variabel iterasi -->
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $member->nickname }}</td>
+                            <td>Pemain : {{ $member->status }}</td>
+                            <td><span class="badge bg-label-primary me-1">
+                                    @if ($member->is_captain == 1)
+                                        <p>kapten</p>
+                                    @else
+                                        <p>Member</p>
+                                    @endif
+                                </span></td>
+                        </tr>
                     @empty
-                    <tr>
-                        <td colspan="4">No members found.</td> <!-- Pesan jika tidak ada data -->
-                    </tr>
+                        <tr>
+                            <td colspan="4">No members found.</td>
+
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
 
         </div>
+    </div> --}}
+    <div class="card">
+        <h5 class="card-header">Table Pemain</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Pemain</th>
+                        <th>Status</th>
+                        <th>Ketua</th>
+                        <th>id game</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @forelse ($members as $index => $member)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $member->nickname }}</td>
+                        <td>Pemain: {{ $member->status }}</td>
+                        <td>
+                            @if ($member->is_captain)
+                            <span class="badge bg-label-primary me-1">Kapten</span>
+                            @else
+                            <span class="badge bg-label-secondary me-1">Member</span>
+                            @endif
+                        </td>
+
+                        <td>{{ $member->member }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="4">No members found.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
+
     <!--/ Basic Bootstrap Table -->
 @endsection

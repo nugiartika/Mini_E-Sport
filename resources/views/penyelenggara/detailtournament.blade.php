@@ -104,7 +104,7 @@
             </div>
         </div>
     </div>
-
+    
 
 
 
@@ -199,6 +199,10 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="jadwal-tab" data-bs-toggle="tab" data-bs-target="#jadwal" type="button"
                 role="tab" aria-controls="jadwal" aria-selected="false">Jadwal</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="list-tim-tab" data-bs-toggle="tab" data-bs-target="#list-tim" type="button"
+                role="tab" aria-controls="list-tim" aria-selected="false">Tim</button>
         </li>
     </ul>
 
@@ -643,6 +647,61 @@
                                         <small>{{ $tournaments->contact }}</small>
                                     </div>
 
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="list-tim" role="tabpanel" aria-labelledby="list-tim-tab">
+                                <div>
+                                    <h3>List Tim</h3>
+                                    <div class="row">
+                                        @foreach ($teams as $team)
+                                            <div class="col-md-3 mb-4">
+                                                <div class="card h-100">
+                                                    <div
+                                                        class="card-body d-flex justify-content-between align-items-center">
+                                                        <div class="team-profile">
+                                                            <img src="{{ asset('storage/' . $team->profile) }}"
+                                                                alt="Profile Image" class="img-fluid rounded-circle"
+                                                                style="width: 50px; height: 50px;">
+                                                        </div>
+                                                        <div class="team-info">
+                                                            <h6 class="card-title mb-0">{{ $team->name }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @foreach ($teamtournament as $teamturnamen)
+                                            <div class="col-md-3 mb-4">
+                                                <div class="card h-100">
+                                                    <div
+                                                        class="card-body d-flex justify-content-between align-items-center">
+                                                        <div class="team-profile">
+                                                            <img src="{{ asset('storage/' . $teamturnamen->team->profile) }}"
+                                                                alt="Profile Image" class="img-fluid rounded-circle"
+                                                                style="width: 50px; height: 50px;">
+                                                        </div>
+                                                        <div class="team-info">
+                                                            <h6 class="card-title mb-0">{{ $teamturnamen->team->name }}
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @if ($teams && $teamtournament)
+                                            {{-- ada --}}
+                                        @else
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-4">
+                                                    <div class="text-center">
+                                                        <img src="{{ asset('assets/img/No-data.png') }}" width="70%"
+                                                            alt="Image Not Found" />
+                                                        <h5 class="mb-3 text-center">Belum ada Tim yang bergabung.</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>

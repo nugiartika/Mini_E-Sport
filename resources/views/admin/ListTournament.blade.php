@@ -56,7 +56,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
                 data-bs-target="#filter">Saring</button>
-                <form action="{{ route('DetailTournament') }}" method="get">
+                <form action="{{ route('ptournament.index') }}" method="get">
                     @csrf
                     <div class="input-group">
                         <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;"

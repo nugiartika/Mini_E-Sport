@@ -1,10 +1,39 @@
 @extends('layouts.panel')
 
 @section('content')
+    @php
+        use App\Models\TeamTournament;
+    @endphp
+
+
     <div class="d-flex pb-4">
         <a href="{{ route('user.tournament') }}" class="btn btn-primary d-flex gap-2 align-items-center"><i
                 class="ti ti-arrow-left"></i><span>Kembali Ke Daftar Turnamen</span></a>
     </div>
+
+
+
+
+    @php
+        // Ambil total tim dari hasil perhitungan
+        $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+        $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+        $totalTeams = ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
+
+        $userTeams = $teams ?? collect();
+        $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
+        // $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+
+        // if ($isUserInTournament) {
+        //     // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+        //     $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+
+        //     // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+        //     $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+        //         ->where('tournament_id', $tournament->id)
+        //         ->get();
+        // }
+    @endphp
 
     <div class="row">
         <div class="col-md-3">
@@ -42,12 +71,36 @@
                 </div>
             </div>
 
-            @if (auth()->user()->role === 'user')
-                <a href="{{ $selectedTournament->link }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
+
+            @if ($totalTeams && $totalTeams < $tournament->slotTeam && !$userTeamInTournament && !$teamtournamentId)
+                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                    data-tournament-id="{{ $tournament->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
                     Turnamen</a>
             @endif
         </div>
     </div>
+
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-items-center">
+                    <div class="d-flex justify-content-center align-items-center mb-4" style="height: 100px;">
+                        <center>
+                            <h6 style="color: white;">Create a New Team for the Tournament or Choose an
+                                Existing Team</h6>
+                        </center>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="#" type="button" class="btn btn-secondary me-2">Existing Team</a>
+                        <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="row py-4">
         <div class="col-md-2">
@@ -125,22 +178,26 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="bracket-tab" data-bs-toggle="tab" data-bs-target="#bracket" type="button"
-                role="tab" aria-controls="bracket" aria-selected="true">Bracket</button>
+            <button class="nav-link active" id="bracket-tab" data-bs-toggle="tab" data-bs-target="#bracket"
+                type="button" role="tab" aria-controls="bracket" aria-selected="true">Bracket</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="juara-tab" data-bs-toggle="tab" data-bs-target="#juara" type="button"
                 role="tab" aria-controls="juara" aria-selected="false">Juara</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="detail-info-tab" data-bs-toggle="tab" data-bs-target="#detail-info" type="button"
-                role="tab" aria-controls="detail-info" aria-selected="false">Detail dan
+            <button class="nav-link" id="detail-info-tab" data-bs-toggle="tab" data-bs-target="#detail-info"
+                type="button" role="tab" aria-controls="detail-info" aria-selected="false">Detail dan
                 Informasi</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="jadwal-tab" data-bs-toggle="tab" data-bs-target="#jadwal" type="button"
                 role="tab" aria-controls="jadwal" aria-selected="false">Jadwal</button>
         </li>
+        {{-- <li class="nav-item" role="presentation">
+            <button class="nav-link" id="list-tim-tab" data-bs-toggle="tab" data-bs-target="#list-tim" type="button"
+                role="tab" aria-controls="list-tim" aria-selected="false">Tim</button>
+        </li> --}}
     </ul>
 
     <!-- Tab content -->
@@ -165,186 +222,393 @@
                                 </div>
                                 <div class="modal-body">
                                     <form id="updateBracketForm"
-                                        action="{{ route('add.bracket', $selectedTournament->id) }}"                                        "
-                                        method="POST">
-                                        @csrf
-                                        @method('PATCH')
+                                        action="{{ route('add.bracket', $selectedTournament->id) }}" "
+                                                method="POST">
+                                                @csrf
+                                                @method('PATCH')
 
-                                        <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
-                                        <input type="hidden" name="column" value="urlBracket" />
+                                                <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
+                                                <input type="hidden" name="column" value="urlBracket" />
 
-                                        <div class="mb-3">
-                                            <label for="bracketUrl" class="form-label">URL Bracket</label>
-                                            <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
-                                                placeholder="Masukkan URL Bracket">
+                                                <div class="mb-3">
+                                                    <label for="bracketUrl" class="form-label">URL Bracket</label>
+                                                    <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
+                                                        placeholder="Masukkan URL Bracket">
+                                                </div>
+                                            </form>
+
+
                                         </div>
-                                    </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="document.getElementById('updateBracketForm').submit();">Ubah
+                                                Status</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+     @endif
 
+                                </div>
 
+                                @if ($selectedTournament->urlBracket)
+                                    <iframe src="{{ $selectedTournament->urlBracket }}" class="w-100" height="750"
+                                        frameborder="0"></iframe>
+                                @else
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-4">
+                                            <div class="text-center">
+                                                <img src="{{ asset('assets/img/No-data.png') }}" width="70%"
+                                                    alt="Image Not Found" />
+                                                <h3>Maaf, Belum Disediakan.</h3>
+                                                <p class="mb-3 text-center">Bracket belum disediakan oleh penyelenggara.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="tab-pane fade" id="juara" role="tabpanel" aria-labelledby="juara-tab">
+
+                                <h3>Juara</h3>
+                                <!-- Button trigger modal -->
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleJuara" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="{{ route('ptournament.juara', ['id' => $tournament->id]) }}"
+                                                method="POST">
+                                                <!-- Tambahkan method POST -->
+                                                @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Juara</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <label for="nama_juara1" class="form-label">Juara 1</label>
+                                                    <input type="text" class="form-control" id="nama_juara1"
+                                                        name="nama_juara1" required>
+                                                    <!-- Tambahkan atribut required -->
+                                                    <label for="nama_juara2" class="form-label">Juara 2</label>
+                                                    <input type="text" class="form-control" id="nama_juara2"
+                                                        name="nama_juara2" required>
+                                                    <!-- Tambahkan atribut required -->
+                                                    <label for="nama_juara3" class="form-label">Juara 3</label>
+                                                    <input type="text" class="form-control" id="nama_juara3"
+                                                        name="nama_juara3" required>
+                                                    <!-- Tambahkan atribut required -->
+                                                    <label for="mvp" class="form-label">MVP</label>
+                                                    <input type="text" class="form-control" id="mvp"
+                                                        name="mvp" required>
+                                                    <!-- Tambahkan atribut required -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <!-- Ubah type dari button menjadi submit -->
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                @forelse ( $juaras as $juara )
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Juara 1</th>
+                                                <th scope="col">Juara 2</th>
+                                                <th scope="col">Juara 3</th>
+                                                <th scope="col">MVP</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+
+                                                <td>{{ $juara->nama_juara1 }}</td>
+                                                <td>{{ $juara->nama_juara2 }}</td>
+                                                <td>{{ $juara->nama_juara3 }}</td>
+                                                <td>{{ $juara->mvp }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                @empty
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-4">
+                                            <div class="text-center">
+                                                <img src="{{ asset('assets/img/No-data.png') }}" class="w-100"
+                                                    alt="Image Not Found" />
+                                                <h3>Maaf, Belum Disediakan.</h3>
+                                                <p class="mb-3 text-center">Bracket belum disediakan oleh penyelenggara.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                @endforelse
+                            </div>
+                            <div class="tab-pane fade" id="jadwal" role="tabpanel" aria-labelledby="jadwal-tab">
+                                <h3>Jadwal</h3>
+
+                                @forelse ( $jadwals as  $jadwal)
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Penyisihan</th>
+                                                <th scope="col">Semi Final</th>
+                                                <th scope="col">Final</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach ($jadwals as $jadwal)
+                                                    <td>Tanggal Dimulai : {{ $jadwal->tanggalPenyisihan }} <br>
+                                                        Waktu Dimulai : {{ $jadwal->waktuPenyisihan }} <br>
+                                                        BO : {{ $jadwal->boPenyisihan }} <br>
+                                                    </td>
+                                                    <td>Tanggal Dimulai : {{ $jadwal->tanggalSemi }} <br>
+                                                        Waktu Dimulai : {{ $jadwal->waktuSemi }} <br>
+                                                        BO : {{ $jadwal->boSemi }} <br>
+                                                    </td>
+                                                    <td>Tanggal Dimulai : {{ $jadwal->tanggalFinal }} <br>
+                                                        Waktu Dimulai : {{ $jadwal->waktuFinal }} <br>
+                                                        BO : {{ $jadwal->boFinal }} <br>
+                                                    </td>
+                                                @endforeach
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                @empty
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-4">
+                                            <div class="text-center">
+                                                <img src="{{ asset('assets/img/No-data.png') }}" class="w-100"
+                                                    alt="Image Not Found" />
+                                                <h3>Maaf, Belum Disediakan.</h3>
+                                                <p class="mb-3 text-center">Bracket belum disediakan oleh penyelenggara.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforelse
+                            </div>
+                            <div class="tab-pane fade" id="detail-info" role="tabpanel"
+                                aria-labelledby="detail-info-tab">
+                                <div>
+                                    <h3>Detail dan Informasi</h3>
+                                    <div class="border-end border-bottom">
+                                        <h6>Deskripsi</h6>
+                                        <small>{!! $tournament->description !!}</small>
+                                    </div>
+                                    <div class="border-end border-bottom">
+                                        <h6>Peraturan</h6>
+                                        <small>{{ $tournament->rule }}</small>
+                                    </div>
+                                    <div class="border-end border-bottom">
+                                        <h6>Kontak Personal</h6>
+                                        <small>{{ $tournament->contact }}</small>
+                                    </div>
+
+                                    <h5>Semi Fiinal</h5>
+                                    <label for="tanggalSemi" class="form-label">Tanggal Semi</label>
+                                    <input type="date" class="form-control" id="tanggalSemi" name="tanggalSemi"
+                                        required>
+                                    <!-- Tambahkan atribut required -->
+                                    <label for="waktuSemi" class="form-label">Waktu Semi</label>
+                                    <input type="time" class="form-control" id="waktuSemi" name="waktuSemi" required>
+                                    <!-- Tambahkan atribut required -->
+                                    <label for="boSemi" class="form-label">Best Of</label>
+                                    <input type="text" class="form-control" id="boSemi" name="boSemi" required>
+                                    <!-- Tambahkan atribut required -->
+
+                                    <h5>Final</h5>
+                                    <label for="tanggalFinal" class="form-label">Tanggal Final</label>
+                                    <input type="date" class="form-control" id="tanggalFinal" name="tanggalFinal"
+                                        required>
+                                    <!-- Tambahkan atribut required -->
+                                    <label for="waktuFinal" class="form-label">Waktu Final</label>
+                                    <input type="time" class="form-control" id="waktuFinal" name="waktuFinal"
+                                        required>
+                                    <!-- Tambahkan atribut required -->
+                                    <label for="boFinal" class="form-label">Best Of</label>
+                                    <input type="text" class="form-control" id="boFinal" name="boFinal" required>
+                                    <!-- Tambahkan atribut required -->
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Batal</button>
-                                    <button type="button" class="btn btn-primary"
-                                        onclick="document.getElementById('updateBracketForm').submit();">Ubah
-                                        Status</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-
-            </div>
-
-            @if ($selectedTournament->urlBracket)
-                <iframe src="{{ $selectedTournament->urlBracket }}" class="w-100" height="750"
-                    frameborder="0"></iframe>
-            @else
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <div class="text-center">
-                            <img src="{{ asset('assets/img/No-data.png') }}" class="w-100" alt="Image Not Found" />
-                            <h3>Maaf, Belum Disediakan.</h3>
-                            <p class="mb-3 text-center">Bracket belum disediakan oleh penyelenggara.</p>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
-        <div class="tab-pane fade" id="juara" role="tabpanel" aria-labelledby="juara-tab">
-
-            <h3>Juara</h3>
-            <!-- Button trigger modal -->
-                <!-- Modal -->
-                <div class="modal fade" id="exampleJuara" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form action="{{ route('ptournament.juara', ['id' =>$tournament->id]) }}" method="POST">
-                                <!-- Tambahkan method POST -->
-                                @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Juara</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <label for="nama_juara1" class="form-label">Juara 1</label>
-                                    <input type="text" class="form-control" id="nama_juara1" name="nama_juara1" required>
-                                    <!-- Tambahkan atribut required -->
-                                    <label for="nama_juara2" class="form-label">Juara 2</label>
-                                    <input type="text" class="form-control" id="nama_juara2" name="nama_juara2" required>
-                                    <!-- Tambahkan atribut required -->
-                                    <label for="nama_juara3" class="form-label">Juara 3</label>
-                                    <input type="text" class="form-control" id="nama_juara3" name="nama_juara3" required>
-                                    <!-- Tambahkan atribut required -->
-                                    <label for="mvp" class="form-label">MVP</label>
-                                    <input type="text" class="form-control" id="mvp" name="mvp" required>
-                                    <!-- Tambahkan atribut required -->
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Save</button>
                                     <!-- Ubah type dari button menjadi submit -->
                                 </div>
-                            </form>
-                        </div>
+                                </form>
+                            </div>
 
-                    </div>
-                </div>
-            @forelse ( $juaras as $juara )
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Juara 1</th>
-                            <th scope="col">Juara 2</th>
-                            <th scope="col">Juara 3</th>
-                            <th scope="col">MVP</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-
-                                <td>{{ $juara->nama_juara1 }}</td>
-                                <td>{{ $juara->nama_juara2 }}</td>
-                                <td>{{ $juara->nama_juara3 }}</td>
-                                <td>{{ $juara->mvp }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            @empty
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <div class="text-center">
-                            <img src="{{ asset('assets/img/No-data.png') }}" class="w-100" alt="Image Not Found" />
-                            <h3>Maaf, Belum Disediakan.</h3>
-                            <p class="mb-3 text-center">Bracket belum disediakan oleh penyelenggara.</p>
                         </div>
                     </div>
-                </div>
-
-            @endforelse
-        </div>
-        <div class="tab-pane fade" id="jadwal" role="tabpanel" aria-labelledby="jadwal-tab">
-            <h3>Jadwal</h3>
-
-            @forelse ( $jadwals as  $jadwal)
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Penyisihan</th>
-                            <th scope="col">Semi Final</th>
-                            <th scope="col">Final</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            @foreach ($jadwals as $jadwal)
-                                <td>Tanggal Dimulai : {{ $jadwal->tanggalPenyisihan }} <br>
-                                    Waktu Dimulai : {{$jadwal->waktuPenyisihan}} <br>
-                                    BO : {{$jadwal->boPenyisihan}} <br>
-                                </td>
-                                <td>Tanggal Dimulai : {{ $jadwal->tanggalSemi }} <br>
-                                    Waktu Dimulai : {{$jadwal->waktuSemi}} <br>
-                                    BO : {{$jadwal->boSemi}} <br>
-                                </td>
-                                <td>Tanggal Dimulai : {{ $jadwal->tanggalFinal }} <br>
-                                    Waktu Dimulai : {{$jadwal->waktuFinal}} <br>
-                                    BO : {{$jadwal->boFinal}} <br>
-                                </td>
-                            @endforeach
-                        </tr>
-                    </tbody>
-                </table>
-            @empty
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Penyisihan</th>
+                                <th scope="col">Semi Final</th>
+                                <th scope="col">Final</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach ($jadwals as $jadwal)
+                                    <td>Tanggal Dimulai : {{ $jadwal->tanggalPenyisihan }} <br>
+                                        Waktu Dimulai : {{ $jadwal->waktuPenyisihan }} <br>
+                                        BO : {{ $jadwal->boPenyisihan }} <br>
+                                    </td>
+                                    <td>Tanggal Dimulai : {{ $jadwal->tanggalSemi }} <br>
+                                        Waktu Dimulai : {{ $jadwal->waktuSemi }} <br>
+                                        BO : {{ $jadwal->boSemi }} <br>
+                                    </td>
+                                    <td>Tanggal Dimulai : {{ $jadwal->tanggalFinal }} <br>
+                                        Waktu Dimulai : {{ $jadwal->waktuFinal }} <br>
+                                        BO : {{ $jadwal->boFinal }} <br>
+                                    </td>
+                                @endforeach
+                            </tr>
+                        </tbody>
+                    </table>
+                @empty
                     <div class="row justify-content-center">
                         <div class="col-md-4">
                             <div class="text-center">
-                                <img src="{{ asset('assets/img/No-data.png') }}" class="w-100" alt="Image Not Found" />
+                                <img src="{{ asset('assets/img/No-data.png') }}" width="70%" alt="Image Not Found" />
                                 <h3>Maaf, Belum Disediakan.</h3>
-                                <p class="mb-3 text-center">Bracket belum disediakan oleh penyelenggara.</p>
+                                <p class="mb-3 text-center">Jadwal belum disediakan oleh penyelenggara.</p>
                             </div>
                         </div>
                     </div>
-            @endforelse
-        </div>
-        <div class="tab-pane fade" id="detail-info" role="tabpanel" aria-labelledby="detail-info-tab">
-            <div>
-                <h3>Detail dan Informasi</h3>
-                <div class="border-end border-bottom">
-                    <h6>Deskripsi</h6>
-                    <small>{!! $tournament->description !!}</small>
-                </div>
-                <div class="border-end border-bottom">
-                    <h6>Peraturan</h6>
-                    <small>{{ $tournament->rule }}</small>
-                </div>
-                <div class="border-end border-bottom">
-                    <h6>Kontak Personal</h6>
-                    <small>{{ $tournament->contact }}</small>
-                </div>
-
+                @endforelse
             </div>
+            <div class="tab-pane fade" id="detail-info" role="tabpanel" aria-labelledby="detail-info-tab">
+                <div>
+                    <h3>Detail dan Informasi</h3>
+                    <div class="border-end border-bottom">
+                        <h6>Deskripsi</h6>
+                        <small>{!! $tournament->description !!}</small>
+                    </div>
+                    <div class="border-end border-bottom">
+                        <h6>Peraturan</h6>
+                        <small>{{ $tournament->rule }}</small>
+                    </div>
+                    <div class="border-end border-bottom">
+                        <h6>Kontak Personal</h6>
+                        <small>{{ $tournament->contact }}</small>
+                    </div>
+
+                </div>
+            </div>
+            {{-- <div class="tab-pane fade" id="list-tim" role="tabpanel" aria-labelledby="list-tim-tab">
+                                <div>
+                                    <h3>List Tim</h3>
+                                    <div class="row">
+                                        @foreach ($teams as $team)
+                                            <div class="col-md-3 mb-4">
+                                                <div class="card h-100">
+                                                    <div
+                                                        class="card-body d-flex justify-content-between align-items-center">
+                                                        <div class="team-profile">
+                                                            <img src="{{ asset('storage/' . $team->profile) }}"
+                                                                alt="Profile Image" class="img-fluid rounded-circle"
+                                                                style="width: 50px; height: 50px;">
+                                                        </div>
+                                                        <div class="team-info">
+                                                            <h6 class="card-title mb-0">{{ $team->name }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @foreach ($teamtournament as $teamturnamen)
+                                            <div class="col-md-3 mb-4">
+                                                <div class="card h-100">
+                                                    <div
+                                                        class="card-body d-flex justify-content-between align-items-center">
+                                                        <div class="team-profile">
+                                                            <img src="{{ asset('storage/' . $teamturnamen->team->profile) }}"
+                                                                alt="Profile Image" class="img-fluid rounded-circle"
+                                                                style="width: 50px; height: 50px;">
+                                                        </div>
+                                                        <div class="team-info">
+                                                            <h6 class="card-title mb-0">{{ $teamturnamen->team->name }}
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @if ($teams && $teamtournament)
+                                        @else
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-4">
+                                                    <div class="text-center">
+                                                        <img src="{{ asset('assets/img/No-data.png') }}" width="70%"
+                                                            alt="Image Not Found" />
+                                                        <h5 class="mb-3 text-center">Belum ada Tim yang bergabung.</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div> --}}
         </div>
-    </div>
-@endsection
+    @endsection
+
+
+    @push('script')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var exampleModal = document.getElementById('exampleModalCenter');
+                exampleModal.addEventListener('show.bs.modal', function(event) {
+                    var button = event.relatedTarget; // Tombol yang memicu modal
+                    var tournamentId = button.getAttribute(
+                        'data-tournament-id'); // Ambil ID turnamen dari atribut data
+
+                    // Update tautan dengan ID turnamen yang benar
+                    var existingTeamLink = exampleModal.querySelector('.btn-secondary');
+                    var newTeamLink = exampleModal.querySelector('.btn-primary');
+
+                    existingTeamLink.href = '/teams/create?tournament_id=' + tournamentId;
+                    newTeamLink.href = '/team/create?tournament_id=' + tournamentId;
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('#existing').on('show.bs.modal', function(event) {
+                    var button = $(event.relatedTarget); // Tombol yang memicu modal
+                    var tournamentId = button.data(
+                        'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
+                    var modal = $(this);
+                    modal.find('.modal-body input[name="tournament_id"]').val(
+                        tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
+                });
+            });
+
+            function cardRadio(card) {
+                var radioButton = card.querySelector('input[type="radio"]');
+
+                if (!radioButton.checked) {
+                    radioButton.checked = true;
+
+                    var cards = document.querySelectorAll('.card');
+                    cards.forEach(function(card) {
+                        card.classList.remove('border-red');
+                    });
+
+                    card.classList.add('border-red');
+                }
+            }
+        </script>
+    @endpush
