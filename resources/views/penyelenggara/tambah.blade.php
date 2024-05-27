@@ -218,7 +218,7 @@
         }
     </style>
 
-    @if($errors->all())
+    {{-- @if($errors->all())
     <div class="alert alert-danger">
         <ul>
             @foreach($errors->all() as $error)
@@ -226,7 +226,7 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif --}}
 
     <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
         @csrf
@@ -385,7 +385,7 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="images" class="form-label">Unggah Poster</label>
                                 <input type="file" class="form-control @error('images') is-invalid @enderror"
                                     id="images" name="images" onchange="previewImage(event)">
@@ -393,6 +393,21 @@
                                     <img id="preview" src="{{ asset('storage/' . old('images')) }}" alt="Old images"
                                         style="max-width: 100px; max-height: 100px;">
                                 @endif
+                                @error('images')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div> --}}
+                            <div class="mb-3">
+                                <label for="images" class="form-label">Unggah Poster</label>
+                                <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" name="images" onchange="previewImage(event)">
+
+                                <!-- Gambar Pratinjau -->
+                                <img id="preview" src="{{ old('images') ? asset('storage/' . old('images')) : '' }}"
+                                     alt="Pratinjau Gambar"
+                                     style="max-width: 100px; max-height: 100px; {{ old('images') ? '' : 'display: none;' }}">
+
                                 @error('images')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -471,6 +486,19 @@
 @endsection
 
 @push('script')
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('preview');
+            output.src = reader.result;
+            output.style.display = 'block'; // Tampilkan gambar setelah memuat
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 
     {{-- script untuk memunculkan form nominal apabila memilih paid --}}

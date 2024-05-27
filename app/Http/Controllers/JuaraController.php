@@ -45,7 +45,7 @@ class JuaraController extends Controller
                 'mvp' => $request->input('mvp'),
             ]);
 
-            return redirect()->route('tournament.detail', $tournament->id)->with('Daftar Juara Berhasil Ditambahkan');
+            return redirect()->route('tournament.detail', $tournament->id)->with('success','Daftar Juara Berhasil Ditambahkan');
 
     }
 

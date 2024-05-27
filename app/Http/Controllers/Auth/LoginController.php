@@ -54,7 +54,19 @@ class LoginController extends Controller
         $data = $request->validated();
         $data['status'] = 'active'; // Tambahkan status aktif supaya yang terbanned dan masih pending gak bisa masuk
 
-        if (Auth::attempt($data)) {
+        // if (Auth::attempt($data)) {
+        //     $user = Auth::user();
+
+        if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+            $user = Auth::user();
+
+            if ($user->status === 'pending') {
+                Auth::logout();
+                return redirect()->back()->withInput()->withErrors([
+                    'account_pending' => 'Akun anda belum dikonfirmasi oleh admin.'
+                ]);
+            }
+        } elseif(Auth::attempt($data)) {
             $user = Auth::user();
 
             if ($user->role === 'organizer') {

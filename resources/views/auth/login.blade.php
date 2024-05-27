@@ -11,6 +11,25 @@
     <title>Login Humma Esport</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .notification {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .notification-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+        .notification-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+    </style>
 </head>
 
 <body>
@@ -86,7 +105,11 @@
                     @endforeach
                 </div>
             @endif
-
+        @if (session('success'))
+            <div class="notification notification-success">
+                <p>{{ session('success') }}</p>
+            </div>
+        @endif
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="form-area">

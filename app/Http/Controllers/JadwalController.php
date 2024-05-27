@@ -48,7 +48,7 @@ class JadwalController extends Controller
             'boFinal' => $request->boFinal,
         ]);
 
-        return redirect()->back()->with('error', 'Tidak dapat menemukan informasi turnamen');
+        return redirect()->route('tournament.detail', $tournament->id)->with('success','Jadwal Berhasil Ditambahkan');
 
     }
 

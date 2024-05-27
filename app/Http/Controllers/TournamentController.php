@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TournamentRequest;
+use App\Http\Requests\UpdateTournamentRequest;
 
 class TournamentController extends Controller
 {
@@ -236,7 +237,7 @@ class TournamentController extends Controller
 
             return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil ditambahkan');
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
 
 
@@ -457,7 +458,7 @@ public function detailTournamentUser(Tournament $tournament, $id)
         return view('penyelenggara.edit',  ['id' => $id], compact('counttournaments', 'note', 'prizes', 'tournament', 'category', 'user'));
     }
 
-    public function updatetour(Tournament $tournament, Request $request, $id)
+    public function updatetour(Tournament $tournament, UpdateTournamentRequest $request, $id)
     {
         try {
             $tournament = Tournament::findOrFail($id);
