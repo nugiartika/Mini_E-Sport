@@ -16,13 +16,13 @@ class JadwalRequest extends FormRequest
 {
     return [
         'tanggalPenyisihan' => 'required|date_format:Y-m-d',
-        'waktuPenyisihan' => 'required|date_format:H:i:s', // Menggunakan "date_format:H:i:s" untuk format waktu
+        'waktuPenyisihan' => 'required', // Menggunakan "date_format:H:i:s" untuk format waktu
         'boPenyisihan' => 'required|numeric|min:1', // Menggunakan "numeric" untuk memastikan input adalah angka
         'tanggalSemi' => 'required|date_format:Y-m-d|after:tanggalPenyisihan',
-        'waktuSemi' => 'required|date_format:H:i:s',
+        'waktuSemi' => 'required',
         'boSemi' => 'required|numeric|min:1',
         'tanggalFinal' => 'required|date_format:Y-m-d|after:tanggalSemi',
-        'waktuFinal' => 'required|date_format:H:i:s',
+        'waktuFinal' => 'required',
         'boFinal' => 'required|numeric|min:1',
     ];
 }
