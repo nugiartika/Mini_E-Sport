@@ -13,8 +13,8 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-        <link rel="shortcut icon" href="assets/img/humma-01.png" type="image/x-icon">
-        <title>HOME - HUMMAESPORT</title>
+    <link rel="shortcut icon" href="assets/img/humma-01.png" type="image/x-icon">
+    <title>HOME - HUMMAESPORT</title>
 
     <meta name="description" content="" />
 
@@ -65,7 +65,7 @@
                 <div class="app-brand demo">
                     <a href="{{ route('index') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
-                            <img src="{{asset('assets/img/humma-01.png')}}" style="width:100%">
+                            <img src="{{ asset('assets/img/humma-01.png') }}" style="width:100%">
                         </span>
                         <span class="app-brand-text demo menu-text fw-bold">E-Sport</span>
                     </a>
@@ -128,15 +128,17 @@
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             @if (auth()->user()->role === 'organizer')
-                             <!-- Notification -->
-                             <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1 mx-2">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="{{ route('notificationTournament') }}"
-                                    data-bs-target="#Notifikasi" aria-expanded="false">
-                                    <i class="ti ti-bell ti-md" style="color: white;"></i>
-                                    <span class="badge bg-danger rounded-pill badge-notifications">{{ $counttournaments }}</span>
-                                </a>
-                            </li>
-                            <!-- End Notification -->
+                                <!-- Notification -->
+                                <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1 mx-2">
+                                    <a class="nav-link dropdown-toggle hide-arrow"
+                                        href="{{ route('notificationTournament') }}" data-bs-target="#Notifikasi"
+                                        aria-expanded="false">
+                                        <i class="ti ti-bell ti-md" style="color: white;"></i>
+                                        <span
+                                            class="badge bg-danger rounded-pill badge-notifications">{{ $counttournaments }}</span>
+                                    </a>
+                                </li>
+                                <!-- End Notification -->
                             @endif
 
                             <!-- User -->
@@ -144,9 +146,10 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <i class="fas fa-user-alt rounded-circle mt-2" style="width: 100%; font-size: 25px;"></i>
+                                        <i class="fas fa-user-alt rounded-circle mt-2"
+                                            style="width: 100%; font-size: 25px;"></i>
                                     </div>
-                                    
+
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
@@ -154,13 +157,14 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <i class="fas fa-user-alt rounded-circle mt-2" style="width: 100%; font-size: 25px;"></i>
+                                                        <i class="fas fa-user-alt rounded-circle mt-2"
+                                                            style="width: 100%; font-size: 25px;"></i>
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <span class="fw-medium d-block">{{ $user->name }}</span>
                                                     <small class="text-muted">
-                                                        @if($userRole === 'admin')
+                                                        @if ($userRole === 'admin')
                                                             Admin
                                                         @elseif($userRole === 'organizer')
                                                             Penyelenggara
@@ -180,7 +184,8 @@
                                             @csrf
                                         </form>
 
-                                        <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit()">
+                                        <a class="dropdown-item" href="#"
+                                            onclick="document.getElementById('logout-form').submit()">
                                             <i class="ti ti-logout me-2 ti-sm"></i>
                                             <span class="align-middle">Keluar</span>
                                         </a>
@@ -261,52 +266,56 @@
                 cssPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
                 themesPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
                 displayCustomizer: false,
-                lang: localStorage.getItem('templateCustomizer-' + templateName + '--Lang') || 'en', // Set default language here
+                lang: localStorage.getItem('templateCustomizer-' + templateName + '--Lang') ||
+                'en', // Set default language here
                 defaultTheme: 1,
                 defaultStyle: 'system',
                 defaultContentLayout: 'wide',
-                controls: ['rtl', 'style', 'headerType', 'contentLayout', 'layoutCollapsed', 'layoutNavbarOptions', 'themes']
+                controls: ['rtl', 'style', 'headerType', 'contentLayout', 'layoutCollapsed', 'layoutNavbarOptions',
+                    'themes'
+                ]
             });
         }
     </script>
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
 
-@if ($errors->any())
-<script>
- toastr.error(`{!! implode('\n', $errors->all()) !!}`);
-    // toastr.error("{{ session('error') }}");
-</script>
-@endif
+    @if ($errors->any())
+        <script>
+            toastr.error(`{!! implode('\n', $errors->all()) !!}`);
+            // toastr.error("{{ session('error') }}");
+        </script>
+    @endif
 
-@if (session('warning'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: "{{ session('warning') }}"
-    });
-</script>
-@endif
+    @if (session('warning'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "{{ session('warning') }}"
+            });
+        </script>
+    @endif
 
 
-@if (session('success'))
-    <script>
-        Swal.fire({
-            // title: "Good job!",
-            text: "{{ session('success') }}",
-            icon: "success"
-        });
-    </script>
-@endif
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                // title: "Good job!",
+                text: "{{ session('success') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
 
 
 
 
     @stack('script')
 </body>
+
 </html>

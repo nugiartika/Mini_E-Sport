@@ -22,9 +22,9 @@
                                     <span class="badge text-bg-danger me-4">Ditolak</span>
                                 @endif
                                 @if ($tournament->aktif > now())
-                                    <span class="badge text-bg-success me-4">Tounament : Aktif</span>
+                                    <span class="badge text-bg-success me-4">Status : Aktif</span>
                                 @elseif ($tournament->tidakaktif > now())
-                                    <span class="badge text-bg-danger me-4">Tournament : Tidak Aktif</span>
+                                    <span class="badge text-bg-danger me-4">Status : Tidak Aktif</span>
                                 @endif
                             </div>
                         </div>
@@ -37,12 +37,19 @@
                             </div>
                             <div class="pb-3 border-bottom mb-3 d-flex justify-content-between">
                                 <h5 class="mb-0">Prizepool</h5>
+                                @php
+                                    $prizeStrings = [];
+                                @endphp
+
                                 @foreach ($prizes as $prize)
                                     @if ($prize->tournament_id == $tournament->id)
-                                    <span class="tcn-1 title-anim">{{ $prize->prizepool->prize }} ,
-                                        {{ $prize->note }}</span>
+                                        @php
+                                            $prizeStrings[] = $prize->prizepool->prize;
+                                        @endphp
                                     @endif
                                 @endforeach
+
+                                <span class="tcn-1 title-anim">{{ implode(', ', $prizeStrings) }}</span>
                             </div>
                             <div class="pb-2 d-flex justify-content-between">
                                 <h5 class="mb-0">Slot Tim</h5>

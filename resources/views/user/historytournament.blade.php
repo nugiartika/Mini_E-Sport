@@ -19,7 +19,7 @@
                         $transactionExists = $transaction->exists();
                         $latestTransaction = $tournament->transaction()->latest()->first();
                     @endphp
-                    <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="col-sm-6 col-xxl-4 mb-3">
                         <div class="card">
                             <img src="{{ asset("storage/{$tournament->tournament->images}") }}" alt="{{ $tournament->tournament->name }}"
                                 class="card-img-top" />

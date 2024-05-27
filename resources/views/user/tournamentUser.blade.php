@@ -143,11 +143,11 @@
                                 </div>
                                 <div class="tournament-content px-xxl-4 mt-3 mt-md-4">
                                     <div class="tournament-info mb-4">
-                                        @if ($tournament->aktif ==='aktif')
-                                        <span class="badge text-bg-success me-4">Aktif</span>
-                                    @elseif ($tournament->aktif === 'tidak aktif')
-                                        <span class="badge text-bg-danger me-4">Tidak aktif</span>
-                                    @endif
+                                        @if ($tournament->aktif === 'aktif')
+                                            <span class="badge text-bg-success me-4">Aktif</span>
+                                        @elseif ($tournament->aktif === 'tidak aktif')
+                                            <span class="badge text-bg-danger me-4">Tidak aktif</span>
+                                        @endif
 
                                         <h4 class="tournament-tFitle tcn-1 mb-1 cursor-scale growDown title-anim">
                                             {{ $tournament->name }}
@@ -178,12 +178,20 @@
                                         </div>
                                         <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                             <i class="fa fa-gift fs-base tcn-1"></i>
-                                            @foreach ($prizes as $prize)
-                                                @if ($prize->tournament_id == $tournament->id)
-                                                <span class="tcn-1 title-anim">{{ $prize->prizepool->prize }} ,
-                                                    {{ $prize->note }}</span>
-                                                @endif
-                                            @endforeach
+                                            @php
+                                                $prizesArray = $prizes
+                                                    ->filter(function ($prize) use ($tournament) {
+                                                        return $prize->tournament_id == $tournament->id;
+                                                    })
+                                                    ->map(function ($prize) {
+                                                        return $prize->prizepool->prize;
+                                                    })
+                                                    ->toArray();
+                                            @endphp
+
+                                            @if (!empty($prizesArray))
+                                                <span class="tcn-1 title-anim">{{ implode(', ', $prizesArray) }}</span>
+                                            @endif
                                         </div>
                                     </div>
 
@@ -215,9 +223,8 @@
 
                                         // Cek apakah ada tim pengguna dalam turnamen ini
                                         $teamtournamentId = TeamTournament::where('tournament_id', $tournament->id)
-                                                ->whereIn('team_id', $userTeamIds)
-                                                ->exists();
-
+                                            ->whereIn('team_id', $userTeamIds)
+                                            ->exists();
                                     @endphp
 
 
@@ -242,9 +249,8 @@
 
                                         {{-- @dd($tournament->users_id == Auth::user()->id) --}}
                                         {{-- @if ($teamCount && $teamCount->count < $tournament->slotTeam) --}}
-                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && !$isUserInTournament && !$teamtournamentId)
-
-                                        {{-- @if ($tournament->users_id == Auth::user()->id) --}}
+                                        @if ($totalTeams && $totalTeams < $tournament->slotTeam && !$isUserInTournament && !$teamtournamentId)
+                                            {{-- @if ($tournament->users_id == Auth::user()->id) --}}
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"

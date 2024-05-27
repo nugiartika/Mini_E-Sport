@@ -28,7 +28,7 @@ class TransactionController extends Controller
 
     private function getTournament(int $tournamentId)
     {
-        return Tournament::find($tournamentId);
+        return TeamTournament::find($tournamentId)->tournament;
     }
 
     private function getUser(int $userId)
@@ -64,7 +64,7 @@ class TransactionController extends Controller
         $request->validate([
             'tournament_id' => 'exists:team_tournaments,id|required'
         ]);
-        
+
         $eventData = TeamTournament::find($request->tournament_id);
         $paymentList = $this->paymentService->getPaymentList();
 
@@ -79,8 +79,8 @@ class TransactionController extends Controller
         $data = collect($request->validated());
 
         try {
-            $userData = $this->getUser($data->get('user_id'));
-            $tourData = $this->getTournament($data->get('team_tournament_id'));
+            $userData = $this->getUser($request->input('user_id'));
+            $tourData = $this->getTournament((int) $request->input('team_tournament_id'));
             $paymentList = $this->paymentService->getPaymentList();
 
             $amountTotal = (int)$tourData->nominal + (int)$paymentList->where('code', $request->payment_method)->first()['fee'];
@@ -99,6 +99,7 @@ class TransactionController extends Controller
 
             return redirect()->route('transaction.show', $transactionData->transaction_id);
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             abort(500, $th->getMessage());
         }
     }
