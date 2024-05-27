@@ -253,6 +253,7 @@
 
                                 <h3>Juara</h3>
                                 <!-- Button trigger modal -->
+
                                 @if (count($juaras) < 1)
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleJuara">
@@ -662,6 +663,7 @@
                                             </div>
                                         @endforeach
                                         @if ($teams->isEmpty() && $teamtournament->isEmpty())
+
                                             <div class="row justify-content-center">
                                                 <div class="col-md-4">
                                                     <div class="text-center">

@@ -272,46 +272,41 @@
                                 <label for="prizepol" class="form-label">Hadiah Turnamen</label>
                                 <div id="prizepol-form">
                                     <div id="inputs">
-                                            @foreach ($tournament->tournament_prize as $index => $prizepools)
-                                            <div class="form-prize @if($index > 0) pt-3 mt-3 border-top @endif">
+                                        @foreach ($tournament->tournament_prize as $index => $prizepools)
+                                            <div
+                                                class="form-prize @if ($index > 0) pt-3 mt-3 border-top @endif">
                                                 <div class="input-group">
                                                     <select class="form-select prize-dropdown" name="prizepool_id[]">
                                                         <option value="">Pilih Hadiah</option>
                                                         @foreach ($prizes as $prize)
                                                             <option value="{{ $prize->id }}"
-                                                                @php
-                                                                $selectedPrizeIds = old('prizepool_id', [$prizepools->id]); // Ensure it's an array
-                                                                if (!is_array($selectedPrizeIds)) {
-                                                                    $selectedPrizeIds = [$selectedPrizeIds];
-                                                                } @endphp
-                                                                {{ in_array($prize->id, $selectedPrizeIds) ? 'selected' : '' }}>
-                                                                {{ $prize->prize }}
-                                                            </option>
+                                                                @if ($prizepools->prizepool_id == $prize->id) selected @endif>
+                                                                {{ $prize->prize }}</option>
                                                         @endforeach
+
                                                     </select>
                                                     @error('prizepool_id')
                                                         <p class="text-danger">{{ $message }}</p>
                                                     @enderror
 
-                                                    @if($index === 0)
-                                                    <button type="button" class="addRow rounded-end btn btn-info"><i
-                                                            class="ti ti-plus fs-2xl"></i></button>
+                                                    @if ($index === 0)
+                                                        <button type="button" class="addRow rounded-end btn btn-info"><i
+                                                                class="ti ti-plus fs-2xl"></i></button>
+                                                    @else
+                                                        <button type="button" class="removeRow btn btn-danger"><i
+                                                                class="ti ti-trash fs-2xl"></i></button>
                                                     @endif
-
-                                                    <button type="button" class="removeRow @if($index === 0) d-none @endif btn btn-danger"><i
-                                                            class="ti ti-trash fs-2xl"></i></button>
                                                 </div>
 
                                                 <div class="w-100 mt-3 noteForm" style="display: block;">
                                                     <input class="form-control" type="text"
-                                                        placeholder="Isikan deskripsi hadiah" value="{{ $prizepools->note }}" name="note[]" />
+                                                        placeholder="Isikan deskripsi hadiah"
+                                                        value="{{ $prizepools->note }}" name="note[]" />
                                                 </div>
                                             </div>
-                                            @endforeach
-                                        </div>
-
+                                        @endforeach
+                                    </div>
                                 </div>
-
                             </div>
 
                             <div class="mb-3">
@@ -384,6 +379,7 @@
                             <div class="mb-3">
                                 <label for="paidment" class="form-label">Pilih Status Pembayaran</label>
                                 <select name="paidment" id="paidment" class="form-control">
+                                    <option>{{ $tournament->paidment }}</option>
                                     <option value="Berbayar" {{ old('paidment') == 'Berbayar' ? 'selected' : '' }}>
                                         Berbayar</option>
                                     <option value="Gratis" {{ old('paidment') == 'Gratis' ? 'selected' : '' }}>Gratis
@@ -393,8 +389,8 @@
 
                             <div class="mb-3" id="nominal" style="display: none;">
                                 <label for="nominal_input" class="form-label">Masukkan Nominal</label>
-                                <input type="text" name="nominal" id="nominal_input" value="{{ old('nominal') }}"
-                                    class="form-control" />
+                                <input type="text" name="nominal" id="nominal_input"
+                                    value="{{ old('nominal', $tournament->nomnial) }}" class="form-control" />
 
                                 @error('nominal')
                                     <p class="text-danger">{{ $message }}</p>
@@ -460,7 +456,7 @@
                 if (value === "Berbayar") {
                     div.style.display = "block";
                     inputNominal.value =
-                    "{{ old('nominal', (int) $tournament->nominal ?? '') }}"; // Set old value to the input
+                        "{{ old('nominal', (int) $tournament->nominal ?? '') }}"; // Set old value to the input
                 } else {
                     div.style.display = "none";
                     inputNominal.value = ""; // Clear input value if not Berbayar

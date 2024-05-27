@@ -12,8 +12,8 @@ class Tournament_prizeRequest extends FormRequest
     public function tournament_prize(): array
     {
         return [
-            'note'=>'required',
-            'prizepool_id'=>'required',
+            'note[]'=>'required',
+            'prizepool_id[]'=>'required',
         ];
     }
     /**
@@ -24,8 +24,8 @@ class Tournament_prizeRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'note.required'=>'keterangan hadiah harus jelas',
-            'prizepool_id.required'=>'hadiah harus dipilih',
+            'note.required[]'=>'keterangan hadiah harus jelas',
+            'prizepool_id[].required'=>'hadiah harus dipilih',
         ];
     }
 }

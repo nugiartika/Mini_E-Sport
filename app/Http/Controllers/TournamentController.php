@@ -218,7 +218,6 @@ class TournamentController extends Controller
             ]);
             $tournamentId = $tournament->id;
 
-
             foreach ($prizepoolId as $index => $value) {
                 $note = $request->input('note')[$index];
                 if (empty($note)) {
@@ -336,10 +335,8 @@ class TournamentController extends Controller
 
         $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
-            ->get();
-        $category = Category::all();
+            ->get();        $category = Category::all();
         $jadwals = jadwal::where('tournament_id', $id)->get();
-        // $juaras = juara::find($id);
         $juaras = juara::where('tournament_id', $id)->get();
         $selectedTournament = Tournament::findOrFail($id);
         $teams = Team::where('tournament_id', $id)->get();
@@ -401,6 +398,7 @@ public function detailTournamentUser(Tournament $tournament, $id)
 
     return view('user.detailtournament', compact('teamIdCounts', 'teamCounts', 'counttournaments', 'user', 'category', 'jadwals', 'juaras', 'selectedTournament', 'teams', 'teamtournament', 'teamtournamentId', 'tournament', 'prizes', 'userTeamInTournament'));
 }
+
 
 
     /**
