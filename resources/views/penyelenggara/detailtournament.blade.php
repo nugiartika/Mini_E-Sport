@@ -142,8 +142,8 @@
                 <p class="mb-0">{{ $selectedTournament->slotTeam }} tim</p>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card card-body rounded-4 text-center">
+        <div class="col-md-2 ">
+            <div class="card card-body rounded-4 text-center mt-5">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-device-gamepad-2 display-five fw-normal tcp-2"></i>
                 </div>
@@ -202,32 +202,32 @@
                                 <div class="modal-body">
                                     <form id="updateBracketForm"
                                         action="{{ route('add.bracket', $selectedTournament->id) }}" "
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('PATCH')
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PATCH')
 
-                                                    <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
-                                                    <input type="hidden" name="column" value="urlBracket" />
+                                                        <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
+                                                        <input type="hidden" name="column" value="urlBracket" />
 
-                                                    <div class="mb-3">
-                                                        <label for="bracketUrl" class="form-label">URL Bracket</label>
-                                                        <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
-                                                            placeholder="Masukkan URL Bracket">
-                                                    </div>
-                                                </form>
+                                                        <div class="mb-3">
+                                                            <label for="bracketUrl" class="form-label">URL Bracket</label>
+                                                            <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
+                                                                placeholder="Masukkan URL Bracket">
+                                                        </div>
+                                                    </form>
 
 
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Batal</button>
-                                                <button type="button" class="btn btn-primary"
-                                                    onclick="document.getElementById('updateBracketForm').submit();">Ubah
-                                                    Status</button>
+                                                 </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                        onclick="document.getElementById('updateBracketForm').submit();">Ubah
+                                                        Status</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
      @endif
 
                                 </div>
@@ -278,20 +278,44 @@
                                                     <input type="hidden" name="tournament_id"
                                                         value="{{ request('tournament_id') }}">
                                                     <label for="nama_juara1" class="form-label">Juara 1</label>
-                                                    <input type="text" class="form-control" id="nama_juara1"
-                                                        name="nama_juara1" required>
+                                                    <input type="text"
+                                                        class="form-control @error('nama_juara1') is-invalid @enderror"
+                                                        id="nama_juara1" name="nama_juara1" required>
+                                                    @error('nama_juara1')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                     <!-- Tambahkan atribut required -->
                                                     <label for="nama_juara2" class="form-label">Juara 2</label>
-                                                    <input type="text" class="form-control" id="nama_juara2"
-                                                        name="nama_juara2" required>
+                                                    <input type="text"
+                                                        class="form-control @error('nama_juara2') is-invalid @enderror""
+                                                        id="nama_juara2" name="nama_juara2" required>
+                                                    @error('nama_juara2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                     <!-- Tambahkan atribut required -->
                                                     <label for="nama_juara3" class="form-label">Juara 3</label>
-                                                    <input type="text" class="form-control" id="nama_juara3"
-                                                        name="nama_juara3" required>
+                                                    <input type="text"
+                                                        class="form-control @error('nama_juara3') is-invalid @enderror"
+                                                        id="nama_juara3" name="nama_juara3" required>
+                                                    @error('nama_juara3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                     <!-- Tambahkan atribut required -->
                                                     <label for="mvp" class="form-label">MVP</label>
-                                                    <input type="text" class="form-control" id="mvp"
-                                                        name="mvp" required>
+                                                    <input type="text"
+                                                        class="form-control @error('mvp') is-invalid @enderror"
+                                                        id="mvp" name="mvp" required>
+                                                    @error('mvp')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                     <!-- Tambahkan atribut required -->
                                                 </div>
                                                 <div class="modal-footer">
@@ -369,58 +393,112 @@
                                                     <div class="mb-3">
                                                         <label for="tanggalPenyisihan" class="form-label">Tanggal
                                                             Penyisihan</label>
-                                                        <input type="date" class="form-control" id="tanggalPenyisihan"
-                                                            name="tanggalPenyisihan" min="{{ now()->toDateString() }}"
-                                                            required>
+                                                        <input type="date"
+                                                            class="form-control @error('tanggalPenyisihan') is-invalid @enderror"
+                                                            id="tanggalPenyisihan" name="tanggalPenyisihan"
+                                                            min="{{ now()->toDateString() }}" required>
+                                                        @error('tanggalPenyisihan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="waktuPenyisihan" class="form-label">Waktu
                                                             Penyisihan</label>
-                                                        <input type="time" class="form-control" id="waktuPenyisihan"
-                                                            name="waktuPenyisihan" required>
+                                                        <input type="time"
+                                                            class="form-control @error('waktuPenyisihan') is-invalid @enderror"
+                                                            id="waktuPenyisihan" name="waktuPenyisihan" required>
+                                                        @error('waktuPenyisihan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="boPenyisihan" class="form-label">Best Of</label>
-                                                        <input type="text" class="form-control" id="boPenyisihan"
-                                                            name="boPenyisihan" required>
+                                                        <input type="text"
+                                                            class="form-control @error('boPenyisihan') is-invalid @enderror"
+                                                            id="boPenyisihan" name="boPenyisihan" required>
+                                                        @error('boPenyisihan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
 
                                                     <!-- Semi Final -->
                                                     <h5>Semi Final</h5>
                                                     <div class="mb-3">
                                                         <label for="tanggalSemi" class="form-label">Tanggal Semi</label>
-                                                        <input type="date" class="form-control" id="tanggalSemi"
-                                                            name="tanggalSemi" min="{{ now()->toDateString() }}"
-                                                            required>
+                                                        <input type="date"
+                                                            class="form-control @error('tanggalSemi') is-invalid @enderror "
+                                                            id="tanggalSemi" name="tanggalSemi"
+                                                            min="{{ now()->toDateString() }}" required>
+                                                        @error('tanggalSemi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="waktuSemi" class="form-label">Waktu Semi</label>
-                                                        <input type="time" class="form-control" id="waktuSemi"
-                                                            name="waktuSemi" required>
+                                                        <input type="time"
+                                                            class="form-control @error('waktuSemi') is-invalid @enderror"
+                                                            id="waktuSemi" name="waktuSemi" required>
+                                                        @error('waktuSemi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="boSemi" class="form-label">Best Of</label>
-                                                        <input type="text" class="form-control" id="boSemi"
-                                                            name="boSemi" required>
+                                                        <input type="text"
+                                                            class="form-control @error('boSemi') is-invalid @enderror"
+                                                            id="boSemi" name="boSemi" required>
+                                                        @error('boSemi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
 
                                                     <!-- Final -->
                                                     <h5>Final</h5>
                                                     <div class="mb-3">
                                                         <label for="tanggalFinal" class="form-label">Tanggal Final</label>
-                                                        <input type="date" class="form-control" id="tanggalFinal"
-                                                            name="tanggalFinal" min="{{ now()->toDateString() }}"
-                                                            required>
+                                                        <input type="date"
+                                                            class="form-control @error('tanggalFinal') is-invalid @enderror"
+                                                            id="tanggalFinal" name="tanggalFinal"
+                                                            min="{{ now()->toDateString() }}" required>
+                                                        @error('tanggalFinal')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="waktuFinal" class="form-label">Waktu Final</label>
-                                                        <input type="time" class="form-control" id="waktuFinal"
-                                                            name="waktuFinal" required>
+                                                        <input type="time"
+                                                            class="form-control @error('waktuFinal') is-invalid @enderror"
+                                                            id="waktuFinal" name="waktuFinal" required>
+                                                        @error('waktuFinal')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="boFinal" class="form-label">Best Of</label>
-                                                        <input type="text" class="form-control" id="boFinal"
-                                                            name="boFinal" required>
+                                                        <input type="text"
+                                                            class="form-control @error('boFinal') is-invalid @enderror"
+                                                            id="boFinal" name="boFinal" required>
+                                                        @error('boFinal')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -663,7 +741,6 @@
                                             </div>
                                         @endforeach
                                         @if ($teams->isEmpty() && $teamtournament->isEmpty())
-
                                             <div class="row justify-content-center">
                                                 <div class="col-md-4">
                                                     <div class="text-center">

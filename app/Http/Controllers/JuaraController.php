@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JuaraRequest;
 use App\Models\Team;
 use App\Models\juara;
 use App\Models\jadwal;
@@ -32,22 +33,30 @@ class JuaraController extends Controller
         return view('penyelenggara.detailtournament', compact('juara','jadwal','tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
 
-    public function juara(Tournament $tournament, Request $request, $id)
-    {
+    public function juara(JuaraRequest  $request, $id)
+{
+    try {
+        // Mencari turnamen berdasarkan ID, dan jika tidak ditemukan, akan mengembalikan 404
+        $tournament = Tournament::findOrFail($id);
 
-        $tournament = Tournament::find($id);
+        // Validasi input menggunakan aturan yang didefinisikan di dalam JadwalRequest
+        $validatedData = $request->validated();
 
-            Juara::create([
-                'tournament_id' => $tournament->id,
-                'nama_juara1' => $request->input('nama_juara1'),
-                'nama_juara2' => $request->input('nama_juara2'),
-                'nama_juara3' => $request->input('nama_juara3'),
-                'mvp' => $request->input('mvp'),
-            ]);
+        // Membuat jadwal baru dengan data yang sudah divalidasi
+        Juara::create([
+            'tournament_id' => $tournament->id,
+            'nama_juara1' => $validatedData['nama_juara1'],
+            'nama_juara2' => $validatedData['nama_juara2'],
+            'nama_juara3' => $validatedData['nama_juara3'],
+            'mvp' => $validatedData['mvp'],
+        ]);
 
-            return redirect()->route('tournament.detail', $tournament->id)->with('success','Daftar Juara Berhasil Ditambahkan');
-
+        return redirect()->route('tournament.detail', $tournament->id)->with('success','Juara Berhasil Ditambahkan');
+    } catch (\Exception $e) {
+        // Tangani jika turnamen tidak ditemukan atau terjadi kesalahan lain
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
 
 
 
