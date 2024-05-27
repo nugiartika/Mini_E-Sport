@@ -28,7 +28,7 @@ public function messages(): array
         'nama_juara1.required' => 'nama tim juara 1 harus diisi',
         'nama_juara2.required' => 'nama tim juara 2 harus diisi',
         'nama_juara3.required' => 'nama tim juara 3 harus diisi',
-        'mvp.numeric' => 'nama player mvp harus diisi',
+        'mvp.required' => 'nama player mvp harus diisi',
     ];
 }
 

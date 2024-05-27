@@ -280,43 +280,43 @@
                                                     <label for="nama_juara1" class="form-label">Juara 1</label>
                                                     <input type="text"
                                                         class="form-control @error('nama_juara1') is-invalid @enderror"
-                                                        id="nama_juara1" name="nama_juara1" required>
+                                                        id="nama_juara1" name="nama_juara1" >
                                                     @error('nama_juara1')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <!-- Tambahkan atribut required -->
+                                                    <!-- Tambahkan atribut  -->
                                                     <label for="nama_juara2" class="form-label">Juara 2</label>
                                                     <input type="text"
                                                         class="form-control @error('nama_juara2') is-invalid @enderror""
-                                                        id="nama_juara2" name="nama_juara2" required>
+                                                        id="nama_juara2" name="nama_juara2" >
                                                     @error('nama_juara2')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <!-- Tambahkan atribut required -->
+                                                    <!-- Tambahkan atribut  -->
                                                     <label for="nama_juara3" class="form-label">Juara 3</label>
                                                     <input type="text"
                                                         class="form-control @error('nama_juara3') is-invalid @enderror"
-                                                        id="nama_juara3" name="nama_juara3" required>
+                                                        id="nama_juara3" name="nama_juara3" >
                                                     @error('nama_juara3')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <!-- Tambahkan atribut required -->
+                                                    <!-- Tambahkan atribut  -->
                                                     <label for="mvp" class="form-label">MVP</label>
                                                     <input type="text"
                                                         class="form-control @error('mvp') is-invalid @enderror"
-                                                        id="mvp" name="mvp" required>
+                                                        id="mvp" name="mvp" >
                                                     @error('mvp')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <!-- Tambahkan atribut required -->
+                                                    <!-- Tambahkan atribut  -->
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -396,7 +396,7 @@
                                                         <input type="date"
                                                             class="form-control @error('tanggalPenyisihan') is-invalid @enderror"
                                                             id="tanggalPenyisihan" name="tanggalPenyisihan"
-                                                            min="{{ now()->toDateString() }}" required>
+                                                            min="{{ now()->toDateString() }}" >
                                                         @error('tanggalPenyisihan')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -408,7 +408,7 @@
                                                             Penyisihan</label>
                                                         <input type="time"
                                                             class="form-control @error('waktuPenyisihan') is-invalid @enderror"
-                                                            id="waktuPenyisihan" name="waktuPenyisihan" required>
+                                                            id="waktuPenyisihan" name="waktuPenyisihan" >
                                                         @error('waktuPenyisihan')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -419,7 +419,7 @@
                                                         <label for="boPenyisihan" class="form-label">Best Of</label>
                                                         <input type="text"
                                                             class="form-control @error('boPenyisihan') is-invalid @enderror"
-                                                            id="boPenyisihan" name="boPenyisihan" required>
+                                                            id="boPenyisihan" name="boPenyisihan" >
                                                         @error('boPenyisihan')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -434,7 +434,7 @@
                                                         <input type="date"
                                                             class="form-control @error('tanggalSemi') is-invalid @enderror "
                                                             id="tanggalSemi" name="tanggalSemi"
-                                                            min="{{ now()->toDateString() }}" required>
+                                                            min="{{ now()->toDateString() }}" >
                                                         @error('tanggalSemi')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -445,7 +445,7 @@
                                                         <label for="waktuSemi" class="form-label">Waktu Semi</label>
                                                         <input type="time"
                                                             class="form-control @error('waktuSemi') is-invalid @enderror"
-                                                            id="waktuSemi" name="waktuSemi" required>
+                                                            id="waktuSemi" name="waktuSemi" >
                                                         @error('waktuSemi')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -456,7 +456,7 @@
                                                         <label for="boSemi" class="form-label">Best Of</label>
                                                         <input type="text"
                                                             class="form-control @error('boSemi') is-invalid @enderror"
-                                                            id="boSemi" name="boSemi" required>
+                                                            id="boSemi" name="boSemi" >
                                                         @error('boSemi')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -471,7 +471,7 @@
                                                         <input type="date"
                                                             class="form-control @error('tanggalFinal') is-invalid @enderror"
                                                             id="tanggalFinal" name="tanggalFinal"
-                                                            min="{{ now()->toDateString() }}" required>
+                                                            min="{{ now()->toDateString() }}" >
                                                         @error('tanggalFinal')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -482,7 +482,7 @@
                                                         <label for="waktuFinal" class="form-label">Waktu Final</label>
                                                         <input type="time"
                                                             class="form-control @error('waktuFinal') is-invalid @enderror"
-                                                            id="waktuFinal" name="waktuFinal" required>
+                                                            id="waktuFinal" name="waktuFinal" >
                                                         @error('waktuFinal')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -493,7 +493,7 @@
                                                         <label for="boFinal" class="form-label">Best Of</label>
                                                         <input type="text"
                                                             class="form-control @error('boFinal') is-invalid @enderror"
-                                                            id="boFinal" name="boFinal" required>
+                                                            id="boFinal" name="boFinal" >
                                                         @error('boFinal')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -534,29 +534,29 @@
                                                             Penyisihan</label>
                                                         <input type="date"
                                                             class="form-control @error('tanggalPenyisihan') is-invalid @enderror"
-                                                            id="tanggalPenyisihan" name="tanggalPenyisihan" required>
+                                                            id="tanggalPenyisihan" name="tanggalPenyisihan" >
                                                         @error('tanggalPenyisihan')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
-                                                        <!-- Tambahkan atribut required -->
+                                                        <!-- Tambahkan atribut  -->
                                                         <label for="waktuPenyisihan" class="form-label">Waktu
                                                             Penyisihan</label>
                                                         <input type="time"
                                                             class="form-control @error('waktuPenyisihan') is-invalid @enderror"
-                                                            id="waktuPenyisihan" name="waktuPenyisihan" required>
+                                                            id="waktuPenyisihan" name="waktuPenyisihan" >
                                                         @error('waktuPenyisihan')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
-                                                        <!-- Tambahkan atribut required -->
+                                                        <!-- Tambahkan atribut  -->
                                                         <label for="boPenyisihan" class="form-label">Best Of</label>
                                                         <input type="text"
                                                             class="form-control @error('boPenyisihan') is-invalid @enderror"
-                                                            id="boPenyisihan" name="boPenyisihan" required>
-                                                        <!-- Tambahkan atribut required -->
+                                                            id="boPenyisihan" name="boPenyisihan" >
+                                                        <!-- Tambahkan atribut  -->
                                                         @error('boPenyisihan')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -566,8 +566,8 @@
                                                         <label for="tanggalSemi" class="form-label">Tanggal Semi</label>
                                                         <input type="date"
                                                             class="form-control @error('tanggalSemi') is-invalid @enderror"
-                                                            id="tanggalSemi" name="tanggalSemi" required>
-                                                        <!-- Tambahkan atribut required -->
+                                                            id="tanggalSemi" name="tanggalSemi" >
+                                                        <!-- Tambahkan atribut  -->
                                                         @error('tanggalSemi')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -576,8 +576,8 @@
                                                         <label for="waktuSemi" class="form-label">Waktu Semi</label>
                                                         <input type="time"
                                                             class="form-control @error('waktuSemi') is-invalid @enderror"
-                                                            id="waktuSemi" name="waktuSemi" required>
-                                                        <!-- Tambahkan atribut required -->
+                                                            id="waktuSemi" name="waktuSemi" >
+                                                        <!-- Tambahkan atribut  -->
                                                         @error('waktuSemi')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -586,8 +586,8 @@
                                                         <label for="boSemi" class="form-label">Best Of</label>
                                                         <input type="text"
                                                             class="form-control @error('boSemi') is-invalid @enderror"
-                                                            id="boSemi" name="boSemi" required>
-                                                        <!-- Tambahkan atribut required -->
+                                                            id="boSemi" name="boSemi" >
+                                                        <!-- Tambahkan atribut  -->
                                                         @error('boSemi')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -598,8 +598,8 @@
                                                         <label for="tanggalFinal" class="form-label">Tanggal Final</label>
                                                         <input type="date"
                                                             class="form-control @error('tanggalFinal') is-invalid @enderror"
-                                                            id="tanggalFinal" name="tanggalFinal" required>
-                                                        <!-- Tambahkan atribut required -->
+                                                            id="tanggalFinal" name="tanggalFinal" >
+                                                        <!-- Tambahkan atribut  -->
                                                         @error('tanggalFinal')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -608,8 +608,8 @@
                                                         <label for="waktuFinal" class="form-label">Waktu Final</label>
                                                         <input type="time"
                                                             class="form-control @error('waktuFinal') is-invalid @enderror"
-                                                            id="waktuFinal" name="waktuFinal" required>
-                                                        <!-- Tambahkan atribut required -->
+                                                            id="waktuFinal" name="waktuFinal" >
+                                                        <!-- Tambahkan atribut  -->
                                                         @error('waktuFinal')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -618,8 +618,8 @@
                                                         <label for="boFinal" class="form-label">Best Of</label>
                                                         <input type="text"
                                                             class="form-control @error('boFinal') is-invalid @enderror"
-                                                            id="boFinal" name="boFinal" required>
-                                                        <!-- Tambahkan atribut required -->
+                                                            id="boFinal" name="boFinal" >
+                                                        <!-- Tambahkan atribut  -->
                                                         @error('boFinal')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
