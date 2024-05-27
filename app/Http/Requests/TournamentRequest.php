@@ -87,7 +87,7 @@ class TournamentRequest extends FormRequest
             'slotTeam.integer' => 'Slot tim harus berupa angka.',
             'slotTeam.min' => 'Slot tim tidak boleh kurang dari 2.',
             'slotTeam.custom' => 'Slot tim harus berupa angka genap.',
-            'nominal.nullable' => 'Nominal harus berupa angka.',
+            'nominal.required_if' => 'Nominal harus diisi.',
             'paidment.required' => 'Metode pembayaran harus dipilih.',
 
         ];
