@@ -57,10 +57,10 @@
             <div class="modal-content">
                 <div class="modal-body d-flex flex-column align-items-center">
                     <div class="d-flex justify-content-center align-items-center mb-4" style="height: 100px;">
-                        <center>
+                        <div class="d-flex text-center">
                             <h6 style="color: white;">Create a New Team for the Tournament or Choose an
                                 Existing Team</h6>
-                        </center>
+                        </div>
                     </div>
                     <div class="d-flex justify-content-center">
                         <a href="#" type="button" class="btn btn-secondary me-2">Existing Team</a>
@@ -142,8 +142,8 @@
                 <p class="mb-0">{{ $selectedTournament->slotTeam }} tim</p>
             </div>
         </div>
-        <div class="col-md-2 ">
-            <div class="card card-body rounded-4 text-center mt-5">
+        <div class="col-md-3">
+            <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-device-gamepad-2 display-five fw-normal tcp-2"></i>
                 </div>
