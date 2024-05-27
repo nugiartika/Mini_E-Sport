@@ -9,9 +9,9 @@ use App\Models\Member;
 use App\Models\Team;
 use App\Models\TeamTournament;
 use App\Models\Tournament;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class MemberController extends Controller
 {
@@ -74,10 +74,29 @@ class MemberController extends Controller
             }
 
             if($member->team->tournament_id) {
-                TeamTournament::create([
+                $teamTournament = TeamTournament::create([
                     'team_id' => $member->team->id,
                     'tournament_id' => $member->team->tournament_id,
                 ]);
+
+                $tournamentData = Tournament::where([
+                    ['id', $member->team->tournament_id],
+                    ['paidment', 'Gratis']
+                ]);
+
+                if($tournamentData->exists()) {
+                    Transaction::create([
+                        'name' => auth()->user()->name,
+                        'email' => auth()->user()->email,
+                        'phone' => '081234567890',
+                        'status' => 'PAID',
+                        'team_tournament_id' => $teamTournament->id,
+                        'payment_method' => 'FREE',
+                        'amount' => 0,
+                        'transaction_id' => 'TRANS-'. Str::upper(Str::random(16)),
+                        'ref_id' => 'INV-'. Str::upper(Str::random(16))
+                    ]);
+                }
             }
 
             return redirect()->route('team.index')->with('success', 'Members added successfully');

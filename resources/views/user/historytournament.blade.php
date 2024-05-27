@@ -39,6 +39,7 @@
                                     <span>Tanggal Ikut</span>
                                     <span>{{ $tournament->created_at->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}</span>
                                 </div>
+                                @if($tournament->tournament->paidment !== 'Gratis')
                                 <div class="d-flex gap-3 border-top justify-content-between py-3">
                                     <span>Sudah Bayar?</span>
                                     <span>{{ $transactionExists ? 'Sudah' : 'Belum' }}</span>
@@ -52,6 +53,7 @@
                                         <span>Belum Ada Transaksi</span>
                                     @endif
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
