@@ -255,6 +255,9 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
 
     <!-- Main JS -->
     <script src="/admin-panel/assets/js/main.js"></script>
@@ -278,16 +281,9 @@
         }
     </script>
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
-
     @if ($errors->any())
         <script>
             toastr.error(`{!! implode('\n', $errors->all()) !!}`);
-            // toastr.error("{{ session('error') }}");
         </script>
     @endif
 
@@ -311,9 +307,6 @@
             });
         </script>
     @endif
-
-
-
 
     @stack('script')
 </body>

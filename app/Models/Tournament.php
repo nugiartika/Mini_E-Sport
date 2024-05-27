@@ -35,17 +35,17 @@ class Tournament extends Model
         return $this->hasOne(Team::class);
     }
 
-    public function prizepool ()
+    public function prizepool()
     {
         return $this->hasMany(Prizepool::class, 'prizepool_id', 'id');
     }
 
-    public function jadwal ()
+    public function jadwal()
     {
         return $this->hasMany(jadwal::class,'jadwal_id');
     }
 
-    public function juara ()
+    public function juara()
     {
         return $this->hasMany(juara::class,'juara_id');
     }
