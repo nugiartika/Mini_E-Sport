@@ -109,7 +109,6 @@ class TeamController extends Controller
         $user = User::all();
         $membersPerTeam = $team->tournament->category->membersPerTeam;
 
-
         return view('user.createmember', compact('members', 'teams', 'teamId','user','membersPerTeam'));
     }
 

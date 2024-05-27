@@ -1,5 +1,6 @@
 {{-- @extends('layouts.user') --}}
 @extends('layouts.panel')
+
 @section('style')
     <style>
         .saring-btn {
@@ -82,7 +83,7 @@
     </style>
 @endsection
 @section('content')
-    <div class="col-xl-6 col-12 mb-4">
+    <div class="col-xl-6 mx-auto col-12 mb-4">
         <div class="card">
             <div class="card-header">
                 <h5 class="modal-title text-white" id="exampleModalLabel">Tim Lama</h5>
@@ -93,7 +94,7 @@
                 <form action="{{ route('teams.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="team_id">Pilih Tim:</label>
+                        <label for="team_id" class="mb-3">Pilih Tim:</label>
                         <div class="row text-black">
                             @forelse ($teams as $team)
                                 {{-- @if ($team->user_id === auth()->user()->id) --}}
@@ -114,11 +115,11 @@
                                     </div>
                                 </div>
                                 {{-- @endif --}}
-                                @empty
-                                    <div class="p-3 text-center">
-                                        <h4 class="mb-2">Tidak Ada Data</h4>
-                                        <p class="mb-0 text-muted">Anda belum memiliki Tim.</p>
-                                    </div>
+                            @empty
+                                <div class="p-3 text-center">
+                                    <h4 class="mb-2">Tidak Ada Data</h4>
+                                    <p class="mb-0 text-muted">Anda belum memiliki Tim.</p>
+                                </div>
                             @endforelse
                         </div>
                     </div>

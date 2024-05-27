@@ -54,9 +54,8 @@
 
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
-                <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal"
-                data-bs-target="#filter">Saring</button>
-                <form action="{{ route('DetailTournament') }}" method="get">
+                <button class="saring-btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#filter">Saring</button>
+                <form action="{{ route('ptournament.index') }}" method="get">
                     @csrf
                     <div class="input-group">
                         <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;"
@@ -82,7 +81,7 @@
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @forelse ($tournaments as $tournament)
-                     <tr>
+                        <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td> <span class="fw-medium">{{ $tournament->name }}</span></td>
                             <td>{{ $tournament->category->name }}</td>
@@ -151,9 +150,7 @@
         </div>
     </div>
 
-
-
-    <div class="modal" tabindex="-1" id="filter">
+    <div class="modal fade" tabindex="-1" id="filter">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
                 <div class="modal-header">
@@ -231,15 +228,15 @@
                                             <li class="list-group-item" style="font-weight: bold;">Hadiah :
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
                                                     @foreach ($prizes as $prize)
-                                                    @if ($prize->tournament_id == $tournament->id)
-                                                        <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }}
+                                                        @if ($prize->tournament_id == $tournament->id)
+                                                            <p class="tcn-1 title-anim">{{ $prize->prizepool->prize }}
                                                             </p>
                                                             <label style="font-weight: bold;">Keterangan:</label>
-                                                        <p class="tcn-1 title-anim">
-                                                            {{ $prize->note }}</p>
-                                                    @endif
-                                                @endforeach
-                                                    </span>
+                                                            <p class="tcn-1 title-anim">
+                                                                {{ $prize->note }}</p>
+                                                        @endif
+                                                    @endforeach
+                                                </span>
                                             </li>
 
 
@@ -249,40 +246,42 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item" style="font-weight: bold;">Pendafataran Dibuka :
                                                 <span id="detail-gender" style="font-weight: normal;">
-                                                    {{ $tournament->pendaftaran }}</span>
+                                                    {{ $tournament->pendaftaran->locale('id')->translatedFormat('d F Y'); }}</span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup :
                                                 <span id="detail-national_student_id" style="font-weight: normal;">
-                                                    {{ $tournament->end_pendaftaran }}</span>
+                                                    {{ $tournament->end_pendaftaran->locale('id')->translatedFormat('d F Y'); }}</span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
-                                                    {{ $tournament->permainan }}</span>
+                                                    {{ $tournament->permainan->locale('id')->translatedFormat('d F Y'); }}</span>
                                             </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
+                                            <li class="list-group-item" style="font-weight: bold;">Tournament Berakhir :
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
-                                                    {{ $tournament->permainan }}</span>
+                                                    {{ $tournament->end_permainan->locale('id')->translatedFormat('d F Y'); }}</span>
                                             </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Tipe Tournament :
+                                            <li class="list-group-item" style="font-weight: bold;">Tipe Turnamen :
                                                 <span id="detail-national_identity_number"
                                                     style="font-weight: normal;">{{ $tournament->paidment }}</span>
                                             </li>
                                             @if ($tournament->paidment === 'Berbayar')
-                                            <li class="list-group-item" style="font-weight: bold;">Nominal :
-                                                <span id="detail-national_identity_number"
-                                                    style="font-weight: normal;">IDR
-                                                    {{-- {{ $tournament->paidment }} --}}
-                                                    {{ number_format($tournament->nominal, 0, '.', ',') }}
-                                                </span>
-                                            </li>
+                                                <li class="list-group-item" style="font-weight: bold;">HTM :
+                                                    <span id="detail-national_identity_number"
+                                                        style="font-weight: normal;">IDR {{ number_format($tournament->nominal, 0, '.', ',') }}
+                                                    </span>
+                                                </li>
                                             @endif
                                         </ul>
                                     </div>
                                     <div class="row mx-2">
                                         <div class="col">
                                             {{-- <div class="list-group"> --}}
-                                                <li class="list-group-item" style="font-weight: bold;">Description: <br><span style="font-weight: normal;" id="detail-family_card_id">{!! $tournament->description !!}</span></li>
-                                                <li class="list-group-item" style="font-weight: bold;">Rule: <br><span style="font-weight: normal;" id="detail-number_siblings">{{ $tournament->rule }}</span></li>
+                                            <li class="list-group-item" style="font-weight: bold;">Description: <br><span
+                                                    style="font-weight: normal;"
+                                                    id="detail-family_card_id">{!! $tournament->description !!}</span></li>
+                                            <li class="list-group-item" style="font-weight: bold;">Rule: <br><span
+                                                    style="font-weight: normal;"
+                                                    id="detail-number_siblings">{{ $tournament->rule }}</span></li>
                                             {{-- </div> --}}
                                         </div>
                                     </div>

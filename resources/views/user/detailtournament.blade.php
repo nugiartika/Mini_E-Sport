@@ -5,14 +5,10 @@
         use App\Models\TeamTournament;
     @endphp
 
-
     <div class="d-flex pb-4">
         <a href="{{ route('user.tournament') }}" class="btn btn-primary d-flex gap-2 align-items-center"><i
                 class="ti ti-arrow-left"></i><span>Kembali Ke Daftar Turnamen</span></a>
     </div>
-
-
-
 
     @php
         // Ambil total tim dari hasil perhitungan
@@ -22,17 +18,6 @@
 
         $userTeams = $teams ?? collect();
         $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
-        // $isUserInTournament = $userTeamsInTournament->isNotEmpty();
-
-        // if ($isUserInTournament) {
-        //     // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-        //     $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
-
-        //     // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-        //     $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-        //         ->where('tournament_id', $tournament->id)
-        //         ->get();
-        // }
     @endphp
 
     <div class="row">
@@ -96,10 +81,10 @@
             <div class="modal-content">
                 <div class="modal-body d-flex flex-column align-items-center">
                     <div class="d-flex justify-content-center align-items-center mb-4" style="height: 100px;">
-                        <center>
+                        <div class="d-flex gap-2 align-items-center justify-content-center">
                             <h6 style="color: white;">Create a New Team for the Tournament or Choose an
                                 Existing Team</h6>
-                        </center>
+                        </div>
                     </div>
                     <div class="d-flex justify-content-center">
                         <a href="#" type="button" class="btn btn-secondary me-2">Existing Team</a>
@@ -110,9 +95,8 @@
         </div>
     </div>
 
-
-    <div class="row py-4">
-        <div class="col-md-2">
+    <div class="row py-4 gy-4">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-location display-five fw-normal tcp-2"></i>
@@ -121,7 +105,7 @@
                 <p class="mb-0">{{ $selectedTournament->paidment }}</p>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-wallet display-five fw-normal tcp-2"></i>
@@ -130,22 +114,28 @@
                 <p class="mb-0">Rp {{ number_format($selectedTournament->nominal, 0, ',', '.') }}</p>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-gift display-five fw-normal tcp-2"></i>
                 </div>
-                <h4 class="mb-1">Prizepool</h4>
-                @foreach ($prizes as $prize)
-                    @if ($prize->tournament_id == $selectedTournament->id)
-                        <p class="mb-0">{{ $prize->prizepool->prize }} ,
-                            {{ $prize->note }}</p>
-                    @endif
-                @endforeach
+                <h4 class="mb-1">Hadiah</h4>
+                @php
+                    $prizesArray = $prizes
+                        ->filter(function ($prize) use ($selectedTournament) {
+                            return $prize->tournament_id == $selectedTournament->id;
+                        })
+                        ->map(function ($prize) {
+                            return $prize->prizepool->prize;
+                        })
+                        ->toArray();
+                @endphp
+
+                <span class="mb-0">{{ implode(', ', $prizesArray) }}</span>
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-calendar display-five fw-normal tcp-2"></i>
@@ -154,7 +144,7 @@
                 <p class="mb-0">{{ $selectedTournament->pendaftaran->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</p>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-calendar-x display-five fw-normal tcp-2"></i>
@@ -164,7 +154,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-users-group display-five fw-normal tcp-2"></i>
@@ -173,7 +163,7 @@
                 <p class="mb-0">{{ $selectedTournament->slotTeam }} tim</p>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-device-gamepad-2 display-five fw-normal tcp-2"></i>

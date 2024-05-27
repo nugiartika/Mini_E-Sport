@@ -3,8 +3,6 @@
 @section('content')
     {{-- start row    --}}
     <div class="row">
-
-
         <div class="col-lg-12">
             <div class="card mb-4">
 
@@ -100,23 +98,27 @@
         </div>
 
         @forelse ($tournament->where('status', 'accepted') as $index => $tour)
-            <div class="col-12 col-xl-4 col-md-6">
+            <div class="col-12 col-xxl-4 col-sm-6">
                 <div class="card h-100">
                     <div class="card-body">
-                        <div class="text-center mb-3 pt-4">
-                            <img class="img-fluid" src="{{ asset('storage/' . $tour->images) }}" alt="Card girl image" />
-
+                        <div class="text-center">
+                            <img class="img-fluid rounded-3 overflow-hidden mb-3" src="{{ asset('storage/' . $tour->images) }}" alt="Card image" />
                         </div>
-                        @if ($tour->aktif ==='aktif')
-                        <span class="badge text-bg-success me-4">Aktif</span>
-                    @elseif ($tour->aktif === 'tidak aktif')
-                        <span class="badge text-bg-danger me-4">Tidak aktif</span>
-                    @endif
 
-                        <h4 class="mb-2 pb-1">{{ $tour->name }}</h4>
-                        <p class="small">{{ $tour->category->name }}</p>
+                        <div class="d-flex pb-3 justify-content-between align-items-center">
+                            <div>
+                                <h4 class="pb-1 mb-0">{{ $tour->name }}</h4>
+                                <p class="small mb-0">{{ $tour->category->name }}</p>
+                            </div>
 
-                        <div class="row w-100">
+                            @if ($tour->aktif === 'aktif')
+                                <span class="badge text-bg-success">Aktif</span>
+                            @elseif ($tour->aktif === 'tidak aktif')
+                                <span class="badge text-bg-danger">Tidak aktif</span>
+                            @endif
+                        </div>
+
+                        <div class="row w-100 gy-3">
                             <div class="col-md-6">
                                 <div class="d-flex">
                                     <div class="avatar flex-shrink-0 me-2">
@@ -167,12 +169,20 @@
                                     <div>
                                         <small>Prizepool</small>
                                         <h6 class="mb-0 text-nowrap">
-                                            @foreach ($prizes as $prize)
-                                                @if ($prize->tournament_id == $tour->id)
-                                                <span class="tcn-1 title-anim">{{ $prize->prizepool->prize }} ,
-                                                    {{ $prize->note }}</span>
-                                                @endif
-                                            @endforeach
+                                            @php
+                                                $prizesArray = $prizes
+                                                    ->filter(function ($prize) use ($tour) {
+                                                        return $prize->tournament_id == $tour->id;
+                                                    })
+                                                    ->map(function ($prize) {
+                                                        return $prize->prizepool->prize;
+                                                    })
+                                                    ->toArray();
+                                            @endphp
+
+                                            @if (!empty($prizesArray))
+                                                <span class="tcn-1 title-anim">{{ implode(', ', $prizesArray) }}</span>
+                                            @endif
                                         </h6>
                                     </div>
                                 </div>

@@ -74,8 +74,8 @@
 
 
 
-    <div class="row py-4">
-        <div class="col-md-2">
+    <div class="row py-4 gy-4">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-location display-five fw-normal tcp-2"></i>
@@ -84,7 +84,7 @@
                 <p class="mb-0">{{ $selectedTournament->paidment }}</p>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-wallet display-five fw-normal tcp-2"></i>
@@ -93,21 +93,28 @@
                 <p class="mb-0">Rp {{ number_format($selectedTournament->nominal, 0, ',', '.') }}</p>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-gift display-five fw-normal tcp-2"></i>
                 </div>
                 <h4 class="mb-1">Prizepool</h4>
+                @php
+                    $prizeStrings = [];
+                @endphp
+
                 @foreach ($prizes as $prize)
                     @if ($prize->tournament_id == $selectedTournament->id)
-                        <p class="mb-0">{{ $prize->prizepool->prize }} ,
-                            {{ $prize->note }}</p>
+                        @php
+                            $prizeStrings[] = $prize->prizepool->prize;
+                        @endphp
                     @endif
                 @endforeach
+
+                {!! implode(', ', $prizeStrings) !!}
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-calendar display-five fw-normal tcp-2"></i>
@@ -116,7 +123,7 @@
                 <p class="mb-0">{{ $selectedTournament->pendaftaran->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</p>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-calendar-x display-five fw-normal tcp-2"></i>
@@ -126,7 +133,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-users-group display-five fw-normal tcp-2"></i>
@@ -135,7 +142,7 @@
                 <p class="mb-0">{{ $selectedTournament->slotTeam }} tim</p>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-body rounded-4 text-center">
                 <div class="icon-area mb-6">
                     <i class="h1 ti ti-device-gamepad-2 display-five fw-normal tcp-2"></i>
@@ -150,8 +157,8 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="bracket-tab" data-bs-toggle="tab" data-bs-target="#bracket"
-                type="button" role="tab" aria-controls="bracket" aria-selected="true">Bracket</button>
+            <button class="nav-link active" id="bracket-tab" data-bs-toggle="tab" data-bs-target="#bracket" type="button"
+                role="tab" aria-controls="bracket" aria-selected="true">Bracket</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="juara-tab" data-bs-toggle="tab" data-bs-target="#juara" type="button"
@@ -195,32 +202,32 @@
                                 <div class="modal-body">
                                     <form id="updateBracketForm"
                                         action="{{ route('add.bracket', $selectedTournament->id) }}" "
-                                                method="POST">
-                                                @csrf
-                                                @method('PATCH')
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
 
-                                                <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
-                                                <input type="hidden" name="column" value="urlBracket" />
+                                                    <input type="hidden" name="id" value="{{ $selectedTournament->id }}" />
+                                                    <input type="hidden" name="column" value="urlBracket" />
 
-                                                <div class="mb-3">
-                                                    <label for="bracketUrl" class="form-label">URL Bracket</label>
-                                                    <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
-                                                        placeholder="Masukkan URL Bracket">
-                                                </div>
-                                            </form>
+                                                    <div class="mb-3">
+                                                        <label for="bracketUrl" class="form-label">URL Bracket</label>
+                                                        <input type="url" class="form-control" id="bracketUrl" name="urlBracket"
+                                                            placeholder="Masukkan URL Bracket">
+                                                    </div>
+                                                </form>
 
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Batal</button>
-                                            <button type="button" class="btn btn-primary"
-                                                onclick="document.getElementById('updateBracketForm').submit();">Ubah
-                                                Status</button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Batal</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="document.getElementById('updateBracketForm').submit();">Ubah
+                                                    Status</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
      @endif
 
                                 </div>
@@ -347,7 +354,7 @@
                                         <!-- Tambahkan class modal-lg untuk modal yang lebih besar jika diperlukan -->
                                         <div class="modal-content">
                                             <!-- Form -->
-                                            <form action="{{ route('ptournament.jadwal', ['id' => $tournaments->id]) }}"
+                                            <form action="{{ route('ptournament.jadwal', $tournaments->id) }}"
                                                 method="POST">
                                                 <!-- Tambahkan method POST -->
                                                 @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
@@ -432,7 +439,7 @@
 
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                <form action="{{ route('ptournament.jadwal', ['id' => $jadwal->id]) }}"
+                                                <form action="{{ route('ptournament.jadwal', $jadwal->id) }}"
                                                     method="POST">
                                                     <!-- Tambahkan method POST -->
                                                     @csrf
@@ -601,17 +608,17 @@
                                 aria-labelledby="detail-info-tab">
                                 <div>
                                     <h3>Detail dan Informasi</h3>
-                                    <div class="border-end border-bottom">
-                                        <h6>Deskripsi</h6>
-                                        <small>{!! $tournaments->description !!}</small>
+                                    <div class="mb-3 pb-3 border-bottom">
+                                        <h6 class="mb-1">Deskripsi</h6>
+                                        <small class="mb-0">{!! $tournaments->description !!}</small>
                                     </div>
-                                    <div class="border-end border-bottom">
-                                        <h6>Peraturan</h6>
-                                        <small>{{ $tournaments->rule }}</small>
+                                    <div class="mb-3 pb-3 border-bottom">
+                                        <h6 class="mb-1">Peraturan</h6>
+                                        <small class="mb-0">{{ $tournaments->rule }}</small>
                                     </div>
-                                    <div class="border-end border-bottom">
-                                        <h6>Kontak Personal</h6>
-                                        <small>{{ $tournaments->contact }}</small>
+                                    <div class="border-bottom">
+                                        <h6 class="mb-1">Kontak Personal</h6>
+                                        <small class="mb-0">{{ $tournaments->contact }}</small>
                                     </div>
 
                                 </div>

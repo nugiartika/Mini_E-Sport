@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        User::firstOrCreate([
             'name' => 'Administrator',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'active',
         ]);
 
-        User::create([
+        User::firstOrCreate([
             'name' => 'Regular User',
             'email' => 'user@gmail.com',
             'password' => Hash::make('password'),
@@ -34,11 +34,47 @@ class DatabaseSeeder extends Seeder
             'status' => 'active',
         ]);
 
-        User::create([
+        User::firstOrCreate([
             'name' => 'Event Organizer',
             'email' => 'penyelenggara@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'organizer',
+            'email_verified_at' => now(),
+            'status' => 'active',
+        ]);
+
+        User::firstOrCreate([
+            'name' => 'Cak Adi',
+            'email' => 'cakadi190@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
+            'email_verified_at' => now(),
+            'status' => 'active',
+        ]);
+
+        User::firstOrCreate([
+            'name' => 'Moh Fajar',
+            'email' => 'fajar123@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
+            'email_verified_at' => now(),
+            'status' => 'active',
+        ]);
+
+        User::firstOrCreate([
+            'name' => 'Nasya A.P.',
+            'email' => 'nasya@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
+            'email_verified_at' => now(),
+            'status' => 'active',
+        ]);
+
+        User::firstOrCreate([
+            'name' => 'Nugi',
+            'email' => 'nugi@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
             'email_verified_at' => now(),
             'status' => 'active',
         ]);

@@ -1,5 +1,5 @@
-{{-- @extends('layouts.user') --}}
 @extends('layouts.panel')
+
 @section('style')
     <style>
         .saring-btn {
@@ -81,12 +81,13 @@
         }
     </style>
 @endsection
+
 @section('content')
     @php
         use App\Models\TeamTournament;
         use App\Models\Team;
     @endphp
-    <div class="modal fade" tabindex="-1" id="filter" style="color: #ffffff;">
+    <div class="modal fade" tabindex="-1" id="filter">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
                 <div class="modal-header">
@@ -141,52 +142,71 @@
                                             src="{{ asset('storage/' . $tournament->images) }}" alt="tournament">
                                     </div>
                                 </div>
-                                <div class="tournament-content px-xxl-4 mt-3 mt-md-4">
-                                    <div class="tournament-info mb-4">
-                                        @if ($tournament->aktif ==='aktif')
-                                        <span class="badge text-bg-success me-4">Aktif</span>
-                                    @elseif ($tournament->aktif === 'tidak aktif')
-                                        <span class="badge text-bg-danger me-4">Tidak aktif</span>
-                                    @endif
-
-                                        <h4 class="tournament-tFitle tcn-1 mb-1 cursor-scale growDown title-anim">
-                                            {{ $tournament->name }}
-                                        </h4>
-                                        <span class="tcn-6 fs-sm">{{ $tournament->penyelenggara }}</span>
+                                <div class="tournament-content">
+                                    <div class="d-flex gap-2 justify-content-between my-4">
+                                        <div>
+                                            <h4 class="tournament-tFitle tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                {{ $tournament->name }}
+                                            </h4>
+                                            <span class="tcn-6 fs-sm">{{ $tournament->user->name }}</span>
+                                        </div>
+                                        <div>
+                                            @if ($tournament->aktif === 'aktif')
+                                                <span class="badge text-bg-success">Aktif</span>
+                                            @elseif ($tournament->aktif === 'tidak aktif')
+                                                <span class="badge text-bg-danger">Tidak aktif</span>
+                                            @endif
+                                        </div>
                                     </div>
 
-
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
-                                        <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
-                                            <div class="d-flex align-items-center gap-2">
+                                    <div class="list-group list-group-flush mb-4">
+                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                            <div class="d-flex gap-2">
                                                 <i class="ti ti-moneybag fs-base tcp-2"></i>
-                                                <span class="tcn-1 fs-sm">IDR
-                                                    {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
+                                                <span>HTM</span>
                                             </div>
+                                            <span class="">
+                                                IDR {{ number_format($tournament->nominal, 0, '.', ',') }}
+                                            </span>
                                         </div>
-                                        <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-ticket fs-base tcp-2"></i>
-                                            <span class="tcn-1 fs-sm">
+                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                            <div class="d-flex gap-2">
+                                                <i class="ti ti-ticket fs-base tcp-2"></i>
+                                                <span>Jenis Event</span>
+                                            </div>
+                                            <span class="">
                                                 {{ $tournament->paidment == 'Gratis' ? 'Gratis' : 'Berbayar' }}
                                             </span>
                                         </div>
-                                        <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-calendar fs-base tcn-1"></i>
-                                            <span
-                                                class="tcn-1 fs-sm">{{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}</span>
+                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                            <div class="d-flex gap-2">
+                                                <i class="ti ti-calendar fs-base tcn-1"></i>
+                                                <span>Tanggal Mulai</span>
+                                            </div>
+                                            <span class="">
+                                                {{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}
+                                            </span>
                                         </div>
-                                        <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="fa fa-gift fs-base tcn-1"></i>
-                                            @foreach ($prizes as $prize)
-                                                @if ($prize->tournament_id == $tournament->id)
-                                                <span class="tcn-1 title-anim">{{ $prize->prizepool->prize }} ,
-                                                    {{ $prize->note }}</span>
-                                                @endif
-                                            @endforeach
+                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                            <div class="d-flex gap-2 align-items-center">
+                                                <i class="ti ti-gift fs-base tcn-1"></i>
+                                                <span>Hadiah</span>
+                                            </div>
+                                            @php
+                                                $prizesArray = $prizes
+                                                    ->filter(function ($prize) use ($tournament) {
+                                                        return $prize->tournament_id == $tournament->id;
+                                                    })
+                                                    ->map(function ($prize) {
+                                                        return $prize->prizepool->prize;
+                                                    })
+                                                    ->toArray();
+                                            @endphp
+                                            @if (!empty($prizesArray))
+                                                <span class="tcn-1 title-anim">{{ implode(', ', $prizesArray) }}</span>
+                                            @endif
                                         </div>
                                     </div>
-
 
                                     @php
                                         // Ambil total tim dari hasil perhitungan
@@ -215,9 +235,8 @@
 
                                         // Cek apakah ada tim pengguna dalam turnamen ini
                                         $teamtournamentId = TeamTournament::where('tournament_id', $tournament->id)
-                                                ->whereIn('team_id', $userTeamIds)
-                                                ->exists();
-
+                                            ->whereIn('team_id', $userTeamIds)
+                                            ->exists();
                                     @endphp
 
 
@@ -242,9 +261,8 @@
 
                                         {{-- @dd($tournament->users_id == Auth::user()->id) --}}
                                         {{-- @if ($teamCount && $teamCount->count < $tournament->slotTeam) --}}
-                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && !$isUserInTournament && !$teamtournamentId )
-
-                                        {{-- @if ($tournament->users_id == Auth::user()->id) --}}
+                                        @if ($totalTeams && $totalTeams < $tournament->slotTeam && !$isUserInTournament && !$teamtournamentId )
+                                            {{-- @if ($tournament->users_id == Auth::user()->id) --}}
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"

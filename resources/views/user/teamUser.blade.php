@@ -11,12 +11,18 @@
                 <div class="card h-100">
                     <img class="card-img-top" src="{{ asset('storage/' . $team->profile) }}" alt="Gambar Tim" />
                     <div class="card-body text-center">
-                        <h5 class="card-title">Nama Team : {{ $team->name }}</h5>
-                        <div>
+                        <div class="d-flex pb-3 border-bottom mb-3 gap-2 justify-content-between">
+                            <strong>Nama Tim</strong>
+                            <span>{{ $team->name }}</span>
+                        </div>
+                        <div class="d-flex gap-2 justify-content-end">
                             <a href="{{ route('user.detailTeam', ['id' => $team->id]) }}" class="btn btn-primary">
                                 Detail
                             </a>
                         </div>
+                        {{-- <h5 class="card-title">Nama Team : {{ $team->name }}</h5>
+                        <div>
+                        </div> --}}
                     </div>
 
                 </div>

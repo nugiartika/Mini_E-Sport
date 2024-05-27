@@ -180,13 +180,18 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <form id="statusForm" action="{{ route('updateStatus', $tournament->id) }}" method="POST">
+                                        <form id="statusForm" action="{{ route('updateStatus', $tournament->id) }}"
+                                            method="POST">
                                             @csrf
                                             @method('PUT')
-                                            <select class="dropdown-item" id="status" name="status" onchange="submitForm()">
+                                            <select class="dropdown-item" id="status" name="status"
+                                                onchange="submitForm()">
                                                 <option value="">Status</option>
-                                                <option value="aktif" {{ $tournament->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                                                <option value="tidak aktif" {{ $tournament->status == 'Rejected' ? 'selected' : '' }}>Tidak Aktif</option>
+                                                <option value="aktif"
+                                                    {{ $tournament->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                                                <option value="tidak aktif"
+                                                    {{ $tournament->status == 'Rejected' ? 'selected' : '' }}>Tidak Aktif
+                                                </option>
                                             </select>
                                             {{-- <button type="submit" class="btn btn-primary mt-2">Update Status</button> --}}
                                         </form>
@@ -210,7 +215,7 @@
                                     @else
                                         <span class="badge text-bg-danger me-4">Ditolak</span>
                                     @endif
-                                    @if ($tournament->aktif ==='aktif')
+                                    @if ($tournament->aktif === 'aktif')
                                         <span class="badge text-bg-success me-4">Aktif</span>
                                     @elseif ($tournament->aktif === 'tidak aktif')
                                         <span class="badge text-bg-danger me-4">Tidak aktif</span>
@@ -238,12 +243,18 @@
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
                                 <strong>Prizepool</strong>
-                                @foreach ($prizes as $prize)
-                                    @if ($prize->tournament_id == $tournament->id)
-                                    <span class="tcn-1 title-anim">{{ $prize->prizepool->prize }} ,
-                                        {{ $prize->note }}</span>
-                                    @endif
-                                @endforeach
+                                @php
+                                    $prizesArray = [];
+                                    foreach ($prizes as $prize) {
+                                        if ($prize->tournament_id == $tournament->id) {
+                                            $prizesArray[] = $prize->prizepool->prize;
+                                        }
+                                    }
+                                @endphp
+
+                                @if (!empty($prizesArray))
+                                    <span class="tcn-1 title-anim">{{ implode(', ', $prizesArray) }}</span>
+                                @endif
                             </div>
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
@@ -323,11 +334,11 @@
 @endsection
 
 @push('script')
-<script>
-    function submitForm() {
-        document.getElementById("statusForm").submit();
-    }
-</script>
+    <script>
+        function submitForm() {
+            document.getElementById("statusForm").submit();
+        }
+    </script>
     <script>
         function confirmDelete(tournamentId) {
             Swal.fire({
