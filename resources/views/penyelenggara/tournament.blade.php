@@ -233,7 +233,7 @@
                                 <strong>Nominal</strong>
                                 @if ($tournament->paidment === 'Berbayar')
                                     <span>Rp. {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
-                                @endif  
+                                @endif
                             </div>
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
@@ -337,7 +337,7 @@
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
+                confirmButtonText: "Ya, Hapus!"
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('deleteForm' + tournamentId).submit();

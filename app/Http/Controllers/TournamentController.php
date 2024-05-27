@@ -293,7 +293,7 @@ class TournamentController extends Controller
         $tournaments = $query->get();
         $prizes = tournament_prize::all();
 
-        return view('user.tournamentUser', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams'));
+        return view('user.tournamentUser', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams','prizes'));
     }
 
     public function filterLanding(Request $request)
