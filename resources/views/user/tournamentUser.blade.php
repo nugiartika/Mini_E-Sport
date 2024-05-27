@@ -242,7 +242,7 @@
 
                                         {{-- @dd($tournament->users_id == Auth::user()->id) --}}
                                         {{-- @if ($teamCount && $teamCount->count < $tournament->slotTeam) --}}
-                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && !$isUserInTournament && !$teamtournamentId)
+                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && !$isUserInTournament && !$teamtournamentId )
 
                                         {{-- @if ($tournament->users_id == Auth::user()->id) --}}
                                             <div class="text-center">
@@ -255,6 +255,8 @@
                                                     </div>
                                                 </a>
                                             </div>
+                                        @elseif ($tournament->aktif === 'tidak aktif')
+
                                         @elseif (!$totalTeams)
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"

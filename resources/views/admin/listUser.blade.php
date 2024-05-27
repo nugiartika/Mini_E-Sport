@@ -106,6 +106,8 @@
                                         </div>
                                     </form>
                                 @else
+                                @if ($user->role === 'organizer' || $user->role === 'user')
+
                                 <form id="delete-form-{{ $user->id }}" action="{{ route('user.destroy', ['user' => $user->id]) }}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
@@ -116,6 +118,7 @@
                                         </svg>
                                     </button>
                                 </form>
+                                @endif
 
                                 @endif
                             </td>

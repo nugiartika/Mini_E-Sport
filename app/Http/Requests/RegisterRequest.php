@@ -45,8 +45,7 @@ class RegisterRequest extends FormRequest
     private function emailUniqueRule()
     {
         return function ($attribute, $value, $fail) {
-            if (DB::table('users')->where('email', $value)->exists() ||
-                DB::table('sains_roles')->where('email', $value)->exists()) {
+            if (DB::table('users')->where('email', $value)->exists()) {
                 $fail('Email sudah digunakan, Gunakan email yang belum terdaftar');
             }
         };

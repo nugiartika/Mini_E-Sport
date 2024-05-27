@@ -50,8 +50,9 @@ class RegisterController extends Controller
             $data['status'] = $data['role'] == 'user' ? 'active' : 'pending';
 
             $this->user->create($data);
+            $message = $data['status'] == 'pending' ? 'Registrasi berhasil! Akun Anda menunggu konfirmasi dari admin.' : 'Registrasi berhasil! Silahkan masuk ke akun anda.';
 
-            return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan masuk ke akun anda.');
+            return redirect()->route('login')->with('success', $message);
         } catch (\Throwable $th) {
             Log::error('Registration failed', ['error' => $th->getMessage(), 'trace' => $th->getTrace()]);
 
