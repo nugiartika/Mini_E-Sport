@@ -47,7 +47,8 @@ class TournamentRequest extends FormRequest
             'paidment' => 'required|string',
             'nominal' => 'nullable|numeric|required_if:paidment,Berbayar',
             'aktif' => 'nullable',
-            'note' => 'required'
+            'note' => 'required',
+            'prizepool_id' => 'required',
         ];
 
 
@@ -77,7 +78,7 @@ class TournamentRequest extends FormRequest
             'contact.required' => 'Kontak harus diisi.',
             'contact.integer' => 'Kontak harus berupa angka.',
             'contact.max' => 'Kontak tidak boleh lebih dari 14 angka',
-            // 'description.required' => 'Deskripsi harus diisi.',
+            'description.required' => 'Deskripsi harus diisi.',
             'rule.required' => 'Aturan harus diisi.',
             'rule.max' => 'Aturan tidak boleh lebih dari 2048 karakter.',
             'prizepool_id.required' => 'Hadiah harus diisi.',
@@ -88,7 +89,6 @@ class TournamentRequest extends FormRequest
             'slotTeam.custom' => 'Slot tim harus berupa angka genap.',
             'nominal.nullable' => 'Nominal harus berupa angka.',
             'paidment.required' => 'Metode pembayaran harus dipilih.',
-            'note.required' => 'note harus diisi.',
 
         ];
 

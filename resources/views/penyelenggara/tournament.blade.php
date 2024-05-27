@@ -231,7 +231,9 @@
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
                                 <strong>Nominal</strong>
-                                <span>Rp. {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
+                                @if ($tournament->paidment === 'Berbayar')
+                                    <span>Rp. {{ number_format($tournament->nominal, 0, '.', ',') }}</span>
+                                @endif  
                             </div>
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">

@@ -326,17 +326,18 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                @error('prizepool_id[]')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
 
                                                 <button type="button" class="addRow rounded-end btn btn-info"><i
                                                         class="ti ti-plus fs-2xl"></i></button>
 
                                                 <button type="button" class="removeRow d-none btn btn-danger"><i
                                                         class="ti ti-trash fs-2xl"></i></button>
+
+                                                @error('prizepool_id[]')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
 
                                             <div class="w-100 mt-3 noteForm" style="display: none;">
@@ -420,9 +421,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="paidment" class="form-label">Event Berbayar atau Gratis?</label>
-                                @error('paidment')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
+
                                 <select name="paidment" id="paidment" class="form-control" onchange="toggleDiv1()">
                                     <option value="" selected disabled>Pilih</option>
                                     <option value="Berbayar" {{ old('paidment') == 'Berbayar' ? 'selected' : '' }}>
@@ -431,13 +430,16 @@
                                     <option value="Gratis" {{ old('paidment') == 'Gratis' ? 'selected' : '' }}>
                                         Gratis</option>
                                 </select>
+                                @error('paidment')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="mb-3" id="nominal" style="display: none;">
                                 <label for="nominal_input" class="form-label">Masukkan Nominal</label>
+                                <input type="number" name="nominal" id="nominal_input" class="form-control">
                                 @error('nominal')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <input type="number" name="nominal" id="nominal_input" class="form-control">
                             </div>
                         </div>
                         <div class="d-flex gap-2 justify-content-between">
