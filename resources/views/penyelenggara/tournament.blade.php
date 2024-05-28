@@ -331,6 +331,7 @@
             </div>
         @endforelse
     </div>
+    {{ $tournaments->links() }}
 @endsection
 
 @push('script')

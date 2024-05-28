@@ -39,7 +39,7 @@ class TournamentController extends Controller
         $tournamentsQuery->where('users_id', $user->id);
 
         // Get the paginated results
-        $tournaments = $tournamentsQuery->paginate(5);
+        $tournaments = $tournamentsQuery->paginate(6);
 
         // Count the tournaments with 'rejected' status
         $counttournaments = $tournamentsQuery->where('status', 'rejected')->count();

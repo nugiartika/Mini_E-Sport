@@ -18,9 +18,9 @@ class LandingPageController extends Controller
     {
         if ($request->has('categories_id')) {
             $a = $request->input('categories_id', []);
-            $Tournaments = Tournament::where('categories_id', $a)->paginate(5)->where('status', 'accepted');
+            $Tournaments = Tournament::where('categories_id', $a)->paginate(5)->where('aktif', 'aktif');
         } else {
-            $Tournaments = Tournament::where('status', 'accepted')->get();
+            $Tournaments = Tournament::where('aktif', 'aktif')->get();
         }
         $Categories = Category::all();
         $categoryFilter = Category::all();
