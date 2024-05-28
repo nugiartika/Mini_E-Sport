@@ -274,50 +274,50 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="tournament_id"
-                                                        value="{{ request('tournament_id') }}">
-                                                    <label for="nama_juara1" class="form-label">Juara 1</label>
-                                                    <input type="text"
-                                                        class="form-control @error('nama_juara1') is-invalid @enderror"
-                                                        id="nama_juara1" name="nama_juara1" >
-                                                    @error('nama_juara1')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                    <!-- Tambahkan atribut  -->
-                                                    <label for="nama_juara2" class="form-label">Juara 2</label>
-                                                    <input type="text"
-                                                        class="form-control @error('nama_juara2') is-invalid @enderror""
-                                                        id="nama_juara2" name="nama_juara2" >
-                                                    @error('nama_juara2')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                    <!-- Tambahkan atribut  -->
-                                                    <label for="nama_juara3" class="form-label">Juara 3</label>
-                                                    <input type="text"
-                                                        class="form-control @error('nama_juara3') is-invalid @enderror"
-                                                        id="nama_juara3" name="nama_juara3" >
-                                                    @error('nama_juara3')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                    <!-- Tambahkan atribut  -->
-                                                    <label for="mvp" class="form-label">MVP</label>
-                                                    <input type="text"
-                                                        class="form-control @error('mvp') is-invalid @enderror"
-                                                        id="mvp" name="mvp" >
-                                                    @error('mvp')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                    <!-- Tambahkan atribut  -->
-                                                </div>
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="tournament_id"
+                                                            value="{{ request('tournament_id') }}">
+                                                        <label for="nama_juara1" class="form-label">Juara 1</label>
+                                                        <input type="text"
+                                                            class="form-control @error('nama_juara1') is-invalid @enderror"
+                                                            id="nama_juara1" name="nama_juara1" >
+                                                        @error('nama_juara1')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <!-- Tambahkan atribut  -->
+                                                        <label for="nama_juara2" class="form-label">Juara 2</label>
+                                                        <input type="text"
+                                                            class="form-control @error('nama_juara2') is-invalid @enderror""
+                                                            id="nama_juara2" name="nama_juara2" >
+                                                        @error('nama_juara2')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <!-- Tambahkan atribut  -->
+                                                        <label for="nama_juara3" class="form-label">Juara 3</label>
+                                                        <input type="text"
+                                                            class="form-control @error('nama_juara3') is-invalid @enderror"
+                                                            id="nama_juara3" name="nama_juara3" >
+                                                        @error('nama_juara3')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <!-- Tambahkan atribut  -->
+                                                        <label for="mvp" class="form-label">MVP</label>
+                                                        <input type="text"
+                                                            class="form-control @error('mvp') is-invalid @enderror"
+                                                            id="mvp" name="mvp">
+                                                        @error('mvp')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <!-- Tambahkan atribut  -->
+                                                    </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Close</button>
@@ -325,6 +325,75 @@
                                                     <!-- Ubah type dari button menjadi submit -->
                                                 </div>
                                             </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                @if (count($juaras) > 0 && $selectedTournament->permainan > now())
+                                    <button class="btn btn-warning " data-bs-toggle="modal"
+                                        data-bs-target="#editJuara" >
+                                            edit juara <i class="far fa-edit mx-2"></i>
+                                    </button>
+                                @endif
+                                <div class="modal fade" id="editJuara" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        @foreach ($juaras as $juara )
+                                            <form action="{{ route('ptournament.editjuara', ['id' => $juara->id]) }}" method="POST">
+                                                <!-- Tambahkan method POST -->
+                                                @csrf
+                                                @method('PATCH')
+                                                <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Juara</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="tournament_id" value="{{ request('tournament_id') }}">
+
+                                                    <label for="nama_juara1" class="form-label">Juara 1</label>
+                                                    <input type="text" class="form-control @error('nama_juara1') is-invalid @enderror" id="nama_juara1" name="nama_juara1" value="{{ old('nama_juara1', $juara->nama_juara1) }}">
+                                                    @error('nama_juara1')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+
+                                                    <label for="nama_juara2" class="form-label">Juara 2</label>
+                                                    <input type="text" class="form-control @error('nama_juara2') is-invalid @enderror" id="nama_juara2" name="nama_juara2" value="{{ old('nama_juara2', $juara->nama_juara2) }}">
+                                                    @error('nama_juara2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+
+                                                    <label for="nama_juara3" class="form-label">Juara 3</label>
+                                                    <input type="text" class="form-control @error('nama_juara3') is-invalid @enderror" id="nama_juara3" name="nama_juara3" value="{{ old('nama_juara3', $juara->nama_juara3) }}">
+                                                    @error('nama_juara3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+
+                                                    <label for="mvp" class="form-label">MVP</label>
+                                                    <input type="text" class="form-control @error('mvp') is-invalid @enderror" id="mvp" name="mvp" value="{{ old('mvp', $juara->mvp) }}">
+                                                    @error('mvp')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <!-- Ubah type dari button menjadi submit -->
+                                                </div>
+                                            </form>
+                                        @endforeach
                                         </div>
 
                                     </div>
@@ -372,6 +441,14 @@
                                     </button>
                                 @endif
 
+
+                                @if (count($jadwals) > 0 && $selectedTournament->permainan > now())
+                                    <button class="btn btn-warning " data-bs-toggle="modal"
+                                        data-bs-target="#editJadwal" >
+                                            edit juara <i class="far fa-edit mx-2"></i>
+                                    </button>
+                                @endif
+
                                 <div class="modal fade" id="exampleModal" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
@@ -381,7 +458,8 @@
                                             <form action="{{ route('ptournament.jadwal', $tournaments->id) }}"
                                                 method="POST">
                                                 <!-- Tambahkan method POST -->
-                                                @csrf <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
+                                                @csrf
+                                                 <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Tambah Jadwal</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -619,6 +697,133 @@
                                                         <input type="text"
                                                             class="form-control @error('boFinal') is-invalid @enderror"
                                                             id="boFinal" name="boFinal" >
+                                                        <!-- Tambahkan atribut  -->
+                                                        @error('boFinal')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                        <!-- Ubah type dari button menjadi submit -->
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="editJadwal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form action="{{ route('ptournament.editjadwal', $jadwal->id) }}"
+                                                    method="POST">
+                                                    <!-- Tambahkan method POST -->
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <!-- Tambahkan ini jika menggunakan Laravel untuk keamanan CSRF -->
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Jadwal
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h5>Penyisihan</h5>
+                                                        <label for="tanggalPenyisihan" class="form-label">Tanggal
+                                                            Penyisihan</label>
+                                                        <input type="date"
+                                                            class="form-control @error('tanggalPenyisihan') is-invalid @enderror"
+                                                            id="tanggalPenyisihan" name="tanggalPenyisihan" value="{{old('tanggalPenyisihan',$jadwal->tanggalPenyisihan)}}">
+                                                        @error('tanggalPenyisihan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <!-- Tambahkan atribut  -->
+                                                        <label for="waktuPenyisihan" class="form-label">Waktu
+                                                            Penyisihan</label>
+                                                        <input type="time"
+                                                            class="form-control @error('waktuPenyisihan') is-invalid @enderror"
+                                                            id="waktuPenyisihan" name="waktuPenyisihan" value="{{old('waktuPenyisihan',$jadwal->waktuPenyisihan)}}">
+                                                        @error('waktuPenyisihan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <!-- Tambahkan atribut  -->
+                                                        <label for="boPenyisihan" class="form-label">Best Of</label>
+                                                        <input type="text"
+                                                            class="form-control @error('boPenyisihan') is-invalid @enderror"
+                                                            id="boPenyisihan" name="boPenyisihan" value="{{old('boPenyisihan', $jadwal->boPenyisihan)}}">
+                                                        <!-- Tambahkan atribut  -->
+                                                        @error('boPenyisihan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <h5>Semi Final</h5>
+                                                        <label for="tanggalSemi" class="form-label">Tanggal Semi</label>
+                                                        <input type="date"
+                                                            class="form-control @error('tanggalSemi') is-invalid @enderror"
+                                                            id="tanggalSemi" name="tanggalSemi" value="{{old('tanggalSemi', $jadwal->tanggalSemi)}}" >
+                                                        <!-- Tambahkan atribut  -->
+                                                        @error('tanggalSemi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <label for="waktuSemi" class="form-label">Waktu Semi</label>
+                                                        <input type="time"
+                                                            class="form-control @error('waktuSemi') is-invalid @enderror"
+                                                            id="waktuSemi" name="waktuSemi" value="{{old('waktuSemi', $jadwal->waktuSemi)}}">
+                                                        <!-- Tambahkan atribut  -->
+                                                        @error('waktuSemi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <label for="boSemi" class="form-label">Best Of</label>
+                                                        <input type="text"
+                                                            class="form-control @error('boSemi') is-invalid @enderror"
+                                                            id="boSemi" name="boSemi" value="{{old('bosemi' , $jadwal->boSemi)}}" >
+                                                        <!-- Tambahkan atribut  -->
+                                                        @error('boSemi')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+
+                                                        <h5>Final</h5>
+                                                        <label for="tanggalFinal" class="form-label">Tanggal Final</label>
+                                                        <input type="date"
+                                                            class="form-control @error('tanggalFinal') is-invalid @enderror"
+                                                            id="tanggalFinal" name="tanggalFinal" value="{{old('tanggalFinal', $jadwal->tanggalFinal)}}">
+                                                        <!-- Tambahkan atribut  -->
+                                                        @error('tanggalFinal')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <label for="waktuFinal" class="form-label">Waktu Final</label>
+                                                        <input type="time"
+                                                            class="form-control @error('waktuFinal') is-invalid @enderror"
+                                                            id="waktuFinal" name="waktuFinal" value="{{old('waktuFinal', $jadwal->waktuFinal)}}">
+                                                        <!-- Tambahkan atribut  -->
+                                                        @error('waktuFinal')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <label for="boFinal" class="form-label">Best Of</label>
+                                                        <input type="text"
+                                                            class="form-control @error('boFinal') is-invalid @enderror"
+                                                            id="boFinal" name="boFinal" value="{{old('boFinal', $jadwal->boFinal)}}">
                                                         <!-- Tambahkan atribut  -->
                                                         @error('boFinal')
                                                             <span class="invalid-feedback" role="alert">

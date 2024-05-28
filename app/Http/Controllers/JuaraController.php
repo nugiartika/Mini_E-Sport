@@ -57,6 +57,21 @@ class JuaraController extends Controller
         return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
 }
+public function editJuara(JuaraRequest $request,  $id){
+    try {
+        $validatedData = $request->validated();
+        $juara = Juara::findOrFail($id);
+        $juara->update([
+            'nama_juara1' => $validatedData['nama_juara1'],
+            'nama_juara2' => $validatedData['nama_juara2'],
+            'nama_juara3' => $validatedData['nama_juara3'],
+            'mvp' => $validatedData['mvp'],
+        ]);
+        return redirect()->back()->with('success', 'Juara berhasil diupdate.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('warning', 'Terjadi kesalahan: ' . $e->getMessage());
+    }
+}
 
 
 

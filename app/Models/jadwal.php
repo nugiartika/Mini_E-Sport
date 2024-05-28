@@ -9,6 +9,7 @@ class jadwal extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $fillable = ['tanggalPenyisihan','waktuPenyisihan','boPenyisihan','tanggalSemi','waktuSemi','boSemi','tanggalFinal','waktuFinal','boFinal'];
     public function tournament()
     {
         return $this->OneToMany(tournament::class);

@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function team()
     {
-        return $this->hasMany(Team::class);
+        return $this->hasOne(Team::class);
     }
 }
