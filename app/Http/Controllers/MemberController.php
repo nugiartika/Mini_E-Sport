@@ -39,7 +39,12 @@ class MemberController extends Controller
     public function store(StoreMemberRequest $request)
     {
         try {
-            $duplicates = $this->getDuplicatesEmail($request->nickname);
+            $nicknames = array_merge(
+                array_filter($request->nickname, 'is_string'),
+                array_filter($request->nickname_cadangan, 'is_string')
+            );
+
+            $duplicates = $this->getDuplicatesEmail($nicknames);
             if (!empty($duplicates)) {
                 // Handle duplicates found in the nicknames
                 return redirect()->back()->withInput()->withErrors(['error' => 'Duplikat ditemukan dalam email']);
@@ -135,7 +140,13 @@ class MemberController extends Controller
 
     {
         try {
-            $duplicates = $this->getDuplicates($request->nickname);
+            // $nicknames = array_merge($request->nickname, $request->nickname_cadangan);
+            $nicknames = array_merge(
+                array_filter($request->nickname, 'is_string'),
+                array_filter($request->nickname_cadangan, 'is_string')
+            );
+            
+            $duplicates = $this->getDuplicates($nicknames);
             if (!empty($duplicates)) {
                 // Lakukan sesuatu untuk menangani duplikat
                 return redirect()->back()->withInput()->withErrors(['error' => 'Duplikat ditemukan dalam email']);

@@ -23,8 +23,8 @@
 @endsection
 
 @section('content')
-    <div class="container d-flex justify-content-center align-items-center" style="margin-top: 10%; color: #939393">
 
+<div class="container d-flex justify-content-center align-items-center" style="margin-top: 10%; color: #939393">
 
         <!-- Second column -->
         <div class="col-12 col-lg-4">
@@ -46,7 +46,6 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-
                             </div>
                             <!-- Discounted Price -->
                             <div class="mb-3">
