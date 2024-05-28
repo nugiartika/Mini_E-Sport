@@ -127,6 +127,25 @@
                         </div>
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            @php
+                                $roles = [
+                                    'organizer' => 'Penyelenggara',
+                                    'admin' => 'Administrator',
+                                    'user' => 'Pemain',
+                                ];
+                                $roleColor = [
+                                    'organizer' => 'primary',
+                                    'admin' => 'success',
+                                    'user' => 'info',
+                                ];
+                            @endphp
+
+                            <li class="nav-item">
+                                <span class="nav-link">
+                                    <span class="badge bg-{{ $roleColor[auth()->user()->role] }}">{{ $roles[auth()->user()->role] }}</span>
+                                </span>
+                            </li>
+
                             @if (auth()->user()->role === 'organizer')
                                 <!-- Notification -->
                                 <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1 mx-2">
@@ -270,7 +289,7 @@
                 themesPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
                 displayCustomizer: false,
                 lang: localStorage.getItem('templateCustomizer-' + templateName + '--Lang') ||
-                'en', // Set default language here
+                    'en', // Set default language here
                 defaultTheme: 1,
                 defaultStyle: 'system',
                 defaultContentLayout: 'wide',
