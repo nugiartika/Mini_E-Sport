@@ -67,7 +67,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/NotifikasiTournament', [TournamentController::class, 'notification'])->name('notificationTournament');
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
         Route::post('/jadwal/{tournament}', [JadwalController::class, 'jadwal'])->name('ptournament.jadwal');
+        Route::patch('/editjadwal/{tournament}', [JadwalController::class, 'editJadwal'])->name('ptournament.editjadwal');
         Route::post('/juara/{id}', [JuaraController::class, 'juara'])->name('ptournament.juara');
+        Route::patch('/editjuara/{id}', [JuaraController::class, 'editJuara'])->name('ptournament.editjuara');
         Route::patch('/addbracket/{tournament}', [TournamentController::class, 'bracket'])->name('add.bracket');
         Route::get('/tournaments/{id}/edit', [TournamentController::class, 'editStatus'])->name('editStatus');
         Route::put('/tournaments/{id}/update-status', [TournamentController::class, 'updateStatus'])->name('updateStatus');

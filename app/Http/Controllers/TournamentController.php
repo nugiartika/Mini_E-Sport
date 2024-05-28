@@ -72,8 +72,13 @@ class TournamentController extends Controller
 
     public function notification()
     {
-        $tournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->get();
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $tournaments = Tournament::where('users_id', auth()->user()->id)
+        ->whereIn('status', ['rejected', 'accepted'])
+        ->get();
+
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+                ->whereIn('status', ['rejected', 'accepted'])
+                ->count();
 
         return view('penyelenggara.notification', compact('tournaments', 'counttournaments'));
     }
@@ -341,7 +346,6 @@ class TournamentController extends Controller
         $selectedTournament = Tournament::findOrFail($id);
         $teams = Team::where('tournament_id', $id)->get();
         $teamtournament = TeamTournament::where('tournament_id', $id)->with('team')->get();
-
         $tournaments = Tournament::find($id);
         $prizes = tournament_prize::where('tournament_id', $id)->get();
 
