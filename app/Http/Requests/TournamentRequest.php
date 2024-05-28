@@ -50,10 +50,9 @@ class TournamentRequest extends FormRequest
             'note' => 'required',
             'prizepool_id' => 'required',
         ];
-
-
     }
 
+    
     public function messages(): array
     {
         return [

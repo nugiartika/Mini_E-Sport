@@ -126,10 +126,7 @@ Route::group(['prefix' => 'transaction', 'as' => 'transaction.', 'middleware' =>
     // Route untuk menampilkan form edit transaksi tertentu (menggunakan transaction_id)
     Route::get('{transaction:transaction_id}/edit', [TransactionController::class, 'edit'])->name('edit');
 
-    // Route for updating transactions (changed name)
     Route::match(['put', 'patch'], '{transaction:id}', [TransactionController::class, 'update'])->name('update');
-
-    // Route untuk menghapus transaksi tertentu (menggunakan transaction_id)
     Route::delete('{transaction:transaction_id}', [TransactionController::class, 'destroy'])->name('destroy');
 });
 

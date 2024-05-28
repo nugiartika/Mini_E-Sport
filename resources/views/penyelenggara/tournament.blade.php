@@ -180,12 +180,12 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <form id="statusForm" action="{{ route('updateStatus', $tournament->id) }}"
+                                        <form id="statusForm-{{ $tournament->id }}" action="{{ route('updateStatus', $tournament->id) }}"
                                             method="POST">
                                             @csrf
                                             @method('PUT')
                                             <select class="dropdown-item" id="status" name="status"
-                                                onchange="submitForm()">
+                                                onchange="submitForm('{{ $tournament->id }}')">
                                                 <option value="">Status</option>
                                                 <option value="aktif"
                                                     {{ $tournament->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
@@ -331,12 +331,13 @@
             </div>
         @endforelse
     </div>
+    {{ $tournaments->links() }}
 @endsection
 
 @push('script')
     <script>
-        function submitForm() {
-            document.getElementById("statusForm").submit();
+        function submitForm(id) {
+            document.getElementById("statusForm-"+id).submit();
         }
     </script>
     <script>

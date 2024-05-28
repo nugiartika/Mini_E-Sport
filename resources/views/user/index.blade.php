@@ -365,12 +365,10 @@
                                                 <div class="v-line"></div>
                                                 <div class="d-flex align-items-center gap-2">
                                                     <i class="ti ti-gift"></i> <span class="tcn-1 fs-sm">
-                                                        @if ($Tournament->status === 'pending')
-                                                            Status: Menunggu
-                                                        @elseif ($Tournament->status === 'accepted')
-                                                            Status: Sedang Berlangsung
-                                                        @elseif ($Tournament->status === 'rejected')
-                                                            Status: Ditolak
+                                                        @if ($Tournament->aktif === 'aktif')
+                                                            Status: aktif
+                                                        @elseif ($Tournament->aktif === 'aktif')
+                                                            Status: Tidak aktif
                                                         @else
                                                             Status: Tidak Diketahui
                                                         @endif
