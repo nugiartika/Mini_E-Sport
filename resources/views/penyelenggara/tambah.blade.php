@@ -218,10 +218,10 @@
         }
     </style>
 
-    {{-- @if($errors->all())
+    {{-- @if ($errors->all())
     <div class="alert alert-danger">
         <ul>
-            @foreach($errors->all() as $error)
+            @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
             @endforeach
         </ul>
@@ -252,7 +252,8 @@
                                 <div class="col-md-6">
                                     <label for="pendaftaran" class="form-label">Tanggal Pendaftaran</label>
                                     <input type="date" class="form-control @error('pendaftaran') is-invalid @enderror"
-                                        id="pendaftaran" name="pendaftaran" value="{{ old('pendaftaran') }}" min="{{ now()->toDateString()}}">
+                                        id="pendaftaran" name="pendaftaran" value="{{ old('pendaftaran') }}"
+                                        min="{{ now()->toDateString() }}">
                                     @error('pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -263,7 +264,8 @@
                                     <label for="end_pendaftaran" class="form-label">Akhir Pendaftaran</label>
                                     <input type="date"
                                         class="form-control @error('end_pendaftaran') is-invalid @enderror"
-                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran') }}" min="{{ now()->toDateString()}}">
+                                        id="end_pendaftaran" name="end_pendaftaran" value="{{ old('end_pendaftaran') }}"
+                                        min="{{ now()->toDateString() }}">
                                     @error('end_pendaftaran')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -277,7 +279,8 @@
                                 <div class="col-md-6">
                                     <label for="permainan" class="form-label">Mulai Kompetisi</label>
                                     <input type="date" class="form-control @error('permainan') is-invalid @enderror"
-                                        id="permainan" name="permainan" value="{{ old('permainan') }}" min="{{ now()->toDateString()}}">
+                                        id="permainan" name="permainan" value="{{ old('permainan') }}"
+                                        min="{{ now()->toDateString() }}">
                                     @error('permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -287,7 +290,8 @@
                                 <div class="col-md-6">
                                     <label for="end_permainan" class="form-label">Tanggal Berakhir</label>
                                     <input type="date" class="form-control @error('end_permainan') is-invalid @enderror"
-                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}" min="{{ now()->toDateString()}}">
+                                        id="end_permainan" name="end_permainan" value="{{ old('end_permainan') }}"
+                                        min="{{ now()->toDateString() }}">
                                     @error('end_permainan')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -342,7 +346,8 @@
 
                                             <div class="w-100 mt-3 noteForm" style="display: none;">
                                                 <input class="form-control @error('note') is-invalid @enderror"
-                                                    type="text" placeholder="Isikan deskripsi hadiah" name="note[]" />
+                                                    type="text" placeholder="Isikan deskripsi hadiah"
+                                                    name="note[]" />
                                                 @error('note[]')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -401,12 +406,13 @@
                             </div> --}}
                             <div class="mb-3">
                                 <label for="images" class="form-label">Unggah Poster</label>
-                                <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" name="images" onchange="previewImage(event)">
+                                <input type="file" class="form-control @error('images') is-invalid @enderror"
+                                    id="images" name="images" onchange="previewImage(event)">
 
                                 <!-- Gambar Pratinjau -->
                                 <img id="preview" src="{{ old('images') ? asset('storage/' . old('images')) : '' }}"
-                                     alt="Pratinjau Gambar"
-                                     style="max-width: 100px; max-height: 100px; {{ old('images') ? '' : 'display: none;' }}">
+                                    alt="Pratinjau Gambar"
+                                    style="max-width: 100px; max-height: 100px; {{ old('images') ? '' : 'display: none;' }}">
 
                                 @error('images')
                                     <span class="invalid-feedback" role="alert">
@@ -449,9 +455,9 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="mb-3" id="nominal" style="display: none;">
+                            <div class="mb-3" id="nominal" @if(old('paidment') === 'Berbayar') style="display: block;" @else style="display: none;" @endif>
                                 <label for="nominal_input" class="form-label">Masukkan Nominal</label>
-                                <input type="number" name="nominal" id="nominal_input" class="form-control">
+                                <input type="number" name="nominal" value="{{ old('nominal') }}" id="nominal_input" class="form-control">
                                 @error('nominal')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -487,17 +493,17 @@
 
 @push('script')
 
-<script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('preview');
-            output.src = reader.result;
-            output.style.display = 'block'; // Tampilkan gambar setelah memuat
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('preview');
+                output.src = reader.result;
+                output.style.display = 'block'; // Tampilkan gambar setelah memuat
+            }
+            reader.readAsDataURL(event.target.files[0]);
         }
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 

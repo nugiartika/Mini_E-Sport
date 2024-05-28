@@ -1,5 +1,11 @@
 @extends('layouts.panel')
 
+@push('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css"
+        integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endpush
+
 @section('content')
     <div class="card card-body mb-4 d-flex gap-2 flex-row justify-content-between">
         <h3 class="mb-0">Informasi Tagihan <span
@@ -11,85 +17,43 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
-            <div class="card card-body mb-4">
-                {{-- <div class="row">
-                    <div class="col-md-6">
-                        <h5>Penagih</h5>
-
-                        <p class="fw-bold mb-2">Humma Esport</p>
-                        <p class="mb-1">Perum Permata Regency 1, Blk. 10 No.28, Perun Gpa, Ngijo, Kec. Karang Ploso,
-                            Kabupaten Malang, Jawa Timur 65152</p>
-                        <p class="mb-1">0851-7677-7785</p>
-                        <p class="mb-1">admin@humma-esport.com</p>
-                    </div>
-                    <div class="col-md-6 text-end">
-                        <h5>Ditagihkan Kepada</h5>
-                        <p class="fw-bold mb-2">{{ $transaction->customer_name }}</p>
-                        <p class="mb-1">{{ $transaction->customer_phone }}</p>
-                        <p class="mb-1">{{ $transaction->customer_email }}</p>
-                    </div>
-                </div> --}}
-
-                <div class="mt-4 mb-2">
+        <div class="col-md-7 col-xxl-8">
+            <div class="card mb-4">
+                <div class="card-header">
                     <h3>Detail Tagihan</h3>
-
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Produk</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>#1</th>
-                                    <td>Pendaftaran "{{ $transaction->teamTournament->tournament->name }}"</td>
-                                    <td>{{ number_format($transaction->teamTournament->tournament->nominal, 2, ',', '.') }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>#2</th>
-                                    <td>Biaya Admin</td>
-                                    <td>
-                                        {{ number_format($paymentList->where('code', $transaction->payment_method)->first()['fee'], 2, '.', ',') }}
-                                        IDR</td>
-                                </tr>
-                                <tr>
-                                    <th colspan="2" class="text-end">Total</th>
-                                    <td>{{ number_format($transaction->amount + $paymentList->where('code', $transaction->payment_method)->first()['fee'], 0, '.', ',') }}
-                                        IDR</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-
-                {{-- @if (!in_array($transaction->status, ['PAID', 'EXPIRED', 'REFUND', 'FAILED']))
-                    <div class="mt-4">
-                        <div class="row align-items-center">
-                            <div class="col-md-9 @if (!$paymentDetail['data']['pay_code']) mx-auto text-center @endif">
-                                @if ($paymentDetail['data']['pay_code'])
-                                    <h3 class="mb-0" id="paymentCode">{{ $paymentDetail['data']['pay_code'] }}</h3>
-                                @else
-                                    <img class="p-2 bg-white rounded-3" src="{{ $paymentDetail['data']['qr_url'] }}"
-                                        height="150" alt="URL QR Code" />
-                                @endif
-
-                                <p class="fw-bold mb-0 mt-2">Kode / QR Pembayaran</p>
-                            </div>
-                            @if ($paymentDetail['data']['pay_code'])
-                                <div class="col-md-3">
-                                    <button onclick="copyAndShowAlert('paymentCode')" type="button"
-                                        class="btn ms-auto btn-primary d-flex align-items-center gap-2"><i
-                                            class="ti ti-copy"></i><span>Salin Kode</span></button>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                @endif --}}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Produk</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>#1</th>
+                                <td>Pendaftaran "{{ $transaction->teamTournament->tournament->name }}"</td>
+                                <td>{{ number_format($transaction->teamTournament->tournament->nominal, 2, ',', '.') }}
+                                    IDR
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>#2</th>
+                                <td>Biaya Admin</td>
+                                <td>
+                                    {{ number_format($paymentList->where('code', $transaction->payment_method)->first()['fee'], 2, '.', ',') }}
+                                    IDR</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2" class="text-end">Total</th>
+                                <td>{{ number_format($transaction->amount, 0, '.', ',') }}
+                                    IDR</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             @if (auth()->user()->role === 'organizer')
@@ -103,16 +67,28 @@
                     <div class="card-body">
                         <p>Pendapatan anda ini adalah potongan 15% dari harga penjualan harga tiket turnamen.</p>
 
-                        <div class="mb-0 d-flex justify-content-between">
-                            <span>Total pendapatan anda</span>
-                            <span class="text-success">{{ number_format($income, 0, '.', ',') }} IDR</span>
+                        <div class="list-group-flush list-group">
+                            <div class="list-group-item mb-0 d-flex justify-content-between">
+                                <span>Harga Tiket Masuk</span>
+                                <span>{{ number_format($transaction->teamTournament->tournament->nominal, 2, ',', '.') }}
+                                    IDR</span>
+                            </div>
+                            <div class="list-group-item mb-0 d-flex justify-content-between">
+                                <span>Potongan Admin</span>
+                                <span>&minus;{{ number_format($transaction->teamTournament->tournament->nominal * 0.15, 2, ',', '.') }}
+                                    IDR</span>
+                            </div>
+                            <div class="list-group-item mb-0 d-flex justify-content-between">
+                                <span>Total pendapatan anda</span>
+                                <span class="text-success">{{ number_format($income, 0, '.', ',') }} IDR</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             @elseif(auth()->user()->role === 'admin')
                 @php
                     $income = 0.15 * $transaction->teamTournament->tournament->nominal;
-                    @endphp
+                @endphp
                 <div class="card mb-3">
                     <h3 class="card-header">Pendapatan anda</h3>
                     <div class="card-body">
@@ -124,11 +100,9 @@
                     </div>
                 </div>
             @endif
-
-            {{-- <p class="mb-0 mt-3">Didukung oleh <a href="https://tripay.co.id">PT Trijaya Digital Group (Tripay)</a></p> --}}
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-5 col-xxl-4">
             <div class="card mb-3">
                 <h3 class="mb-0 card-header">Informasi Tagihan</h3>
 
@@ -148,33 +122,6 @@
                         <span><span
                                 class="badge bg-{{ \App\Enums\TransactionStatus::color($transaction->status) }}">{{ \App\Enums\TransactionStatus::label($transaction->status) }}</span></span>
                     </div>
-                    {{-- <div class="list-group-item d-flex justify-content-between align-items-center">
-                        <span class="fw-bold">Biaya Admin</span>
-                        <span>{{ number_format($paymentDetail['data']['total_fee'], 0, '.', ',') }} IDR</span>
-                    </div>
-                    <div class="list-group-item d-flex justify-content-between align-items-center">
-                        <span class="fw-bold">Total Tagihan</span>
-                        <span>{{ number_format($orderItem['subtotal'] + $paymentDetail['data']['total_fee'], 0, '.', ',') }}
-                            IDR</span>
-                    </div>
-                    @if (auth()->user()->role !== 'user')
-                    <div class="list-group-item d-flex justify-content-between align-items-center">
-                        <span class="fw-bold">ID Referensi</span>
-                        <div class="d-flex gap-2 align-items-center">
-                            <a class="text-white text-decoration-none" href="javascript:copyAndShowAlert('refId')"><i
-                                    class="ti ti-copy"></i></a>
-                            <span id="refId">{{ $transaction->ref_id }}</span>
-                        </div>
-                    </div>
-                    @endif
-                    <div class="list-group-item d-flex justify-content-between align-items-center">
-                        <span class="fw-bold">ID Transaksi</span>
-                        <div class="d-flex gap-2 align-items-center">
-                            <a class="text-white text-decoration-none" href="javascript:copyAndShowAlert('transId')"><i
-                                    class="ti ti-copy"></i></a>
-                            <span id="transId">{{ $transaction->transaction_id }}</span>
-                        </div>
-                    </div> --}}
 
                     @if (auth()->user()->role !== 'user')
                         <div class="list-group-item d-flex justify-content-between align-items-center">
@@ -194,6 +141,220 @@
                             <span id="transId">{{ $transaction->transaction_id }}</span>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <h3 class="card-header">Bukti Pembayaran</h3>
+
+                @php
+                    $status = $transactionProofsIsNotPending ? $transactionProofsIsNotPending->status : 2;
+                @endphp
+
+                @if (auth()->user()->role === 'user' && $status === 2)
+                    <div class="card-body">
+                        <form action="{{ route('payment-proof.store') }}" enctype="multipart/form-data" method="post">
+                            @csrf
+
+                            <input type="hidden" name="transaction_id" value="{{ $transaction->id }}" />
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}" />
+                            <input type="hidden" name="payment_date" value="{{ now() }}" />
+
+                            <div class="mb-3">
+                                <label for="file" class="form-label">Bukti</label>
+                                <input type="file" class="form-control" name="file" id="file"
+                                    accept="image/png,image/jpg,image/jpeg" />
+
+                                @error('file')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Unggah</button>
+                            </div>
+                        </form>
+                    </div>
+                @endif
+
+                <div class="list-group list-group-flush">
+                    @forelse ($transactionProofs as $proof)
+                        <div class="list-group-item gap-2 d-flex flex-column">
+                            <div class="d-flex gap-2 justify-content-between align-items-center">
+                                <a href="{{ Storage::url($proof->file) }}" data-lightbox="imageproof-{{ $loop->index }}"
+                                    data-title="Bukti {{ $proof->created_at->translatedFormat('d M Y') }}">Lihat Bukti</a>
+                                <div class="d-flex gap-2">
+                                    <span>
+                                        @if ($proof->status === 1)
+                                            <i class="ti ti-check text-success"></i>
+                                        @elseif($proof->status === 2)
+                                            <i class="ti ti-x text-danger"></i>
+                                        @else
+                                            <i class="ti ti-clock"></i>
+                                        @endif
+                                    </span>
+                                    <span>{{ $proof->payment_date->translatedFormat('d M Y') }}</span>
+
+                                    @if (auth()->user()->role == 'organizer')
+                                        <a href="#" data-bs-toggle="modal"
+                                            data-bs-target="#detail-{{ $loop->index }}"><i
+                                                class="ti ti-info-circle"></i></a>
+                                    @endif
+                                </div>
+                            </div>
+
+                            @if ($proof->status === 2)
+                                <div class="text-muted">
+                                    <i class="ti ti-note me-2"></i>{{ $proof->reason ?? 'Tidak ada alasan yang ditulis' }}
+                                </div>
+                            @endif
+
+                            {{-- Approval Modal --}}
+                            <div class="modal fade" id="approval-{{ $loop->index }}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Approval Bukti</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('payment-proof.update', $proof->id) }}"
+                                                id="proof-form-approve-{{ $loop->index }}" method="post">
+                                                @csrf
+                                                @method('PATCH')
+
+                                                <input type="hidden" name="status" value="1" />
+
+                                                <p class="mb-0">Apakah anda yakin akan menerima bukti ini?</p>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#detail-{{ $loop->index }}">
+                                                Batal
+                                            </a>
+
+                                            <button class="btn btn-success" type="button"
+                                                onclick="document.getElementById('proof-form-approve-{{ $loop->index }}').submit()">Terima</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Denying Modal --}}
+                            <div class="modal fade" id="denying-{{ $loop->index }}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Tolak Bukti</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('payment-proof.update', $proof->id) }}"
+                                                id="proof-form-denying-{{ $loop->index }}" method="post">
+                                                @csrf
+                                                @method('PATCH')
+
+                                                <input type="hidden" name="status" value="2" />
+
+                                                <div class="mb-3">
+                                                    <label for="reason" class="form-label">Alasan</label>
+                                                    <textarea class="form-control" name="reason" id="reason"
+                                                        rows="3"></textarea>
+                                                </div>
+
+                                                <p class="mb-0">Apakah anda yakin akan menolak bukti ini?</p>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn btn-light" data-bs-toggle="modal"
+                                                data-bs-target="#detail-{{ $loop->index }}">
+                                                Batal
+                                            </a>
+
+                                            <button class="btn btn-danger" type="button"
+                                                onclick="document.getElementById('proof-form-denying-{{ $loop->index }}').submit()">Ya, Tolak</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Detail Modal --}}
+                            <div class="modal fade" id="detail-{{ $loop->index }}">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Detail Bukti</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="list-group list-group-flush">
+                                                <div
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <span class="fw-bold">Status</span>
+                                                    <span>
+                                                        @if ($proof->status === 1)
+                                                            <i class="ti ti-check text-success"></i> Diterima
+                                                        @elseif($proof->status === 2)
+                                                            <i class="ti ti-x text-danger"></i> Ditolak
+                                                        @else
+                                                            <i class="ti ti-clock"></i> Menunggu
+                                                        @endif
+                                                    </span>
+                                                </div>
+
+                                                <div
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <span class="fw-bold">Diperbaharui Pada</span>
+                                                    <span>{{ $proof->updated_at->translatedFormat('d M Y H:m:s') }}</span>
+                                                </div>
+                                                <div
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <span class="fw-bold">Diunggah Pada</span>
+                                                    <span>{{ $proof->payment_date->translatedFormat('d M Y H:m:s') }}</span>
+                                                </div>
+                                                @if ($proof->status === 2)
+                                                    <div
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span class="fw-bold">Alasan</span>
+                                                        <span>{{ $proof->reason ?? 'Tidak ada alasan yang ditulis' }}</span>
+                                                    </div>
+                                                @endif
+                                            </div>
+
+                                            <img src="{{ Storage::url($proof->file) }}" alt="Bukti"
+                                                class="w-100 mt-3 rounded-3">
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light me-auto"
+                                                data-bs-dismiss="modal">
+                                                Tutup
+                                            </button>
+
+                                            @if ($proof->status === 2)
+                                                <a href="#" class="btn btn-danger">Hapus</a>
+                                            @elseif ($proof->status === 0)
+                                                <a href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#denying-{{ $loop->index }}"
+                                                    class="btn btn-danger">Tolak Bukti</a>
+                                                <a href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#approval-{{ $loop->index }}"
+                                                    class="btn btn-success">Terima</a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="card-body">
+                            <p class="text-center mb-0">Tidak ada unggahan</p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
 
@@ -224,36 +385,6 @@
                     </div>
                 </div>
             @endif
-
-            {{-- <div class="card overflow-hidden">
-                <div class="card-body pb-0">
-                    <h3 class="mb-0">Panduan Pembayaran</h3>
-                </div>
-                <div id="accordion" class="accordion">
-                    @foreach ($paymentDetail['data']['instructions'] as $key => $instruction)
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading{{ $key }}">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse{{ $key }}" aria-expanded="false"
-                                    aria-controls="collapse{{ $key }}">
-                                    {{ $instruction['title'] }}
-                                </button>
-                            </h2>
-                            <div id="collapse{{ $key }}" class="accordion-collapse collapse"
-                                aria-labelledby="heading{{ $key }}" data-bs-parent="#accordion">
-                                <div class="accordion-body">
-                                    <ol class="mb-0">
-                                        @foreach ($instruction['steps'] as $step)
-                                            <li>{!! $step !!}</li>
-                                        @endforeach
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-            </div> --}}
         </div>
     </div>
 @endsection
@@ -261,6 +392,9 @@
 @push('script')
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"
+        integrity="sha512-Ixzuzfxv1EqafeQlTCufWfaC6ful6WFqIz4G+dWvK0beHw0NVJwvCKSgafpy5gwNqKmgUfIBraVwkKI+Cz0SEQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
         function copyAndShowAlert(id) {

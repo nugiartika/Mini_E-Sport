@@ -25,7 +25,7 @@
 
                 <div class="row gy-4">
                     @forelse ($paymentList as $index => $payment)
-                        <div class="col-md-3">
+                        <div class="col-md-4 col-xxl-3">
                             <div class="form-check custom-option custom-option-icon">
                                 <label class="form-check-label custom-option-content" for="method-{{ $index }}" />
                                 <span class="custom-option-body">
