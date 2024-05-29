@@ -1,9 +1,8 @@
 @extends('layouts.panel')
 
 @push('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css"
-        integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
 @endpush
 
 @section('content')
@@ -88,14 +87,28 @@
             @elseif(auth()->user()->role === 'admin')
                 @php
                     $income = 0.15 * $transaction->teamTournament->tournament->nominal;
+                    $feeOrganizer = $transaction->teamTournament->tournament->nominal - $income;
                 @endphp
                 <div class="card mb-3">
                     <h3 class="card-header">Pendapatan anda</h3>
                     <div class="card-body">
                         <p>Pendapatan anda ini adalah 15% dari harga penjualan harga tiket turnamen.</p>
-                        <div class="mb-0 d-flex justify-content-between">
-                            <span>Total pendapatan anda</span>
-                            <span class="text-success">{{ number_format($income, 0, '.', ',') }} IDR</span>
+
+                        <div class="list-group-flush list-group">
+                            <div class="list-group-item mb-0 d-flex justify-content-between">
+                                <span>Harga Tiket Masuk</span>
+                                <span>{{ number_format($transaction->teamTournament->tournament->nominal, 2, ',', '.') }}
+                                    IDR</span>
+                            </div>
+                            <div class="list-group-item mb-0 d-flex justify-content-between">
+                                <span>Potongan Admin</span>
+                                <span>&minus;{{ number_format($feeOrganizer, 2, ',', '.') }}
+                                    IDR</span>
+                            </div>
+                            <div class="list-group-item mb-0 d-flex justify-content-between">
+                                <span>Total pendapatan anda</span>
+                                <span class="text-success">{{ number_format($income, 0, '.', ',') }} IDR</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -144,6 +157,7 @@
                 </div>
             </div>
 
+            @if(in_array(auth()->user()->role, ['organzer', 'user']))
             <div class="card mt-4">
                 <h3 class="card-header">Bukti Pembayaran</h3>
 
@@ -357,6 +371,7 @@
                     @endforelse
                 </div>
             </div>
+            @endif
 
             @if (auth()->user()->role === 'organizer')
                 <div class="card mt-4">
@@ -390,7 +405,6 @@
 @endsection
 
 @push('script')
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"
         integrity="sha512-Ixzuzfxv1EqafeQlTCufWfaC6ful6WFqIz4G+dWvK0beHw0NVJwvCKSgafpy5gwNqKmgUfIBraVwkKI+Cz0SEQ=="

@@ -78,7 +78,7 @@ class MemberController extends Controller
                 }
             }
 
-            if($member->team->tournament_id) {
+            if ($member->team->tournament_id) {
                 $teamTournament = TeamTournament::create([
                     'team_id' => $member->team->id,
                     'tournament_id' => $member->team->tournament_id,
@@ -89,7 +89,7 @@ class MemberController extends Controller
                     ['paidment', 'Gratis']
                 ]);
 
-                if($tournamentData->exists()) {
+                if ($tournamentData->exists()) {
                     Transaction::create([
                         'name' => auth()->user()->name,
                         'email' => auth()->user()->email,
@@ -98,8 +98,8 @@ class MemberController extends Controller
                         'team_tournament_id' => $teamTournament->id,
                         'payment_method' => 'FREE',
                         'amount' => 0,
-                        'transaction_id' => 'TRANS-'. Str::upper(Str::random(16)),
-                        'ref_id' => 'INV-'. Str::upper(Str::random(16))
+                        'transaction_id' => 'TRANS-' . Str::upper(Str::random(16)),
+                        'ref_id' => 'INV-' . Str::upper(Str::random(16))
                     ]);
                 }
             }
@@ -112,18 +112,11 @@ class MemberController extends Controller
 
     private function getDuplicatesEmail(array $arr)
     {
-        // Count the frequency of each element in the array
-        $counts = array_count_values($arr);
-
-        // Select elements that appear more than once
-        $duplicates = [];
-        foreach ($counts as $item => $count) {
-            if ($count > 1) {
-                $duplicates[] = $item;
-            }
-        }
-
-        return $duplicates;
+        return collect($arr)
+            ->countBy()
+            ->filter(fn ($count) => $count > 1)
+            ->keys()
+            ->all();
     }
 
     public function createMember(Request $request)
@@ -135,9 +128,7 @@ class MemberController extends Controller
         return view('user.addmember', compact('members', 'teams', 'selectedTeamId'));
     }
 
-
     public function storeMember(MemberRequest $request)
-
     {
         try {
             // $nicknames = array_merge($request->nickname, $request->nickname_cadangan);
@@ -145,11 +136,10 @@ class MemberController extends Controller
                 array_filter($request->nickname, 'is_string'),
                 array_filter($request->nickname_cadangan, 'is_string')
             );
-            
+
             $duplicates = $this->getDuplicates($nicknames);
             if (!empty($duplicates)) {
-                // Lakukan sesuatu untuk menangani duplikat
-                return redirect()->back()->withInput()->withErrors(['error' => 'Duplikat ditemukan dalam email']);
+                return redirect()->back()->withInput()->withErrors(['error' => 'Email tidak boleh ada yang sama.']);
             }
 
             $teams_id = $request->team_id;
@@ -159,7 +149,7 @@ class MemberController extends Controller
             foreach ($request->member as $index => $memberName) {
                 $is_captain = $index === 0 ? 1 : 0;
 
-                $member = Member::create([
+                Member::create([
                     'member' => $memberName,
                     'nickname' => $request->nickname[$index],
                     'team_id' => $teams_id,
@@ -171,7 +161,7 @@ class MemberController extends Controller
             // Store "cadangan" members
             if ($request->has('member_cadangan')) {
                 foreach ($request->member_cadangan as $index => $memberName) {
-                    $member = Member::create([
+                    Member::create([
                         'member' => $memberName,
                         'nickname' => $request->nickname_cadangan[$index],
                         'team_id' => $teams_id,
@@ -189,17 +179,10 @@ class MemberController extends Controller
 
     private function getDuplicates(array $arr)
     {
-        // Menghitung frekuensi setiap elemen dalam array
-        $counts = array_count_values($arr);
-
-        // Memilih elemen yang muncul lebih dari sekali
-        $duplicates = [];
-        foreach ($counts as $item => $count) {
-            if ($count > 1) {
-                $duplicates[] = $item;
-            }
-        }
-
-        return $duplicates;
+        return collect($arr)
+            ->countBy()
+            ->filter(fn ($count) => $count > 1)
+            ->keys()
+            ->all();
     }
 }

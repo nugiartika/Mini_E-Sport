@@ -184,7 +184,7 @@
                                                 <span>Tanggal Mulai</span>
                                             </div>
                                             <span class="">
-                                                {{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}
+                                                {{ \Carbon\Carbon::parse($tournament->permainan)->translatedFormat('d F Y') }}
                                             </span>
                                         </div>
                                         <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
