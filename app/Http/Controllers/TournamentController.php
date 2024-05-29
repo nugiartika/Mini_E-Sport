@@ -42,7 +42,7 @@ class TournamentController extends Controller
         $tournaments = $tournamentsQuery->paginate(6);
 
         // Count the tournaments with 'rejected' status
-        $counttournaments = $tournamentsQuery->where('status', 'rejected')->count();
+        $counttournaments = $tournamentsQuery->whereIn('status', ['rejected', 'accepted'])->count();
 
         // Get team counts grouped by tournament_id
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
