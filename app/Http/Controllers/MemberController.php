@@ -10,7 +10,9 @@ use App\Models\Team;
 use App\Models\TeamTournament;
 use App\Models\Tournament;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class MemberController extends Controller
@@ -28,6 +30,9 @@ class MemberController extends Controller
 
     public function create(Request $request)
     {
+        $query = $request->input('query');
+        $users = User::where('email', 'LIKE', "%{$query}%")->where('role', 'user')->get();
+        // return response()->json($users);
         $members = Member::all();
         $teams = Team::all();
         $selectedTeamId = $request->input('team_id');
@@ -39,6 +44,8 @@ class MemberController extends Controller
     public function store(StoreMemberRequest $request)
     {
         try {
+            Log::info($request->all());
+
             $nicknames = array_merge(
                 array_filter($request->nickname, 'is_string'),
                 array_filter($request->nickname_cadangan, 'is_string')

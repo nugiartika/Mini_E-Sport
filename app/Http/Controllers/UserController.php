@@ -52,7 +52,12 @@ class UserController extends Controller
         return view('admin.listPenyelenggara', compact('users'));
     }
 
-
+    public function searchUsers(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('email', 'LIKE', "%{$query}%")->where('role', 'user')->get();
+        return response()->json($users);
+    }
     /**
      * Show the form for creating a new resource.
      */

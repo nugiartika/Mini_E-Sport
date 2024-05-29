@@ -69,20 +69,6 @@ class TeamController extends Controller
             return redirect()->back()->withErrors(['error' => 'Tournament ID tidak ada.']);
         }
 
-        $existingTeam = Team::where('tournament_id', $tournament_id)
-            ->where('user_id', $user->id)
-            ->first();
-
-        // Cek apakah user sudah terdaftar di turnamen ini melalui model TeamTournament
-        $existingTeamTournament = TeamTournament::where('tournament_id', $tournament_id)
-            ->whereHas('team', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
-            })
-            ->first();
-
-        if ($existingTeam || $existingTeamTournament) {
-            return redirect()->route('user.tournament')->withErrors(['error' => 'Anda sudah terdaftar di turnamen ini.']);
-        }
 
         $gambar = $request->file('profile');
         if ($gambar) {
