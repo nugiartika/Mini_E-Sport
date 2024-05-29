@@ -7,7 +7,6 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\juara;
 use App\Models\jadwal;
-use App\Models\bracket;
 use App\Models\Category;
 use App\Models\prizepool;
 use App\Models\Tournament;
@@ -121,9 +120,9 @@ class TournamentController extends Controller
         $user = Auth::user();
         $tournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->get();
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
-        ->whereIn('status', ['rejected', 'accepted'])
-        ->where('notif', 'belum baca')
-        ->count();
+            ->whereIn('status', ['rejected', 'accepted'])
+            ->where('notif', 'belum baca')
+            ->count();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
@@ -182,12 +181,11 @@ class TournamentController extends Controller
         return view('penyelenggara.tambah', compact('counttournaments', 'note', 'prizes', 'tournament', 'category', 'user'));
     }
 
-
     public function history()
     {
         $teams = Team::orderBy('id', 'desc')
-        ->where('user_id', auth()->user()->id)
-        ->get();
+            ->where('user_id', auth()->id())
+            ->get();
         return view('user.historytournament', compact('teams'));
     }
 
@@ -278,9 +276,9 @@ class TournamentController extends Controller
     public function filter(Request $request)
     {
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
-        ->whereIn('status', ['rejected', 'accepted'])
-        ->where('notif', 'belum baca')
-        ->count();
+            ->whereIn('status', ['rejected', 'accepted'])
+            ->where('notif', 'belum baca')
+            ->count();
         $oldSearch = $request->input('search');
         $user = Auth::user();
         $categories = Category::all();
@@ -588,9 +586,9 @@ class TournamentController extends Controller
     public function editStatus($id)
     {
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
-        ->whereIn('status', ['rejected', 'accepted'])
-        ->where('notif', 'belum baca')
-        ->count();
+            ->whereIn('status', ['rejected', 'accepted'])
+            ->where('notif', 'belum baca')
+            ->count();
         $tournament = Tournament::FindOrFail($id);
         $user = User::all();
         $category = Category::all();
