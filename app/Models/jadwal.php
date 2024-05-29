@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class jadwal extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
-    protected $fillable = ['tanggalPenyisihan','waktuPenyisihan','boPenyisihan','tanggalSemi','waktuSemi','boSemi','tanggalFinal','waktuFinal','boFinal'];
+
+    protected $fillable = ['tournament_id','tanggalPenyisihan','waktuPenyisihan','boPenyisihan','tanggalSemi','waktuSemi','boSemi','tanggalFinal','waktuFinal','boFinal'];
     public function tournament()
     {
-        return $this->OneToMany(tournament::class);
+        return $this->belongsTo(tournament::class);
     }
 }

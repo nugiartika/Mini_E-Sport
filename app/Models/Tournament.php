@@ -42,14 +42,13 @@ class Tournament extends Model
 
     public function jadwal()
     {
-        return $this->hasMany(jadwal::class,'jadwal_id');
+        return $this->hasMany(jadwal::class,'tournament_id');
     }
 
-    public function juara()
+    public function juaras()
     {
-        return $this->hasMany(juara::class,'juara_id');
+        return $this->hasMany(Juara::class, 'tournament_id');
     }
-
     public function tournament_prize()
     {
         return $this->hasMany(tournament_prize::class);
