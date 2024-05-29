@@ -308,29 +308,51 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body d-flex flex-column align-items-center">
-                                    <div class="d-flex justify-content-center align-items-center mb-4"
-                                        style="height: 100px;">
-                                        <div class="d-flex justify-content-center align-items-center gap-3">
-                                            <h6 style="color: white;">Buat tim baru atau gunakan tim yang sudah ada.</h6>
+
+                    @if (auth()->user()->team)
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body d-flex flex-column align-items-center">
+                                        <div class="d-flex justify-content-center align-items-center mb-4"
+                                            style="height: 100px;">
+                                            <div class="d-flex justify-content-center align-items-center gap-3">
+                                                <h6 style="color: white;">Buat tim baru atau gunakan tim yang sudah ada.
+                                                </h6>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center">
-                                        @if (auth()->user()->team)
-                                            <a href="#" type="button" class="btn btn-secondary me-2">Tim yang
-                                                Sudah Ada</a>
-                                        @endif
-                                        <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
+                                                Ada</a>
+                                            <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body d-flex flex-column align-items-center">
+                                        <div class="d-flex justify-content-center align-items-center mb-4"
+                                            style="height: 100px;">
+                                            <div class="d-flex justify-content-center align-items-center gap-3">
+                                                <h6 style="color: white;">Buat tim baru atau gunakan tim yang sudah ada.
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
 
+                                            <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 @empty
                     <div class="col-lg-12">
                         <center>
@@ -342,31 +364,57 @@
                         </h1>
                     </div>
                 @endforelse
-
-
-
             </div>
         </div>
     </div>
 @endsection
 @push('script')
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var exampleModal = document.getElementById('exampleModalCenter');
+            exampleModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget; // Tombol yang memicu modal
+                var tournamentId = button.getAttribute(
+                    'data-tournament-id'); // Ambil ID turnamen dari atribut data
+
+                // Periksa apakah pengguna memiliki tim atau tidak
+                var userHasTeam = {{ auth()->user()->team ? 'true' : 'false' }};
+
+                // Update tautan dengan ID turnamen yang benar
+                var existingTeamLink = exampleModal.querySelector('.btn-secondary');
+                var newTeamLink = exampleModal.querySelector('.btn-primary');
+
+                // Sembunyikan tombol "Yang Sudah Ada" jika pengguna tidak memiliki tim
+                if (!userHasTeam) {
+                    existingTeamLink.style.display = 'none';
+                } else {
+                    existingTeamLink.href = '/teams/create?tournament_id=' + tournamentId;
+                }
+
+                // Tetapkan href untuk tombol "Tim Baru"
+                newTeamLink.href = '/team/create?tournament_id=' + tournamentId;
+            });
+        });
+    </script> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var exampleModal = document.getElementById('exampleModalCenter');
             exampleModal.addEventListener('show.bs.modal', function(event) {
                 var button = event.relatedTarget; // Tombol yang memicu modal
                 var tournamentId = button.getAttribute(
-                'data-tournament-id'); // Ambil ID turnamen dari atribut data
+                    'data-tournament-id'); // Ambil ID turnamen dari atribut data
 
                 // Update tautan dengan ID turnamen yang benar
-                var existingTeamLink = exampleModal.querySelector('.btn-secondary');
                 var newTeamLink = exampleModal.querySelector('.btn-primary');
+                var existingTeamLink = exampleModal.querySelector('.btn-secondary');
 
-                existingTeamLink.href = '/teams/create?tournament_id=' + tournamentId;
+                // Tetapkan href untuk tombol "Tim Baru"
                 newTeamLink.href = '/team/create?tournament_id=' + tournamentId;
+                existingTeamLink.href = '/teams/create?tournament_id=' + tournamentId;
             });
         });
     </script>
+
 
 
     {{-- <script>
