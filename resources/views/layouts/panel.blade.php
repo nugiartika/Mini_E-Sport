@@ -142,7 +142,8 @@
 
                             <li class="nav-item">
                                 <span class="nav-link">
-                                    <span class="badge bg-{{ $roleColor[auth()->user()->role] }}">{{ $roles[auth()->user()->role] }}</span>
+                                    <span
+                                        class="badge bg-{{ $roleColor[auth()->user()->role] }}">{{ $roles[auth()->user()->role] }}</span>
                                 </span>
                             </li>
 
@@ -298,6 +299,20 @@
                 ]
             });
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const submitButton = document.querySelector('button[type="submit"]');
+            submitButton.addEventListener('click', function(event) {
+                if (submitButton.disabled) {
+                    event.preventDefault();
+                } else {
+                    submitButton.disabled = true;
+                    submitButton.textContent = "Submitting...";
+                }
+            });
+        });
     </script>
 
     @if ($errors->any())
