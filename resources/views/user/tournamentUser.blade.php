@@ -160,7 +160,8 @@
                                     </div>
 
                                     <div class="list-group list-group-flush mb-4">
-                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                        <div
+                                            class="list-group-item justify-content-between d-flex align-items-center gap-3">
                                             <div class="d-flex gap-2">
                                                 <i class="ti ti-moneybag fs-base tcp-2"></i>
                                                 <span>HTM</span>
@@ -169,7 +170,8 @@
                                                 IDR {{ number_format($tournament->nominal, 0, '.', ',') }}
                                             </span>
                                         </div>
-                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                        <div
+                                            class="list-group-item justify-content-between d-flex align-items-center gap-3">
                                             <div class="d-flex gap-2">
                                                 <i class="ti ti-ticket fs-base tcp-2"></i>
                                                 <span>Jenis Event</span>
@@ -178,7 +180,8 @@
                                                 {{ $tournament->paidment == 'Gratis' ? 'Gratis' : 'Berbayar' }}
                                             </span>
                                         </div>
-                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                        <div
+                                            class="list-group-item justify-content-between d-flex align-items-center gap-3">
                                             <div class="d-flex gap-2">
                                                 <i class="ti ti-calendar fs-base tcn-1"></i>
                                                 <span>Tanggal Mulai</span>
@@ -187,7 +190,8 @@
                                                 {{ \Carbon\Carbon::parse($tournament->permainan)->translatedFormat('d F Y') }}
                                             </span>
                                         </div>
-                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                        <div
+                                            class="list-group-item justify-content-between d-flex align-items-center gap-3">
                                             <div class="d-flex gap-2 align-items-center">
                                                 <i class="ti ti-gift fs-base tcn-1"></i>
                                                 <span>Hadiah</span>
@@ -261,7 +265,7 @@
 
                                         {{-- @dd($tournament->users_id == Auth::user()->id) --}}
                                         {{-- @if ($teamCount && $teamCount->count < $tournament->slotTeam) --}}
-                                        @if ($totalTeams && $totalTeams < $tournament->slotTeam && !$isUserInTournament && !$teamtournamentId )
+                                        @if ($totalTeams && $totalTeams < $tournament->slotTeam && !$isUserInTournament && !$teamtournamentId)
                                             {{-- @if ($tournament->users_id == Auth::user()->id) --}}
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
@@ -316,8 +320,9 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        @if(auth()->user()->team)
-                                            <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah Ada</a>
+                                        @if (auth()->user()->team)
+                                            <a href="#" type="button" class="btn btn-secondary me-2">Tim yang
+                                                Sudah Ada</a>
                                         @endif
                                         <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
                                     </div>
@@ -351,7 +356,7 @@
             exampleModal.addEventListener('show.bs.modal', function(event) {
                 var button = event.relatedTarget; // Tombol yang memicu modal
                 var tournamentId = button.getAttribute(
-                    'data-tournament-id'); // Ambil ID turnamen dari atribut data
+                'data-tournament-id'); // Ambil ID turnamen dari atribut data
 
                 // Update tautan dengan ID turnamen yang benar
                 var existingTeamLink = exampleModal.querySelector('.btn-secondary');
