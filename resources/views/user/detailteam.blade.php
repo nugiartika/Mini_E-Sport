@@ -32,9 +32,9 @@
                     <div class="d-flex gap-2 align-items-center">
                         <i class="ti ti-device-gamepad-2"></i>
                         @if ($categoryName)
-                        <span>{{ $categoryName }}</span>
+                            <span>{{ $categoryName }}</span>
                         @else
-                        <span>{{ $categoryId }}</span>
+                            <span>{{ $categoryId }}</span>
                         @endif
                     </div>
                 </div>
@@ -108,24 +108,24 @@
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @forelse ($members as $index => $member)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $member->nickname }}</td>
-                        <td>Pemain: {{ $member->status }}</td>
-                        <td>
-                            @if ($member->is_captain)
-                            <span class="badge bg-label-primary me-1">Kapten</span>
-                            @else
-                            <span class="badge bg-label-secondary me-1">Member</span>
-                            @endif
-                        </td>
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $member->nickname }}</td>
+                            <td>Pemain: {{ $member->status }}</td>
+                            <td>
+                                @if ($member->is_captain)
+                                    <span class="badge bg-label-primary me-1">Kapten</span>
+                                @else
+                                    <span class="badge bg-label-secondary me-1">Member</span>
+                                @endif
+                            </td>
 
-                        <td>{{ $member->member }}</td>
-                    </tr>
+                            <td>{{ $member->member }}</td>
+                        </tr>
                     @empty
-                    <tr>
-                        <td colspan="4">No members found.</td>
-                    </tr>
+                        <tr>
+                            <td colspan="4">No members found.</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>

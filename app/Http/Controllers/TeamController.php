@@ -32,13 +32,24 @@ class TeamController extends Controller
      */
     public function create(Request $request)
     {
-        $teams = Team::all();
-        $user = User::all();
-        $selectedTournamentId = $request->input('tournament_id');
+        // Ambil tournament_id dari URL
+        $selectedTournamentId = $request->query('tournament_id');
 
-        return view('user.createteam', compact('teams','user','selectedTournamentId'));
+        // Periksa apakah tournament_id valid
+        $tournament = Tournament::find($selectedTournamentId);
+        if (!$tournament) {
+            // Jika tidak valid, kembalikan ke halaman sebelumnya dengan pesan error
+            return redirect()->back()->withErrors(['tournament_id' => 'Tournament ID tidak valid']);
+        }
+
+        // Jika valid, lanjutkan untuk mengambil tim dan pengguna
+        $teams = Team::all();
+        $users = User::all(); // Nama variabel diubah menjadi users untuk konsistensi
+
+        // Tampilkan view dengan data yang diperlukan
+        return view('user.createteam', compact('teams', 'users', 'selectedTournamentId'));
     }
-    /**
+        /**
      * Store a newly created resource in storage.
      */
     public function store(TeamRequest $request)
@@ -59,25 +70,7 @@ class TeamController extends Controller
         ]);
         return redirect()->route('team.show', $team->id);
     }
-    // public function store(TeamRequest $request)
-    // {
-    //     $tournament_id = $request->get('tournament_id');
-    //     $user = Auth::user();
 
-    //     $gambar = $request->file('profile');
-    //     if ($gambar) {
-    //         $path_gambar = Storage::disk('public')->put('team', $gambar);
-    //     }
-
-    //     $team = Team::create([
-    //         'name' => $request->name,
-    //         'profile' => $path_gambar,
-    //         'tournament_id' => $tournament_id,
-    //         'user_id' => $user->id,
-    //     ]);
-
-    //     return redirect()->route('team.show', $team->id)->with('success', 'Team added successfully');
-    // }
 
     public function indexdetail($id)
     {
@@ -89,13 +82,6 @@ class TeamController extends Controller
         $categoryName = $teams->category->name ?? '';
         $categoryId = $teams->tournament->category->name ?? '';
         return view('user.detailteam', compact('teams','category', 'membersCount', 'tournament', 'members','categoryName','categoryId'));
-
-
-        // $members = Member::where('team_id', $id)->whereNotNull('nickname')->where('is_captain', '$id')->get();
-        // $members = Member::where('team_id', $id)->whereNotNull('nickname')->get();
-        // $categoryName = $teams->category->name ?? '';
-        // $categoryId = $teams->tournament->category->name;
-        // return view('user.detailteam', compact('teams','category', 'membersCount', 'tournament', 'members','categoryName','categoryId'));
     }
 
     /**
@@ -123,7 +109,6 @@ class TeamController extends Controller
 
     public function storeTeam(TeamBaruRequest $request)
     {
-        // $tournament_id = $request->get('tournament_id');
         $user = Auth::user();
 
         $gambar = $request->file('profile');
@@ -151,6 +136,6 @@ class TeamController extends Controller
 
 
         return view('user.addmember', compact('members', 'teams', 'teamId', 'user','category','membersPerTeam'));
-    }
+    }   
 
 }

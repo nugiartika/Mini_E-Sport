@@ -160,7 +160,8 @@
                                     </div>
 
                                     <div class="list-group list-group-flush mb-4">
-                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                        <div
+                                            class="list-group-item justify-content-between d-flex align-items-center gap-3">
                                             <div class="d-flex gap-2">
                                                 <i class="ti ti-moneybag fs-base tcp-2"></i>
                                                 <span>HTM</span>
@@ -169,7 +170,8 @@
                                                 IDR {{ number_format($tournament->nominal, 0, '.', ',') }}
                                             </span>
                                         </div>
-                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                        <div
+                                            class="list-group-item justify-content-between d-flex align-items-center gap-3">
                                             <div class="d-flex gap-2">
                                                 <i class="ti ti-ticket fs-base tcp-2"></i>
                                                 <span>Jenis Event</span>
@@ -178,7 +180,8 @@
                                                 {{ $tournament->paidment == 'Gratis' ? 'Gratis' : 'Berbayar' }}
                                             </span>
                                         </div>
-                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                        <div
+                                            class="list-group-item justify-content-between d-flex align-items-center gap-3">
                                             <div class="d-flex gap-2">
                                                 <i class="ti ti-calendar fs-base tcn-1"></i>
                                                 <span>Tanggal Mulai</span>
@@ -187,7 +190,8 @@
                                                 {{ \Carbon\Carbon::parse($tournament->permainan)->format('d F Y') }}
                                             </span>
                                         </div>
-                                        <div class="list-group-item justify-content-between d-flex align-items-center gap-3">
+                                        <div
+                                            class="list-group-item justify-content-between d-flex align-items-center gap-3">
                                             <div class="d-flex gap-2 align-items-center">
                                                 <i class="ti ti-gift fs-base tcn-1"></i>
                                                 <span>Hadiah</span>
@@ -261,35 +265,34 @@
 
                                         {{-- @dd($tournament->users_id == Auth::user()->id) --}}
                                         {{-- @if ($teamCount && $teamCount->count < $tournament->slotTeam) --}}
-                                        @if ($totalTeams && $totalTeams < $tournament->slotTeam && !$isUserInTournament && !$teamtournamentId )
-                                            {{-- @if ($tournament->users_id == Auth::user()->id) --}}
-                                            <div class="text-center">
-                                                <a type="button" class="btn-half position-relative d-inline-block py-2"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                                                    data-tournament-id="{{ $tournament->id }}">
-                                                    <div class="custom-btn"
-                                                        style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
-                                                        Daftar
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        @elseif ($tournament->aktif === 'tidak aktif')
-
-                                        @elseif (!$totalTeams)
-                                            <div class="text-center">
-                                                <a type="button" class="btn-half position-relative d-inline-block py-2"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                                                    data-tournament-id="{{ $tournament->id }}">
-                                                    <div class="custom-btn"
-                                                        style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
-                                                        Daftar
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        @elseif ($totalTeams)
-
-                                        @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
+                                        @if ($tournament->aktif !== 'tidak aktif')
+                                            @if ($totalTeams && $totalTeams < $tournament->slotTeam && !$isUserInTournament && !$teamtournamentId)
+                                                <div class="text-center">
+                                                    <a type="button" class="btn-half position-relative d-inline-block py-2"
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                                                        data-tournament-id="{{ $tournament->id }}">
+                                                        <div class="custom-btn"
+                                                            style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
+                                                            Daftar
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            @elseif (!$totalTeams)
+                                                <div class="text-center">
+                                                    <a type="button" class="btn-half position-relative d-inline-block py-2"
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                                                        data-tournament-id="{{ $tournament->id }}">
+                                                        <div class="custom-btn"
+                                                            style="width: 100px; height: 40px; display: flex; justify-content: center; align-items: center;">
+                                                            Daftar
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
+                                                <!-- Optionally handle case when teams are full -->
+                                            @endif
                                         @endif
+
 
                                         <!-- Tombol Detail Tournament -->
                                         <a href="{{ route('tournament.detailUser', $tournament->id) }}"
@@ -316,7 +319,8 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah Ada</a>
+                                        <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
+                                            Ada</a>
                                         <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
                                     </div>
                                 </div>
@@ -361,34 +365,6 @@
         });
     </script>
 
-
-    {{-- <script>
-        $(document).ready(function() {
-            $('#existing').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget); // Tombol yang memicu modal
-                var tournamentId = button.data(
-                    'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
-                var modal = $(this);
-                modal.find('.modal-body input[name="tournament_id"]').val(
-                    tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
-            });
-        });
-
-        function cardRadio(card) {
-            var radioButton = card.querySelector('input[type="radio"]');
-
-            if (!radioButton.checked) {
-                radioButton.checked = true;
-
-                var cards = document.querySelectorAll('.card');
-                cards.forEach(function(card) {
-                    card.classList.remove('border-red');
-                });
-
-                card.classList.add('border-red');
-            }
-        }
-    </script> --}}
 
     <script>
         $(document).ready(function() {
