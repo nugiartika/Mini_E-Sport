@@ -327,11 +327,6 @@
                                             <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
-                                            Ada</a>
-                                        <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

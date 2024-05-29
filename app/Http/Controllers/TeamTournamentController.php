@@ -27,7 +27,7 @@ class TeamTournamentController extends Controller
      * Show the form for creating a new resource.
      */
 
-    
+
     public function create(Request $request)
     {
         $teams = Team::where('user_id', auth()->id())->get();
@@ -38,6 +38,12 @@ class TeamTournamentController extends Controller
         $existingTeam = Team::where('tournament_id', $selectedTournamentId)
         ->where('user_id', $user_id->id)
         ->first();
+
+        $selectedTournament = Tournament::find($selectedTournamentId);
+
+        if (!$selectedTournament || $selectedTournament->aktif !== 'aktif') {
+            return redirect()->route('user.tournament')->withErrors(['error' => 'Turnamen tidak aktif.']);
+        }
 
         // Cek apakah user sudah terdaftar di turnamen ini melalui model TeamTournament
         $existingTeamTournament = TeamTournament::where('tournament_id', $selectedTournamentId)
@@ -50,7 +56,7 @@ class TeamTournamentController extends Controller
             return redirect()->route('user.tournament')->withErrors(['error' => 'Anda sudah terdaftar di turnamen ini.']);
         }
 
-        
+
         return view('user.teams', compact('teams', 'tournaments', 'selectedTournamentId','user_id', 'tournaments'));
     }
 

@@ -32,13 +32,19 @@ class TeamController extends Controller
      */
     public function create(Request $request)
     {
-
         $teams = Team::all();
         $user = User::all();
         $tournaments = Tournament::all();
         $selectedTournamentId = $request->input('tournament_id');
 
         $user_id = Auth::user();
+
+        // Cek apakah turnamen ada dan aktif
+        $selectedTournament = Tournament::find($selectedTournamentId);
+
+        if (!$selectedTournament || $selectedTournament->aktif !== 'aktif') {
+            return redirect()->route('user.tournament')->withErrors(['error' => 'Turnamen tidak aktif.']);
+        }   
 
         // Cek apakah user sudah terdaftar di turnamen ini melalui model Team
         $existingTeam = Team::where('tournament_id', $selectedTournamentId)
@@ -58,6 +64,7 @@ class TeamController extends Controller
 
         return view('user.createteam', compact('teams', 'user', 'selectedTournamentId', 'user_id', 'tournaments'));
     }
+
         /**
      * Store a newly created resource in storage.
      */
