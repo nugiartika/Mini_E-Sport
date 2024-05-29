@@ -27,16 +27,7 @@ class TeamTournamentController extends Controller
      * Show the form for creating a new resource.
      */
 
-    // public function create(Request $request)
-    // {
-    //     $tournament_id = $request->query('tournament_id');
-    //     $tournaments = Tournament::all();
-    //     $teams = Team::whereHas('tournament', function ($query) use ($tournament_id) {
-    //         $query->where('category_id', $tournament_id);
-    //     })->get();
-
-    //     return view('user.tournament', compact('teams', 'tournaments'));
-    // }
+    
     public function create(Request $request)
     {
         $teams = Team::where('user_id', auth()->id())->get();

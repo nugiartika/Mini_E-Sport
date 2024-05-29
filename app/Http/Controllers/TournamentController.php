@@ -85,7 +85,6 @@ class TournamentController extends Controller
 
     public function indexuser()
     {
-        // $tournaments = Tournament::where('status', 'accepted')->get();
         $tournaments = Tournament::all();
         $user = User::all();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
@@ -144,16 +143,26 @@ class TournamentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        // Jika ada ID yang diterima melalui URL, misalnya 'tournament_id'
+        $selectedTournamentId = $request->input('tournament_id');
+
+        // Jika ID turnamen ada di request, lakukan validasi
+        if ($selectedTournamentId && !Tournament::where('id', $selectedTournamentId)->exists()) {
+            return redirect()->back()->with('error', 'ID turnamen tidak valid.');
+        }
+
         $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
         $tournament = Tournament::all();
         $user = User::all();
         $category = Category::all();
         $prizes = prizepool::all();
         $note = tournament_prize::all();
+
         return view('penyelenggara.tambah', compact('counttournaments', 'note', 'prizes', 'tournament', 'category', 'user'));
     }
+
 
     public function history()
     {
@@ -242,7 +251,6 @@ class TournamentController extends Controller
 
             return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil ditambahkan');
         } catch (\Exception $e) {
-            // dd($e->getMessage());
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
