@@ -33,26 +33,23 @@ class JadwalController extends Controller
 {
     try {
         // Mencari turnamen berdasarkan ID, dan jika tidak ditemukan, akan mengembalikan 404
-        $tournament = Tournament::findOrFail($id);
-
-        // Validasi input menggunakan aturan yang didefinisikan di dalam JadwalRequest
-        $validatedData = $request->validated();
+        $tournamentId = $id;
 
         // Membuat jadwal baru dengan data yang sudah divalidasi
         Jadwal::create([
-            'tournament_id' => $tournament->id,
-            'tanggalPenyisihan' => $validatedData['tanggalPenyisihan'],
-            'waktuPenyisihan' => $validatedData['waktuPenyisihan'],
-            'boPenyisihan' => $validatedData['boPenyisihan'],
-            'tanggalSemi' => $validatedData['tanggalSemi'],
-            'waktuSemi' => $validatedData['waktuSemi'],
-            'boSemi' => $validatedData['boSemi'],
-            'tanggalFinal' => $validatedData['tanggalFinal'],
-            'waktuFinal' => $validatedData['waktuFinal'],
-            'boFinal' => $validatedData['boFinal'],
+            'tournament_id' => $tournamentId,
+            'tanggalPenyisihan' => $request->input('tanggalPenyisihan'),
+            'waktuPenyisihan' => $request->input('waktuPenyisihan'),
+            'boPenyisihan' => $request->input('boPenyisihan'),
+            'tanggalSemi' => $request->input('tanggalSemi'),
+            'waktuSemi' => $request->input('waktuSemi'),
+            'boSemi' => $request->input('boSemi'),
+            'tanggalFinal' => $request->input('tanggalFinal'),
+            'waktuFinal' => $request->input('waktuFinal'),
+            'boFinal' => $request->input('boFinal'),
         ]);
 
-        return redirect()->route('tournament.detail', $tournament->id)->with('success','Jadwal Berhasil Ditambahkan');
+        return redirect()->back()->with('success', 'Jadwal berhasil diupdate.');
     } catch (\Exception $e) {
         // Tangani jika turnamen tidak ditemukan atau terjadi kesalahan lain
         return redirect()->back()->with('warning', 'Terjadi kesalahan: ' . $e->getMessage());

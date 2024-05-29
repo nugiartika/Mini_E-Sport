@@ -180,8 +180,8 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <form id="statusForm-{{ $tournament->id }}" action="{{ route('updateStatus', $tournament->id) }}"
-                                            method="POST">
+                                        <form id="statusForm-{{ $tournament->id }}"
+                                            action="{{ route('updateStatus', $tournament->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <select class="dropdown-item" id="status" name="status"
@@ -231,7 +231,7 @@
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
                                 <strong>Tanggal</strong>
-                                <span>{{ \Carbon\Carbon::parse($tournament->permainan)->locale('id')->format('d F Y') }}</span>
+                                <span>{{ \Carbon\Carbon::parse($tournament->permainan)->translatedFormat('d F Y') }}</span>
                             </div>
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
@@ -337,7 +337,7 @@
 @push('script')
     <script>
         function submitForm(id) {
-            document.getElementById("statusForm-"+id).submit();
+            document.getElementById("statusForm-" + id).submit();
         }
     </script>
     <script>

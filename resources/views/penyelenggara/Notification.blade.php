@@ -11,6 +11,9 @@
                         <div class="card-body d-flex align-items-start">
                             <h5 class="card-title me-3">Alasan :</h5>
                             <p class="card-text">{{ $tournament->reason }}</p>
+                            @if ($tournament->notif == 'belum baca')
+                                <a href="{{ route('Updatenotification', ['id' => $tournament->id]) }}" class="btn btn-primary btn-sm" style="margin-left: 450px"> Tandai sudah baca <i class="fa fa-check mx-2"></i></a>
+                            @endif
                         </div>
                     </div>
                 @else
@@ -21,6 +24,9 @@
                         <div class="card-body d-flex align-items-start">
                             <h5 class="card-title me-3">Alasan :</h5>
                             <p class="card-text">Tournament Anda telah kami setujui</p>
+                            @if ($tournament->notif == 'belum baca')
+                                <a href="{{ route('Updatenotification', ['id' => $tournament->id]) }}" class="btn btn-primary btn-sm " style="margin-left: 450px">Tandai sudah baca <i class="fa fa-check mx-2"></i></a>
+                            @endif
                         </div>
                     </div>
                 @endif

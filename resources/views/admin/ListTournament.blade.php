@@ -246,19 +246,19 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item" style="font-weight: bold;">Pendafataran Dibuka :
                                                 <span id="detail-gender" style="font-weight: normal;">
-                                                    {{ $tournament->pendaftaran->locale('id')->translatedFormat('d F Y'); }}</span>
+                                                    {{ $tournament->pendaftaran->locale('id')->translatedFormat('d F Y') }}</span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Pendaftaran Ditutup :
                                                 <span id="detail-national_student_id" style="font-weight: normal;">
-                                                    {{ $tournament->end_pendaftaran->locale('id')->translatedFormat('d F Y'); }}</span>
+                                                    {{ $tournament->end_pendaftaran->locale('id')->translatedFormat('d F Y') }}</span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Tournament Dimulai :
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
-                                                    {{ $tournament->permainan->locale('id')->translatedFormat('d F Y'); }}</span>
+                                                    {{ $tournament->permainan->locale('id')->translatedFormat('d F Y') }}</span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Tournament Berakhir :
                                                 <span id="detail-student_identity_number" style="font-weight: normal;">
-                                                    {{ $tournament->end_permainan->locale('id')->translatedFormat('d F Y'); }}</span>
+                                                    {{ $tournament->end_permainan->locale('id')->translatedFormat('d F Y') }}</span>
                                             </li>
                                             <li class="list-group-item" style="font-weight: bold;">Tipe Turnamen :
                                                 <span id="detail-national_identity_number"

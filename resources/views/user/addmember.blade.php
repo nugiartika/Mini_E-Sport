@@ -25,6 +25,11 @@
         <div class="col-12 col-lg-6">
             <div class="card mb-4">
                 <div class="card-body">
+                    <div class="mb-3">
+                        <input type="text" id="userSearch" class="form-control" placeholder="Search for users by email...">
+                        <div id="searchResults" class="mt-2"></div>
+                    </div>
+
                     <form action="{{ route('team.storemember') }}" method="POST">
                         @csrf
                         <div class="customer-avatar-section">
@@ -32,98 +37,68 @@
                                 $loggedInUserName = auth()->user()->email;
                             @endphp
 
+                            <h5>pemain inti</h5><br>
 
-                                <h5>pemain inti</h5><br>
-
-                                @for ($i = 1; $i <= $membersPerTeam; $i++)
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            @if ($i === 1)
-                                                <label for="nickname{{ $i }}" class="form-label">Kapten</label>
-
-                                                <input type="text"
-                                                    class="form-control @error('nickname.' . ($i - 1)) is-invalid @enderror"
-                                                    id="nickname{{ $i }}" name="nickname[]"
-                                                    value="{{ old('nickname.' . ($i - 1), $loggedInUserName) }}"
-                                                    placeholder="Masukkan nickname">
-                                                    @else
-                                                    <label for="nickname{{ $i }}" class="form-label">anggota
-                                                        {{ $i-1 }}</label>
-
-                                                        <select type="text"
-                                                            class="form-control @error('nickname.' . ($i - 1)) is-invalid @enderror"
-                                                            id="nickname{{ $i }}" name="nickname[]" placeholder="Masukkan akun pengguna lain">
-                                                            <option value="">Pilih Akun Pengguna</option>
-                                                            @foreach ($user->where('role', 'user') as $u )
-                                                            <option value="{{ $u->email }}"
-                                                                {{ old('nickname.' . ($i - 1)) == $u->email ? 'selected' : '' }}>
-                                                                {{ $u->email }}
-                                                            </option>
-                                                            @endforeach
-                                                        </select>
-
-                                                    @endif
-                                            @error('nickname.' . ($i - 1))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="member{{ $i }}" class="form-label"></label>
-                                            @if ($i === 1)
-                                                <input type="number"
-                                                    class="form-control @error('member.' . ($i - 1)) is-invalid @enderror"
-                                                    id="member{{ $i }}" name="member[]"
-                                                    value="{{ old('member.' . ($i - 1)) }}" placeholder="Masukkan id game" requui>
-                                            @else
-                                            <input type="hidden"
-                                            class="form-control @error('member.' . ($i - 1)) is-invalid @enderror"
-                                            id="member{{ $i }}" name="member[]"
-                                            value="{{ old('member.' . ($i - 1)) }}" placeholder="Masukkan id game">
-                                                    @endif
-                                            @error('member.' . ($i - 1))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-
+                            @for ($i = 1; $i <= $membersPerTeam; $i++)
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        @if ($i === 1)
+                                            <label for="nickname{{ $i }}" class="form-label">Kapten</label>
+                                            <input type="text"
+                                                class="form-control @error('nickname.' . ($i - 1)) is-invalid @enderror"
+                                                id="nickname{{ $i }}" name="nickname[]"
+                                                value="{{ old('nickname.' . ($i - 1), $loggedInUserName) }}"
+                                                placeholder="Masukkan nickname" readonly>
+                                        @else
+                                            <label for="nickname{{ $i }}" class="form-label">Anggota
+                                                {{ $i - 1 }}</label>
+                                            <input type="text"
+                                                class="form-control @error('nickname.' . ($i - 1)) is-invalid @enderror"
+                                                id="nickname{{ $i }}" name="nickname[]"
+                                                value="{{ old('nickname.' . ($i - 1)) }}"
+                                                placeholder="Masukkan akun pengguna lain" readonly>
+                                        @endif
+                                        @error('nickname.' . ($i - 1))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
-                                    <input type="hidden" name="is_captain[]" value="{{ $i === 0 ? '1' : '0' }}">
-                                    <input type="hidden" name="team_id" value="{{ $teamId }}">
-                                @endfor
+                                    <div class="col-md-6">
+                                        <label for="member{{ $i }}" class="form-label"></label>
+                                        @if ($i === 1)
+                                        <input type="number" class="form-control @error('member.' . ($i - 1)) is-invalid @enderror" id="member{{ $i }}" name="member[]" value="{{ old('member.' . ($i - 1)) }}" placeholder="Masukkan id game" required>
+                                        @else
+                                        <input type="hidden" class="form-control @error('member.' . ($i - 1)) is-invalid @enderror" id="member{{ $i }}" name="member[]" value="{{ old('member.' . ($i - 1)) }}" placeholder="Masukkan id game">
+                                        @endif
+                                        @error('member.' . ($i - 1))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                </div>
+                                <input type="hidden" name="is_captain[]" value="{{ $i === 0 ? '1' : '0' }}">
+                                <input type="hidden" name="team_id" value="{{ $teamId }}">
+                            @endfor
                             <br>
                             <h5>pemain cadangan</h5><br>
 
                             @for ($i = 0; $i < 2; $i++)
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label for="nickname_cadangan{{ $i }}" class="form-label">cadangan
-                                            {{ $i + 1 }}</label>
-                                        <select type="text"
-                                            class="form-control @error('nickname_cadangan.' . ($i - 1)) is-invalid @enderror"
-                                            id="nickname_cadangan{{ $i }}" name="nickname_cadangan[]"
-                                            {{-- value="{{ old('nickname_cadangan.' . ($i - 1)) }}" --}}
-                                            placeholder="Masukkan nickname">
-                                            <option value="">Pilih Akun Pengguna</option>
-                                            @foreach ($user->where('role', 'user') as $u )
-                                                <option value="{{ $u->email }}"
-                                                    {{ old('nickname_cadangan.' . ($i)) == $u->email ? 'selected' : '' }}>
-                                                    {{ $u->email }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('nickname_cadangan.' . ($i - 1))
+                                        <label for="nickname_cadangan{{ $i }}" class="form-label">Cadangan {{ $i + 1 }}</label>
+
+                                        <input type="text" class="form-control @error('nickname_cadangan.' . ($i)) is-invalid @enderror" id="nickname_cadangan{{ $i }}" name="nickname_cadangan[]"  value="{{ old('nickname_cadangan.' . ($i)) }}" placeholder="Masukkan akun pengguna lain" readonly>
+                                        @error('nickname_cadangan.' . ($i))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
 
-                                        <input type="hidden"
-                                        class="form-control @error('member_cadangan.' . ($i - 1)) is-invalid @enderror"
-                                        id="member_cadangan{{ $i }}" name="member_cadangan[]"
-                                        value="{{ old('member_cadangan.' . ($i - 1)) }}" placeholder="Masukkan id game">
+                                        <input type="hidden" class="form-control @error('member_cadangan.' . ($i - 1)) is-invalid @enderror" id="member_cadangan{{ $i }}" name="member_cadangan[]" value="{{ old('member_cadangan.' . ($i - 1)) }}" placeholder="Masukkan id game">
+
                                     </div>
                                 </div>
                                 <input type="hidden" name="is_captain[]" value="false">
@@ -146,5 +121,43 @@
 @endsection
 
 @push('script')
+<script>
+    document.getElementById('userSearch').addEventListener('keyup', function() {
+        var query = this.value;
+        if (query.length > 2) {
+            fetch('/search-users?query=' + query)
+                .then(response => response.json())
+                .then(data => {
+                    var resultsContainer = document.getElementById('searchResults');
+                    resultsContainer.innerHTML = '';
+                    data.forEach(user => {
+                        var userElement = document.createElement('div');
+                        userElement.className = 'search-result mt-4 mb-4';
+                        userElement.textContent = user.email;
+                        userElement.dataset.email = user.email;
 
+                        var addButton = document.createElement('button');
+                        addButton.textContent = 'Add';
+                        addButton.className = 'btn btn-sm btn-primary ms-4';
+                        addButton.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            var nicknameInputs = document.querySelectorAll('input[name="nickname[]"], input[name="nickname_cadangan[]"]');
+                            for (var i = 0; i < nicknameInputs.length; i++) {
+                                if (nicknameInputs[i].value === '') {
+                                    nicknameInputs[i].value = user.email;
+                                    break;
+                                }
+                            }
+                            resultsContainer.innerHTML = '';
+                        });
+
+                        userElement.appendChild(addButton);
+                        resultsContainer.appendChild(userElement);
+                    });
+                });
+        }
+    });
+
+
+    </script>
 @endpush

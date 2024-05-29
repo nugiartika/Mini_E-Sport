@@ -15,6 +15,7 @@ class JuaraRequest extends FormRequest
     public function rules(): array
 {
     return [
+        'tournament_id' => 'required',
         'nama_juara1' => 'required',
         'nama_juara2' => 'required', // Menggunakan "date_format:H:i:s" untuk format waktu
         'nama_juara3' => 'required', // Menggunakan "numeric" untuk memastikan input adalah angka
@@ -25,6 +26,7 @@ class JuaraRequest extends FormRequest
 public function messages(): array
 {
     return [
+        'tournament_id.required' => ' id turnament tidak terdeteksi',
         'nama_juara1.required' => 'nama tim juara 1 harus diisi',
         'nama_juara2.required' => 'nama tim juara 2 harus diisi',
         'nama_juara3.required' => 'nama tim juara 3 harus diisi',

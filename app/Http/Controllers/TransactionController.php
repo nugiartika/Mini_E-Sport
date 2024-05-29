@@ -44,8 +44,10 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
-        $transactionData = $this->transaction->where('payment_method', '!=', 'FREE')->when(Auth::user()->role === 'user', function ($query) {
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+        ->whereIn('status', ['rejected', 'accepted'])
+        ->where('notif', 'belum baca')
+        ->count();        $transactionData = $this->transaction->where('payment_method', '!=', 'FREE')->when(Auth::user()->role === 'user', function ($query) {
             $query->with([
                 'teamTournament.toTeam' => function ($query) {
                     $query->where('user_id', Auth::id());

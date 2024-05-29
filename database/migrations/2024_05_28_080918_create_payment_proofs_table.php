@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignUuid('transaction_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('file')->nullable();
-            $table->timestamp('payment_date');
+            $table->timestamp('payment_date')->useCurrent()->useCurrentOnUpdate();
             $table->boolean('status')->nullable()->default(false);
             $table->text('reason')->nullable();
         });

@@ -33,39 +33,36 @@ class JuaraController extends Controller
         return view('penyelenggara.detailtournament', compact('juara','jadwal','tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
     }
 
-    public function juara(JuaraRequest  $request, $id)
+    public function juara(JuaraRequest $request, $id)
 {
     try {
-        // Mencari turnamen berdasarkan ID, dan jika tidak ditemukan, akan mengembalikan 404
-        $tournament = Tournament::findOrFail($id);
+        // Mendapatkan ID turnamen dari parameter rute
+        $tournamentId = $id;
 
-        // Validasi input menggunakan aturan yang didefinisikan di dalam JadwalRequest
-        $validatedData = $request->validated();
-
-        // Membuat jadwal baru dengan data yang sudah divalidasi
+        // Membuat entri juara baru dengan data yang sudah divalidasi dan ID turnamen yang sesuai
         Juara::create([
-            'tournament_id' => $tournament->id,
-            'nama_juara1' => $validatedData['nama_juara1'],
-            'nama_juara2' => $validatedData['nama_juara2'],
-            'nama_juara3' => $validatedData['nama_juara3'],
-            'mvp' => $validatedData['mvp'],
+            'tournament_id' => $tournamentId,
+            'nama_juara1' => $request->input('nama_juara1'),
+            'nama_juara2' => $request->input('nama_juara2'),
+            'nama_juara3' => $request->input('nama_juara3'),
+            'mvp' => $request->input('mvp'),
         ]);
 
-        return redirect()->route('tournament.detail', $tournament->id)->with('success','Juara Berhasil Ditambahkan');
+        return redirect()->back()->with('success', 'Juara berhasil diupdate.');
     } catch (\Exception $e) {
-        // Tangani jika turnamen tidak ditemukan atau terjadi kesalahan lain
-        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        // Tangani jika terjadi kesalahan
+        return redirect()->back()->with('warning', 'Terjadi kesalahan: ' . $e->getMessage());
     }
 }
+
 public function editJuara(JuaraRequest $request,  $id){
     try {
-        $validatedData = $request->validated();
         $juara = Juara::findOrFail($id);
         $juara->update([
-            'nama_juara1' => $validatedData['nama_juara1'],
-            'nama_juara2' => $validatedData['nama_juara2'],
-            'nama_juara3' => $validatedData['nama_juara3'],
-            'mvp' => $validatedData['mvp'],
+            'nama_juara1' => $request->input('nama_juara1'),
+            'nama_juara2' => $request->input('nama_juara2'),
+            'nama_juara3' => $request->input('nama_juara3'),
+            'mvp' => $request->input('mvp'),
         ]);
         return redirect()->back()->with('success', 'Juara berhasil diupdate.');
     } catch (\Exception $e) {
