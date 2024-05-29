@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\TeamTournamentController;
 use App\Http\Controllers\DetailTournamentController;
+use App\Http\Controllers\PaymentProofController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -66,7 +67,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/NotifikasiTournament', [TournamentController::class, 'notification'])->name('notificationTournament');
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
         Route::post('/jadwal/{tournament}', [JadwalController::class, 'jadwal'])->name('ptournament.jadwal');
+        Route::patch('/editjadwal/{tournament}', [JadwalController::class, 'editJadwal'])->name('ptournament.editjadwal');
         Route::post('/juara/{id}', [JuaraController::class, 'juara'])->name('ptournament.juara');
+        Route::patch('/editjuara/{id}', [JuaraController::class, 'editJuara'])->name('ptournament.editjuara');
         Route::patch('/addbracket/{tournament}', [TournamentController::class, 'bracket'])->name('add.bracket');
         Route::get('/tournaments/{id}/edit', [TournamentController::class, 'editStatus'])->name('editStatus');
         Route::put('/tournaments/{id}/update-status', [TournamentController::class, 'updateStatus'])->name('updateStatus');
@@ -109,7 +112,6 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-Route::any('transaction/callback', [TransactionController::class, 'callback'])->name('transaction.callback');
 Route::group(['prefix' => 'transaction', 'as' => 'transaction.', 'middleware' => 'auth'], function () {
     // Route untuk menampilkan daftar transaksi
     Route::get('/', [TransactionController::class, 'index'])->name('index');
@@ -130,15 +132,31 @@ Route::group(['prefix' => 'transaction', 'as' => 'transaction.', 'middleware' =>
     Route::delete('{transaction:transaction_id}', [TransactionController::class, 'destroy'])->name('destroy');
 });
 
+Route::group(['prefix' => 'payment-proof', 'as' => 'payment-proof.', 'middleware' => 'auth'], function () {
+    // Route untuk menampilkan daftar bukti pembayaran
+    Route::get('/', [PaymentProofController::class, 'index'])->name('index');
 
-// Route::get('/landingTournamentFilter', [TournamentController::class, 'filterLanding'])->name('landingPage');
+    // Route untuk menampilkan form pembuatan bukti pembayaran baru
+    Route::get('create', [PaymentProofController::class, 'create'])->name('create');
 
+    // Route untuk menyimpan bukti pembayaran baru
+    Route::post('/', [PaymentProofController::class, 'store'])->name('store');
+
+    // Route untuk menampilkan detail bukti pembayaran tertentu (menggunakan payment_proof_id)
+    Route::get('{paymentProof:payment_proof_id}', [PaymentProofController::class, 'show'])->name('show');
+
+    // Route untuk menampilkan form edit bukti pembayaran tertentu (menggunakan payment_proof_id)
+    Route::get('{paymentProof:payment_proof_id}/edit', [PaymentProofController::class, 'edit'])->name('edit');
+
+    // Route untuk memperbarui bukti pembayaran tertentu (menggunakan payment_proof_id)
+    Route::match(['put', 'patch'], '{paymentProof:id}', [PaymentProofController::class, 'update'])->name('update');
+
+    // Route untuk menghapus bukti pembayaran tertentu (menggunakan payment_proof_id)
+    Route::delete('{paymentProof:payment_proof_id}', [PaymentProofController::class, 'destroy'])->name('destroy');
+});
 
 Route::resource('member', MemberController::class);
 Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
 
 Route::get('DetailTournametUser/{id}', [LandingPageController::class, 'detailTOurnament'])->name('landingpageDetailTournamet');
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
-// Route::get('/', function () {
-//     return view('user.index');
-// })->name('index');

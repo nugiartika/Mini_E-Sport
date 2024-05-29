@@ -14,7 +14,7 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <link rel="shortcut icon" href="assets/img/humma-01.png" type="image/x-icon">
-    <title>HOME - HUMMAESPORT</title>
+    <title>HUMMAESPORT</title>
 
     <meta name="description" content="" />
 
@@ -50,8 +50,8 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/admin-panel/assets/js/config.js"></script>
 
-
     @yield('style')
+    @stack('style')
 
 </head>
 
@@ -142,7 +142,8 @@
 
                             <li class="nav-item">
                                 <span class="nav-link">
-                                    <span class="badge bg-{{ $roleColor[auth()->user()->role] }}">{{ $roles[auth()->user()->role] }}</span>
+                                    <span
+                                        class="badge bg-{{ $roleColor[auth()->user()->role] }}">{{ $roles[auth()->user()->role] }}</span>
                                 </span>
                             </li>
 
@@ -298,6 +299,12 @@
                 ]
             });
         }
+    </script>
+
+    <script>
+        $('form').on('submit', function() {
+            $(this).find("button[type='submit']").prop('disabled', true);
+        })
     </script>
 
     @if ($errors->any())

@@ -3,20 +3,28 @@
 @section('content')
     <div class="col-12">
         @forelse ($tournaments as $tournament)
-            <div class="card text-center">
-                <div class="card-header">
-                    {{ $tournament->name }}
-                </div>
-                <div class="card-body d-flex align-items-start">
-                    <h5 class="card-title me-3">Alasan :</h5>
-                    <p class="card-text">{{ $tournament->reason }}</p>
-                </div>
-
-                {{-- <div class="card-footer text-muted">
-                    2 days ago
-                </div> --}}
-            </div>
-            @empty
+                @if ($tournament->status == 'rejected')
+                    <div class="card text-center" style="background-color: rgb(141, 41, 41)">
+                        <div class="card-header">
+                            {{ $tournament->name }}
+                        </div>
+                        <div class="card-body d-flex align-items-start">
+                            <h5 class="card-title me-3">Alasan :</h5>
+                            <p class="card-text">{{ $tournament->reason }}</p>
+                        </div>
+                    </div>
+                @else
+                    <div class="card text-center" style="background-color: rgb(29, 95, 64)">
+                        <div class="card-header">
+                            {{ $tournament->name }}
+                        </div>
+                        <div class="card-body d-flex align-items-start">
+                            <h5 class="card-title me-3">Alasan :</h5>
+                            <p class="card-text">Tournament Anda telah kami setujui</p>
+                        </div>
+                    </div>
+                @endif
+        @empty
             <div class="col-lg-12 mt-5">
                 <center>
                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""

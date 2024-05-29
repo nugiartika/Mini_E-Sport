@@ -75,7 +75,7 @@
                                                 <input type="number"
                                                     class="form-control @error('member.' . ($i - 1)) is-invalid @enderror"
                                                     id="member{{ $i }}" name="member[]"
-                                                    value="{{ old('member.' . ($i - 1)) }}" placeholder="Masukkan id game">
+                                                    value="{{ old('member.' . ($i - 1)) }}" placeholder="Masukkan id game" requui>
                                             @else
                                             <input type="hidden"
                                             class="form-control @error('member.' . ($i - 1)) is-invalid @enderror"
@@ -104,12 +104,12 @@
                                         <select type="text"
                                             class="form-control @error('nickname_cadangan.' . ($i - 1)) is-invalid @enderror"
                                             id="nickname_cadangan{{ $i }}" name="nickname_cadangan[]"
-                                            value="{{ old('nickname_cadangan.' . ($i - 1)) }}"
+                                            {{-- value="{{ old('nickname_cadangan.' . ($i - 1)) }}" --}}
                                             placeholder="Masukkan nickname">
                                             <option value="">Pilih Akun Pengguna</option>
                                             @foreach ($user->where('role', 'user') as $u )
                                                 <option value="{{ $u->email }}"
-                                                    {{ old('nickname_cadangan[]') == $u->email ? 'selected' : '' }}>
+                                                    {{ old('nickname_cadangan.' . ($i)) == $u->email ? 'selected' : '' }}>
                                                     {{ $u->email }}
                                                 </option>
                                             @endforeach

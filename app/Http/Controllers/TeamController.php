@@ -24,7 +24,7 @@ class TeamController extends Controller
         $teams = Team::where('user_id', auth()->id())->get();
         $category = Category::all();
         $tournaments = Tournament::all();
-        return view('user.teamUser', compact('teams','category','tournaments'));
+        return view('user.teamUser', compact('teams', 'category', 'tournaments'));
     }
 
     /**
@@ -32,22 +32,31 @@ class TeamController extends Controller
      */
     public function create(Request $request)
     {
-        // Ambil tournament_id dari URL
-        $selectedTournamentId = $request->query('tournament_id');
 
-        // Periksa apakah tournament_id valid
-        $tournament = Tournament::find($selectedTournamentId);
-        if (!$tournament) {
-            // Jika tidak valid, kembalikan ke halaman sebelumnya dengan pesan error
-            return redirect()->back()->withErrors(['tournament_id' => 'Tournament ID tidak valid']);
+        $teams = Team::all();
+        $user = User::all();
+        $tournaments = Tournament::all();
+        $selectedTournamentId = $request->input('tournament_id');
+
+        $user_id = Auth::user();
+
+        // Cek apakah user sudah terdaftar di turnamen ini melalui model Team
+        $existingTeam = Team::where('tournament_id', $selectedTournamentId)
+            ->where('user_id', $user_id->id)
+            ->first();
+
+        // Cek apakah user sudah terdaftar di turnamen ini melalui model TeamTournament
+        $existingTeamTournament = TeamTournament::where('tournament_id', $selectedTournamentId)
+            ->whereHas('team', function ($query) use ($user_id) {
+                $query->where('user_id', $user_id->id);
+            })
+            ->first();
+
+        if ($existingTeam || $existingTeamTournament) {
+            return redirect()->route('user.tournament')->withErrors(['error' => 'Anda sudah terdaftar di turnamen ini.']);
         }
 
-        // Jika valid, lanjutkan untuk mengambil tim dan pengguna
-        $teams = Team::all();
-        $users = User::all(); // Nama variabel diubah menjadi users untuk konsistensi
-
-        // Tampilkan view dengan data yang diperlukan
-        return view('user.createteam', compact('teams', 'users', 'selectedTournamentId'));
+        return view('user.createteam', compact('teams', 'user', 'selectedTournamentId', 'user_id', 'tournaments'));
     }
         /**
      * Store a newly created resource in storage.
@@ -56,6 +65,25 @@ class TeamController extends Controller
     {
         $tournament_id = $request->get('tournament_id');
         $user = Auth::user();
+
+        if (!$tournament_id) {
+            return redirect()->back()->withErrors(['error' => 'Tournament ID tidak ada.']);
+        }
+
+        $existingTeam = Team::where('tournament_id', $tournament_id)
+            ->where('user_id', $user->id)
+            ->first();
+
+        // Cek apakah user sudah terdaftar di turnamen ini melalui model TeamTournament
+        $existingTeamTournament = TeamTournament::where('tournament_id', $tournament_id)
+            ->whereHas('team', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->first();
+
+        if ($existingTeam || $existingTeamTournament) {
+            return redirect()->route('user.tournament')->withErrors(['error' => 'Anda sudah terdaftar di turnamen ini.']);
+        }
 
         $gambar = $request->file('profile');
         if ($gambar) {
@@ -68,6 +96,7 @@ class TeamController extends Controller
             'tournament_id' => $tournament_id,
             'user_id' => $user->id,
         ]);
+
         return redirect()->route('team.show', $team->id);
     }
 
@@ -81,7 +110,8 @@ class TeamController extends Controller
         $members = Member::where('team_id', $id)->whereNotNull('nickname')->orderByDesc('is_captain')->get();
         $categoryName = $teams->category->name ?? '';
         $categoryId = $teams->tournament->category->name ?? '';
-        return view('user.detailteam', compact('teams','category', 'membersCount', 'tournament', 'members','categoryName','categoryId'));
+        return view('user.detailteam', compact('teams', 'category', 'membersCount', 'tournament', 'members', 'categoryName', 'categoryId'));
+
     }
 
     /**
@@ -95,7 +125,7 @@ class TeamController extends Controller
         $user = User::all();
         $membersPerTeam = $team->tournament->category->membersPerTeam;
 
-        return view('user.createmember', compact('members', 'teams', 'teamId','user','membersPerTeam'));
+        return view('user.createmember', compact('members', 'teams', 'teamId', 'user', 'membersPerTeam'));
     }
 
     public function addTeam(Request $request)
@@ -104,7 +134,7 @@ class TeamController extends Controller
         $category = Category::all();
         $selectedTournamentId = $request->input('tournament_id');
 
-        return view('user.addteam', compact('user', 'selectedTournamentId','category'));
+        return view('user.addteam', compact('user', 'selectedTournamentId', 'category'));
     }
 
     public function storeTeam(TeamBaruRequest $request)
@@ -136,6 +166,6 @@ class TeamController extends Controller
 
 
         return view('user.addmember', compact('members', 'teams', 'teamId', 'user','category','membersPerTeam'));
-    }   
+    }
 
 }

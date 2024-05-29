@@ -24,7 +24,6 @@ class JadwalController extends Controller
             ->get();
         $category = Category::all();
         $jadwal = jadwal::all();
-
         $selectedTournament = Tournament::findOrFail($id);
 
         return view('penyelenggara.detailtournament', compact('jadwal','tournaments', 'category', 'user', 'teamCounts', 'selectedTournament'));
@@ -56,7 +55,29 @@ class JadwalController extends Controller
         return redirect()->route('tournament.detail', $tournament->id)->with('success','Jadwal Berhasil Ditambahkan');
     } catch (\Exception $e) {
         // Tangani jika turnamen tidak ditemukan atau terjadi kesalahan lain
-        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        return redirect()->back()->with('warning', 'Terjadi kesalahan: ' . $e->getMessage());
+    }
+}
+
+public function editJadwal(JadwalRequest $request, $id){
+
+    try{
+
+        $jadwal = Jadwal::findOrFail($id);
+        $jadwal->update([
+            'tanggalPenyisihan' => $request['tanggalPenyisihan'],
+            'waktuPenyisihan' => $request['waktuPenyisihan'],
+            'boPenyisihan' => $request['boPenyisihan'],
+            'tanggalSemi' => $request['tanggalSemi'],
+            'waktuSemi' => $request['waktuSemi'],
+            'boSemi' => $request['boSemi'],
+            'tanggalFinal' => $request['tanggalFinal'],
+            'waktuFinal' => $request['waktuFinal'],
+            'boFinal' => $request['boFinal'],
+        ]);
+        return redirect()->back()->with('success', 'Jadwal berhasil diupdate.');
+    }catch (\Exception $e){
+        return redirect()->back()->with('warning', 'Terjadi kesalahan: ' . $e->getMessage());
     }
 }
 

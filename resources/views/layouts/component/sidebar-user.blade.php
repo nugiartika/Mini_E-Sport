@@ -2,21 +2,21 @@
     <li class="menu-item {{ request()->routeIs('dashboardUser') ? 'active' : '' }}">
         <a href="{{ route('dashboardUser') }}" class="menu-link d-flex align-items-center">
             <i class="menu-icon tf-icons ti ti-dashboard"></i>
-            <span class="ms-1">Dasbor</span>
+            <div>Dasbor</div>
         </a>
     </li>
 
     <li class="menu-item {{ request()->routeIs('user.tournament') ? 'active' : '' }}">
         <a href="{{ route('user.tournament') }}" class="menu-link d-flex align-items-center">
             <i class="menu-icon tf-icons ti ti-trophy"></i>
-            <span class="ms-1">Turnamen</span>
+            <div>Turnamen</div>
         </a>
     </li>
 
     <li class="menu-item {{ request()->routeIs('team.index') ? 'active' : '' }}">
         <a href="{{ route('team.index') }}" class="menu-link d-flex align-items-center">
             <i class="menu-icon tf-icons ti ti-users-group"></i>
-            <span class="ms-1">Tim</span>
+            <div>Tim</div>
         </a>
     </li>
 

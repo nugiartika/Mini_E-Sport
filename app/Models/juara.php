@@ -9,6 +9,7 @@ class juara extends Model
 {
     use HasFactory;
     protected $guarded=['id'];
+    protected $fillable = ['nama_juara1', 'nama_juara2', 'nama_juara3', 'mvp'];
 
     public function tournament()
     {
