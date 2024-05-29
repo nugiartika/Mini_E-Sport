@@ -20,8 +20,8 @@ class DashboardUserController extends Controller
         $tournaments = Tournament::all()->count();
         $tournament = Tournament::all();
         $prizes = tournament_prize::all();
-        $tournamentFree = Tournament::where('paidment','Gratis')->count();
-        $tournamentPaid = Tournament::where('paidment','Berbayar')->count();
+        $tournamentFree = Tournament::where('paidment','Gratis')->where('status','accepted')->count();
+        $tournamentPaid = Tournament::where('paidment','Berbayar')->where('status','accepted')->count();
         return view('user.Dashboard', compact('prizes','categorys', 'tournaments', 'tournament', 'tournamentFree', 'tournamentPaid'));
     }
 
