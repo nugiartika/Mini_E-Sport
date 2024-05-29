@@ -30,6 +30,7 @@ return new class extends Migration
             $table->enum('aktif', ['aktif', 'tidak aktif'])->default('aktif');
             $table->text('reason')->nullable();
             $table->enum('paidment', ['Berbayar', 'Gratis']);
+            $table->enum('notif', ['belum baca', 'baca'])->default('belum baca');
             $table->integer('nominal')->nullable();
             $table->foreignId('juara_id')->nullable();
             $table->foreignId('jadwal_id')->nullable();
