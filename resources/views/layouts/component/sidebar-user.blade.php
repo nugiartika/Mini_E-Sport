@@ -34,10 +34,10 @@
         </a>
     </li>
 
-    <li class="menu-item {{ request()->routeIs('transaction.index') ? 'active' : '' }}">
-        <a href="{{ route('transaction.index') }}" class="menu-link d-flex align-items-center">
-            <i class="menu-icon tf-icons ti ti-wallet"></i>
-            <div>Riwayat Transaksi</div>
+    <li class="menu-item {{ request()->routeIs('payment-proof.index') ? 'active' : '' }}">
+        <a href="{{ route('payment-proof.index') }}" class="menu-link d-flex align-items-center">
+            <i class="menu-icon tf-icons ti ti-upload"></i>
+            <div>Bukti Pembayaran</div>
         </a>
     </li>
 </ul>

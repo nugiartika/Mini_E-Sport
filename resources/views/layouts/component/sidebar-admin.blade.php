@@ -55,12 +55,4 @@
             <div>Pengguna</div>
         </a>
     </li>
-
-    {{-- Data Transaksi --}}
-    <li class="menu-item {{ request()->routeIs('transaction.*') ? 'active' : '' }}">
-        <a href="{{ route('transaction.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons ti ti-moneybag"></i>
-            <div>Data Transaksi</div>
-        </a>
-    </li>
 </ul>

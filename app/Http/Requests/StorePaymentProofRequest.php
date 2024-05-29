@@ -20,10 +20,7 @@ class StorePaymentProofRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'transaction_id' => 'required|uuid|exists:transactions,id',
-            'user_id' => 'required|exists:users,id',
             'file' => 'nullable|file|mimes:jpeg,png|max:2048',
-            'payment_date' => 'required|date',
         ];
     }
 
@@ -33,16 +30,9 @@ class StorePaymentProofRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'transaction_id.required' => 'ID Transaksi wajib diisi.',
-            'transaction_id.uuid' => 'ID Transaksi harus berupa UUID yang valid.',
-            'transaction_id.exists' => 'ID Transaksi yang dipilih tidak valid.',
-            'user_id.required' => 'ID Pengguna wajib diisi.',
-            'user_id.exists' => 'ID Pengguna yang dipilih tidak valid.',
             'file.file' => 'Berkas harus berupa file.',
             'file.mimes' => 'Berkas harus berupa tipe: jpeg, png, pdf.',
             'file.max' => 'Ukuran berkas tidak boleh lebih dari 2MB.',
-            'payment_date.required' => 'Tanggal pembayaran wajib diisi.',
-            'payment_date.date' => 'Tanggal pembayaran harus berupa tanggal yang valid.',
         ];
     }
 }

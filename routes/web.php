@@ -155,7 +155,7 @@ Route::group(['prefix' => 'payment-proof', 'as' => 'payment-proof.', 'middleware
     Route::match(['put', 'patch'], '{paymentProof:id}', [PaymentProofController::class, 'update'])->name('update');
 
     // Route untuk menghapus bukti pembayaran tertentu (menggunakan payment_proof_id)
-    Route::delete('{paymentProof:payment_proof_id}', [PaymentProofController::class, 'destroy'])->name('destroy');
+    Route::delete('{paymentProof:id}', [PaymentProofController::class, 'destroy'])->name('destroy');
 });
 
 Route::resource('member', MemberController::class);
