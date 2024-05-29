@@ -180,8 +180,8 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <form id="statusForm-{{ $tournament->id }}" action="{{ route('updateStatus', $tournament->id) }}"
-                                            method="POST">
+                                        <form id="statusForm-{{ $tournament->id }}"
+                                            action="{{ route('updateStatus', $tournament->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <select class="dropdown-item" id="status" name="status"
@@ -337,7 +337,7 @@
 @push('script')
     <script>
         function submitForm(id) {
-            document.getElementById("statusForm-"+id).submit();
+            document.getElementById("statusForm-" + id).submit();
         }
     </script>
     <script>

@@ -309,32 +309,27 @@
 
 
                     @if (auth()->user()->team)
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body d-flex flex-column align-items-center">
-                                        <div class="d-flex justify-content-center align-items-center mb-4"
-                                            style="height: 100px;">
-                                            <div class="d-flex justify-content-center align-items-center gap-3">
-                                                <h6 style="color: white;">Buat tim baru atau gunakan tim yang sudah ada.
-                                                </h6>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
-                                                Ada</a>
-                                            <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
-                                        </div>
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body d-flex flex-column align-items-center">
+                                <div class="d-flex justify-content-center align-items-center mb-4"
+                                    style="height: 100px;">
+                                    <div class="d-flex justify-content-center align-items-center gap-3">
+                                        <h6 style="color: white;">Buat tim baru atau gunakan tim yang sudah ada.
+                                        </h6>
                                     </div>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
-                                            Ada</a>
-                                        <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
-                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
+                                        Ada</a>
+                                    <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
                     @else
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

@@ -276,7 +276,7 @@ class TournamentController extends Controller
         }
 
 
-        $tournaments = $query->get();
+        $tournaments = $query->paginate(6);
         $prizes = tournament_prize::all();
 
         return view('penyelenggara.tournament', compact('tournaments', 'categories', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'counttournaments', 'prizes'));
