@@ -344,9 +344,11 @@
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-center">
-
+                                            <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
+                                                Ada</a>
                                             <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
                                         </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -368,33 +370,7 @@
     </div>
 @endsection
 @push('script')
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var exampleModal = document.getElementById('exampleModalCenter');
-            exampleModal.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget; // Tombol yang memicu modal
-                var tournamentId = button.getAttribute(
-                    'data-tournament-id'); // Ambil ID turnamen dari atribut data
 
-                // Periksa apakah pengguna memiliki tim atau tidak
-                var userHasTeam = {{ auth()->user()->team ? 'true' : 'false' }};
-
-                // Update tautan dengan ID turnamen yang benar
-                var existingTeamLink = exampleModal.querySelector('.btn-secondary');
-                var newTeamLink = exampleModal.querySelector('.btn-primary');
-
-                // Sembunyikan tombol "Yang Sudah Ada" jika pengguna tidak memiliki tim
-                if (!userHasTeam) {
-                    existingTeamLink.style.display = 'none';
-                } else {
-                    existingTeamLink.href = '/teams/create?tournament_id=' + tournamentId;
-                }
-
-                // Tetapkan href untuk tombol "Tim Baru"
-                newTeamLink.href = '/team/create?tournament_id=' + tournamentId;
-            });
-        });
-    </script> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var exampleModal = document.getElementById('exampleModalCenter');

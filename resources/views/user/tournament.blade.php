@@ -1,4 +1,3 @@
-
 {{-- @extends('layouts.user') --}}
 @extends('user.layouts.app')
 @section('style')
@@ -83,9 +82,9 @@
     </style>
 @endsection
 @section('content')
-@php
-    use App\Models\TeamTournament;
-@endphp
+    @php
+        use App\Models\TeamTournament;
+    @endphp
     <div class="modal" tabindex="-1" id="filter" style="color: #ffffff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
@@ -174,24 +173,26 @@
 
                                     @php
 
-                                    // Ambil total tim dari hasil perhitungan
-                                    $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
-                                    $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
-                                    $totalTeams = ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
+                                        // Ambil total tim dari hasil perhitungan
+                                        $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+                                        $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+                                        $totalTeams =
+                                            ($teamCount ? $teamCount->count : 0) +
+                                            ($teamIdCount ? $teamIdCount->count : 0);
 
-                                    $userTeams = $teams ?? collect();
-                                    $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
-                                    $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+                                        $userTeams = $teams ?? collect();
+                                        $userTeamsInTournament = $userTeams->where('tournament_id', $tournament->id);
+                                        $isUserInTournament = $userTeamsInTournament->isNotEmpty();
 
-                                    if ($isUserInTournament) {
-                                        // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-                                        $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+                                        if ($isUserInTournament) {
+                                            // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+                                            $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
 
-                                        // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-                                        $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-                                            ->where('tournament_id', $tournament->id)
-                                            ->get();
-                                    }
+                                            // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+                                            $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+                                                ->where('tournament_id', $tournament->id)
+                                                ->get();
+                                        }
                                     @endphp
 
 
@@ -213,7 +214,7 @@
                                             </div>
                                         </div>
 
-                                        @if (($totalTeams && $totalTeams < $tournament->slotTeam) && (!$isUserInTournament && !$userTeamsWithRelation))
+                                        @if ($totalTeams && $totalTeams < $tournament->slotTeam && (!$isUserInTournament && !$userTeamsWithRelation))
                                             <div class="text-center">
                                                 <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
@@ -240,36 +241,39 @@
                                         @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
                                         @endif
 
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body d-flex flex-column align-items-center">
-                                    <div class="d-flex justify-content-center align-items-center mb-4"
-                                        style="height: 100px;">
-                                        <center>
-                                            <h6 style="color: white;">Create a New Team for the Tournament or Choose an
-                                                Existing Team</h6>
-                                        </center>
-                                    </div>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="#" type="button" class="btn btn-secondary me-2">Existing Team</a>
-                                        <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-lg-12">
-                        <center>
-                            <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                        </center>
-                        <h1 class="table-light" style="text-align: center;">
-                            Data Tidak Tersedia
-                        </h1>
-                    </div>
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body d-flex flex-column align-items-center">
+                                                        <div class="d-flex justify-content-center align-items-center mb-4"
+                                                            style="height: 100px;">
+                                                            <center>
+                                                                <h6 style="color: white;">Create a New Team for the
+                                                                    Tournament or Choose an
+                                                                    Existing Team</h6>
+                                                            </center>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center">
+                                                            <a href="#" type="button"
+                                                                class="btn btn-secondary me-2">Existing Team</a>
+                                                            <a href="#" type="button" class="btn btn-primary">Tim
+                                                                Baru</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <div class="col-lg-12">
+                                            <center>
+                                                <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                                    style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
+                                            </center>
+                                            <h1 class="table-light" style="text-align: center;">
+                                                Data Tidak Tersedia
+                                            </h1>
+                                        </div>
                 @endforelse
 
 
@@ -280,26 +284,26 @@
 @endsection
 
 @push('script')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var exampleModal = document.getElementById('exampleModalCenter');
-        exampleModal.addEventListener('show.bs.modal', function(event) {
-            var button = event.relatedTarget; // Tombol yang memicu modal
-            var tournamentId = button.getAttribute(
-                'data-tournament-id'); // Ambil ID turnamen dari atribut data
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var exampleModal = document.getElementById('exampleModalCenter');
+            exampleModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget; // Tombol yang memicu modal
+                var tournamentId = button.getAttribute(
+                    'data-tournament-id'); // Ambil ID turnamen dari atribut data
 
-            // Update tautan dengan ID turnamen yang benar
-            var existingTeamLink = exampleModal.querySelector('.btn-secondary');
-            var newTeamLink = exampleModal.querySelector('.btn-primary');
+                // Update tautan dengan ID turnamen yang benar
+                var existingTeamLink = exampleModal.querySelector('.btn-secondary');
+                var newTeamLink = exampleModal.querySelector('.btn-primary');
 
-            existingTeamLink.href = '/teams/create?tournament_id=' + tournamentId;
-            newTeamLink.href = '/team/create?tournament_id=' + tournamentId;
+                existingTeamLink.href = '/teams/create?tournament_id=' + tournamentId;
+                newTeamLink.href = '/team/create?tournament_id=' + tournamentId;
+            });
         });
-    });
-</script>
+    </script>
 
 
-{{-- <script>
+    {{-- <script>
     $(document).ready(function() {
         $('#existing').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Tombol yang memicu modal
@@ -327,31 +331,31 @@
     }
 </script> --}}
 
-<script>
-    $(document).ready(function() {
-        $('#existing').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget); // Tombol yang memicu modal
-            var tournamentId = button.data(
-                'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
-            var modal = $(this);
-            modal.find('.modal-body input[name="tournament_id"]').val(
-                tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
-        });
-    });
-
-    function cardRadio(card) {
-        var radioButton = card.querySelector('input[type="radio"]');
-
-        if (!radioButton.checked) {
-            radioButton.checked = true;
-
-            var cards = document.querySelectorAll('.card');
-            cards.forEach(function(card) {
-                card.classList.remove('border-red');
+    <script>
+        $(document).ready(function() {
+            $('#existing').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Tombol yang memicu modal
+                var tournamentId = button.data(
+                    'tournament-id'); // Ambil nilai tournament_id dari atribut data-tournament-id
+                var modal = $(this);
+                modal.find('.modal-body input[name="tournament_id"]').val(
+                    tournamentId); // Isi input tersembunyi di dalam modal dengan tournament_id
             });
+        });
 
-            card.classList.add('border-red');
+        function cardRadio(card) {
+            var radioButton = card.querySelector('input[type="radio"]');
+
+            if (!radioButton.checked) {
+                radioButton.checked = true;
+
+                var cards = document.querySelectorAll('.card');
+                cards.forEach(function(card) {
+                    card.classList.remove('border-red');
+                });
+
+                card.classList.add('border-red');
+            }
         }
-    }
-</script>
+    </script>
 @endpush
