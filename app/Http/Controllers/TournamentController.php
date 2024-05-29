@@ -176,7 +176,9 @@ class TournamentController extends Controller
 
     public function history()
     {
-        $teams = Team::orderBy('id', 'desc')->get();
+        $teams = Team::orderBy('id', 'desc')
+        ->where('user_id', auth()->user()->id)
+        ->get();
         return view('user.historytournament', compact('teams'));
     }
 
