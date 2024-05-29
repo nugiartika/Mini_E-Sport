@@ -231,7 +231,7 @@
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
                                 <strong>Tanggal</strong>
-                                <span>{{ \Carbon\Carbon::parse($tournament->permainan)->locale('id')->format('d F Y') }}</span>
+                                <span>{{ \Carbon\Carbon::parse($tournament->permainan)->translatedFormat('d F Y') }}</span>
                             </div>
 
                             <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">

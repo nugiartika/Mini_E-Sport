@@ -157,7 +157,9 @@ class TournamentController extends Controller
 
     public function history()
     {
-        $teams = Auth::user()->team;
+        $teams = Auth::user()->member;
+
+        dd($teams);
 
         return view('user.historytournament', compact('teams'));
     }

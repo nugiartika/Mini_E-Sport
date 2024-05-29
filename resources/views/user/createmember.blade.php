@@ -20,9 +20,17 @@
     </style>
 @endsection
 @section('content')
-    <div class="container d-flex justify-content-center align-items-center" style="margin-top: 10%; color: #939393">
-
+    <div class="container row justify-content-center align-items-center" style="margin-top: 10%; color: #939393">
         <div class="col-12 col-lg-6">
+
+            @if($errors->all())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger" role="alert">
+                        {{ $error }}
+                    </div>
+                @endforeach
+            @endif
+
             <div class="card mb-4">
                 <div class="card-body">
                     <form action="{{ route('member.store') }}" method="POST">
