@@ -302,17 +302,9 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const submitButton = document.querySelector('button[type="submit"]');
-            submitButton.addEventListener('click', function(event) {
-                if (submitButton.disabled) {
-                    event.preventDefault();
-                } else {
-                    submitButton.disabled = true;
-                    submitButton.textContent = "Submitting...";
-                }
-            });
-        });
+        $('form').on('submit', function() {
+            $(this).find("button[type='submit']").prop('disabled', true);
+        })
     </script>
 
     @if ($errors->any())
