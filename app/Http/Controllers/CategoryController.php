@@ -28,9 +28,14 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
+        // $counttournaments = Tournament::where('users_id', auth()->user()->id)
+
+        // ->where('status', 'rejected')
+        // ->count();
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
-        ->where('status', 'rejected')
-        ->count();
+            ->whereIn('status', ['rejected', 'accepted'])
+            ->where('notif', 'belum baca')
+            ->count();
         return view('penyelenggara.game', compact('categories', 'counttournaments'));
     }
 

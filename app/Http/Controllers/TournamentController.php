@@ -42,7 +42,10 @@ class TournamentController extends Controller
         $tournaments = $tournamentsQuery->paginate(6);
 
         // Count the tournaments with 'rejected' status
-        $counttournaments = $tournamentsQuery->where('status', 'rejected')->count();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+            ->whereIn('status', ['rejected', 'accepted'])
+            ->where('notif', 'belum baca')
+            ->count();
 
         // Get team counts grouped by tournament_id
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
@@ -117,7 +120,10 @@ class TournamentController extends Controller
     {
         $user = Auth::user();
         $tournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->get();
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+        ->whereIn('status', ['rejected', 'accepted'])
+        ->where('notif', 'belum baca')
+        ->count();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
@@ -163,7 +169,10 @@ class TournamentController extends Controller
             return redirect()->back()->with('error', 'ID turnamen tidak valid.');
         }
 
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+            ->whereIn('status', ['rejected', 'accepted'])
+            ->where('notif', 'belum baca')
+            ->count();
         $tournament = Tournament::all();
         $user = User::all();
         $category = Category::all();
@@ -268,7 +277,10 @@ class TournamentController extends Controller
 
     public function filter(Request $request)
     {
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+        ->whereIn('status', ['rejected', 'accepted'])
+        ->where('notif', 'belum baca')
+        ->count();
         $oldSearch = $request->input('search');
         $user = Auth::user();
         $categories = Category::all();
@@ -349,7 +361,10 @@ class TournamentController extends Controller
 
     public function detailTournament(Tournament $tournament, $id)
     {
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+            ->whereIn('status', ['rejected', 'accepted'])
+            ->where('notif', 'belum baca')
+            ->count();
         $user = Auth::user();
         // $tournaments = Tournament::all();
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
@@ -471,7 +486,10 @@ class TournamentController extends Controller
 
     public function edittour($id)
     {
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+            ->whereIn('status', ['rejected', 'accepted'])
+            ->where('notif', 'belum baca')
+            ->count();
         $tournament = Tournament::FindOrFail($id);
         $user = User::all();
         $category = Category::all();
@@ -569,7 +587,10 @@ class TournamentController extends Controller
 
     public function editStatus($id)
     {
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+        ->whereIn('status', ['rejected', 'accepted'])
+        ->where('notif', 'belum baca')
+        ->count();
         $tournament = Tournament::FindOrFail($id);
         $user = User::all();
         $category = Category::all();
