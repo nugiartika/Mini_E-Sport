@@ -7,6 +7,8 @@ use App\Http\Requests\StoreMemberRequest;
 use App\Models\Member;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class MemberController extends Controller
 {
@@ -23,6 +25,9 @@ class MemberController extends Controller
 
     public function create(Request $request)
     {
+        $query = $request->input('query');
+        $users = User::where('email', 'LIKE', "%{$query}%")->where('role', 'user')->get();
+        // return response()->json($users);
         $members = Member::all();
         $teams = Team::all();
         $selectedTeamId = $request->input('team_id');
@@ -34,6 +39,8 @@ class MemberController extends Controller
     public function store(StoreMemberRequest $request)
     {
         try {
+            Log::info($request->all());
+
             $nicknames = array_merge(
                 array_filter($request->nickname, 'is_string'),
                 array_filter($request->nickname_cadangan, 'is_string')

@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('ptournament', TournamentController::class);
         Route::get('/ptournamentfilter', [TournamentController::class, 'filter'])->name('tournament.filter');
         Route::get('/NotifikasiTournament', [TournamentController::class, 'notification'])->name('notificationTournament');
+        Route::get('/UpdateNotifikasi{id}', [TournamentController::class, 'updatenotification'])->name('Updatenotification');
         Route::get('/games', [CategoryController::class, 'indexuser'])->name('games');
         Route::post('/jadwal/{tournament}', [JadwalController::class, 'jadwal'])->name('ptournament.jadwal');
         Route::patch('/editjadwal/{tournament}', [JadwalController::class, 'editJadwal'])->name('ptournament.editjadwal');
@@ -83,6 +84,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('user')->group(function () {
         // Route::post('/teams', [TeamController::class, 'storeId'])->name('team.storeId')->name('team.create');
         Route::get('DashboardUser', [DashboardUserController::class, 'index'])->name('dashboardUser');
+        Route::get('/search-users', [UserController::class, 'searchUsers']);
+        // Route::get('member/{id}/', [UserController::class, 'searchUsers'])->name('dashboardUser');
         Route::get('tournamentUser/history', [TournamentController::class, 'history'])->name('user.tournament.history');
         Route::get('/tournamentfilter', [TournamentController::class, 'filteruser'])->name('tournament.filteruser');
         Route::get('/detailTeam/{id}', [TeamController::class, 'indexdetail'])->name('user.detailTeam');

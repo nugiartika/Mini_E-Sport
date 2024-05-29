@@ -8,6 +8,7 @@ use App\Models\TeamTournament;
 use App\Models\Tournament;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class TeamTournamentController extends Controller
@@ -26,23 +27,31 @@ class TeamTournamentController extends Controller
      * Show the form for creating a new resource.
      */
 
-    // public function create(Request $request)
-    // {
-    //     $tournament_id = $request->query('tournament_id');
-    //     $tournaments = Tournament::all();
-    //     $teams = Team::whereHas('tournament', function ($query) use ($tournament_id) {
-    //         $query->where('category_id', $tournament_id);
-    //     })->get();
-
-    //     return view('user.tournament', compact('teams', 'tournaments'));
-    // }
+    
     public function create(Request $request)
     {
         $teams = Team::where('user_id', auth()->id())->get();
         $tournaments = Tournament::all();
         $selectedTournamentId = $request->input('tournament_id');
 
-        return view('user.teams', compact('teams', 'tournaments', 'selectedTournamentId'));
+        $user_id = Auth::user();
+        $existingTeam = Team::where('tournament_id', $selectedTournamentId)
+        ->where('user_id', $user_id->id)
+        ->first();
+
+        // Cek apakah user sudah terdaftar di turnamen ini melalui model TeamTournament
+        $existingTeamTournament = TeamTournament::where('tournament_id', $selectedTournamentId)
+            ->whereHas('team', function ($query) use ($user_id) {
+                $query->where('user_id', $user_id->id);
+            })
+            ->first();
+
+        if ($existingTeam || $existingTeamTournament) {
+            return redirect()->route('user.tournament')->withErrors(['error' => 'Anda sudah terdaftar di turnamen ini.']);
+        }
+
+        
+        return view('user.teams', compact('teams', 'tournaments', 'selectedTournamentId','user_id', 'tournaments'));
     }
 
     public function store(TeamTournamentRequest $request)
