@@ -308,7 +308,7 @@
                     </div>
 
 
-                    @if (auth()->user()->team)
+                    @if ($teamuser)
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -344,11 +344,10 @@
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-center">
-                                            <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
-                                                Ada</a>
+
                                             <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                             </div>

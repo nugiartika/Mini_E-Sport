@@ -202,7 +202,5 @@ document.getElementById('userSearch').addEventListener('keyup', function() {
             });
     }
 });
-
-
 </script>
 @endpush

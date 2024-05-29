@@ -108,10 +108,11 @@ class TournamentController extends Controller
             ->get();
         $category = Category::all();
         $teams = Team::with('tournament')->where('user_id', auth()->id())->get();
+        $teamuser = Team::where('user_id', auth()->id())->exists();
         $teamTournament = TeamTournament::all();
         $prizes = tournament_prize::all();
 
-        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamIdCounts', 'teamTournament'));
+        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teams','teamuser', 'teamIdCounts', 'teamTournament'));
     }
 
 
