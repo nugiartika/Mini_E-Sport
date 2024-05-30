@@ -26,7 +26,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="mb-3">
-                        <input type="text" id="userSearch" class="form-control" placeholder="Search for users by email...">
+                        <input type="text" id="userSearch" class="form-control" placeholder="Cari Email Pengguna...">
                         <div id="searchResults" class="mt-2"></div>
                     </div>
 
@@ -122,40 +122,111 @@
 
 @push('script')
 <script>
-    document.getElementById('userSearch').addEventListener('keyup', function() {
-        var query = this.value;
-        if (query.length > 2) {
-            fetch('/search-users?query=' + query)
-                .then(response => response.json())
-                .then(data => {
-                    var resultsContainer = document.getElementById('searchResults');
-                    resultsContainer.innerHTML = '';
-                    data.forEach(user => {
-                        var userElement = document.createElement('div');
-                        userElement.className = 'search-result mt-4 mb-4';
-                        userElement.textContent = user.email;
-                        userElement.dataset.email = user.email;
-
-                        var addButton = document.createElement('button');
-                        addButton.textContent = 'Add';
-                        addButton.className = 'btn btn-sm btn-primary ms-4';
-                        addButton.addEventListener('click', function(event) {
-                            event.preventDefault();
-                            var nicknameInputs = document.querySelectorAll('input[name="nickname[]"], input[name="nickname_cadangan[]"]');
-                            for (var i = 0; i < nicknameInputs.length; i++) {
-                                if (nicknameInputs[i].value === '') {
-                                    nicknameInputs[i].value = user.email;
-                                    break;
-                                }
-                            }
-                            resultsContainer.innerHTML = '';
-                        });
-
-                        userElement.appendChild(addButton);
-                        resultsContainer.appendChild(userElement);
+   document.addEventListener('DOMContentLoaded', function () {
+        function updateClearButton(input) {
+            let clearButton = input.nextElementSibling;
+            if (input.value.trim() !== '') {
+                if (!clearButton || !clearButton.classList.contains('clear-btn')) {
+                    clearButton = document.createElement('button');
+                    clearButton.textContent = 'Hapus';
+                    clearButton.className = 'btn btn-sm btn-danger ms-2 clear-btn mt-2 ';
+                    clearButton.type = 'button'; // Ensure the button does not submit the form
+                    clearButton.addEventListener('click', function () {
+                        input.value = '';
+                        input.dispatchEvent(new Event('input')); // Trigger input event to update the clear button
                     });
-                });
+                    input.insertAdjacentElement('afterend', clearButton);
+                }
+            } else {
+                if (clearButton && clearButton.classList.contains('clear-btn')) {
+                    clearButton.remove();
+                }
+            }
         }
+
+        document.querySelectorAll('input[name="nickname[]"], input[name="nickname_cadangan[]"]').forEach(function (input, index) {
+            if (index !== 0) { // Exclude the first "nickname" input field where $i is equal to 1
+                updateClearButton(input);
+
+                input.addEventListener('input', function () {
+                    updateClearButton(input);
+                });
+            }
+        });
+
+        // document.getElementById('userSearch').addEventListener('keyup', function () {
+        //     var query = this.value;
+        //     if (query.length > 2) {
+        //         fetch('/search-users?query=' + query)
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 var resultsContainer = document.getElementById('searchResults');
+        //                 resultsContainer.innerHTML = '';
+        //                 data.forEach(user => {
+        //                     var userElement = document.createElement('div');
+        //                     userElement.className = 'search-result d-flex justify-content-between';
+        //                     userElement.textContent = user.email;
+        //                     userElement.dataset.email = user.email;
+
+        //                     var addButton = document.createElement('button');
+        //                     addButton.textContent = 'Add';
+        //                     addButton.className = 'btn btn-sm btn-primary ms-4 mt-2';
+        //                     addButton.addEventListener('click', function (event) {
+        //                         event.preventDefault();
+        //                         var nicknameInputs = document.querySelectorAll('input[name="nickname[]"], input[name="nickname_cadangan[]"]');
+        //                         for (var i = 0; i < nicknameInputs.length; i++) {
+        //                             if (nicknameInputs[i].value === '') {
+        //                                 nicknameInputs[i].value = user.email;
+        //                                 nicknameInputs[i].dispatchEvent(new Event('input'));
+        //                                 break;
+        //                             }
+        //                         }
+        //                         resultsContainer.innerHTML = '';
+        //                     });
+
+        //                     userElement.appendChild(addButton);
+        //                     resultsContainer.appendChild(userElement);
+        //                 });
+        //             });
+        //     }
+        // });
+        document.getElementById('userSearch').addEventListener('keyup', function () {
+            var query = this.value;
+            if (query.length > 2) {
+                fetch('/search-users?query=' + query)
+                    .then(response => response.json())
+                    .then(data => {
+                        var resultsContainer = document.getElementById('searchResults');
+                        resultsContainer.innerHTML = '';
+                        data.forEach(user => {
+                            var userElement = document.createElement('div');
+                            userElement.className = 'search-result d-flex justify-content-between';
+                            userElement.textContent = user.email;
+                            userElement.dataset.email = user.email;
+
+                            var addButton = document.createElement('button');
+                            addButton.textContent = 'Add';
+                            addButton.className = 'btn btn-sm btn-primary ms-4';
+                            addButton.addEventListener('click', function (event) {
+                                event.preventDefault();
+                                var nicknameInputs = document.querySelectorAll('input[name="nickname[]"], input[name="nickname_cadangan[]"]');
+                                for (var i = 0; i < nicknameInputs.length; i++) {
+                                    if (nicknameInputs[i].value === '') {
+                                        nicknameInputs[i].value = user.email;
+                                        nicknameInputs[i].dispatchEvent(new Event('input'));
+                                        break;
+                                    }
+                                }
+                                resultsContainer.innerHTML = '';
+                                document.getElementById('userSearch').value = ''; // Clear the search input field
+                            });
+
+                            userElement.appendChild(addButton);
+                            resultsContainer.appendChild(userElement);
+                        });
+                    });
+            }
+        });
     });
 
 
