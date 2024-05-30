@@ -93,13 +93,6 @@
                 <div>Penghasilan</div>
             </a>
         </li>
-        {{-- User --}}
-        <li class="menu-item {{ request()->routeIs('transaction.*') ? 'active' : '' }}">
-            <a href="{{ route('transaction.index') }}" class="menu-link">
-                <i class="menu-icon ti ti-moneybag"></i>
-                <div>Data Transaksi</div>
-            </a>
-        </li>
 
     </ul>
 </aside>
