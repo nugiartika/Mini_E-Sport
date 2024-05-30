@@ -15,10 +15,12 @@ use App\Models\TeamTournament;
 use App\Models\tournament_prize;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TournamentRequest;
 use App\Http\Requests\UpdateTournamentRequest;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TournamentController extends Controller
 {
@@ -146,7 +148,7 @@ class TournamentController extends Controller
             $query->select('tournament_id', DB::raw('COUNT(*) as count'))
                   ->from('teams')
                   ->groupBy('tournament_id')
-                  ->unionAll(   
+                  ->unionAll(
                       TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
                         ->groupBy('tournament_id')
                   );
@@ -292,6 +294,9 @@ class TournamentController extends Controller
         // Siapkan array hasil untuk dikirim ke view
         $result = [];
         $totalIncomeOrganizer = 0;
+        $perPage = 5;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
         foreach ($tournaments as $tournament) {
             $totalTeams = $combinedCounts->get($tournament->id, 0);
             $totalNominal = $totalTeams * $tournament->nominal;
@@ -308,13 +313,23 @@ class TournamentController extends Controller
                 'biaya_register' => $biayaRegister,
                 'id_organizer' => $id_organizer
             ];
+            $resultCollection = collect($result);
+
+            // Paginate the result collection
+            $paginatedResult = new LengthAwarePaginator(
+                $resultCollection->forPage($currentPage, $perPage),
+                $resultCollection->count(),
+                $perPage,
+                $currentPage,
+                ['path' => Paginator::resolveCurrentPath()]
+            );
         }
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
         ->whereIn('status', ['rejected', 'accepted'])
         ->where('notif', 'belum baca')
         ->count();
 
-        return view('penyelenggara.income', compact('result','counttournaments','totalIncomeOrganizer','id_organizer'));
+        return view('penyelenggara.income', compact('result','paginatedResult','counttournaments','totalIncomeOrganizer','id_organizer'));
     }
 
     /**
