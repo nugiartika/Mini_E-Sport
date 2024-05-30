@@ -19,12 +19,13 @@
                                 {{-- <a href="{{ route('user.tournament.history', ['tournament' => $team->tournament->id]) }}"> --}}
                                     <h3 class="mb-0">{{ $team->tournament->name }}</h3>
                                 {{-- </a> --}}
+                                @if ($team->tournament->paidment !== 'Gratis')
 
                                 @if (!in_array($team->tournament->id, $uploadedTournamentIds))
-                                @else
                                 <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#uploadbukti"
                                         class="btn btn-sm btn-primary"
                                         data-tournament-id="{{ $team->tournament->id }}">Kirim Bukti</a>
+                                @endif
                                 @endif
                             </div>
 
@@ -43,12 +44,18 @@
                             </div>
                             <div class="d-flex gap-3 border-top justify-content-between pt-3">
                                 <span>Transaksi Terakhir</span>
-                                {{-- @if ($latestTransaction)
-                                    <span
-                                        class="badge bg-{{ \App\Enums\TransactionStatus::color($latestTransaction->status) }}">{{ \App\Enums\TransactionStatus::label($latestTransaction->status) }}</span>
-                                @else
-                                    <span>Belum Ada Transaksi</span>
-                                @endif --}}
+                                @foreach ($uploads as $upload)
+
+                                    @if ($upload->status === 'pending')
+                                    <span>Menungggu Konfirmasi</span>
+                                    @elseif ($upload->status === 'accepted')
+                                    <span>Diterima</span>
+                                    @elseif ($upload->status === 'rejected')
+                                    <span>Ditolak</span>
+                                    @else
+                                        <span>Belum Ada Transaksi</span>
+                                    @endif
+                                    @endforeach
                             </div>
                         @endif
                         </div>
@@ -74,12 +81,15 @@
                                 {{-- <a href="{{ route('user.tournament.history', ['tournament' => $teamtournament->tournament->id]) }}"> --}}
                                     <h3 class="mb-0">{{ $teamtournament->tournament->name }}</h3>
                                 {{-- </a> --}}
-                           @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
-                                @else
-                                <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#uploadbukti"
-                                    class="btn btn-sm btn-primary"
-                                    data-tournament-id="{{ $teamtournament->tournament->id }}">kirim bukti</a>
-                                        @endif
+                                @if ($teamtournament->tournament->paidment !== 'Gratis')
+
+                            @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
+                            <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#uploadbukti"
+                                class="btn btn-sm btn-primary"
+                                data-tournament-id="{{ $teamtournament->tournament->id }}">kirim bukti</a>
+
+                            @endif
+                            @endif
                             </div>
 
                             <div class="d-flex gap-3 justify-content-between py-3">
@@ -97,15 +107,18 @@
                                 </div>
                                 <div class="d-flex gap-3 border-top justify-content-between pt-3">
                                     <span>Transaksi Terakhir</span>
-                                    {{-- @if ($uploads->status === 'pending')
+                                    @foreach ($uploads as $upload)
+
+                                    @if ($upload->status === 'pending')
                                     <span>Menungggu Konfirmasi</span>
-                                    @elseif ($uploads->status === 'accepted')
+                                    @elseif ($upload->status === 'accepted')
                                     <span>Diterima</span>
-                                    @elseif ($uploads->status === 'rejected')
+                                    @elseif ($upload->status === 'rejected')
                                     <span>Ditolak</span>
                                     @else
                                         <span>Belum Ada Transaksi</span>
-                                    @endif --}}
+                                    @endif
+                                    @endforeach
                                 </div>
                             @endif
                         </div>
