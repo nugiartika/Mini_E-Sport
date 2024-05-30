@@ -62,6 +62,8 @@
             </thead>
             <tbody>
                 @forelse ($result as $item)
+                @if ($acceptedUploads->contains('tournament_id', $item['tournament']->id))
+
                 @if ($item['total_teams'] != 0)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
@@ -72,6 +74,8 @@
                     <td> Rp . {{ number_format($item['income_organizer'],2,',','.') }}</td>
                 </tr>
                 @endif
+                @endif
+
                 @empty
                     <tr>
                         <td colspan="6">
