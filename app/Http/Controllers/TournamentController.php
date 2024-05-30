@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TournamentRequest;
 use App\Http\Requests\UpdateTournamentRequest;
+use App\Models\upload;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class TournamentController extends Controller
@@ -222,8 +223,10 @@ class TournamentController extends Controller
         $teams = Team::orderBy('id', 'desc')
             ->where('user_id', auth()->id())
             ->get();
+        $uploads = upload::where('user_id', auth()->user()->id)->get();
+        $uploadedTournamentIds = $uploads->pluck('tournament_id')->toArray();
 
-        return view('user.historytournament', compact('teams'));
+        return view('user.historytournament', compact('teams','uploads','uploadedTournamentIds'));
     }
 
     public function indexIncome()

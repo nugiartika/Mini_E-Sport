@@ -93,7 +93,7 @@ class UploadController extends Controller
     public function update(Request $request, $id)
     {
         $upload =  upload::findOrFail($id);
-        
+
         $request->validate([
             'status' => 'required|in:accepted,rejected',
             'reason' => 'required_if:status,rejected|nullable|string|max:255',

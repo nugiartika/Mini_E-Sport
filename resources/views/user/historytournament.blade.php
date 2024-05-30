@@ -20,18 +20,37 @@
                                     <h3 class="mb-0">{{ $team->tournament->name }}</h3>
                                 {{-- </a> --}}
 
-                                {{-- @if (!in_array($team->tournament->id, $uploadedTournamentIds))
-                                @else --}}
+                                @if (!in_array($team->tournament->id, $uploadedTournamentIds))
+                                @else
                                 <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#uploadbukti"
                                         class="btn btn-sm btn-primary"
                                         data-tournament-id="{{ $team->tournament->id }}">Kirim Bukti</a>
-                                {{-- @endif --}}
+                                @endif
                             </div>
 
                             <div class="d-flex gap-3 justify-content-between py-3">
                                 <span>Tanggal Ikut</span>
                                 <span>{{ $team->created_at->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}</span>
                             </div>
+                            @if ($team->tournament->paidment !== 'Gratis')
+                            <div class="d-flex gap-3 border-top justify-content-between py-3">
+                                <span>Sudah Bayar?</span>
+                                @if (!in_array($team->tournament->id, $uploadedTournamentIds))
+                                <span>Sudah</span>
+                                @else
+                                <span>Belum</span>
+                                @endif
+                            </div>
+                            <div class="d-flex gap-3 border-top justify-content-between pt-3">
+                                <span>Transaksi Terakhir</span>
+                                {{-- @if ($latestTransaction)
+                                    <span
+                                        class="badge bg-{{ \App\Enums\TransactionStatus::color($latestTransaction->status) }}">{{ \App\Enums\TransactionStatus::label($latestTransaction->status) }}</span>
+                                @else
+                                    <span>Belum Ada Transaksi</span>
+                                @endif --}}
+                            </div>
+                        @endif
                         </div>
                     </div>
                 </div>
@@ -39,13 +58,13 @@
 
 
             @foreach ($team->teamTournament as $teamtournament)
-                @php
+                {{-- @php
                     $transaction = $teamtournament->transaction()->where('status', 'PAID');
                     $findIsNotSuccess = $teamtournament->transaction()->whereNotIn('status', ['PAID', 'UNPAID', 'PENDING']);
                     $findIsSuccess = $teamtournament->transaction()->whereIn('status', ['PAID', 'UNPAID', 'PENDING']);
                     $transactionExists = $transaction->exists();
                     $latestTransaction = $teamtournament->transaction()->latest()->first();
-                @endphp
+                @endphp --}}
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
                         <img src="{{ asset('storage/' . $teamtournament->tournament->images) }}" alt="No images"
@@ -55,13 +74,12 @@
                                 {{-- <a href="{{ route('user.tournament.history', ['tournament' => $teamtournament->tournament->id]) }}"> --}}
                                     <h3 class="mb-0">{{ $teamtournament->tournament->name }}</h3>
                                 {{-- </a> --}}
-{{--
-                                @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
-                                @else --}}
+                           @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
+                                @else
                                 <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#uploadbukti"
                                     class="btn btn-sm btn-primary"
                                     data-tournament-id="{{ $teamtournament->tournament->id }}">kirim bukti</a>
-                                        {{-- @endif --}}
+                                        @endif
                             </div>
 
                             <div class="d-flex gap-3 justify-content-between py-3">
@@ -71,16 +89,23 @@
                             @if ($teamtournament->tournament->paidment !== 'Gratis')
                                 <div class="d-flex gap-3 border-top justify-content-between py-3">
                                     <span>Sudah Bayar?</span>
-                                    <span>{{ $transactionExists ? 'Sudah' : 'Belum' }}</span>
+                                    @if (!in_array($team->tournament->id, $uploadedTournamentIds))
+                                    <span>Sudah</span>
+                                    @else
+                                    <span>Belum</span>
+                                    @endif
                                 </div>
                                 <div class="d-flex gap-3 border-top justify-content-between pt-3">
                                     <span>Transaksi Terakhir</span>
-                                    @if ($latestTransaction)
-                                        <span
-                                            class="badge bg-{{ \App\Enums\TransactionStatus::color($latestTransaction->status) }}">{{ \App\Enums\TransactionStatus::label($latestTransaction->status) }}</span>
+                                    {{-- @if ($uploads->status === 'pending')
+                                    <span>Menungggu Konfirmasi</span>
+                                    @elseif ($uploads->status === 'accepted')
+                                    <span>Diterima</span>
+                                    @elseif ($uploads->status === 'rejected')
+                                    <span>Ditolak</span>
                                     @else
                                         <span>Belum Ada Transaksi</span>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             @endif
                         </div>
@@ -116,7 +141,7 @@
                         <input type="hidden" name="tournament_id" value="">
 
                         <div class="mb-3">
-                            <label for="upload" class="form-label">Foto Cover</label>
+                            <label for="upload" class="form-label">Foto Bukti Pembayaran</label>
                             <input type="file" class="form-control @error('upload') is-invalid @enderror" id="upload"
                                 name="upload">
                             @if (old('upload'))
