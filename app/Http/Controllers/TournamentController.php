@@ -163,7 +163,6 @@ class TournamentController extends Controller
             $totalNominal = $totalTeams * $tournament->nominal;
             $incomeOrganizer = $totalNominal - ($totalNominal *  15 / 100);
             $totalIncomeOrganizer += $incomeOrganizer;
-            $id_organizer = $tournament->users_id;
         }
         return view('penyelenggara.Dashboard', compact('id_organizer','totalIncomeOrganizer','tournamentpend','tournamentrej','tournamentacc','counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
     }
@@ -226,7 +225,10 @@ class TournamentController extends Controller
     public function indexIncome()
     {
         // Ambil semua turnamen
-        $tournaments = Tournament::orderBy('id', 'desc')->get();
+        $tournaments = Tournament::orderBy('id', 'desc')
+        ->where('status', 'accepted')
+        ->where('paidment', 'Berbayar')
+        ->get();
 
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
@@ -250,8 +252,6 @@ class TournamentController extends Controller
             $totalNominal = $totalTeams * $tournament->nominal;
             $incomeAdmin = $totalNominal * 15 / 100;
             $biayaRegister = $tournament->nominal;
-            $type = $tournament->paidment;
-            $status = $tournament->status;
             $totalIncomeAdmin += $incomeAdmin;
 
             $result[] = [
@@ -260,8 +260,6 @@ class TournamentController extends Controller
                 'total_nominal' => $totalNominal,
                 'income_admin' => $incomeAdmin,
                 'biaya_register' => $biayaRegister,
-                'type' => $type,
-                'status' => $status,
             ];
         }
 
@@ -270,7 +268,11 @@ class TournamentController extends Controller
     public function organizerIncome()
     {
         // Ambil semua turnamen
-        $tournaments = Tournament::orderBy('id', 'desc')->get();
+        $tournaments = Tournament::orderBy('id', 'desc')
+        ->where('users_id', auth()->user()->id)
+        ->where('status', 'accepted')
+        ->where('paidment', 'Berbayar')
+        ->get();
 
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
@@ -294,8 +296,6 @@ class TournamentController extends Controller
             $totalNominal = $totalTeams * $tournament->nominal;
             $incomeOrganizer = $totalNominal - ($totalNominal *  15 / 100);
             $biayaRegister = $tournament->nominal;
-            $type = $tournament->paidment;
-            $status = $tournament->status;
             $totalIncomeOrganizer += $incomeOrganizer;
             $id_organizer = $tournament->users_id;
 
@@ -305,8 +305,6 @@ class TournamentController extends Controller
                 'total_nominal' => $totalNominal,
                 'income_organizer' => $incomeOrganizer,
                 'biaya_register' => $biayaRegister,
-                'type' => $type,
-                'status' => $status,
                 'id_organizer' => $id_organizer
             ];
         }

@@ -51,10 +51,7 @@
             </thead>
             <tbody>
                 @forelse ($result as $item)
-                @if (Auth::user()->id == $item['id_organizer'])
-                @if ($item['status'] == 'accepted')
                 @if ($item['total_teams'] != 0)
-                @if ($item['type'] == 'Berbayar')
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item['tournament']->name }}</td>
@@ -63,9 +60,6 @@
                     <td> Rp . {{ number_format($item['total_nominal'],2,',','.') }}</td>
                     <td> Rp . {{ number_format($item['income_organizer'],2,',','.') }}</td>
                 </tr>
-                @endif
-                @endif
-                @endif
                 @endif
                 @empty
                 <tr>
