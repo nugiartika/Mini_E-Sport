@@ -61,16 +61,6 @@
             </thead>
             <tbody>
                 @forelse ($result as $item)
-                    @if ($item['total_teams'] != 0)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item['tournament']->name }}</td>
-                            <td>{{ $item['total_teams'] }}</td>
-                            <td> Rp . {{ number_format($item['biaya_register'], 2, ',', '.') }}</td>
-                            <td> Rp . {{ number_format($item['total_nominal'], 2, ',', '.') }}</td>
-                            <td> Rp . {{ number_format($item['income_organizer'], 2, ',', '.') }}</td>
-                        </tr>
-                    @endif
                 @if ($item['total_teams'] != 0)
                 <tr>
                     <td>{{ $loop->iteration }}</td>

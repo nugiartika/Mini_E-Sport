@@ -159,6 +159,7 @@ class TournamentController extends Controller
 
         // Siapkan array hasil untuk dikirim ke view
         $result = [];
+        $id_organizer = 0;
         $totalIncomeOrganizer = 0;
         foreach ($tournamentss as $tournament) {
             $totalTeams = $combinedCounts->get($tournament->id, 0);
