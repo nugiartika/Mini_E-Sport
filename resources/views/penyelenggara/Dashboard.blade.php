@@ -1,64 +1,64 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="card-widget-separator-wrapper">
+    <div class="card-widget-separator-wrapper ">
         <div class="card-body card-widget-separator">
             <div class="row gy-4 gy-sm-1 " >
-                <div class="col-sm-6 col-lg-3">
+                <div class="card col-sm-6 col-lg-5 mx-5 mt-5">
                     <div
-                        class="d-flex justify-content-between align-items-start card-widget-1 border-end pb-3 pb-sm-0">
-                        <div>
+                        class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
+                        <div class="ms-4">
                             <h6 class="mb-2">JUMLAH TOURNAMENT DITERIMA</h6>
                             <h4 class="mb-2">{{$tournamentacc}}</h4>
 
                             <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
                         </div>
-                        <span class="avatar me-sm-4">
+                        <span class="avatar p-2 me-lg-4 mt-4">
                             <span class="avatar-initial bg-label-secondary rounded"><i
                                     class="fas fa-trophy"></i></span>
                         </span>
                     </div>
                     <hr class="d-none d-sm-block d-lg-none me-4">
                 </div>
-                <div class="col-sm-6 col-lg-3">
+                <div class="card col-sm-6 col-lg-5 mx-5 mt-5">
                     <div
-                        class="d-flex justify-content-between align-items-start card-widget-1 border-end pb-3 pb-sm-0">
-                        <div>
+                        class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
+                        <div class="ms-4">
                             <h6 class="mb-2">JUMLAH TOURNAMENT DITOLAK</h6>
                             <h4 class="mb-2">{{$tournamentrej}}</h4>
                             <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
                         </div>
-                        <span class="avatar me-sm-4">
+                        <span class="avatar p-2 me-lg-4 mt-4">
                             <span class="avatar-initial bg-label-secondary rounded"><i
                                     class="fas fa-trophy"></i></span>
                         </span>
                     </div>
                     <hr class="d-none d-sm-block d-lg-none me-4">
                 </div>
-                <div class="col-sm-6 col-lg-3">
+                <div class="card col-sm-6 col-lg-5 mx-5 mt-4">
                     <div
-                        class="d-flex justify-content-between align-items-start card-widget-1 border-end pb-3 pb-sm-0">
-                        <div>
+                        class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
+                        <div class="ms-4">
                             <h6 class="mb-2">JUMLAH TOURNAMENT PENDING</h6>
                             <h4 class="mb-2">{{$tournamentpend}}</h4>
                             <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
                         </div>
-                        <span class="avatar me-sm-4">
+                        <span class="avatar p-2 me-lg-4 mt-4">
                             <span class="avatar-initial bg-label-secondary rounded"><i
                                     class="fas fa-trophy"></i></span>
                         </span>
                     </div>
                     <hr class="d-none d-sm-block d-lg-none me-4">
                 </div>
-                <div class="col-sm-6 col-lg-3 ">
+                <div class="card col-sm-6 col-lg-5 mx-5 mt-4">
                     <div
-                        class="d-flex justify-content-between align-items-start card-widget-2 ">
-                        <div>
+                        class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
+                        <div class="ms-4">
                             <h6 class="mb-2">SALDO PENYELENGGARA</h6>
                             {{-- <h4 class="mb-2">Rp. {{ number_format($tournaments->nominal, 0, '.', ',') }}</h4> --}}
                             <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
                         </div>
-                        <span class="avatar p-2 me-lg-4">
+                        <span class="avatar p-2 me-lg-4 mt-4">
                             <span class="avatar-initial bg-label-secondary rounded"><i
                                     class="fa fa-dollar"></i></span>
                         </span>
