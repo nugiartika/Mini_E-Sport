@@ -395,7 +395,7 @@ class TournamentController extends Controller
             ->get();
         $teams = Team::all();
         $query = Tournament::query();
-
+        $teamuser = Team::where('user_id', auth()->id())->exists();
         if (!empty($selectedCategories)) {
             $query->whereIn('categories_id', $selectedCategories);
         }
@@ -403,7 +403,7 @@ class TournamentController extends Controller
         $tournaments = $query->get();
         $prizes = tournament_prize::all();
 
-        return view('user.tournamentUser', compact('tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'prizes'));
+        return view('user.tournamentUser', compact('teamuser','tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'prizes'));
     }
 
     public function filterLanding(Request $request)
@@ -459,7 +459,7 @@ class TournamentController extends Controller
         $tournaments = Tournament::find($id);
         $prizes = tournament_prize::where('tournament_id', $id)->get();
 
-        return view('penyelenggara.detailtournament', compact('tournaments', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts', 'teamIdCounts', 'selectedTournament', 'teamtournament'));
+        return view('penyelenggara.detailtournament', compact('tournaments','tournaments', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts', 'teamIdCounts', 'selectedTournament', 'teamtournament'));
     }
 
     public function bracket(Tournament $tournament, Request $request)
