@@ -94,12 +94,12 @@
 
                             <div class="d-flex gap-3 justify-content-between py-3">
                                 <span>Tanggal Ikut</span>
-                                <span>{{ $team->created_at->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}</span>
+                                <span>{{ $teamtournament->created_at->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}</span>
                             </div>
                             @if ($teamtournament->tournament->paidment !== 'Gratis')
                                 <div class="d-flex gap-3 border-top justify-content-between py-3">
                                     <span>Sudah Bayar?</span>
-                                    @if (!in_array($team->tournament->id, $uploadedTournamentIds))
+                                    @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
                                     <span>Belum</span>
                                     @else
                                     <span>Sudah</span>

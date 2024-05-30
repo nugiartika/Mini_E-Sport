@@ -339,7 +339,11 @@ class TournamentController extends Controller
             ->where('notif', 'belum baca')
             ->count();
 
-        return view('penyelenggara.income', compact('result', 'paginatedResult', 'counttournaments', 'totalIncomeOrganizer', 'id_organizer'));
+            $acceptedUploads = Upload::where('status', 'accepted')
+            ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
+            ->get();
+
+        return view('penyelenggara.income', compact('result', 'paginatedResult', 'counttournaments', 'totalIncomeOrganizer', 'id_organizer','acceptedUploads'));
     }
 
     /**
