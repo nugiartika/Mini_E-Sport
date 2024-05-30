@@ -50,7 +50,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item['tournament']->name}}</td>
-                    <td>{{ $item['total_teams'] }}</td>
+                    <td>{{ $item['total_teams'] }}/ {{$item['tournament']->slotTeam}} Tim</td>
                     <td>Rp {{ number_format($item['biaya_register'], 0, '.', '.') }}</td>
                     <td>Rp {{ number_format($item['total_nominal'], 0, '.', '.') }}</td>
                     <td>Rp {{ number_format($item['income_admin'], 0, '.', '.') }}</td>
