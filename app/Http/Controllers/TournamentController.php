@@ -114,7 +114,7 @@ class TournamentController extends Controller
         $teamTournament = TeamTournament::all();
         $prizes = tournament_prize::all();
 
-        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teams','teamuser', 'teamIdCounts', 'teamTournament'));
+        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamuser', 'teamIdCounts', 'teamTournament'));
     }
 
 
@@ -127,9 +127,9 @@ class TournamentController extends Controller
             ->whereIn('status', ['rejected', 'accepted'])
             ->where('notif', 'belum baca')
             ->count();
-        $tournamentacc = Tournament::where('users_id', auth()->user()->id)->where('status' , 'accepted')->count();
-        $tournamentrej = Tournament::where('users_id', auth()->user()->id)->where('status' , 'rejected')->count();
-        $tournamentpend = Tournament::where('users_id', auth()->user()->id)->where('status' , 'pending')->count();
+        $tournamentacc = Tournament::where('users_id', auth()->user()->id)->where('status', 'accepted')->count();
+        $tournamentrej = Tournament::where('users_id', auth()->user()->id)->where('status', 'rejected')->count();
+        $tournamentpend = Tournament::where('users_id', auth()->user()->id)->where('status', 'pending')->count();
 
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
@@ -147,16 +147,16 @@ class TournamentController extends Controller
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
             $query->select('tournament_id', DB::raw('COUNT(*) as count'))
-                  ->from('teams')
-                  ->groupBy('tournament_id')
-                  ->unionAll(
-                      TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+                ->from('teams')
+                ->groupBy('tournament_id')
+                ->unionAll(
+                    TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
                         ->groupBy('tournament_id')
-                  );
+                );
         }, 'combined_counts')
-        ->select('tournament_id', DB::raw('SUM(count) as total_count'))
-        ->groupBy('tournament_id')
-        ->pluck('total_count', 'tournament_id');
+            ->select('tournament_id', DB::raw('SUM(count) as total_count'))
+            ->groupBy('tournament_id')
+            ->pluck('total_count', 'tournament_id');
 
         // Siapkan array hasil untuk dikirim ke view
         $result = [];
@@ -167,9 +167,9 @@ class TournamentController extends Controller
             $totalNominal = $totalTeams * $tournament->nominal;
             $incomeOrganizer = $totalNominal - ($totalNominal *  15 / 100);
             $totalIncomeOrganizer += $incomeOrganizer;
-            $id_organizer = $tournament->users_id;
+            // $id_organizer = $tournament->users_id;
         }
-        return view('penyelenggara.Dashboard', compact('id_organizer','totalIncomeOrganizer','tournamentpend','tournamentrej','tournamentacc','counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
+        return view('penyelenggara.Dashboard', compact('totalIncomeOrganizer', 'tournamentpend', 'tournamentrej', 'tournamentacc', 'counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
     }
 
     public function indexadmin(Request $request)
@@ -233,23 +233,23 @@ class TournamentController extends Controller
     {
         // Ambil semua turnamen
         $tournaments = Tournament::orderBy('id', 'desc')
-        ->where('status', 'accepted')
-        ->where('paidment', 'Berbayar')
-        ->get();
+            ->where('status', 'accepted')
+            ->where('paidment', 'Berbayar')
+            ->get();
 
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
             $query->select('tournament_id', DB::raw('COUNT(*) as count'))
-                  ->from('teams')
-                  ->groupBy('tournament_id')
-                  ->unionAll(
-                      TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+                ->from('teams')
+                ->groupBy('tournament_id')
+                ->unionAll(
+                    TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
                         ->groupBy('tournament_id')
-                  );
+                );
         }, 'combined_counts')
-        ->select('tournament_id', DB::raw('SUM(count) as total_count'))
-        ->groupBy('tournament_id')
-        ->pluck('total_count', 'tournament_id');
+            ->select('tournament_id', DB::raw('SUM(count) as total_count'))
+            ->groupBy('tournament_id')
+            ->pluck('total_count', 'tournament_id');
 
         // Siapkan array hasil untuk dikirim ke view
         $result = [];
@@ -270,30 +270,30 @@ class TournamentController extends Controller
             ];
         }
 
-        return view('admin.income', compact('result','totalIncomeAdmin'));
+        return view('admin.income', compact('result', 'totalIncomeAdmin'));
     }
     public function organizerIncome()
     {
         // Ambil semua turnamen
         $tournaments = Tournament::orderBy('id', 'desc')
-        ->where('users_id', auth()->user()->id)
-        ->where('status', 'accepted')
-        ->where('paidment', 'Berbayar')
-        ->get();
+            ->where('users_id', auth()->user()->id)
+            ->where('status', 'accepted')
+            ->where('paidment', 'Berbayar')
+            ->get();
 
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
             $query->select('tournament_id', DB::raw('COUNT(*) as count'))
-                  ->from('teams')
-                  ->groupBy('tournament_id')
-                  ->unionAll(
-                      TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+                ->from('teams')
+                ->groupBy('tournament_id')
+                ->unionAll(
+                    TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
                         ->groupBy('tournament_id')
-                  );
+                );
         }, 'combined_counts')
-        ->select('tournament_id', DB::raw('SUM(count) as total_count'))
-        ->groupBy('tournament_id')
-        ->pluck('total_count', 'tournament_id');
+            ->select('tournament_id', DB::raw('SUM(count) as total_count'))
+            ->groupBy('tournament_id')
+            ->pluck('total_count', 'tournament_id');
 
         // Siapkan array hasil untuk dikirim ke view
         $result = [];
@@ -329,11 +329,11 @@ class TournamentController extends Controller
             );
         }
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
-        ->whereIn('status', ['rejected', 'accepted'])
-        ->where('notif', 'belum baca')
-        ->count();
+            ->whereIn('status', ['rejected', 'accepted'])
+            ->where('notif', 'belum baca')
+            ->count();
 
-        return view('penyelenggara.income', compact('result','paginatedResult','counttournaments','totalIncomeOrganizer','id_organizer'));
+        return view('penyelenggara.income', compact('result', 'paginatedResult', 'counttournaments', 'totalIncomeOrganizer', 'id_organizer'));
     }
 
     /**
@@ -472,7 +472,7 @@ class TournamentController extends Controller
         $tournaments = $query->get();
         $prizes = tournament_prize::all();
 
-        return view('user.tournamentUser', compact('teamuser','tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'prizes'));
+        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'prizes'));
     }
 
     public function filterLanding(Request $request)
@@ -528,7 +528,7 @@ class TournamentController extends Controller
         $tournaments = Tournament::find($id);
         $prizes = tournament_prize::where('tournament_id', $id)->get();
 
-        return view('penyelenggara.detailtournament', compact('tournaments','tournaments', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts', 'teamIdCounts', 'selectedTournament', 'teamtournament'));
+        return view('penyelenggara.detailtournament', compact('tournaments', 'tournaments', 'counttournaments', 'teams', 'prizes', 'juaras', 'jadwals', 'category', 'user', 'teamCounts', 'teamIdCounts', 'selectedTournament', 'teamtournament'));
     }
 
     public function bracket(Tournament $tournament, Request $request)
