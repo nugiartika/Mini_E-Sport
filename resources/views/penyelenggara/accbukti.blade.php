@@ -51,15 +51,15 @@
                                 <form id="updateForm{{ $upload->id }}" action="{{ route('Upload.update', $upload->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <div class="radio-button">
+                                    <div class="radio-button ">
                                         <span class="badge bg-label-danger me-1">
                                             <label for="rejected{{ $upload->id }}">Tolak</label>
-                                            <input type="radio" id="rejected{{ $upload->id }}" name="status" value="rejected" {{ $upload->status == 'rejected' ? 'checked' : '' }}>
+                                            <input style="display:none;" type="radio" id="rejected{{ $upload->id }}" name="status" value="rejected" {{ $upload->status == 'rejected' ? 'checked' : '' }}>
                                         </span>
 
                                         <span class="badge bg-label-success me-1">
                                             <label for="accepted{{ $upload->id }}">Terima</label>
-                                            <input type="radio" id="accepted{{ $upload->id }}" name="status" value="accepted" {{ $upload->status == 'accepted' ? 'checked' : '' }}>
+                                            <input style="display:none;" type="radio" id="accepted{{ $upload->id }}" name="status" value="accepted" {{ $upload->status == 'accepted' ? 'checked' : '' }}>
                                         </span>
                                     </div>
 

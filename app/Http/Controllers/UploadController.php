@@ -37,6 +37,8 @@ class UploadController extends Controller
      */
     public function store(StoreUploadRequest $request)
     {
+        try {
+
         $user_id = Auth::user();
         $tournament_id = $request->get('tournament_id');
         $gambar = $request->file('upload');
@@ -52,7 +54,10 @@ class UploadController extends Controller
 
         ]);
 
-        return redirect()->back()->with('succes', 'Berhasil kirim bukti pebayaran');
+        return redirect()->route('user.historytournament')->with('success', 'Berhasil kirim bukti pebayaran');
+    } catch (\Throwable $th) {
+        return redirect()->back()->withErrors(['warning' => $th->getMessage()]);
+    }
     }
 
     /**
