@@ -83,9 +83,9 @@ class TournamentController extends Controller
             ->where('notif', 'belum baca')
             ->count();
 
-
         return view('penyelenggara.notification', compact('tournaments', 'counttournaments'));
     }
+
     public function Updatenotification($id)
     {
         $tours = Tournament::findOrFail($id)->update([
@@ -187,6 +187,7 @@ class TournamentController extends Controller
         $teams = Team::orderBy('id', 'desc')
             ->where('user_id', auth()->id())
             ->get();
+        
         return view('user.historytournament', compact('teams'));
     }
 

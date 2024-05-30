@@ -129,7 +129,7 @@
                 if (!clearButton || !clearButton.classList.contains('clear-btn')) {
                     clearButton = document.createElement('button');
                     clearButton.textContent = 'Hapus';
-                    clearButton.className = 'btn btn-sm btn-danger ms-2 clear-btn mt-2 ';
+                    clearButton.className = 'btn btn-sm btn-danger ms-2 clear-btn mt-2';
                     clearButton.type = 'button'; // Ensure the button does not submit the form
                     clearButton.addEventListener('click', function () {
                         input.value = '';
@@ -206,7 +206,7 @@
 
                             var addButton = document.createElement('button');
                             addButton.textContent = 'Add';
-                            addButton.className = 'btn btn-sm btn-primary ms-4';
+                            addButton.className = 'btn btn-sm btn-primary ms-4 mt-2';
                             addButton.addEventListener('click', function (event) {
                                 event.preventDefault();
                                 var nicknameInputs = document.querySelectorAll('input[name="nickname[]"], input[name="nickname_cadangan[]"]');
