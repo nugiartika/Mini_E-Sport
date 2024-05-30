@@ -1,5 +1,9 @@
 @extends('layouts.panel')
-
+@push('script')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.css"
+        integrity="sha512-Woz+DqWYJ51bpVk5Fv0yES/edIMXjj3Ynda+KWTIkGoynAMHrqTcDUQltbipuiaD5ymEo9520lyoVOo9jCQOCA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endpush
 @section('content')
     <div class="card">
         <div class="card-header flex-column flex-lg-row d-flex justify-content-between">
@@ -31,7 +35,10 @@
                             <td>#{{ $upload->id }}</td>
                             <td>{{ $upload->created_at->translatedFormat('d M Y H:i') }}</td>
                             <td>{{ $upload->status }}</td>
-                            <td>{{ $upload->status }}</td>
+                            <td>
+                                <a href="{{ asset("storage/{$upload->upload}") }}" data-lightbox="image-1"
+                                    data-title="Unggahan Tanggal: {{ $upload->created_at->translatedFormat('d M Y H:i') }}">Lihat</a>
+                            </td>
                             <td>{{ $upload->user_id }}</td>
                             <td>
                                 <form id="updateForm{{ $upload->id }}" action="{{ route('Upload.update', $upload->id) }}" method="POST">

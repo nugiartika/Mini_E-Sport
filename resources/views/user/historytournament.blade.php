@@ -37,9 +37,9 @@
                             <div class="d-flex gap-3 border-top justify-content-between py-3">
                                 <span>Sudah Bayar?</span>
                                 @if (!in_array($team->tournament->id, $uploadedTournamentIds))
-                                <span>Sudah</span>
-                                @else
                                 <span>Belum</span>
+                                @else
+                                <span>Sudah</span>
                                 @endif
                             </div>
                             <div class="d-flex gap-3 border-top justify-content-between pt-3">
@@ -100,9 +100,9 @@
                                 <div class="d-flex gap-3 border-top justify-content-between py-3">
                                     <span>Sudah Bayar?</span>
                                     @if (!in_array($team->tournament->id, $uploadedTournamentIds))
-                                    <span>Sudah</span>
-                                    @else
                                     <span>Belum</span>
+                                    @else
+                                    <span>Sudah</span>
                                     @endif
                                 </div>
                                 <div class="d-flex gap-3 border-top justify-content-between pt-3">
