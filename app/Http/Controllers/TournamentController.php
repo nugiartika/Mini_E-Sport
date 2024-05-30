@@ -163,6 +163,7 @@ class TournamentController extends Controller
             $totalNominal = $totalTeams * $tournament->nominal;
             $incomeOrganizer = $totalNominal - ($totalNominal *  15 / 100);
             $totalIncomeOrganizer += $incomeOrganizer;
+            $id_organizer = $tournament->users_id;
         }
         return view('penyelenggara.Dashboard', compact('id_organizer','totalIncomeOrganizer','tournamentpend','tournamentrej','tournamentacc','counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
     }
