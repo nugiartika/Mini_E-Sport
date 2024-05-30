@@ -84,10 +84,13 @@
                         </td>
                     </tr>
                 @endforelse
+
             </tbody>
         </table>
     </div>
     </div>
+    {{ $paginatedResult->links() }}
+
 @endsection
 
 
