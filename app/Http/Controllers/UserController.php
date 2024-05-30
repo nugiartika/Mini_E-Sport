@@ -54,7 +54,7 @@ class UserController extends Controller
 
     public function searchUsers(Request $request)
     {
-        $query = $request->input('query');  
+        $query = $request->input('query');
         $users = User::where('email', 'LIKE', "%$query%")->where('role', 'user')->get();
         return response()->json($users);
     }

@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\PaymentProof;
 use App\Http\Requests\StorePaymentProofRequest;
 use App\Http\Requests\UpdatePaymentProofRequest;
+use App\Models\Tournament;
 use Illuminate\Support\Facades\Storage;
 
 class PaymentProofController extends Controller
 {
     private PaymentProof $_paymentProof;
+    private Tournament $_tournament;
 
     public function __construct()
     {
+        $this->_tournament = new Tournament();
         $this->_paymentProof = new PaymentProof();
     }
 
@@ -22,8 +25,12 @@ class PaymentProofController extends Controller
     public function index()
     {
         $paymentProofs = $this->_paymentProof->paginate(20);
+        $counttournaments = $this->_tournament->where('users_id', auth()->user()->id)
+            ->whereIn('status', ['rejected', 'accepted'])
+            ->where('notif', 'belum baca')
+            ->count();
 
-        return view('transaction-proof.index', compact('paymentProofs'));
+        return view('transaction-proof.index', compact('paymentProofs', 'counttournaments'));
     }
 
     /**
@@ -42,6 +49,8 @@ class PaymentProofController extends Controller
         try {
             $data = $request->validated();
             $data['file'] = $request->file('file')->store('payment-proofs', 'public');
+            $data['user_id'] = auth()->id();
+            $data['payment_date'] = now();
 
             $this->_paymentProof->create($data);
 
@@ -76,8 +85,6 @@ class PaymentProofController extends Controller
     {
         try {
             $data = $request->validated();
-            $paymentProof->transaction->update(['status' => $request->status == 1 ? 'PAID' : 'UNPAID']);
-
             $paymentProof->update($data);
 
             return back()->with('success', "Berhasil memperbaharui bukti pembayaran.");

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('payment_proofs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignUuid('transaction_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('file')->nullable();
             $table->timestamp('payment_date')->useCurrent()->useCurrentOnUpdate();
