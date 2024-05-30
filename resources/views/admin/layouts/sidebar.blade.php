@@ -88,6 +88,11 @@
             </a>
         </li>
 
+        <li class="menu-item {{ request()->routeIs('income.index') ? 'active' : '' }}">
+            <a href="{{ route('income.index') }}" class="menu-link">
+                <div>Penghasilan</div>
+            </a>
+        </li>
         {{-- User --}}
         <li class="menu-item {{ request()->routeIs('transaction.*') ? 'active' : '' }}">
             <a href="{{ route('transaction.index') }}" class="menu-link">

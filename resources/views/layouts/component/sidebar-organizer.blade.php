@@ -29,6 +29,12 @@
             </li>
         </ul>
     </li>
+    <li class="menu-item {{ request()->routeIs('organizerincome') ? 'active' : '' }}">
+        <a href="{{ url('organizerincome') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-device-gamepad-2"></i>
+            <div data-i18n="Dashboard">Penghasilan</div>
+        </a>
+    </li>
     <li class="menu-item {{ request()->routeIs('transaction.*') ? 'active' : '' }}">
         <a href="{{ url('transaction') }}" class="menu-link">
             <i class="menu-icon tf-icons ti ti-wallet"></i>

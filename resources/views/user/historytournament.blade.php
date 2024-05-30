@@ -9,17 +9,6 @@
     <div class="row pt-4">
         @forelse ($teams as $team)
             @if ($team->tournament_id != null)
-                @php
-                    $transaction = $team->teamTournament->transaction()->where('status', 'PAID');
-                    $findIsNotSuccess = $team->teamTournament
-                        ->transaction()
-                        ->whereNotIn('status', ['PAID', 'UNPAID', 'PENDING']);
-                    $findIsSuccess = $team->teamTournament
-                        ->transaction()
-                        ->whereIn('status', ['PAID', 'UNPAID', 'PENDING']);
-                    $transactionExists = $transaction->exists();
-                    $latestTransaction = $team->teamTournament->transaction()->latest()->first();
-                @endphp
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
                         <img src="{{ asset("storage/{$team->tournament->images}") }}" alt="{{ $team->tournament->name }}"
@@ -29,32 +18,12 @@
                                 <a href="{{ route('user.tournament.history', ['tournament' => $team->tournament->id]) }}">
                                     <h3 class="mb-0">{{ $team->tournament->name }}</h3>
                                 </a>
-
-                                @if (!$transactionExists && !$findIsSuccess->exists())
-                                    <a href="{{ route('transaction.create', ['tournament_id' => $team->id]) }}"
-                                        class="btn btn-sm btn-primary">Bayar Sekarang</a>
-                                @endif
                             </div>
 
                             <div class="d-flex gap-3 justify-content-between py-3">
                                 <span>Tanggal Ikut</span>
                                 <span>{{ $team->created_at->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}</span>
                             </div>
-                            @if ($team->tournament->paidment !== 'Gratis')
-                                <div class="d-flex gap-3 border-top justify-content-between py-3">
-                                    <span>Sudah Bayar?</span>
-                                    <span>{{ $transactionExists ? 'Sudah' : 'Belum' }}</span>
-                                </div>
-                                <div class="d-flex gap-3 border-top justify-content-between pt-3">
-                                    <span>Transaksi Terakhir</span>
-                                    @if ($latestTransaction)
-                                        <span
-                                            class="badge bg-{{ \App\Enums\TransactionStatus::color($latestTransaction->status) }}">{{ \App\Enums\TransactionStatus::label($latestTransaction->status) }}</span>
-                                    @else
-                                        <span>Belum Ada Transaksi</span>
-                                    @endif
-                                </div>
-                            @endif
                         </div>
                     </div>
                 </div>
