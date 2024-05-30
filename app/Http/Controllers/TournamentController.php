@@ -124,6 +124,10 @@ class TournamentController extends Controller
             ->whereIn('status', ['rejected', 'accepted'])
             ->where('notif', 'belum baca')
             ->count();
+        $tournamentacc = Tournament::where('users_id', auth()->user()->id)->where('status' , 'accepted')->count();
+        $tournamentrej = Tournament::where('users_id', auth()->user()->id)->where('status' , 'rejected')->count();
+        $tournamentpend = Tournament::where('users_id', auth()->user()->id)->where('status' , 'pending')->count();
+
         $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->groupBy('tournament_id')
             ->get();
@@ -133,7 +137,7 @@ class TournamentController extends Controller
         $category = Category::all();
         $prizes = tournament_prize::all();
         $tournaments = tournament::all();
-        return view('penyelenggara.Dashboard', compact('counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
+        return view('penyelenggara.Dashboard', compact('tournamentpend','tournamentrej','tournamentacc','counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
     }
 
     public function indexadmin(Request $request)
@@ -187,7 +191,7 @@ class TournamentController extends Controller
         $teams = Team::orderBy('id', 'desc')
             ->where('user_id', auth()->id())
             ->get();
-        
+
         return view('user.historytournament', compact('teams'));
     }
 
