@@ -39,7 +39,14 @@
                                 <a href="{{ asset("storage/{$upload->upload}") }}" data-lightbox="image-1"
                                     data-title="Unggahan Tanggal: {{ $upload->created_at->translatedFormat('d M Y H:i') }}">Lihat</a>
                             </td>
-                            <td>{{ $upload->user_id }}</td>
+                            <td>
+                                @if($user = \App\Models\User::find($upload->user_id))
+                                    {{ $user->email }}
+                                @else
+                                    User tidak ditemukan
+                                @endif
+                            </td>
+
                             <td>
                                 <form id="updateForm{{ $upload->id }}" action="{{ route('Upload.update', $upload->id) }}" method="POST">
                                     @csrf

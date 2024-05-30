@@ -487,7 +487,7 @@
                                                         <input type="date"
                                                         class="form-control @error('tanggalPenyisihan') is-invalid @enderror"
                                                         id="tanggalPenyisihan" name="tanggalPenyisihan"
-                                                        value="{{ $tournaments->permainan }}" >
+                                                        min="{{ now()->toDateString() }}">
                                                     @error('tanggalPenyisihan')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
