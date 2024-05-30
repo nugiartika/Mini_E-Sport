@@ -55,11 +55,11 @@
                         class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
                         <div class="ms-4">
                             <h6 class="mb-2">SALDO PENYELENGGARA</h6>
-                            {{-- <h4 class="mb-2">@if (Auth::user()->id == $id_organizer)
+                            <h4 class="mb-2">@if (Auth::user()->id == $id_organizer)
                                 Rp . {{ number_format($totalIncomeOrganizer,2,',','.') }}
                                 @else
                                 Rp. 0
-                                @endif</h4> --}}
+                                @endif</h4>
                             <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
                         </div>
                         <span class="avatar p-2 me-lg-4 mt-4">

@@ -99,7 +99,7 @@
                             @if ($teamtournament->tournament->paidment !== 'Gratis')
                                 <div class="d-flex gap-3 border-top justify-content-between py-3">
                                     <span>Sudah Bayar?</span>
-                                    @if (!in_array($team->tournament->id, $uploadedTournamentIds))
+                                    @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
                                     <span>Belum</span>
                                     @else
                                     <span>Sudah</span>
