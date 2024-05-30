@@ -35,10 +35,16 @@
             <div data-i18n="Dashboard">Penghasilan</div>
         </a>
     </li>
-    <li class="menu-item {{ request()->routeIs('payment-proof.index') ? 'active' : '' }}">
-        <a href="{{ route('payment-proof.index') }}" class="menu-link d-flex align-items-center">
+    <li class="menu-item {{ request()->routeIs('accbukti') ? 'active' : '' }}">
+        <a href="{{ route('accbukti') }}" class="menu-link d-flex align-items-center">
             <i class="menu-icon tf-icons ti ti-upload"></i>
             <div>Bukti Pembayaran</div>
         </a>
     </li>
+    {{-- <li class="menu-item {{ request()->routeIs('payment-proof.index') ? 'active' : '' }}">
+        <a href="{{ route('payment-proof.index') }}" class="menu-link d-flex align-items-center">
+            <i class="menu-icon tf-icons ti ti-upload"></i>
+            <div>Bukti Pembayaran</div>
+        </a>
+    </li> --}}
 </ul>

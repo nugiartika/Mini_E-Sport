@@ -9,27 +9,23 @@
     <div class="row pt-4">
         @forelse ($teams as $team)
         @if ($team->tournament_id != null)
-        {{-- @php
-            $transaction = $team->transaction()->where('status', 'PAID');
-            $findIsNotSuccess = $team->transaction()->whereNotIn('status', ['PAID', 'UNPAID', 'PENDING']);
-            $findIsSuccess = $team->transaction()->whereIn('status', ['PAID', 'UNPAID', 'PENDING']);
-            $transactionExists = $transaction->exists();
-            $latestTransaction = $team->transaction()->latest()->first();
-        @endphp --}}
+
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
                         <img src="{{ asset('storage/' . $team->tournament->images) }}" alt="{{ $team->tournament->name }}"
                             class="card-img-top" />
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
-                                <a href="{{ route('user.tournament.history', ['tournament' => $team->tournament->id]) }}">
+                                {{-- <a href="{{ route('user.tournament.history', ['tournament' => $team->tournament->id]) }}"> --}}
                                     <h3 class="mb-0">{{ $team->tournament->name }}</h3>
-                                </a>
+                                {{-- </a> --}}
 
-                                @if (!$transactionExists && !$findIsSuccess->exists())
-                                    <a href="{{ route('transaction.create', ['tournament_id' => $teamtournament->id]) }}"
-                                        class="btn btn-sm btn-primary">Bayar Sekarang</a>
-                                @endif
+                                {{-- @if (!in_array($team->tournament->id, $uploadedTournamentIds))
+                                @else --}}
+                                <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#uploadbukti"
+                                        class="btn btn-sm btn-primary"
+                                        data-tournament-id="{{ $team->tournament->id }}">Kirim Bukti</a>
+                                {{-- @endif --}}
                             </div>
 
                             <div class="d-flex gap-3 justify-content-between py-3">
@@ -56,14 +52,16 @@
                             class="card-img-top" />
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
-                                <a href="{{ route('user.tournament.history', ['tournament' => $teamtournament->tournament->id]) }}">
+                                {{-- <a href="{{ route('user.tournament.history', ['tournament' => $teamtournament->tournament->id]) }}"> --}}
                                     <h3 class="mb-0">{{ $teamtournament->tournament->name }}</h3>
-                                </a>
-
-                                @if (!$transactionExists && !$findIsSuccess->exists())
-                                    <a href="{{ route('transaction.create', ['tournament_id' => $teamtournament->id]) }}"
-                                        class="btn btn-sm btn-primary">Bayar Sekarang</a>
-                                @endif
+                                {{-- </a> --}}
+{{--
+                                @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
+                                @else --}}
+                                <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#uploadbukti"
+                                    class="btn btn-sm btn-primary"
+                                    data-tournament-id="{{ $teamtournament->tournament->id }}">kirim bukti</a>
+                                        {{-- @endif --}}
                             </div>
 
                             <div class="d-flex gap-3 justify-content-between py-3">
@@ -105,4 +103,60 @@
 
     </div>
 
+
+    <div class="modal fade" tabindex="-1" id="uploadbukti">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Kirim Bukti</h6>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('Upload.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="tournament_id" value="">
+
+                        <div class="mb-3">
+                            <label for="upload" class="form-label">Foto Cover</label>
+                            <input type="file" class="form-control @error('upload') is-invalid @enderror" id="upload"
+                                name="upload">
+                            @if (old('upload'))
+                                <img id="preview" src="{{ asset('storage/' . old('upload')) }}" alt="Old gambar"
+                                    style="max-width: 100px; max-height: 100px;">
+                            @endif
+                            @error('upload')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="pt-2 d-flex gap-3 justify-content-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Tambahkan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
+
+@push('script')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('uploadbukti');
+
+    modal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Tombol yang memicu modal
+        var tournamentId = button.getAttribute('data-tournament-id'); // Ambil nilai dari atribut data-tournament-id
+
+        // Perbarui nilai input hidden tournament_id di dalam modal
+        var inputField = modal.querySelector('input[name="tournament_id"]');
+        if (inputField) {
+            inputField.value = tournamentId;
+        }
+    });
+});
+</script>
+@endpush
