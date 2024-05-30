@@ -8,8 +8,10 @@
     </div>
     <div class="row pt-4">
         @forelse ($teams as $team)
-        @if ($team->tournament_id != null)
-
+            @if ($team->tournament_id != null)
+                @php
+                    $upload = $uploads->firstWhere('tournament_id', $team['tournament']->id);
+                @endphp
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
                         <img src="{{ asset('storage/' . $team->tournament->images) }}" alt="{{ $team->tournament->name }}"
@@ -17,15 +19,14 @@
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
                                 {{-- <a href="{{ route('user.tournament.history', ['tournament' => $team->tournament->id]) }}"> --}}
-                                    <h3 class="mb-0">{{ $team->tournament->name }}</h3>
+                                <h3 class="mb-0">{{ $team->tournament->name }}</h3>
                                 {{-- </a> --}}
                                 @if ($team->tournament->paidment !== 'Gratis')
-
-                                @if (!in_array($team->tournament->id, $uploadedTournamentIds))
-                                <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#uploadbukti"
-                                        class="btn btn-sm btn-primary"
-                                        data-tournament-id="{{ $team->tournament->id }}">Kirim Bukti</a>
-                                @endif
+                                    @if (!in_array($team->tournament->id, $uploadedTournamentIds))
+                                        <a type="button" data-toggle="tooltip" data-bs-toggle="modal"
+                                            data-bs-target="#uploadbukti" class="btn btn-sm btn-primary"
+                                            data-tournament-id="{{ $team->tournament->id }}">Kirim Bukti</a>
+                                    @endif
                                 @endif
                             </div>
 
@@ -34,30 +35,35 @@
                                 <span>{{ $team->created_at->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}</span>
                             </div>
                             @if ($team->tournament->paidment !== 'Gratis')
-                            <div class="d-flex gap-3 border-top justify-content-between py-3">
-                                <span>Sudah Bayar?</span>
-                                @if (!in_array($team->tournament->id, $uploadedTournamentIds))
-                                <span>Belum</span>
-                                @else
-                                <span>Sudah</span>
-                                @endif
-                            </div>
-                            <div class="d-flex gap-3 border-top justify-content-between pt-3">
-                                <span>Transaksi Terakhir</span>
-                                @foreach ($uploads as $upload)
+                                <div class="d-flex gap-3 border-top justify-content-between py-3">
+                                    <span>Sudah Bayar?</span>
+                                    @if (!in_array($team->tournament->id, $uploadedTournamentIds))
+                                        <span>Belum</span>
+                                    @else
+                                        <span>Sudah</span>
+                                    @endif
+                                </div>
+                                <div class="d-flex gap-3 border-top justify-content-between pt-3">
+                                    <span>Transaksi Terakhir</span>
+                                    {{-- @foreach ($uploads as $upload) --}}
+@if ($upload)
 
                                     @if ($upload->status === 'pending')
-                                    <span>Menungggu Konfirmasi</span>
+                                        <span>Menungggu Konfirmasi</span>
                                     @elseif ($upload->status === 'accepted')
-                                    <span>Diterima</span>
+                                        <span>Diterima</span>
                                     @elseif ($upload->status === 'rejected')
-                                    <span>Ditolak</span>
+                                        <span>Ditolak</span>
                                     @else
                                         <span>Belum Ada Transaksi</span>
                                     @endif
-                                    @endforeach
-                            </div>
-                        @endif
+@else
+<span>Belum Ada Transaksi</span>
+
+@endif
+                                    {{-- @endforeach --}}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -65,13 +71,9 @@
 
 
             @foreach ($team->teamTournament as $teamtournament)
-                {{-- @php
-                    $transaction = $teamtournament->transaction()->where('status', 'PAID');
-                    $findIsNotSuccess = $teamtournament->transaction()->whereNotIn('status', ['PAID', 'UNPAID', 'PENDING']);
-                    $findIsSuccess = $teamtournament->transaction()->whereIn('status', ['PAID', 'UNPAID', 'PENDING']);
-                    $transactionExists = $transaction->exists();
-                    $latestTransaction = $teamtournament->transaction()->latest()->first();
-                @endphp --}}
+                @php
+                    $uploadteam = $uploads->firstWhere('tournament_id', $teamtournament['tournament']->id);
+                @endphp
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
                         <img src="{{ asset('storage/' . $teamtournament->tournament->images) }}" alt="No images"
@@ -79,17 +81,15 @@
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
                                 {{-- <a href="{{ route('user.tournament.history', ['tournament' => $teamtournament->tournament->id]) }}"> --}}
-                                    <h3 class="mb-0">{{ $teamtournament->tournament->name }}</h3>
+                                <h3 class="mb-0">{{ $teamtournament->tournament->name }}</h3>
                                 {{-- </a> --}}
                                 @if ($teamtournament->tournament->paidment !== 'Gratis')
-
-                            @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
-                            <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#uploadbukti"
-                                class="btn btn-sm btn-primary"
-                                data-tournament-id="{{ $teamtournament->tournament->id }}">kirim bukti</a>
-
-                            @endif
-                            @endif
+                                    @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
+                                        <a type="button" data-toggle="tooltip" data-bs-toggle="modal"
+                                            data-bs-target="#uploadbukti" class="btn btn-sm btn-primary"
+                                            data-tournament-id="{{ $teamtournament->tournament->id }}">kirim bukti</a>
+                                    @endif
+                                @endif
                             </div>
 
                             <div class="d-flex gap-3 justify-content-between py-3">
@@ -100,25 +100,26 @@
                                 <div class="d-flex gap-3 border-top justify-content-between py-3">
                                     <span>Sudah Bayar?</span>
                                     @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
-                                    <span>Belum</span>
+                                        <span>Belum</span>
                                     @else
-                                    <span>Sudah</span>
+                                        <span>Sudah</span>
                                     @endif
                                 </div>
                                 <div class="d-flex gap-3 border-top justify-content-between pt-3">
                                     <span>Transaksi Terakhir</span>
-                                    @foreach ($uploads as $upload)
-
-                                    @if ($upload->status === 'pending')
-                                    <span>Menungggu Konfirmasi</span>
-                                    @elseif ($upload->status === 'accepted')
-                                    <span>Diterima</span>
-                                    @elseif ($upload->status === 'rejected')
-                                    <span>Ditolak</span>
+                                    @if ($uploadteam)
+                                        @if ($uploadteam->status === 'pending')
+                                            <span>Menungggu Konfirmasi</span>
+                                        @elseif ($uploadteam->status === 'accepted')
+                                            <span>Diterima</span>
+                                        @elseif ($uploadteam->status === 'rejected')
+                                            <span>Ditolak</span>
+                                        @else
+                                            <span>Belum Ada Transaksi</span>
+                                        @endif
                                     @else
                                         <span>Belum Ada Transaksi</span>
                                     @endif
-                                    @endforeach
                                 </div>
                             @endif
                         </div>
@@ -181,20 +182,21 @@
 @endsection
 
 @push('script')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById('uploadbukti');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById('uploadbukti');
 
-    modal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget; // Tombol yang memicu modal
-        var tournamentId = button.getAttribute('data-tournament-id'); // Ambil nilai dari atribut data-tournament-id
+            modal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget; // Tombol yang memicu modal
+                var tournamentId = button.getAttribute(
+                'data-tournament-id'); // Ambil nilai dari atribut data-tournament-id
 
-        // Perbarui nilai input hidden tournament_id di dalam modal
-        var inputField = modal.querySelector('input[name="tournament_id"]');
-        if (inputField) {
-            inputField.value = tournamentId;
-        }
-    });
-});
-</script>
+                // Perbarui nilai input hidden tournament_id di dalam modal
+                var inputField = modal.querySelector('input[name="tournament_id"]');
+                if (inputField) {
+                    inputField.value = tournamentId;
+                }
+            });
+        });
+    </script>
 @endpush
