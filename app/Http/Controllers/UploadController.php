@@ -54,7 +54,7 @@ class UploadController extends Controller
 
         ]);
 
-        return redirect()->route('user.historytournament')->with('success', 'Berhasil kirim bukti pebayaran');
+        return redirect()->back()->with('success', 'Berhasil kirim bukti pebayaran');
     } catch (\Throwable $th) {
         return redirect()->back()->withErrors(['warning' => $th->getMessage()]);
     }

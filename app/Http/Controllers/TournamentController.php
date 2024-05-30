@@ -169,6 +169,8 @@ class TournamentController extends Controller
             $totalIncomeOrganizer += $incomeOrganizer;
             // $id_organizer = $tournament->users_id;
         }
+
+
         return view('penyelenggara.Dashboard', compact('totalIncomeOrganizer', 'tournamentpend', 'tournamentrej', 'tournamentacc', 'counttournaments', 'prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teamIdCounts'));
     }
 
@@ -270,7 +272,11 @@ class TournamentController extends Controller
             ];
         }
 
-        return view('admin.income', compact('result', 'totalIncomeAdmin'));
+    // Ambil transaksi yang statusnya 'accepted' dan terkait dengan turnamen di result
+    $acceptedUploads = Upload::where('status', 'accepted')
+        ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
+        ->get();
+        return view('admin.income', compact('result', 'totalIncomeAdmin','acceptedUploads'));
     }
     public function organizerIncome()
     {
