@@ -18,6 +18,7 @@ use App\Http\Controllers\TeamTournamentController;
 use App\Http\Controllers\DetailTournamentController;
 use App\Http\Controllers\PaymentProofController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +101,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('team', TeamController::class);
         Route::get('tournamentUser', [TournamentController::class, 'indexuser'])->name('user.tournament');
     });
+
+    Route::resource('Upload', UploadController::class);
+    Route::get('UploadAcc', [UploadController::class, 'accbukti'])->name('accbukti');
+
 
     Route::get('/home', function() {
         $user = Auth::user();
