@@ -75,15 +75,19 @@ class UploadController extends Controller
 
 
     public function accbukti(upload $upload)
-    {
-        $counttournaments = Tournament::where('users_id', auth()->user()->id)
+{
+
+    $counttournaments = Tournament::where('users_id', auth()->user()->id)
         ->whereIn('status', ['rejected', 'accepted'])
         ->where('notif', 'belum baca')
         ->count();
-        $uploads = upload::all();
-        return view('penyelenggara.accbukti', compact('uploads','counttournaments'));
 
-    }
+    // Mengambil semua data upload
+    $uploads = upload::all();
+
+    // Mengembalikan view 'penyelenggara.accbukti' beserta data turnamen, upload, dan jumlah turnamen yang belum dibaca notifikasinya
+    return view('penyelenggara.accbukti', compact( 'uploads', 'counttournaments'));
+}
 
 
 
