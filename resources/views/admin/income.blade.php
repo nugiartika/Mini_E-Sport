@@ -76,6 +76,7 @@
         </table>
     </div>
 </div>
+{{ $tournaments->links() }}
 @endsection
 
 @push('script')
