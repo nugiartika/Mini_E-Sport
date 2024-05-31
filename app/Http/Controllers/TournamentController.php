@@ -280,12 +280,12 @@ class TournamentController extends Controller
             ->when($request->has('search'), function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
             })
-            ->paginate(5);
+            ->get();
 
         // Ambil transaksi yang statusnya 'accepted' dan terkait dengan turnamen di result
         $acceptedUploads = Upload::where('status', 'accepted')
-            ->whereIn('tournament_id', $allTournaments->pluck('id')->toArray())
-            ->get();
+            ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
+            ->paginate(5);
 
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
@@ -307,9 +307,7 @@ class TournamentController extends Controller
 
         // Menghitung total incomeAdmin dari semua turnamen yang memenuhi syarat
         foreach ($allTournaments as $tournament) {
-            $hasAcceptedUpload = $acceptedUploads->contains('tournament_id', $tournament->id);
-
-            if ($hasAcceptedUpload) {
+            if ($tournament) {
                 $totalTeams = $combinedCounts->get($tournament->id, 0);
                 $totalNominal = $totalTeams * $tournament->nominal;
                 $incomeAdmin = $totalNominal * 15 / 100;
@@ -346,9 +344,6 @@ class TournamentController extends Controller
             ->where('users_id', auth()->user()->id)
             ->where('status', 'accepted')
             ->where('paidment', 'Berbayar')
-            ->when($request->has('search'), function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->search . '%');
-            })
             ->get();
 
         // Ambil turnamen dengan pagination
@@ -359,12 +354,12 @@ class TournamentController extends Controller
             ->when($request->has('search'), function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
             })
-            ->paginate(5);
+            ->get();
 
         // Ambil transaksi yang statusnya 'accepted' dan terkait dengan turnamen di result
         $acceptedUploads = Upload::where('status', 'accepted')
-            ->whereIn('tournament_id', $allTournaments->pluck('id')->toArray())
-            ->get();
+            ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
+            ->paginate(5);
 
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
@@ -387,9 +382,7 @@ class TournamentController extends Controller
 
         // Menghitung total incomeOrganizer dari semua turnamen yang memenuhi syarat
         foreach ($allTournaments as $tournament) {
-            $hasAcceptedUpload = $acceptedUploads->contains('tournament_id', $tournament->id);
-
-            if ($hasAcceptedUpload) {
+            if ($tournament) {
                 $totalTeams = $combinedCounts->get($tournament->id, 0);
                 $totalNominal = $totalTeams * $tournament->nominal;
                 $incomeOrganizer = $totalNominal - ($totalNominal * 15 / 100);

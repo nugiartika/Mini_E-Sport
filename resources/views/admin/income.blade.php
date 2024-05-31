@@ -76,7 +76,7 @@
         </table>
     </div>
 </div>
-{{ $tournaments->links() }}
+{{ $acceptedUploads->links() }}
 @endsection
 
 @push('script')
