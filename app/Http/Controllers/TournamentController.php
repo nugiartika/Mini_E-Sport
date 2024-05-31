@@ -452,7 +452,7 @@ class TournamentController extends Controller
             $user = Auth::user();
 
 
-
+            
             // Proses gambar
             $gambar = $request->file('images');
             $path_gambar = null;
