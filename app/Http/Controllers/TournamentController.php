@@ -234,10 +234,20 @@ class TournamentController extends Controller
                 ];
             }
         }
-return view('penyelenggara.Dashboard', compact(
-            'totalIncomeOrganizer', 'tournamentpend', 'tournamentrej',
-            'tournamentacc', 'counttournaments', 'prizes', 'tournamentss',
-            'category', 'user', 'teamCounts', 'teamIdCounts', 'tournaments', 'id_organizer'
+        return view('penyelenggara.Dashboard', compact(
+            'totalIncomeOrganizer',
+            'tournamentpend',
+            'tournamentrej',
+            'tournamentacc',
+            'counttournaments',
+            'prizes',
+            'tournamentss',
+            'category',
+            'user',
+            'teamCounts',
+            'teamIdCounts',
+            'tournaments',
+            'id_organizer'
         ));
     }
 
@@ -295,21 +305,33 @@ return view('penyelenggara.Dashboard', compact(
         $uploads = upload::where('user_id', auth()->user()->id)->get();
         $uploadedTournamentIds = $uploads->pluck('tournament_id')->toArray();
 
-        return view('user.historytournament', compact('teams','uploads','uploadedTournamentIds'));
+        return view('user.historytournament', compact('teams', 'uploads', 'uploadedTournamentIds'));
     }
 
-    public function indexIncome()
+    public function indexIncome(Request $request)
     {
-        // Ambil semua turnamen yang sudah diterima dan berbayar
+        // Ambil semua turnamen untuk menghitung total incomeAdmin
+        $allTournaments = Tournament::orderBy('id', 'desc')
+            ->where('status', 'accepted')
+            ->where('paidment', 'Berbayar')
+            ->when($request->has('search'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            })
+            ->get();
+
+        // Ambil turnamen dengan pagination
         $tournaments = Tournament::orderBy('id', 'desc')
             ->where('status', 'accepted')
             ->where('paidment', 'Berbayar')
+            ->when($request->has('search'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            })
             ->get();
 
         // Ambil transaksi yang statusnya 'accepted' dan terkait dengan turnamen di result
         $acceptedUploads = Upload::where('status', 'accepted')
             ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
-            ->get();
+            ->paginate(5);
 
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
@@ -329,8 +351,18 @@ return view('penyelenggara.Dashboard', compact(
         $result = [];
         $totalIncomeAdmin = 0;
 
+        // Menghitung total incomeAdmin dari semua turnamen yang memenuhi syarat
+        foreach ($allTournaments as $tournament) {
+            if ($tournament) {
+                $totalTeams = $combinedCounts->get($tournament->id, 0);
+                $totalNominal = $totalTeams * $tournament->nominal;
+                $incomeAdmin = $totalNominal * 15 / 100;
+                $totalIncomeAdmin += $incomeAdmin;
+            }
+        }
+
+        // Menyusun hasil untuk turnamen yang ada di halaman saat ini
         foreach ($tournaments as $tournament) {
-            // Periksa apakah turnamen ini memiliki accepted uploads
             $hasAcceptedUpload = $acceptedUploads->contains('tournament_id', $tournament->id);
 
             if ($hasAcceptedUpload) {
@@ -338,7 +370,6 @@ return view('penyelenggara.Dashboard', compact(
                 $totalNominal = $totalTeams * $tournament->nominal;
                 $incomeAdmin = $totalNominal * 15 / 100;
                 $biayaRegister = $tournament->nominal;
-                $totalIncomeAdmin += $incomeAdmin;
 
                 $result[] = [
                     'tournament' => $tournament,
@@ -350,21 +381,31 @@ return view('penyelenggara.Dashboard', compact(
             }
         }
 
-        return view('admin.income', compact('result', 'totalIncomeAdmin', 'acceptedUploads'));
+        return view('admin.income', compact('result', 'tournaments', 'totalIncomeAdmin', 'acceptedUploads'));
     }
-    public function organizerIncome()
+    public function organizerIncome(Request $request)
     {
-        // Ambil semua turnamen
-        $tournaments = Tournament::orderBy('id', 'desc')
+        // Ambil semua turnamen untuk menghitung total incomeOrganizer
+        $allTournaments = Tournament::orderBy('id', 'desc')
             ->where('users_id', auth()->user()->id)
             ->where('status', 'accepted')
             ->where('paidment', 'Berbayar')
             ->get();
 
+        // Ambil turnamen dengan pagination
+        $tournaments = Tournament::orderBy('id', 'desc')
+            ->where('users_id', auth()->user()->id)
+            ->where('status', 'accepted')
+            ->where('paidment', 'Berbayar')
+            ->when($request->has('search'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            })
+            ->get();
+
         // Ambil transaksi yang statusnya 'accepted' dan terkait dengan turnamen di result
         $acceptedUploads = Upload::where('status', 'accepted')
             ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
-            ->get();
+            ->paginate(5);
 
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
@@ -383,12 +424,20 @@ return view('penyelenggara.Dashboard', compact(
         // Siapkan array hasil untuk dikirim ke view
         $result = [];
         $totalIncomeOrganizer = 0;
-        $perPage = 5;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $id_organizer = null;
 
+        // Menghitung total incomeOrganizer dari semua turnamen yang memenuhi syarat
+        foreach ($allTournaments as $tournament) {
+            if ($tournament) {
+                $totalTeams = $combinedCounts->get($tournament->id, 0);
+                $totalNominal = $totalTeams * $tournament->nominal;
+                $incomeOrganizer = $totalNominal - ($totalNominal * 15 / 100);
+                $totalIncomeOrganizer += $incomeOrganizer;
+            }
+        }
+
+        // Menyusun hasil untuk turnamen yang ada di halaman saat ini
         foreach ($tournaments as $tournament) {
-            // Periksa apakah turnamen ini memiliki accepted uploads
             $hasAcceptedUpload = $acceptedUploads->contains('tournament_id', $tournament->id);
 
             if ($hasAcceptedUpload) {
@@ -396,7 +445,6 @@ return view('penyelenggara.Dashboard', compact(
                 $totalNominal = $totalTeams * $tournament->nominal;
                 $incomeOrganizer = $totalNominal - ($totalNominal * 15 / 100);
                 $biayaRegister = $tournament->nominal;
-                $totalIncomeOrganizer += $incomeOrganizer;
                 $id_organizer = $tournament->users_id;
 
                 $result[] = [
@@ -410,24 +458,12 @@ return view('penyelenggara.Dashboard', compact(
             }
         }
 
-        // Konversi result menjadi koleksi untuk paginasi
-        $resultCollection = collect($result);
-
-        // Paginate the result collection
-        $paginatedResult = new LengthAwarePaginator(
-            $resultCollection->forPage($currentPage, $perPage),
-            $resultCollection->count(),
-            $perPage,
-            $currentPage,
-            ['path' => Paginator::resolveCurrentPath()]
-        );
-
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
             ->whereIn('status', ['rejected', 'accepted'])
             ->where('notif', 'belum baca')
             ->count();
 
-        return view('penyelenggara.income', compact('result', 'paginatedResult', 'counttournaments', 'totalIncomeOrganizer', 'id_organizer', 'acceptedUploads'));
+        return view('penyelenggara.income', compact('result', 'tournaments', 'counttournaments', 'totalIncomeOrganizer', 'id_organizer', 'acceptedUploads'));
     }
 
     /**
@@ -462,7 +498,7 @@ return view('penyelenggara.Dashboard', compact(
             $user = Auth::user();
 
 
-
+            
             // Proses gambar
             $gambar = $request->file('images');
             $path_gambar = null;

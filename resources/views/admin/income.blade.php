@@ -76,6 +76,7 @@
         </table>
     </div>
 </div>
+{{ $acceptedUploads->links() }}
 @endsection
 
 @push('script')
