@@ -22,7 +22,9 @@ class StoreUploadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tournament_id'=>'required|unique:categories,name,max:50',
+            'team_id'=>'nullable',
+            'teamtournament_id'=>'nullable',
+            'tournament_id'=>'required',
             'upload'=>'required|image|mimes:jpeg,png,jpg|max:2048',
             'reason'=>'nullable',
             'status'=>'nullable',

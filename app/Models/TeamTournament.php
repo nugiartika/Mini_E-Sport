@@ -18,10 +18,10 @@ class TeamTournament extends Model
     {
         return $this->belongsTo(Tournament::class);
     }
-    // public function team()
-    // {
-    //     return $this->hasOne(Team::class);
-    // }
+    public function upload()
+    {
+        return $this->hasMany(Upload::class);
+    }
     public function team()
     {
         return $this->belongsTo(Team::class);

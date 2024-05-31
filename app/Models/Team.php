@@ -27,4 +27,8 @@ class Team extends Model
     {
         return $this->hasMany(TeamTournament::class);
     }
+    public function upload()
+    {
+        return $this->hasMany(Upload::class);
+    }
 }

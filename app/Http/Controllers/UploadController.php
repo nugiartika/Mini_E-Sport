@@ -41,13 +41,17 @@ class UploadController extends Controller
 
         $user_id = Auth::user();
         $tournament_id = $request->get('tournament_id');
+        $team_id = $request->get('team_id');
+        $teamtournament_id = $request->get('teamtournament_id');
         $gambar = $request->file('upload');
         if ($gambar) {
             $path_gambar = Storage::disk('public')->put('bukti', $gambar);
         }
 
-        upload::create([
+        $upload = upload::create([
             'user_id' => $user_id->id,
+            'team_id' => $team_id,
+            'teamtournament_id' => $teamtournament_id,
             'tournament_id' => $tournament_id,
             'upload' => $path_gambar,
             'status' => 'pending',
@@ -56,6 +60,7 @@ class UploadController extends Controller
 
         return redirect()->back()->with('success', 'Berhasil kirim bukti pebayaran');
     } catch (\Throwable $th) {
+        dd($th);
         return redirect()->back()->withErrors(['warning' => $th->getMessage()]);
     }
     }

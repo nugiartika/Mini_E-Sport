@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tournament_id')->constrained();
             $table->string('upload');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('team_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->foreignId('teamtournament_id')->constrained('team_tournaments')->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->enum('status',['accepted','rejected', 'pending'])->default('pending');
             $table->text('reason')->nullable();
             $table->timestamps();

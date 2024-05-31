@@ -213,9 +213,44 @@
                                     </div>
 
                                     @php
-                                        // Ambil total tim dari hasil perhitungan
-                                        $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
-                                        $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+                                        $isPaidTournament = $tournament->paidment === 'Berbayar';
+
+                                        if ($isPaidTournament) {
+                                            // $teamCounts1 = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+                                            //     ->whereIn('tournament_id', $acceptedUploads)
+                                            //     ->groupBy('tournament_id')
+                                            //     ->get();
+                                            // $teamIdCounts1 = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+                                            //     ->whereIn('tournament_id', $acceptedUploads)
+                                            //     ->groupBy('tournament_id')
+                                            //     ->get();
+                                            // $teambaru = Team::whereIn('tournament_id', $acceptedUploads);
+                                            // $teamlama = TeamTournament::whereIn('tournament_id', $acceptedUploads);
+
+                                            // if ($teambaru && $teamlama) {
+                                            //     $teamCount = $teamCounts1->firstWhere('tournament_id', $tournament->id);
+                                            //     $teamIdCount = $teamIdCounts1->firstWhere('tournament_id', $tournament->id);
+                                            // // } else {
+                                            // //     $teamCount = null;
+                                            // //     $teamIdCount = null;
+                                            // }
+                                            $teamCount = $acceptedTeamCounts->get($tournament->id);
+                                            $teamIdCount = $acceptedTeamIdCounts->get($tournament->id);
+                                        } else {
+                                            $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+                                                ->groupBy('tournament_id')
+                                                ->get();
+
+                                            $teamIdCounts = TeamTournament::select(
+                                                'tournament_id',
+                                                DB::raw('COUNT(*) as count'),
+                                            )
+                                                ->groupBy('tournament_id')
+                                                ->get();
+                                            $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+                                            $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+                                        }
+
                                         $totalTeams =
                                             ($teamCount ? $teamCount->count : 0) +
                                             ($teamIdCount ? $teamIdCount->count : 0);
@@ -241,6 +276,9 @@
                                         $teamtournamentId = TeamTournament::where('tournament_id', $tournament->id)
                                             ->whereIn('team_id', $userTeamIds)
                                             ->exists();
+
+                                        // dd($acceptedUploads);
+
                                     @endphp
 
 
@@ -309,27 +347,27 @@
 
 
                     @if ($teamuser)
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body d-flex flex-column align-items-center">
-                                <div class="d-flex justify-content-center align-items-center mb-4"
-                                    style="height: 100px;">
-                                    <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <h6 style="color: white;">Buat tim baru atau gunakan tim yang sudah ada.
-                                        </h6>
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body d-flex flex-column align-items-center">
+                                        <div class="d-flex justify-content-center align-items-center mb-4"
+                                            style="height: 100px;">
+                                            <div class="d-flex justify-content-center align-items-center gap-3">
+                                                <h6 style="color: white;">Buat tim baru atau gunakan tim yang sudah ada.
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
+                                                Ada</a>
+                                            <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
-                                        Ada</a>
-                                    <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
                     @else
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -369,7 +407,6 @@
     </div>
 @endsection
 @push('script')
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var exampleModal = document.getElementById('exampleModalCenter');

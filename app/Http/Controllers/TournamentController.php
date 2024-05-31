@@ -98,23 +98,69 @@ class TournamentController extends Controller
         return redirect()->route('notificationTournament');
     }
 
+    // public function indexuser()
+    // {
+    //     $tournaments = Tournament::all();
+    //     $user = User::all();
+    //     $user_id = auth::user();
+    //     $acceptedUploads = Upload::where('user_id',$user_id->id)->where('status', 'accepted')->pluck('tournament_id')->toArray();
+
+
+    //     $uploads = upload::where('user_id', auth()->user()->id)->where('status', 'accepted')->get();
+    //     $uploadedTournamentIds = $uploads->pluck('tournament_id')->toArray();
+
+    //     // Count teams with accepted uploads
+    //     $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+    //         ->whereIn('tournament_id', $uploadedTournamentIds)
+    //         ->groupBy('tournament_id')
+    //         ->get();
+    //         // ->keyBy('tournament_id');
+
+    //     $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+    //         ->whereIn('tournament_id', $uploadedTournamentIds)
+    //         ->groupBy('tournament_id')
+    //         ->get();
+    //         // ->keyBy('tournament_id');
+
+    //     $category = Category::all();
+    //     $teams = Team::with('tournament')->where('user_id', auth()->id())->get();
+    //     $teamuser = Team::where('user_id', auth()->id())->exists();
+    //     $teamTournament = TeamTournament::all();
+    //     $prizes = tournament_prize::all();
+
+    //     return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament','uploads','uploadedTournamentIds','acceptedUploads','acceptedTeamIdCounts','acceptedTeamCounts'));
+    // }
     public function indexuser()
     {
+        // $user = auth()->user();
+    $user = User::all();
+
+        $acceptedUploads = Upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
+
         $tournaments = Tournament::all();
-        $user = User::all();
-        $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->groupBy('tournament_id')
-            ->get();
-        $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->groupBy('tournament_id')
-            ->get();
         $category = Category::all();
         $teams = Team::with('tournament')->where('user_id', auth()->id())->get();
         $teamuser = Team::where('user_id', auth()->id())->exists();
         $teamTournament = TeamTournament::all();
         $prizes = tournament_prize::all();
+        $uploads = Upload::where('status', 'accepted')->get();
+        $uploadedTournamentIds = $uploads->pluck('team_id')->toArray();
+        $uploadedTournamentteamIds = $uploads->pluck('teamtournament_id')->toArray();
 
-        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teamCounts', 'teams', 'teamuser', 'teamIdCounts', 'teamTournament'));
+        // Count teams with accepted uploads
+        $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->whereIn('id', $uploadedTournamentIds)
+            ->groupBy('tournament_id')
+            ->get()
+            ->keyBy('tournament_id');
+
+        $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->whereIn('team_id', $uploadedTournamentteamIds)
+            ->groupBy('tournament_id')
+            ->get()
+            ->keyBy('tournament_id');
+
+        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
     }
 
 
@@ -504,12 +550,12 @@ return view('penyelenggara.Dashboard', compact(
         $user = Auth::user();
         $category = Category::all();
         $selectedCategories = $request->input('categories_id', []);
-        $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->groupBy('tournament_id')
-            ->get();
-        $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->groupBy('tournament_id')
-            ->get();
+        // $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+        //     ->groupBy('tournament_id')
+        //     ->get();
+        // $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+        //     ->groupBy('tournament_id')
+        //     ->get();
         $teams = Team::all();
         $query = Tournament::query();
         $teamuser = Team::where('user_id', auth()->id())->exists();
@@ -520,7 +566,7 @@ return view('penyelenggara.Dashboard', compact(
         $tournaments = $query->get();
         $prizes = tournament_prize::all();
 
-        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'prizes'));
+        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes'));
     }
 
     public function filterLanding(Request $request)

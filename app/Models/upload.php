@@ -14,4 +14,14 @@ class upload extends Model
     {
         return $this->belongsTo(Tournament::class, 'tournament_id');
     }
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class, 'team_id');
+    }
+
+    public function teamtournament()
+    {
+        return $this->belongsTo(TeamTournament::class, 'teamtournament_id');
+    }
 }
