@@ -16,10 +16,11 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped " style="text-align: center">
                     <thead>
                         <tr>
-                            <th>ID Unggahan</th>
+                            <th>No</th>
+                            <th>Nama Tournament</th>
                             <th>Tanggal Diunggah</th>
                             <th>Status</th>
                             <th>Lihat Bukti</th>
@@ -30,64 +31,111 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($uploads as $upload)
-                        <tr>
-                            <td>#{{ $upload->id }}</td>
-                            <td>{{ $upload->created_at->translatedFormat('d M Y H:i') }}</td>
-                            <td>{{ $upload->status }}</td>
-                            <td>
-                                <a href="{{ asset("storage/{$upload->upload}") }}" data-lightbox="image-1"
-                                    data-title="Unggahan Tanggal: {{ $upload->created_at->translatedFormat('d M Y H:i') }}">Lihat</a>
-                            </td>
-                            <td>
-                                @if($user = \App\Models\User::find($upload->user_id))
-                                    {{ $user->email }}
-                                @else
-                                    User tidak ditemukan
-                                @endif
-                            </td>
+                        @forelse ($uploads as $upload)
+                            <tr>
+                                <th scope="row">{{$loop->iteration }}</th>
+                                <td>{{ $upload->tournament->name }}</td>
+                                <td>{{ $upload->created_at->translatedFormat('d M Y H:i') }}</td>
+                                <td>{{ $upload->status }}</td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        <i class="far fa-eye"></i>
+                                    </button>
 
-                            <td>
-                                <form id="updateForm{{ $upload->id }}" action="{{ route('Upload.update', $upload->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="radio-button ">
-                                        <span class="badge bg-label-danger me-1">
-                                            <label for="rejected{{ $upload->id }}">Tolak</label>
-                                            <input style="display:none;" type="radio" id="rejected{{ $upload->id }}" name="status" value="rejected" {{ $upload->status == 'rejected' ? 'checked' : '' }}>
-                                        </span>
-
-                                        <span class="badge bg-label-success me-1">
-                                            <label for="accepted{{ $upload->id }}">Terima</label>
-                                            <input style="display:none;" type="radio" id="accepted{{ $upload->id }}" name="status" value="accepted" {{ $upload->status == 'accepted' ? 'checked' : '' }}>
-                                        </span>
-                                    </div>
-
-                                    <div id="reasonModal{{ $upload->id }}" class="modal fade" tabindex="-1" aria-labelledby="reasonModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="reasonModalLabel">Alasan upload Ditolak</h5>
+                                                    <h5 class="modal-title fs-5" id="exampleModalLabel">Bukti Transaksi</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <textarea class="form-control" id="reason{{ $upload->id }}" name="reason" rows="3" placeholder="Alasan penolakan">{{ old('reason', $upload->reason) }}</textarea>
-                                                    @error('reason')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                    @enderror
+                                                    <img src="{{ asset("storage/{$upload->upload}") }}" alt="Uploaded Image" style="max-width: 100%;">
+                                                    <p class="mt-2">Unggahan Tanggal: {{ $upload->created_at->translatedFormat('d M Y H:i') }}</p>
+                                                    <p class="mt-2">Nama Tournament: {{ $upload->tournament->name }}</p>
                                                 </div>
-
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                            <td>
+
+
+                                </td>
+                                <td>
+                                    @if ($user = \App\Models\User::find($upload->user_id))
+                                        {{ $user->email }}
+                                    @else
+                                        User tidak ditemukan
+                                    @endif
+                                </td>
+
+                                <td>
+                                    <form id="updateForm{{ $upload->id }}"
+                                        action="{{ route('Upload.update', $upload->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="radio-button ">
+                                            <span class="badge bg-label-danger me-1">
+                                                <label for="rejected{{ $upload->id }}">Tolak</label>
+                                                <input style="display:none;" type="radio" id="rejected{{ $upload->id }}"
+                                                    name="status" value="rejected"
+                                                    {{ $upload->status == 'rejected' ? 'checked' : '' }}>
+                                            </span>
+
+                                            <span class="badge bg-label-success me-1">
+                                                <label for="accepted{{ $upload->id }}">Terima</label>
+                                                <input style="display:none;" type="radio"
+                                                    id="accepted{{ $upload->id }}" name="status" value="accepted"
+                                                    {{ $upload->status == 'accepted' ? 'checked' : '' }}>
+                                            </span>
+                                        </div>
+
+                                        <div id="reasonModal{{ $upload->id }}" class="modal fade" tabindex="-1"
+                                            aria-labelledby="reasonModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="reasonModalLabel">Alasan upload Ditolak
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <textarea class="form-control" id="reason{{ $upload->id }}" name="reason" rows="3"
+                                                            placeholder="Alasan penolakan">{{ old('reason', $upload->reason) }}</textarea>
+                                                        @error('reason')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Tutup</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <td>
+                            </tr>
+                        @empty
+                        <tr>
+                            <td colspan="7">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
+                                        style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+                                    <h4 class="table-light" style="text-align: center;">
+                                        Data Tidak Tersedia
+                                    </h4>
+                                </div>
+                            </td>
                         </tr>
-                        @endforeach
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -99,28 +147,28 @@
 @push('script')
     <!-- Modifikasi JavaScript -->
     @push('script')
-    <script>
-        $(document).ready(function() {
-            $('input[type=radio][name=status]').change(function() {
-                var formId = $(this).closest('form').attr('id');
-                if (this.value === 'accepted') {
-                    // Directly submit the form for 'accepted' status
-                    $('#' + formId).submit();
-                } else if (this.value === 'rejected') {
-                    var modalId = '#reasonModal' + formId.substring(10);
-                    $(modalId).modal('show');
+        <script>
+            $(document).ready(function() {
+                $('input[type=radio][name=status]').change(function() {
+                    var formId = $(this).closest('form').attr('id');
+                    if (this.value === 'accepted') {
+                        // Directly submit the form for 'accepted' status
+                        $('#' + formId).submit();
+                    } else if (this.value === 'rejected') {
+                        var modalId = '#reasonModal' + formId.substring(10);
+                        $(modalId).modal('show');
 
-                    // Submit reason form
-                    $(modalId).find('.btn-primary').click(function() {
-                        var reason = $(modalId).find('.form-control').val();
-                        if (reason.trim() !== '') {
-                            $('#' + formId).submit();
-                        }
-                    });
-                }
+                        // Submit reason form
+                        $(modalId).find('.btn-primary').click(function() {
+                            var reason = $(modalId).find('.form-control').val();
+                            if (reason.trim() !== '') {
+                                $('#' + formId).submit();
+                            }
+                        });
+                    }
+                });
             });
-        });
-    </script>
+        </script>
     @endpush
 
 @endpush

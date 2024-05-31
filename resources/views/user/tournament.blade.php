@@ -204,7 +204,7 @@
                                             <div class="teams d-flex align-items-center gap-1">
                                                 <i class="ti ti-users fs-base"></i>
                                                 <span class="tcn-6 fs-sm">
-                                                    @if ($totalTeams)
+                                                    @if ($totalTeams )
                                                         {{ $totalTeams }}/{{ $tournament->slotTeam }}
                                                         Teams
                                                     @else

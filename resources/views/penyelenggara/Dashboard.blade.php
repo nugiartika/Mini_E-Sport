@@ -4,70 +4,78 @@
     <div class="card-widget-separator-wrapper ">
         <div class="card-body card-widget-separator">
             <div class="row gy-4 gy-sm-1 " >
-                <div class="card col-sm-6 col-lg-5 mx-5 mt-5">
-                    <div
-                        class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
-                        <div class="ms-4">
-                            <h6 class="mb-2">JUMLAH TOURNAMENT DITERIMA</h6>
-                            <h4 class="mb-2">{{$tournamentacc}}</h4>
+                <div class="col-sm-6 col-lg-6">
+                    <div class="card mx-5 mt-4">
+                        <div
+                            class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
+                            <div class="ms-4">
+                                <h6 class="mb-2">JUMLAH TOURNAMENT DITERIMA</h6>
+                                <h4 class="mb-2">{{$tournamentacc}}</h4>
 
-                            <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
+                                <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
+                            </div>
+                            <span class="avatar p-2 me-lg-4 mt-4">
+                                <span class="avatar-initial bg-label-secondary rounded"><i
+                                        class="fas fa-trophy"></i></span>
+                            </span>
                         </div>
-                        <span class="avatar p-2 me-lg-4 mt-4">
-                            <span class="avatar-initial bg-label-secondary rounded"><i
-                                    class="fas fa-trophy"></i></span>
-                        </span>
+                        <hr class="d-none d-sm-block d-lg-none me-4">
                     </div>
-                    <hr class="d-none d-sm-block d-lg-none me-4">
                 </div>
-                <div class="card col-sm-6 col-lg-5 mt-5">
-                    <div
-                        class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
-                        <div class="ms-4">
-                            <h6 class="mb-2">JUMLAH TOURNAMENT DITOLAK</h6>
-                            <h4 class="mb-2">{{$tournamentrej}}</h4>
-                            <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
+                <div class="col-sm-6 col-lg-6">
+                    <div class="card mx-5 mt-4">
+                        <div
+                            class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
+                            <div class="ms-4">
+                                <h6 class="mb-2">JUMLAH TOURNAMENT DITOLAK</h6>
+                                <h4 class="mb-2">{{$tournamentrej}}</h4>
+                                <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
+                            </div>
+                            <span class="avatar p-2 me-lg-4 mt-4">
+                                <span class="avatar-initial bg-label-secondary rounded"><i
+                                        class="fas fa-trophy"></i></span>
+                            </span>
                         </div>
-                        <span class="avatar p-2 me-lg-4 mt-4">
-                            <span class="avatar-initial bg-label-secondary rounded"><i
-                                    class="fas fa-trophy"></i></span>
-                        </span>
+                        <hr class="d-none d-sm-block d-lg-none me-4">
                     </div>
-                    <hr class="d-none d-sm-block d-lg-none me-4">
                 </div>
-                <div class="card col-sm-6 col-lg-5 mx-5 mt-4">
-                    <div
-                        class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
-                        <div class="ms-4">
-                            <h6 class="mb-2">JUMLAH TOURNAMENT PENDING</h6>
-                            <h4 class="mb-2">{{$tournamentpend}}</h4>
-                            <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
+                <div class="col-sm-6 col-lg-6">
+                    <div class="card  mx-5 mt-4">
+                        <div
+                            class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
+                            <div class="ms-4">
+                                <h6 class="mb-2">JUMLAH TOURNAMENT PENDING</h6>
+                                <h4 class="mb-2">{{$tournamentpend}}</h4>
+                                <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
+                            </div>
+                            <span class="avatar p-2 me-lg-4 mt-4">
+                                <span class="avatar-initial bg-label-secondary rounded"><i
+                                        class="fas fa-trophy"></i></span>
+                            </span>
                         </div>
-                        <span class="avatar p-2 me-lg-4 mt-4">
-                            <span class="avatar-initial bg-label-secondary rounded"><i
-                                    class="fas fa-trophy"></i></span>
-                        </span>
+                        <hr class="d-none d-sm-block d-lg-none me-4">
                     </div>
-                    <hr class="d-none d-sm-block d-lg-none me-4">
                 </div>
-                <div class="card col-sm-6 col-lg-5 mt-4">
-                    <div
-                        class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
-                        <div class="ms-4">
-                            <h6 class="mb-2">SALDO PENYELENGGARA</h6>
-                            <h4 class="mb-2">@if (Auth::user()->id == $id_organizer)
-                                Rp . {{ number_format($totalIncomeOrganizer,2,',','.') }}
-                                @else
-                                Rp. 0
-                                @endif</h4>
-                            <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
+                <div class="col-sm-6 col-lg-6">
+                    <div class="card  mx-5 mt-4">
+                        <div
+                            class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
+                            <div class="ms-4">
+                                <h6 class="mb-2">SALDO PENYELENGGARA</h6>
+                                <h4 class="mb-2">@if (Auth::user()->id == $id_organizer)
+                                    Rp . {{ number_format($totalIncomeOrganizer,2,',','.') }}
+                                    @else
+                                    Rp. 0
+                                    @endif</h4>
+                                <p class="mb-0"><span class="text-muted me-2">Humma Esport</span></p>
+                            </div>
+                            <span class="avatar p-2 me-lg-4 mt-4">
+                                <span class="avatar-initial bg-label-secondary rounded"><i
+                                        class="fa fa-dollar"></i></span>
+                            </span>
                         </div>
-                        <span class="avatar p-2 me-lg-4 mt-4">
-                            <span class="avatar-initial bg-label-secondary rounded"><i
-                                    class="fa fa-dollar"></i></span>
-                        </span>
+                        <hr class="d-none d-sm-block d-lg-none">
                     </div>
-                    <hr class="d-none d-sm-block d-lg-none">
                 </div>
             </div>
         </div>

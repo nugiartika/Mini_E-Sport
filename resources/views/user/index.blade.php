@@ -35,7 +35,7 @@
                             <span></span>
                         </button>
                         <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="" src="assets/img/humma-01.png" width="70px" height="70px"
+                            <img class="" src="assets/img/humma-01.png" width="70px" height="50px"
                                 alt="favicon">
                         </a>
                     </div>
