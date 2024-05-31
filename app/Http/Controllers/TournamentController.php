@@ -333,6 +333,11 @@ class TournamentController extends Controller
             ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
             ->paginate(5);
 
+        //all accept
+        $allAcceptedUploads = Upload::where('status', 'accepted')
+            ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
+            ->get();
+
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
             $query->select('tournament_id', DB::raw('COUNT(*) as count'))
@@ -353,7 +358,8 @@ class TournamentController extends Controller
 
         // Menghitung total incomeAdmin dari semua turnamen yang memenuhi syarat
         foreach ($allTournaments as $tournament) {
-            if ($tournament) {
+            $hasAcceptedUpload = $allAcceptedUploads->contains('tournament_id', $tournament->id);
+            if ($hasAcceptedUpload) {
                 $totalTeams = $combinedCounts->get($tournament->id, 0);
                 $totalNominal = $totalTeams * $tournament->nominal;
                 $incomeAdmin = $totalNominal * 15 / 100;
@@ -406,6 +412,11 @@ class TournamentController extends Controller
         $acceptedUploads = Upload::where('status', 'accepted')
             ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
             ->paginate(5);
+        
+        //all accept
+        $allAcceptedUploads = Upload::where('status', 'accepted')
+            ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
+            ->get();
 
         // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
         $combinedCounts = DB::table(function ($query) {
@@ -428,7 +439,8 @@ class TournamentController extends Controller
 
         // Menghitung total incomeOrganizer dari semua turnamen yang memenuhi syarat
         foreach ($allTournaments as $tournament) {
-            if ($tournament) {
+            $hasAcceptedUpload = $allAcceptedUploads->contains('tournament_id', $tournament->id);
+            if ($hasAcceptedUpload) {
                 $totalTeams = $combinedCounts->get($tournament->id, 0);
                 $totalNominal = $totalTeams * $tournament->nominal;
                 $incomeOrganizer = $totalNominal - ($totalNominal * 15 / 100);
