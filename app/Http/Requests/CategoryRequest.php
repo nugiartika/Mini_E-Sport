@@ -39,7 +39,8 @@ class CategoryRequest extends FormRequest
             'photo.mimes' => 'Foto harus berupa file jpeg,png,jpg',
             'photo.max' => 'Ukuran foto harus kurang 2MB',
             'membersPerTeam.required' => 'Anggota pertim wajib diisi',
-            'membersPerTeam.min' => 'Minimal 1 anggota'
+            'membersPerTeam.min' => 'Minimal 1 anggota',
+            'membersPerTeam.max' => 'Maksimal 7 anggota'
         ];
     }
 }
