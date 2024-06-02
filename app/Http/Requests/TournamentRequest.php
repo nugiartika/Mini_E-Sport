@@ -47,12 +47,12 @@ class TournamentRequest extends FormRequest
             'paidment' => 'required|string',
             'nominal' => 'nullable|numeric|required_if:paidment,Berbayar',
             'aktif' => 'nullable',
-            'note' => 'required',
-            'prizepool_id' => 'required',
+            'note.*' => 'nullable',
+            'prizepool_id.*' => 'required',
         ];
     }
 
-    
+
     public function messages(): array
     {
         return [
@@ -80,8 +80,7 @@ class TournamentRequest extends FormRequest
             'description.required' => 'Deskripsi harus diisi.',
             'rule.required' => 'Aturan harus diisi.',
             'rule.max' => 'Aturan tidak boleh lebih dari 2048 karakter.',
-            'prizepool_id.required' => 'Hadiah harus diisi.',
-            'note.required' => 'Deskripsi Hadiah harus diisi.',
+            'prizepool_id.*.required' => 'Hadiah Wajib Di isi',
             'slotTeam.required' => 'Slot tim harus diisi.',
             'slotTeam.integer' => 'Slot tim harus berupa angka.',
             'slotTeam.min' => 'Slot tim tidak boleh kurang dari 2.',

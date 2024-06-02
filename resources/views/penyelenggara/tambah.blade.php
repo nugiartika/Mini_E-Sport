@@ -227,7 +227,15 @@
         </ul>
     </div>
     @endif --}}
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('ptournament.store') }}" method="POST" enctype="multipart/form-data" id="regForm">
         @csrf
         <div class="row justify-content-center">
@@ -320,17 +328,19 @@
                                         <div class="form-prize">
                                             <div class="input-group">
                                                 <select
-                                                    class="form-control prize-dropdown @error('prizepool_id[]') is-invalid @enderror"
+                                                    class="form-control prize-dropdown @error('prizpool_id[]') is-invalid @enderror"
                                                     name="prizepool_id[]">
                                                     <option value="">Pilih Hadiah</option>
+
                                                     @foreach ($prizes as $kat)
                                                         <option value="{{ $kat->id }}"
-                                                            {{ old('prizepool_id[]') == $kat->id ? 'selected' : '' }}>
+                                                            {{ old('prizepool_id.' . $kat) == $kat->id ? 'selected' : '' }}>
                                                             {{ $kat->prize }}
                                                         </option>
                                                     @endforeach
                                                 </select>
-
+                                                @if ($errors->has('prizpool_id[]'))
+                                                @endif
                                                 <button type="button" class="addRow rounded-end btn btn-info"><i
                                                         class="ti ti-plus fs-2xl"></i></button>
 
@@ -343,6 +353,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+
 
                                             <div class="w-100 mt-3 noteForm" style="display: none;">
                                                 <input class="form-control @error('note') is-invalid @enderror"
@@ -421,6 +432,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="tab">
                             <div class="mb-3">
                                 <label for="description" class="form-label">Deskripsi</label>
@@ -455,9 +467,11 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="mb-3" id="nominal" @if(old('paidment') === 'Berbayar') style="display: block;" @else style="display: none;" @endif>
+                            <div class="mb-3" id="nominal"
+                                @if (old('paidment') === 'Berbayar') style="display: block;" @else style="display: none;" @endif>
                                 <label for="nominal_input" class="form-label">Masukkan Nominal</label>
-                                <input type="number" name="nominal" value="{{ old('nominal') }}" id="nominal_input" class="form-control">
+                                <input type="number" name="nominal" value="{{ old('nominal') }}" id="nominal_input"
+                                    class="form-control">
                                 @error('nominal')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
