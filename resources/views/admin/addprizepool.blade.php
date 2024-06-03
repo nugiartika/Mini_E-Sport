@@ -14,7 +14,7 @@
         <form action="{{ route('admin.prizepool') }}" method="get">
             @csrf
             <div class="input-group mb-3">
-                <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;" value="{{ old('search', request('search')) }}" />
+                <input type="search" name="search" class="form-control" placeholder="Cari Hadiah Touenament&hellip;" value="{{ old('search', request('search')) }}" />
                 <button type="submit" class="btn btn-secondary">Cari</button>
             </div>
         </form>

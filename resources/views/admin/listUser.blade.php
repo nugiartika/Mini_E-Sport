@@ -33,7 +33,7 @@
                     @endif
 
                     <div class="input-group">
-                        <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;"
+                        <input type="search" name="search" class="form-control" placeholder="Cari nama user&hellip;"
                             value="{{ old('search', request()->input('search')) }}" />
                         <button type="submit" class="btn btn-secondary">Cari</button>
                     </div>

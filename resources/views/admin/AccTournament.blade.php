@@ -20,7 +20,7 @@
             <form action="{{ route('konfirmtournament') }}" method="get">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="search" name="search" class="form-control" placeholder="Cari sesuatu&hellip;"
+                    <input type="search" name="search" class="form-control" placeholder="Cari tournament&hellip;"
                         value="{{ old('search', request('search')) }}" />
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </div>
