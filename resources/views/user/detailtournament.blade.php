@@ -56,20 +56,21 @@
                 </div>
             </div>
 
+            @if ($tournament->aktif !== 'tidak aktif')
+                @if ($totalTeams && $totalTeams < $tournament->slotTeam && !$userTeamInTournament && !$teamtournamentId)
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                        data-tournament-id="{{ $tournament->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
+                        Turnamen</a>
+                @elseif ($tournament->aktif === 'tidak aktif')
 
-            @if ($totalTeams && $totalTeams < $tournament->slotTeam && !$userTeamInTournament && !$teamtournamentId)
-                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                    data-tournament-id="{{ $tournament->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
-                    Turnamen</a>
-            @elseif ($tournament->aktif === 'tidak aktif')
+                @elseif (!$totalTeams)
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                        data-tournament-id="{{ $tournament->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
+                        Turnamen</a>
+                @elseif ($totalTeams)
 
-            @elseif (!$totalTeams)
-                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                    data-tournament-id="{{ $tournament->id }}" class="btn btn-primary btn-lg btn-block text-anim">Gabung
-                    Turnamen</a>
-            @elseif ($totalTeams)
-
-            @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
+                @elseif ($totalTeams && $totalTeams == $tournament->slotTeam)
+                @endif
             @endif
         </div>
     </div>
