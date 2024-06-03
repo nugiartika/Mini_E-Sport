@@ -40,12 +40,12 @@
                                 <td>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">
+                                        data-bs-target="#exampleModal{{ $upload->id }}">
                                         <i class="far fa-eye"></i>
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModal{{ $upload->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $upload->id }}" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
