@@ -83,7 +83,7 @@ class UploadController extends Controller
         ->count();
 
     // Mengambil semua data upload
-    $uploads = upload::all();
+    $uploads = upload::orderBy('id','desc')->get();
 
     // Mengembalikan view 'penyelenggara.accbukti' beserta data turnamen, upload, dan jumlah turnamen yang belum dibaca notifikasinya
     return view('penyelenggara.accbukti', compact( 'uploads', 'counttournaments'));

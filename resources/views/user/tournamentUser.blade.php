@@ -216,24 +216,7 @@
                                         $isPaidTournament = $tournament->paidment === 'Berbayar';
 
                                         if ($isPaidTournament) {
-                                            // $teamCounts1 = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-                                            //     ->whereIn('tournament_id', $acceptedUploads)
-                                            //     ->groupBy('tournament_id')
-                                            //     ->get();
-                                            // $teamIdCounts1 = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-                                            //     ->whereIn('tournament_id', $acceptedUploads)
-                                            //     ->groupBy('tournament_id')
-                                            //     ->get();
-                                            // $teambaru = Team::whereIn('tournament_id', $acceptedUploads);
-                                            // $teamlama = TeamTournament::whereIn('tournament_id', $acceptedUploads);
 
-                                            // if ($teambaru && $teamlama) {
-                                            //     $teamCount = $teamCounts1->firstWhere('tournament_id', $tournament->id);
-                                            //     $teamIdCount = $teamIdCounts1->firstWhere('tournament_id', $tournament->id);
-                                            // // } else {
-                                            // //     $teamCount = null;
-                                            // //     $teamIdCount = null;
-                                            // }
                                             $teamCount = $acceptedTeamCounts->get($tournament->id);
                                             $teamIdCount = $acceptedTeamIdCounts->get($tournament->id);
                                         } else {
@@ -276,8 +259,6 @@
                                         $teamtournamentId = TeamTournament::where('tournament_id', $tournament->id)
                                             ->whereIn('team_id', $userTeamIds)
                                             ->exists();
-
-                                        // dd($acceptedUploads);
 
                                     @endphp
 

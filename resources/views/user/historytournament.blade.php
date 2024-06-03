@@ -25,7 +25,9 @@
                                     @if (!in_array($team->tournament->id, $uploadedTournamentIds))
                                         <a type="button" data-toggle="tooltip" data-bs-toggle="modal"
                                             data-bs-target="#uploadbukti" class="btn btn-sm btn-primary"
-                                            data-tournament-id="{{ $team->tournament->id }}">Kirim Bukti</a>
+                                            data-tournament-id="{{ $team->tournament->id }}"
+                                            data-team-id="{{ $team->id }}">
+                                            Kirim Bukti</a>
                                     @endif
                                 @endif
                             </div>
@@ -46,21 +48,19 @@
                                 <div class="d-flex gap-3 border-top justify-content-between pt-3">
                                     <span>Transaksi Terakhir</span>
                                     {{-- @foreach ($uploads as $upload) --}}
-@if ($upload)
-
-                                    @if ($upload->status === 'pending')
-                                        <span>Menungggu Konfirmasi</span>
-                                    @elseif ($upload->status === 'accepted')
-                                        <span>Diterima</span>
-                                    @elseif ($upload->status === 'rejected')
-                                        <span>Ditolak</span>
+                                    @if ($upload)
+                                        @if ($upload->status === 'pending')
+                                            <span>Menungggu Konfirmasi</span>
+                                        @elseif ($upload->status === 'accepted')
+                                            <span>Diterima</span>
+                                        @elseif ($upload->status === 'rejected')
+                                            <span>Ditolak</span>
+                                        @else
+                                            <span>Belum Ada Transaksi</span>
+                                        @endif
                                     @else
                                         <span>Belum Ada Transaksi</span>
                                     @endif
-@else
-<span>Belum Ada Transaksi</span>
-
-@endif
                                     {{-- @endforeach --}}
                                 </div>
                             @endif
@@ -87,7 +87,9 @@
                                     @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
                                         <a type="button" data-toggle="tooltip" data-bs-toggle="modal"
                                             data-bs-target="#uploadbukti" class="btn btn-sm btn-primary"
-                                            data-tournament-id="{{ $teamtournament->tournament->id }}">kirim bukti</a>
+                                            data-tournament-id="{{ $teamtournament->tournament->id }}"
+                                            data-teamtournament-id="{{ $teamtournament->id }}">
+                                            kirim bukti</a>
                                     @endif
                                 @endif
                             </div>
@@ -153,6 +155,8 @@
                     <form action="{{ route('Upload.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="tournament_id" value="">
+                        <input type="hidden" name="team_id" value="">
+                        <input type="hidden" name="teamtournament_id" value="">
 
                         <div class="mb-3">
                             <label for="upload" class="form-label">Foto Bukti Pembayaran</label>
@@ -187,14 +191,36 @@
             var modal = document.getElementById('uploadbukti');
 
             modal.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget; // Tombol yang memicu modal
+                var button = event.relatedTarget; // Button that triggered the modal
                 var tournamentId = button.getAttribute(
-                'data-tournament-id'); // Ambil nilai dari atribut data-tournament-id
+                'data-tournament-id'); // Get the tournament ID from data attribute
+                var teamId = button.getAttribute('data-team-id'); // Get the team ID from data attribute
+                var teamTournamentId = button.getAttribute(
+                'data-teamtournament-id'); // Get the team tournament ID from data attribute
 
-                // Perbarui nilai input hidden tournament_id di dalam modal
                 var inputField = modal.querySelector('input[name="tournament_id"]');
                 if (inputField) {
                     inputField.value = tournamentId;
+                }
+
+                // Update the hidden input fields for team_id and teamtournament_id
+                var teamInputField = modal.querySelector('input[name="team_id"]');
+                var teamTournamentInputField = modal.querySelector('input[name="teamtournament_id"]');
+
+                if (teamId) {
+                    if (teamInputField) {
+                        teamInputField.value = teamId;
+                    }
+                    if (teamTournamentInputField) {
+                        teamTournamentInputField.value = null; // Set teamtournament_id to null
+                    }
+                } else if (teamTournamentId) {
+                    if (teamTournamentInputField) {
+                        teamTournamentInputField.value = teamTournamentId;
+                    }
+                    if (teamInputField) {
+                        teamInputField.value = null; // Set team_id to null
+                    }
                 }
             });
         });

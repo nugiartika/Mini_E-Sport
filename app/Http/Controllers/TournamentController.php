@@ -297,7 +297,6 @@ class TournamentController extends Controller
             ->get();
         $uploads = upload::where('user_id', auth()->user()->id)->get();
         $uploadedTournamentIds = $uploads->pluck('tournament_id')->toArray();
-
         return view('user.historytournament', compact('teams', 'uploads', 'uploadedTournamentIds'));
     }
 
