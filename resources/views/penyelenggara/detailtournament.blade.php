@@ -330,7 +330,7 @@
                                     </div>
                                 </div>
 
-                                @if (count($juaras) > 0 && $selectedTournament->permainan > now())
+                                @if (count($juaras) > 0 )
                                     <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#editJuara">
                                         edit juara <i class="far fa-edit mx-2"></i>
                                     </button>
