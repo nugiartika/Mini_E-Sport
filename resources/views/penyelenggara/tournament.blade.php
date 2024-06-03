@@ -92,6 +92,10 @@
 @endsection
 
 @section('content')
+@php
+use App\Models\TeamTournament;
+use App\Models\Team;
+@endphp
     <div class="modal fade" tabindex="-1" id="filter" style="color: #fff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
@@ -269,11 +273,34 @@
                                     })
                                     ->count();
 
+                                    $isPaidTournament = $tournament->paidment === 'Berbayar';
+
+                                    if ($isPaidTournament) {
+                                        $teamCount = $acceptedTeamCounts->get($tournament->id);
+                                        $teamIdCount = $acceptedTeamIdCounts->get($tournament->id);
+                                    } else {
+                                        $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+                                            ->groupBy('tournament_id')
+                                            ->get();
+
+                                        $teamIdCounts = TeamTournament::select(
+                                            'tournament_id',
+                                            DB::raw('COUNT(*) as count'),
+                                        )
+                                            ->groupBy('tournament_id')
+                                            ->get();
+                                        $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
+                                        $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
+                                    }
+
+                                    $totalTeams =
+                                    ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
+
                                 // Get the total number of teams from calculations
-                                $totalTeams =
-                                    ($teamCounts->firstWhere('tournament_id', $tournament->id)->count ?? 0) +
-                                    ($teamIdCounts->firstWhere('tournament_id', $tournament->id)->count ?? 0) -
-                                    $transactionsCount;
+                                // $totalTeams =
+                                //     ($teamCounts->firstWhere('tournament_id', $tournament->id)->count ?? 0) +
+                                //     ($teamIdCounts->firstWhere('tournament_id', $tournament->id)->count ?? 0) -
+                                //     $transactionsCount;
 
                                 $userTeamsInTournament = ($teams ?? collect())->where('tournament_id', $tournament->id);
                                 $isUserInTournament = $userTeamsInTournament->isNotEmpty();

@@ -315,7 +315,7 @@
                                                         </div>
                                                     </a>
                                                 </div>
-                                            @elseif (!$totalTeams)
+                                                @elseif (!$totalTeams && !$isUserInTournament && !$teamtournamentId)
                                                 <div class="text-center">
                                                     <a type="button" class="btn-half position-relative d-inline-block py-2"
                                                         data-bs-toggle="modal" data-bs-target="#exampleModalCenter"

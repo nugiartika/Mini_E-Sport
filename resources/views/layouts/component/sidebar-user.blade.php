@@ -30,7 +30,7 @@
     <li class="menu-item {{ request()->routeIs('user.tournament.history') ? 'active' : '' }}">
         <a href="{{ route('user.tournament.history') }}" class="menu-link d-flex align-items-center">
             <i class="menu-icon tf-icons ti ti-history"></i>
-            <div>Riwayat Ikutserta</div>
+            <div>Riwayat Ikut serta</div>
         </a>
     </li>
 

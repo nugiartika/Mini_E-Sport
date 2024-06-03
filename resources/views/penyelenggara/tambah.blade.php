@@ -339,7 +339,7 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                @if ($errors->has('prizpool_id[]'))
+                                                @if ($errors->has('prizepool_id[]'))
                                                 @endif
                                                 <button type="button" class="addRow rounded-end btn btn-info"><i
                                                         class="ti ti-plus fs-2xl"></i></button>

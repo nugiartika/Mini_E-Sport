@@ -49,7 +49,6 @@ class UpdateTournamentRequest extends FormRequest
             'note' => 'required'
         ];
 
-
     }
 
     public function messages(): array
