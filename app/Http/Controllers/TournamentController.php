@@ -890,24 +890,32 @@ class TournamentController extends Controller
                 'aktif' => $aktif,
             ]);
 
+               $rules = [
+                'note.*' => 'required',
+                'note' => 'required',
+                'prizepool_id.*' => 'required',
+            ];
+
+            // Define custom error messages
+            $messages = [
+                'note.*.required' => 'Catatan harus diisi',
+                'prizepool_id.*.required' => 'Prizepool harus dipilih',
+            ];
+
+            // Validate the request
+            $request->validate($rules, $messages);
+
+            $tournamentId = $request->input('tournament_id');
+            $prizepoolIds = $request->input('prizepool_id');
+            $notes = $request->input('note');
             // Update prize pools
             foreach ($prizepoolIds as $index => $value) {
-                $tournamentPrize = Tournament_prize::where('tournament_id', $id)->where('prizepool_id', $value)->first();
-                if ($tournamentPrize) {
-                    // Update existing prize pool entry
-                    $tournamentPrize->update([
-                        'note' => $request->input('note')[$index],
-                        'prizepool_id' => $value
-                    ]);
-                } else {
-                    // Create new prize pool entry if it doesn't exist
-                    Tournament_Prize::create([
-                        'tournament_id' => $id,
-                        'note' => $request->input('note')[$index],
-                        'prizepool_id' => $value
+                $note = $notes[$index];
+                    $tournamentPrize = Tournament_Prize::create([
+                        'tournament_id' => $tournamentId,
+                        'note' => $note,
                     ]);
                 }
-            }
             return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil diedit');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);

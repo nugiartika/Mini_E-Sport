@@ -339,7 +339,12 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                @if ($errors->has('prizepool_id[]'))
+                                                @error('prizepool_id[]')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                @if ($errors->has('prizpool_id[]'))
                                                 @endif
                                                 <button type="button" class="addRow rounded-end btn btn-info"><i
                                                         class="ti ti-plus fs-2xl"></i></button>
@@ -347,11 +352,7 @@
                                                 <button type="button" class="removeRow d-none btn btn-danger"><i
                                                         class="ti ti-trash fs-2xl"></i></button>
 
-                                                @error('prizepool_id[]')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+
                                             </div>
 
 
