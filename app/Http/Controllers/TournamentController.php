@@ -30,6 +30,7 @@ class TournamentController extends Controller
      */
     public function index(Request $request)
     {
+
         $user = Auth::user();
 
         $acceptedUploads = Upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
@@ -82,7 +83,6 @@ class TournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-
         return view('penyelenggara.tournament', compact(
             'counttournaments',
             'prizes',
@@ -99,6 +99,7 @@ class TournamentController extends Controller
             'acceptedTeamIdCounts'
         ));
     }
+
 
 
     public function notification()
@@ -125,6 +126,39 @@ class TournamentController extends Controller
     }
 
 
+    // public function indexuser()
+    // {
+    //     // $user = auth()->user();
+    // $user = User::all();
+
+    //     $acceptedUploads = Upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
+
+    //     $tournaments = Tournament::all();
+    //     $category = Category::all();
+    //     $teams = Team::with('tournament')->where('user_id', auth()->id())->get();
+    //     $teamuser = Team::where('user_id', auth()->id())->exists();
+    //     $teamTournament = TeamTournament::all();
+    //     $prizes = tournament_prize::all();
+    //     $uploads = Upload::where('status', 'accepted')->get();
+    //     $uploadedTournamentIds = $uploads->pluck('team_id')->toArray();
+    //     $uploadedTournamentteamIds = $uploads->pluck('teamtournament_id')->toArray();
+
+    //     // Count teams with accepted uploads
+    //     $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+    //         ->whereIn('id', $uploadedTournamentIds)
+    //         ->groupBy('tournament_id')
+    //         ->get()
+    //         ->keyBy('tournament_id');
+
+    //     $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+    //         ->whereIn('team_id', $uploadedTournamentteamIds)
+    //         ->groupBy('tournament_id')
+    //         ->get()
+    //         ->keyBy('tournament_id');
+
+    //     return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+    // }
+
     public function indexuser()
     {
         // $user = auth()->user();
@@ -141,23 +175,21 @@ class TournamentController extends Controller
         $uploads = Upload::where('status', 'accepted')->get();
         $uploadedTournamentIds = $uploads->pluck('team_id')->toArray();
         $uploadedTournamentteamIds = $uploads->pluck('teamtournament_id')->toArray();
+    // Count teams with accepted uploads
+    $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+    ->whereIn('id', $uploadedTournamentIds)
+    ->groupBy('tournament_id')
+    ->get()
+    ->keyBy('tournament_id');
 
-        // Count teams with accepted uploads
-        $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->whereIn('id', $uploadedTournamentIds)
-            ->groupBy('tournament_id')
-            ->get()
-            ->keyBy('tournament_id');
+$acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+    ->whereIn('team_id', $uploadedTournamentteamIds)
+    ->groupBy('tournament_id')
+    ->get()
+    ->keyBy('tournament_id');
 
-        $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->whereIn('team_id', $uploadedTournamentteamIds)
-            ->groupBy('tournament_id')
-            ->get()
-            ->keyBy('tournament_id');
-
-        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
-    }
-
+return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+}
 
 
     public function dashboard()
@@ -889,34 +921,53 @@ class TournamentController extends Controller
                 'aktif' => $aktif,
             ]);
 
-               $rules = [
-                'note.*' => 'required',
-                'note' => 'required',
-                'prizepool_id.*' => 'required',
-            ];
+            //    $rules = [
+            //     'note.*' => 'required',
+            //     'note' => 'required',
+            //     'prizepool_id.*' => 'required',
+            // ];
 
-            // Define custom error messages
-            $messages = [
-                'note.*.required' => 'Catatan harus diisi',
-                'prizepool_id.*.required' => 'Prizepool harus dipilih',
-            ];
+            // // Define custom error messages
+            // $messages = [
+            //     'note.*.required' => 'Catatan harus diisi',
+            //     'prizepool_id.*.required' => 'Prizepool harus dipilih',
+            // ];
 
-            // Validate the request
-            $request->validate($rules, $messages);
+            // // Validate the request
+            // $request->validate($rules, $messages);
 
-            $tournamentId = $request->input('tournament_id');
-            $prizepoolIds = $request->input('prizepool_id');
-            $notes = $request->input('note');
-            // Update prize pools
+            // $tournamentId = $request->input('tournament_id');
+            // $prizepoolIds = $request->input('prizepool_id');
+            // $notes = $request->input('note');
+            // // Update prize pools
+            // foreach ($prizepoolIds as $index => $value) {
+            //     $note = $notes[$index];
+            //         $tournamentPrize = Tournament_Prize::create([
+            //             'tournament_id' => $tournamentId,
+            //             'note' => $note,
+            //         ]);
+            //     }
+
             foreach ($prizepoolIds as $index => $value) {
-                $note = $notes[$index];
-                    $tournamentPrize = Tournament_Prize::create([
-                        'tournament_id' => $tournamentId,
-                        'note' => $note,
+                $tournamentPrize = Tournament_prize::where('tournament_id', $id)->where('prizepool_id', $value)->first();
+                if ($tournamentPrize) {
+                    // Update existing prize pool entry
+                    $tournamentPrize->update([
+                        'note' => $request->input('note')[$index],
+                        'prizepool_id' => $value
+                    ]);
+                } else {
+                    // Create new prize pool entry if it doesn't exist
+                    Tournament_Prize::create([
+                        'tournament_id' => $id,
+                        'note' => $request->input('note')[$index],
+                        'prizepool_id' => $value
                     ]);
                 }
+            }
             return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil diedit');
         } catch (\Exception $e) {
+            // dd($e);
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
