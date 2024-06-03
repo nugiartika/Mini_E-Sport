@@ -536,7 +536,6 @@ class TournamentController extends Controller
             // Define validation rules
             $rules = [
                 'note.*' => 'required',
-                'note' => 'required',
                 'prizepool_id.*' => 'required',
             ];
 
@@ -549,19 +548,20 @@ class TournamentController extends Controller
             // Validate the request
             $request->validate($rules, $messages);
 
-            // $tournamentId = $request->input('tournament_id');
+            $tournamentId = $tournament->id;
             $prizepoolIds = $request->input('prizepool_id');
             $notes = $request->input('note');
 
             foreach ($prizepoolIds as $index => $value) {
-                $notes = $notes[$index];
+                $note = $notes[$index];
 
                 $tournamentPrize = Tournament_Prize::create([
-                    'tournament_id' => $tournamentId,
-                    'note' => $notes,
+                    'tournament_id' => $tournamentId, // Gunakan id turnamen yang baru dibuat
+                    'note' => $note,
                     'prizepool_id' => $value
                 ]);
             }
+
 
 
             return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil ditambahkan');
