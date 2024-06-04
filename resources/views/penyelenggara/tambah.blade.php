@@ -479,7 +479,7 @@
                             </div>
                         </div>
                         <div class="d-flex gap-2 justify-content-between">
-                            <button type="button" class="btn btn-secondary"
+                            <button type="button" class="btn btn-light"
                                 onclick="window.location.href='/ptournament'">Batal</button>
 
                             <div class="d-flex align-items-center gap-2">
