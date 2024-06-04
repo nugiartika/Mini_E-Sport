@@ -20,6 +20,7 @@ use App\Http\Controllers\PaymentProofController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserGameController;
+use App\Http\Controllers\UserTimController;
 use App\Http\Controllers\UserTournamentController;
 use App\Models\UserTournament;
 
@@ -157,8 +158,10 @@ Route::group(['prefix' => 'payment-proof', 'as' => 'payment-proof.', 'middleware
 });
 
 Route::resource('member', MemberController::class);
-Route::get('DetailTournametUser/{id}', [LandingPageController::class, 'detailTOurnament'])->name('landingpageDetailTournamet');
 
+//Landing Page
+Route::get('DetailTournametUser/{id}', [LandingPageController::class, 'detailTOurnament'])->name('landingpageDetailTournamet');
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
 Route::get('Tournament', [UserTournamentController::class, 'index'])->name('userTournament');
 Route::get('Game', [UserGameController::class, 'index'])->name('userGame');
+Route::get('Tim', [UserTimController::class, 'index'])->name('userTim');

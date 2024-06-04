@@ -16,24 +16,14 @@
                                 alt="favicon">
                         </a>
                     </div>
-                    {{-- <div class="navbar-toggle-item w-100 position-lg-relative">
-                        <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
-                            <li class="menu-link">
-                                <a href="tournaments.html">Tournaments</a>
-                            </li>
-                            <li class="menu-link">
-                                <a href="game.html">Game</a>
-                            </li>
-                            <li class="menu-link">
-                                <a href="game.html">Team</a>
-                            </li>
 
-                        </ul>
-                    </div> --}}
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
 
                     <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
+                        <li class="menu-link">
+                            <a href="{{ route('index') }}">Home</a>
+                        </li>
                         <li class="menu-link">
                             <a href="{{ route('userTournament') }}">Tournaments</a>
                         </li>
@@ -41,7 +31,7 @@
                             <a href="{{ route('userGame') }}">Game</a>
                         </li>
                         <li class="menu-link">
-                            <a href="game.html">Team</a>
+                            <a href="{{ route('userTim') }}">Team</a>
                         </li>
                         <li class="menu-link">
                             <a href="{{ route('login') }}"
