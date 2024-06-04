@@ -101,9 +101,7 @@
                             </div>
                         @endif
                     </div>
-
                 </div>
-
             </div>
         </div>
     </header>
@@ -269,7 +267,7 @@
                                     for="category{{ $game->id }}">
                                 {{ $game->name }}
                                 </label>
-                            </div>
+                            </div> 
                         @endforeach
                     </form>
                 </div>
