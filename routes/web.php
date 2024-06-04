@@ -164,6 +164,7 @@ Route::resource('member', MemberController::class);
 //Landing Page
 Route::get('DetailTournametUser/{id}', [LandingPageController::class, 'detailTOurnament'])->name('landingpageDetailTournamet');
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
-Route::get('Tournament', [UserTournamentController::class, 'index'])->name('userTournament');
+Route::get('Tournament', [UserTournamentController::class, 'filter'])->name('userTournament');
+Route::get('Tournamentfilter', [UserTournamentController::class, 'index'])->name('filtertournament');
 Route::get('Game', [UserGameController::class, 'index'])->name('userGame');
 Route::get('Tim', [UserTimController::class, 'index'])->name('userTim');

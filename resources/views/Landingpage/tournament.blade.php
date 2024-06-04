@@ -252,7 +252,7 @@ use App\Models\Team;
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('index') }}" method="GET">
+                    <form action="{{ route('filtertournament') }}" method="GET">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="widget-title text-black"><b>Game Filters</b></h4>
                             <button type="submit" class="btn btn-primary"

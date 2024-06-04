@@ -34,6 +34,11 @@
             <div class="row g-6 justify-content-md-start justify-content-center mb-lg-15 mb-10">
                 {{-- @dd($teams); --}}
                 @forelse ($teams as $team)
+                @php
+                    $membersCount = \App\Models\Member::where('team_id', $team->id)
+                        ->whereNotNull('nickname')
+                        ->count();
+                @endphp
                     <div class="col-xl-4 col-md-6">
                         <div class="team-card gap-6 p-xxl-8 p-4 bgn-4 box-style alt-box" data-tilt>
                             <div class="team-thumb">
@@ -47,7 +52,7 @@
                                 <div class="player-info d-flex gap-6 align-items-center mb-6">
                                     <div class="d-flex gap-3 align-items-center">
                                         <i class="ti ti-users fs-2xl"></i>
-                                        <span class="tcn-6">3 players</span>
+                                        <span class="tcn-6">{{ $membersCount }} players</span>
                                     </div>
                                     <div class="d-flex gap-3 align-items-center">
                                         <i class="ti ti-device-gamepad-2 fs-2xl"></i>
