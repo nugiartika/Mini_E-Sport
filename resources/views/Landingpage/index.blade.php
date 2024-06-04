@@ -222,10 +222,9 @@
                         <div class="swiper-slide">
                             <div class="card-3d d-grid justify-content-center p-3"style="min-heigt:200px;">
                                 <div class="img-area w-100 mb-8 position-relative">
-
-                                    <img class="w-100" src=" {{ asset('storage/' . $category->photo) }}"
-                                        alt="game" style="min-heigt:100px;">
+                                    <img class="w-100" src="{{ asset('storage/' . $category->photo) }}" alt="game" style="width: 200px; height: 200px; object-fit: cover;">
                                 </div>
+
                                 <h5 class="card-title text-center tcn-1 mb-4 title-anim">{{ $category->name }}</h5>
 
                             </div>

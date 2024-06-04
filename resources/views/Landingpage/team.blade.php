@@ -41,10 +41,10 @@
                 @endphp
                     <div class="col-xl-4 col-md-6">
                         <div class="team-card gap-6 p-xxl-8 p-4 bgn-4 box-style alt-box" data-tilt>
-                            <div class="team-thumb">
-                                <img class="w-100 rounded-circle" src="{{ asset('storage/' . $team->profile) }}"
-                                    alt="team">
+                            <div class="team-thumb overflow-hidden rounded-circle" style="height: 5rem; width: 5rem">
+                                <img class="w-100 h-100 object-fit-cover" src="{{ asset('storage/' . $team->profile) }}" alt="team" style="object-fit: cover">
                             </div>
+
                             <div class="team-info w-100">
                                 <div class="title-area d-flex gap-5 align-items-end mb-5">
                                     <h4 class="tcn-1 cursor-scale growDown title-anim">{{ $team->name }}</h4>
