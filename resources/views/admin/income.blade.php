@@ -53,7 +53,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($tournamentGrouping as $index => $tournament)
+                    @forelse ($paginator as $index => $tournament)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $tournament->tournament->user->name }}</td>
