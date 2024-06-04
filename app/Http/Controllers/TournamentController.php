@@ -869,11 +869,11 @@ class TournamentController extends Controller
                 'status' => $status,
                 'aktif' => $aktif,
             ]);
+            $tournamentId = $tournament->id;
 
-
+            // Define validation rules
             $rules = [
                 'note.*' => 'required',
-                'note' => 'required',
                 'prizepool_id.*' => 'required',
             ];
 
@@ -886,44 +886,23 @@ class TournamentController extends Controller
             // Validate the request
             $request->validate($rules, $messages);
 
-            $tournamentId = $request->input('tournament_id');
+            $tournamentId = $tournament->id;    
             $prizepoolIds = $request->input('prizepool_id');
             $notes = $request->input('note');
-            // Update prize pools
-            foreach ($prizepoolIds as $index => $value) {
-                $note = $notes[$index];
-                    $tournamentPrize = Tournament_Prize::create([
-                        'tournament_id' => $tournamentId,
-                        'note' => $note,
-                    ]);
-                }
 
             foreach ($prizepoolIds as $index => $value) {
-                $tournamentPrize = Tournament_prize::where('tournament_id', $id)->where('prizepool_id', $value)->first();
-                if ($tournamentPrize) {
-                    // Update existing prize pool entry
-                    $tournamentPrize->update([
-                        'note' => $request->input('note')[$index],
-                        'prizepool_id' => $value
-                    ]);
-                } else {
-                    // Create new prize pool entry if it doesn't exist
-                    Tournament_Prize::create([
-                        'tournament_id' => $id,
-                        'note' => $request->input('note')[$index],
-                        'prizepool_id' => $value
-                    ]);
-                }
                 $note = $notes[$index];
+
                 $tournamentPrize = Tournament_Prize::create([
-                    'tournament_id' => $tournamentId,
+                    'tournament_id' => $tournamentId, // Gunakan id turnamen yang baru dibuat
                     'note' => $note,
+                    'prizepool_id' => $value
                 ]);
             }
             return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil diedit');
         } catch (\Exception $e) {
             // dd($e);
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->back()->withInput()->withErrors(['warning' => $e->getMessage()]);
         }
     }
 
