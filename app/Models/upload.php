@@ -24,4 +24,8 @@ class upload extends Model
     {
         return $this->belongsTo(TeamTournament::class, 'teamtournament_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
