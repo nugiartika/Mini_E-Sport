@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LandingPage;
-use App\Http\Requests\StoreLandingPageRequest;
-use App\Http\Requests\UpdateLandingPageRequest;
 use App\Models\Category;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
+use App\Models\UserTournament;
+use App\Http\Requests\StoreUserTournamentRequest;
+use App\Http\Requests\UpdateUserTournamentRequest;
 
-class LandingPageController extends Controller
+class UserTournamentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,13 +26,7 @@ class LandingPageController extends Controller
         $categoryFilter = Category::all();
         $listGame = $Categories;
 
-        return view('Landingpage.index', compact('Tournaments', 'Categories', 'listGame','categoryFilter'));
-    }
-
-    public function detailTournament($id)
-    {
-        $tournaments = Tournament::findOrFail($id);
-        return view('Landingpage.detailTournament', compact('tournaments'));
+        return view('Landingpage.tournament', compact('Tournaments', 'Categories', 'listGame','categoryFilter'));
     }
 
     /**
@@ -46,7 +40,7 @@ class LandingPageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreLandingPageRequest $request)
+    public function store(StoreUserTournamentRequest $request)
     {
         //
     }
@@ -54,7 +48,7 @@ class LandingPageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(LandingPage $landingPage)
+    public function show(UserTournament $userTournament)
     {
         //
     }
@@ -62,7 +56,7 @@ class LandingPageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LandingPage $landingPage)
+    public function edit(UserTournament $userTournament)
     {
         //
     }
@@ -70,7 +64,7 @@ class LandingPageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLandingPageRequest $request, LandingPage $landingPage)
+    public function update(UpdateUserTournamentRequest $request, UserTournament $userTournament)
     {
         //
     }
@@ -78,7 +72,7 @@ class LandingPageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LandingPage $landingPage)
+    public function destroy(UserTournament $userTournament)
     {
         //
     }

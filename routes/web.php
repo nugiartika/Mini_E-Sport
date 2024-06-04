@@ -19,6 +19,9 @@ use App\Http\Controllers\DetailTournamentController;
 use App\Http\Controllers\PaymentProofController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\UserGameController;
+use App\Http\Controllers\UserTournamentController;
+use App\Models\UserTournament;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/tournaments/{id}/update-status', [TournamentController::class, 'updateStatus'])->name('updateStatus');
         Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
         Route::get('/organizerincome', [TournamentController::class, 'organizerIncome'])->name('organizerincome');
-    }); 
+    });
 
     Route::get('/detailTournamentUser/{id}', [TournamentController::class, 'detailTournamentUser'])->name('tournament.detailUser');
 
@@ -142,30 +145,20 @@ Route::group(['prefix' => 'transaction', 'as' => 'transaction.', 'middleware' =>
 });
 
 Route::group(['prefix' => 'payment-proof', 'as' => 'payment-proof.', 'middleware' => 'auth'], function () {
-    // Route untuk menampilkan daftar bukti pembayaran
     Route::get('/', [PaymentProofController::class, 'index'])->name('index');
-
-    // Route untuk menampilkan form pembuatan bukti pembayaran baru
     Route::get('create', [PaymentProofController::class, 'create'])->name('create');
 
-    // Route untuk menyimpan bukti pembayaran baru
     Route::post('/', [PaymentProofController::class, 'store'])->name('store');
-
-    // Route untuk menampilkan detail bukti pembayaran tertentu (menggunakan payment_proof_id)
     Route::get('{paymentProof:payment_proof_id}', [PaymentProofController::class, 'show'])->name('show');
 
-    // Route untuk menampilkan form edit bukti pembayaran tertentu (menggunakan payment_proof_id)
     Route::get('{paymentProof:payment_proof_id}/edit', [PaymentProofController::class, 'edit'])->name('edit');
-
-    // Route untuk memperbarui bukti pembayaran tertentu (menggunakan payment_proof_id)
     Route::match(['put', 'patch'], '{paymentProof:id}', [PaymentProofController::class, 'update'])->name('update');
-
-    // Route untuk menghapus bukti pembayaran tertentu (menggunakan payment_proof_id)
     Route::delete('{paymentProof:id}', [PaymentProofController::class, 'destroy'])->name('destroy');
 });
 
 Route::resource('member', MemberController::class);
-Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
-
 Route::get('DetailTournametUser/{id}', [LandingPageController::class, 'detailTOurnament'])->name('landingpageDetailTournamet');
+
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
+Route::get('Tournament', [UserTournamentController::class, 'index'])->name('userTournament');
+Route::get('Game', [UserGameController::class, 'index'])->name('userGame');
