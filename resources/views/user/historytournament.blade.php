@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="gambar overflow-hidden" style="max-height: 300px">
                             <img src="{{ asset('storage/' . $team->tournament->images) }}" alt="{{ $team->tournament->name }}"
-                                class="card-img-top" style="object-fit: cover; height:100%; widht:100%;"/>
+                                class="card-img-top" style="object-fit: cover; height:100%; widht:100%;" />
                         </div>
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
@@ -48,22 +48,44 @@
                                     @endif
                                 </div>
                                 <div class="d-flex gap-3 border-top justify-content-between pt-3">
-                                    <span>Transaksi Terakhir</span>
-                                    {{-- @foreach ($uploads as $upload) --}}
-                                    @if ($upload)
-                                        @if ($upload->status === 'pending')
-                                            <span>Menungggu Konfirmasi</span>
-                                        @elseif ($upload->status === 'accepted')
-                                            <span>Diterima</span>
-                                        @elseif ($upload->status === 'rejected')
-                                            <span>Ditolak</span>
+                                    <span class="flex-shrink-0">Transaksi Terakhir</span>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        @if ($upload)
+                                            @if ($upload->status === 'pending')
+                                                <span>Menungggu Konfirmasi</span>
+                                            @elseif ($upload->status === 'accepted')
+                                                <span>Diterima</span>
+                                            @elseif ($upload->status === 'rejected')
+                                                <span>Ditolak</span>
+                                                <span data-bs-toggle="tooltip" data-bs-title="Lihat Alasannya">
+                                                    <a href="javascript:void(0)" data-bs-target="#alasan-{{ $upload->id }}" data-bs-toggle="modal" class="text-decoration-none text-white"><i
+                                                            class="ti ti-help"></i></a>
+
+                                                    <div class="modal fade" id="alasan-{{ $upload->id }}" tabindex="-1"
+                                                        aria-labelledby="alasan-{{ $upload->id }}Label"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="alasan-{{ $upload->id }}Label">Alasannya?</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{ $upload->reason }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            @else
+                                                <span>Belum Ada Transaksi</span>
+                                            @endif
                                         @else
                                             <span>Belum Ada Transaksi</span>
                                         @endif
-                                    @else
-                                        <span>Belum Ada Transaksi</span>
-                                    @endif
-                                    {{-- @endforeach --}}
+                                    </div>
                                 </div>
                             @endif
                         </div>
@@ -79,14 +101,12 @@
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
                         <div class="gambar" style="width:386px; height:300px;">
-                        <img src="{{ asset('storage/' . $teamtournament->tournament->images) }}" alt="No images"
-                            class="card-img-top" style="object-fit: cover; height:100%; widht:100%;"/>
+                            <img src="{{ asset('storage/' . $teamtournament->tournament->images) }}" alt="No images"
+                                class="card-img-top" style="object-fit: cover; height:100%; widht:100%;" />
                         </div>
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
-                                {{-- <a href="{{ route('user.tournament.history', ['tournament' => $teamtournament->tournament->id]) }}"> --}}
                                 <h3 class="mb-0">{{ $teamtournament->tournament->name }}</h3>
-                                {{-- </a> --}}
                                 @if ($teamtournament->tournament->paidment !== 'Gratis')
                                     @if (!in_array($teamtournament->tournament->id, $uploadedTournamentIds))
                                         <a type="button" data-toggle="tooltip" data-bs-toggle="modal"
@@ -120,6 +140,7 @@
                                             <span>Diterima</span>
                                         @elseif ($uploadteam->status === 'rejected')
                                             <span>Ditolak</span>
+                                            <span><i class="ti ti-note"></i>{{ $uploadteam->reason }}</span>
                                         @else
                                             <span>Belum Ada Transaksi</span>
                                         @endif
@@ -164,8 +185,8 @@
 
                         <div class="mb-3">
                             <label for="upload" class="form-label">Foto Bukti Pembayaran</label>
-                            <input type="file" class="form-control @error('upload') is-invalid @enderror" id="upload"
-                                name="upload">
+                            <input type="file" class="form-control @error('upload') is-invalid @enderror"
+                                id="upload" name="upload">
                             @if (old('upload'))
                                 <img id="preview" src="{{ asset('storage/' . old('upload')) }}" alt="Old gambar"
                                     style="max-width: 100px; max-height: 100px;">
@@ -190,17 +211,17 @@
 @endsection
 
 @push('script')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var modal = document.getElementById('uploadbukti');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById('uploadbukti');
 
             modal.addEventListener('show.bs.modal', function(event) {
                 var button = event.relatedTarget; // Button that triggered the modal
                 var tournamentId = button.getAttribute(
-                'data-tournament-id'); // Get the tournament ID from data attribute
+                    'data-tournament-id'); // Get the tournament ID from data attribute
                 var teamId = button.getAttribute('data-team-id'); // Get the team ID from data attribute
                 var teamTournamentId = button.getAttribute(
-                'data-teamtournament-id'); // Get the team tournament ID from data attribute
+                    'data-teamtournament-id'); // Get the team tournament ID from data attribute
 
                 var inputField = modal.querySelector('input[name="tournament_id"]');
                 if (inputField) {
@@ -228,6 +249,6 @@
                 }
             });
 
-    });
-</script>
+        });
+    </script>
 @endpush
