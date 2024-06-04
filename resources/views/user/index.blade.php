@@ -258,10 +258,9 @@
                                     <div class="tournament-content px-xl-4 px-sm-2">
                                         <div class="tournament-info mb-5">
                                             <a href="" class="d-block">
-                                                <h4
-                                                    class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                    {{ $Category->name }}</h4>
-
+                                                <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                    {{ $Category->name }}
+                                                </h4>
                                             </a>
                                         </div>
                                         <div class="hr-line line3"></div>

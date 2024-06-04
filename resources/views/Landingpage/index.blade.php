@@ -299,10 +299,10 @@
                             </div>
                         @empty
                             <div class="col-lg-12">
-                                <center>
+                                <div class="d-flex justify-content-center">
                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
                                         style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
-                                </center>
+                                </div>
                                 <h4 class="text-light" style="text-align: center;">
                                     game Tidak Tersedia
                                 </h4>
@@ -353,9 +353,6 @@
                                             <img class="w-100" src="{{ asset('storage/' . $Tournament->images) }}"
                                                 alt="tournament">
                                         </div>
-                                        {{-- <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                     <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span> --}}
                                     </div>
                                     <div class="tournament-content px-xl-4 px-sm-2">
                                         <div class="tournament-info mb-5">
@@ -365,7 +362,6 @@
                                                     {{ $Tournament->name }}</h4>
 
                                             </a>
-                                            {{-- <span class="tcn-6 fs-sm">Torneo Individual</span> --}}
                                         </div>
                                         <div class="hr-line line3"></div>
                                         <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
@@ -382,13 +378,7 @@
                                                 class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                 <i class="ti ti-ticket fs-base tcp-2"></i>
                                                 <span class="tcn-1 fs-sm">
-                                                    @if ($Tournament->paidment === 'Gratis')
-                                                        Gratis
-                                                    @elseif ($Tournament->paidment === 'Berbayar')
-                                                        Berbayar
-                                                    @else
-                                                        Status pembayaran tidak valid
-                                                    @endif
+                                                    {{ $Tournament->paidment === 'Gratis' ? 'Gratis' : ($Tournament->paidment === 'Berbayar' ? 'Berbayar' : 'Status pembayaran tidak valid') }}
                                                 </span>
                                             </div>
                                             <div

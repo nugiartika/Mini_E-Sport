@@ -1,5 +1,7 @@
 @extends('Landingpage.layout.asset')
+
 @section('title', 'Turnamen')
+
 @section('content')
         <!-- tournament section start -->
         <section class="tournament-section pb-120" id="tournament-hero">
@@ -12,7 +14,6 @@
                 <img class="w-100" src="assets/img/game-console2.png" alt="game-console">
             </div>
             <div class="red-ball top-50"></div>
-
 
             <div class="tournament-wrapper">
                 <div class="tournament-wrapper-border">
@@ -34,11 +35,8 @@
                                         <div class="tournament-img mb-8 position-relative">
                                             <div class="img-area overflow-hidden">
                                                 <img class="w-100" src="{{ asset('storage/' . $Tournament->images) }}"
-                                                    alt="tournament">
+                                                    alt="tournament" />
                                             </div>
-                                            {{-- <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                         <span class="dot-icon alt-icon ps-3">Playing</span>
-                                    </span> --}}
                                         </div>
                                         <div class="tournament-content px-xl-4 px-sm-2">
                                             <div class="tournament-info mb-5">
@@ -48,25 +46,14 @@
                                                         {{ $Tournament->name }}</h4>
 
                                                 </a>
-                                                {{-- <span class="tcn-6 fs-sm">Torneo Individual</span> --}}
                                             </div>
                                             <div class="hr-line line3"></div>
                                             <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
                                                 <div
                                                     class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                                     <div class="d-flex align-items-center gap-2">
-                                                    </div>
-                                                    <div class="v-line"></div>
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <i class="ti ti-gift"></i> <span class="tcn-1 fs-sm">
-                                                            @if ($Tournament->aktif === 'aktif')
-                                                                Status: aktif
-                                                            @elseif ($Tournament->aktif === 'aktif')
-                                                                Status: Tidak aktif
-                                                            @else
-                                                                Status: Tidak Diketahui
-                                                            @endif
-
+                                                        <i class="ti ti-brand-flightradar24"></i> <span class="tcn-1 fs-sm">
+                                                            {{ $Tournament->aktif === 'aktif' ? 'Aktif' : ($Tournament->aktif === 'tidak aktif' ? 'Tidak aktif' : 'Tidak Diketahui') }}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -74,19 +61,13 @@
                                                     class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                     <i class="ti ti-ticket fs-base tcp-2"></i>
                                                     <span class="tcn-1 fs-sm">
-                                                        @if ($Tournament->paidment === 'Gratis')
-                                                            Gratis
-                                                        @elseif ($Tournament->paidment === 'Berbayar')
-                                                            Berbayar
-                                                        @else
-                                                            Status pembayaran tidak valid
-                                                        @endif
+                                                        {{ $Tournament->paidment === 'Gratis' ? 'Gratis' : ($Tournament->paidment === 'Berbayar' ? 'Berbayar' : 'Status pembayaran tidak valid') }}
                                                     </span>
                                                 </div>
                                                 <div
                                                     class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                     <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                    <span class="tcn-1 fs-sm">{{ $Tournament->permainan }}</span>
+                                                    <span class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y') }}</span>
                                                 </div>
                                             </div>
                                             <div class="hr-line line3"></div>
