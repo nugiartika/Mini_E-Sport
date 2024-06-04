@@ -43,7 +43,12 @@
                         <div>
                             <h6 class="mb-2 fs-6">Saldo Penyelenggara</h6>
                             <h6 class="mb-2">
+                                @if (Auth::user()->id == $id_organizer)
                                 Rp . {{ number_format($totalIncomeOrganizer, 2, ',', '.') }}
+                                @else
+                                Rp . 0
+                                @endif
+                                
                             </h6>
                         </div>
                         <span class="avatar ms-4 mt-1">

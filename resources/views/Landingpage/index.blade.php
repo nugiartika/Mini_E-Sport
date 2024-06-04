@@ -61,13 +61,16 @@
 
                     <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                         <li class="menu-link">
+                            <a href="{{ route('index') }}">Home</a>
+                        </li>
+                        <li class="menu-link">
                             <a href="{{ route('userTournament') }}">Tournaments</a>
                         </li>
                         <li class="menu-link">
-                            <a href="game.html">Game</a>
+                            <a href="{{ route('userGame') }}">Game</a>
                         </li>
                         <li class="menu-link">
-                            <a href="game.html">Team</a>
+                            <a href="{{ route('userTim') }}">Team</a>
                         </li>
                         <li class="menu-link">
                             <a href="{{ route('login') }}"
@@ -521,33 +524,6 @@
     </div>
 
     <!-- end modal Filter-->
-
-
-
-    <!-- call to action section start -->
-    <div class="call-to-action pt-120 pb-120 bgn-4 overflow-x-hidden" id="cta">
-        <div class="container">
-            <div class="row justify-content-between g-6">
-                <div class="col-lg-6">
-                    <span class="display-three tcn-1 cursor-scale growUp mb-8 d-block title-anim">Humma Esport</span>
-                </div>
-                <div class="col-xl-5 col-lg-6">
-                    <div
-                        class="d-flex align-items-md-center align-items-start justify-content-between gap-lg-8 gap-6 flex-md-row flex-column">
-                        <div class="d-flex align-items-center gap-lg-4 gap-2">
-                            <label class="custom-checkbox">
-                                <input type="checkbox">
-                            </label>
-                            <span class="fs-base tcn-6"><a href="" class="tcp-1"></a>
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- call to action section end -->
 
     <!-- footer section start  -->
     <footer class="footer bgn-4 bt">

@@ -215,52 +215,43 @@ class TournamentController extends Controller
         $prizes = tournament_prize::all();
         $tournaments = tournament::where('users_id', auth()->user()->id)->get();
         // saldo penyelenggara
-        // Ambil semua turnamen
-        $tournamentss = Tournament::orderBy('id', 'desc')->get();
-
-        // Ambil transaksi yang statusnya 'accepted' dan terkait dengan turnamen
-        $acceptedUploads = Upload::where('status', 'accepted')
-            ->whereIn('tournament_id', $tournamentss->pluck('id')->toArray())
+        // Ambil data uploads dengan kondisi yang sesuai
+        $allUploads = Upload::whereHas('tournament', function ($query) {
+            $query->orderBy('id', 'desc')
+                ->where('users_id', auth()->user()->id)
+                ->where('status', 'accepted')
+                ->where('paidment', 'Berbayar');
+        })
+            ->where('status', 'accepted')
             ->get();
 
-        // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
-        $combinedCounts = DB::table(function ($query) {
-            $query->select('tournament_id', DB::raw('COUNT(*) as count'))
-                ->from('teams')
-                ->groupBy('tournament_id')
-                ->unionAll(
-                    TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-                        ->groupBy('tournament_id')
-                );
-        }, 'combined_counts')
-            ->select('tournament_id', DB::raw('SUM(count) as total_count'))
-            ->groupBy('tournament_id')
-            ->pluck('total_count', 'tournament_id');
+        // Inisialisasi array untuk menyimpan total tim
+        $totalTeams = [];
+
+        // Hitung total tim untuk setiap turnamen
+        foreach ($allUploads as $upload) {
+            $tournamentId = $upload->tournament_id;
+            if (!isset($totalTeams[$tournamentId])) {
+                $totalTeams[$tournamentId] = 0;
+            }
+            $totalTeams[$tournamentId]++;
+        }
+
+        // Mengelompokkan data berdasarkan turnamen
+        $groupedUploads = $allUploads->groupBy('tournament_id');
 
         // Siapkan array hasil untuk dikirim ke view
-        $result = [];
         $totalIncomeOrganizer = 0;
         $id_organizer = null;
 
-        foreach ($tournamentss as $tournament) {
-            // Periksa apakah turnamen ini memiliki accepted uploads
-            $hasAcceptedUpload = $acceptedUploads->contains('tournament_id', $tournament->id);
-
-            if ($hasAcceptedUpload) {
-                $totalTeams = $combinedCounts->get($tournament->id, 0);
-                $totalNominal = $totalTeams * $tournament->nominal;
-                $incomeOrganizer = $totalNominal - ($totalNominal * 15 / 100);
-                $totalIncomeOrganizer += $incomeOrganizer;
-                $id_organizer = $tournament->users_id;
-
-                $result[] = [
-                    'tournament' => $tournament,
-                    'total_teams' => $totalTeams,
-                    'total_nominal' => $totalNominal,
-                    'income_organizer' => $incomeOrganizer,
-                    'id_organizer' => $id_organizer
-                ];
-            }
+        // Bangun array hasil dengan turnamen yang dijadikan 1 data
+        foreach ($groupedUploads as $tournamentId => $uploads) {
+            $tournament = $uploads->first()->tournament;
+            $totalTeamsCount = $totalTeams[$tournamentId] ?? 0;
+            $totalNominal = $totalTeamsCount * $tournament->nominal;
+            $incomeOrganizer = $totalNominal - ($totalNominal * 5 / 100);
+            $totalIncomeOrganizer += $incomeOrganizer;
+            $id_organizer = $tournament->users_id;
         }
         return view('penyelenggara.Dashboard', compact(
             'totalIncomeOrganizer',
@@ -269,7 +260,6 @@ class TournamentController extends Controller
             'tournamentacc',
             'counttournaments',
             'prizes',
-            'tournamentss',
             'category',
             'user',
             'teamCounts',
@@ -423,6 +413,7 @@ class TournamentController extends Controller
             $totalNominal = $totalTeamsCount * $tournament->nominal;
             $incomeOrganizer = $totalNominal - ($totalNominal * 5 / 100);
             $totalIncomeOrganizer += $incomeOrganizer;
+            $id_organizer = $tournament->users_id;
 
             $uploadDetails = [];
             foreach ($uploads as $upload) {
@@ -441,7 +432,6 @@ class TournamentController extends Controller
                 'total_nominal' => $totalNominal,
                 'income_organizer' => $incomeOrganizer,
                 'biaya_register' => $tournament->nominal,
-                'id_organizer' => $tournament->users_id,
                 'upload_details' => $uploadDetails,
             ];
         }
