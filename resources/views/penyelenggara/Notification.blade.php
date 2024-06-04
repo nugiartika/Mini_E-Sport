@@ -9,7 +9,7 @@
                             <div style="display: inline-block;">
                                 <img src="assets/img/humma-01.png" width="60" height="50" style="vertical-align: middle; margin-left:30px">
                                 <h6 style="display: inline-block; vertical-align: middle; margin-left: 5px;">Humma E-Sport</h6>
-                                <p class="ml-auto" style="display: inline-block; vertical-align: middle; margin-left: 815px;">{{ $tournament->updated_at->format('H:i') }}</p>
+                                <p class="ml-auto" style="display: inline-block; vertical-align: middle; margin-left: 725px;">{{ $tournament->updated_at->format('H:i') }}</p>
                             </div>
                         </div>
 
@@ -32,7 +32,7 @@
                                     <p class="card-text mb-3">{{ $tournament->reason }}</p>
                                 </div>
                                 @if ($tournament->notif == 'belum baca')
-                                    <a href="{{ route('Updatenotification', ['id' => $tournament->id]) }}" class="btn btn-primary btn-sm" style="margin-left: 910px"> Tandai sudah baca <i class="fa fa-check mx-2"></i></a>
+                                    <a href="{{ route('Updatenotification', ['id' => $tournament->id]) }}" class="btn btn-primary btn-sm ml-auto" style="margin-left: 815px"> Tandai sudah baca <i class="fa fa-check mx-2"></i></a>
                                 @endif
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                         <div style="display: inline-block;">
                             <img src="assets/img/humma-01.png" width="60" height="50" style="vertical-align: middle; margin-left:30px">
                             <h6 style="display: inline-block; vertical-align: middle; margin-left: 5px;">Humma E-Sport</h6>
-                            <p class="ml-auto" style="display: inline-block; vertical-align: middle; margin-left: 815px;">{{ $tournament->updated_at->format('H:i') }}</p>
+                            <p class="ml-auto" style="display: inline-block; vertical-align: middle; margin-left: 725px;">{{ $tournament->updated_at->format('H:i') }}</p>
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@
                                 <p class="card-text mb-3">Tournament anda sudah kami setujui</p>
                             </div>
                             @if ($tournament->notif == 'belum baca')
-                                <a href="{{ route('Updatenotification', ['id' => $tournament->id]) }}" class="btn btn-primary btn-sm" style="margin-left: 910px"> Tandai sudah baca <i class="fa fa-check mx-2"></i></a>
+                                <a href="{{ route('Updatenotification', ['id' => $tournament->id]) }}" class="btn btn-primary btn-sm ml-auto" style="margin-left: 815px"> Tandai sudah baca <i class="fa fa-check mx-2"></i></a>
                             @endif
                         </div>
                     </div>
