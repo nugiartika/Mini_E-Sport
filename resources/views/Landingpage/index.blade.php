@@ -39,14 +39,33 @@
                                 alt="favicon">
                         </a>
                     </div>
-                    <div class="navbar-toggle-item w-100 position-lg-relative">
+                    {{-- <div class="navbar-toggle-item w-100 position-lg-relative">
+                        <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
+                            <li class="menu-link">
+                                <a href="tournaments.html">Tournaments</a>
+                            </li>
+                            <li class="menu-link">
+                                <a href="game.html">Game</a>
+                            </li>
+                            <li class="menu-link">
+                                <a href="game.html">Team</a>
+                            </li>
 
-                    </div>
+                        </ul>
+                    </div> --}}
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
 
-
                     <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
+                        <li class="menu-link">
+                            <a href="{{ route('userTournament') }}">Tournaments</a>
+                        </li>
+                        <li class="menu-link">
+                            <a href="game.html">Game</a>
+                        </li>
+                        <li class="menu-link">
+                            <a href="game.html">Team</a>
+                        </li>
                         <li class="menu-link">
                             <a href="{{ route('login') }}"
                                 class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Masuk</a>
@@ -284,7 +303,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @empty
+                        @empty
                             <div class="col-lg-12">
                                 <center>
                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
@@ -294,7 +313,6 @@
                                     game Tidak Tersedia
                                 </h4>
                             </div>
-
                         @endforelse
                     </div>
 
@@ -338,8 +356,7 @@
                                 <div class="tournament-card p-xl-4 p-3 bgn-4">
                                     <div class="tournament-img mb-8 position-relative">
                                         <div class="img-area overflow-hidden">
-                                            <img class="w-100"
-                                                src="{{ asset('storage/' . $Tournament->images) }}"
+                                            <img class="w-100" src="{{ asset('storage/' . $Tournament->images) }}"
                                                 alt="tournament">
                                         </div>
                                         {{-- <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
@@ -417,7 +434,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @empty
+                        @empty
                             <div class="col-lg-12">
                                 <center>
                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
@@ -427,7 +444,6 @@
                                     Tournament Tidak Tersedia
                                 </h4>
                             </div>
-
                         @endforelse
                     </div>
 

@@ -63,7 +63,7 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="{{ route('index') }}" class="app-brand-link">
+                    <a href="{{ route('user.index') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
                             <img src="{{ asset('assets/img/humma-01.png') }}" style="width:100%">
                         </span>
