@@ -3,9 +3,9 @@
 @section('content')
     <div class="card-widget-separator-wrapper ">
         <div class="card-body card-widget-separator">
-            <div class="row gy-4 gy-sm-1 " >
+            <div class="row gy-4 gy-sm-1 gx-4" >
                 <div class="col-sm-6 col-lg-6">
-                    <div class="card mx-5 mt-4">
+                    <div class="card mt-4">
                         <div
                             class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
                             <div class="ms-4">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6">
-                    <div class="card mx-5 mt-4">
+                    <div class="card mt-4">
                         <div
                             class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
                             <div class="ms-4">
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6">
-                    <div class="card  mx-5 mt-4">
+                    <div class="card mt-4">
                         <div
                             class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
                             <div class="ms-4">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6">
-                    <div class="card  mx-5 mt-4">
+                    <div class="card mt-4">
                         <div
                             class="d-flex justify-content-between align-items-start card-widget-1  pb-3 pb-sm-0 mt-3 mb-3">
                             <div class="ms-4">

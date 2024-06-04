@@ -9,8 +9,8 @@
 
     <div class="row mt-4 mb-5">
         @forelse ($categories as $cat)
-            <div class="col-md-4 col-lg-3 mb-3">
-                <div class="card h-100">
+            <div class="col-md-6 col-lg-4 col-xxl-3 mb-3">
+                <div class="card overflow-hidden h-100">
                     <div class="overflow-hidden w-100" style="height: 200px">
                         <img class="w-100 h-100" src="{{ asset('storage/' . $cat->photo) }}" alt="game"
                             style="object-fit: cover;" />

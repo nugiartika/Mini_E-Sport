@@ -126,7 +126,7 @@
                             @enderror
                         </div>
                         <div class="pt-2 d-flex gap-3 justify-content-end">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Tambahkan</button>
                         </div>
                     </form>
