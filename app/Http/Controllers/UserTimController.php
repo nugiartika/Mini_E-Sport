@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserTim;
 use App\Http\Requests\StoreUserTimRequest;
 use App\Http\Requests\UpdateUserTimRequest;
+use App\Models\Member;
 use App\Models\Team;
 
 class UserTimController extends Controller
@@ -15,6 +16,7 @@ class UserTimController extends Controller
     public function index()
     {
         $teams = Team::all();
+        // $membersCount = Member::where('team_id', $teams->id)->whereNotNull('nickname')->count();
         return view('Landingpage.team', compact('teams'));
     }
 
