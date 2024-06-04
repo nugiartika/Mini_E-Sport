@@ -78,7 +78,7 @@ class TournamentController extends Controller
             ->keyBy('tournament_id');
 
         $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->whereIn('team_id', $uploadedTournamentteamIds)
+            ->whereIn('id', $uploadedTournamentteamIds)
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
@@ -175,18 +175,19 @@ class TournamentController extends Controller
         $uploads = Upload::where('status', 'accepted')->get();
         $uploadedTournamentIds = $uploads->pluck('team_id')->toArray();
         $uploadedTournamentteamIds = $uploads->pluck('teamtournament_id')->toArray();
-    // Count teams with accepted uploads
-    $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-    ->whereIn('id', $uploadedTournamentIds)
-    ->groupBy('tournament_id')
-    ->get()
-    ->keyBy('tournament_id');
 
-$acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-    ->whereIn('team_id', $uploadedTournamentteamIds)
-    ->groupBy('tournament_id')
-    ->get()
-    ->keyBy('tournament_id');
+        // Count teams with accepted uploads
+        $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->whereIn('id', $uploadedTournamentIds)
+            ->groupBy('tournament_id')
+            ->get()
+            ->keyBy('tournament_id');
+
+        $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->whereIn('id', $uploadedTournamentteamIds)
+            ->groupBy('tournament_id')
+            ->get()
+            ->keyBy('tournament_id');
 
 return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
 }
@@ -641,7 +642,7 @@ return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 
             ->keyBy('tournament_id');
 
         $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->whereIn('team_id', $uploadedTournamentteamIds)
+            ->whereIn('id', $uploadedTournamentteamIds)
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
@@ -684,7 +685,7 @@ return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 
             ->keyBy('tournament_id');
 
       $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->whereIn('team_id', $uploadedTournamentteamIds)
+            ->whereIn('id', $uploadedTournamentteamIds)
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');

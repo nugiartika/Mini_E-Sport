@@ -14,8 +14,10 @@
                 @endphp
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
-                        <img src="{{ asset('storage/' . $team->tournament->images) }}" alt="{{ $team->tournament->name }}"
-                            class="card-img-top" />
+                        <div class="gambar" style="width:386px; height:300px;">
+                            <img src="{{ asset('storage/' . $team->tournament->images) }}" alt="{{ $team->tournament->name }}"
+                                class="card-img-top" style="object-fit: cover; height:100%; widht:100%;"/>
+                        </div>
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
                                 {{-- <a href="{{ route('user.tournament.history', ['tournament' => $team->tournament->id]) }}"> --}}
@@ -76,8 +78,10 @@
                 @endphp
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
+                        <div class="gambar" style="width:386px; height:300px;">
                         <img src="{{ asset('storage/' . $teamtournament->tournament->images) }}" alt="No images"
-                            class="card-img-top" />
+                            class="card-img-top" style="object-fit: cover; height:100%; widht:100%;"/>
+                        </div>
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
                                 {{-- <a href="{{ route('user.tournament.history', ['tournament' => $teamtournament->tournament->id]) }}"> --}}
@@ -186,9 +190,9 @@
 @endsection
 
 @push('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var modal = document.getElementById('uploadbukti');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('uploadbukti');
 
             modal.addEventListener('show.bs.modal', function(event) {
                 var button = event.relatedTarget; // Button that triggered the modal
@@ -223,6 +227,7 @@
                     }
                 }
             });
-        });
-    </script>
+        
+    });
+</script>
 @endpush
