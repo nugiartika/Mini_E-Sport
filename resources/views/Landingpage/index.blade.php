@@ -67,7 +67,7 @@
                             <a href="{{ route('userTournament') }}">Tournaments</a>
                         </li>
                         <li class="menu-link">
-                            <a href="game.html">Game</a>
+                            <a href="{{ route('userGame') }}">Game</a>
                         </li>
                         <li class="menu-link">
                             <a href="{{ route('userTim') }}">Team</a>
