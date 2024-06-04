@@ -13,12 +13,12 @@
                                         <h5 class="card-title me-3">{{ $tournament->name }}</h5>
                                         <p style="margin-left: 530px">{{ $tournament->updated_at->format('H:i') }}</p>
                                     </div>
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center ">
                                         <p class="card-text me-3">Status :</p>
                                         @if($tournament->status == 'accepted')
-                                            <p class="card-text mb-3">Diterima</p>
+                                            <span class="badge bg-success mb-3">Diterima</span>
                                         @else
-                                            <p class="card-text mb-3">Ditolak</p>
+                                            <span class="badge bg-danger mb-3">Ditolak</span>
                                         @endif
                                     </div>
                                     <div class="d-flex align-items-center">
@@ -45,9 +45,9 @@
                                     <div class="d-flex align-items-center">
                                         <p class="card-text me-3">Status :</p>
                                         @if($tournament->status == 'accepted')
-                                            <p class="card-text mb-3">Diterima</p>
+                                            <span class="badge bg-success mb-3">Diterima</span>
                                         @else
-                                            <p class="card-text mb-3">Ditolak</p>
+                                            <span class="badge bg-danger mb-3">Ditolak</span>
                                         @endif
                                     </div>
                                     <div class="d-flex align-items-center">
