@@ -58,7 +58,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $tournament->tournament->user->name }}</td>
                             <td>{{ $tournament->tournament->name }}</td>
-                            <td>{{ $tournament->total_team }} tim</td>
+                            <td>{{ $tournament->total_team }} dari {{ $tournament->tournament->slotTeam }} tim</td>
                             <td>Rp {{ number_format($tournament->tournament->nominal, 2, ',', '.') }}</td>
                             <td>Rp {{ number_format($tournament->total_income, 2, ',', '.') }}</td>
                             <td>Rp {{ number_format($tournament->admin_income, 2, ',', '.') }}</td>

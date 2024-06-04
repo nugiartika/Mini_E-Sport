@@ -357,7 +357,7 @@ class TournamentController extends Controller
 
         // Paginasi
         $page = $request->input('page', 1);
-        $perPage = 10;
+        $perPage = 5;
         $pagedData = $tournamentGrouping->forPage($page, $perPage)->values(); // Data untuk halaman saat ini
 
         // Membuat LengthAwarePaginator
