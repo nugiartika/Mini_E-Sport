@@ -30,8 +30,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($counttournaments)
                     @forelse ($uploads as $upload)
+                    @if ($upload->tournament->users_id == auth()->user()->id)
+
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $upload->tournament->name }}</td>
@@ -139,6 +140,8 @@
                                 </td>
                             @endif
                         </tr>
+                        @endif
+
                     @empty
                         <tr>
                             <td colspan="7">
@@ -152,7 +155,6 @@
                             </td>
                         </tr>
                     @endforelse
-                    @endif
 
                 </tbody>
             </table>
