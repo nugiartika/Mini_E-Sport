@@ -216,7 +216,6 @@
                                         $isPaidTournament = $tournament->paidment === 'Berbayar';
 
                                         if ($isPaidTournament) {
-
                                             $teamCount = $acceptedTeamCounts->get($tournament->id);
                                             $teamIdCount = $acceptedTeamIdCounts->get($tournament->id);
                                         } else {
@@ -233,6 +232,7 @@
                                             $teamCount = $teamCounts->firstWhere('tournament_id', $tournament->id);
                                             $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournament->id);
                                         }
+
 
                                         $totalTeams =
                                             ($teamCount ? $teamCount->count : 0) +

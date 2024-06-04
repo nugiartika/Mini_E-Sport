@@ -37,6 +37,7 @@
             <thead class="thead-light">
                 <tr>
                     <th>No.</th>
+                    <th>Nama Penyelenggara</th>
                     <th>Nama Tournament</th>
                     <th>Jumlah Pendaftar</th>
                     <th>Biaya Register</th>
@@ -46,18 +47,17 @@
             </thead>
             <tbody>
                 @forelse ($result as $item)
-                @if ($acceptedUploads->contains('tournament_id', $item['tournament']->id))
 
                 @if ($item['total_teams'] != 0)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item['tournament']->user->name }}</td>
                     <td>{{ $item['tournament']->name}}</td>
                     <td>{{ $item['total_teams'] }}/ {{$item['tournament']->slotTeam}} Tim</td>
                     <td>Rp {{ number_format($item['biaya_register'], 0, '.', '.') }}</td>
                     <td>Rp {{ number_format($item['total_nominal'], 0, '.', '.') }}</td>
                     <td>Rp {{ number_format($item['income_admin'], 0, '.', '.') }}</td>
                 </tr>
-                @endif
                 @endif
 
                 @empty
@@ -76,7 +76,7 @@
         </table>
     </div>
 </div>
-{{ $acceptedUploads->links() }}
+{{ $allUploads->links() }}
 @endsection
 
 @push('script')

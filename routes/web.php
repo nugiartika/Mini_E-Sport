@@ -156,6 +156,8 @@ Route::group(['prefix' => 'payment-proof', 'as' => 'payment-proof.', 'middleware
     Route::delete('{paymentProof:id}', [PaymentProofController::class, 'destroy'])->name('destroy');
 });
 
+Route::get('/game', [CategoryController::class, 'indexusers'])->name('game');
+
 Route::resource('member', MemberController::class);
 Route::get('DetailTournametUser/{id}', [LandingPageController::class, 'detailTOurnament'])->name('landingpageDetailTournamet');
 
