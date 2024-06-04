@@ -349,8 +349,12 @@ class TournamentController extends Controller
             $uploadData->setAttribute('total_income', $totalIncome);
             $uploadData->setAttribute('admin_income', $totalIncome * 0.05);
 
+            // Hapus data jika total_team === 0
+            if ($totalTeams === 0) {
+                return null;
+            }
             return $uploadData;
-        });
+        })->filter(fn ($items) => $items != null);
 
         // Menghitung total pendapatan keseluruhan
         $totalIncome = $tournamentGrouping->sum('admin_income');
