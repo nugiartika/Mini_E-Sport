@@ -1,5 +1,5 @@
 @extends('Landingpage.layout.asset')
-@section('title', 'Tournament')
+@section('title', 'Turnamen')
 @section('content')
         <!-- tournament section start -->
         <section class="tournament-section pb-120" id="tournament-hero">
@@ -19,7 +19,7 @@
                     <div class="container pt-120 pb-120">
                         <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15">
                             <div class="col-md-6 col-sm-8">
-                                <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENTS</h2>
+                                <h2 class="display-four tcn-1 cursor-scale growUp title-anim">DAFTAR TURNAMEN</h2>
                             </div>
                             <div class="col-md-6 col-sm-4 text-sm-end">
                                 <a href=""
@@ -130,7 +130,7 @@
             </div>
         </section>
         <!-- tournament section end -->
-        
+
         <!-- Start modal Filter-->
     <div class="modal fade" tabindex="-1" id="filter" style="color: #ffffff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">

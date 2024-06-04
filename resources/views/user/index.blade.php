@@ -39,33 +39,14 @@
                                 alt="favicon">
                         </a>
                     </div>
-                    {{-- <div class="navbar-toggle-item w-100 position-lg-relative">
-                        <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
-                            <li class="menu-link">
-                                <a href="tournaments.html">Tournaments</a>
-                            </li>
-                            <li class="menu-link">
-                                <a href="game.html">Game</a>
-                            </li>
-                            <li class="menu-link">
-                                <a href="game.html">Team</a>
-                            </li>
+                    <div class="navbar-toggle-item w-100 position-lg-relative">
 
-                        </ul>
-                    </div> --}}
+                    </div>
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
 
+
                     <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
-                        <li class="menu-link">
-                            <a href="{{ route('userTournament') }}">Tournaments</a>
-                        </li>
-                        <li class="menu-link">
-                            <a href="game.html">Game</a>
-                        </li>
-                        <li class="menu-link">
-                            <a href="game.html">Team</a>
-                        </li>
                         <li class="menu-link">
                             <a href="{{ route('login') }}"
                                 class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Masuk</a>
@@ -280,17 +261,16 @@
                                                 <h4
                                                     class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                     {{ $Category->name }}</h4>
+
                                             </a>
                                         </div>
                                         <div class="hr-line line3"></div>
-                                        <div class="card-info d-flex gap-3 flex-wrap my-5  ">
+                                        <div class="card-info d-flex justify-content-center gap-3 flex-wrap my-5  ">
                                             <div
                                                 class=" price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                                 <div class="d-flex align-items-center gap-2">
-                                                    <i class="ti ti-users-group"></i>
-                                                </div>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <span class="tcn-1 fs-sm">{{ $Category->membersPerTeam }} orang / tim</span>
+                                                    <span class="tcn-1 fs-sm">{{ $Category->membersPerTeam }} orang /
+                                                        tim</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -353,9 +333,6 @@
                                             <img class="w-100" src="{{ asset('storage/' . $Tournament->images) }}"
                                                 alt="tournament">
                                         </div>
-                                        {{-- <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
-                                     <span class="dot-icon alt-icon ps-3">Playing</span>
-                                </span> --}}
                                     </div>
                                     <div class="tournament-content px-xl-4 px-sm-2">
                                         <div class="tournament-info mb-5">
@@ -365,7 +342,6 @@
                                                     {{ $Tournament->name }}</h4>
 
                                             </a>
-                                            {{-- <span class="tcn-6 fs-sm">Torneo Individual</span> --}}
                                         </div>
                                         <div class="hr-line line3"></div>
                                         <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
@@ -394,7 +370,8 @@
                                             <div
                                                 class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                 <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                <span class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y') }}</span>
+                                                <span
+                                                    class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y') }}</span>
                                             </div>
                                         </div>
                                         <div class="hr-line line3"></div>
@@ -410,23 +387,19 @@
                                             <div class="col-md-6 col-sm-4 text-sm-end">
                                                 <a href="{{ route('landingpageDetailTournamet', ['id' => $Tournament->id]) }}"
                                                     class="btn-half-border position-relative d-inline-block py-2 px-3 bgp-1 rounded-pill">Detail</a>
-
                                             </div>
-                                            {{-- <a href="tournaments-details.html" class="btn2">
-                                        <i class="ti ti-arrow-right fs-2xl"></i>
-                                    </a> --}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @empty
                             <div class="col-lg-12">
-                                <center>
+                                <div class="d-flex justify-content-center">
                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
                                         style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
-                                </center>
+                                </div>
                                 <h4 class="text-light" style="text-align: center;">
-                                    Tournament Tidak Tersedia
+                                    Turnamen Tidak Tersedia
                                 </h4>
                             </div>
                         @endforelse
@@ -438,29 +411,30 @@
         </div>
     </section>
     <!-- tournament section end -->
+
     <!-- Start modal Filter-->
     <div class="modal fade" tabindex="-1" id="filter" style="color: #ffffff;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-split">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-black">Filter</h5>
+                    <h5 class="modal-title text-black">Saring</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('index') }}" method="GET">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="widget-title text-black"><b>Game Filters</b></h4>
+                            <h4 class="widget-title text-black"><b>Saring Berdasarkan Kategori</b></h4>
                             <button type="submit" class="btn btn-primary"
-                                style="background-color:#7367f0; border:none;">Search</button>
+                                style="background-color:#7367f0; border:none;">Saring</button>
                         </div>
 
                         @foreach ($Categories as $game)
                             <div class="form-check text-black">
                                 <input type="checkbox" class="form-check-input text-black"
                                     id="category{{ $game->id }}" name="categories_id"
-                                    value="{{ $game->id }}" <label class="text-black"
-                                    for="category{{ $game->id }}">
-                                {{ $game->name }}
+                                    value="{{ $game->id }}" />
+                                <label class="text-black" for="category{{ $game->id }}">
+                                    {{ $game->name }}
                                 </label>
                             </div>
                         @endforeach
@@ -469,10 +443,7 @@
             </div>
         </div>
     </div>
-
     <!-- end modal Filter-->
-
-
 
     <!-- call to action section start -->
     <div class="call-to-action pt-120 pb-120 bgn-4 overflow-x-hidden" id="cta">
