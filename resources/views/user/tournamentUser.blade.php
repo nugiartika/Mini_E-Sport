@@ -341,7 +341,7 @@
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-center">
-                                            <a href="#" type="button" class="btn btn-secondary me-2">Yang Sudah
+                                            <a href="#" type="button" class="btn btn-light me-2">Yang Sudah
                                                 Ada</a>
                                             <a href="#" type="button" class="btn btn-primary">Tim Baru</a>
                                         </div>
@@ -398,7 +398,7 @@
 
                 // Update tautan dengan ID turnamen yang benar
                 var newTeamLink = exampleModal.querySelector('.btn-primary');
-                var existingTeamLink = exampleModal.querySelector('.btn-secondary');
+                var existingTeamLink = exampleModal.querySelector('.btn-light');
 
                 // Tetapkan href untuk tombol "Tim Baru"
                 newTeamLink.href = '/team/create?tournament_id=' + tournamentId;

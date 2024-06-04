@@ -335,55 +335,51 @@ class TournamentController extends Controller
 
     public function indexIncome(Request $request)
     {
+        // Ambil data uploads dengan kondisi yang sesuai
         $allUploads = Upload::whereHas('tournament', function ($query) use ($request) {
-            $query->orderBy('id', 'desc')
-                ->where('status', 'accepted')
+            $query->where('status', 'accepted')
                 ->where('paidment', 'Berbayar')
                 ->when($request->has('search'), function ($query) use ($request) {
                     $query->where('name', 'like', '%' . $request->search . '%');
                 });
-        })
-            ->where('status', 'accepted')
-            ->paginate(5);
+        })->with('tournament')
+            ->orderBy('id', 'desc')
+            ->get();
 
-        // Inisialisasi array untuk menyimpan total tim
-        $totalTeams = [];
+        // Mengelompokkan data turnamen dan menghitung total tim serta pendapatan
+        $tournamentGrouping = $allUploads->groupBy('tournament_id')->map(function ($uploads) {
+            $uploadData = $uploads->first();
+            $totalTeams = $uploads->where('status', 'accepted')->count();
+            $totalIncome = $uploads->sum(function ($upload) {
+                return $upload->status === 'accepted' ? $upload->tournament->nominal : 0;
+            });
 
-        // Hitung total tim untuk setiap turnamen
-        foreach ($allUploads as $upload) {
-            $tournamentId = $upload->tournament_id;
-            if (!isset($totalTeams[$tournamentId])) {
-                $totalTeams[$tournamentId] = 0;
-            }
-            $totalTeams[$tournamentId]++;
-        }
+            // Tambahkan atribut total_team dan total_income
+            $uploadData->setAttribute('total_team', $totalTeams);
+            $uploadData->setAttribute('total_income', $totalIncome);
+            $uploadData->setAttribute('admin_income', $totalIncome * 0.05);
 
-        // Mengelompokkan data berdasarkan turnamen
-        $groupedUploads = $allUploads->groupBy('tournament_id');
+            return $uploadData;
+        });
 
-        // Siapkan array hasil untuk dikirim ke view
-        $result = [];
-        $totalIncomeAdmin = 0;
+        // Menghitung total pendapatan keseluruhan
+        $totalIncome = $tournamentGrouping->sum('admin_income');
 
-        // Bangun array hasil dengan turnamen yang dijadikan 1 data
-        foreach ($groupedUploads as $tournamentId => $uploads) {
-            $tournament = $uploads->first()->tournament;
-            $totalTeamsCount = $totalTeams[$tournamentId] ?? 0;
-            $totalNominal = $totalTeamsCount * $tournament->nominal;
-            $incomeAdmin = $totalNominal - ($totalNominal * 5 / 100);
-            $totalIncomeAdmin += $incomeAdmin;
+        // Paginasi
+        $page = $request->input('page', 1);
+        $perPage = 10;
+        $pagedData = $tournamentGrouping->forPage($page, $perPage)->values(); // Data untuk halaman saat ini
 
-            $result[] = [
-                'tournament' => $tournament,
-                'total_teams' => $totalTeamsCount,
-                'total_nominal' => $totalNominal,
-                'income_admin' => $incomeAdmin,
-                'biaya_register' => $tournament->nominal,
-                'id_organizer' => $tournament->users_id,
-            ];
-        }
+        // Membuat LengthAwarePaginator
+        $paginator = new LengthAwarePaginator(
+            $pagedData,
+            $tournamentGrouping->count(),
+            $perPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
 
-        return view('admin.income', compact('result', 'totalIncomeAdmin','allUploads'));
+        return view('admin.income', compact('allUploads', 'tournamentGrouping', 'totalIncome', 'paginator'));
     }
     public function organizerIncome(Request $request)
     {
@@ -428,16 +424,16 @@ class TournamentController extends Controller
             $incomeOrganizer = $totalNominal - ($totalNominal * 5 / 100);
             $totalIncomeOrganizer += $incomeOrganizer;
 
-        $uploadDetails = [];
-        foreach ($uploads as $upload) {
-            $uploadDetails[] = [
-                'upload_id' => $upload->id,
-                'tanggal' => $upload->created_at,
-                'user' => $upload->user->email,
-                'tournament_id' => $upload->tournament_id,
-                // Tambahkan atribut lain dari tabel Upload jika diperlukan
-            ];
-        }
+            $uploadDetails = [];
+            foreach ($uploads as $upload) {
+                $uploadDetails[] = [
+                    'upload_id' => $upload->id,
+                    'tanggal' => $upload->created_at,
+                    'user' => $upload->user->email,
+                    'tournament_id' => $upload->tournament_id,
+                    // Tambahkan atribut lain dari tabel Upload jika diperlukan
+                ];
+            }
 
             $result[] = [
                 'tournament' => $tournament,
@@ -455,7 +451,7 @@ class TournamentController extends Controller
             ->where('notif', 'belum baca')
             ->count();
 
-        return view('penyelenggara.income', compact('result', 'counttournaments', 'totalIncomeOrganizer', 'id_organizer','allUploads'));
+        return view('penyelenggara.income', compact('result', 'counttournaments', 'totalIncomeOrganizer', 'id_organizer', 'allUploads'));
     }
 
 
@@ -642,7 +638,7 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
-      $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+        $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
             ->whereIn('id', $uploadedTournamentteamIds)
             ->groupBy('tournament_id')
             ->get()

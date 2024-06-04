@@ -14,7 +14,7 @@
                 @endphp
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
-                        <div class="gambar" style="width:386px; height:300px;">
+                        <div class="gambar overflow-hidden" style="max-height: 300px">
                             <img src="{{ asset('storage/' . $team->tournament->images) }}" alt="{{ $team->tournament->name }}"
                                 class="card-img-top" style="object-fit: cover; height:100%; widht:100%;"/>
                         </div>
@@ -153,7 +153,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Kirim Bukti</h6>
+                    <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-2"></i>Kirim Bukti</h6>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('Upload.store') }}" method="POST" enctype="multipart/form-data">
@@ -178,8 +178,8 @@
                         </div>
 
                         <div class="pt-2 d-flex gap-3 justify-content-end">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Tambahkan</button>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Unggah Bukti</button>
                         </div>
                     </form>
                 </div>
@@ -227,7 +227,7 @@
                     }
                 }
             });
-        
+
     });
 </script>
 @endpush
