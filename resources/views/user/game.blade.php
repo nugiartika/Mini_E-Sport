@@ -5,9 +5,9 @@
         @forelse ($categories as $category)
             <div class="col-md-4 col-lg-3 mb-3">
                 <div class="card h-100">
-                    <div class="gambar" style="width:287px; height:200px;">
+                    {{-- <div class="gambar" style="width:287px; height:200px;"> --}}
                     <img class="card-img-top" src="{{ asset('storage/' . $category->photo) }}" alt="{{ $category->name }}" style="object-fit: cover; height:100%; widht:100%;"/>
-                    </div>
+                    {{-- </div> --}}
                     <div class="card-body text-center">
                         <div class="d-flex gap-2 justify-content-between pb-3 mb-3 border-bottom">
                             <strong>Nama Game</strong>
