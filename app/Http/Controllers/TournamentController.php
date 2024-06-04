@@ -877,26 +877,26 @@ class TournamentController extends Controller
                 'prizepool_id.*' => 'required',
             ];
 
-            // // Define custom error messages
-            // $messages = [
-            //     'note.*.required' => 'Catatan harus diisi',
-            //     'prizepool_id.*.required' => 'Prizepool harus dipilih',
-            // ];
+            // Define custom error messages
+            $messages = [
+                'note.*.required' => 'Catatan harus diisi',
+                'prizepool_id.*.required' => 'Prizepool harus dipilih',
+            ];
 
-            // // Validate the request
-            // $request->validate($rules, $messages);
+            // Validate the request
+            $request->validate($rules, $messages);
 
-            // $tournamentId = $request->input('tournament_id');
-            // $prizepoolIds = $request->input('prizepool_id');
-            // $notes = $request->input('note');
-            // // Update prize pools
-            // foreach ($prizepoolIds as $index => $value) {
-            //     $note = $notes[$index];
-            //         $tournamentPrize = Tournament_Prize::create([
-            //             'tournament_id' => $tournamentId,
-            //             'note' => $note,
-            //         ]);
-            //     }
+            $tournamentId = $request->input('tournament_id');
+            $prizepoolIds = $request->input('prizepool_id');
+            $notes = $request->input('note');
+            // Update prize pools
+            foreach ($prizepoolIds as $index => $value) {
+                $note = $notes[$index];
+                    $tournamentPrize = Tournament_Prize::create([
+                        'tournament_id' => $tournamentId,
+                        'note' => $note,
+                    ]);
+                }
 
             foreach ($prizepoolIds as $index => $value) {
                 $tournamentPrize = Tournament_prize::where('tournament_id', $id)->where('prizepool_id', $value)->first();
