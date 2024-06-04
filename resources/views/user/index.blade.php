@@ -284,7 +284,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @empty
+                        @empty
                             <div class="col-lg-12">
                                 <center>
                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
@@ -294,7 +294,6 @@
                                     game Tidak Tersedia
                                 </h4>
                             </div>
-
                         @endforelse
                     </div>
 
@@ -338,8 +337,7 @@
                                 <div class="tournament-card p-xl-4 p-3 bgn-4">
                                     <div class="tournament-img mb-8 position-relative">
                                         <div class="img-area overflow-hidden">
-                                            <img class="w-100"
-                                                src="{{ asset('storage/' . $Tournament->images) }}"
+                                            <img class="w-100" src="{{ asset('storage/' . $Tournament->images) }}"
                                                 alt="tournament">
                                         </div>
                                         {{-- <span class="card-status position-absolute start-0 py-2 px-6 tcn-1 fs-sm">
@@ -361,18 +359,9 @@
                                             <div
                                                 class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                                 <div class="d-flex align-items-center gap-2">
-                                                </div>
-                                                <div class="v-line"></div>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <i class="ti ti-gift"></i> <span class="tcn-1 fs-sm">
-                                                        @if ($Tournament->aktif === 'aktif')
-                                                            Status: aktif
-                                                        @elseif ($Tournament->aktif === 'aktif')
-                                                            Status: Tidak aktif
-                                                        @else
-                                                            Status: Tidak Diketahui
-                                                        @endif
-
+                                                    <i class="ti ti-brand-flightradar24"></i>
+                                                    <span class="tcn-1 fs-sm">
+                                                        {{ $Tournament->aktif === 'aktif' ? 'Aktif' : ($Tournament->aktif === 'tidak aktif' ? 'Tidak aktif' : 'Tidak Diketahui') }}
                                                     </span>
                                                 </div>
                                             </div>
@@ -392,7 +381,7 @@
                                             <div
                                                 class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                 <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                <span class="tcn-1 fs-sm">{{ $Tournament->permainan }}</span>
+                                                <span class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y') }}</span>
                                             </div>
                                         </div>
                                         <div class="hr-line line3"></div>
@@ -417,7 +406,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @empty
+                        @empty
                             <div class="col-lg-12">
                                 <center>
                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
@@ -427,7 +416,6 @@
                                     Tournament Tidak Tersedia
                                 </h4>
                             </div>
-
                         @endforelse
                     </div>
 
