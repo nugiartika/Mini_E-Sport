@@ -30,6 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if ($counttournaments)
                     @forelse ($uploads as $upload)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
@@ -151,6 +152,8 @@
                             </td>
                         </tr>
                     @endforelse
+                    @endif
+
                 </tbody>
             </table>
         </div>
