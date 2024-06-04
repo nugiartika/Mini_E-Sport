@@ -11,7 +11,10 @@
 </head>
 
 <body>
-
+    @php
+    use App\Models\TeamTournament;
+    use App\Models\Team;
+    @endphp
     <!-- Preloader -->
     <div class="preloader">
         <div class="loader">

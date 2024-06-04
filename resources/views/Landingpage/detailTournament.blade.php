@@ -12,7 +12,10 @@
 </head>
 
 <body>
-
+    @php
+    use App\Models\TeamTournament;
+    use App\Models\Team;
+    @endphp
     <!-- Preloader -->
     <div class="preloader">
         <div class="loader">
@@ -47,6 +50,59 @@
         </div>
     </header>
     <!-- header-section end -->
+
+
+{{-- @foreach ($tournaments as Tournament) --}}
+@php
+$isPaidTournament = $tournaments->paidment === 'Berbayar';
+
+if ($isPaidTournament) {
+    $teamCount = $acceptedTeamCounts->get($tournaments->id);
+    $teamIdCount = $acceptedTeamIdCounts->get($tournaments->id);
+} else {
+    $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+        ->groupBy('tournament_id')
+        ->get();
+
+    $teamIdCounts = TeamTournament::select(
+        'tournament_id',
+        DB::raw('COUNT(*) as count'),
+    )
+        ->groupBy('tournament_id')
+        ->get();
+    $teamCount = $teamCounts->firstWhere('tournament_id', $tournaments->id);
+    $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournaments->id);
+}
+
+
+$totalTeams =
+    ($teamCount ? $teamCount->count : 0) +
+    ($teamIdCount ? $teamIdCount->count : 0);
+
+$userTeams = $teams ?? collect();
+$userTeamsInTournament = $userTeams->where('tournament_id', $tournaments->id);
+$isUserInTournament = $userTeamsInTournament->isNotEmpty();
+
+if ($isUserInTournament) {
+    // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+    $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+
+    // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+    $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+        ->where('tournament_id', $tournaments->id)
+        ->get();
+}
+$userId = Auth::id();
+
+$userTeamIds = Team::where('user_id', $userId)->pluck('id')->toArray();
+
+// Cek apakah ada tim pengguna dalam turnamen ini
+$teamtournamentId = TeamTournament::where('tournament_id', $tournaments->id)
+    ->whereIn('team_id', $userTeamIds)
+    ->exists();
+
+@endphp
+{{-- @endforeach --}}
 
 
     <!-- tournament details banner section start -->
@@ -87,7 +143,14 @@
                                 <br>
                                 <div class="players text-center">
                                     <i class="ti ti-users-group tcn-1"></i>
-                                    <span class="tcn-6">Slot Tim: {{ $tournaments->slotTeam }}</span>
+                                    <span class="tcn-6">Slot Tim:
+                                        @if ($totalTeams)
+                                        {{ $totalTeams }}/{{ $tournaments->slotTeam }}
+                                        Teams
+                                    @else
+                                        0/{{ $tournaments->slotTeam }} Teams
+                                    @endif
+                                    </span>
                                 </div>
                             </div>
                         </div>

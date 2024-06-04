@@ -78,7 +78,7 @@ class TournamentController extends Controller
             ->keyBy('tournament_id');
 
         $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->whereIn('team_id', $uploadedTournamentteamIds)
+            ->whereIn('id', $uploadedTournamentteamIds)
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
@@ -162,7 +162,7 @@ class TournamentController extends Controller
     public function indexuser()
     {
         // $user = auth()->user();
-    $user = User::all();
+        $user = User::all();
 
         $acceptedUploads = Upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
 
@@ -175,21 +175,22 @@ class TournamentController extends Controller
         $uploads = Upload::where('status', 'accepted')->get();
         $uploadedTournamentIds = $uploads->pluck('team_id')->toArray();
         $uploadedTournamentteamIds = $uploads->pluck('teamtournament_id')->toArray();
-    // Count teams with accepted uploads
-    $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-    ->whereIn('id', $uploadedTournamentIds)
-    ->groupBy('tournament_id')
-    ->get()
-    ->keyBy('tournament_id');
 
-$acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-    ->whereIn('team_id', $uploadedTournamentteamIds)
-    ->groupBy('tournament_id')
-    ->get()
-    ->keyBy('tournament_id');
+        // Count teams with accepted uploads
+        $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->whereIn('id', $uploadedTournamentIds)
+            ->groupBy('tournament_id')
+            ->get()
+            ->keyBy('tournament_id');
 
-return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
-}
+        $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+            ->whereIn('id', $uploadedTournamentteamIds)
+            ->groupBy('tournament_id')
+            ->get()
+            ->keyBy('tournament_id');
+
+        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+    }
 
 
     public function dashboard()
@@ -334,164 +335,119 @@ return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 
 
     public function indexIncome(Request $request)
     {
-        // Ambil semua turnamen untuk menghitung total incomeAdmin
-        $allTournaments = Tournament::orderBy('id', 'desc')
+        $allUploads = Upload::whereHas('tournament', function ($query) use ($request) {
+            $query->orderBy('id', 'desc')
+                ->where('status', 'accepted')
+                ->where('paidment', 'Berbayar')
+                ->when($request->has('search'), function ($query) use ($request) {
+                    $query->where('name', 'like', '%' . $request->search . '%');
+                });
+        })
             ->where('status', 'accepted')
-            ->where('paidment', 'Berbayar')
-            ->when($request->has('search'), function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->search . '%');
-            })
-            ->get();
-
-        // Ambil turnamen dengan pagination
-        $tournaments = Tournament::orderBy('id', 'desc')
-            ->where('status', 'accepted')
-            ->where('paidment', 'Berbayar')
-            ->when($request->has('search'), function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->search . '%');
-            })
-            ->get();
-
-        // Ambil transaksi yang statusnya 'accepted' dan terkait dengan turnamen di result
-        $acceptedUploads = Upload::where('status', 'accepted')
-            ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
             ->paginate(5);
 
-        //all accept
-        $allAcceptedUploads = Upload::where('status', 'accepted')
-            ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
-            ->get();
+        // Inisialisasi array untuk menyimpan total tim
+        $totalTeams = [];
 
-        // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
-        $combinedCounts = DB::table(function ($query) {
-            $query->select('tournament_id', DB::raw('COUNT(*) as count'))
-                ->from('teams')
-                ->groupBy('tournament_id')
-                ->unionAll(
-                    TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-                        ->groupBy('tournament_id')
-                );
-        }, 'combined_counts')
-            ->select('tournament_id', DB::raw('SUM(count) as total_count'))
-            ->groupBy('tournament_id')
-            ->pluck('total_count', 'tournament_id');
+        // Hitung total tim untuk setiap turnamen
+        foreach ($allUploads as $upload) {
+            $tournamentId = $upload->tournament_id;
+            if (!isset($totalTeams[$tournamentId])) {
+                $totalTeams[$tournamentId] = 0;
+            }
+            $totalTeams[$tournamentId]++;
+        }
+
+        // Mengelompokkan data berdasarkan turnamen
+        $groupedUploads = $allUploads->groupBy('tournament_id');
 
         // Siapkan array hasil untuk dikirim ke view
         $result = [];
         $totalIncomeAdmin = 0;
 
-        // Menghitung total incomeAdmin dari semua turnamen yang memenuhi syarat
-        foreach ($allTournaments as $tournament) {
-            $hasAcceptedUpload = $allAcceptedUploads->contains('tournament_id', $tournament->id);
-            if ($hasAcceptedUpload) {
-                $totalTeams = $combinedCounts->get($tournament->id, 0);
-                $totalNominal = $totalTeams * $tournament->nominal;
-                $incomeAdmin = $totalNominal * 15 / 100;
-                $totalIncomeAdmin += $incomeAdmin;
-            }
+        // Bangun array hasil dengan turnamen yang dijadikan 1 data
+        foreach ($groupedUploads as $tournamentId => $uploads) {
+            $tournament = $uploads->first()->tournament;
+            $totalTeamsCount = $totalTeams[$tournamentId] ?? 0;
+            $totalNominal = $totalTeamsCount * $tournament->nominal;
+            $incomeAdmin = $totalNominal - ($totalNominal * 5 / 100);
+            $totalIncomeAdmin += $incomeAdmin;
+
+            $result[] = [
+                'tournament' => $tournament,
+                'total_teams' => $totalTeamsCount,
+                'total_nominal' => $totalNominal,
+                'income_admin' => $incomeAdmin,
+                'biaya_register' => $tournament->nominal,
+                'id_organizer' => $tournament->users_id,
+            ];
         }
 
-        // Menyusun hasil untuk turnamen yang ada di halaman saat ini
-        foreach ($tournaments as $tournament) {
-            $hasAcceptedUpload = $acceptedUploads->contains('tournament_id', $tournament->id);
-
-            if ($hasAcceptedUpload) {
-                $totalTeams = $combinedCounts->get($tournament->id, 0);
-                $totalNominal = $totalTeams * $tournament->nominal;
-                $incomeAdmin = $totalNominal * 15 / 100;
-                $biayaRegister = $tournament->nominal;
-
-                $result[] = [
-                    'tournament' => $tournament,
-                    'total_teams' => $totalTeams,
-                    'total_nominal' => $totalNominal,
-                    'income_admin' => $incomeAdmin,
-                    'biaya_register' => $biayaRegister,
-                ];
-            }
-        }
-
-        return view('admin.income', compact('result', 'tournaments', 'totalIncomeAdmin', 'acceptedUploads'));
+        return view('admin.income', compact('result', 'totalIncomeAdmin','allUploads'));
     }
     public function organizerIncome(Request $request)
     {
-        // Ambil semua turnamen untuk menghitung total incomeOrganizer
-        $allTournaments = Tournament::orderBy('id', 'desc')
-            ->where('users_id', auth()->user()->id)
+        // Ambil data uploads dengan kondisi yang sesuai
+        $allUploads = Upload::whereHas('tournament', function ($query) use ($request) {
+            $query->orderBy('id', 'desc')
+                ->where('users_id', auth()->user()->id)
+                ->where('status', 'accepted')
+                ->where('paidment', 'Berbayar')
+                ->when($request->has('search'), function ($query) use ($request) {
+                    $query->where('name', 'like', '%' . $request->search . '%');
+                });
+        })
             ->where('status', 'accepted')
-            ->where('paidment', 'Berbayar')
             ->get();
 
-        // Ambil turnamen dengan pagination
-        $tournaments = Tournament::orderBy('id', 'desc')
-            ->where('users_id', auth()->user()->id)
-            ->where('status', 'accepted')
-            ->where('paidment', 'Berbayar')
-            ->when($request->has('search'), function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->search . '%');
-            })
-            ->get();
+        // Inisialisasi array untuk menyimpan total tim
+        $totalTeams = [];
 
-        // Ambil transaksi yang statusnya 'accepted' dan terkait dengan turnamen di result
-        $acceptedUploads = Upload::where('status', 'accepted')
-            ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
-            ->paginate(5);
+        // Hitung total tim untuk setiap turnamen
+        foreach ($allUploads as $upload) {
+            $tournamentId = $upload->tournament_id;
+            if (!isset($totalTeams[$tournamentId])) {
+                $totalTeams[$tournamentId] = 0;
+            }
+            $totalTeams[$tournamentId]++;
+        }
 
-        //all accept
-        $allAcceptedUploads = Upload::where('status', 'accepted')
-            ->whereIn('tournament_id', $tournaments->pluck('id')->toArray())
-            ->get();
-
-        // Gabungkan hasil perhitungan jumlah tim dari kedua tabel
-        $combinedCounts = DB::table(function ($query) {
-            $query->select('tournament_id', DB::raw('COUNT(*) as count'))
-                ->from('teams')
-                ->groupBy('tournament_id')
-                ->unionAll(
-                    TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-                        ->groupBy('tournament_id')
-                );
-        }, 'combined_counts')
-            ->select('tournament_id', DB::raw('SUM(count) as total_count'))
-            ->groupBy('tournament_id')
-            ->pluck('total_count', 'tournament_id');
+        // Mengelompokkan data berdasarkan turnamen
+        $groupedUploads = $allUploads->groupBy('tournament_id');
 
         // Siapkan array hasil untuk dikirim ke view
         $result = [];
         $totalIncomeOrganizer = 0;
         $id_organizer = null;
 
-        // Menghitung total incomeOrganizer dari semua turnamen yang memenuhi syarat
-        foreach ($allTournaments as $tournament) {
-            $hasAcceptedUpload = $allAcceptedUploads->contains('tournament_id', $tournament->id);
-            if ($hasAcceptedUpload) {
-                $totalTeams = $combinedCounts->get($tournament->id, 0);
-                $totalNominal = $totalTeams * $tournament->nominal;
-                $incomeOrganizer = $totalNominal - ($totalNominal * 15 / 100);
-                $totalIncomeOrganizer += $incomeOrganizer;
-            }
+        // Bangun array hasil dengan turnamen yang dijadikan 1 data
+        foreach ($groupedUploads as $tournamentId => $uploads) {
+            $tournament = $uploads->first()->tournament;
+            $totalTeamsCount = $totalTeams[$tournamentId] ?? 0;
+            $totalNominal = $totalTeamsCount * $tournament->nominal;
+            $incomeOrganizer = $totalNominal - ($totalNominal * 5 / 100);
+            $totalIncomeOrganizer += $incomeOrganizer;
+
+        $uploadDetails = [];
+        foreach ($uploads as $upload) {
+            $uploadDetails[] = [
+                'upload_id' => $upload->id,
+                'tanggal' => $upload->created_at,
+                'user' => $upload->user->email,
+                'tournament_id' => $upload->tournament_id,
+                // Tambahkan atribut lain dari tabel Upload jika diperlukan
+            ];
         }
 
-        // Menyusun hasil untuk turnamen yang ada di halaman saat ini
-        foreach ($tournaments as $tournament) {
-            $hasAcceptedUpload = $acceptedUploads->contains('tournament_id', $tournament->id);
-
-            if ($hasAcceptedUpload) {
-                $totalTeams = $combinedCounts->get($tournament->id, 0);
-                $totalNominal = $totalTeams * $tournament->nominal;
-                $incomeOrganizer = $totalNominal - ($totalNominal * 15 / 100);
-                $biayaRegister = $tournament->nominal;
-                $id_organizer = $tournament->users_id;
-
-                $result[] = [
-                    'tournament' => $tournament,
-                    'total_teams' => $totalTeams,
-                    'total_nominal' => $totalNominal,
-                    'income_organizer' => $incomeOrganizer,
-                    'biaya_register' => $biayaRegister,
-                    'id_organizer' => $id_organizer,
-                ];
-            }
+            $result[] = [
+                'tournament' => $tournament,
+                'total_teams' => $totalTeamsCount,
+                'total_nominal' => $totalNominal,
+                'income_organizer' => $incomeOrganizer,
+                'biaya_register' => $tournament->nominal,
+                'id_organizer' => $tournament->users_id,
+                'upload_details' => $uploadDetails,
+            ];
         }
 
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
@@ -499,8 +455,12 @@ return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 
             ->where('notif', 'belum baca')
             ->count();
 
-        return view('penyelenggara.income', compact('result', 'tournaments', 'counttournaments', 'totalIncomeOrganizer', 'id_organizer', 'acceptedUploads'));
+        return view('penyelenggara.income', compact('result', 'counttournaments', 'totalIncomeOrganizer', 'id_organizer','allUploads'));
     }
+
+
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -641,12 +601,12 @@ return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 
             ->keyBy('tournament_id');
 
         $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->whereIn('team_id', $uploadedTournamentteamIds)
+            ->whereIn('id', $uploadedTournamentteamIds)
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
 
-        return view('penyelenggara.tournament', compact('tournaments', 'categories', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'counttournaments', 'prizes','acceptedUploads','uploads', 'uploadedTournamentIds','uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+        return view('penyelenggara.tournament', compact('tournaments', 'categories', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'counttournaments', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
     }
 
     public function filteruser(Request $request)
@@ -682,13 +642,12 @@ return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
-
       $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-            ->whereIn('team_id', $uploadedTournamentteamIds)
+            ->whereIn('id', $uploadedTournamentteamIds)
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
-        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes','acceptedUploads','uploads', 'uploadedTournamentIds','uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
     }
 
     public function filterLanding(Request $request)
@@ -921,11 +880,12 @@ return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 
                 'aktif' => $aktif,
             ]);
 
-            //    $rules = [
-            //     'note.*' => 'required',
-            //     'note' => 'required',
-            //     'prizepool_id.*' => 'required',
-            // ];
+
+            $rules = [
+                'note.*' => 'required',
+                'note' => 'required',
+                'prizepool_id.*' => 'required',
+            ];
 
             // // Define custom error messages
             // $messages = [
@@ -964,6 +924,11 @@ return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 
                         'prizepool_id' => $value
                     ]);
                 }
+                $note = $notes[$index];
+                $tournamentPrize = Tournament_Prize::create([
+                    'tournament_id' => $tournamentId,
+                    'note' => $note,
+                ]);
             }
             return redirect()->route('ptournament.index')->with('success', 'Tournament berhasil diedit');
         } catch (\Exception $e) {

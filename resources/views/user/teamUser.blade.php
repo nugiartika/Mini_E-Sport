@@ -9,7 +9,9 @@
             <div class="col-md-6 col-lg-4 mb-3">
 
                 <div class="card h-100">
-                    <img class="card-img-top" src="{{ asset('storage/' . $team->profile) }}" alt="Gambar Tim" />
+                    <div class="img" style="width: 100px height: 100px;">
+                        <img class="card-img-top" src="{{ asset('storage/' . $team->profile) }}" alt="Gambar Tim" style="object-fit: cover; width:100%; height:100%;"/>
+                    </div>
                     <div class="card-body text-center">
                         <div class="d-flex pb-3 border-bottom mb-3 gap-2 justify-content-between">
                             <strong>Nama Tim</strong>

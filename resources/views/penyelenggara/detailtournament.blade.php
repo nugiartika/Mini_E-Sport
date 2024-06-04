@@ -254,7 +254,7 @@
                                 <h3>Juara</h3>
                                 <!-- Button trigger modal -->
 
-                                @if (count($juaras) < 1)
+                                @if (count($juaras) < 1 && now() >= $selectedTournament->end_permainan)
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleJuara">
                                         Tambah Juara
@@ -330,7 +330,7 @@
                                     </div>
                                 </div>
 
-                                @if (count($juaras) > 0 )
+                                @if (count($juaras) > 0 && now() >= $selectedTournament->end_permainan && now() <= $selectedTournament->end_permainan->addHours(24) )
                                     <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#editJuara">
                                         edit juara <i class="far fa-edit mx-2"></i>
                                     </button>
