@@ -48,7 +48,7 @@
                                 @else
                                 Rp . 0
                                 @endif
-                                
+
                             </h6>
                         </div>
                         <span class="avatar ms-4 mt-1">
@@ -66,7 +66,7 @@
     </div>
 </div>
 <div class="row">
-    @foreach ($result as $item)
+    @forelse ($result as $item)
     @if ($item['total_teams'] != 0)
     <div class="col-md-6 col-xxl-4 mb-4">
         <div class="card h-100">
@@ -87,15 +87,15 @@
 
                     <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
                         <strong>Biaya Register</strong>
-                        <span>Rp. {{ number_format($item['tournament']->nominal, 0, '.', ',') }}</span>
+                        <span>Rp. {{ number_format($item['tournament']->nominal, 2, ',', '.') }}</span>
                     </div>
                     <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
                         <strong>Total Pembayaran</strong>
-                        <span>{{ number_format($item['total_nominal'], 0, '.', ',') }}</span>
+                        <span>Rp. {{ number_format($item['total_nominal'], 2, ',', '.') }}</span>
                     </div>
                     <div class="d-flex gap-2 border-bottom justify-content-between pb-3 mb-3">
-                        <strong>Penghasilan Penyelenggara</strong>
-                        <span>{{ number_format($item['income_organizer'], 0, '.', ',') }}</span>
+                        <strong>Penghasilan</strong>
+                        <span>Rp. {{ number_format($item['income_organizer'], 2, ',', '.') }}</span>
                     </div>
                     <div class="hr-line line3"></div>
                     <div class="card-more-info d-flex justify-content-between align-items-center mt-6">
@@ -130,8 +130,9 @@
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th>No.</th>
-                                                        <th>Tanggal diunggah</th>
-                                                        <th>Diunggah oleh</th>
+                                                        <th>Tanggal Pembayaran</th>
+                                                        <th>Dibayar oleh</th>
+                                                        <th>Nominal Bayar</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -141,6 +142,7 @@
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $upload['tanggal']->translatedFormat('d M Y H:i')}}</td>
                                                         <td>{{ $upload['user'] }}</td>
+                                                        <td> Rp. {{ number_format($item['tournament']->nominal, 2, ',', '.') }} </td>
                                                     </tr>
                                                     @endif
                                                     @empty
@@ -170,7 +172,14 @@
         </div>
     </div>
     @endif
-    @endforeach
+    @empty
+    <div class="d-flex flex-column justify-content-center">
+        <img src="{{ asset('assets/img/No-data.png') }}" alt="" style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
+        <h4 class="table-light" style="text-align: center;">
+            Data Tidak Tersedia
+        </h4>
+    </div>
+    @endforelse
 </div>
 
 @endsection
