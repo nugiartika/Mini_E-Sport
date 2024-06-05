@@ -146,7 +146,6 @@ use App\Models\Team;
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         {{ $Tournament->name }}</h4>
-
                                                 </a>
                                             </div>
                                             <div class="hr-line line3"></div>
