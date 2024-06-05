@@ -252,7 +252,7 @@ use App\Models\Team;
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('filtertournament') }}" method="GET">
+                    <form action="{{ route('userTournament') }}" method="GET">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="widget-title text-black"><b>Game Filters</b></h4>
                             <button type="submit" class="btn btn-primary"
@@ -271,13 +271,13 @@ use App\Models\Team;
                                 </label>
                             </div>
                         @endforeach --}}
-                        @foreach ($Categories as $categories)
+                        @foreach ($Categories as $category)
                         <div class="form-check text-black">
-                            <input type="checkbox" class="form-check-input text-black" id="category{{ $categories->id }}"
-                                name="categories_id[]" value="{{ $categories->id }}"
-                                @if (in_array($categories->id, (array) $selectedCategories)) checked @endif>
-                            <label class="form-check-label text-black" for="category{{ $categories->id }}">
-                                {{ $categories->name }}
+                            <input type="checkbox" class="form-check-input text-black" id="category{{ $category->id }}"
+                                name="categories_id[]" value="{{ $category->id }}"
+                                @if (in_array($category->id, (array) $selectedCategories)) checked @endif>
+                            <label class="form-check-label text-black" for="category{{ $category->id }}">
+                                {{ $category->name }}
                             </label>
                         </div>
                     @endforeach
