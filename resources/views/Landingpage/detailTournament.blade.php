@@ -163,9 +163,9 @@ $teamtournamentId = TeamTournament::where('tournament_id', $tournaments->id)
     <!-- tournament details prize section start -->
     <section class="tournament-prize-section mb-10">
         <div class="container bgn-4 p-lg-10 p-sm-6 p-4">
-            <div class="d-flex align-items-center gap-xxl-20 gap-6 flex-wrap">
-                <div class="tour-prize-card">
-                    <div class="icon-area mb-6">
+            <div class="row align-items-center gy-4 flex-wrap">
+                <div class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
+                    <div class="icon-area">
                         <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round"
@@ -185,8 +185,8 @@ $teamtournamentId = TeamTournament::where('tournament_id', $tournaments->id)
                             {{ Carbon\Carbon::parse($tournaments->permainan)->translatedFormat('d F Y') }}</span>
                     </h4>
                 </div>
-                <div class="tour-prize-card">
-                    <div class="icon-area mb-6">
+                <div class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
+                    <div class="icon-area">
                         <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"
                             fill="none" stroke="#FFA62F" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round"
@@ -205,14 +205,14 @@ $teamtournamentId = TeamTournament::where('tournament_id', $tournaments->id)
                             {{ Carbon\Carbon::parse($tournaments->end_permainan)->translatedFormat('d F Y') }}</span>
                     </h4>
                 </div>
-                <div class="tour-prize-card">
+                <v class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
                     <div class="icon-area mb-6">
                         <i class="ti ti-users-group display-five fw-normal tcp-2"></i>
                     </div>
                     <p class="tcn-1 title-anim">Jumlah Tim</p>
                     <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">{{ $tournaments->slotTeam }}</h4>
-                </div>
-                <div class="tour-prize-card">
+                </v>
+                <v class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
                     <div class="icon-area mb-6">
                         <i class="ti ti-sitemap display-five fw-normal tcp-2"></i>
                     </div>
@@ -227,15 +227,15 @@ $teamtournamentId = TeamTournament::where('tournament_id', $tournaments->id)
                             <br> tidak valid
                         @endif
                     </h4>
-                </div>
-                <div class="tour-prize-card">
+                </v>
+                <v class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
                     <div class="icon-area mb-6">
                         <i class="ti ti-trophy display-five fw-normal tcp-2"></i>
                     </div>
                     <p class="tcn-1 title-anim">Game</p>
                     <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">{{ $tournaments->category->name }}</h4>
-                </div>
-                <div class="tour-prize-card">
+                </v>
+                <v class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
                     <div class="icon-area mb-6">
                         <i class="ti ti-trophy display-five fw-normal tcp-2"></i>
                     </div>
@@ -251,7 +251,7 @@ $teamtournamentId = TeamTournament::where('tournament_id', $tournaments->id)
                             Status pembayaran tidak valid
                         @endif
                     </h4>
-                </div>
+                </v>
             </div>
         </div>
     </section>
