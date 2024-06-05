@@ -27,9 +27,17 @@ use App\Models\Team;
                                 <h2 class="display-four tcn-1 cursor-scale growUp title-anim">DAFTAR TURNAMEN</h2>
                             </div>
                             <div class="col-md-6 col-sm-4 text-sm-end">
-                                <a href=""
+                                <form action="{{ route('filtertournament') }}" method="get" class="d-flex align-items-center">
+                                    @csrf
+                                    <div class="input-group me-3">
+                                        <input type="search" name="search" class="form-control" placeholder="Cari tournament..."
+                                            value="{{ old('search', request('search')) }}">
+                                        <button type="submit" class="btn btn-primary">Cari</button>
+                                    </div>
+                                </form>
+                                <a
                                     class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill"
-                                    data-bs-toggle="modal" data-bs-target="#filter">Cari Bedasarkan Game</a>
+                                    data-bs-toggle="modal" data-bs-target="#filter">Saring</a>
                             </div>
                         </div>
                         <div class="row justify-content-between align-items-center g-6">

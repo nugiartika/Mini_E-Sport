@@ -24,15 +24,28 @@ class UserTournamentController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('categories_id')) {
-            $a = $request->input('categories_id', []);
-            $Tournaments = Tournament::where('categories_id', $a)->paginate(5)->where('aktif', 'aktif');
+        // if ($request->has('categories_id')) {
+        //     $a = $request->input('categories_id', []);
+        //     $Tournaments = Tournament::where('categories_id', $a)->paginate(5)->where('aktif', 'aktif');
+        // } else {
+        //     $Tournaments = Tournament::where('aktif', 'aktif')->get();
+        // }
+        $query = Tournament::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('status', 'accepted')
+                ->where('name', 'LIKE', "%{$search}%");
         } else {
-            $Tournaments = Tournament::where('aktif', 'aktif')->get();
+            $query->where('status', 'accepted');
         }
+        $Tournaments = $query->paginate(5);
+
         $Categories = Category::all();
         $categoryFilter = Category::all();
         $listGame = $Categories;
+        $type = $request->input('paidment');
+        $prizepool = prizepool::all();
 
         $user = User::all();
         $acceptedUploads = upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
@@ -52,7 +65,7 @@ class UserTournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-        return view('Landingpage.tournament', compact('Tournaments', 'Categories', 'listGame','categoryFilter','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+        return view('Landingpage.tournament', compact('Tournaments', 'Categories', 'listGame','categoryFilter','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','type','prizepool'));
     }
 
 

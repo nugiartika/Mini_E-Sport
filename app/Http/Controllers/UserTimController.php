@@ -7,15 +7,27 @@ use App\Http\Requests\StoreUserTimRequest;
 use App\Http\Requests\UpdateUserTimRequest;
 use App\Models\Member;
 use App\Models\Team;
+use Illuminate\Http\Request;
 
 class UserTimController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teams = Team::all();
+        // $teams = Team::all();
+        $query = Team::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query
+                ->where('name', 'LIKE', "%{$search}%");
+        } else {
+            $query->get();
+        }
+        $teams = $query->paginate(5);
+
         // $membersCount = Member::where('team_id', $teams->id)->whereNotNull('nickname')->count();
         return view('Landingpage.team', compact('teams'));
     }

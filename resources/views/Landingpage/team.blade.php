@@ -28,6 +28,14 @@
             <div class="row">
                 <div class="col-12 mb-lg-15 mb-10">
                     {{-- <h2 class="display-four tcn-1 cursor-scale growUp title-anim">Nama </h2> --}}
+                    <form action="{{ route('userTim') }}" method="get" class="d-flex align-items-center">
+                        @csrf
+                        <div class="display-four tcn-1 cursor-scale growUp title-anim">
+                            <input type="search" name="search" class="form-control" placeholder="Cari tournament..."
+                                value="{{ old('search', request('search')) }}">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <!-- teams card  -->
