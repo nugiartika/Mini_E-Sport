@@ -57,7 +57,7 @@ class TeamTournamentController extends Controller
         }
 
 
-        return view('user.teams', compact('teams', 'tournaments', 'selectedTournamentId','user_id', 'tournaments'));
+        return view('user.teams', compact('teams', 'tournaments', 'selectedTournamentId','selectedTournament','user_id', 'tournaments'));
     }
 
     public function store(TeamTournamentRequest $request)

@@ -101,7 +101,7 @@
                             </td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
+                                    data-bs-target="#exampleModal{{ $tournament->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                         viewBox="0 0 32 32">
                                         <g fill="currentColor">
@@ -185,7 +185,7 @@
 
 
     @foreach ($tournaments as $tournament)
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal{{ $tournament->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $tournament->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
