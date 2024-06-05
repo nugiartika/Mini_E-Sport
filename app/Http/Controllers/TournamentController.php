@@ -159,10 +159,20 @@ class TournamentController extends Controller
     //     return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
     // }
 
-    public function indexuser()
+    public function indexuser(Request $request)
     {
         // $user = auth()->user();
         $user = User::all();
+
+        $selectedTournamentId = $request->input('tournament_id');
+
+        $user_id = Auth::user();
+        $existingTeam = Team::where('tournament_id', $selectedTournamentId)
+        ->where('user_id', $user_id->id)
+        ->first();
+
+        $selectedTournament = Tournament::find($selectedTournamentId);
+
 
         $acceptedUploads = Upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
 
@@ -189,7 +199,7 @@ class TournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','selectedTournamentId','selectedTournament','existingTeam','user_id'));
     }
 
 
@@ -886,7 +896,7 @@ class TournamentController extends Controller
             // Validate the request
             $request->validate($rules, $messages);
 
-            $tournamentId = $tournament->id;    
+            $tournamentId = $tournament->id;
             $prizepoolIds = $request->input('prizepool_id');
             $notes = $request->input('note');
 
