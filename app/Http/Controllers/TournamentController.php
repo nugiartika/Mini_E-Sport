@@ -100,13 +100,11 @@ class TournamentController extends Controller
         ));
     }
 
-
-
     public function notification()
     {
         $tournaments = Tournament::where('users_id', auth()->user()->id)
             ->whereIn('status', ['rejected', 'accepted'])
-            ->get();
+            ->paginate(10);
 
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
             ->whereIn('status', ['rejected', 'accepted'])
@@ -116,12 +114,11 @@ class TournamentController extends Controller
         return view('penyelenggara.notification', compact('tournaments', 'counttournaments'));
     }
 
-    public function Updatenotification($id)
+    public function Updatenotification()
     {
-        $tours = Tournament::findOrFail($id)->update([
+        $tours = Tournament::where('notif','belum baca')->update([
             'notif' => 'baca',
         ]);
-
         return redirect()->route('notificationTournament');
     }
 

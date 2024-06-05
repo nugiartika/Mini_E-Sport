@@ -146,7 +146,6 @@ use App\Models\Team;
                                                     <h4
                                                         class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
                                                         {{ $Tournament->name }}</h4>
-
                                                 </a>
                                             </div>
                                             <div class="hr-line line3"></div>
@@ -169,7 +168,7 @@ use App\Models\Team;
                                                 <div
                                                     class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                     <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                    <span class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y') }}</span>
+                                                    <span class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y H:i') }}</span>
                                                 </div>
                                             </div>
                                             <div class="hr-line line3"></div>

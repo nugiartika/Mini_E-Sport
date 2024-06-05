@@ -2,77 +2,86 @@
 
 @section('content')
     <div class="col-12">
-
+        <a href="{{ route('Updatenotification') }}" class="btn btn-primary ms-auto mb-3">
+            <i class="fa fa-check mx-2"></i>
+            Tandai semua sudah dibaca
+        </a>
         @forelse ($tournaments as $tournament)
-                @if ($tournament->status == 'rejected')
-                    <div class="mt-3">
-                        <div class="card d-flex flex-row align-items-start">
-                            <img src="{{ asset('storage/' . $tournament->images) }}" width="150" height="110" style="vertical-align: middle; margin-top:25px; margin-left:25px; ">
-                            <div class="card-body" style="margin-left: 20px; margin-top:10px;">
-                                <div class="d-flex flex-column align-items-start">
-                                    <div class="d-flex align-items-center">
-                                        <h5 class="card-title me-3">{{ $tournament->name }}</h5>
-                                        <p style="margin-left: 830px">{{ $tournament->updated_at->format('H:i') }}</p>
+            <div class="mt-3">
+                <div
+                    class="card @if ($tournament->notif == 'belum baca') shadow-sm bg-light @endif gap-3 flex-row align-items-start p-3">
+                    <div class="row w-100 align-items-center">
+                        <a href="{{ url("/detailTournament/{$tournament->id}") }}" id="tournament-title"
+                            class="d-flex col-md-4 gap-3">
+                            <div class="d-flex justify-content-center ratio-1x1 ratio"
+                                style="height: 5rem; width: 5rem; overflow: hidden;">
+                                <img src="{{ asset('storage/' . $tournament->images) }}" class="img-fluid rounded"
+                                    style="object-fit: cover;">
+                            </div>
+
+                            <div class="d-flex flex-column gap-2">
+                                <h5 class="mb-0 card-title">{{ $tournament->name }}</h5>
+                                <div class="text-muted">{{ $tournament->permainan->translatedFormat('d F Y') }}</div>
+                            </div>
+                        </a>
+
+                        <div id="status" class="d-flex flex-column gap-2 align-items-start col-md-2">
+                            <strong>Status Turnamen</strong>
+                            <p class="badge mb-0 {{ $tournament->status == 'accepted' ? 'bg-success' : 'bg-danger' }}">
+                                {{ $tournament->status == 'accepted' ? 'Diterima' : 'Ditolak' }}</p>
+                        </div>
+                        <div id="status" class="d-flex flex-column gap-2 align-items-start col-md-3">
+                            <strong>Catatan</strong>
+                            <div class="mb-0">
+                                {{ $tournament->status == 'accepted' ? 'Turnamen anda sudah kami setujui' : Str::limit($tournament->reason, 100) }}
+
+                                @if(strlen($tournament->reason) >= 100)
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-reason-{{ $tournament->id }}"><i class="ti ti-eye"></i></a>
+
+                                    <div class="modal fade" id="modal-reason-{{ $tournament->id }}" tabindex="-1"
+                                        aria-labelledby="modal-reason-{{ $tournament->id }}"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"
+                                                        id="modal-reason-{{ $tournament->id }}">Alasannya?
+                                                    </h5>
+                                                    <button type="button" class="btn-close"
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $tournament->reason }}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex align-items-center ">
-                                        <p class="card-text me-3">Status :</p>
-                                        @if($tournament->status == 'accepted')
-                                            <span class="badge bg-success mb-3">Diterima</span>
-                                        @else
-                                            <span class="badge bg-danger mb-3">Ditolak</span>
-                                        @endif
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <p class="card-text me-3">Pesan :</p>
-                                        <p class="card-text mb-3">{{ $tournament->reason }}</p>
-                                    </div>
-                                    @if ($tournament->notif == 'belum baca')
-                                        <a href="{{ route('Updatenotification', ['id' => $tournament->id]) }}" class="btn btn-primary btn-sm ms-auto">Tandai sudah baca <i class="fa fa-check mx-2"></i></a>
-                                    @endif
-                                </div>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                @else
-                    <div class="mt-3">
-                        <div class="card d-flex flex-row align-items-start">
-                            <img src="{{ asset('storage/' . $tournament->images) }}" width="150" height="110" style="vertical-align: middle; margin-top:25px; margin-left:25px;">
-                            <div class="card-body" style="margin-left: 20px; margin-top:10px;">
-                                <div class="d-flex flex-column align-items-start">
-                                    <div class="d-flex align-items-center">
-                                        <h5 class="card-title me-3">{{ $tournament->name }}</h5>
-                                        <p style="margin-left: 830px">{{ $tournament->updated_at->format('H:i') }}</p>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <p class="card-text me-3">Status :</p>
-                                        @if($tournament->status == 'accepted')
-                                            <span class="badge bg-success mb-3">Diterima</span>
-                                        @else
-                                            <span class="badge bg-danger mb-3">Ditolak</span>
-                                        @endif
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <p class="card-text me-3">Pesan :</p>
-                                        <p class="card-text mb-3">Tournament anda sudah kami setujui</p>
-                                    </div>
-                                    @if ($tournament->notif == 'belum baca')
-                                        <a href="{{ route('Updatenotification', ['id' => $tournament->id]) }}" class="btn btn-primary btn-sm ms-auto">Tandai sudah baca <i class="fa fa-check mx-2"></i></a>
-                                    @endif
-                                </div>
-                            </div>
+                        <div class="col-md-2 my-auto ms-auto d-flex flex-column align-items-md-end gap-2">
+                            <p class="ms-auto mb-0 text-muted">{{ $tournament->updated_at->diffForHumans() }}</p>
+                            @if ($tournament->notif == 'belum baca')
+                                <a href="{{ route('Updatenotification', ['id' => $tournament->id]) }}"
+                                    class="btn btn-primary btn-sm ms-auto"><i class="fa fa-check mx-2"></i></a>
+                            @endif
                         </div>
                     </div>
-                @endif
+                </div>
+            </div>
         @empty
-            <div class="col-lg-12 mt-5">
-                <center>
-                    <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                        style="display: block; margin: 0 auto; max-width: 20%; height: auto;">
-                </center>
-                <h1 class="table-light" style="text-align: center;">
+            <div class="d-flex flex-column align-items-center mt-5">
+                <img src="{{ asset('assets/img/No-data.png') }}" alt="No data" class="img-fluid" style="max-width: 20%;">
+                <h1 class="table-light text-center mt-3">
                     Data Tidak Tersedia
                 </h1>
             </div>
         @endforelse
+
+        @if ($tournaments->hasPages())
+            <div class="mt-3">
+                {{ $tournaments->links() }}
+            </div>
+        @endif
     </div>
 @endsection
