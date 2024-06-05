@@ -100,13 +100,11 @@ class TournamentController extends Controller
         ));
     }
 
-
-
     public function notification()
     {
         $tournaments = Tournament::where('users_id', auth()->user()->id)
             ->whereIn('status', ['rejected', 'accepted'])
-            ->get();
+            ->paginate(10);
 
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
             ->whereIn('status', ['rejected', 'accepted'])
@@ -885,7 +883,7 @@ class TournamentController extends Controller
             // Validate the request
             $request->validate($rules, $messages);
 
-            $tournamentId = $tournament->id;    
+            $tournamentId = $tournament->id;
             $prizepoolIds = $request->input('prizepool_id');
             $notes = $request->input('note');
 

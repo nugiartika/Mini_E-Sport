@@ -20,9 +20,7 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
-                                {{-- <a href="{{ route('user.tournament.history', ['tournament' => $team->tournament->id]) }}"> --}}
                                 <h3 class="mb-0">{{ $team->tournament->name }}</h3>
-                                {{-- </a> --}}
                                 @if ($team->tournament->paidment !== 'Gratis')
                                     @if (!in_array($team->tournament->id, $uploadedTournamentIds))
                                         <a type="button" data-toggle="tooltip" data-bs-toggle="modal"

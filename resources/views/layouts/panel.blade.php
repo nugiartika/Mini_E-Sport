@@ -155,7 +155,7 @@
                                         aria-expanded="false">
                                         <i class="ti ti-bell ti-md" style="color: white;"></i>
                                         <span
-                                            class="badge bg-danger rounded-pill badge-notifications">{{ $counttournaments }}</span>
+                                            class="badge bg-danger rounded-pill badge-notifications">{{ $counttournaments > 10 ? '10+' : $counttournaments }}</span>
                                     </a>
                                 </li>
                                 <!-- End Notification -->
