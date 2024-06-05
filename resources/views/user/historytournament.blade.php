@@ -58,7 +58,9 @@
                                             @elseif ($upload->status === 'rejected')
                                                 <span>Ditolak</span>
                                                 <span data-bs-toggle="tooltip" data-bs-title="Lihat Alasannya">
-                                                    <a href="javascript:void(0)" data-bs-target="#alasan-{{ $upload->id }}" data-bs-toggle="modal" class="text-decoration-none text-white"><i
+                                                    <a href="javascript:void(0)"
+                                                        data-bs-target="#alasan-{{ $upload->id }}" data-bs-toggle="modal"
+                                                        class="text-decoration-none text-white"><i
                                                             class="ti ti-help"></i></a>
 
                                                     <div class="modal fade" id="alasan-{{ $upload->id }}" tabindex="-1"
@@ -132,21 +134,47 @@
                                     @endif
                                 </div>
                                 <div class="d-flex gap-3 border-top justify-content-between pt-3">
-                                    <span>Transaksi Terakhir</span>
-                                    @if ($uploadteam)
-                                        @if ($uploadteam->status === 'pending')
-                                            <span>Menungggu Konfirmasi</span>
-                                        @elseif ($uploadteam->status === 'accepted')
-                                            <span>Diterima</span>
-                                        @elseif ($uploadteam->status === 'rejected')
-                                            <span>Ditolak</span>
-                                            <span><i class="ti ti-note"></i>{{ $uploadteam->reason }}</span>
+                                    <span class="flex-shrink-0">Transaksi Terakhir</span>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        @if ($upload)
+                                            @if ($upload->status === 'pending')
+                                                <span>Menungggu Konfirmasi</span>
+                                            @elseif ($upload->status === 'accepted')
+                                                <span>Diterima</span>
+                                            @elseif ($upload->status === 'rejected')
+                                                <span>Ditolak</span>
+                                                <span data-bs-toggle="tooltip" data-bs-title="Lihat Alasannya">
+                                                    <a href="javascript:void(0)"
+                                                        data-bs-target="#alasan-{{ $upload->id }}" data-bs-toggle="modal"
+                                                        class="text-decoration-none text-white"><i
+                                                            class="ti ti-help"></i></a>
+
+                                                    <div class="modal fade" id="alasan-{{ $upload->id }}" tabindex="-1"
+                                                        aria-labelledby="alasan-{{ $upload->id }}Label"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="alasan-{{ $upload->id }}Label">Alasannya?
+                                                                    </h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{ $upload->reason }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            @else
+                                                <span>Belum Ada Transaksi</span>
+                                            @endif
                                         @else
                                             <span>Belum Ada Transaksi</span>
                                         @endif
-                                    @else
-                                        <span>Belum Ada Transaksi</span>
-                                    @endif
+                                    </div>
                                 </div>
                             @endif
                         </div>
