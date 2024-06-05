@@ -254,7 +254,7 @@
                                 <h3>Juara</h3>
                                 <!-- Button trigger modal -->
 
-                                @if (count($juaras) < 1 && now() >= $selectedTournament->end_permainan)
+                                @if (count($juaras) < 1 && now() >= $selectedTournament->end_permainan && now() <= $selectedTournament->end_permainan->addDays(3))
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleJuara">
                                         Tambah Juara
@@ -330,7 +330,7 @@
                                     </div>
                                 </div>
 
-                                @if (count($juaras) > 0 && now() >= $selectedTournament->end_permainan && now() <= $selectedTournament->end_permainan->addHours(24) )
+                                @if (count($juaras) > 0 && now() >= $selectedTournament->end_permainan && now() <= $selectedTournament->end_permainan->addDays(3) )
                                     <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#editJuara">
                                         edit juara <i class="far fa-edit mx-2"></i>
                                     </button>
@@ -440,7 +440,7 @@
                                                 <img src="{{ asset('assets/img/No-data.png') }}" class="w-100"
                                                     alt="Image Not Found" />
                                                 <h3>Maaf, Belum Disediakan.</h3>
-                                                <p class="mb-3 text-center">Bracket belum disediakan oleh penyelenggara.
+                                                <p class="mb-3 text-center">Juara belum disediakan oleh penyelenggara.
                                                 </p>
                                             </div>
                                         </div>
@@ -903,7 +903,7 @@
                                                 <img src="{{ asset('assets/img/No-data.png') }}" class="w-100"
                                                     alt="Image Not Found" />
                                                 <h3>Maaf, Belum Disediakan.</h3>
-                                                <p class="mb-3 text-center">Bracket belum disediakan oleh penyelenggara.
+                                                <p class="mb-3 text-center">Jadwal belum disediakan oleh penyelenggara.
                                                 </p>
                                             </div>
                                         </div>
