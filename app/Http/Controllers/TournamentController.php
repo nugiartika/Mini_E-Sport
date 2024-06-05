@@ -116,12 +116,11 @@ class TournamentController extends Controller
         return view('penyelenggara.notification', compact('tournaments', 'counttournaments'));
     }
 
-    public function Updatenotification($id)
+    public function Updatenotification()
     {
-        $tours = Tournament::findOrFail($id)->update([
+        $tours = Tournament::where('notif','belum baca')->update([
             'notif' => 'baca',
         ]);
-
         return redirect()->route('notificationTournament');
     }
 
