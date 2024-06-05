@@ -112,6 +112,7 @@ use App\Models\Team;
                         </div>
                         @php
                             $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
+                            $selectedPrizes = isset($selectedPrizes) ? $selectedPrizes : [];
                         @endphp
                         @foreach ($categories as $category)
                             <div class="form-check">
@@ -120,6 +121,36 @@ use App\Models\Team;
                                     @if (in_array($category->id, (array) $selectedCategories)) checked @endif>
                                 <label class="form-check-label" for="category{{ $category->id }}">
                                     {{ $category->name }}
+                                </label>
+                            </div>
+                        @endforeach
+
+                        <h4 class="widget-title mt-4"><b>Status tournament</b></h4>
+                        <input type="radio" name="status" value="accepted" id="accepted" @if ($statustournament === 'accepted') checked @endif>
+                        <label for="accepted" >Diterima</label><br>
+                        <input type="radio" name="status" value="rejected" id="rejected" @if ($statustournament === 'rejected') checked @endif>
+                        <label for="rejected" >Ditolak</label><br>
+
+                        <h4 class="widget-title mt-4"><b>Status aktif</b></h4>
+                        <input type="radio" name="aktif" value="aktif" id="aktif" @if ($statusaktif === 'aktif') checked @endif>
+                        <label for="aktif" >aktif</label><br>
+                        <input type="radio" name="aktif" value="tidak aktif" id="tidak aktif" @if ($statusaktif === 'tidak aktif') checked @endif>
+                        <label for="tidak aktif" >tidak aktif</label><br>
+
+                        <h4 class="widget-title mt-4"><b>Jenis Tournament</b></h4>
+                        <input type="radio" name="paidment" value="Gratis" id="Gratis" @if ($type === 'Gratis') checked @endif>
+                        <label for="Gratis" >Gratis</label><br>
+                        <input type="radio" name="paidment" value="Berbayar" id="Berbayar" @if ($type === 'Berbayar') checked @endif>
+                        <label for="Berbayar" >Berbayar</label><br>
+
+                        <h4 class="widget-title mt-4"><b>Hadiah</b></h4>
+                        @foreach ($prizepool as $prize)
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="prize{{ $prize->id }}"
+                                    name="prizepool_id[]" value="{{ $prize->id }}"
+                                    {{ in_array($prize->id, (array) $selectedPrizes) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="prize{{ $prize->id }}">
+                                    {{ $prize->prize }}
                                 </label>
                             </div>
                         @endforeach

@@ -272,23 +272,23 @@ use App\Models\Team;
                             </div>
                         @endforeach
 
-                        <h4 class="widget-title text-black mt-4"><b>Kategori</b></h4>
+                        <h4 class="widget-title text-black mt-4"><b>Jenis Tournament</b></h4>
                         <input type="radio" name="paidment" value="Gratis" id="Gratis" @if ($type === 'Gratis') checked @endif>
                         <label for="Gratis" class="text-black">Gratis</label><br>
                         <input type="radio" name="paidment" value="Berbayar" id="Berbayar" @if ($type === 'Berbayar') checked @endif>
                         <label for="Berbayar" class="text-black">Berbayar</label><br>
 
-                        <h4 class="widget-title text-black mt-4"><b>Prizepool</b></h4>
+                        <h4 class="widget-title text-black mt-4"><b>Hadiah</b></h4>
                         @foreach ($prizepool as $prize)
-    <div class="form-check text-black">
-        <input type="checkbox" class="form-check-input text-black" id="prize{{ $prize->id }}"
-            name="prizepool_id[]" value="{{ $prize->id }}"
-            {{ in_array($prize->id, (array) $selectedPrizes) ? 'checked' : '' }}>
-        <label class="form-check-label text-black" for="prize{{ $prize->id }}">
-            {{ $prize->prize }}
-        </label>
-    </div>
-@endforeach
+                            <div class="form-check text-black">
+                                <input type="checkbox" class="form-check-input text-black" id="prize{{ $prize->id }}"
+                                    name="prizepool_id[]" value="{{ $prize->id }}"
+                                    {{ in_array($prize->id, (array) $selectedPrizes) ? 'checked' : '' }}>
+                                <label class="form-check-label text-black" for="prize{{ $prize->id }}">
+                                    {{ $prize->prize }}
+                                </label>
+                            </div>
+                        @endforeach
 
 
                     </form>
