@@ -131,7 +131,7 @@ use App\Models\Team;
                                 ->exists();
 
                         @endphp
-                        @if ($totalTeams != $Tournament->slotTeam)
+                        @if ($totalTeams != $Tournament->slotTeam && $Tournament->status === 'accepted' && $Tournament->aktif === 'aktif')
                                 <div class="col-xl-4 col-md-6">
                                     <div class="tournament-card p-xl-4 p-3 bgn-4">
                                         <div class="tournament-img mb-8 position-relative">
