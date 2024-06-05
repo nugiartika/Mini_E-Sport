@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 my-auto ms-auto d-flex flex-column align-items-md-end gap-2">
-                            <p class="ms-auto mb-0 text-muted">{{ $tournament->updated_at->diffForHumans() }}</p>
+                            <p class="ms-auto mb-0 text-muted">{{ $tournament->created_at->diffForHumans() }}</p>
                             @if ($tournament->notif == 'belum baca')
                                 <a href="{{ route('Updatenotification', ['id' => $tournament->id]) }}"
                                     class="btn btn-primary btn-sm ms-auto"><i class="fa fa-check mx-2"></i></a>
