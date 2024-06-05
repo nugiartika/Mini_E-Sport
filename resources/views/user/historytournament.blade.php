@@ -12,7 +12,7 @@
                 @php
                     $upload = $uploads->firstWhere('tournament_id', $team['tournament']->id);
                 @endphp
-                <div class="col-sm-6 col-xxl-4 mb-3">
+                <div class="col-sm-6 col-lg-4 col-xxl-3 mb-3">
                     <div class="card">
                         <div class="gambar overflow-hidden" style="height: 200px;">
                             <img src="{{ asset('storage/' . $team->tournament->images) }}" alt="{{ $team->tournament->name }}"
@@ -100,7 +100,7 @@
                 @php
                     $uploadteam = $uploads->firstWhere('tournament_id', $teamtournament['tournament']->id);
                 @endphp
-                <div class="col-sm-6 col-xxl-4 mb-3">
+                <div class="col-sm-6 col-lg-4 col-xxl-3 mb-3">
                     <div class="card">
                         <div class="gambar overflow-hidden" style="height: 200px;">
                             <img src="{{ asset('storage/' . $teamtournament->tournament->images) }}" alt="No images"
