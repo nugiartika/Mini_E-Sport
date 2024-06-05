@@ -12,7 +12,7 @@
                 @php
                     $upload = $uploads->firstWhere('tournament_id', $team['tournament']->id);
                 @endphp
-                <div class="col-sm-6 col-xxl-4 mb-3">
+                <div class="col-sm-6 col-lg-4 col-xxl-3 mb-3">
                     <div class="card">
                         <div class="gambar overflow-hidden" style="max-height: 300px">
                             <img src="{{ asset('storage/' . $team->tournament->images) }}" alt="{{ $team->tournament->name }}"
@@ -20,9 +20,7 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
-                                {{-- <a href="{{ route('user.tournament.history', ['tournament' => $team->tournament->id]) }}"> --}}
                                 <h3 class="mb-0">{{ $team->tournament->name }}</h3>
-                                {{-- </a> --}}
                                 @if ($team->tournament->paidment !== 'Gratis')
                                     @if (!in_array($team->tournament->id, $uploadedTournamentIds))
                                         <a type="button" data-toggle="tooltip" data-bs-toggle="modal"
