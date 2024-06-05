@@ -114,6 +114,30 @@
                                 </label>
                             </div>
                         @endforeach
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <h4 class="widget-title"><b>Kategori</b></h4>
+                        </div>
+                        <input type="radio" class="form-check-input" name="paidment" value="Gratis" id="Gratis" @if ($type === 'Gratis') checked @endif>
+                        <label for="Gratis" class="form-check-label">Gratis</label><br>
+                        <input type="radio" class="form-check-input" name="paidment" value="Berbayar" id="Berbayar" @if ($type === 'Berbayar') checked @endif>
+                        <label for="Berbayar" class="form-check-label">Berbayar</label><br>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <h4 class="widget-title"><b>Prizepool</b></h4>
+                        </div>
+                        @php
+                            $selectedPrizepool = isset($selectedPrizepool) ? $selectedPrizepool : [];
+                        @endphp
+                        @foreach ($prizepools as $prizepool) <!-- Mengganti $prizepool menjadi $prizepools -->
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="category{{ $prizepool->id }}"
+                                name="prizepool_id[]" value="{{ $prizepool->id }}"
+                                @if (in_array($prizepool->id, (array) $selectedCategories)) checked @endif>
+                            <label class="form-check-label" for="category{{ $prizepool->id }}">
+                                {{ $prizepool->prize}}
+                            </label>
+                        </div>
+                        @endforeach
+
                     </form>
                 </div>
             </div>

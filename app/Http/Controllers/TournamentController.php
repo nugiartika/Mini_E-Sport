@@ -116,7 +116,7 @@ class TournamentController extends Controller
 
     public function Updatenotification()
     {
-        $tours = Tournament::where('notif','belum baca')->update([
+        $tours = Tournament::where('notif', 'belum baca')->update([
             'notif' => 'baca',
         ]);
         return redirect()->route('notificationTournament');
@@ -173,6 +173,8 @@ class TournamentController extends Controller
 
         $acceptedUploads = Upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
 
+        $type = $request->input('paidment');
+        $prizepools = Prizepool::all();
         $tournaments = Tournament::all();
         $category = Category::all();
         $teams = Team::with('tournament')->where('user_id', auth()->id())->get();
@@ -196,7 +198,7 @@ class TournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','selectedTournamentId','selectedTournament','existingTeam','user_id'));
+        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','selectedTournamentId','selectedTournament','existingTeam','user_id','prizepools','type'));
     }
 
 
@@ -627,8 +629,25 @@ class TournamentController extends Controller
             $query->whereIn('categories_id', $selectedCategories);
         }
 
-        $tournaments = $query->get();
+        $type = $request->input('paidment');
+
+        if ($type === 'Berbayar') {
+            $query->where('paidment', 'Berbayar');
+        } elseif ($type === 'Gratis') {
+            $query->where('paidment', 'Gratis');
+        }
+
         $prizes = tournament_prize::all();
+        $prizepools = Prizepool::all(); // Mengganti variabel $prizepool dengan $prizepools
+        $selectedPrizepool = $request->input('prizepool_id', []);
+
+        if (!empty($selectedPrizepool)) {
+            $tournamentPrizepool = tournament_prize::whereIn('prizepool_id', $selectedPrizepool)->pluck('tournament_id')->toArray();
+            $query->whereIn('id', $tournamentPrizepool);
+        }
+
+
+        $tournaments = $query->get();
         $uploads = Upload::where('status', 'accepted')->get();
         $uploadedTournamentIds = $uploads->pluck('team_id')->toArray();
         $uploadedTournamentteamIds = $uploads->pluck('teamtournament_id')->toArray();
@@ -644,7 +663,7 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
-        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'prizepools', 'selectedPrizepool','type'));
     }
 
     public function filterLanding(Request $request)
