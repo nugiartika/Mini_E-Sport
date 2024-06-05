@@ -253,7 +253,7 @@ use App\Models\Team;
                 <div class="modal-body">
                     <form action="{{ route('userTournament') }}" method="GET">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="widget-title text-black"><b>Game</b></h4>
+                            <h5 class="widget-title text-black"><b>Game</b></h5>
                             <button type="submit" class="btn btn-primary"
                                 style="background-color:#7367f0; border:none;">Search</button>
                         </div>
@@ -272,13 +272,13 @@ use App\Models\Team;
                             </div>
                         @endforeach
 
-                        <h4 class="widget-title text-black mt-4"><b>Jenis Tournament</b></h4>
+                        <h5 class="widget-title text-black mt-4"><b>Jenis Tournament</b></h5>
                         <input type="radio" name="paidment" value="Gratis" id="Gratis" @if ($type === 'Gratis') checked @endif>
                         <label for="Gratis" class="text-black">Gratis</label><br>
                         <input type="radio" name="paidment" value="Berbayar" id="Berbayar" @if ($type === 'Berbayar') checked @endif>
                         <label for="Berbayar" class="text-black">Berbayar</label><br>
 
-                        <h4 class="widget-title text-black mt-4"><b>Hadiah</b></h4>
+                        <h5 class="widget-title text-black mt-4"><b>Hadiah</b></h5>
                         @foreach ($prizepool as $prize)
                             <div class="form-check text-black">
                                 <input type="checkbox" class="form-check-input text-black" id="prize{{ $prize->id }}"

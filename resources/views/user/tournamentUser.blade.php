@@ -97,7 +97,7 @@
                 <div class="modal-body">
                     <form action="{{ route('tournament.filteruser') }}" method="GET">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="widget-title"><b>Category</b></h4>
+                            <h5 class="widget-title"><b>Game</b></h5>
                             <button type="submit" class="btn btn-primary"
                                 style="background-color:#7367f0; border:none;">Saring</button>
                         </div>
@@ -115,14 +115,14 @@
                             </div>
                         @endforeach
                         <div class="d-flex justify-content-between align-items-center mt-3">
-                            <h4 class="widget-title"><b>Kategori</b></h4>
+                            <h5 class="widget-title"><b>Kategori</b></h5>
                         </div>
                         <input type="radio" class="form-check-input" name="paidment" value="Gratis" id="Gratis" @if ($type === 'Gratis') checked @endif>
                         <label for="Gratis" class="form-check-label">Gratis</label><br>
                         <input type="radio" class="form-check-input" name="paidment" value="Berbayar" id="Berbayar" @if ($type === 'Berbayar') checked @endif>
                         <label for="Berbayar" class="form-check-label">Berbayar</label><br>
                         <div class="d-flex justify-content-between align-items-center mt-3">
-                            <h4 class="widget-title"><b>Prizepool</b></h4>
+                            <h5 class="widget-title"><b>Hadiah</b></h5>
                         </div>
                         @php
                             $selectedPrizepool = isset($selectedPrizepool) ? $selectedPrizepool : [];

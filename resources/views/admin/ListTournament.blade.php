@@ -88,12 +88,10 @@
 
                             <td>{{ $tournament->user->name }}</td>
                             <td><span class="badge bg-label-primary me-1">
-                                    @if ($tournament->status === 'rejected')
-                                        <span>Tolak</span>
-                                    @elseif ($tournament->status === 'pending')
-                                        <span>Tertunda</span>
-                                    @elseif ($tournament->status === 'accepted')
-                                        <span>Aktif</span>
+                                    @if ($tournament->aktif === 'aktif')
+                                        <span>aktif</span>
+                                    @elseif ($tournament->aktif === 'tidak aktif')
+                                        <span>tidak aktif</span>
                                     @else
                                         <span>Status turnamen tidak valid.</span>
                                     @endif
@@ -160,7 +158,7 @@
                 <div class="modal-body">
                     <form action="{{ route('tournamentfilter') }}" method="GET">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="widget-title">Category</h5>
+                            <h5 class="widget-title">Game</h5>
                             <button type="submit" class="btn btn-primary"
                                 style="background-color:#7367f0; border:none; color: #ffffff;">Saring</button>
                         </div>
@@ -174,6 +172,36 @@
                                     @if (in_array($categories->id, (array) $selectedCategories)) checked @endif>
                                 <label class="form-check-label" for="category{{ $categories->id }}">
                                     {{ $categories->name }}
+                                </label>
+                            </div>
+                        @endforeach
+
+                        <h5 class="widget-title mt-4"><b>Status tournament</b></h5>
+                        <input type="radio" name="status" value="accepted" id="accepted" @if ($statustournament === 'accepted') checked @endif>
+                        <label for="accepted" >Diterima</label><br>
+                        <input type="radio" name="status" value="rejected" id="rejected" @if ($statustournament === 'rejected') checked @endif>
+                        <label for="rejected" >Ditolak</label><br>
+
+                        <h5 class="widget-title mt-4"><b>Status aktif</b></h5>
+                        <input type="radio" name="aktif" value="aktif" id="aktif" @if ($statusaktif === 'aktif') checked @endif>
+                        <label for="aktif" >aktif</label><br>
+                        <input type="radio" name="aktif" value="tidak aktif" id="tidak aktif" @if ($statusaktif === 'tidak aktif') checked @endif>
+                        <label for="tidak aktif" >tidak aktif</label><br>
+
+                        <h5 class="widget-title mt-4"><b>Jenis Tournament</b></h5>
+                        <input type="radio" name="paidment" value="Gratis" id="Gratis" @if ($type === 'Gratis') checked @endif>
+                        <label for="Gratis" >Gratis</label><br>
+                        <input type="radio" name="paidment" value="Berbayar" id="Berbayar" @if ($type === 'Berbayar') checked @endif>
+                        <label for="Berbayar" >Berbayar</label><br>
+
+                        <h5 class="widget-title mt-4"><b>Hadiah</b></h5>
+                        @foreach ($prizepool as $prize)
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="prize{{ $prize->id }}"
+                                    name="prizepool_id[]" value="{{ $prize->id }}"
+                                    {{ in_array($prize->id, (array) $selectedPrizes) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="prize{{ $prize->id }}">
+                                    {{ $prize->prize }}
                                 </label>
                             </div>
                         @endforeach
