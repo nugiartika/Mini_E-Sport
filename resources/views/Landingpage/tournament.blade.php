@@ -169,7 +169,7 @@ use App\Models\Team;
                                                 <div
                                                     class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                     <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                    <span class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y') }}</span>
+                                                    <span class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y H:i') }}</span>
                                                 </div>
                                             </div>
                                             <div class="hr-line line3"></div>
