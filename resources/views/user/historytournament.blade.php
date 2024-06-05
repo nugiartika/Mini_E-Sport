@@ -14,9 +14,9 @@
                 @endphp
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
-                        <div class="gambar overflow-hidden" style="max-height: 300px">
+                        <div class="gambar overflow-hidden" style="height: 200px;">
                             <img src="{{ asset('storage/' . $team->tournament->images) }}" alt="{{ $team->tournament->name }}"
-                                class="card-img-top" style="object-fit: cover; height:100%; widht:100%;" />
+                                class="card-img-top" style="object-fit: cover" />
                         </div>
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
@@ -102,9 +102,9 @@
                 @endphp
                 <div class="col-sm-6 col-xxl-4 mb-3">
                     <div class="card">
-                        <div class="gambar" style="width:386px; height:300px;">
+                        <div class="gambar overflow-hidden" style="height: 200px;">
                             <img src="{{ asset('storage/' . $teamtournament->tournament->images) }}" alt="No images"
-                                class="card-img-top" style="object-fit: cover; height:100%; widht:100%;" />
+                                class="card-img-top" style="object-fit: cover;" />
                         </div>
                         <div class="card-body">
                             <div class="d-flex gap-3 mb-3 justify-content-between align-items-center">
@@ -136,33 +136,33 @@
                                 <div class="d-flex gap-3 border-top justify-content-between pt-3">
                                     <span class="flex-shrink-0">Transaksi Terakhir</span>
                                     <div class="d-flex gap-1 align-items-center">
-                                        @if ($upload)
-                                            @if ($upload->status === 'pending')
+                                        @if ($uploadteam)
+                                            @if ($uploadteam->status === 'pending')
                                                 <span>Menungggu Konfirmasi</span>
-                                            @elseif ($upload->status === 'accepted')
+                                            @elseif ($uploadteam->status === 'accepted')
                                                 <span>Diterima</span>
-                                            @elseif ($upload->status === 'rejected')
+                                            @elseif ($uploadteam->status === 'rejected')
                                                 <span>Ditolak</span>
                                                 <span data-bs-toggle="tooltip" data-bs-title="Lihat Alasannya">
                                                     <a href="javascript:void(0)"
-                                                        data-bs-target="#alasan-{{ $upload->id }}" data-bs-toggle="modal"
+                                                        data-bs-target="#alasan-{{ $uploadteam->id }}" data-bs-toggle="modal"
                                                         class="text-decoration-none text-white"><i
                                                             class="ti ti-help"></i></a>
 
-                                                    <div class="modal fade" id="alasan-{{ $upload->id }}" tabindex="-1"
-                                                        aria-labelledby="alasan-{{ $upload->id }}Label"
+                                                    <div class="modal fade" id="alasan-{{ $uploadteam->id }}" tabindex="-1"
+                                                        aria-labelledby="alasan-{{ $uploadteam->id }}Label"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title"
-                                                                        id="alasan-{{ $upload->id }}Label">Alasannya?
+                                                                        id="alasan-{{ $uploadteam->id }}Label">Alasannya?
                                                                     </h5>
                                                                     <button type="button" class="btn-close"
                                                                         data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    {{ $upload->reason }}
+                                                                    {{ $uploadteam->reason }}
                                                                 </div>
                                                             </div>
                                                         </div>
