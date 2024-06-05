@@ -97,7 +97,7 @@
                         <label for="team_id" class="mb-3">Pilih Tim:</label>
                         <div class="row text-black">
                             @forelse ($teams as $team)
-                                {{-- @if ($team->user_id === auth()->user()->id) --}}
+                                @if ($team->categories_id ?? $team->tournament->categories_id === $selectedTournament->categories_id)
                                 {{-- @if ($team->user_id === auth()->user()->id && $team->tournament->categories_id === $tournament->categories_id) --}}
                                 <input type="hidden" name="tournament_id" value="{{ $selectedTournamentId }}">
                                 <div class="col-12 mb-3">
@@ -114,7 +114,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- @endif --}}
+                                @endif
                             @empty
                                 <div class="p-3 text-center">
                                     <h4 class="mb-2">Tidak Ada Data</h4>
