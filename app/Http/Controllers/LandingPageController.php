@@ -49,12 +49,18 @@ class LandingPageController extends Controller
             ->keyBy('tournament_id');
 
         $newtournament = Tournament::orderBy('created_at', 'desc')
-        ->where('status', 'accepted')
-        ->where('aktif', 'aktif')
-        ->take(3)->get();
+            ->where('status', 'accepted')
+            ->where('aktif', 'aktif')
+            ->take(3)->get();
 
-        return view('Landingpage.index', compact('newtournament','Tournaments', 'Categories', 'listGame','categoryFilter','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
-        // return view('user.index', compact('Tournaments', 'Categories', 'listGame','categoryFilter','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+        $topTeams = TeamTournament::selectRaw('team_id, COUNT(*) AS tournament_count')
+            ->groupBy('team_id')
+            ->orderByDesc('tournament_count')
+            ->limit(10)
+            ->get();
+            // dd($topTeams);
+
+        return view('Landingpage.index', compact('newtournament', 'Tournaments', 'Categories', 'listGame', 'categoryFilter', 'acceptedUploads', 'user', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'topTeams'));
     }
 
     public function detailTournament($id)
@@ -78,7 +84,8 @@ class LandingPageController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-        return view('Landingpage.detailTournament', compact('tournaments','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+
+        return view('Landingpage.detailTournament', compact('tournaments', 'acceptedUploads', 'user', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
     }
     /**
      * Show the form for creating a new resource.

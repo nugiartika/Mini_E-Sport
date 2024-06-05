@@ -12,8 +12,8 @@
 
 <body>
     @php
-    use App\Models\TeamTournament;
-    use App\Models\Team;
+        use App\Models\TeamTournament;
+        use App\Models\Team;
     @endphp
     <!-- Preloader -->
     <div class="preloader">
@@ -220,7 +220,8 @@
                         <div class="swiper-slide">
                             <div class="card-3d d-grid justify-content-center p-3"style="min-heigt:200px;">
                                 <div class="img-area w-100 mb-8 position-relative">
-                                    <img class="w-100" src="{{ asset('storage/' . $category->photo) }}" alt="game" style="width: 200px; height: 200px; object-fit: cover;">
+                                    <img class="w-100" src="{{ asset('storage/' . $category->photo) }}"
+                                        alt="game" style="width: 200px; height: 200px; object-fit: cover;">
                                 </div>
 
                                 <h5 class="card-title text-center tcn-1 mb-4 title-anim">{{ $category->name }}</h5>
@@ -245,129 +246,80 @@
 
     <!-- tournament section start -->
     <section class="tournament-section pb-120" id="tournament-hero">
-            <!-- Diamond animation -->
-            <div class="diamond-area">
-                <img class="w-100" src="assets/img/diamond.png" alt="diamond">
-            </div>
-            <!-- game console animation -->
-            <div class="game-console-area">
-                <img class="w-100" src="assets/img/game-console2.png" alt="game-console">
-            </div>
-            <div class="red-ball top-50"></div>
+        <!-- Diamond animation -->
+        <div class="diamond-area">
+            <img class="w-100" src="assets/img/diamond.png" alt="diamond">
+        </div>
+        <!-- game console animation -->
+        <div class="game-console-area">
+            <img class="w-100" src="assets/img/game-console2.png" alt="game-console">
+        </div>
+        <div class="red-ball top-50"></div>
 
-            <div class="tournament-wrapper">
-                <div class="tournament-wrapper-border">
-                    <div class="container pt-120 pb-120">
-                        <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15">
-                            <div class="col-md-6 col-sm-8">
-                                <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENT TERBARU</h2>
-                            </div>
+        <div class="tournament-wrapper">
+            <div class="tournament-wrapper-border">
+                <div class="container pt-120 pb-120">
+                    <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15">
+                        <div class="col-md-6 col-sm-8">
+                            <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENT TERBARU</h2>
                         </div>
-                        <div class="row justify-content-between align-items-center g-6">
-                            {{-- @php
+                    </div>
+                    <div class="row justify-content-between align-items-center g-6">
 
-                            if ($isPaidTournament) {
-                                $teamCount = $acceptedTeamCounts->get($Tournaments->id);
-                                $teamIdCount = $acceptedTeamIdCounts->get($Tournaments->id);
-                            } else {
-                                $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-                                    ->groupBy('tournament_id')
-                                    ->get();
-
-                                $teamIdCounts = TeamTournament::select(
-                                    'tournament_id',
-                                    DB::raw('COUNT(*) as count'),
-                                )
-                                    ->groupBy('tournament_id')
-                                    ->get();
-                                $teamCount = $teamCounts->firstWhere('tournament_id', $Tournaments->id);
-                                $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $Tournaments->id);
-                            }
-
-
-                            $totalTeams =
-                                ($teamCount ? $teamCount->count : 0) +
-                                ($teamIdCount ? $teamIdCount->count : 0);
-
-                            $userTeams = $teams ?? collect();
-                            $userTeamsInTournament = $userTeams->where('tournament_id', $Tournaments->id);
-                            $isUserInTournament = $userTeamsInTournament->isNotEmpty();
-
-                            if ($isUserInTournament) {
-                                // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-                                $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
-
-                                // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-                                $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-                                    ->where('tournament_id', $Tournaments->id)
-                                    ->get();
-                            }
-                            $userId = Auth::id();
-
-                            $userTeamIds = Team::where('user_id', $userId)->pluck('id')->toArray();
-
-                            // Cek apakah ada tim pengguna dalam turnamen ini
-                            $teamtournamentId = TeamTournament::where('tournament_id', $Tournaments->id)
-                                ->whereIn('team_id', $userTeamIds)
-                                ->exists();
-
-                        @endphp --}}
                         @forelse ($newtournament as $index => $Tournament)
                             @php
-                            $isPaidTournament = $Tournament->paidment === 'Berbayar';
+                                $isPaidTournament = $Tournament->paidment === 'Berbayar';
 
-                            if ($isPaidTournament) {
-                                $teamCount = $acceptedTeamCounts->get($Tournament->id);
-                                $teamIdCount = $acceptedTeamIdCounts->get($Tournament->id);
-                            } else {
-                                $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-                                    ->groupBy('tournament_id')
-                                    ->get();
+                                if ($isPaidTournament) {
+                                    $teamCount = $acceptedTeamCounts->get($Tournament->id);
+                                    $teamIdCount = $acceptedTeamIdCounts->get($Tournament->id);
+                                } else {
+                                    $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+                                        ->groupBy('tournament_id')
+                                        ->get();
 
-                                $teamIdCounts = TeamTournament::select(
-                                    'tournament_id',
-                                    DB::raw('COUNT(*) as count'),
-                                )
-                                    ->groupBy('tournament_id')
-                                    ->get();
-                                $teamCount = $teamCounts->firstWhere('tournament_id', $Tournament->id);
-                                $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $Tournament->id);
-                            }
+                                    $teamIdCounts = TeamTournament::select(
+                                        'tournament_id',
+                                        DB::raw('COUNT(*) as count'),
+                                    )
+                                        ->groupBy('tournament_id')
+                                        ->get();
+                                    $teamCount = $teamCounts->firstWhere('tournament_id', $Tournament->id);
+                                    $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $Tournament->id);
+                                }
 
+                                $totalTeams =
+                                    ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
 
-                            $totalTeams =
-                                ($teamCount ? $teamCount->count : 0) +
-                                ($teamIdCount ? $teamIdCount->count : 0);
+                                $userTeams = $teams ?? collect();
+                                $userTeamsInTournament = $userTeams->where('tournament_id', $Tournament->id);
+                                $isUserInTournament = $userTeamsInTournament->isNotEmpty();
 
-                            $userTeams = $teams ?? collect();
-                            $userTeamsInTournament = $userTeams->where('tournament_id', $Tournament->id);
-                            $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+                                if ($isUserInTournament) {
+                                    // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+                                    $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
 
-                            if ($isUserInTournament) {
-                                // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-                                $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+                                    // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+                                    $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+                                        ->where('tournament_id', $Tournament->id)
+                                        ->get();
+                                }
+                                $userId = Auth::id();
 
-                                // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-                                $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-                                    ->where('tournament_id', $Tournament->id)
-                                    ->get();
-                            }
-                            $userId = Auth::id();
+                                $userTeamIds = Team::where('user_id', $userId)->pluck('id')->toArray();
 
-                            $userTeamIds = Team::where('user_id', $userId)->pluck('id')->toArray();
-
-                            // Cek apakah ada tim pengguna dalam turnamen ini
-                            $teamtournamentId = TeamTournament::where('tournament_id', $Tournament->id)
-                                ->whereIn('team_id', $userTeamIds)
-                                ->exists();
-
-                        @endphp
-                        @if ($totalTeams != $Tournament->slotTeam && $Tournament->status === 'accepted' && $Tournament->aktif === 'aktif')
+                                // Cek apakah ada tim pengguna dalam turnamen ini
+                                $teamtournamentId = TeamTournament::where('tournament_id', $Tournament->id)
+                                    ->whereIn('team_id', $userTeamIds)
+                                    ->exists();
+                            @endphp
+                            @if ($totalTeams != $Tournament->slotTeam && $Tournament->status === 'accepted' && $Tournament->aktif === 'aktif')
                                 <div class="col-xl-4 col-md-6">
                                     <div class="tournament-card p-xl-4 p-3 bgn-4">
                                         <div class="tournament-img mb-8 position-relative">
                                             <div class="img-area overflow-hidden">
-                                                <img class="w-100" src="{{ asset('storage/' . $Tournament->images) }}"
+                                                <img class="w-100"
+                                                    src="{{ asset('storage/' . $Tournament->images) }}"
                                                     alt="tournament" />
                                             </div>
                                         </div>
@@ -384,7 +336,8 @@
                                                 <div
                                                     class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <i class="ti ti-brand-flightradar24"></i> <span class="tcn-1 fs-sm">
+                                                        <i class="ti ti-brand-flightradar24"></i> <span
+                                                            class="tcn-1 fs-sm">
                                                             {{ $Tournament->aktif === 'aktif' ? 'Aktif' : ($Tournament->aktif === 'tidak aktif' ? 'Tidak aktif' : 'Tidak Diketahui') }}
                                                         </span>
                                                     </div>
@@ -399,7 +352,8 @@
                                                 <div
                                                     class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                     <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                    <span class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y H:i') }}</span>
+                                                    <span
+                                                        class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y H:i') }}</span>
                                                 </div>
                                             </div>
                                             <div class="hr-line line3"></div>
@@ -408,12 +362,12 @@
                                                     <div class="teams d-flex align-items-center gap-1">
                                                         <i class="ti ti-users fs-base"></i>
                                                         <span class="tcn-6 fs-sm"> Slot Tim :
-                                                        @if ($totalTeams)
-                                                            {{ $totalTeams }}/{{ $Tournament->slotTeam }}
-                                                            Teams
-                                                        @else
-                                                            0/{{ $Tournament->slotTeam }} Teams
-                                                        @endif
+                                                            @if ($totalTeams)
+                                                                {{ $totalTeams }}/{{ $Tournament->slotTeam }}
+                                                                Teams
+                                                            @else
+                                                                0/{{ $Tournament->slotTeam }} Teams
+                                                            @endif
                                                         </span>
                                                     </div>
 
@@ -429,19 +383,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- @else
-
-                            <div class="col-lg-12">
-                                    <center>
-                                        <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                            style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
-                                    </center>
-                                    <h4 class="text-light" style="text-align: center;">
-                                        Tournament Tidak Tersedia
-                                    </h4>
-                                </div> --}}
-                                @endif
-                            @empty
+                            @endif
+                        @empty
                             <div class="col-lg-12">
                                 <center>
                                     <img src="{{ asset('assets/img/No-data.png') }}" alt=""
@@ -451,26 +394,67 @@
                                     Tournament Tidak Tersedia
                                 </h4>
                             </div>
-                            @endforelse
-                                {{-- @if ($totalTeams === $Tournaments->slotTeam)
-                                <div class="col-lg-12">
-                                    <center>
-                                        <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                            style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
-                                    </center>
-                                    <h4 class="text-light" style="text-align: center;">
-                                        Tournament Tidak Tersedia
-                                    </h4>
-                                </div>
-                                @endif --}}
-                        </div>
-
+                        @endforelse
                     </div>
-                </div>
 
+                </div>
             </div>
-        </section>
-        <!-- tournament section end -->
+
+        </div>
+    </section>
+    <!-- tournament section end -->
+
+    <!-- teams card section start   -->
+    <section class="teams-card-section pb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-lg-15 mb-10">
+                    <h2 class="display-four tcn-1 cursor-scale growUp title-anim">Tim Teraktif</h2>
+                </div>
+            </div>
+            <!-- teams card  -->
+            <div class="row g-6 justify-content-md-start justify-content-center mb-lg-15 mb-10">
+                {{-- @dd($topTeams); --}}
+                @forelse ($topTeams as $team)
+                    @php
+                        $membersCount = \App\Models\Member::where('team_id', $team->id)
+                            ->whereNotNull('nickname')
+                            ->count();
+                    @endphp
+                    <div class="col-xl-4 col-md-6">
+                        <div class="team-card gap-6 p-xxl-8 p-4 bgn-4 box-style alt-box" data-tilt>
+                            <div class="team-thumb overflow-hidden rounded-circle" style="height: 5rem; width: 5rem">
+                                <img class="w-100 h-100 object-fit-cover"
+                                    src="{{ asset('storage/' . $team->profile) }}" alt="team"
+                                    style="object-fit: cover">
+                            </div>
+
+                            <div class="team-info w-100">
+                                <div class="title-area d-flex gap-5 align-items-end mb-5">
+                                    <h4 class="tcn-1 cursor-scale growDown title-anim">{{ $team->name }}</h4>
+                                </div>
+                                <div class="player-info d-flex gap-6 align-items-center mb-6">
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <i class="ti ti-users fs-2xl"></i>
+                                        <span class="tcn-6">{{ $membersCount }} players</span>
+                                    </div>
+                                    {{-- <div class="d-flex gap-3 align-items-center">
+                                        <i class="ti ti-device-gamepad-2 fs-2xl"></i>
+                                        <span
+                                            class="tcn-6">{{ $team->category ? $team->category->name : $team->tournament->category->name }}</span>
+                                    </div> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                @empty
+                @endforelse
+            </div>
+        </div>
+    </section>
+    <!-- teams card section end   -->
+
 
     <!-- Start modal Filter-->
     <div class="modal fade" tabindex="-1" id="filter" style="color: #ffffff;">
@@ -496,7 +480,7 @@
                                     for="category{{ $game->id }}">
                                 {{ $game->name }}
                                 </label>
-                            </div> 
+                            </div>
                         @endforeach
                     </form>
                 </div>
