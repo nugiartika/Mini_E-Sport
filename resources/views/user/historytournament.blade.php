@@ -91,12 +91,11 @@
                 </div>
             @endif
 
-
             @foreach ($team->teamTournament as $teamtournament)
                 @php
                     $uploadteam = $uploads->firstWhere('tournament_id', $teamtournament['tournament']->id);
                 @endphp
-                <div class="col-sm-6 col-xxl-4 mb-3">
+                <div class="col-sm-6 col-lg-4 col-xxl-3 mb-3">
                     <div class="card">
                         <div class="gambar" style="width:386px; height:300px;">
                             <img src="{{ asset('storage/' . $teamtournament->tournament->images) }}" alt="No images"
