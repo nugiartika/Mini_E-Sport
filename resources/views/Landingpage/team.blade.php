@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-lg-15 mb-10">
-                    <h2 class="display-four tcn-1 cursor-scale growUp title-anim">Nama </h2>
+                    {{-- <h2 class="display-four tcn-1 cursor-scale growUp title-anim">Nama </h2> --}}
                 </div>
             </div>
             <!-- teams card  -->
