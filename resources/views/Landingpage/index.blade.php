@@ -417,21 +417,22 @@
                 {{-- @dd($topTeams); --}}
                 @forelse ($topTeams as $team)
                     @php
-                        $membersCount = \App\Models\Member::where('team_id', $team->id)
+                        $membersCount = \App\Models\Member::where('team_id', $team->data->id)
                             ->whereNotNull('nickname')
                             ->count();
                     @endphp
+
                     <div class="col-xl-4 col-md-6">
                         <div class="team-card gap-6 p-xxl-8 p-4 bgn-4 box-style alt-box" data-tilt>
                             <div class="team-thumb overflow-hidden rounded-circle" style="height: 5rem; width: 5rem">
                                 <img class="w-100 h-100 object-fit-cover"
-                                    src="{{ asset('storage/' . $team->profile) }}" alt="team"
+                                    src="{{ asset('storage/' . $team->data->team->profile) }}" alt="team"
                                     style="object-fit: cover">
                             </div>
 
                             <div class="team-info w-100">
                                 <div class="title-area d-flex gap-5 align-items-end mb-5">
-                                    <h4 class="tcn-1 cursor-scale growDown title-anim">{{ $team->name }}</h4>
+                                    <h4 class="tcn-1 cursor-scale growDown title-anim">{{ $team->data->team->name }}</h4>
                                 </div>
                                 <div class="player-info d-flex gap-6 align-items-center mb-6">
                                     <div class="d-flex gap-3 align-items-center">

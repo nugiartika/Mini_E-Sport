@@ -57,8 +57,7 @@ class LandingPageController extends Controller
             ->groupBy('team_id')
             ->orderByDesc('tournament_count')
             ->limit(10)
-            ->get();
-            // dd($topTeams);
+            ->get()->map(fn ($item) => $item->setAttribute('data', TeamTournament::where('team_id', $item->team_id)->first()));
 
         return view('Landingpage.index', compact('newtournament', 'Tournaments', 'Categories', 'listGame', 'categoryFilter', 'acceptedUploads', 'user', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'topTeams'));
     }
