@@ -258,8 +258,10 @@ use App\Models\Team;
                             <button type="submit" class="btn btn-primary"
                                 style="background-color:#7367f0; border:none;">Search</button>
                         </div>
-
-                        @foreach ($Categories as $game)
+                        @php
+                        $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
+                    @endphp
+                        {{-- @foreach ($Categories as $game)
                             <div class="form-check text-black">
                                 <input type="checkbox" class="form-check-input text-black"
                                     id="category{{ $game->id }}" name="categories_id"
@@ -268,7 +270,17 @@ use App\Models\Team;
                                 {{ $game->name }}
                                 </label>
                             </div>
-                        @endforeach
+                        @endforeach --}}
+                        @foreach ($Categories as $categories)
+                        <div class="form-check text-black">
+                            <input type="checkbox" class="form-check-input text-black" id="category{{ $categories->id }}"
+                                name="categories_id[]" value="{{ $categories->id }}"
+                                @if (in_array($categories->id, (array) $selectedCategories)) checked @endif>
+                            <label class="form-check-label text-black" for="category{{ $categories->id }}">
+                                {{ $categories->name }}
+                            </label>
+                        </div>
+                    @endforeach
                     </form>
                 </div>
             </div>

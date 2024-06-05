@@ -12,6 +12,7 @@ use App\Models\Team;
 use App\Models\TeamTournament;
 use App\Models\upload;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserTournamentController extends Controller
@@ -52,18 +53,52 @@ class UserTournamentController extends Controller
         return view('Landingpage.tournament', compact('Tournaments', 'Categories', 'listGame','categoryFilter','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
     }
 
+    // public function filter(Request $request)
+    // {
+    //     if ($request->has('categories_id')) {
+    //         $a = $request->input('categories_id', []);
+    //         $Tournaments = Tournament::where('categories_id', $a)->paginate(5)->where('aktif', 'aktif');
+    //     } else {
+    //         $Tournaments = Tournament::where('aktif', 'aktif')->get();
+    //     }
+    //     $Categories = Category::all();
+    //     $categoryFilter = Category::all();
+    //     $listGame = $Categories;
+    //     $user = User::all();
+    //     $acceptedUploads = upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
+    //     $uploads = Upload::where('status', 'accepted')->get();
+    //     $uploadedTournamentIds = $uploads->pluck('team_id')->toArray();
+    //     $uploadedTournamentteamIds = $uploads->pluck('teamtournament_id')->toArray();
+    //     // Count teams with accepted uploads
+    //     $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
+    //         ->whereIn('id', $uploadedTournamentIds)
+    //         ->groupBy('tournament_id')
+    //         ->get()
+    //         ->keyBy('tournament_id');
+    //     // Count teams with accepted uploads
+    //     $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+    //         ->whereIn('id', $uploadedTournamentteamIds)
+    //         ->groupBy('tournament_id')
+    //         ->get()
+    //         ->keyBy('tournament_id');
+
+    //         return view('Landingpage.tournament', compact('Tournaments', 'Categories', 'listGame','categoryFilter','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+    // }
+
     public function filter(Request $request)
     {
-        if ($request->has('categories_id')) {
-            $a = $request->input('categories_id', []);
-            $Tournaments = Tournament::where('categories_id', $a)->paginate(5)->where('aktif', 'aktif');
-        } else {
-            $Tournaments = Tournament::where('aktif', 'aktif')->get();
+        $oldSearch = $request->input('search');
+        $user = Auth::user();
+        $selectedCategories = $request->input('categories_id', []);
+        $query = Tournament::query();
+        if (!empty($selectedCategories)) {
+            $query->whereIn('categories_id', $selectedCategories);
         }
+        $Tournaments = $query->get();
+
         $Categories = Category::all();
         $categoryFilter = Category::all();
         $listGame = $Categories;
-        $user = User::all();
         $acceptedUploads = upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
         $uploads = Upload::where('status', 'accepted')->get();
         $uploadedTournamentIds = $uploads->pluck('team_id')->toArray();
@@ -81,7 +116,7 @@ class UserTournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-            return view('Landingpage.tournament', compact('Tournaments', 'Categories', 'listGame','categoryFilter','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+            return view('Landingpage.tournament', compact('Tournaments', 'oldSearch','selectedCategories','Categories', 'listGame','categoryFilter','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
     }
     /**
      * Show the form for creating a new resource.
