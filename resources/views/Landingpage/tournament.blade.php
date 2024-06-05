@@ -253,33 +253,44 @@ use App\Models\Team;
                 <div class="modal-body">
                     <form action="{{ route('userTournament') }}" method="GET">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="widget-title text-black"><b>Game Filters</b></h4>
+                            <h4 class="widget-title text-black"><b>Game</b></h4>
                             <button type="submit" class="btn btn-primary"
                                 style="background-color:#7367f0; border:none;">Search</button>
                         </div>
                         @php
-                        $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
-                    @endphp
-                        {{-- @foreach ($Categories as $game)
+                            $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];
+                            $selectedPrizes = isset($selectedPrizes) ? $selectedPrizes : [];
+                        @endphp
+                        @foreach ($Categories as $category)
                             <div class="form-check text-black">
-                                <input type="checkbox" class="form-check-input text-black"
-                                    id="category{{ $game->id }}" name="categories_id"
-                                    value="{{ $game->id }}" <label class="text-black"
-                                    for="category{{ $game->id }}">
-                                {{ $game->name }}
+                                <input type="checkbox" class="form-check-input text-black" id="category{{ $category->id }}"
+                                    name="categories_id[]" value="{{ $category->id }}"
+                                    @if (in_array($category->id, (array) $selectedCategories)) checked @endif>
+                                <label class="form-check-label text-black" for="category{{ $category->id }}">
+                                    {{ $category->name }}
                                 </label>
                             </div>
-                        @endforeach --}}
-                        @foreach ($Categories as $category)
-                        <div class="form-check text-black">
-                            <input type="checkbox" class="form-check-input text-black" id="category{{ $category->id }}"
-                                name="categories_id[]" value="{{ $category->id }}"
-                                @if (in_array($category->id, (array) $selectedCategories)) checked @endif>
-                            <label class="form-check-label text-black" for="category{{ $category->id }}">
-                                {{ $category->name }}
-                            </label>
-                        </div>
-                    @endforeach
+                        @endforeach
+
+                        <h4 class="widget-title text-black mt-4"><b>Kategori</b></h4>
+                        <input type="radio" name="paidment" value="Gratis" id="Gratis" @if ($type === 'Gratis') checked @endif>
+                        <label for="Gratis" class="text-black">Gratis</label><br>
+                        <input type="radio" name="paidment" value="Berbayar" id="Berbayar" @if ($type === 'Berbayar') checked @endif>
+                        <label for="Berbayar" class="text-black">Berbayar</label><br>
+
+                        <h4 class="widget-title text-black mt-4"><b>Prizepool</b></h4>
+                        @foreach ($prizepool as $prize)
+    <div class="form-check text-black">
+        <input type="checkbox" class="form-check-input text-black" id="prize{{ $prize->id }}"
+            name="prizepool_id[]" value="{{ $prize->id }}"
+            {{ in_array($prize->id, (array) $selectedPrizes) ? 'checked' : '' }}>
+        <label class="form-check-label text-black" for="prize{{ $prize->id }}">
+            {{ $prize->prize }}
+        </label>
+    </div>
+@endforeach
+
+
                     </form>
                 </div>
             </div>

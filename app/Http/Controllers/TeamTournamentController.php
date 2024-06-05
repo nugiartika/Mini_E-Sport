@@ -16,11 +16,20 @@ class TeamTournamentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teams = Team::all();
+        $teams = Team::where('user_id', auth()->id())->get();
         $tournaments = Tournament::all();
-        return view('user.tournamentUser', compact('teams', 'tournaments'));
+        $selectedTournamentId = $request->input('tournament_id');
+
+        $user_id = Auth::user();
+        $existingTeam = Team::where('tournament_id', $selectedTournamentId)
+        ->where('user_id', $user_id->id)
+        ->first();
+
+        $selectedTournament = Tournament::find($selectedTournamentId);
+
+        return view('user.tournamentUser', compact('teams', 'tournaments','selectedTournamentId','user_id','existingTeam','selectedTournament'));
     }
 
     /**
