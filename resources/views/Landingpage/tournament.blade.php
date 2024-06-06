@@ -33,7 +33,7 @@
                                     <div class="input-group me-3">
                                         <input type="search" name="search" class="form-control"
                                             placeholder="Cari turnamen&hellip;" value="{{ old('search', request('search')) }}">
-                                        <button type="submit" class="btn btn-primary">Cari</button>
+                                        <button type="submit" class="btn btn-primary"  style="background-color: #1791C8;">Cari</button>
                                     </div>
                                 </form>
                                 <a class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill"
@@ -126,8 +126,7 @@
                                                 <div
                                                     class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                     <i class="ti ti-calendar fs-base tcn-1"></i>
-                                                    <span
-                                                        class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y') }}</span>
+                                                    <span class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y') }}</span>
                                                 </div>
                                             </div>
                                             <div class="hr-line line3"></div>
@@ -203,7 +202,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="widget-title text-black"><b>Game</b></h5>
                             <button type="submit" class="btn btn-primary"
-                                style="background-color:#7367f0; border:none;">Search</button>
+                                style="background-color:#7367f0; border:none;">Saring</button>
                         </div>
                         @php
                             $selectedCategories = isset($selectedCategories) ? $selectedCategories : [];

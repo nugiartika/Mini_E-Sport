@@ -87,6 +87,14 @@ class UserTournamentController extends Controller
             $query->where('paidment', 'Gratis');
         }
 
+        $statusaktif = $request->input('aktif');
+
+        if ($statusaktif === 'aktif') {
+            $query->where('aktif', 'aktif');
+        } elseif ($statusaktif === 'tidak aktif') {
+            $query->where('aktif', 'tidak aktif');
+        }
+
         $prizepool = prizepool::all();
         $prizepooltournament = tournament_prize::all();
 
@@ -120,7 +128,7 @@ class UserTournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-            return view('Landingpage.tournament', compact('Tournaments', 'oldSearch','selectedCategories','Categories', 'listGame','categoryFilter','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','type','prizepool'));
+            return view('Landingpage.tournament', compact('Tournaments', 'oldSearch','selectedCategories','Categories', 'listGame','categoryFilter','acceptedUploads','user','uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','type','prizepool','statusaktif'));
     }
     /**
      * Show the form for creating a new resource.
