@@ -121,6 +121,16 @@
                         <label for="Gratis" class="form-check-label">Gratis</label><br>
                         <input type="radio" class="form-check-input" name="paidment" value="Berbayar" id="Berbayar" @if ($type === 'Berbayar') checked @endif>
                         <label for="Berbayar" class="form-check-label">Berbayar</label><br>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <h5 class="widget-title"><b>Status Aktif</b></h5>
+                        </div>
+                        <input type="radio" name="aktif" class="form-check-input" value="aktif" id="aktif" @if ($statusaktif === 'aktif') checked @endif>
+                        <label for="aktif"  >aktif</label><br>
+                        <input type="radio" name="aktif" class="form-check-input" value="tidak aktif" id="tidak aktif" @if ($statusaktif === 'tidak aktif') checked @endif>
+                        <label for="tidak aktif"  >tidak aktif</label><br>
+
+
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <h5 class="widget-title"><b>Hadiah</b></h5>
                         </div>
