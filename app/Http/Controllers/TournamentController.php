@@ -130,7 +130,7 @@ class TournamentController extends Controller
         if($request->input('id')) {
             $tournament = Tournament::find($request->input('id'));
         } else {
-            $tournament = Tournament::where('notif', 'belum baca');
+            $tournament = Tournament::where('notif', 'belum baca')->limit(10)->latest();
         }
 
         $tournament->update([
