@@ -42,40 +42,31 @@
                                 alt="favicon">
                         </a>
                     </div>
-                    {{-- <div class="navbar-toggle-item w-100 position-lg-relative">
-                        <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
-                            <li class="menu-link">
-                                <a href="tournaments.html">Tournaments</a>
-                            </li>
-                            <li class="menu-link">
-                                <a href="game.html">Game</a>
-                            </li>
-                            <li class="menu-link">
-                                <a href="game.html">Team</a>
-                            </li>
-
-                        </ul>
-                    </div> --}}
                 </nav>
                 <div class="header-btn-area d-flex align-items-center gap-sm-6 gap-3">
 
                     <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                         <li class="menu-link">
-                            <a href="{{ route('index') }}">Home</a>
+                            <a href="{{ route('index') }}">Beranda</a>
                         </li>
                         <li class="menu-link">
-                            <a href="{{ route('userTournament') }}">Tournaments</a>
+                            <a href="{{ route('userTournament') }}">Turnamen</a>
                         </li>
                         <li class="menu-link">
                             <a href="{{ route('userGame') }}">Game</a>
                         </li>
                         <li class="menu-link">
-                            <a href="{{ route('userTim') }}">Team</a>
+                            <a href="{{ route('userTim') }}">Tim</a>
                         </li>
                         <li class="menu-link">
                             <a href="{{ route('login') }}"
-                                class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Masuk</a>
-                        </li>
+                                class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">
+                                @guest
+                                    Masuk
+                                @else
+                                    Dasbor
+                                @endguest
+                            </a>
                         </li>
                     </ul>
 
@@ -261,7 +252,7 @@
                 <div class="container pt-120 pb-120">
                     <div class="row justify-content-between align-items-center gy-sm-0 gy-4 mb-15">
                         <div class="col-md-6 col-sm-8">
-                            <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TOURNAMENT TERBARU</h2>
+                            <h2 class="display-four tcn-1 cursor-scale growUp title-anim">TURNAMEN TERBARU</h2>
                         </div>
                     </div>
                     <div class="row justify-content-between align-items-center g-6">
@@ -353,7 +344,7 @@
                                                     class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
                                                     <i class="ti ti-calendar fs-base tcn-1"></i>
                                                     <span
-                                                        class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y ') }}</span>
+                                                        class="tcn-1 fs-sm">{{ $Tournament->permainan->locale('id')->translatedFormat('d F Y') }}</span>
                                                 </div>
                                             </div>
                                             <div class="hr-line line3"></div>
@@ -376,9 +367,6 @@
                                                     <a href="{{ route('landingpageDetailTournamet', ['id' => $Tournament->id]) }}"
                                                         class="btn-half-border position-relative d-inline-block py-2 px-3 bgp-1 rounded-pill">Detail</a>
                                                 </div>
-                                                {{-- <a href="tournaments-details.html" class="btn2">
-                                            <i class="ti ti-arrow-right fs-2xl"></i>
-                                        </a> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -432,18 +420,14 @@
 
                             <div class="team-info w-100">
                                 <div class="title-area d-flex gap-5 align-items-end mb-5">
-                                    <h4 class="tcn-1 cursor-scale growDown title-anim">{{ $team->data->team->name }}</h4>
+                                    <h4 class="tcn-1 cursor-scale growDown title-anim">{{ $team->data->team->name }}
+                                    </h4>
                                 </div>
                                 <div class="player-info d-flex gap-6 align-items-center mb-6">
                                     <div class="d-flex gap-3 align-items-center">
                                         <i class="ti ti-users fs-2xl"></i>
                                         <span class="tcn-6">{{ $membersCount }} players</span>
                                     </div>
-                                    {{-- <div class="d-flex gap-3 align-items-center">
-                                        <i class="ti ti-device-gamepad-2 fs-2xl"></i>
-                                        <span
-                                            class="tcn-6">{{ $team->category ? $team->category->name : $team->tournament->category->name }}</span>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>

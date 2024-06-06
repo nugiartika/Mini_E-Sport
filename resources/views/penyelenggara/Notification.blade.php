@@ -2,10 +2,17 @@
 
 @section('content')
     <div class="col-12">
-        <a href="{{ route('Updatenotification') }}" class="btn btn-primary ms-auto mb-3">
-            <i class="fa fa-check mx-2"></i>
-            Tandai semua sudah dibaca
-        </a>
+        <div class="d-flex justify-content-between gap-3">
+            <h3 class="mb-0">Notifikasi</h3>
+
+            @if($counttournaments > 0)
+            <a href="{{ route('Updatenotification') }}" class="btn btn-primary ms-auto gap-2 d-flex align-items-center">
+                <i class="fa fa-check mx-2"></i>
+                Tandai semua sudah dibaca
+            </a>
+            @endif
+        </div>
+
         @forelse ($tournaments as $tournament)
             <div class="mt-3">
                 <div
