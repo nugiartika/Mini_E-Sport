@@ -176,11 +176,11 @@
                             </div>
                         @endforeach
 
-                        <h5 class="widget-title mt-4"><b>Status tournament</b></h5>
+                        {{-- <h5 class="widget-title mt-4"><b>Status tournament</b></h5>
                         <input type="radio" name="status" value="accepted" id="accepted" @if ($statustournament === 'accepted') checked @endif>
                         <label for="accepted" >Diterima</label><br>
                         <input type="radio" name="status" value="rejected" id="rejected" @if ($statustournament === 'rejected') checked @endif>
-                        <label for="rejected" >Ditolak</label><br>
+                        <label for="rejected" >Ditolak</label><br> --}}
 
                         <h5 class="widget-title mt-4"><b>Status aktif</b></h5>
                         <input type="radio" name="aktif" value="aktif" id="aktif" @if ($statusaktif === 'aktif') checked @endif>

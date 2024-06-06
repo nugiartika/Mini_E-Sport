@@ -24,13 +24,18 @@
     <section class="teams-card-section pb-120">
         <div class="container">
             <div class="row">
-                <div class="col-4 mb-lg-15 mb-10">
+                <div class="col-9"></div> <!-- Empty columns to push the form to the right -->
+
+                <div class="col-3 mb-lg-15 mb-10 mt-4">
                     {{-- <h2 class="display-four tcn-1 cursor-scale growUp title-anim">Nama </h2> --}}
                     <form action="{{ route('userTim') }}" method="get" class="d-flex gap-3 align-items-center">
                         @csrf
-                        <input type="search" name="search" class="form-control" placeholder="Cari tournament..."
+                        <div class="input-group me-3">
+
+                        <input type="search" name="search" class="form-control" placeholder="Cari Team..."
                             value="{{ old('search', request('search')) }}">
-                        <button type="submit" class="btn btn-primary">Cari</button>
+                        <button type="submit" class="btn btn-primary" style="background-color: #1791C8;">Cari</button>
+                        </div>
                     </form>
                 </div>
             </div>
