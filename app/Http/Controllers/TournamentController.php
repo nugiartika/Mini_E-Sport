@@ -133,6 +133,8 @@ class TournamentController extends Controller
             $tournament = Tournament::where('users_id', auth()->id())->where('notif', 'belum baca')->limit(10)->latest();
         }
 
+        // dd($tournament->toRawSql());
+
         $tournament->update([
             'notif' => 'baca',
         ]);
