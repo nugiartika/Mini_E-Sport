@@ -181,17 +181,6 @@
                                 </h4>
                             </div>
                         @endforelse
-                        {{-- @if ($totalTeams === $Tournaments->slotTeam)
-                                <div class="col-lg-12">
-                                    <center>
-                                        <img src="{{ asset('assets/img/No-data.png') }}" alt=""
-                                            style="display: block; margin: 0 auto; max-width: 16%; height: auto;">
-                                    </center>
-                                    <h4 class="text-light" style="text-align: center;">
-                                        Tournament Tidak Tersedia
-                                    </h4>
-                                </div>
-                                @endif --}}
                     </div>
 
                 </div>

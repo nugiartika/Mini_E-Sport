@@ -79,16 +79,10 @@
         @empty
             <div class="d-flex flex-column align-items-center mt-5">
                 <img src="{{ asset('assets/img/No-data.png') }}" alt="No data" class="img-fluid" style="max-width: 20%;">
-                <h1 class="table-light text-center mt-3">
-                    Data Tidak Tersedia
-                </h1>
+                <h5 class="table-light text-center mt-3 mb-0">
+                    Data Tidak Ada Notifikasi
+                </h5>
             </div>
         @endforelse
-
-        @if ($tournaments->hasPages())
-            <div class="mt-3">
-                {{ $tournaments->links() }}
-            </div>
-        @endif
     </div>
 @endsection

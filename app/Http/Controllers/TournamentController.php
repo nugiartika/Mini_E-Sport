@@ -112,7 +112,10 @@ class TournamentController extends Controller
     {
         $tournaments = Tournament::where('users_id', auth()->user()->id)
             ->whereIn('status', ['rejected', 'accepted'])
-            ->paginate(10);
+            ->where('notif', 'belum baca')
+            ->limit(10)
+            ->latest()
+            ->get();
 
         $counttournaments = Tournament::where('users_id', auth()->user()->id)
             ->whereIn('status', ['rejected', 'accepted'])
@@ -122,47 +125,20 @@ class TournamentController extends Controller
         return view('penyelenggara.notification', compact('tournaments', 'counttournaments'));
     }
 
-    public function Updatenotification()
+    public function Updatenotification(Request $request)
     {
-        $tours = Tournament::where('notif', 'belum baca')->update([
+        if($request->input('id')) {
+            $tournament = Tournament::find($request->input('id'));
+        } else {
+            $tournament = Tournament::where('notif', 'belum baca');
+        }
+
+        $tournament->update([
             'notif' => 'baca',
         ]);
+        
         return redirect()->route('notificationTournament');
     }
-
-
-    // public function indexuser()
-    // {
-    //     // $user = auth()->user();
-    // $user = User::all();
-
-    //     $acceptedUploads = Upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
-
-    //     $tournaments = Tournament::all();
-    //     $category = Category::all();
-    //     $teams = Team::with('tournament')->where('user_id', auth()->id())->get();
-    //     $teamuser = Team::where('user_id', auth()->id())->exists();
-    //     $teamTournament = TeamTournament::all();
-    //     $prizes = tournament_prize::all();
-    //     $uploads = Upload::where('status', 'accepted')->get();
-    //     $uploadedTournamentIds = $uploads->pluck('team_id')->toArray();
-    //     $uploadedTournamentteamIds = $uploads->pluck('teamtournament_id')->toArray();
-
-    //     // Count teams with accepted uploads
-    //     $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-    //         ->whereIn('id', $uploadedTournamentIds)
-    //         ->groupBy('tournament_id')
-    //         ->get()
-    //         ->keyBy('tournament_id');
-
-    //     $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-    //         ->whereIn('team_id', $uploadedTournamentteamIds)
-    //         ->groupBy('tournament_id')
-    //         ->get()
-    //         ->keyBy('tournament_id');
-
-    //     return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
-    // }
 
     public function indexuser(Request $request)
     {
@@ -173,11 +149,10 @@ class TournamentController extends Controller
 
         $user_id = Auth::user();
         $existingTeam = Team::where('tournament_id', $selectedTournamentId)
-        ->where('user_id', $user_id->id)
-        ->first();
+            ->where('user_id', $user_id->id)
+            ->first();
 
         $selectedTournament = Tournament::find($selectedTournamentId);
-
 
         $acceptedUploads = Upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
 
@@ -206,9 +181,8 @@ class TournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','selectedTournamentId','selectedTournament','existingTeam','user_id','prizepools','type'));
+        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'selectedTournamentId', 'selectedTournament', 'existingTeam', 'user_id', 'prizepools', 'type'));
     }
-
 
     public function dashboard()
     {
@@ -647,7 +621,7 @@ class TournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-        return view('penyelenggara.tournament', compact('tournaments', 'categories', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'counttournaments', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','type','prizepool','prizepooltournament','selectedPrizes','statusaktif','statustournament'));
+        return view('penyelenggara.tournament', compact('tournaments', 'categories', 'selectedCategories', 'oldSearch', 'user', 'teamCounts', 'teamIdCounts', 'teams', 'counttournaments', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'type', 'prizepool', 'prizepooltournament', 'selectedPrizes', 'statusaktif', 'statustournament'));
     }
 
     public function filteruser(Request $request)
@@ -705,7 +679,7 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
-        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'prizepools', 'selectedPrizepool','type'));
+        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'prizepools', 'selectedPrizepool', 'type'));
     }
 
     public function filterLanding(Request $request)
