@@ -127,21 +127,18 @@ class TournamentController extends Controller
 
     public function Updatenotification(Request $request)
     {
-        $tournament = Tournament::when($request->input('id'), function ($query, $id) {
-            return $query->where('users_id', auth()->id())->find($id);
-        }, function ($query) {
-            return $query->where('users_id', auth()->id())
-                ->where('notif', 'belum baca')
-                ->first();
-        });
-
-        if ($tournament) {
-            $tournament->update(['notif' => 'baca']);
+        if($request->input('id')) {
+            $tournament = Tournament::where('users_id', auth()->id())->find($request->input('id'));
+        } else {
+            $tournament = Tournament::where('users_id', auth()->id())->where('notif', 'belum baca')->limit(10)->latest();
         }
+
+        $tournament->update([
+            'notif' => 'baca',
+        ]);
 
         return redirect()->route('notificationTournament');
     }
-
 
 
     // public function indexuser()
@@ -218,7 +215,7 @@ class TournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'selectedTournamentId', 'selectedTournament', 'existingTeam', 'user_id', 'prizepools', 'type'));
+        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','selectedTournamentId','selectedTournament','existingTeam','user_id','prizepools','type'));
     }
 
     public function dashboard()
@@ -724,7 +721,7 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
-        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'prizepools', 'selectedPrizepool', 'type', 'statusaktif'));
+        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'prizepools', 'selectedPrizepool', 'type','statusaktif'));
     }
 
     public function filterLanding(Request $request)
