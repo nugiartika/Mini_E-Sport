@@ -10,6 +10,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\TeamTournament;
 use App\Models\Tournament;
+use App\Models\tournament_prize;
 use App\Models\upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -82,9 +83,9 @@ class LandingPageController extends Controller
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
+            $prizes = tournament_prize::all();
 
-
-        return view('Landingpage.detailTournament', compact('tournaments', 'acceptedUploads', 'user', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
+        return view('Landingpage.detailTournament', compact('tournaments', 'acceptedUploads', 'user', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','prizes'));
     }
     /**
      * Show the form for creating a new resource.

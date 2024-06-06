@@ -32,8 +32,7 @@ class DetailTournamentController extends Controller
         $statustournament = $request->input('status');
         $type = $request->input('paidment');
 
-
-        return view('admin.ListTournament', compact('tournaments', 'category','prizes','statusaktif','selectedPrizes','prizepool','statustournament','type'));
+        return view('admin.ListTournament', compact('tournaments', 'category','prizes','statusaktif','selectedPrizes','prizepool','statustournament','type',''));
     }
 
     public function detail($id)
