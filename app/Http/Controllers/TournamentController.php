@@ -131,38 +131,6 @@ class TournamentController extends Controller
     }
 
 
-    // public function indexuser()
-    // {
-    //     // $user = auth()->user();
-    // $user = User::all();
-
-    //     $acceptedUploads = Upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
-
-    //     $tournaments = Tournament::all();
-    //     $category = Category::all();
-    //     $teams = Team::with('tournament')->where('user_id', auth()->id())->get();
-    //     $teamuser = Team::where('user_id', auth()->id())->exists();
-    //     $teamTournament = TeamTournament::all();
-    //     $prizes = tournament_prize::all();
-    //     $uploads = Upload::where('status', 'accepted')->get();
-    //     $uploadedTournamentIds = $uploads->pluck('team_id')->toArray();
-    //     $uploadedTournamentteamIds = $uploads->pluck('teamtournament_id')->toArray();
-
-    //     // Count teams with accepted uploads
-    //     $acceptedTeamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))
-    //         ->whereIn('id', $uploadedTournamentIds)
-    //         ->groupBy('tournament_id')
-    //         ->get()
-    //         ->keyBy('tournament_id');
-
-    //     $acceptedTeamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-    //         ->whereIn('team_id', $uploadedTournamentteamIds)
-    //         ->groupBy('tournament_id')
-    //         ->get()
-    //         ->keyBy('tournament_id');
-
-    //     return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts'));
-    // }
 
     public function indexuser(Request $request)
     {
@@ -180,7 +148,7 @@ class TournamentController extends Controller
 
 
         $acceptedUploads = Upload::where('user_id',  auth()->id())->where('status', 'accepted')->pluck('tournament_id')->toArray();
-
+        $statusaktif = $request->input('aktif');
         $type = $request->input('paidment');
         $prizepools = Prizepool::all();
         $tournaments = Tournament::all();
@@ -206,7 +174,7 @@ class TournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','selectedTournamentId','selectedTournament','existingTeam','user_id','prizepools','type'));
+        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','selectedTournamentId','selectedTournament','existingTeam','user_id','prizepools','type','statusaktif'));
     }
 
 
@@ -671,6 +639,14 @@ class TournamentController extends Controller
             $query->whereIn('categories_id', $selectedCategories);
         }
 
+        $statusaktif = $request->input('aktif');
+
+        if ($statusaktif === 'aktif') {
+            $query->where('aktif', 'aktif');
+        } elseif ($statusaktif === 'tidak aktif') {
+            $query->where('aktif', 'tidak aktif');
+        }
+
         $type = $request->input('paidment');
 
         if ($type === 'Berbayar') {
@@ -705,7 +681,7 @@ class TournamentController extends Controller
             ->groupBy('tournament_id')
             ->get()
             ->keyBy('tournament_id');
-        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'prizepools', 'selectedPrizepool','type'));
+        return view('user.tournamentUser', compact('teamuser', 'tournaments', 'category', 'selectedCategories', 'oldSearch', 'user', 'teams', 'prizes', 'acceptedUploads', 'uploads', 'uploadedTournamentIds', 'uploadedTournamentteamIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts', 'prizepools', 'selectedPrizepool','type','statusaktif'));
     }
 
     public function filterLanding(Request $request)

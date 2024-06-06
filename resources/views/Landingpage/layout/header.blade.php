@@ -20,20 +20,25 @@
 
                     <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 ms-xxl-10" data-lenis-prevent>
                         <li class="menu-link">
-                            <a href="{{ route('index') }}">Home</a>
+                            <a href="{{ route('index') }}">Beranda</a>
                         </li>
                         <li class="menu-link">
-                            <a href="{{ route('userTournament') }}">Tournaments</a>
+                            <a href="{{ route('userTournament') }}">Turnamen</a>
                         </li>
                         <li class="menu-link">
                             <a href="{{ route('userGame') }}">Game</a>
                         </li>
                         <li class="menu-link">
-                            <a href="{{ route('userTim') }}">Team</a>
+                            <a href="{{ route('userTim') }}">Tim</a>
                         </li>
                         <li class="menu-link">
-                            <a href="{{ route('login') }}" class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">Masuk</a>
-                        </li>
+                            <a href="{{ route('login') }}" class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill ">
+                                @guest
+                                    Masuk
+                                @else
+                                    Dasbor
+                                @endguest
+                            </a>
                         </li>
                     </ul>
 
