@@ -217,7 +217,7 @@ class TournamentController extends Controller
             ->get()
             ->keyBy('tournament_id');
 
-        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','selectedTournamentId','selectedTournament','existingTeam','user_id','prizepools','type'));
+        return view('user.tournamentUser', compact('prizes', 'tournaments', 'category', 'user', 'teams', 'teamuser', 'teamTournament', 'uploads', 'uploadedTournamentIds', 'acceptedTeamCounts', 'acceptedTeamIdCounts','selectedTournamentId','selectedTournament','existingTeam','user_id','prizepools','type','statusaktif'));
     }
 
     public function dashboard()

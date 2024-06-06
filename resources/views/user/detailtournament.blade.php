@@ -39,7 +39,7 @@
                 <div class="col-md-6 p-3 border-bottom">
                     <div class="d-flex gap-2 align-items-center">
                         <i class="ti ti-calendar"></i>
-                        <span>{{ $selectedTournament->created_at->locale('id')->format('d M Y') }}</span>
+                        <span>{{ $selectedTournament->permainan->locale('id')->format('d M Y') }}</span>
                     </div>
                 </div>
                 <div class="col-md-6 border-end p-3">
