@@ -13,8 +13,8 @@
 
 <body>
     @php
-    use App\Models\TeamTournament;
-    use App\Models\Team;
+        use App\Models\TeamTournament;
+        use App\Models\Team;
     @endphp
     <!-- Preloader -->
     <div class="preloader">
@@ -31,7 +31,8 @@
     <header class="header-section w-100 bgn-4">
         <div class="py-sm-6 py-3 mx-xxl-20 mx-md-15 mx-3">
             <div class="d-flex align-items-center justify-content-between gap-xxl-10 gap-lg-8 w-100">
-                <nav class="navbar-custom d-flex gap-lg-6 align-items-center flex-column flex-lg-row justify-content-start justify-content-lg-between w-100">
+                <nav
+                    class="navbar-custom d-flex gap-lg-6 align-items-center flex-column flex-lg-row justify-content-start justify-content-lg-between w-100">
                     <div class="top-bar w-100 d-flex align-items-center gap-6">
                         <button class="navbar-toggle-btn d-block d-lg-none" type="button">
                             <span></span>
@@ -53,44 +54,44 @@
 
     {{-- @foreach ($tournaments as Tournament) --}}
     @php
-    $isPaidTournament = $tournaments->paidment === 'Berbayar';
+        $isPaidTournament = $tournaments->paidment === 'Berbayar';
 
-    if ($isPaidTournament) {
-    $teamCount = $acceptedTeamCounts->get($tournaments->id);
-    $teamIdCount = $acceptedTeamIdCounts->get($tournaments->id);
-    } else {
-    $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))->groupBy('tournament_id')->get();
+        if ($isPaidTournament) {
+            $teamCount = $acceptedTeamCounts->get($tournaments->id);
+            $teamIdCount = $acceptedTeamIdCounts->get($tournaments->id);
+        } else {
+            $teamCounts = Team::select('tournament_id', DB::raw('COUNT(*) as count'))->groupBy('tournament_id')->get();
 
-    $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
-    ->groupBy('tournament_id')
-    ->get();
-    $teamCount = $teamCounts->firstWhere('tournament_id', $tournaments->id);
-    $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournaments->id);
-    }
+            $teamIdCounts = TeamTournament::select('tournament_id', DB::raw('COUNT(*) as count'))
+                ->groupBy('tournament_id')
+                ->get();
+            $teamCount = $teamCounts->firstWhere('tournament_id', $tournaments->id);
+            $teamIdCount = $teamIdCounts->firstWhere('tournament_id', $tournaments->id);
+        }
 
-    $totalTeams = ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
+        $totalTeams = ($teamCount ? $teamCount->count : 0) + ($teamIdCount ? $teamIdCount->count : 0);
 
-    $userTeams = $teams ?? collect();
-    $userTeamsInTournament = $userTeams->where('tournament_id', $tournaments->id);
-    $isUserInTournament = $userTeamsInTournament->isNotEmpty();
+        $userTeams = $teams ?? collect();
+        $userTeamsInTournament = $userTeams->where('tournament_id', $tournaments->id);
+        $isUserInTournament = $userTeamsInTournament->isNotEmpty();
 
-    if ($isUserInTournament) {
-    // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
-    $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
+        if ($isUserInTournament) {
+            // Ambil ID tim pengguna dalam turnamen berdasarkan ID turnamen
+            $userTeamIds = $userTeamsInTournament->pluck('id')->toArray();
 
-    // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
-    $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
-    ->where('tournament_id', $tournaments->id)
-    ->get();
-    }
-    $userId = Auth::id();
+            // Cek apakah ada relasi antara tim pengguna dan team_tournaments berdasarkan ID tim dan ID turnamen
+            $userTeamsWithRelation = TeamTournament::whereIn('team_id', $userTeamIds)
+                ->where('tournament_id', $tournaments->id)
+                ->get();
+        }
+        $userId = Auth::id();
 
-    $userTeamIds = Team::where('user_id', $userId)->pluck('id')->toArray();
+        $userTeamIds = Team::where('user_id', $userId)->pluck('id')->toArray();
 
-    // Cek apakah ada tim pengguna dalam turnamen ini
-    $teamtournamentId = TeamTournament::where('tournament_id', $tournaments->id)
-    ->whereIn('team_id', $userTeamIds)
-    ->exists();
+        // Cek apakah ada tim pengguna dalam turnamen ini
+        $teamtournamentId = TeamTournament::where('tournament_id', $tournaments->id)
+            ->whereIn('team_id', $userTeamIds)
+            ->exists();
     @endphp
     {{-- @endforeach --}}
 
@@ -101,7 +102,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="d-flex align-items-center gap-4 mb-4">
-                        <a href="javascript:void(0)" onclick="window.history.back()" class="back-btn"><i class="ti ti-arrow-narrow-left fs-2xl"></i></a>
+                        <a href="javascript:void(0)" onclick="window.history.back()" class="back-btn"><i
+                                class="ti ti-arrow-narrow-left fs-2xl"></i></a>
                         <h3 class="tcn-1 cursor-scale growDown title-anim">Detail Tournament </h3>
                     </div>
                 </div>
@@ -109,11 +111,14 @@
             <div class="row">
                 <div class="col-12">
                     <div class="parallax-banner-area parallax-container position-relative rounded-5 overflow-hidden">
-                        <img class="w-100 h-100 parallax-img" src="{{ asset('assets/img/tour-details-banner.png') }}" alt="tournament banner">
+                        <img class="w-100 h-100 parallax-img" src="{{ asset('assets/img/tour-details-banner.png') }}"
+                            alt="tournament banner">
                         <!-- running tournament content here -->
-                        <div class="running-tournament d-flex flex-lg-row flex-column position-absolute top-50 start-50 translate-middle w-100 text-center">
+                        <div
+                            class="running-tournament d-flex flex-lg-row flex-column position-absolute top-50 start-50 translate-middle w-100 text-center">
                             <div class="running-tournament-thumb w-100">
-                                <img class="w-100 h-100" src="{{ asset('storage/' . $tournaments->images) }}" alt="tournament thumb">
+                                <img class="w-100 h-100" src="{{ asset('storage/' . $tournaments->images) }}"
+                                    alt="tournament thumb">
                             </div>
                             <div class="running-tour-info py-sm-6 py-4 px-xl-15 px-lg-10 px-sm-6 px-2 w-100">
                                 <h3 class="tcn-1 mb-lg-6 mb-4">{{ $tournaments->name }}</h3>
@@ -121,9 +126,6 @@
                                     {{ $tournaments->user->name }}</span>
                                 <h5 class="tcn-1 mb-lg-6 mb-4">Nama Game : {{ $tournaments->category->name }}</h5>
                                 <div class="list-group-item justify-content-center d-flex align-items-center gap-3">
-                                    <div class="d-flex gap-2 align-items-center">
-                                        <i class="ti ti-gift fs-base tcn-1"></i>
-                                    </div>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center gap-md-6 gap-3">
                                     <div class="end-date text-center">
@@ -136,10 +138,10 @@
                                     <i class="ti ti-users-group tcn-1"></i>
                                     <span class="tcn-6">Slot Tim:
                                         @if ($totalTeams)
-                                        {{ $totalTeams }}/{{ $tournaments->slotTeam }}
-                                        Teams
+                                            {{ $totalTeams }}/{{ $tournaments->slotTeam }}
+                                            Teams
                                         @else
-                                        0/{{ $tournaments->slotTeam }} Teams
+                                            0/{{ $tournaments->slotTeam }} Teams
                                         @endif
                                     </span>
                                 </div>
@@ -153,38 +155,59 @@
 
     <!-- tournament details prize section start -->
     @php
-    $prizesArray = $prizes
-    ->filter(function ($prize) use ($tournaments) {
-    return $prize->tournament_id == $tournaments->id;
-    })
-    ->map(function ($prize) {
-    return $prize->prizepool->prize;
-    })
-    ->toArray();
+        $prizesArray = $prizes
+            ->filter(function ($prize) use ($tournaments) {
+                return $prize->tournament_id == $tournaments->id;
+            })
+            ->map(function ($prize) {
+                return [
+                'prize' => $prize->prizepool->prize,
+                'type' => $prize->type, // pastikan ada properti 'type' di objek prize
+                'note' => $prize->note  // pastikan ada properti 'note' di objek prize
+            ];
+        })
+            ->toArray();
     @endphp
     <section class="tournament-prize-section mb-10">
-        <div class="container bgn-4 p-lg-10 p-sm-6 p-4">
-            <div class="row align-items-center gy-4 flex-wrap">
-            @foreach($prizesArray as $prize)
-                <div class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
-                    <div class="icon-area">
-                        @if ($prize == 'Dianond')
-                        <i class="ti ti-diamond display-five fw-normal tcp-2"></i>
-                        @elseif ($prize == 'Sertifikat')
-                        <i class="ti ti-certificate display-five fw-normal tcp-2"></i>
-                        @elseif ($prize == 'Uang')
-                        <i class="ti ti-cash display-five fw-normal tcp-2"></i>
-                        @elseif ($prize == 'piala')
-                        <i class="ti ti-trophy display-five fw-normal tcp-2"></i>
-                        @elseif ($prize == 'trofi')
-                        <i class="ti ti-medal display-five fw-normal tcp-2"></i>
-                        @endif
+        <h2 class="tcn-1 cursor-scale growDown title-anim mb-1 container">
+            Hadiah
+        </h2>
+        <div class="container pt-120 pb-120">
+
+            <div class="row justify-content-between align-items-center g-6">
+                @foreach ($prizesArray as $prize)
+                    <div class="col-md-2 d-flex flex-column justify-content-center align-items-center tour-prize-card">
+                        <div class="tournament-card p-xl-4 p-3 bgn-4">
+                            <div class="tournament-img d-flex justify-content-center mb-8 position-relative ">
+                                <div class="icon-area">
+                                    @if ($prize['prize'] == 'Diamond')
+                                        <i class="ti ti-diamond display-five fw-normal tcp-2 " style="color: rgb(0, 153, 255);"></i>
+                                    @elseif ($prize['prize'] == 'Sertifikat')
+                                        <i class="ti ti-certificate display-five fw-normal tcp-2" style="color: #ffffff;"></i>
+                                    @elseif ($prize['prize'] == 'Uang')
+                                        <i class="ti ti-cash display-five fw-normal tcp-2" style="color: #068246;"></i>
+                                    @elseif ($prize['prize'] == 'Piala')
+                                        <i class="ti ti-trophy display-five fw-normal tcp-2"></i>
+
+                                    @elseif ($prize['prize'] == 'Mendali')
+                                        <i class="ti ti-medal display-five fw-normal tcp-2" style="color: #c41b0c;"></i>
+                                    @endif
+                                </div>
+
+                            </div>
+                            <div class="tournament-content px-xl-4 px-sm-2 justify-content-center">
+                                <div class="tournament-info mb-5 justify-content-center">
+                                    <a href="" class="d-block text-center">
+                                        <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                            {{ $prize['prize'] }}</h4>
+                                        <p class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                            {{ $prize['note'] }}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">
-                        <span>{{ $prize }}</span>
-                    </h4>
-                </div>
-            @endforeach
+                @endforeach
             </div>
         </div>
     </section>
@@ -194,9 +217,13 @@
     <section class="tournament-prize-section mb-10">
         <div class="container bgn-4 p-lg-10 p-sm-6 p-4">
             <div class="row align-items-center gy-4 flex-wrap">
-                <div class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
+                <div
+                    class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
                     <div class="icon-area">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-week display-five fw-normal tcp-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-week display-five fw-normal tcp-2">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
                             <path d="M16 3v4" />
@@ -212,11 +239,16 @@
                             {{ Carbon\Carbon::parse($tournaments->permainan)->translatedFormat('d F Y') }}</span>
                     </h4>
                 </div>
-                <div class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
+                <div
+                    class="col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center tour-prize-card">
                     <div class="icon-area">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="#FFA62F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-off">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"
+                            fill="none" stroke="#FFA62F" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-off">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M9 5h9a2 2 0 0 1 2 2v9m-.184 3.839a2 2 0 0 1 -1.816 1.161h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 1.158 -1.815" />
+                            <path
+                                d="M9 5h9a2 2 0 0 1 2 2v9m-.184 3.839a2 2 0 0 1 -1.816 1.161h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 1.158 -1.815" />
                             <path d="M16 3v4" />
                             <path d="M8 3v1" />
                             <path d="M4 11h7m4 0h5" />
@@ -242,12 +274,12 @@
                     <p class="tcn-1 title-anim">Jenis Tournament</p>
                     <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">
                         @if ($tournaments->paidment === 'Gratis')
-                        Gratis
+                            Gratis
                         @elseif ($tournaments->paidment === 'Berbayar')
-                        Berbayar
+                            Berbayar
                         @else
-                        Status pembayaran
-                        <br> tidak valid
+                            Status pembayaran
+                            <br> tidak valid
                         @endif
                     </h4>
                 </v>
@@ -265,13 +297,13 @@
                     <p class="tcn-1 title-anim">Status</p>
                     <h4 class="tcn-1 cursor-scale growDown title-anim mb-1">
                         @if ($tournaments->status === 'accepted')
-                        Aktif
+                            Aktif
                         @elseif ($tournaments->status === 'pending')
-                        Tertunda
+                            Tertunda
                         @elseif ($tournaments->status === 'rejected')
-                        Tolak
+                            Tolak
                         @else
-                        Status pembayaran tidak valid
+                            Status pembayaran tidak valid
                         @endif
                     </h4>
                 </v>
@@ -296,7 +328,8 @@
                             <div class="accordion-section rule-accordion d-grid gap-6">
                                 <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
                                     <h5 class="acc-header-area">
-                                        <button class="accordion-btn rule-acc-btn fs-four position-relative ps-8" type="button">
+                                        <button class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
+                                            type="button">
                                             Deskripsi
                                         </button>
                                     </h5>
@@ -311,7 +344,8 @@
 
                                 <div class="accordion-single p-sm-5 p-3 bgn-4 rounded">
                                     <h5 class="acc-header-area">
-                                        <button class="accordion-btn rule-acc-btn fs-four position-relative ps-8" type="button">
+                                        <button class="accordion-btn rule-acc-btn fs-four position-relative ps-8"
+                                            type="button">
                                             Aturan Permainan
                                         </button>
                                     </h5>
@@ -370,9 +404,12 @@
                         <ul class="footer-list d-grid gap-4">
                             <li><a href="tournaments.html" class="footer-link d-flex align-items-center tcn-6">
                                     <i class="ti ti-chevron-right"></i> Tournaments</a></li>
-                            <li><a href="game.html" class="footer-link d-flex align-items-center tcn-6"> <i class="ti ti-chevron-right"></i> Games </a></li>
-                            <li><a href="teams.html" class="footer-link d-flex align-items-center tcn-6"> <i class="ti ti-chevron-right"></i> Teams</a></li>
-                            <li><a href="faq.html" class="footer-link d-flex align-items-center tcn-6"> <i class="ti ti-chevron-right"></i> FAQ</a></li>
+                            <li><a href="game.html" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> Games </a></li>
+                            <li><a href="teams.html" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> Teams</a></li>
+                            <li><a href="faq.html" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> FAQ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -380,9 +417,12 @@
                     <div class="py-lg-10">
                         <h4 class="footer-title mb-8 title-anim">Explore</h4>
                         <ul class="footer-list d-grid gap-4">
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i class="ti ti-chevron-right"></i> Top Players</a></li>
-                            <li><a href="chat.html" class="footer-link d-flex align-items-center tcn-6"> <i class="ti ti-chevron-right"></i> messages</a></li>
-                            <li><a href="profile.html" class="footer-link d-flex align-items-center tcn-6"> <i class="ti ti-chevron-right"></i> Profile</a></li>
+                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> Top Players</a></li>
+                            <li><a href="chat.html" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> messages</a></li>
+                            <li><a href="profile.html" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> Profile</a></li>
                         </ul>
                     </div>
                 </div>
@@ -390,10 +430,14 @@
                     <div class="py-lg-10">
                         <h4 class="footer-title mb-8 title-anim">Follow Us</h4>
                         <ul class="footer-list d-grid gap-4">
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i class="ti ti-chevron-right"></i> Facebook</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i class="ti ti-chevron-right"></i> Instagram</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i class="ti ti-chevron-right"></i> Twitter</a></li>
-                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i class="ti ti-chevron-right"></i> Linkedln</a></li>
+                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> Facebook</a></li>
+                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> Instagram</a></li>
+                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> Twitter</a></li>
+                            <li><a href="#" class="footer-link d-flex align-items-center tcn-6"> <i
+                                        class="ti ti-chevron-right"></i> Linkedln</a></li>
                         </ul>
                     </div>
                 </div>
