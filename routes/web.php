@@ -82,6 +82,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/tournaments/{id}/update-status', [TournamentController::class, 'updateStatus'])->name('updateStatus');
         Route::get('/detailTournament/{id}', [TournamentController::class, 'detailTournament'])->name('tournament.detail');
         Route::get('/organizerincome', [TournamentController::class, 'organizerIncome'])->name('organizerincome');
+        Route::get('/testing1212', [TournamentController::class, 'organizerIncome'])->name('organizerincome');
     });
 
     Route::get('/detailTournamentUser/{id}', [TournamentController::class, 'detailTournamentUser'])->name('tournament.detailUser');
