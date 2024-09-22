@@ -67,7 +67,7 @@ class CategoryController extends Controller
         return view('admin.category', compact('category'));
     }
 
-    public function store(CategoryRequest $request)
+        public function store(CategoryRequest $request)
     {
         try {
             $gambar = $request->file('photo');
